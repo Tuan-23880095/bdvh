@@ -1,0 +1,12 @@
+# Cơ sở dữ liệu SQLite cục bộ & logs
+*.sqlite
+*.sqlite3
+*.db
+*.log
+error_log
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

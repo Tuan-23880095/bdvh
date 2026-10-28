@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phiếu Báo Điểm & Đánh Giá Năng Lực Tư Duy · HCMUS</title>
+  
+  <link rel="icon" type="image/svg+xml" href="assets/logo-sen.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,400&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            luc: '#0F6B55',
+            'luc-non': '#46A385',
+            lam: '#1F4E79',
+            muc: '#10212B',
+            giay: '#F6F7F3',
+            son: '#D2492A',
+            tho: '#D6A130',
+            bac: '#D5DCE1'
+          },
+          fontFamily: {
+            serif: ['"Source Serif 4"', 'Georgia', 'serif'],
+            sans: ['"Be Vietnam Pro"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\(', '\)']],
+        displayMath: [['$$', '$$'], ['\[', '\]']],
+        processEscapes: true
+      },
+      startup: {
+        typeset: true,
+        ready: () => {
+          MathJax.startup.defaultReady();
+          if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise().catch(e => console.warn(e));
+          }
+        }
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #F6F7F3; color: #10212B; }
+    .title-serif { font-family: 'Source Serif 4', Georgia, serif; }
+
+    /* Quy chuẩn In ấn A4 (tuan-md-to-a4-html & tuan-thuong-hieu): Ẩn logo sen khi in, giữ logo trường */
+    @media print {
+      @page { size: A4 portrait; margin: 15mm; }
+      body { background: #fff !important; color: #000 !important; }
+      header, footer, .no-print { display: none !important; }
+      .print-only { display: block !important; }
+      .card-shadow { box-shadow: none !important; border: 1px solid #ccc !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- HEADER TRANG BÁO CÁO -->
+  <header class="bg-white border-b border-bac sticky top-0 z-40 shadow-sm no-print">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="text-gray-500 hover:text-lam text-sm font-bold flex items-center gap-1">
+          <i class="fas fa-home"></i> <span class="hidden sm:inline">Về Trang Chủ</span>
+        </a>
+        <div class="h-6 w-[1px] bg-bac"></div>
+        <div>
+          <h1 class="text-sm sm:text-base font-bold text-lam leading-tight">Báo Cáo Đánh Giá Năng Lực Học Tập</h1>
+          <p class="text-[11px] text-luc font-semibold">Trung Tâm Bồi Dưỡng Văn Hóa · HCMUS</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button onclick="window.print()" class="bg-giay hover:bg-gray-200 text-gray-700 border border-bac px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+          <i class="fas fa-print"></i> <span>In Phiếu A4</span>
+        </button>
+        <a href="index.html" class="bg-luc hover:bg-emerald-800 text-white px-4 py-1.5 rounded-lg text-xs font-bold transition shadow-sm">
+          Luyện đề khác
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- NỘI DUNG CHÍNH -->
+  <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-8 space-y-6">
+    
+    <!-- ĐẦU TRANG CHO BẢN IN A4 (CHUẨN VĂN BẢN TRƯỜNG KHTN) -->
+    <div class="hidden print-only text-center pb-4 border-b border-gray-300 mb-6">
+      <div class="flex justify-between items-center mb-2">
+        <div class="text-left">
+          <p class="text-xs uppercase font-bold text-gray-800">Đại Học Quốc Gia TP.Hồ Chí Minh</p>
+          <p class="text-xs font-bold text-gray-900">Trường ĐH Khoa Học Tự Nhiên</p>
+          <p class="text-[10px] text-gray-600">Trung Tâm Bồi Dưỡng Văn Hóa</p>
+        </div>
+        <div class="text-right">
+          <p class="text-xs font-bold text-gray-800">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+          <p class="text-[11px] font-semibold text-gray-700">Độc lập - Tự do - Hạnh phúc</p>
+        </div>
+      </div>
+      <h2 class="text-lg font-bold uppercase text-gray-900 mt-4">PHIẾU ĐÁNH GIÁ NĂNG LỰC TƯ DUY & KẾT QUẢ BÀI LÀM</h2>
+      <p class="text-xs text-gray-500 italic">Hệ thống khảo thí thông minh hỗ trợ bởi Trợ lý Hệ Thống Khảo Thí - ThS. Đinh Quốc Tuấn</p>
+    </div>
+
+    <!-- KHỐI TỔNG KẾT ĐIỂM SỐ -->
+    <div class="bg-white rounded-2xl p-6 sm:p-8 border border-bac shadow-md card-shadow flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-6">
+        <div class="w-24 h-24 rounded-2xl bg-gradient-to-tr from-lam to-blue-600 text-white flex flex-col items-center justify-center shadow-lg">
+          <span class="text-3xl font-extrabold title-serif leading-none" id="res-score">0.0</span>
+          <span class="text-[11px] text-white/80 font-medium mt-1">Thang điểm 10</span>
+        </div>
+        <div>
+          <span id="res-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-luc mb-2 inline-block">
+            ⭐ Đang phân tích
+          </span>
+          <h2 class="text-xl sm:text-2xl font-bold text-muc title-serif" id="res-level">Xếp loại năng lực</h2>
+          <p class="text-xs text-gray-500 mt-1" id="res-stats">Đúng: 0/0 câu · Thời gian làm: 0s</p>
+        </div>
+      </div>
+
+      <!-- Thông tin thí sinh & Mã lớp -->
+      <div class="bg-giay p-4 rounded-xl border border-bac w-full sm:w-72 text-center sm:text-right no-print">
+        <span class="text-xs text-gray-600 block" id="candidate-badge-label">Tài khoản học tập:</span>
+        <span class="text-sm font-bold text-muc block" id="res-candidate-name">Học sinh</span>
+        <div id="class-code-status-box" class="mt-2">
+          <button onclick="openClassCodeModal()" class="text-xs text-luc font-bold hover:underline">
+            <i class="fas fa-key"></i> Nhập mã lớp để lưu phiên
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- KHỐI ĐÁNH GIÁ SƯ PHẠM CỦA GEMINI AI (CÓ CHẾ ĐỘ MỞ KHÓA HOẶC LÀM MỜ NẾU HẾT LƯỢT AI) -->
+    <div id="ai-block-container" class="relative bg-white rounded-2xl p-6 sm:p-8 border-l-4 border-luc border-y border-r border-bac shadow-md card-shadow space-y-4 overflow-hidden">
+      
+      <!-- Đã gỡ bỏ overlay ép 5.000đ -->
+
+      <div class="flex items-center gap-2 text-luc font-bold text-sm">
+        <i class="fas fa-brain text-base"></i> <span>Phân Tích Sư Phạm & Nhận Xét Tư Duy Từ Thầy Đinh Quốc Tuấn (Hệ Thống Khảo Thí)</span>
+      </div>
+
+      <!-- Lời nhận xét giáo viên -->
+      <p class="text-xs sm:text-sm text-gray-700 leading-relaxed italic bg-emerald-50/60 p-4 rounded-xl border border-emerald-100" id="ai-teacher-remark">
+        Đang tải nhận xét sư phạm...
+      </p>
+
+      <!-- Nguyên nhân sai sót & Điểm cần cải thiện -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+        <div class="bg-giay p-4 rounded-xl border border-bac space-y-2">
+          <h4 class="font-bold text-xs text-lam flex items-center gap-1.5 uppercase">
+            <i class="fas fa-exclamation-triangle text-amber-500"></i> Lỗ hổng tư duy cần lưu ý:
+          </h4>
+          <ul class="text-xs text-gray-600 space-y-1 list-disc list-inside" id="ai-root-causes">
+            <li>Đang phân tích dữ liệu...</li>
+          </ul>
+        </div>
+
+        <div class="bg-giay p-4 rounded-xl border border-bac space-y-2">
+          <h4 class="font-bold text-xs text-luc flex items-center gap-1.5 uppercase">
+            <i class="fas fa-lightbulb text-amber-400"></i> Mẹo giải nhanh độc quyền từ Thầy:
+          </h4>
+          <p class="text-xs text-gray-700 leading-relaxed" id="ai-tip">
+            Đang tải mẹo nhớ...
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- KHỐI PHÂN TÍCH THỜI GIAN LÀM BÀI & NHỊP ĐỘ THI CỬ -->
+    <div class="bg-white rounded-2xl p-6 sm:p-8 border border-bac shadow-md card-shadow space-y-4">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+        <div class="flex items-center gap-2 text-lam font-bold text-sm">
+          <i class="fas fa-stopwatch text-base text-son"></i> <span>Phân Tích Nhịp Độ & Thời Gian Hoàn Thành Bài Thi</span>
+        </div>
+        <span id="time-pace-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-lam">
+          Đang tính toán nhịp độ
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-giay p-4 rounded-xl border border-bac text-center">
+          <span class="text-xs text-gray-500 block">Thời gian thực tế làm bài</span>
+          <span class="text-xl font-bold font-mono text-lam block mt-1" id="time-actual">00:00</span>
+          <span class="text-[11px] text-gray-500" id="time-avg-q">TB: 0s / câu</span>
+        </div>
+        <div class="bg-giay p-4 rounded-xl border border-bac text-center">
+          <span class="text-xs text-gray-500 block">Thời gian chuẩn khuyến nghị</span>
+          <span class="text-xl font-bold font-mono text-gray-700 block mt-1" id="time-recommended">45 phút</span>
+          <span class="text-[11px] text-gray-500">Khung chuẩn Bộ GD&ĐT</span>
+        </div>
+        <div class="bg-giay p-4 rounded-xl border border-bac text-center">
+          <span class="text-xs text-gray-500 block">Chênh lệch nhịp độ</span>
+          <span class="text-xl font-bold font-mono block mt-1" id="time-diff">0 phút</span>
+          <span class="text-[11px]" id="time-diff-status">Đúng tiến độ</span>
+        </div>
+      </div>
+
+      <!-- Lời khuyên chiến thuật quản lý thời gian -->
+      <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 text-xs sm:text-sm text-gray-800 leading-relaxed">
+        <b class="text-amber-900 block mb-1 flex items-center gap-1.5">
+          <i class="fas fa-lightbulb text-amber-500"></i> Chiến thuật phân bổ thời gian của Thầy Tuấn:
+        </b>
+        <span id="time-advice">Đang tải lời khuyên...</span>
+      </div>
+    </div>
+
+    <!-- CHI TIẾT TỪNG CÂU HỎI VÀ LỜI GIẢI -->
+    <div class="space-y-4">
+      <h3 class="text-lg font-bold title-serif text-lam flex items-center gap-2">
+        <i class="fas fa-list-check"></i> Chi Tiết Đáp Án & Hướng Dẫn Giải
+      </h3>
+      
+      
+    <!-- KHUNG NHẬP MÃ LỚP MỞ KHÓA TOÀN BỘ LỜI GIẢI CHI TIẾT -->
+    <div id="unlock-class-banner" class="bg-gradient-to-r from-amber-50 via-emerald-50 to-amber-50 rounded-2xl p-5 border-2 border-amber-300 shadow-md flex flex-col md:flex-row items-center justify-between gap-4 no-print">
+      <div class="flex items-center gap-3 text-left w-full md:w-auto">
+        <div class="w-12 h-12 rounded-2xl bg-amber-400 text-white flex items-center justify-center text-xl font-bold flex-none shadow">
+          <i class="fas fa-key"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-amber-200 text-amber-900 text-[10px] font-black uppercase tracking-wider">Học Sinh Của Thầy Tuấn / GV Bộ Môn</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          </div>
+          <h4 class="font-bold text-muc text-base title-serif mt-0.5">Nhập Mã Lớp 4 Ký Tự Để Mở Khóa Toàn Bộ Lời Giải Chi Tiết</h4>
+          <p class="text-xs text-gray-600 mt-0.5">Học sinh trong lớp chỉ cần nhập mã điểm danh Thầy chiếu trên bảng để xem đầy đủ hướng dẫn giải và công thức toán.</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 w-full md:w-auto justify-end flex-none">
+        <input type="text" id="bannerClassCodeInput" maxlength="6" placeholder="Mã 4 ký tự" class="px-3.5 py-2.5 border-2 border-amber-400 rounded-xl text-center uppercase font-mono font-black text-sm w-32 outline-none focus:ring-2 focus:ring-amber-500 bg-white shadow-inner">
+        <button onclick="submitBannerClassCode()" class="px-4 py-2.5 bg-luc hover:bg-emerald-800 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center gap-1.5 flex-none">
+          <i class="fas fa-unlock-alt"></i> Mở Khóa Ngay
+        </button>
+      </div>
+    </div>
+
+    <div id="answers-breakdown" class="space-y-4">
+        <!-- Render danh sách câu trả lời đúng sai -->
+      </div>
+    </div>
+
+    <!-- HỘP THÔNG BÁO ỦNG HỘ LY CAFE TÙY HỶ CUỐI BÀI THỨ 2 CỦA KHÁCH -->
+    <div id="guest-coffee-box" class="hidden bg-amber-50 border-2 border-amber-300 rounded-2xl p-6 sm:p-7 shadow-sm text-center space-y-4 no-print">
+      <div class="w-12 h-12 bg-amber-100 text-amber-800 rounded-full flex items-center justify-center mx-auto text-xl shadow-inner">
+        <i class="fas fa-coffee"></i>
+      </div>
+      <div class="space-y-1">
+        <h4 class="font-bold text-base text-gray-900 title-serif">Gửi Tặng Tác Giả Ly Cà Phê Đồng Hành</h4>
+        <p class="text-xs text-gray-700 max-w-lg mx-auto leading-relaxed">
+          Cảm ơn bạn đã trải nghiệm hệ thống! Nếu thấy hữu ích, bạn có thể hỗ trợ tác giả ly cafe tuỳ người dùng <b>1k - 3k - 5k... tuỳ hỷ</b>; hoặc liên hệ tác giả: <b>Zalo 0903052119</b>. Chúc bạn luôn đạt kết quả cao trong học tập!
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-3 pt-1">
+        <button onclick="openCoffeeModal()" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 px-6 rounded-xl text-xs transition shadow flex items-center gap-2">
+          <i class="fas fa-heart text-amber-200"></i> <span>Gửi tặng ly cafe (1k - 3k - 5k tùy hỷ)</span>
+        </button>
+        <a href="https://zalo.me/0903052119" target="_blank" class="bg-white border border-gray-300 hover:border-gray-400 text-gray-800 font-bold py-2.5 px-6 rounded-xl text-xs transition shadow flex items-center gap-2">
+          <i class="fas fa-comment-dots text-luc"></i> <span>Liên hệ Zalo: 0903.052.119</span>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+      <footer class="bg-white border-t border-bac py-4 text-center text-xs text-gray-500 no-print mt-auto">
+      <div>Trung Tâm Bồi Dưỡng Văn Hóa — Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM · ThS. Đinh Quốc Tuấn</div>
+      <div class="mt-2 text-[10px] sm:text-[11px] italic text-black font-serif">Hỗ trợ tác giả ly cafe nếu thích (tùy hỷ 1k, 3k, 5k...) hoặc liên hệ tác giả: Zalo 0903052119</div>
+    </footer>
+
+  <script>
+    async function init() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const subId = urlParams.get('sub_id');
+
+      if (subId && subId !== '0') {
+        try {
+          const res = await fetch(`api.php?action=get_submission&sub_id=${subId}`);
+          const d = await res.json();
+          if (d.status === 'success' && d.submission) {
+            renderResults(d.submission);
+            return;
+          }
+        } catch (e) {
+          console.warn("Lỗi tải bài làm từ máy chủ:", e);
+        }
+      }
+
+      // Dự phòng từ bộ nhớ phiên (sessionStorage)
+      const stored = sessionStorage.getItem('last_submission');
+      if (stored) {
+        try {
+          const data = JSON.parse(stored);
+          renderResults(data);
+          return;
+        } catch (e) {}
+      }
+
+      alert('Không tìm thấy thông tin bài làm!');
+      window.location.href = 'index.html';
+    }
+
+    function renderResults(data) {
+      document.getElementById('res-score').innerText = data.score.toFixed(1);
+      document.getElementById('res-stats').innerText = 
+        `Đúng: ${data.correct_count}/${data.total_questions} câu · Thời gian làm: ${data.duration_seconds}s`;
+
+      const ai = data.ai_evaluation;
+      const overlayEl = document.getElementById('ai-locked-overlay');
+
+      if (ai && ai.locked) {
+        if (overlayEl) overlayEl.classList.remove('hidden');
+      } else {
+        if (overlayEl) overlayEl.classList.add('hidden');
+      }
+
+      if (ai) {
+        document.getElementById('res-level').innerText = ai.level;
+        document.getElementById('res-badge').innerText = ai.badge;
+        document.getElementById('ai-teacher-remark').innerText = ai.teacher_remark;
+        document.getElementById('ai-tip').innerText = ai.exclusive_tip;
+
+        const causesList = document.getElementById('ai-root-causes');
+        causesList.innerHTML = ai.root_causes.map(c => `<li>${esc(c)}</li>`).join('');
+
+        // Cập nhật phân tích thời gian làm bài
+        const t = ai.time_analysis;
+        if (t) {
+          document.getElementById('time-actual').innerText = t.actual_formatted || '00:00';
+          document.getElementById('time-avg-q').innerText = `TB: ${t.avg_seconds_per_question}s / câu`;
+          document.getElementById('time-recommended').innerText = `${t.recommended_minutes} phút`;
+          
+          const diffEl = document.getElementById('time-diff');
+          const diffStatusEl = document.getElementById('time-diff-status');
+          const badgeEl = document.getElementById('time-pace-badge');
+
+          if (t.is_overtime) {
+            diffEl.innerText = `+${t.diff_minutes} phút`;
+            diffEl.className = 'text-xl font-bold font-mono text-son block mt-1';
+            diffStatusEl.innerText = 'Vượt quá giờ chuẩn';
+            diffStatusEl.className = 'text-[11px] text-son font-semibold';
+            badgeEl.innerText = '⏳ Nhịp độ cẩn trọng (vượt giờ)';
+            badgeEl.className = 'px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900';
+          } else {
+            diffEl.innerText = `-${t.diff_minutes} phút`;
+            diffEl.className = 'text-xl font-bold font-mono text-luc block mt-1';
+            diffStatusEl.innerText = 'Hoàn thành sớm';
+            diffStatusEl.className = 'text-[11px] text-luc font-semibold';
+            badgeEl.innerText = '⚡ Tiến độ chuẩn xác';
+            badgeEl.className = 'px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-luc';
+          }
+
+          document.getElementById('time-advice').innerText = t.time_strategy_advice || '';
+        }
+      }
+
+      
+      // Kiểm tra bài làm thứ 2 của khách
+      const classCode = localStorage.getItem('bdvh_class_code') || sessionStorage.getItem('bdvh_class_code') || '';
+      const guestExamCount = parseInt(localStorage.getItem('bdvh_guest_exam_count') || '0', 10);
+      const isClassStudent = Boolean(classCode) || (data.is_class_student === true);
+
+      const candidateName = localStorage.getItem('bdvh_student_name') || sessionStorage.getItem('bdvh_student_name') || data.student_name || 'Học sinh';
+      const candEl = document.getElementById('res-candidate-name');
+      if (candEl) candEl.innerText = candidateName;
+
+      const codeStatusEl = document.getElementById('class-code-status-box');
+      if (codeStatusEl) {
+        if (isClassStudent && classCode) {
+          codeStatusEl.innerHTML = `<span class="text-xs text-luc font-bold"><i class="fas fa-check-circle"></i> Lớp: ${esc(classCode)}</span>`;
+        } else {
+          codeStatusEl.innerHTML = `<button onclick="openClassCodeModal()" class="text-xs text-luc font-bold hover:underline"><i class="fas fa-key"></i> Nhập mã lớp giáo viên cấp</button>`;
+        }
+      }
+
+      // Hiện box cà phê tùy hỷ nếu là khách và ở bài thi thứ 2
+      const coffeeBox = document.getElementById('guest-coffee-box');
+      if (coffeeBox) {
+        if (!isClassStudent && (guestExamCount === 2 || data.user_submission_count === 2)) {
+          coffeeBox.classList.remove('hidden');
+        } else {
+          coffeeBox.classList.add('hidden');
+        }
+      }
+
+      // totalLeft check
+      document.getElementById('res-trials-left').innerText = totalLeft + ' lượt';
+
+      // Chi tiết câu hỏi
+      const container = document.getElementById('answers-breakdown');
+      container.innerHTML = data.details.map((d, idx) => {
+        const isRight = d.is_correct;
+        return `
+          <div class="bg-white rounded-2xl p-5 border ${isRight ? 'border-emerald-200' : 'border-red-200'} shadow-sm card-shadow space-y-3">
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex items-start gap-3">
+                <span class="w-7 h-7 rounded-full ${isRight ? 'bg-emerald-100 text-luc' : 'bg-red-100 text-son'} font-bold text-xs flex items-center justify-center flex-none">
+                  ${idx + 1}
+                </span>
+                <div class="text-xs sm:text-sm font-medium text-muc pt-0.5">
+                  ${esc(d.q)}
+                </div>
+              </div>
+              <span class="px-2.5 py-0.5 rounded text-[11px] font-bold flex-none ${isRight ? 'bg-emerald-100 text-luc' : 'bg-red-100 text-son'}">
+                ${isRight ? '✔ Đúng' : '✖ Sai'}
+              </span>
+            </div>
+
+            <div class="text-xs space-y-1.5 pl-10">
+              <p><b>Lựa chọn của em:</b> <span class="${isRight ? 'text-luc font-bold' : 'text-son font-bold'}">${d.chosen >= 0 ? ['A', 'B', 'C', 'D'][d.chosen] + '. ' + esc(d.opts[d.chosen]) : 'Chưa chọn'}</span></p>
+              ${!isRight ? `<p><b>Đáp án đúng:</b> <span class="text-luc font-bold">${['A', 'B', 'C', 'D'][d.correct_ans]}. ${esc(d.opts[d.correct_ans])}</span></p>` : ''}
+              ${d.explanation ? `
+${d.is_explanation_locked ? `
+                <div class="bg-amber-50/80 p-3.5 rounded-xl border border-amber-200 text-gray-700 mt-3 text-xs flex items-center justify-between gap-3 shadow-sm">
+                  <div class="flex items-center gap-2">
+                    <i class="fas fa-lock text-amber-600 text-sm"></i>
+                    <span><b>Hướng dẫn giải chi tiết & mẹo giải nhanh:</b> Đang bị khóa đối với tài khoản khách/hết lượt.</span>
+                  </div>
+                  <button onclick="promptClassCode()" class="px-3 py-1.5 bg-luc text-white rounded-lg font-bold text-[11px] hover:bg-emerald-800 transition flex-none shadow-sm">
+                    🔑 Mở Khóa Ngay
+                  </button>
+                </div>
+              ` : (d.explanation ? `
+                <div class="bg-emerald-50/50 p-4 rounded-2xl border border-emerald-200/80 text-slate-800 mt-3 text-xs leading-relaxed shadow-sm">
+                  <div class="font-bold text-luc uppercase tracking-wider text-[11px] mb-2 flex items-center gap-1.5 border-b border-emerald-200/60 pb-1.5">
+                    <i class="fas fa-graduation-cap text-sm"></i> Hướng Dẫn Giải Chi Tiết Chuẩn Sư Phạm:
+                  </div>
+                  <div class="explanation-content space-y-1.5">
+                    ${d.explanation}
+                  </div>
+                </div>
+              ` : '')}
+            ` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // MathJax re-render
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+    }
+
+    function esc(s) { return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    
+    async function promptClassCode() {
+      const code = prompt("Nhập Mã Lớp (4 ký tự) do Thầy Đinh Quốc Tuấn hoặc Thầy/Cô bộ môn cung cấp:");
+      if (!code) return;
+      try {
+        const res = await fetch('api.php?action=verify_class_code', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: code.trim() })
+        });
+        const data = await res.json();
+        alert(data.message || data.status);
+        if (data.status === 'success') {
+          location.reload();
+        }
+      } catch (e) {
+        alert("Lỗi xác thực: " + e.message);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+
+  <!-- MODAL NHẬP MÃ LỚP 4 KÝ TỰ TRÊN KẾT QUẢ -->
+  <div id="modal-class-result" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 no-print">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-bac space-y-4 animate-scaleIn text-left">
+      <div class="flex items-start justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg font-bold">
+            <i class="fas fa-key"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-base text-muc title-serif">Mở Khóa Lời Giải Chi Tiết</h3>
+            <p class="text-xs text-gray-500">Dành cho học sinh lớp Thầy Tuấn & GV bộ môn</p>
+          </div>
+        </div>
+        <button onclick="closeResultClassModal()" class="text-gray-400 hover:text-muc text-lg">✕</button>
+      </div>
+
+      <p class="text-xs text-gray-600 leading-relaxed">
+        Nhập mã 4 ký tự chiếu trên bảng hoặc do Thầy cung cấp để <b>mở khóa ngay toàn bộ bài giải từng bước</b>:
+      </p>
+
+      <div class="space-y-3 pt-1">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Mã Lớp 4 ký tự:</label>
+          <input type="text" id="modalClassCodeInput" maxlength="6" placeholder="VD: 7K8B" class="w-full px-4 py-3 border-2 border-amber-400 bg-amber-50/40 rounded-xl text-center text-2xl font-black uppercase tracking-widest text-slate-800 outline-none focus:border-amber-600 font-mono">
+        </div>
+
+        <button onclick="submitModalClassCode()" class="w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center justify-center gap-2">
+          <i class="fas fa-unlock"></i> Xác Nhận Mở Khóa Lời Giải
+        </button>
+      </div>
+
+      <div class="border-t border-bac pt-3 text-center">
+        <p class="text-[11px] text-gray-500 mb-2">Em không có mã lớp?</p>
+        <a href="https://zalo.me/0903052119" target="_blank" class="text-xs text-luc font-bold hover:underline"><i class="fas fa-comment-dots"></i> Nhắn Thầy Tuấn (Zalo: 0903.052.119) để nhận mã lớp</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL GỬI TẶNG LY CÀ PHÊ TÙY HỶ (1k, 3k, 5k... tùy hỷ) -->
+  <div id="modal-coffee" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-bac space-y-4 text-center animate-scaleIn">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">☕</span>
+          <h3 class="font-bold text-base text-gray-900 title-serif">Gửi Tặng Tác Giả Ly Cà Phê</h3>
+        </div>
+        <button onclick="closeCoffeeModal()" class="text-gray-400 hover:text-gray-700 text-lg">✕</button>
+      </div>
+
+      <p class="text-xs text-gray-600 leading-relaxed text-left">
+        Nền tảng được phát triển bởi <b>ThS. Đinh Quốc Tuấn</b> nhằm hỗ trợ học sinh ôn luyện. Bạn có thể gửi tặng tác giả ly cà phê tùy hỷ <b>(1k, 3k, 5k...)</b> để cùng duy trì máy chủ, hoặc kết nối trao đổi qua Zalo.
+      </p>
+
+      <!-- Mã QR VietQR tùy hỷ -->
+      <div class="bg-amber-50/60 p-4 rounded-2xl border border-amber-200 text-center space-y-2">
+        <img src="https://img.vietqr.io/image/970407-19033385750013-compact2.png?amount=0&addInfo=Ung%20ho%20cafe%20bdvh&accountName=DINH%20QUOC%20TUAN" alt="QR VietQR" class="w-44 h-44 mx-auto rounded-xl shadow-sm border border-bac">
+        <p class="text-[11px] font-bold text-muc">Chủ TK: ĐINH QUỐC TUẤN</p>
+        <p class="text-[10px] text-gray-500">Techcombank: 19033385750013 · Nội dung: Ung ho cafe bdvh</p>
+      </div>
+
+      <div class="grid grid-cols-3 gap-2">
+        <a href="https://img.vietqr.io/image/970407-19033385750013-compact2.png?amount=1000&addInfo=Ly%20tra%20da%201k&accountName=DINH%20QUOC%20TUAN" target="_blank" class="py-2 bg-gray-100 hover:bg-amber-100 rounded-xl text-xs font-bold text-gray-700 transition">1.000đ</a>
+        <a href="https://img.vietqr.io/image/970407-19033385750013-compact2.png?amount=3000&addInfo=Ly%20cafe%203k&accountName=DINH%20QUOC%20TUAN" target="_blank" class="py-2 bg-gray-100 hover:bg-amber-100 rounded-xl text-xs font-bold text-gray-700 transition">3.000đ</a>
+        <a href="https://img.vietqr.io/image/970407-19033385750013-compact2.png?amount=5000&addInfo=Ly%20cafe%205k&accountName=DINH%20QUOC%20TUAN" target="_blank" class="py-2 bg-gray-100 hover:bg-amber-100 rounded-xl text-xs font-bold text-gray-700 transition">5.000đ</a>
+      </div>
+
+      <div class="pt-2 border-t border-bac flex items-center justify-between text-xs">
+        <span class="text-gray-500">Zalo tác giả: <b>0903052119</b></span>
+        <a href="https://zalo.me/0903052119" target="_blank" class="text-luc font-bold hover:underline">Mở Zalo</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

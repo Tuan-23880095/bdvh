@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phòng Thi Trực Tuyến · Bồi Dưỡng Văn Hóa HCMUS</title>
+  
+  <link rel="icon" type="image/svg+xml" href="assets/logo-sen.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,400&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            luc: '#0F6B55',
+            'luc-non': '#46A385',
+            lam: '#1F4E79',
+            muc: '#10212B',
+            giay: '#F6F7F3',
+            son: '#D2492A',
+            tho: '#D6A130',
+            bac: '#D5DCE1'
+          },
+          fontFamily: {
+            serif: ['"Source Serif 4"', 'Georgia', 'serif'],
+            sans: ['"Be Vietnam Pro"', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- MathJax cấu hình inline math $...$ -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      startup: {
+        typeset: false
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #F6F7F3; color: #10212B; }
+    .title-serif { font-family: 'Source Serif 4', Georgia, serif; }
+    .opt-label:hover { border-color: #0F6B55; background-color: #E8F4EE; }
+    .opt-input:checked + .opt-box { border-color: #0F6B55; background-color: #E8F4EE; }
+    .opt-input:checked + .opt-box .opt-circle { background-color: #0F6B55; color: #fff; border-color: #0F6B55; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- HEADER PHÒNG THI TÍNH GIỜ -->
+  <header class="bg-white border-b border-bac sticky top-0 z-40 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="text-gray-500 hover:text-lam text-sm font-bold flex items-center gap-1">
+          <i class="fas fa-arrow-left"></i> <span class="hidden sm:inline">Thoát</span>
+        </a>
+        <div class="h-6 w-[1px] bg-bac"></div>
+        <div>
+          <h1 class="text-sm sm:text-base font-bold text-lam leading-tight line-clamp-1" id="exam-title">Đang tải đề thi...</h1>
+          <p class="text-[11px] text-gray-500" id="candidate-name">Thí sinh: Đang xác thực...</p>
+        </div>
+      </div>
+
+      <!-- ĐỒNG HỒ ĐO THỜI GIAN LÀM BÀI (KHÔNG DỪNG ÉP BUỘC MÀ PHÂN TÍCH NHỊP ĐỘ) -->
+      <div class="flex items-center gap-2 bg-slate-50 border border-bac px-3.5 py-1.5 rounded-xl shadow-inner" id="timer-box">
+        <i class="fas fa-stopwatch text-lam" id="timer-icon"></i>
+        <div class="text-right">
+          <span class="font-mono font-bold text-base sm:text-lg text-lam block leading-none" id="timer-display">00:00</span>
+          <span class="text-[9px] text-gray-500 block" id="timer-status">Chuẩn: 45 phút</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- THANH TIẾN ĐỘ 3 CHẶNG (GAMIFICATION) -->
+    <div class="bg-slate-100 border-t border-bac px-4 py-1.5 text-xs flex justify-between items-center text-gray-500">
+      <div class="flex items-center gap-2">
+        <span id="stage-badge" class="bg-emerald-100 text-luc font-bold px-2 py-0.5 rounded text-[10px] uppercase">Chặng 1: Khởi động</span>
+        <span id="progress-text">Đã chọn: 0/0 câu</span>
+      </div>
+      <div class="w-32 sm:w-48 bg-gray-200 h-2 rounded-full overflow-hidden">
+        <div id="progress-bar" class="bg-luc h-full transition-all duration-300" style="width: 0%"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- VÙNG NỘI DUNG CÂU HỎI -->
+  <main class="flex-grow max-w-4xl w-full mx-auto px-4 py-8 space-y-6">
+    <div id="loading-box" class="text-center py-20 space-y-3">
+      <i class="fas fa-spinner fa-spin text-3xl text-luc"></i>
+      <p class="text-sm text-gray-600 font-semibold">Đang chuẩn bị đề thi và khởi tạo đồng hồ...</p>
+    </div>
+
+    <form id="quiz-form" onsubmit="submitExam(event)" class="hidden space-y-6">
+      <div id="questions-list" class="space-y-6">
+        <!-- Render danh sách câu hỏi -->
+      </div>
+
+      <!-- NÚT NỘP BÀI -->
+      <div class="pt-6 border-t border-bac flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="text-xs text-gray-500 italic">
+          <i class="fas fa-info-circle text-luc"></i> Sau khi nộp bài, Hệ thống sẽ tự động tổng hợp ma trận điểm, phân tích tốc độ và chỉ ra lỗ hổng kiến thức.
+        </p>
+        <button type="submit" id="btn-submit" class="w-full sm:w-auto bg-luc hover:bg-emerald-800 text-white font-bold py-3.5 px-8 rounded-xl text-sm transition shadow-lg flex items-center justify-center gap-2">
+          <i class="fas fa-paper-plane"></i> <span>Nộp Bài & Xem Phân Tích Chuyên Sâu</span>
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <!-- Đã gỡ bỏ modal-quota ép 5.000đ -->
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const examId = urlParams.get('exam_id') || '';
+    const examCode = urlParams.get('exam_code') || '';
+    let examData = null;
+    let timerInterval = null;
+    let timeRemainingSeconds = 0;
+    let durationSeconds = 0;
+    const userAnswers = {};
+    let isExamStarted = false;
+    let currentStudentName = sessionStorage.getItem('bdvh_student_name') || '';
+    let currentClassCode = sessionStorage.getItem('bdvh_class_code') || '';
+    let isUnlocked = sessionStorage.getItem('bdvh_unlocked') === '1';
+
+    async function init() {
+      if (!examId && !examCode) {
+        alert('Thiếu mã đề thi!');
+        window.location.href = 'index.html';
+        return;
+      }
+
+      try {
+        const queryParam = examCode ? `exam_code=${encodeURIComponent(examCode)}` : `exam_id=${encodeURIComponent(examId)}`;
+        const res = await fetch(`api.php?action=get_exam&${queryParam}`);
+        const data = await res.json();
+
+        if (data.status === 'success') {
+          examData = data.exam;
+          renderExam();
+        } else {
+          alert(data.message || 'Lỗi tải đề thi');
+          window.location.href = 'index.html';
+        }
+      } catch (err) {
+        console.error('Lỗi tải đề:', err);
+        alert('Lỗi kết nối máy chủ!');
+      }
+    }
+
+    let targetStandardSeconds = 45 * 60;
+
+    function renderExam() {
+      document.getElementById('loading-box').classList.add('hidden');
+      document.getElementById('quiz-form').classList.remove('hidden');
+      document.getElementById('exam-title').innerText = examData.title;
+
+      const listEl = document.getElementById('questions-list');
+      listEl.innerHTML = examData.questions.map((q, idx) => {
+        const qType = q.type || 'choice'; // 'choice', 'true_false', 'short'
+        
+        let bodyHtml = '';
+        if (qType === 'choice') {
+          bodyHtml = `
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              ${q.opts.map((opt, oIdx) => `
+                <label class="opt-label relative block cursor-pointer">
+                  <input type="radio" name="q_${idx}" value="${oIdx}" onchange="selectOption(${idx}, ${oIdx})" class="opt-input peer sr-only">
+                  <div class="opt-box border border-bac rounded-xl p-3 flex items-center gap-3 transition">
+                    <span class="opt-circle w-6 h-6 rounded-full border border-gray-400 text-gray-500 font-bold text-xs flex items-center justify-center flex-none">
+                      ${['A', 'B', 'C', 'D'][oIdx]}
+                    </span>
+                    <span class="text-xs sm:text-sm text-gray-800">${esc(opt)}</span>
+                  </div>
+                </label>
+              `).join('')}
+            </div>
+          `;
+        } else if (qType === 'true_false') {
+          bodyHtml = `
+            <div class="space-y-2 pt-2">
+              ${q.items.map((subItem, sIdx) => `
+                <div class="flex items-center justify-between gap-4 p-2.5 rounded-xl border border-bac bg-giay text-xs sm:text-sm">
+                  <span class="text-gray-800"><b>${['a', 'b', 'c', 'd'][sIdx]})</b> ${esc(subItem)}</span>
+                  <div class="flex items-center gap-2 flex-none">
+                    <label class="flex items-center gap-1 cursor-pointer">
+                      <input type="radio" name="q_${idx}_${sIdx}" value="1" onchange="selectTFOption(${idx}, ${sIdx}, 1)" class="text-luc focus:ring-luc">
+                      <span class="text-xs font-bold text-luc">Đúng</span>
+                    </label>
+                    <label class="flex items-center gap-1 cursor-pointer">
+                      <input type="radio" name="q_${idx}_${sIdx}" value="0" onchange="selectTFOption(${idx}, ${sIdx}, 0)" class="text-son focus:ring-son">
+                      <span class="text-xs font-bold text-son">Sai</span>
+                    </label>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        } else if (qType === 'short') {
+          bodyHtml = `
+            <div class="pt-2">
+              <label class="block text-xs font-bold text-gray-600 mb-1">Điền đáp số tự tính toán (số hoặc phân số):</label>
+              <input type="text" placeholder="Ví dụ: 15 hoặc -3.5 hoặc 7/4" oninput="selectShortAnswer(${idx}, this.value)" class="w-full sm:w-72 px-3 py-2 border border-bac rounded-xl text-sm focus:outline-none focus:border-luc bg-giay">
+            </div>
+          `;
+        }
+
+        const sectionBadge = q.section ? `<span class="text-[10px] uppercase font-bold text-luc bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded ml-2">${esc(q.section)}</span>` : '';
+
+        return `
+          <div class="bg-white rounded-2xl p-5 border border-bac shadow-sm space-y-4" id="q-card-${idx}">
+            <div class="flex items-start gap-3">
+              <span class="w-8 h-8 rounded-full bg-slate-100 text-lam font-bold text-xs flex items-center justify-center flex-none border border-bac">
+                ${idx + 1}
+              </span>
+              <div class="font-medium text-sm sm:text-base text-muc leading-relaxed pt-1">
+                ${esc(q.q)} ${sectionBadge}
+              </div>
+            </div>
+            ${bodyHtml}
+          </div>
+        `;
+      }).join('');
+
+      // Render lại MathJax
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+
+      updateProgress();
+
+      // Kiểm tra trạng thái học sinh & mã lớp
+      if (isUnlocked && currentStudentName) {
+        updateCandidateHeader(currentStudentName, currentClassCode, true);
+        if (!isExamStarted) {
+          isExamStarted = true;
+          startTimer(examData.time_minutes * 60);
+        }
+      } else {
+        updateCandidateHeader(currentStudentName || 'Chưa định danh', '', false);
+        // Hiển thị khung inbox nhập mã lớp & họ tên trước khi bắt đầu làm bài
+        openThiClassModal(true);
+      }
+    }
+
+    function selectOption(qIdx, optIdx) {
+      userAnswers[qIdx] = optIdx;
+      updateProgress();
+    }
+
+    function selectTFOption(qIdx, sIdx, val) {
+      if (!userAnswers[qIdx] || typeof userAnswers[qIdx] !== 'object') {
+        userAnswers[qIdx] = {};
+      }
+      userAnswers[qIdx][sIdx] = val;
+      updateProgress();
+    }
+
+    function selectShortAnswer(qIdx, val) {
+      userAnswers[qIdx] = val.trim();
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const total = examData.questions.length;
+      const pct = Math.round((answeredCount / total) * 100);
+      document.getElementById('progress-text').innerText = `Đã làm: ${answeredCount}/${total} câu`;
+      document.getElementById('progress-bar').style.width = pct + '%';
+
+      const badge = document.getElementById('stage-badge');
+      if (pct < 40) {
+        badge.innerText = 'Chặng 1: Khởi động';
+        badge.className = 'bg-emerald-100 text-luc font-bold px-2 py-0.5 rounded text-[10px] uppercase';
+      } else if (pct < 80) {
+        badge.innerText = 'Chặng 2: Tăng tốc';
+        badge.className = 'bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded text-[10px] uppercase';
+      } else {
+        badge.innerText = 'Chặng 3: Về đích';
+        badge.className = 'bg-red-100 text-son font-bold px-2 py-0.5 rounded text-[10px] uppercase';
+      }
+    }
+
+    // TÍNH GIỜ THEO NHỊP ĐỘ: KHÔNG DỪNG BÀI KHI HẾT GIỜ, MÀ ĐO THỜI GIAN THỰC TẾ ĐỂ PHÂN TÍCH CHO HỌC SINH
+    function startTimer(standardSeconds) {
+      targetStandardSeconds = standardSeconds;
+      durationSeconds = 0;
+      updateTimerDisplay();
+
+      timerInterval = setInterval(() => {
+        durationSeconds++;
+        updateTimerDisplay();
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const m = Math.floor(durationSeconds / 60);
+      const s = durationSeconds % 60;
+      const displayStr = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+      document.getElementById('timer-display').innerText = displayStr;
+
+      const stdMin = Math.round(targetStandardSeconds / 60);
+      const timerBox = document.getElementById('timer-box');
+      const timerStatus = document.getElementById('timer-status');
+      const timerIcon = document.getElementById('timer-icon');
+
+      if (durationSeconds <= targetStandardSeconds) {
+        timerStatus.innerText = `Khuyến nghị: ${stdMin} phút`;
+        timerStatus.className = 'text-[9px] text-gray-500 block';
+        timerIcon.className = 'fas fa-stopwatch text-lam';
+      } else {
+        const overMin = Math.ceil((durationSeconds - targetStandardSeconds) / 60);
+        timerStatus.innerText = `+${overMin}p (vượt giờ chuẩn - Thầy vẫn chấm)`;
+        timerStatus.className = 'text-[9px] text-amber-600 font-semibold block';
+        timerIcon.className = 'fas fa-clock text-amber-500 animate-pulse';
+      }
+    }
+
+    async function submitExam(e) {
+      if (e) e.preventDefault();
+      clearInterval(timerInterval);
+
+      const btn = document.getElementById('btn-submit');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Đang nộp bài & Hệ Thống Khảo Thí chấm...</span>';
+
+      try {
+        const res = await fetch('api.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'submit_exam',
+            exam_id: examData ? examData.exam_id : (examId || 0),
+            exam_code: examCode || (examData ? examData.exam_code : ''),
+            student_name: currentStudentName,
+            class_code: currentClassCode,
+            answers: userAnswers,
+            duration_seconds: durationSeconds
+          })
+        });
+
+        const data = await res.json();
+        if (data.status === 'success') {
+          sessionStorage.setItem('last_submission', JSON.stringify(data));
+          window.location.href = `ket-qua.html?sub_id=${data.submission_id}`;
+        
+        } else {
+          alert(data.message || 'Lỗi khi nộp bài!');
+          btn.disabled = false;
+        }
+      } catch (err) {
+        alert('Lỗi kết nối khi nộp bài!');
+        btn.disabled = false;
+      }
+    }
+
+    function esc(s) { return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+
+  <!-- MODAL NHẬP MÃ LỚP TRƯỚC KHI BẮT ĐẦU LÀM BÀI -->
+  <div id="modal-class-thi" class="fixed inset-0 bg-slate-900/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-bac space-y-5 animate-scaleIn text-left">
+      <div class="flex items-start justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 text-luc flex items-center justify-center text-xl font-bold shadow-sm">
+            <i class="fas fa-unlock-alt"></i>
+          </div>
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-luc bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Phòng Thi Trực Tuyến</span>
+            <h3 class="font-bold text-lg text-muc title-serif mt-0.5">Xác Thực & Mở Khóa Lời Giải</h3>
+          </div>
+        </div>
+        <button id="btn-close-class-modal" onclick="closeThiClassModal()" class="text-gray-400 hover:text-muc text-lg hidden">✕</button>
+      </div>
+
+      <p class="text-xs text-gray-600 leading-relaxed">
+        Nhập <b>Họ tên</b> và <b>Mã lớp 4 ký tự</b> của Thầy Đinh Quốc Tuấn (chiếu trên bảng) để mở khóa trọn bộ <b>Lời giải chi tiết</b> và nhận xét tư duy chuyên sâu sau khi nộp bài.
+      </p>
+
+      <div class="space-y-3 pt-1">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Họ và tên thí sinh <span class="text-son">*</span>:</label>
+          <input type="text" id="candidateNameInput" required placeholder="Ví dụ: Nguyễn Minh Triết" class="w-full px-3.5 py-2.5 border border-bac rounded-xl text-sm focus:outline-none focus:border-luc focus:ring-1 focus:ring-luc">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Mã lớp / Mã mở khóa (4 ký tự):</label>
+          <div class="relative">
+            <input type="text" id="thiClassCodeInput" maxlength="8" placeholder="MÃ 4 KÝ TỰ (VD: ABCD)" class="w-full px-4 py-3 border-2 border-amber-400 bg-amber-50/40 rounded-xl text-center text-xl font-black uppercase tracking-widest text-slate-800 outline-none font-mono">
+            <span class="absolute right-3 top-3 text-xs text-amber-600 font-bold"><i class="fas fa-qrcode"></i></span>
+          </div>
+          <p class="text-[11px] text-gray-400 mt-1">Mã chiếu trực tiếp trên máy chiếu tại <code class="text-luc font-bold">bdvh.diemdanhsv.com/thay-tuan.html</code></p>
+        </div>
+
+        <button onclick="submitThiClassCode()" class="w-full py-3 bg-luc hover:bg-emerald-800 text-white font-bold text-sm rounded-xl shadow-md transition flex items-center justify-center gap-2">
+          <i class="fas fa-key"></i> <span>Xác Nhận & Bắt Đầu Làm Bài</span>
+        </button>
+
+        <div class="text-center pt-2 border-t border-slate-100">
+          <button type="button" onclick="startFreeTrialWithoutCode()" class="text-xs text-gray-500 hover:text-lam underline font-medium cursor-pointer">
+            Em chưa có mã lớp (Làm bài tự do)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function updateCandidateHeader(name, code, unlocked) {
+      const el = document.getElementById('candidate-name');
+      if (!el) return;
+      if (unlocked) {
+        el.innerHTML = `Thí sinh: <b class="text-muc">${esc(name)}</b> · <span class="text-luc font-bold"><i class="fas fa-check-circle"></i> Đã mở khóa lời giải (${esc(code)})</span> <button onclick="openThiClassModal(false)" class="text-[10px] text-gray-400 hover:text-luc ml-1 underline cursor-pointer">Đổi</button>`;
+      } else {
+        el.innerHTML = `Thí sinh: <b class="text-muc">${esc(name || 'Chưa định danh')}</b> · <button onclick="openThiClassModal(false)" class="text-[10px] text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-300 px-2 py-0.5 rounded-full font-bold ml-1 transition cursor-pointer"><i class="fas fa-key"></i> Nhập mã mở khóa</button>`;
+      }
+    }
+
+    function openThiClassModal(isStarting = false) {
+      const m = document.getElementById('modal-class-thi');
+      const btnClose = document.getElementById('btn-close-class-modal');
+      if (isStarting) {
+        btnClose.classList.add('hidden');
+      } else {
+        btnClose.classList.remove('hidden');
+      }
+      document.getElementById('candidateNameInput').value = currentStudentName;
+      document.getElementById('thiClassCodeInput').value = currentClassCode;
+      m.classList.remove('hidden');
+      setTimeout(() => {
+        if (!currentStudentName) {
+          document.getElementById('candidateNameInput').focus();
+        } else {
+          document.getElementById('thiClassCodeInput').focus();
+        }
+      }, 100);
+    }
+
+    function closeThiClassModal() {
+      document.getElementById('modal-class-thi').classList.add('hidden');
+    }
+
+    async function submitThiClassCode() {
+      const name = document.getElementById('candidateNameInput').value.trim();
+      const code = document.getElementById('thiClassCodeInput').value.trim().toUpperCase();
+      if (!name) {
+        alert("Vui lòng điền Họ và tên thí sinh để Thầy ghi nhận điểm số.");
+        document.getElementById('candidateNameInput').focus();
+        return;
+      }
+      if (!code) {
+        alert("Vui lòng nhập Mã lớp 4 ký tự của Thầy để mở khóa lời giải, hoặc bấm 'Em chưa có mã lớp' ở bên dưới.");
+        document.getElementById('thiClassCodeInput').focus();
+        return;
+      }
+
+      try {
+        const res = await fetch('api.php?action=verify_class_code', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: code, student_name: name })
+        });
+        const d = await res.json();
+        if (d.status === 'success') {
+          currentStudentName = name;
+          currentClassCode = code;
+          isUnlocked = true;
+          sessionStorage.setItem('bdvh_student_name', name);
+          sessionStorage.setItem('bdvh_class_code', code);
+          sessionStorage.setItem('bdvh_unlocked', '1');
+          updateCandidateHeader(name, code, true);
+          closeThiClassModal();
+          if (!isExamStarted && examData) {
+            isExamStarted = true;
+            startTimer(examData.time_minutes * 60);
+          }
+          alert(d.message || "Xác thực mã lớp thành công! Đã mở khóa trọn bộ lời giải chi tiết.");
+        } else {
+          alert(d.message || "Mã lớp không hợp lệ hoặc đã hết hạn.");
+        }
+      } catch (e) {
+        alert("Lỗi kết nối khi kiểm tra mã lớp: " + e.message);
+      }
+    }
+
+    function startFreeTrialWithoutCode() {
+      const name = document.getElementById('candidateNameInput').value.trim();
+      if (!name) {
+        alert("Vui lòng điền Họ và tên thí sinh để Thầy ghi nhận điểm số.");
+        document.getElementById('candidateNameInput').focus();
+        return;
+      }
+      currentStudentName = name;
+      sessionStorage.setItem('bdvh_student_name', name);
+      updateCandidateHeader(name, '', false);
+      closeThiClassModal();
+      if (!isExamStarted && examData) {
+        isExamStarted = true;
+        startTimer(examData.time_minutes * 60);
+      }
+    }
+  </script>
+
+</body>
+</html>

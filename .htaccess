@@ -1,0 +1,20 @@
+# .htaccess — Cấu hình máy chủ LiteSpeed / Apache cho bdvh.diemdanhsv.com
+Options -Indexes
+DirectoryIndex index.html index.php
+
+RewriteEngine On
+
+# Chống xem cấu trúc file ẩn & file mã nguồn/CSDL nhạy cảm
+RewriteRule (^|/)\. - [F,L]
+RewriteRule \.(sql|log|bak|sqlite|sqlite3|md|ps1)$ - [F,L]
+RewriteRule (^|/)error_log$ - [F,L]
+
+# Tối ưu cache trình duyệt: đảm bảo các bản cập nhật JS/CSS/HTML phản ánh ngay lập tức
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>

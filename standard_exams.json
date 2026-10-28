@@ -1,0 +1,981 @@
+[
+  {
+    "exam_code": "TOAN06_01",
+    "grade": "L06",
+    "subject": "TOAN",
+    "title": "Đấu Trường Toán 6: Lũy thừa và Thứ tự thực hiện phép tính",
+    "description": "Rèn luyện tư duy tính toán nhanh, quy tắc lũy thừa cơ số tự nhiên và thứ tự ưu tiên các phép tính chuẩn chương trình KNTT.",
+    "time_minutes": 20,
+    "questions": [
+      {
+        "q": "Kết quả của phép tính $2^3 \\cdot 2^2$ bằng bao nhiêu?",
+        "opts": [
+          "$2^5 = 32$",
+          "$2^6 = 64$",
+          "$4^5 = 1024$",
+          "$4^6 = 4096$"
+        ],
+        "ans": 0,
+        "exp": "<b>Phương pháp giải:</b> Áp dụng quy tắc nhân hai lũy thừa cùng cơ số:<br>$$a^m \\cdot a^n = a^{m+n} \\quad (a \\in \\mathbb{N}^*; m, n \\in \\mathbb{N})$$<br><b>Lời giải chi tiết:</b><br>Với $a = 2, m = 3, n = 2$, ta có:<br>$$2^3 \\cdot 2^2 = 2^{3+2} = 2^5 = 32$$<br><b>Kết luận:</b> Kết quả của phép tính là $2^5 = 32$. Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Giá trị của biểu thức $15 + 5 \\cdot 2^2$ là:",
+        "opts": [
+          "$40$",
+          "$35$",
+          "$80$",
+          "$25$"
+        ],
+        "ans": 1,
+        "exp": "<b>Quy tắc thứ tự thực hiện phép tính:</b><br>1. Tính lũy thừa trước.<br>2. Thực hiện phép nhân và phép chia.<br>3. Cuối cùng thực hiện phép cộng và phép trừ.<br><br><b>Lời giải từng bước:</b><br>Bước 1 (Tính lũy thừa): $2^2 = 4$.<br>Bước 2 (Thực hiện phép nhân): $5 \\cdot 4 = 20$.<br>Bước 3 (Thực hiện phép cộng): $15 + 20 = 35$.<br><br><b>Kết luận:</b> Giá trị biểu thức bằng $35$. Chọn đáp án <b>B</b>."
+      },
+      {
+        "q": "Tìm số tự nhiên $x$ thỏa mãn đẳng thức: $3^x = 27$?",
+        "opts": [
+          "$x = 2$",
+          "$x = 3$",
+          "$x = 4$",
+          "$x = 9$"
+        ],
+        "ans": 1,
+        "exp": "<b>Phương pháp giải:</b> Đưa hai vế về cùng cơ số $a$ dạng $a^x = a^n \\Rightarrow x = n$.<br><br><b>Lời giải chi tiết:</b><br>Ta phân tích số $27$ ra thừa số nguyên tố: $27 = 3 \\cdot 3 \\cdot 3 = 3^3$.<br>Khi đó phương trình trở thành:<br>$$3^x = 3^3 \\Rightarrow x = 3$$<br><b>Kết luận:</b> Số tự nhiên cần tìm là $x = 3$. Chọn đáp án <b>B</b>."
+      },
+      {
+        "q": "Trong các số sau, số nào chia hết cho cả 2 và 5?",
+        "opts": [
+          "124",
+          "235",
+          "450",
+          "502"
+        ],
+        "ans": 2,
+        "exp": "<b>Dấu hiệu chia hết:</b><br>• Số có chữ số tận cùng là 0, 2, 4, 6, 8 thì chia hết cho 2.<br>• Số có chữ số tận cùng là 0 hoặc 5 thì chia hết cho 5.<br>⇒ Số chia hết cho cả 2 và 5 phải có <b>chữ số tận cùng là chữ số 0</b>.<br><br><b>Xét các phương án:</b><br>- Số 124 có chữ số tận cùng là 4 (chỉ chia hết cho 2).<br>- Số 235 có chữ số tận cùng là 5 (chỉ chia hết cho 5).<br>- Số 450 có chữ số tận cùng là 0 (chia hết cho cả 2 và 5).<br>- Số 502 có chữ số tận cùng là 2 (chỉ chia hết cho 2).<br><br><b>Kết luận:</b> Số 450 thỏa mãn yêu cầu bài toán. Chọn đáp án <b>C</b>."
+      },
+      {
+        "q": "Thứ tự thực hiện đúng các dấu ngoặc trong một biểu thức toán học là:",
+        "opts": [
+          "Ngoặc tròn $( )$ $\\rightarrow$ Ngoặc vuông $[ ]$ $\\rightarrow$ Ngoặc nhọn $\\{ \\}$",
+          "Ngoặc nhọn $\\{ \\}$ $\\rightarrow$ Ngoặc vuông $[ ]$ $\\rightarrow$ Ngoặc tròn $( )$",
+          "Ngoặc vuông $[ ]$ $\\rightarrow$ Ngoặc tròn $( )$ $\\rightarrow$ Ngoặc nhọn $\\{ \\}$",
+          "Ngoặc tròn $( )$ $\\rightarrow$ Ngoặc nhọn $\\{ \\}$ $\\rightarrow$ Ngoặc vuông $[ ]$"
+        ],
+        "ans": 0,
+        "exp": "<b>Quy ước sư phạm chuẩn:</b><br>Khi thực hiện các phép tính trong biểu thức có nhiều dấu ngoặc, ta tính toán theo thứ tự ưu tiên từ trong ra ngoài:<br>$$\\text{Ngoặc tròn } ( ) \\longrightarrow \\text{Ngoặc vuông } [ ] \\longrightarrow \\text{Ngoặc nhọn } \\{ \\}$$<br><b>Kết luận:</b> Thứ tự đúng là $( ) \\rightarrow [ ] \\rightarrow \\{ \\}$. Chọn đáp án <b>A</b>."
+      }
+    ]
+  },
+  {
+    "exam_code": "TOAN07_01",
+    "grade": "L07",
+    "subject": "TOAN",
+    "title": "Đấu Trường Toán 7: Tập hợp số hữu tỉ & Lũy thừa số hữu tỉ",
+    "description": "Kiểm tra định nghĩa tập hợp số hữu tỉ Q, các phép toán cộng trừ nhân chia và giá trị tuyệt đối của số hữu tỉ.",
+    "time_minutes": 25,
+    "questions": [
+      {
+        "q": "Khẳng định nào sau đây là ĐÚNG về tập hợp số hữu tỉ $\\mathbb{Q}$?",
+        "opts": [
+          "Mọi số nguyên đều là số hữu tỉ",
+          "Số hữu tỉ chỉ bao gồm các phân số dương",
+          "Số $0$ không phải là số hữu tỉ",
+          "Số $\\pi$ là một số hữu tỉ"
+        ],
+        "ans": 0,
+        "exp": "<b>Định nghĩa số hữu tỉ:</b> Số hữu tỉ là số viết được dưới dạng phân số $\\frac{a}{b}$ với $a, b \\in \\mathbb{Z}, b \\ne 0$.<br><br><b>Chứng minh chi tiết:</b><br>Với mọi số nguyên $x \\in \\mathbb{Z}$, ta luôn viết được thành $x = \\frac{x}{1}$ (trong đó tử số $x \\in \\mathbb{Z}$, mẫu số $1 \\in \\mathbb{Z}^*$). Do đó mọi số nguyên đều là số hữu tỉ, hay $\\mathbb{Z} \\subset \\mathbb{Q}$.<br><br><b>Xét các phương án còn lại:</b><br>- Số hữu tỉ gồm cả số âm, số dương và số $0$.<br>- Số $0 = \\frac{0}{1} \\in \\mathbb{Q}$ nên khẳng định 'Số 0 không là số hữu tỉ' là sai.<br>- Số $\\pi \\approx 3{,}14159...$ là số vô tỉ $(\\pi \\notin \\mathbb{Q})$.<br><br><b>Kết luận:</b> Khẳng định đúng là 'Mọi số nguyên đều là số hữu tỉ'. Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Kết quả của phép tính $\\left(-\\frac{2}{3}\\right)^2$ là:",
+        "opts": [
+          "$-\\frac{4}{9}$",
+          "$\\frac{4}{9}$",
+          "$-\\frac{4}{6}$",
+          "$\\frac{4}{6}$"
+        ],
+        "ans": 1,
+        "exp": "<b>Quy tắc lũy thừa với số mũ chẵn:</b><br>Với số hữu tỉ $x$ và số tự nhiên $n$ chẵn, ta luôn có $(-x)^{2n} = x^{2n} \\ge 0$.<br><br><b>Lời giải chi tiết:</b><br>$$\\left(-\\frac{2}{3}\\right)^2 = \\left(-\\frac{2}{3}\\right) \\cdot \\left(-\\frac{2}{3}\\right) = \\frac{(-2)^2}{3^2} = \\frac{4}{9}$$<br><b>Kết luận:</b> Bình phương của một số âm luôn là một số dương: $\\frac{4}{9}$. Chọn đáp án <b>B</b>."
+      },
+      {
+        "q": "Giá trị của biểu thức $A = \\frac{1}{2} - \\frac{3}{4} + \\frac{5}{2}$ bằng:",
+        "opts": [
+          "$\\frac{9}{4}$",
+          "$\\frac{7}{4}$",
+          "$\\frac{5}{4}$",
+          "$2$"
+        ],
+        "ans": 0,
+        "exp": "<b>Phương pháp giải:</b> Quy đồng mẫu số các phân số về mẫu số chung nhỏ nhất $\\text{MSCNN} = 4$.<br><br><b>Lời giải chi tiết:</b><br>$$A = \\frac{1 \\cdot 2}{2 \\cdot 2} - \\frac{3}{4} + \\frac{5 \\cdot 2}{2 \\cdot 2} = \\frac{2}{4} - \\frac{3}{4} + \\frac{10}{4}$$<br>$$A = \\frac{2 - 3 + 10}{4} = \\frac{9}{4}$$<br><b>Kết luận:</b> Giá trị biểu thức $A = \\frac{9}{4}$. Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Tìm tất cả các giá trị của $x$ thỏa mãn đẳng thức: $|x| = 2{,}5$?",
+        "opts": [
+          "$x = 2{,}5$",
+          "$x = -2{,}5$",
+          "$x = 2{,}5$ hoặc $x = -2{,}5$",
+          "$x = 5$"
+        ],
+        "ans": 2,
+        "exp": "<b>Định nghĩa giá trị tuyệt đối:</b><br>Với số thực $a > 0$, phương trình $|x| = a$ luôn có hai nghiệm đối nhau là $x = a$ hoặc $x = -a$.<br><br><b>Lời giải:</b><br>$$|x| = 2{,}5 \\iff \\left[\\begin{array}{l} x = 2{,}5 \\\\ x = -2{,}5 \\end{array}\\right.$$<br><b>Kết luận:</b> Giá trị của $x$ là $x = 2{,}5$ hoặc $x = -2{,}5$. Chọn đáp án <b>C</b>."
+      },
+      {
+        "q": "Cho tỉ lệ thức $\\frac{x}{3} = \\frac{8}{12}$. Giá trị của $x$ là:",
+        "opts": [
+          "$1$",
+          "$2$",
+          "$3$",
+          "$4$"
+        ],
+        "ans": 1,
+        "exp": "<b>Tính chất cơ bản của tỉ lệ thức:</b><br>Nếu $\\frac{a}{b} = \\frac{c}{d}$ thì $a \\cdot d = b \\cdot c \\Rightarrow a = \\frac{b \\cdot c}{d}$.<br><br><b>Lời giải chi tiết:</b><br>$$\\frac{x}{3} = \\frac{8}{12} \\iff x \\cdot 12 = 3 \\cdot 8 \\iff 12x = 24 \\iff x = \\frac{24}{12} = 2$$<br><b>Kết luận:</b> Giá trị cần tìm là $x = 2$. Chọn đáp án <b>B</b>."
+      }
+    ]
+  },
+  {
+    "exam_code": "TOAN10_01",
+    "grade": "L10",
+    "subject": "TOAN",
+    "title": "Toán 10: Mệnh đề, Tập hợp & Bất phương trình bậc nhất hai ẩn",
+    "description": "Rèn luyện tư duy logic mệnh đề toán học, các phép toán giao, hợp, hiệu của tập hợp và biểu diễn miền nghiệm hình học.",
+    "time_minutes": 30,
+    "questions": [
+      {
+        "q": "Mệnh đề phủ định của mệnh đề P: \"Với mọi số thực x, x² > 0\" là:",
+        "opts": [
+          "Tồn tại số thực x sao cho x² ≤ 0",
+          "Tồn tại số thực x sao cho x² < 0",
+          "Với mọi số thực x, x² ≤ 0",
+          "Tồn tại số thực x không thuộc R sao cho x² ≤ 0"
+        ],
+        "ans": 0,
+        "exp": "<b>Quy tắc phủ định mệnh đề chứa lượng từ:</b><br>• Phủ định của lượng từ \"với mọi\" (∀) là lượng từ \"tồn tại\" (∃).<br>• Phủ định của bất đẳng thức lớn hơn (&gt;) là nhỏ hơn hoặc bằng (≤).<br><br><b>Lời giải chi tiết:</b><br>Cho mệnh đề: P = \"∀ x ∈ ℝ, x² &gt; 0\".<br>Mệnh đề phủ định là:<br>$$\\overline{P}: \\exists x \\in \\mathbb{R}, x^2 \\le 0$$<br>• <i>Giải thích thêm: Với x = 0 thì 0² = 0 ≤ 0 (thỏa mãn), do đó mệnh đề phủ định này là một mệnh đề đúng.</i><br><br><b>Kết luận:</b> Mệnh đề phủ định đúng là: \"Tồn tại số thực x sao cho x² ≤ 0\". Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Cho hai tập hợp số $A = [-2; 3)$ và $B = (1; 5]$. Giao của hai tập hợp $A \\cap B$ là:",
+        "opts": [
+          "$[-2; 5]$",
+          "$(1; 3)$",
+          "$[1; 3)$",
+          "$(1; 3]$"
+        ],
+        "ans": 1,
+        "exp": "<b>Định nghĩa giao của hai tập hợp:</b><br>$$A \\cap B = \\{x \\in \\mathbb{R} \\mid x \\in A \\text{ và } x \\in B\\}$$<br><b>Lời giải chi tiết:</b><br>- Tập $A = [-2; 3) = \\{x \\in \\mathbb{R} \\mid -2 \\le x < 3\\}$.<br>- Tập $B = (1; 5] = \\{x \\in \\mathbb{R} \\mid 1 < x \\le 5\\}$.<br>Giao của hai khoảng là các giá trị đồng thời thỏa mãn $-2 \\le x < 3$ và $1 < x \\le 5$:<br>$$\\max(-2, 1) < x < \\min(3, 5) \\iff 1 < x < 3$$<br>Biểu diễn dưới dạng khoảng: $A \\cap B = (1; 3)$.<br><br><b>Kết luận:</b> Giao của hai tập hợp là khoảng $(1; 3)$. Chọn đáp án <b>B</b>."
+      },
+      {
+        "q": "Điểm nào sau đây thuộc miền nghiệm của bất phương trình: 2x - y + 1 > 0?",
+        "opts": [
+          "(0; 2)",
+          "(1; 4)",
+          "(2; 1)",
+          "(-1; 0)"
+        ],
+        "ans": 2,
+        "exp": "<b>Phương pháp kiểm tra điểm thuộc miền nghiệm:</b><br>Thay tọa độ (x₀; y₀) của từng điểm vào vế trái f(x, y) = 2x - y + 1.<br>Nếu f(x₀, y₀) &gt; 0 thì điểm đó thuộc miền nghiệm.<br><br><b>Kiểm tra từng phương án:</b><br>• Với điểm (0; 2): f(0, 2) = 2(0) - 2 + 1 = -1 &lt; 0 (Loại).<br>• Với điểm (1; 4): f(1, 4) = 2(1) - 4 + 1 = -1 &lt; 0 (Loại).<br>• Với điểm (2; 1): f(2, 1) = 2(2) - 1 + 1 = 4 &gt; 0 (Thỏa mãn bất phương trình).<br>• Với điểm (-1; 0): f(-1, 0) = 2(-1) - 0 + 1 = -1 &lt; 0 (Loại).<br><br><b>Kết luận:</b> Điểm (2; 1) thuộc miền nghiệm. Chọn đáp án <b>C</b>."
+      },
+      {
+        "q": "Trong tam giác $ABC$ bất kỳ với các cạnh $a = BC, b = CA, c = AB$, công thức định lý Cosin nào sau đây là ĐÚNG?",
+        "opts": [
+          "$a^2 = b^2 + c^2 - 2bc \\cos A$",
+          "$a^2 = b^2 + c^2 + 2bc \\cos A$",
+          "$a^2 = b^2 + c^2 - 2bc \\sin A$",
+          "$a^2 = b^2 + c^2 - bc \\cos A$"
+        ],
+        "ans": 0,
+        "exp": "<b>Định lý Cosin trong tam giác:</b><br>Trong tam giác $ABC$ bất kỳ, bình phương một cạnh bằng tổng bình phương hai cạnh còn lại trừ đi hai lần tích của hai cạnh đó với cosin của góc xen giữa:<br>$$a^2 = b^2 + c^2 - 2bc \\cos A$$<br>$$b^2 = a^2 + c^2 - 2ac \\cos B$$<br>$$c^2 = a^2 + b^2 - 2ab \\cos C$$<br><b>Kết luận:</b> Khẳng định chuẩn xác là $a^2 = b^2 + c^2 - 2bc \\cos A$. Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Vectơ có điểm đầu là $A$ và điểm cuối là $B$ được ký hiệu chuẩn là:",
+        "opts": [
+          "$AB$",
+          "$|\\vec{AB}|$",
+          "$\\vec{AB}$",
+          "$\\vec{BA}$"
+        ],
+        "ans": 2,
+        "exp": "<b>Quy ước ký hiệu vectơ trong hình học:</b><br>- Một đoạn thẳng có hướng được gọi là vectơ.<br>- Khi điểm đầu là $A$ và điểm cuối là $B$, mũi tên chỉ từ $A$ sang $B$, ký hiệu là $\\vec{AB}$.<br>- Phân biệt: $AB$ là độ dài đoạn thẳng, $|\\vec{AB}|$ là độ dài của vectơ, còn $\\vec{BA}$ là vectơ ngược hướng (điểm đầu $B$, điểm cuối $A$).<br><br><b>Kết luận:</b> Ký hiệu chuẩn là $\\vec{AB}$. Chọn đáp án <b>C</b>."
+      }
+    ]
+  },
+  {
+    "exam_code": "DGNL_2026_01",
+    "grade": "DGNL",
+    "subject": "DGNL_TONGHOP",
+    "title": "ĐGNL ĐHQG-HCM: Tư duy Định lượng & Suy luận Logic (Đề số 01)",
+    "description": "Cấu trúc chuẩn ĐHQG-HCM: Giải toán ứng dụng thực tế, toán chuyển động, tối ưu hóa phần trăm, logic suy luận và xác suất tổ hợp.",
+    "time_minutes": 35,
+    "questions": [
+      {
+        "q": "Một món hàng được giảm giá $20\\%$, sau đó người bán tiếp tục giảm thêm $10\\%$ trên giá đã giảm. Tổng phần trăm được giảm giá so với giá gốc ban đầu là bao nhiêu?",
+        "opts": [
+          "$28\\%$",
+          "$30\\%$",
+          "$72\\%$",
+          "$32\\%$"
+        ],
+        "ans": 0,
+        "exp": "<b>Phương pháp giải:</b> Tính giá trị món hàng sau từng đợt giảm giá liên tiếp.<br><br><b>Lời giải chi tiết:</b><br>Gọi giá niêm yết ban đầu của món hàng là $P_0$ (với $P_0 > 0$).<br>Sau lần giảm giá thứ nhất (giảm $20\\%$), giá món hàng còn lại:<br>$$P_1 = P_0 \\cdot (100\\% - 20\\%) = 0{,}8 \\cdot P_0$$<br>Sau lần giảm giá thứ hai (giảm tiếp $10\\%$ trên giá đã giảm $P_1$), giá thực tế người mua phải trả là:<br>$$P_2 = P_1 \\cdot (100\\% - 10\\%) = (0{,}8 \\cdot P_0) \\cdot 0{,}9 = 0{,}72 \\cdot P_0 = 72\\% \\cdot P_0$$<br>Mức giảm giá tổng cộng so với giá gốc ban đầu là:<br>$$\\Delta P = 100\\% - 72\\% = 28\\%$$<br><i>Lưu ý tránh bẫy: Tuyệt đối không lấy $20\\% + 10\\% = 30\\%$ vì đợt giảm thứ hai áp dụng trên giá đã hạ chứ không phải trên giá gốc ban đầu.</i><br><br><b>Kết luận:</b> Món hàng được giảm tổng cộng $28\\%$. Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "An đi xe đạp từ nhà đến trường. Nếu đi với vận tốc $12\\text{ km/h}$ thì An bị muộn $5\\text{ phút}$. Nếu đi với vận tốc $15\\text{ km/h}$ thì An đến sớm $5\\text{ phút}$. Quãng đường từ nhà An đến trường dài bao nhiêu?",
+        "opts": [
+          "$10\\text{ km}$",
+          "$12\\text{ km}$",
+          "$15\\text{ km}$",
+          "$8\\text{ km}$"
+        ],
+        "ans": 0,
+        "exp": "<b>Tóm tắt & Đổi đơn vị:</b><br>- Vận tốc lần 1: $v_1 = 12\\text{ km/h}$ (muộn $5\\text{ phút}$).<br>- Vận tốc lần 2: $v_2 = 15\\text{ km/h}$ (sớm $5\\text{ phút}$).<br>- Chênh lệch thời gian giữa hai lần đi:<br>$$\\Delta t = 5\\text{ phút} - (-5\\text{ phút}) = 10\\text{ phút} = \\frac{10}{60}\\text{ giờ} = \\frac{1}{6}\\text{ giờ}$$<br><b>Thiết lập phương trình chuyển động:</b><br>Gọi quãng đường từ nhà An đến trường là $s$ (đơn vị: $\\text{km}$, điều kiện $s > 0$).<br>- Thời gian đi với vận tốc $v_1$: $t_1 = \\frac{s}{12}\\text{ (giờ)}$.<br>- Thời gian đi với vận tốc $v_2$: $t_2 = \\frac{s}{15}\\text{ (giờ)}$.<br><br>Vì thời gian đi lần 1 nhiều hơn lần 2 là $\\frac{1}{6}\\text{ giờ}$, ta có phương trình:<br>$$t_1 - t_2 = \\frac{s}{12} - \\frac{s}{15} = \\frac{1}{6}$$<br>$$\\iff s \\cdot \\left(\\frac{1}{12} - \\frac{1}{15}\\right) = \\frac{1}{6} \\iff s \\cdot \\left(\\frac{5 - 4}{60}\\right) = \\frac{1}{6} \\iff \\frac{s}{60} = \\frac{1}{6}$$<br>$$\\Rightarrow s = \\frac{60}{6} = 10\\text{ (km)}$$<br><b>Kết luận:</b> Quãng đường từ nhà An đến trường dài đúng $10\\text{ km}$. Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Khảo sát một khối lớp gồm $100$ học sinh: có $65$ bạn thích môn Toán, $50$ bạn thích môn Văn, và $25$ bạn thích cả hai môn Toán và Văn. Hỏi có bao nhiêu bạn không thích môn nào trong hai môn này?",
+        "opts": [
+          "$10\\text{ bạn}$",
+          "$15\\text{ bạn}$",
+          "$20\\text{ bạn}$",
+          "$5\\text{ bạn}$"
+        ],
+        "ans": 0,
+        "exp": "<b>Cơ sở lý thuyết:</b> Áp dụng Nguyên lý Bù trừ (Biểu đồ Ven) cho hai tập hợp hữu hạn:<br>$$|A \\cup B| = |A| + |B| - |A \\cap B|$$<br><b>Lời giải chi tiết:</b><br>- Gọi $T$ là tập hợp học sinh thích Toán $\\Rightarrow |T| = 65$.<br>- Gọi $V$ là tập hợp học sinh thích Văn $\\Rightarrow |V| = 50$.<br>- Tập hợp học sinh thích cả hai môn là $T \\cap V \\Rightarrow |T \\cap V| = 25$.<br><br>Số học sinh thích ít nhất một môn (Toán hoặc Văn) là:<br>$$|T \\cup V| = |T| + |V| - |T \\cap V| = 65 + 50 - 25 = 90\\text{ (học sinh)}$$<br>Tổng số học sinh được khảo sát là $100$ bạn. Do đó, số học sinh không thích môn nào trong hai môn là:<br>$$N = 100 - |T \\cup V| = 100 - 90 = 10\\text{ (học sinh)}$$<br><b>Kết luận:</b> Có $10$ học sinh không thích môn nào. Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Cho mệnh đề logic: \"Nếu trời mưa thì đường trơn\". Trong các mệnh đề sau, mệnh đề nào tương đương logic với mệnh đề đã cho?",
+        "opts": [
+          "Nếu đường không trơn thì trời không mưa",
+          "Nếu trời không mưa thì đường không trơn",
+          "Nếu đường trơn thì trời mưa",
+          "Trời mưa và đường không trơn"
+        ],
+        "ans": 0,
+        "exp": "<b>Cơ sở logic học:</b><br>Xét mệnh đề kéo theo dạng $P \\Rightarrow Q$. Mệnh đề phản đảo của nó là $\\neg Q \\Rightarrow \\neg P$.<br>Theo bảng chân trị logic học mệnh đề, một mệnh đề kéo theo luôn <b>tương đương logic</b> với mệnh đề phản đảo của nó:<br>$$(P \\Rightarrow Q) \\equiv (\\neg Q \\Rightarrow \\neg P)$$<br><b>Phân tích cụ thể:</b><br>- Mệnh đề $P$: \"Trời mưa\" $\\Rightarrow \\neg P$: \"Trời không mưa\".<br>- Mệnh đề $Q$: \"Đường trơn\" $\\Rightarrow \\neg Q$: \"Đường không trơn\".<br>Do đó mệnh đề phản đảo $\\neg Q \\Rightarrow \\neg P$ là: <i>\"Nếu đường không trơn thì trời không mưa\"</i>.<br><br><i>Lưu ý: Mệnh đề đảo $Q \\Rightarrow P$ và mệnh đề nghịch $\\neg P \\Rightarrow \\neg Q$ không tương đương với mệnh đề ban đầu.</i><br><br><b>Kết luận:</b> Mệnh đề tương đương là \"Nếu đường không trơn thì trời không mưa\". Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Một lớp học có $25$ học sinh nam và $15$ học sinh nữ. Chọn ngẫu nhiên $2$ học sinh đi dự đại hội. Xác suất để chọn được đúng $1$ học sinh nam và $1$ học sinh nữ là:",
+        "opts": [
+          "$\\frac{25}{52}$",
+          "$\\frac{1}{2}$",
+          "$\\frac{375}{780}$",
+          "$\\frac{25}{40}$"
+        ],
+        "ans": 0,
+        "exp": "<b>Phương pháp giải:</b> Áp dụng định nghĩa cổ điển của xác suất: $P(A) = \\frac{n(A)}{n(\\Omega)}$.<br><br><b>Lời giải chi tiết:</b><br><b>Bước 1: Tính số phần tử không gian mẫu $n(\\Omega)$</b><br>Tổng số học sinh trong lớp là: $n = 25 + 15 = 40\\text{ (học sinh)}$.<br>Số cách chọn ngẫu nhiên $2$ học sinh từ $40$ học sinh là:<br>$$n(\\Omega) = C_{40}^2 = \\frac{40 \\cdot 39}{2} = 780\\text{ (cách)}$$<br><b>Bước 2: Tính số kết quả thuận lợi cho biến cố $A$</b><br>Biến cố $A$: \"Chọn được 1 học sinh nam và 1 học sinh nữ\".<br>- Số cách chọn $1$ bạn nam từ $25$ bạn nam: $C_{25}^1 = 25\\text{ (cách)}$.<br>- Số cách chọn $1$ bạn nữ từ $15$ bạn nữ: $C_{15}^1 = 15\\text{ (cách)}$.<br>Theo quy tắc nhân, số cách chọn là:<br>$$n(A) = C_{25}^1 \\cdot C_{15}^1 = 25 \\cdot 15 = 375\\text{ (cách)}$$<br><b>Bước 3: Tính xác suất biến cố $A$</b><br>$$P(A) = \\frac{n(A)}{n(\\Omega)} = \\frac{375}{780} = \\frac{25}{52} \\approx 0{,}4808\\text{ (hay } 48{,}08\\%\\text{)}$$<br><b>Kết luận:</b> Xác suất cần tìm là $\\frac{25}{52}$. Chọn đáp án <b>A</b>."
+      }
+    ]
+  },
+  {
+    "exam_code": "TOAN07_CK1_KNTT",
+    "grade": "L07",
+    "subject": "Toán",
+    "title": "Toán 7 - Ôn tập Cuối kì I (Kết nối tri thức)",
+    "description": "Phạm vi: Số hữu tỉ, Số thực, Góc & Đường thẳng song song, Tam giác bằng nhau, Biểu đồ & Hình hộp",
+    "time_minutes": 60,
+    "questions": [
+      {
+        "q": "Khẳng định nào sau đây là <b>sai</b>?",
+        "opts": [
+          "$-3 \\in \\mathbb{Q}$",
+          "$0{,}75 \\in \\mathbb{Q}$",
+          "$\\sqrt{2} \\in \\mathbb{Q}$",
+          "$\\frac{1}{3} \\in \\mathbb{R}$"
+        ],
+        "ans": 2,
+        "exp": "<b>Giải thích:</b> $\\sqrt{2} \\approx 1{,}41421...$ là số thập phân vô hạn không tuần hoàn, thuộc tập số vô tỉ $\\mathbb{I}$, do đó $\\sqrt{2} \\notin \\mathbb{Q}$. Khẳng định sai là <b>C</b>."
+      },
+      {
+        "q": "Phân số nào sau đây viết được dưới dạng số thập phân hữu hạn?",
+        "opts": [
+          "$\\frac{7}{12}$",
+          "$\\frac{3}{40}$",
+          "$\\frac{5}{18}$",
+          "$\\frac{4}{15}$"
+        ],
+        "ans": 1,
+        "exp": "<b>Giải thích:</b> Phân số tối giản viết được dưới dạng số thập phân hữu hạn nếu mẫu chỉ chứa thừa số nguyên tố 2 và 5.<br>Mẫu số của $\\frac{3}{40}$ là $40 = 2^3 \\cdot 5$ (chỉ có ước nguyên tố 2 và 5) $\\Rightarrow \\frac{3}{40} = 0{,}075$ là số thập phân hữu hạn. Chọn <b>B</b>."
+      },
+      {
+        "q": "Giá trị của $\\left(-\\frac{2}{3}\\right)^3$ là",
+        "opts": [
+          "$\\frac{8}{27}$",
+          "$-\\frac{8}{9}$",
+          "$-\\frac{2}{9}$",
+          "$-\\frac{8}{27}$"
+        ],
+        "ans": 3,
+        "exp": "<b>Giải thích:</b> $\\left(-\\frac{2}{3}\\right)^3 = \\frac{(-2)^3}{3^3} = -\\frac{8}{27}$. Lũy thừa bậc lẻ của số âm mang dấu âm. Chọn <b>D</b>."
+      },
+      {
+        "q": "Viết kết quả phép tính $3^8 : 3^5$ dưới dạng một lũy thừa:",
+        "opts": [
+          "$3^{13}$",
+          "$3^3$",
+          "$1^3$",
+          "$3^{40}$"
+        ],
+        "ans": 1,
+        "exp": "<b>Giải thích:</b> Áp dụng công thức chia hai lũy thừa cùng cơ số: $x^m : x^n = x^{m-n}$. Ta có $3^8 : 3^5 = 3^{8-5} = 3^3$. Chọn <b>B</b>."
+      },
+      {
+        "q": "Giá trị của $|-2{,}5| + |1{,}5|$ là",
+        "opts": [
+          "$-1$",
+          "$1$",
+          "$4$",
+          "$-4$"
+        ],
+        "ans": 2,
+        "exp": "<b>Giải thích:</b> Vì $|-2{,}5| = 2{,}5$ và $|1{,}5| = 1{,}5$ nên $|-2{,}5| + |1{,}5| = 2{,}5 + 1{,}5 = 4$. Chọn <b>C</b>."
+      },
+      {
+        "q": "Cho $x + \\frac{1}{3} = -\\frac{1}{6}$. Giá trị của $x$ là",
+        "opts": [
+          "$-\\frac{1}{2}$",
+          "$\\frac{1}{2}$",
+          "$-\\frac{1}{6}$",
+          "$\\frac{1}{6}$"
+        ],
+        "ans": 0,
+        "exp": "<b>Giải thích:</b> Chuyển vế đổi dấu: $x = -\\frac{1}{6} - \\frac{1}{3} = -\\frac{1}{6} - \\frac{2}{6} = -\\frac{3}{6} = -\\frac{1}{2}$. Chọn <b>A</b>."
+      },
+      {
+        "q": "Căn bậc hai số học của $0{,}25$ là",
+        "opts": [
+          "$0{,}05$",
+          "$0{,}125$",
+          "$-0{,}5$",
+          "$0{,}5$"
+        ],
+        "ans": 3,
+        "exp": "<b>Giải thích:</b> Căn bậc hai số học của số không âm $a$ là số không âm $x$ sao cho $x^2 = a$. Vì $0{,}5 > 0$ và $0{,}5^2 = 0{,}25$ nên $\\sqrt{0{,}25} = 0{,}5$. Chọn <b>D</b>."
+      },
+      {
+        "q": "Làm tròn số $86{,}357$ đến hàng phần mười ta được",
+        "opts": [
+          "$86{,}3$",
+          "$86{,}36$",
+          "$86{,}4$",
+          "$86{,}0$"
+        ],
+        "ans": 2,
+        "exp": "<b>Giải thích:</b> Chữ số ngay sau hàng phần mười (sau số 3) là 5 ($\\ge 5$), theo quy tắc làm tròn ta cộng thêm 1 vào hàng phần mười: $86{,}357 \\approx 86{,}4$. Chọn <b>C</b>."
+      },
+      {
+        "q": "Hai đường thẳng cắt nhau tạo một góc $130^\\circ$. Góc kề bù với góc đó có số đo là",
+        "opts": [
+          "$50^\\circ$",
+          "$130^\\circ$",
+          "$40^\\circ$",
+          "$230^\\circ$"
+        ],
+        "ans": 0,
+        "exp": "<b>Giải thích:</b> Hai góc kề bù có tổng số đo bằng $180^\\circ$. Do đó góc cần tìm có số đo là $180^\\circ - 130^\\circ = 50^\\circ$. Chọn <b>A</b>."
+      },
+      {
+        "q": "Cho $a \\parallel b$, đường thẳng $c$ cắt $a, b$ tạo một cặp góc so le trong, một góc bằng $75^\\circ$. Góc còn lại bằng",
+        "opts": [
+          "$105^\\circ$",
+          "$75^\\circ$",
+          "$15^\\circ$",
+          "$90^\\circ$"
+        ],
+        "ans": 1,
+        "exp": "<b>Giải thích:</b> Theo tính chất của hai đường thẳng song song: Hai góc so le trong thì bằng nhau. Do đó góc còn lại bằng $75^\\circ$. Chọn <b>B</b>."
+      },
+      {
+        "q": "Tam giác $ABC$ vuông tại $A$, có $\\widehat{B} = 35^\\circ$. Số đo của góc $\\widehat{C}$ là",
+        "opts": [
+          "$145^\\circ$",
+          "$35^\\circ$",
+          "$65^\\circ$",
+          "$55^\\circ$"
+        ],
+        "ans": 3,
+        "exp": "<b>Giải thích:</b> Trong tam giác vuông, hai góc nhọn phụ nhau: $\\widehat{B} + \\widehat{C} = 90^\\circ \\Rightarrow \\widehat{C} = 90^\\circ - 35^\\circ = 55^\\circ$. Chọn <b>D</b>."
+      },
+      {
+        "q": "Hai tam giác $MNP$ và $DEF$ có $MN = DE,\\ NP = EF,\\ MP = DF$. Khi đó $\\triangle MNP = \\triangle DEF$ theo trường hợp",
+        "opts": [
+          "cạnh - cạnh - cạnh (c-c-c)",
+          "cạnh - góc - cạnh (c-g-c)",
+          "góc - cạnh - góc (g-c-g)",
+          "cạnh huyền - góc nhọn"
+        ],
+        "ans": 0,
+        "exp": "<b>Giải thích:</b> Ba cặp cạnh tương ứng bằng nhau nên hai tam giác bằng nhau theo trường hợp cạnh - cạnh - cạnh (c-c-c). Chọn <b>A</b>."
+      },
+      {
+        "q": "Cho $a = \\frac{3}{4}$ và $b = -\\frac{5}{6}$. Kết quả của phép tính $a - b$ là",
+        "opts": [
+          "$-\\frac{1}{12}$",
+          "$\\frac{19}{12}$",
+          "$-\\frac{5}{8}$",
+          "$-\\frac{9}{10}$"
+        ],
+        "ans": 1,
+        "exp": "<b>Giải thích:</b> $a - b = \\frac{3}{4} - \\left(-\\frac{5}{6}\\right) = \\frac{3}{4} + \\frac{5}{6} = \\frac{9}{12} + \\frac{10}{12} = \\frac{19}{12}$. Chọn <b>B</b>."
+      },
+      {
+        "q": "Tính hợp lí giá trị biểu thức: $B = \\frac{4}{9} \\cdot \\left(-\\frac{7}{13}\\right) + \\frac{4}{9} \\cdot \\left(-\\frac{6}{13}\\right) + \\frac{5}{9}$",
+        "opts": [
+          "$\\frac{1}{9}$",
+          "$-\\frac{1}{9}$",
+          "$1$",
+          "$\\frac{4}{9}$"
+        ],
+        "ans": 0,
+        "exp": "<b>Giải thích:</b> Đặt $\\frac{4}{9}$ làm thừa số chung:<br>$B = \\frac{4}{9} \\left[ -\\frac{7}{13} + \\left(-\\frac{6}{13}\\right) \\right] + \\frac{5}{9} = \\frac{4}{9} \\cdot (-1) + \\frac{5}{9} = -\\frac{4}{9} + \\frac{5}{9} = \\frac{1}{9}$. Chọn <b>A</b>."
+      },
+      {
+        "q": "Rút gọn rồi tính giá trị của biểu thức: $C = \\frac{8^4 \\cdot 27^2}{6^8}$",
+        "opts": [
+          "$\\frac{8}{9}$",
+          "$\\frac{16}{9}$",
+          "$\\frac{4}{3}$",
+          "$2$"
+        ],
+        "ans": 1,
+        "exp": "<b>Giải thích:</b> Phân tích ra lũy thừa cơ số nguyên tố $2$ và $3$:<br>$8^4 = (2^3)^4 = 2^{12}$; $27^2 = (3^3)^2 = 3^6$; $6^8 = (2 \\cdot 3)^8 = 2^8 \\cdot 3^8$.<br>Do đó: $C = \\frac{2^{12} \\cdot 3^6}{2^8 \\cdot 3^8} = \\frac{2^{12-8}}{3^{8-6}} = \\frac{2^4}{3^2} = \\frac{16}{9}$. Chọn <b>B</b>."
+      }
+    ]
+  },
+  {
+    "exam_code": "TOAN07_CK1_PHUAN",
+    "grade": "L07",
+    "subject": "Toán",
+    "title": "Đề thi Cuối kì I - Toán 7 - THCS Phú An (TP.HCM)",
+    "description": "Đề thi chính thức HK1 THCS Phú An: Trắc nghiệm khách quan & Vận dụng đại số, hình học",
+    "time_minutes": 60,
+    "questions": [
+      {
+        "q": "Khẳng định nào sau đây là <b>sai</b>?",
+        "opts": [
+          "$\\frac{-3}{2} \\in \\mathbb{Q}$",
+          "$2\\frac{1}{4} \\in \\mathbb{Q}$",
+          "$1{,}25 \\notin \\mathbb{Q}$",
+          "$-5 \\in \\mathbb{Q}$"
+        ],
+        "ans": 2,
+        "exp": "<b>Giải thích:</b> Số $1{,}25 = \\frac{125}{100} = \\frac{5}{4}$ viết được dưới dạng phân số với tử mẫu nguyên nên $1{,}25 \\in \\mathbb{Q}$. Khẳng định $1{,}25 \\notin \\mathbb{Q}$ là sai. Chọn <b>C</b>."
+      },
+      {
+        "q": "Phân số nào sau đây có thể viết được dưới dạng số thập phân hữu hạn?",
+        "opts": [
+          "$\\frac{3}{14}$",
+          "$\\frac{5}{6}$",
+          "$\\frac{-4}{15}$",
+          "$\\frac{9}{24}$"
+        ],
+        "ans": 3,
+        "exp": "<b>Giải thích:</b> Rút gọn phân số $\\frac{9}{24} = \\frac{3}{8}$. Mẫu số $8 = 2^3$ chỉ có ước nguyên tố 2 nên viết được thành số thập phân hữu hạn ($0{,}375$). Chọn <b>D</b>."
+      },
+      {
+        "q": "Số đối của $\\frac{1}{2}$ là:",
+        "opts": [
+          "$-2$",
+          "$-\\frac{1}{2}$",
+          "$2$",
+          "$\\frac{1}{2}$"
+        ],
+        "ans": 1,
+        "exp": "<b>Giải thích:</b> Số đối của số hữu tỉ $a$ là $-a$. Do đó số đối của $\\frac{1}{2}$ là $-\\frac{1}{2}$. Chọn <b>B</b>."
+      },
+      {
+        "q": "Viết kết quả phép tính $\\left(-\\frac{1}{2}\\right)^5 \\cdot \\left(-\\frac{1}{2}\\right)^2$ dưới dạng một lũy thừa:",
+        "opts": [
+          "$\\left(-\\frac{1}{2}\\right)^{10}$",
+          "$\\left(-\\frac{1}{2}\\right)^3$",
+          "$\\left(-\\frac{1}{2}\\right)^7$",
+          "$\\left(\\frac{1}{2}\\right)^7$"
+        ],
+        "ans": 2,
+        "exp": "<b>Giải thích:</b> Nhân hai lũy thừa cùng cơ số: $\\left(-\\frac{1}{2}\\right)^5 \\cdot \\left(-\\frac{1}{2}\\right)^2 = \\left(-\\frac{1}{2}\\right)^{5+2} = \\left(-\\frac{1}{2}\\right)^7$. Chọn <b>C</b>."
+      },
+      {
+        "q": "Kết quả của phép tính $\\frac{1}{2} - 0{,}25 \\cdot \\frac{4}{3}$ là:",
+        "opts": [
+          "$\\frac{1}{6}$",
+          "$\\frac{1}{2}$",
+          "$\\frac{4}{3}$",
+          "$\\frac{9}{16}$"
+        ],
+        "ans": 0,
+        "exp": "<b>Giải thích:</b> Đổi $0{,}25 = \\frac{1}{4}$. Thực hiện phép nhân trước: $\\frac{1}{4} \\cdot \\frac{4}{3} = \\frac{1}{3}$.<br>Sau đó trừ: $\\frac{1}{2} - \\frac{1}{3} = \\frac{3}{6} - \\frac{2}{6} = \\frac{1}{6}$. Chọn <b>A</b>."
+      },
+      {
+        "q": "Cho $x - \\frac{1}{2} = -\\frac{3}{4}$. Giá trị của $x$ là:",
+        "opts": [
+          "$x = -\\frac{5}{4}$",
+          "$x = \\frac{1}{4}$",
+          "$x = -\\frac{1}{4}$",
+          "$x = \\frac{5}{4}$"
+        ],
+        "ans": 2,
+        "exp": "<b>Giải thích:</b> $x = -\\frac{3}{4} + \\frac{1}{2} = -\\frac{3}{4} + \\frac{2}{4} = -\\frac{1}{4}$. Chọn <b>C</b>."
+      },
+      {
+        "q": "Căn bậc hai số học của $36$ là:",
+        "opts": [
+          "$9$",
+          "$18$",
+          "$13$",
+          "$6$"
+        ],
+        "ans": 3,
+        "exp": "<b>Giải thích:</b> Vì $6 > 0$ và $6^2 = 36$ nên $\\sqrt{36} = 6$. Chọn <b>D</b>."
+      },
+      {
+        "q": "Làm tròn số $37{,}815$ với độ chính xác $0{,}5$ ta được kết quả là:",
+        "opts": [
+          "$37{,}82$",
+          "$37{,}9$",
+          "$38$",
+          "$37{,}8$"
+        ],
+        "ans": 2,
+        "exp": "<b>Giải thích:</b> Độ chính xác $d = 0{,}5$ thuộc hàng phần mười, theo quy tắc ta làm tròn số đến hàng đơn vị (hàng liền trước của hàng có độ chính xác $d$). Chữ số sau hàng đơn vị là 8 ($\\ge 5$) nên $37{,}815 \\approx 38$. Chọn <b>C</b>."
+      },
+      {
+        "q": "Hai đường thẳng cắt nhau tại $O$ tạo thành góc $\\widehat{xOn} = 60^\\circ$. Góc đối đỉnh $\\widehat{mOy}$ có số đo bằng bao nhiêu?",
+        "opts": [
+          "$80^\\circ$",
+          "$60^\\circ$",
+          "$180^\\circ$",
+          "$120^\\circ$"
+        ],
+        "ans": 1,
+        "exp": "<b>Giải thích:</b> Hai góc đối đỉnh thì có số đo bằng nhau. Do đó $\\widehat{mOy} = \\widehat{xOn} = 60^\\circ$. Chọn <b>B</b>."
+      },
+      {
+        "q": "Số mặt, số đỉnh, số cạnh của hình hộp chữ nhật lần lượt là:",
+        "opts": [
+          "4 mặt, 8 đỉnh, 12 cạnh",
+          "6 mặt, 8 đỉnh, 12 cạnh",
+          "6 mặt, 12 đỉnh, 8 cạnh",
+          "8 mặt, 6 đỉnh, 12 cạnh"
+        ],
+        "ans": 1,
+        "exp": "<b>Giải thích:</b> Hình hộp chữ nhật có đúng 6 mặt, 8 đỉnh và 12 cạnh. Chọn <b>B</b>."
+      },
+      {
+        "q": "Trong hình lập phương $ABCD.EFGH$, mặt đáy $ABCD$ là hình gì?",
+        "opts": [
+          "Hình vuông",
+          "Hình tam giác",
+          "Hình bình hành",
+          "Hình chữ nhật"
+        ],
+        "ans": 0,
+        "exp": "<b>Giải thích:</b> Hình lập phương là hình hộp có tất cả 6 mặt đều là các hình vuông bằng nhau. Do đó mặt đáy $ABCD$ là hình vuông. Chọn <b>A</b>."
+      },
+      {
+        "q": "Một hình hộp chữ nhật có kích thước dài $5\\text{ cm}$, rộng $2\\text{ cm}$, cao $3{,}5\\text{ cm}$. Diện tích xung quanh của hình hộp chữ nhật đó là:",
+        "opts": [
+          "$49\\text{ cm}^2$",
+          "$35\\text{ cm}^2$",
+          "$24{,}5\\text{ cm}^2$",
+          "$70\\text{ cm}^2$"
+        ],
+        "ans": 0,
+        "exp": "<b>Giải thích:</b> Công thức diện tích xung quanh: $S_{xq} = 2(a + b)h = 2 \\cdot (5 + 2) \\cdot 3{,}5 = 2 \\cdot 7 \\cdot 3{,}5 = 49\\text{ cm}^2$. Chọn <b>A</b>."
+      },
+      {
+        "q": "Nhân dịp tết trồng cây, ba lớp 7A, 7B, 7C trồng được số cây tỉ lệ với 6, 5, 7. Cả ba lớp trồng được 36 cây. Số cây của mỗi lớp 7A, 7B, 7C lần lượt là:",
+        "opts": [
+          "12 cây, 10 cây, 14 cây",
+          "10 cây, 12 cây, 14 cây",
+          "14 cây, 10 cây, 12 cây",
+          "12 cây, 14 cây, 10 cây"
+        ],
+        "ans": 0,
+        "exp": "<b>Giải thích:</b> Gọi số cây 3 lớp là $a, b, c$. Ta có $\\frac{a}{6} = \\frac{b}{5} = \\frac{c}{7} = \\frac{a+b+c}{6+5+7} = \\frac{36}{18} = 2$.<br>Suy ra: $a = 6 \\cdot 2 = 12$; $b = 5 \\cdot 2 = 10$; $c = 7 \\cdot 2 = 14$ cây. Chọn <b>A</b>."
+      },
+      {
+        "q": "Một bể bơi hình hộp chữ nhật dài $12\\text{ m}$, rộng $5\\text{ m}$, sâu $1{,}5\\text{ m}$. Người ta bơm nước cách miệng bể $20\\text{ cm}$. Thể tích nước được bơm vào bể là:",
+        "opts": [
+          "$90\\text{ m}^3$",
+          "$78\\text{ m}^3$",
+          "$80\\text{ m}^3$",
+          "$75\\text{ m}^3$"
+        ],
+        "ans": 1,
+        "exp": "<b>Giải thích:</b> Đổi $20\\text{ cm} = 0{,}2\\text{ m}$.<br>Chiều cao của cột nước là: $1{,}5 - 0{,}2 = 1{,}3\\text{ m}$.<br>Lượng nước bơm vào là: $V = 12 \\cdot 5 \\cdot 1{,}3 = 78\\text{ m}^3$. Chọn <b>B</b>."
+      }
+    ]
+  },
+  {
+    "exam_code": "TOAN08_01",
+    "grade": "L08",
+    "subject": "TOAN",
+    "title": "Đấu Trường Toán 8: Đa thức, Hằng đẳng thức & Tứ giác (Ôn Giữa Kì I)",
+    "description": "Đề ôn tập chuẩn GDPT 2018 trọng tâm Tuần 8: Đơn thức, đa thức nhiều biến, 7 hằng đẳng thức đáng nhớ, phân tích nhân tử và các hình tứ giác đặc biệt.",
+    "time_minutes": 25,
+    "questions": [
+      {
+        "q": "Trong các biểu thức sau, biểu thức nào là đơn thức?",
+        "opts": [
+          "$3x^2y$",
+          "$x + 2y$",
+          "$\\frac{x}{y}$",
+          "$x^2 - 1$"
+        ],
+        "ans": 0,
+        "exp": "<b>Khái niệm:</b> Đơn thức là biểu thức đại số chỉ gồm một số, hoặc một biến, hoặc một tích giữa các số và các biến.<br>• $3x^2y$ là tích giữa số 3 và các biến $x, y$ nên là đơn thức.<br>• $x + 2y$ và $x^2 - 1$ có phép cộng, phép trừ nên là đa thức.<br>• $\\frac{x}{y}$ có biến ở mẫu nên không phải là đơn thức.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Đa thức $P = 2x^3y - 5x^2y^2 + 3x^3y + 1$ sau khi thu gọn có bậc là:",
+        "opts": [
+          "$3$",
+          "$4$",
+          "$5$",
+          "$6$"
+        ],
+        "ans": 1,
+        "exp": "<b>Phương pháp giải:</b> Thu gọn các hạng tử đồng dạng trước, sau đó tìm bậc của hạng tử có bậc cao nhất.<br><b>Lời giải chi tiết:</b><br>$P = (2x^3y + 3x^3y) - 5x^2y^2 + 1 = 5x^3y - 5x^2y^2 + 1$.<br>• Hạng tử $5x^3y$ có bậc là $3 + 1 = 4$.<br>• Hạng tử $-5x^2y^2$ có bậc là $2 + 2 = 4$.<br>• Hạng tử $1$ có bậc 0.<br>Vậy bậc của đa thức $P$ là 4.<br><b>Kết luận:</b> Chọn đáp án <b>B</b>."
+      },
+      {
+        "q": "Kết quả của phép nhân đơn thức $2x$ với đa thức $(3x - 4y)$ là:",
+        "opts": [
+          "$6x^2 - 8xy$",
+          "$6x^2 - 4y$",
+          "$6x - 8xy$",
+          "$5x^2 - 8xy$"
+        ],
+        "ans": 0,
+        "exp": "<b>Quy tắc nhân đơn thức với đa thức:</b> $A(B - C) = A \\cdot B - A \\cdot C$.<br><b>Lời giải:</b><br>$2x(3x - 4y) = 2x \\cdot 3x - 2x \\cdot 4y = 6x^2 - 8xy$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Kết quả của phép chia $(12x^3y^2 - 8x^2y^3) : 4xy^2$ là:",
+        "opts": [
+          "$3x^2 - 2xy$",
+          "$3x^2 - 2y$",
+          "$3x - 2xy$",
+          "$3x^2y - 2xy$"
+        ],
+        "ans": 0,
+        "exp": "<b>Quy tắc chia đa thức cho đơn thức:</b> Chia từng hạng tử của đa thức cho đơn thức rồi cộng các kết quả lại.<br><b>Lời giải:</b><br>$\\frac{12x^3y^2}{4xy^2} - \\frac{8x^2y^3}{4xy^2} = 3x^{3-1}y^{2-2} - 2x^{2-1}y^{3-2} = 3x^2 - 2xy$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Khai triển hằng đẳng thức $(3x - 2)^2$ ta được kết quả là:",
+        "opts": [
+          "$9x^2 - 12x + 4$",
+          "$9x^2 - 6x + 4$",
+          "$9x^2 - 4$",
+          "$3x^2 - 12x + 4$"
+        ],
+        "ans": 0,
+        "exp": "<b>Áp dụng hằng đẳng thức:</b> $(A - B)^2 = A^2 - 2AB + B^2$.<br>Với $A = 3x, B = 2$, ta có:<br>$(3x - 2)^2 = (3x)^2 - 2 \\cdot (3x) \\cdot 2 + 2^2 = 9x^2 - 12x + 4$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Điền biểu thức thích hợp vào chỗ trống để được đẳng thức đúng: $x^3 - 8 = (x - 2)(\\dots\\dots)$",
+        "opts": [
+          "$x^2 + 2x + 4$",
+          "$x^2 - 2x + 4$",
+          "$x^2 + 4x + 4$",
+          "$x^2 - 4$"
+        ],
+        "ans": 0,
+        "exp": "<b>Hằng đẳng thức hiệu hai lập phương:</b> $A^3 - B^3 = (A - B)(A^2 + AB + B^2)$.<br>Với $A = x, B = 2$ ($B^3 = 2^3 = 8$):<br>$x^3 - 8 = (x - 2)(x^2 + 2x + 4)$.<br><b>Kết luận:</b> Biểu thức cần điền là $x^2 + 2x + 4$. Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Kết quả phân tích đa thức $6x^2y - 9xy^2$ thành nhân tử bằng phương pháp đặt nhân tử chung là:",
+        "opts": [
+          "$3xy(2x - 3y)$",
+          "$3xy(2x + 3y)$",
+          "$6xy(x - 3y)$",
+          "$3x(2xy - 3y)$"
+        ],
+        "ans": 0,
+        "exp": "<b>Phương pháp:</b> Tìm thừa số chung giữa hệ số ($ƯCLN(6, 9) = 3$) và phần biến ($xy$). Nhân tử chung là $3xy$.<br><b>Lời giải:</b><br>$6x^2y - 9xy^2 = 3xy \\cdot 2x - 3xy \\cdot 3y = 3xy(2x - 3y)$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Phân tích đa thức $x^2 - 2xy + y^2 - 9$ thành nhân tử ta được:",
+        "opts": [
+          "$(x - y - 3)(x - y + 3)$",
+          "$(x + y - 3)(x + y + 3)$",
+          "$(x - y - 9)(x - y + 9)$",
+          "$(x - y - 3)^2$"
+        ],
+        "ans": 0,
+        "exp": "<b>Phương pháp nhóm hạng tử và dùng hằng đẳng thức:</b><br>$x^2 - 2xy + y^2 - 9 = (x^2 - 2xy + y^2) - 3^2 = (x - y)^2 - 3^2$.<br>Áp dụng hiệu hai bình phương $A^2 - B^2 = (A - B)(A + B)$ với $A = x - y, B = 3$:<br>$= (x - y - 3)(x - y + 3)$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Tứ giác $ABCD$ có số đo các góc $\\widehat{A} = 60^\\circ, \\widehat{B} = 120^\\circ, \\widehat{C} = 100^\\circ$. Số đo góc $D$ bằng:",
+        "opts": [
+          "$80^\\circ$",
+          "$70^\\circ$",
+          "$90^\\circ$",
+          "$100^\\circ$"
+        ],
+        "ans": 0,
+        "exp": "<b>Định lý:</b> Tổng các góc trong một tứ giác luôn bằng $360^\\circ$.<br>$\\widehat{A} + \\widehat{B} + \\widehat{C} + \\widehat{D} = 360^\\circ$<br>$\\Rightarrow \\widehat{D} = 360^\\circ - (60^\\circ + 120^\\circ + 100^\\circ) = 360^\\circ - 280^\\circ = 80^\\circ$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Trong các hình tứ giác sau, hình nào luôn có hai đường chéo vuông góc với nhau?",
+        "opts": [
+          "Hình chữ nhật",
+          "Hình bình hành",
+          "Hình thoi",
+          "Hình thang cân"
+        ],
+        "ans": 2,
+        "exp": "<b>Tính chất hình học:</b><br>• Hình thoi có hai đường chéo vuông góc với nhau và cắt nhau tại trung điểm của mỗi đường (đây cũng là tính chất của hình vuông vì hình vuông là hình thoi đặc biệt).<br>• Hình chữ nhật và hình thang cân có hai đường chéo bằng nhau nhưng không nhất thiết vuông góc.<br><b>Kết luận:</b> Chọn đáp án <b>C</b> (Hình thoi)."
+      }
+    ]
+  },
+  {
+    "exam_code": "TOAN09_01",
+    "grade": "L09",
+    "subject": "TOAN",
+    "title": "Đấu Trường Toán 9: Hệ hai PT bậc nhất 2 ẩn & Hệ thức lượng tam giác vuông",
+    "description": "Đề ôn tập chuẩn GDPT 2018 trọng tâm Tuần 8: Phương pháp cộng đại số, phương pháp thế, tỉ số lượng giác và hệ thức lượng trong tam giác vuông.",
+    "time_minutes": 25,
+    "questions": [
+      {
+        "q": "Điều kiện xác định của biểu thức căn thức bậc hai $\\sqrt{2x - 6}$ là:",
+        "opts": [
+          "$x \\ge 3$",
+          "$x > 3$",
+          "$x \\le 3$",
+          "$x \\ge -3$"
+        ],
+        "ans": 0,
+        "exp": "<b>Quy tắc:</b> Biểu thức $\\sqrt{A}$ xác định khi và chỉ khi $A \\ge 0$.<br>Ta có: $2x - 6 \\ge 0 \\iff 2x \\ge 6 \\iff x \\ge 3$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Trục căn thức ở mẫu của biểu thức $\\frac{2}{\\sqrt{3} - 1}$ ta được kết quả là:",
+        "opts": [
+          "$\\sqrt{3} + 1$",
+          "$\\sqrt{3} - 1$",
+          "$2(\\sqrt{3} + 1)$",
+          "$\\frac{\\sqrt{3} + 1}{2}$"
+        ],
+        "ans": 0,
+        "exp": "<b>Phương pháp nhân liên hợp:</b> Nhân cả tử và mẫu với $(\\sqrt{3} + 1)$:<br>$$\\frac{2(\\sqrt{3} + 1)}{(\\sqrt{3} - 1)(\\sqrt{3} + 1)} = \\frac{2(\\sqrt{3} + 1)}{3 - 1} = \\frac{2(\\sqrt{3} + 1)}{2} = \\sqrt{3} + 1$$<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Cặp số $(x; y)$ nào sau đây là nghiệm của hệ phương trình $\\begin{cases} 2x + y = 5 \\\\ x - y = 1 \\end{cases}$?",
+        "opts": [
+          "$(2; 1)$",
+          "$(1; 2)$",
+          "$(3; -1)$",
+          "$(0; 5)$"
+        ],
+        "ans": 0,
+        "exp": "<b>Giải hệ phương trình bằng phương pháp cộng đại số:</b><br>Cộng vế theo vế hai phương trình:<br>$(2x + y) + (x - y) = 5 + 1 \\iff 3x = 6 \\iff x = 2$.<br>Thay $x = 2$ vào phương trình thứ hai: $2 - y = 1 \\iff y = 1$.<br>Vậy nghiệm của hệ là $(2; 1)$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Cho tam giác $ABC$ vuông tại $A$ có $AB = 6\\text{ cm}$ và $AC = 8\\text{ cm}$. Giá trị của $\\sin B$ bằng:",
+        "opts": [
+          "$\\frac{4}{5} = 0.8$",
+          "$\\frac{3}{5} = 0.6$",
+          "$\\frac{4}{3}$",
+          "$\\frac{3}{4}$"
+        ],
+        "ans": 0,
+        "exp": "<b>Lời giải chi tiết:</b><br>Áp dụng định lý Pythagore trong tam giác vuông $ABC$:<br>$BC = \\sqrt{AB^2 + AC^2} = \\sqrt{6^2 + 8^2} = \\sqrt{36 + 64} = 10\\text{ cm}$.<br>Theo định nghĩa tỉ số lượng giác sin:<br>$$\\sin B = \\frac{\\text{cạnh đối}}{\\text{cạnh huyền}} = \\frac{AC}{BC} = \\frac{8}{10} = \\frac{4}{5} = 0.8$$<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Cho tam giác $ABC$ vuông tại $A$, đường cao $AH$. Khẳng định nào sau đây là đúng?",
+        "opts": [
+          "$AH^2 = BH \\cdot CH$",
+          "$AB^2 = BH \\cdot AH$",
+          "$AH = BH \\cdot CH$",
+          "$AC^2 = CH \\cdot AH$"
+        ],
+        "ans": 0,
+        "exp": "<b>Hệ thức lượng trong tam giác vuông:</b><br>• Bình phương đường cao ứng với cạnh huyền bằng tích hai hình chiếu của hai cạnh góc vuông trên cạnh huyền: $AH^2 = BH \\cdot CH$.<br>• Bình phương mỗi cạnh góc vuông bằng tích cạnh huyền và hình chiếu của nó: $AB^2 = BC \\cdot BH$; $AC^2 = BC \\cdot CH$.<br><b>Kết luận:</b> Hệ thức đúng là $AH^2 = BH \\cdot CH$. Chọn đáp án <b>A</b>."
+      }
+    ]
+  },
+  {
+    "exam_code": "TOAN11_01",
+    "grade": "L11",
+    "subject": "TOAN",
+    "title": "Đấu Trường Toán 11: Lượng giác & Quan hệ song song không gian (Ôn Giữa Kì I)",
+    "description": "Đề thi ôn tập giữa kì I chuẩn chương trình GDPT 2018 biên soạn từ ngân hàng đề của ThS. Đinh Quốc Tuấn: Hàm số lượng giác, công thức biến đổi và quan hệ song song.",
+    "time_minutes": 25,
+    "questions": [
+      {
+        "q": "Góc lượng giác có số đo $120^\\circ$ tương ứng với số đo radian nào sau đây?",
+        "opts": [
+          "$\\frac{2\\pi}{3}$",
+          "$\\frac{3\\pi}{4}$",
+          "$\\frac{5\\pi}{6}$",
+          "$\\frac{\\pi}{3}$"
+        ],
+        "ans": 0,
+        "exp": "<b>Công thức đổi từ độ sang radian:</b> $\\alpha\\text{ rad} = a^\\circ \\cdot \\frac{\\pi}{180^\\circ}$.<br>Với $a = 120^\\circ$:<br>$$\\alpha = 120 \\cdot \\frac{\\pi}{180} = \\frac{2\\pi}{3}\\text{ rad}$$<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Cho $\\cos\\alpha = -\\frac{3}{5}$ với $\\frac{\\pi}{2} < \\alpha < \\pi$. Giá trị của $\\sin\\alpha$ bằng:",
+        "opts": [
+          "$\\frac{4}{5}$",
+          "$-\\frac{4}{5}$",
+          "$\\frac{16}{25}$",
+          "$-\\frac{16}{25}$"
+        ],
+        "ans": 0,
+        "exp": "<b>Lời giải chi tiết:</b><br>Ta có $\\sin^2\\alpha + \\cos^2\\alpha = 1 \\implies \\sin^2\\alpha = 1 - \\left(-\\frac{3}{5}\\right)^2 = 1 - \\frac{9}{25} = \\frac{16}{25}$.<br>Vì $\\frac{\\pi}{2} < \\alpha < \\pi$ (góc phần tư thứ II) nên $\\sin\\alpha > 0$.<br>Do đó: $\\sin\\alpha = \\sqrt{\\frac{16}{25}} = \\frac{4}{5}$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Khẳng định nào sau đây là khẳng định **SAI**?",
+        "opts": [
+          "$\\sin 2a = \\sin a \\cos a$",
+          "$\\sin(a - b) = \\sin a\\cos b - \\cos a\\sin b$",
+          "$\\cos(a + b) = \\cos a\\cos b - \\sin a\\sin b$",
+          "$\\cos 2a = \\cos^2 a - \\sin^2 a$"
+        ],
+        "ans": 0,
+        "exp": "<b>Công thức nhân đôi chuẩn:</b><br>$$\\sin 2a = 2\\sin a\\cos a$$<br>Khẳng định $\\sin 2a = \\sin a\\cos a$ thiếu hệ số 2 nên là khẳng định <b>SAI</b>.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Tập xác định $D$ của hàm số $y = \\tan\\left(x - \\frac{\\pi}{3}\\right)$ là:",
+        "opts": [
+          "$D = \\mathbb{R} \\setminus \\left\\{\\frac{5\\pi}{6} + k\\pi, k \\in \\mathbb{Z}\\right\\}$",
+          "$D = \\mathbb{R} \\setminus \\left\\{\\frac{\\pi}{3} + k\\pi, k \\in \\mathbb{Z}\\right\\}$",
+          "$D = \\mathbb{R} \\setminus \\left\\{\\frac{5\\pi}{6} + k2\\pi, k \\in \\mathbb{Z}\\right\\}$",
+          "$D = \\mathbb{R} \\setminus \\left\\{\\frac{\\pi}{6} + k\\pi, k \\in \\mathbb{Z}\\right\\}$"
+        ],
+        "ans": 0,
+        "exp": "<b>Điều kiện xác định:</b> Hàm số $\\tan u$ xác định khi $u \\ne \\frac{\\pi}{2} + k\\pi$ ($k \\in \\mathbb{Z}$).<br>Ta có:<br>$$x - \\frac{\\pi}{3} \\ne \\frac{\\pi}{2} + k\\pi \\iff x \\ne \\frac{\\pi}{2} + \\frac{\\pi}{3} + k\\pi \\iff x \\ne \\frac{5\\pi}{6} + k\\pi$$<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Giá trị nhỏ nhất $m$ của hàm số $y = 4\\cos 2x - 1$ trên $\\mathbb{R}$ bằng:",
+        "opts": [
+          "$m = -5$",
+          "$m = -1$",
+          "$m = 3$",
+          "$m = -3$"
+        ],
+        "ans": 0,
+        "exp": "<b>Lời giải:</b><br>Với mọi $x \\in \\mathbb{R}$, ta luôn có: $-1 \\le \\cos 2x \\le 1$.<br>Nhân cả hai vế với 4: $-4 \\le 4\\cos 2x \\le 4$.<br>Trừ 1 ở cả hai vế: $-4 - 1 \\le 4\\cos 2x - 1 \\le 4 - 1 \\implies -5 \\le y \\le 3$.<br>Vậy giá trị nhỏ nhất của hàm số là $m = -5$ (đạt được khi $\\cos 2x = -1$).<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Số nghiệm của phương trình $\\cos x = -\\frac{1}{2}$ trong khoảng $(0; 2\\pi)$ là:",
+        "opts": [
+          "2",
+          "1",
+          "3",
+          "4"
+        ],
+        "ans": 0,
+        "exp": "<b>Lời giải:</b><br>Ta có $\\cos x = \\cos\\left(\\frac{2\\pi}{3}\\right) \\iff x = \\pm \\frac{2\\pi}{3} + k2\\pi$ ($k \\in \\mathbb{Z}$).<br>Trong khoảng $(0; 2\\pi)$:<br>• Với $x = \\frac{2\\pi}{3} + k2\\pi$, chọn $k = 0 \\implies x_1 = \\frac{2\\pi}{3}$.<br>• Với $x = -\\frac{2\\pi}{3} + k2\\pi$, chọn $k = 1 \\implies x_2 = \\frac{4\\pi}{3}$.<br>Vậy có đúng 2 nghiệm thỏa mãn.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Trong không gian, qua hai đường thẳng cắt nhau có thể xác định được bao nhiêu mặt phẳng?",
+        "opts": [
+          "Duy nhất 1 mặt phẳng",
+          "Vô số mặt phẳng",
+          "2 mặt phẳng",
+          "Không có mặt phẳng nào"
+        ],
+        "ans": 0,
+        "exp": "<b>Định lý xác định mặt phẳng:</b> Một mặt phẳng được hoàn toàn xác định nếu nó đi qua hai đường thẳng cắt nhau.<br><b>Kết luận:</b> Có duy nhất 1 mặt phẳng. Chọn đáp án <b>A</b>."
+      }
+    ]
+  },
+  {
+    "exam_code": "TOAN12_01",
+    "grade": "L12",
+    "subject": "TOAN",
+    "title": "Đấu Trường Toán 12: Đạo hàm khảo sát hàm số & Toạ độ không gian Oxyz",
+    "description": "Đề ôn tập thi tốt nghiệp THPT & ĐGNL chuẩn GDPT 2018: Đơn điệu, cực trị, giá trị lớn nhất nhỏ nhất, tiệm cận và vectơ toạ độ Oxyz.",
+    "time_minutes": 25,
+    "questions": [
+      {
+        "q": "Cho hàm số $y = x^3 - 3x^2 + 2$. Điểm cực đại của đồ thị hàm số là điểm:",
+        "opts": [
+          "$(0; 2)$",
+          "$(2; -2)$",
+          "$(0; 0)$",
+          "$(2; 2)$"
+        ],
+        "ans": 0,
+        "exp": "<b>Lời giải chi tiết:</b><br>Tập xác định $D = \\mathbb{R}$.<br>Ta có đạo hàm: $y' = 3x^2 - 6x = 3x(x - 2)$.<br>Cho $y' = 0 \\iff x = 0$ hoặc $x = 2$.<br>Bảng xét dấu $y'$:<br>• Qua $x = 0$, $y'$ đổi dấu từ dương sang âm $\\implies$ điểm cực đại là $x = 0$, tung độ tương ứng $y(0) = 2$.<br>• Qua $x = 2$, $y'$ đổi dấu từ âm sang dương $\\implies$ điểm cực tiểu là $x = 2, y(2) = -2$.<br>Vậy điểm cực đại của đồ thị hàm số là $(0; 2)$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Đường tiệm cận ngang của đồ thị hàm số $y = \\frac{2x - 1}{x + 3}$ là đường thẳng:",
+        "opts": [
+          "$y = 2$",
+          "$x = -3$",
+          "$y = -3$",
+          "$x = 2$"
+        ],
+        "ans": 0,
+        "exp": "<b>Quy tắc tìm tiệm cận ngang:</b><br>$$\\lim_{x \\to \\pm\\infty} \\frac{2x - 1}{x + 3} = \\lim_{x \\to \\pm\\infty} \\frac{2 - \\frac{1}{x}}{1 + \\frac{3}{x}} = 2$$<br>Vậy đồ thị có đường tiệm cận ngang là $y = 2$ (đường $x = -3$ là tiệm cận đứng).<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Giá trị lớn nhất của hàm số $y = -x^4 + 2x^2 + 3$ trên đoạn $[0; 2]$ bằng:",
+        "opts": [
+          "$4$",
+          "$3$",
+          "$-5$",
+          "$5$"
+        ],
+        "ans": 0,
+        "exp": "<b>Lời giải:</b><br>Đạo hàm: $y' = -4x^3 + 4x = -4x(x^2 - 1)$.<br>Trên đoạn $[0; 2]$, $y' = 0 \\iff x = 0$ hoặc $x = 1$.<br>Tính giá trị tại các điểm biên và điểm dừng:<br>• $y(0) = 3$<br>• $y(1) = -(1)^4 + 2(1)^2 + 3 = 4$<br>• $y(2) = -(2)^4 + 2(2)^2 + 3 = -16 + 8 + 3 = -5$<br>So sánh các giá trị: $\\max_{[0; 2]} y = 4$ (tại $x = 1$).<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Trong không gian $Oxyz$, cho hai vectơ $\\vec{a} = (1; 2; -3)$ và $\\vec{b} = (-2; 1; 4)$. Toạ độ của vectơ $\\vec{u} = 2\\vec{a} + \\vec{b}$ là:",
+        "opts": [
+          "$(0; 5; -2)$",
+          "$(0; 5; 2)$",
+          "$(-1; 3; 1)$",
+          "$(4; 3; -10)$"
+        ],
+        "ans": 0,
+        "exp": "<b>Quy tắc toạ độ vectơ:</b><br>$2\\vec{a} = 2(1; 2; -3) = (2; 4; -6)$.<br>$\\vec{u} = 2\\vec{a} + \\vec{b} = (2 + (-2); 4 + 1; -6 + 4) = (0; 5; -2)$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Cho hàm số $y = f(x)$ có bảng biến thiên với $f'(x) > 0$ trên $(-\\infty; 1)$ và $(3; +\\infty)$, $f'(x) < 0$ trên $(1; 3)$. Hàm số đã cho nghịch biến trên khoảng nào?",
+        "opts": [
+          "$(1; 3)$",
+          "$(-\\infty; 1)$",
+          "$(3; +\\infty)$",
+          "$(0; 2)$"
+        ],
+        "ans": 0,
+        "exp": "<b>Định lý:</b> Hàm số nghịch biến trên khoảng mà đạo hàm $f'(x) < 0$.<br>Theo giả thiết, $f'(x) < 0$ với mọi $x \\in (1; 3)$ nên hàm số nghịch biến trên khoảng $(1; 3)$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      }
+    ]
+  },
+  {
+    "exam_code": "DGNL_2026_02",
+    "grade": "DGNL",
+    "subject": "DGNL",
+    "title": "ĐGNL ĐHQG-HCM: Phân tích bảng số liệu & Logic suy luận (Đề số 02)",
+    "description": "Bộ đề thi phân tích dữ liệu thực tế ma trận bảng biểu, logic hoán vị sắp xếp và bài toán điều kiện cần - đủ chuẩn kỳ thi Đánh Giá Năng Lực 2026.",
+    "time_minutes": 25,
+    "questions": [
+      {
+        "q": "Năm bạn An, Bình, Cúc, Dũng, Em ngồi vào một hàng ngang gồm 5 ghế đánh số từ 1 đến 5 (từ trái sang phải). Biết rằng: An ngồi ở ghế số 1; Cúc ngồi cạnh Bình; Dũng không ngồi cạnh An và không ngồi cạnh Cúc. Hỏi Em ngồi ở ghế số mấy?",
+        "opts": [
+          "Ghế số 2",
+          "Ghế số 3",
+          "Ghế số 4",
+          "Ghế số 5"
+        ],
+        "ans": 0,
+        "exp": "<b>Phân tích logic suy luận từng bước:</b><br>1. An ngồi ở ghế 1: [An, _, _, _, _]. Các ghế 2, 3, 4, 5 dành cho Bình, Cúc, Dũng, Em.<br>2. Dũng không ngồi cạnh An (ghế 1) $\\implies$ Dũng không thể ngồi ở ghế 2.<br>3. Cúc và Bình ngồi cạnh nhau nên chiếm một cặp ghế kề nhau: (2,3) hoặc (3,4) hoặc (4,5).<br>• Nếu Cúc - Bình ngồi ghế (2,3): Dũng còn ghế 4 hoặc 5. Nhưng Dũng không ngồi cạnh Cúc (ghế 3), nên Dũng không thể ở ghế 4 $\\implies$ Dũng ở ghế 5. Khi đó Em ở ghế 4. Cúc ở ghế 2, Bình ở ghế 3 $\\implies$ thỏa mãn.<br>• Nếu cặp Cúc - Bình ở ghế khác: Dũng phải ở ghế 2 (mâu thuẫn điều kiện 2).<br>Do đó: Cúc và Bình chiếm ghế 3 và 4 (hoặc 4 và 5). Nếu Cúc-Bình ở (4,5), Dũng không ở 2 và không ở 3 (cạnh Cúc) $\\implies$ mâu thuẫn.<br>Suy ra duy nhất ghế số 2 phải là bạn <b>Em</b> ngồi (để cách li Dũng khỏi An)! Khi đó dãy là: 1-An, 2-Em, 3-Cúc, 4-Bình, 5-Dũng.<br><b>Kết luận:</b> Em ngồi ở ghế số 2. Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Một công ty có 100 nhân viên. Có 70 người biết tiếng Anh, 45 người biết tiếng Trung, và 10 người không biết cả hai thứ tiếng này. Số nhân viên biết cả hai thứ tiếng Anh và Trung là:",
+        "opts": [
+          "25 người",
+          "15 người",
+          "35 người",
+          "20 người"
+        ],
+        "ans": 0,
+        "exp": "<b>Áp dụng công thức tập hợp Venn:</b><br>Số nhân viên biết ít nhất một trong hai thứ tiếng là:<br>$$|A \\cup B| = 100 - 10 = 90\\text{ người}$$<br>Theo công thức hợp hai tập hợp:<br>$$|A \\cup B| = |A| + |B| - |A \\cap B|$$<br>$$\\implies 90 = 70 + 45 - |A \\cap B| \\iff |A \\cap B| = 115 - 90 = 25\\text{ người}$$<br><b>Kết luận:</b> Có 25 nhân viên biết cả hai ngoại ngữ. Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Bảng thống kê doanh thu quý 3 của 4 chi nhánh: Chi nhánh Đông đạt 120 triệu; Tây đạt 150 triệu; Nam đạt 180 triệu; Bắc đạt 150 triệu. Tỷ lệ phần trăm doanh thu của Chi nhánh Nam so với tổng doanh thu của toàn công ty là:",
+        "opts": [
+          "$30\\%$",
+          "$25\\%$",
+          "$35\\%$",
+          "$20\\%$"
+        ],
+        "ans": 0,
+        "exp": "<b>Tính toán số liệu:</b><br>Tổng doanh thu của cả 4 chi nhánh là:<br>$$T = 120 + 150 + 180 + 150 = 600\\text{ triệu đồng}$$<br>Tỷ trọng của Chi nhánh Nam là:<br>$$P = \\frac{180}{600} \\times 100\\% = \\frac{3}{10} \\times 100\\% = 30\\%$$<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      }
+    ]
+  }
+]
