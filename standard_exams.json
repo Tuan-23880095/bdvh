@@ -977,5 +977,221 @@
         "exp": "<b>Tính toán số liệu:</b><br>Tổng doanh thu của cả 4 chi nhánh là:<br>$$T = 120 + 150 + 180 + 150 = 600\\text{ triệu đồng}$$<br>Tỷ trọng của Chi nhánh Nam là:<br>$$P = \\frac{180}{600} \\times 100\\% = \\frac{3}{10} \\times 100\\% = 30\\%$$<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
       }
     ]
+  },
+  {
+    "exam_code": "TOAN06_CTST_T09_01",
+    "grade": "L06",
+    "subject": "TOAN",
+    "title": "Kiểm tra kiến thức về tập hợp số tự nhiên và phép tính",
+    "description": "Đề kiểm tra tập hợp số tự nhiên, phép cộng, trừ, nhân, chia và lũy thừa với số mũ tự nhiên theo chương trình GDPT 2018.",
+    "time_minutes": 45,
+    "questions": [
+      {
+        "type": "choice",
+        "section": "Phần I: Trắc nghiệm (12 câu)",
+        "q": "Số tự nhiên nhỏ nhất là?",
+        "opts": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "ans": 0,
+        "exp": "<b>Phương pháp giải:</b> Theo khái niệm chuẩn SGK CTST, tập hợp số tự nhiên $\\mathbb{N} = \\{0; 1; 2; 3; ...\\}$.<br><b>Lời giải chi tiết:</b> Số tự nhiên nhỏ nhất là 0.<br>Chọn đáp án <b>A</b>"
+      },
+      {
+        "type": "choice",
+        "section": "Phần I: Trắc nghiệm (12 câu)",
+        "q": "Tính $2^3$?",
+        "opts": [
+          "2",
+          "6",
+          "8",
+          "16"
+        ],
+        "ans": 2,
+        "exp": "<b>Phương pháp giải:</b> Sử dụng quy tắc lũy thừa.<br><b>Lời giải chi tiết:</b> $2^3 = 2 \\cdot 2 \\cdot 2 = 8$.<br>Chọn đáp án <b>C</b>"
+      },
+      {
+        "type": "choice",
+        "section": "Phần I: Trắc nghiệm (12 câu)",
+        "q": "Tính $4^2$?",
+        "opts": [
+          "4",
+          "8",
+          "16",
+          "32"
+        ],
+        "ans": 2,
+        "exp": "<b>Phương pháp giải:</b> Sử dụng quy tắc lũy thừa.<br><b>Lời giải chi tiết:</b> $4^2 = 4 \\cdot 4 = 16$.<br>Chọn đáp án <b>C</b>"
+      },
+      {
+        "type": "choice",
+        "section": "Phần I: Trắc nghiệm (12 câu)",
+        "q": "Tính $3^2 \\cdot 3^3$?",
+        "opts": [
+          "27",
+          "81",
+          "243",
+          "729"
+        ],
+        "ans": 1,
+        "exp": "<b>Phương pháp giải:</b> Sử dụng quy tắc nhân lũy thừa cùng cơ số.<br><b>Lời giải chi tiết:</b> $3^2 \\cdot 3^3 = 3^{2+3} = 3^5 = 243$.<br>Chọn đáp án <b>B</b>"
+      },
+      {
+        "type": "choice",
+        "section": "Phần I: Trắc nghiệm (12 câu)",
+        "q": "Tính $5^0$?",
+        "opts": [
+          "0",
+          "1",
+          "5",
+          "10"
+        ],
+        "ans": 1,
+        "exp": "<b>Phương pháp giải:</b> Sử dụng quy tắc lũy thừa.<br><b>Lời giải chi tiết:</b> $5^0 = 1$.<br>Chọn đáp án <b>B</b>"
+      },
+      {
+        "type": "choice",
+        "section": "Phần I: Trắc nghiệm (12 câu)",
+        "q": "Tính $2^4 : 2^2$?",
+        "opts": [
+          "2",
+          "4",
+          "8",
+          "16"
+        ],
+        "ans": 1,
+        "exp": "<b>Phương pháp giải:</b> Sử dụng quy tắc chia lũy thừa cùng cơ số.<br><b>Lời giải chi tiết:</b> $2^4 : 2^2 = 2^{4-2} = 2^2 = 4$.<br>Chọn đáp án <b>B</b>"
+      },
+      {
+        "type": "choice",
+        "section": "Phần I: Trắc nghiệm (12 câu)",
+        "q": "Tính $3^2 + 2^3$?",
+        "opts": [
+          "5",
+          "11",
+          "13",
+          "17"
+        ],
+        "ans": 1,
+        "exp": "<b>Phương pháp giải:</b> Tính lũy thừa trước, sau đó cộng.<br><b>Lời giải chi tiết:</b> $3^2 + 2^3 = 9 + 8 = 17$.<br>Chọn đáp án <b>B</b>"
+      },
+      {
+        "type": "choice",
+        "section": "Phần I: Trắc nghiệm (12 câu)",
+        "q": "Tính $4^2 - 2^3$?",
+        "opts": [
+          "0",
+          "4",
+          "8",
+          "12"
+        ],
+        "ans": 1,
+        "exp": "<b>Phương pháp giải:</b> Tính lũy thừa trước, sau đó trừ.<br><b>Lời giải chi tiết:</b> $4^2 - 2^3 = 16 - 8 = 8$.<br>Chọn đáp án <b>C</b>"
+      },
+      {
+        "type": "choice",
+        "section": "Phần I: Trắc nghiệm (12 câu)",
+        "q": "Tính $2^3 \\cdot 3^2$?",
+        "opts": [
+          "6",
+          "12",
+          "18",
+          "36"
+        ],
+        "ans": 3,
+        "exp": "<b>Phương pháp giải:</b> Tính lũy thừa trước, sau đó nhân.<br><b>Lời giải chi tiết:</b> $2^3 \\cdot 3^2 = 8 \\cdot 9 = 72$.<br>Chọn đáp án <b>D</b>"
+      },
+      {
+        "type": "choice",
+        "section": "Phần I: Trắc nghiệm (12 câu)",
+        "q": "Tính $5^2 : 5^1$?",
+        "opts": [
+          "0",
+          "1",
+          "5",
+          "25"
+        ],
+        "ans": 2,
+        "exp": "<b>Phương pháp giải:</b> Sử dụng quy tắc chia lũy thừa cùng cơ số.<br><b>Lời giải chi tiết:</b> $5^2 : 5^1 = 5^{2-1} = 5^1 = 5$.<br>Chọn đáp án <b>C</b>"
+      },
+      {
+        "type": "choice",
+        "section": "Phần I: Trắc nghiệm (12 câu)",
+        "q": "Tính $2^4 + 3^2$?",
+        "opts": [
+          "5",
+          "11",
+          "13",
+          "17"
+        ],
+        "ans": 3,
+        "exp": "<b>Phương pháp giải:</b> Tính lũy thừa trước, sau đó cộng.<br><b>Lời giải chi tiết:</b> $2^4 + 3^2 = 16 + 9 = 25$.<br>Chọn đáp án <b>D</b>"
+      },
+      {
+        "type": "choice",
+        "section": "Phần I: Trắc nghiệm (12 câu)",
+        "q": "Tính $3^3 - 2^3$?",
+        "opts": [
+          "1",
+          "5",
+          "7",
+          "9"
+        ],
+        "ans": 2,
+        "exp": "<b>Phương pháp giải:</b> Tính lũy thừa trước, sau đó trừ.<br><b>Lời giải chi tiết:</b> $3^3 - 2^3 = 27 - 8 = 19$.<br>Chọn đáp án <b>C</b>"
+      },
+      {
+        "type": "true_false",
+        "section": "Phần II: Đúng / Sai (2 câu = 8 ý)",
+        "q": "Cho bài toán: Tính $2^3 + 3^2$.",
+        "items": [
+          "Ý a) $2^3 = 8$",
+          "Ý b) $3^2 = 9$",
+          "Ý c) $2^3 + 3^2 = 17$",
+          "Ý d) $2^3 + 3^2 = 16$"
+        ],
+        "ans": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "exp": "<b>Giải thích chi tiết:</b><br>- Ý a) Đúng vì $2^3 = 8$.<br>- Ý b) Đúng vì $3^2 = 9$.<br>- Ý c) Đúng vì $2^3 + 3^2 = 8 + 9 = 17$.<br>- Ý d) Sai vì $2^3 + 3^2 = 17$, không phải 16."
+      },
+      {
+        "type": "true_false",
+        "section": "Phần II: Đúng / Sai (2 câu = 8 ý)",
+        "q": "Cho bài toán: Tính $4^2 - 2^3$.",
+        "items": [
+          "Ý a) $4^2 = 16$",
+          "Ý b) $2^3 = 8$",
+          "Ý c) $4^2 - 2^3 = 8$",
+          "Ý d) $4^2 - 2^3 = 12$"
+        ],
+        "ans": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "exp": "<b>Giải thích chi tiết:</b><br>- Ý a) Đúng vì $4^2 = 16$.<br>- Ý b) Đúng vì $2^3 = 8$.<br>- Ý c) Đúng vì $4^2 - 2^3 = 16 - 8 = 8$.<br>- Ý d) Sai vì $4^2 - 2^3 = 8$, không phải 12."
+      },
+      {
+        "type": "short",
+        "section": "Phần III: Trả lời ngắn (2 câu)",
+        "q": "Tính $2^4 + 3^2$.",
+        "ans": "25",
+        "exp": "<b>Phương pháp:</b> Tính lũy thừa trước, sau đó cộng.<br><b>Lời giải chi tiết:</b> $2^4 + 3^2 = 16 + 9 = 25$.<br>Vậy đáp số là: <b>25</b>."
+      },
+      {
+        "type": "short",
+        "section": "Phần III: Trả lời ngắn (2 câu)",
+        "q": "Tính $3^3 - 2^3$.",
+        "ans": "19",
+        "exp": "<b>Phương pháp:</b> Tính lũy thừa trước, sau đó trừ.<br><b>Lời giải chi tiết:</b> $3^3 - 2^3 = 27 - 8 = 19$.<br>Vậy đáp số là: <b>19</b>."
+      }
+    ]
   }
 ]

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Kiểm tra kiến thức về tập hợp số tự nhiên và phép tính · ThS. Đinh Quốc Tuấn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="icon" type="image/svg+xml" href="https://diemdanhsv.com/images/logo-sen.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,400&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+  
+  <!-- MathJax 3 -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 15mm 15mm 18mm 20mm;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 11pt;
+      line-height: 1.5;
+      color: #10212B;
+      background: #F6F7F3;
+      margin: 0;
+      padding: 20px 0;
+    }
+    .a4-page {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 15mm 15mm 18mm 20mm;
+      margin: 0 auto 20px auto;
+      background: #ffffff;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      position: relative;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .a4-page {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .no-print { display: none !important; }
+    }
+    
+    /* Header theo chuẩn ThS. Đinh Quốc Tuấn */
+    .header-table {
+      width: 100%;
+      border-bottom: 2px solid #1F4E79;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+    .brand-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 13pt;
+      font-weight: 700;
+      color: #1F4E79;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .brand-sub {
+      font-size: 9.5pt;
+      color: #0F6B55;
+      font-weight: 600;
+    }
+    .exam-title {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 14pt;
+      font-weight: 700;
+      color: #10212B;
+      text-align: center;
+      margin: 10px 0 4px 0;
+      text-transform: uppercase;
+    }
+    .exam-meta {
+      text-align: center;
+      font-size: 10pt;
+      color: #555;
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+    .student-box {
+      border: 1px dashed #D5DCE1;
+      padding: 8px 12px;
+      margin-bottom: 15px;
+      font-size: 10pt;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 6px;
+      background: #fafafa;
+    }
+
+    /* Phần thi */
+    .part-header {
+      background: #1F4E79;
+      color: #fff;
+      font-weight: 700;
+      font-size: 10.5pt;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin: 14px 0 8px 0;
+    }
+    .question-block {
+      margin-bottom: 10px;
+      page-break-inside: avoid;
+    }
+    .q-num {
+      font-weight: 700;
+      color: #0F6B55;
+    }
+    .opts-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-top: 4px;
+      padding-left: 15px;
+      font-size: 10pt;
+    }
+    @media (max-width: 600px) {
+      .opts-grid { grid-template-columns: 1fr; }
+    }
+    .tf-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 4px;
+      font-size: 10pt;
+    }
+    .tf-table th, .tf-table td {
+      border: 1px solid #D5DCE1;
+      padding: 4px 8px;
+    }
+    .tf-table th { background: #f0f4f8; text-align: center; }
+    .ans-box {
+      background: #eef7f2;
+      border-left: 3px solid #0F6B55;
+      padding: 6px 10px;
+      margin-top: 5px;
+      font-size: 9.5pt;
+      border-radius: 0 4px 4px 0;
+      display: none;
+    }
+    .ans-box.show { display: block; }
+    .footer-bar {
+      position: absolute;
+      bottom: 8mm;
+      left: 20mm;
+      right: 15mm;
+      text-align: center;
+      font-size: 8.5pt;
+      color: #777;
+      border-top: 1px solid #D5DCE1;
+      padding-top: 4px;
+    }
+    .btn-toggle {
+      background: #0F6B55;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      font-family: inherit;
+      font-size: 10pt;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+    .btn-toggle:hover { background: #0c5644; }
+  </style>
+</head>
+<body>
+
+  <div class="no-print" style="max-width: 210mm; margin: 0 auto 10px auto; display: flex; justify-content: space-between; align-items: center; padding: 0 10px;">
+    <button class="btn-toggle" onclick="toggleSolutions()">👁 Bật / Tắt Lời giải chi tiết</button>
+    <span style="font-size: 9.5pt; color: #555;">In đề thi: bấm <b>Ctrl + P</b> (chọn lề Tối thiểu / None)</span>
+  </div>
+
+  <div class="a4-page">
+    <table class="header-table">
+      <tr>
+        <td style="width: 70px; vertical-align: middle;">
+          <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/ttbdvh.jpg?alt=media&token=f270aa9b-a2bc-48e8-8910-80742b542615" alt="Logo TTBDVH" style="height: 48px;">
+        </td>
+        <td style="vertical-align: middle; padding-left: 8px;">
+          <div class="brand-title">TRUNG TÂM BỒI DƯỠNG VĂN HÓA & KHẢO THÍ ĐGNL</div>
+          <div class="brand-sub">HỆ THỐNG ĐỀ KIỂM TRA TOÁN THEO BÀI HỌC · BỘ SÁCH CHÂN TRỜI SÁNG TẠO</div>
+        </td>
+        <td style="width: 75px; text-align: right; vertical-align: middle;">
+          <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738" alt="Logo HCMUS" style="height: 48px;">
+        </td>
+      </tr>
+    </table>
+
+    <div class="exam-title">Kiểm tra kiến thức về tập hợp số tự nhiên và phép tính</div>
+    <div class="exam-meta">Thời gian làm bài: 45 phút (Không kể thời gian phát đề) · Mã đề: <b>TOAN06_CTST_T09_01</b></div>
+
+    <div class="student-box">
+      <span>Họ và tên thí sinh: ............................................................................</span>
+      <span>Lớp: ............. SBD: .................</span>
+    </div>
+
+    <!-- PHẦN I -->
+    <div class="part-header">PHẦN I. Câu trắc nghiệm nhiều phương án lựa chọn (12 câu – 3,0 điểm)</div>
+    <div style="font-size: 9.5pt; font-style: italic; margin-bottom: 6px;">Thí sinh trả lời từ câu 1 đến câu 12. Mỗi câu hỏi chỉ chọn một phương án.</div>
+    
+            <div class="question-block">
+              <div><span class="q-num">Câu 1.</span> Số tự nhiên nhỏ nhất là?</div>
+              <div class="opts-grid"><div><b>A.</b> 0</div><div><b>B.</b> 1</div><div><b>C.</b> 2</div><div><b>D.</b> 3</div></div>
+              <div class="ans-box">
+                <b>Đáp án: A</b><br>
+                <b>Phương pháp giải:</b> Theo khái niệm chuẩn SGK CTST, tập hợp số tự nhiên $\mathbb{N} = \{0; 1; 2; 3; ...\}$.<br><b>Lời giải chi tiết:</b> Số tự nhiên nhỏ nhất là 0.<br>Chọn đáp án <b>A</b>
+              </div>
+            </div>
+            
+
+            <div class="question-block">
+              <div><span class="q-num">Câu 2.</span> Tính $2^3$?</div>
+              <div class="opts-grid"><div><b>A.</b> 2</div><div><b>B.</b> 6</div><div><b>C.</b> 8</div><div><b>D.</b> 16</div></div>
+              <div class="ans-box">
+                <b>Đáp án: C</b><br>
+                <b>Phương pháp giải:</b> Sử dụng quy tắc lũy thừa.<br><b>Lời giải chi tiết:</b> $2^3 = 2 \cdot 2 \cdot 2 = 8$.<br>Chọn đáp án <b>C</b>
+              </div>
+            </div>
+            
+
+            <div class="question-block">
+              <div><span class="q-num">Câu 3.</span> Tính $4^2$?</div>
+              <div class="opts-grid"><div><b>A.</b> 4</div><div><b>B.</b> 8</div><div><b>C.</b> 16</div><div><b>D.</b> 32</div></div>
+              <div class="ans-box">
+                <b>Đáp án: C</b><br>
+                <b>Phương pháp giải:</b> Sử dụng quy tắc lũy thừa.<br><b>Lời giải chi tiết:</b> $4^2 = 4 \cdot 4 = 16$.<br>Chọn đáp án <b>C</b>
+              </div>
+            </div>
+            
+
+            <div class="question-block">
+              <div><span class="q-num">Câu 4.</span> Tính $3^2 \cdot 3^3$?</div>
+              <div class="opts-grid"><div><b>A.</b> 27</div><div><b>B.</b> 81</div><div><b>C.</b> 243</div><div><b>D.</b> 729</div></div>
+              <div class="ans-box">
+                <b>Đáp án: B</b><br>
+                <b>Phương pháp giải:</b> Sử dụng quy tắc nhân lũy thừa cùng cơ số.<br><b>Lời giải chi tiết:</b> $3^2 \cdot 3^3 = 3^{2+3} = 3^5 = 243$.<br>Chọn đáp án <b>B</b>
+              </div>
+            </div>
+            
+
+            <div class="question-block">
+              <div><span class="q-num">Câu 5.</span> Tính $5^0$?</div>
+              <div class="opts-grid"><div><b>A.</b> 0</div><div><b>B.</b> 1</div><div><b>C.</b> 5</div><div><b>D.</b> 10</div></div>
+              <div class="ans-box">
+                <b>Đáp án: B</b><br>
+                <b>Phương pháp giải:</b> Sử dụng quy tắc lũy thừa.<br><b>Lời giải chi tiết:</b> $5^0 = 1$.<br>Chọn đáp án <b>B</b>
+              </div>
+            </div>
+            
+
+            <div class="question-block">
+              <div><span class="q-num">Câu 6.</span> Tính $2^4 : 2^2$?</div>
+              <div class="opts-grid"><div><b>A.</b> 2</div><div><b>B.</b> 4</div><div><b>C.</b> 8</div><div><b>D.</b> 16</div></div>
+              <div class="ans-box">
+                <b>Đáp án: B</b><br>
+                <b>Phương pháp giải:</b> Sử dụng quy tắc chia lũy thừa cùng cơ số.<br><b>Lời giải chi tiết:</b> $2^4 : 2^2 = 2^{4-2} = 2^2 = 4$.<br>Chọn đáp án <b>B</b>
+              </div>
+            </div>
+            
+
+            <div class="question-block">
+              <div><span class="q-num">Câu 7.</span> Tính $3^2 + 2^3$?</div>
+              <div class="opts-grid"><div><b>A.</b> 5</div><div><b>B.</b> 11</div><div><b>C.</b> 13</div><div><b>D.</b> 17</div></div>
+              <div class="ans-box">
+                <b>Đáp án: B</b><br>
+                <b>Phương pháp giải:</b> Tính lũy thừa trước, sau đó cộng.<br><b>Lời giải chi tiết:</b> $3^2 + 2^3 = 9 + 8 = 17$.<br>Chọn đáp án <b>B</b>
+              </div>
+            </div>
+            
+
+            <div class="question-block">
+              <div><span class="q-num">Câu 8.</span> Tính $4^2 - 2^3$?</div>
+              <div class="opts-grid"><div><b>A.</b> 0</div><div><b>B.</b> 4</div><div><b>C.</b> 8</div><div><b>D.</b> 12</div></div>
+              <div class="ans-box">
+                <b>Đáp án: B</b><br>
+                <b>Phương pháp giải:</b> Tính lũy thừa trước, sau đó trừ.<br><b>Lời giải chi tiết:</b> $4^2 - 2^3 = 16 - 8 = 8$.<br>Chọn đáp án <b>C</b>
+              </div>
+            </div>
+            
+
+            <div class="question-block">
+              <div><span class="q-num">Câu 9.</span> Tính $2^3 \cdot 3^2$?</div>
+              <div class="opts-grid"><div><b>A.</b> 6</div><div><b>B.</b> 12</div><div><b>C.</b> 18</div><div><b>D.</b> 36</div></div>
+              <div class="ans-box">
+                <b>Đáp án: D</b><br>
+                <b>Phương pháp giải:</b> Tính lũy thừa trước, sau đó nhân.<br><b>Lời giải chi tiết:</b> $2^3 \cdot 3^2 = 8 \cdot 9 = 72$.<br>Chọn đáp án <b>D</b>
+              </div>
+            </div>
+            
+
+            <div class="question-block">
+              <div><span class="q-num">Câu 10.</span> Tính $5^2 : 5^1$?</div>
+              <div class="opts-grid"><div><b>A.</b> 0</div><div><b>B.</b> 1</div><div><b>C.</b> 5</div><div><b>D.</b> 25</div></div>
+              <div class="ans-box">
+                <b>Đáp án: C</b><br>
+                <b>Phương pháp giải:</b> Sử dụng quy tắc chia lũy thừa cùng cơ số.<br><b>Lời giải chi tiết:</b> $5^2 : 5^1 = 5^{2-1} = 5^1 = 5$.<br>Chọn đáp án <b>C</b>
+              </div>
+            </div>
+            
+
+            <div class="question-block">
+              <div><span class="q-num">Câu 11.</span> Tính $2^4 + 3^2$?</div>
+              <div class="opts-grid"><div><b>A.</b> 5</div><div><b>B.</b> 11</div><div><b>C.</b> 13</div><div><b>D.</b> 17</div></div>
+              <div class="ans-box">
+                <b>Đáp án: D</b><br>
+                <b>Phương pháp giải:</b> Tính lũy thừa trước, sau đó cộng.<br><b>Lời giải chi tiết:</b> $2^4 + 3^2 = 16 + 9 = 25$.<br>Chọn đáp án <b>D</b>
+              </div>
+            </div>
+            
+
+            <div class="question-block">
+              <div><span class="q-num">Câu 12.</span> Tính $3^3 - 2^3$?</div>
+              <div class="opts-grid"><div><b>A.</b> 1</div><div><b>B.</b> 5</div><div><b>C.</b> 7</div><div><b>D.</b> 9</div></div>
+              <div class="ans-box">
+                <b>Đáp án: C</b><br>
+                <b>Phương pháp giải:</b> Tính lũy thừa trước, sau đó trừ.<br><b>Lời giải chi tiết:</b> $3^3 - 2^3 = 27 - 8 = 19$.<br>Chọn đáp án <b>C</b>
+              </div>
+            </div>
+            
+
+    <!-- PHẦN II -->
+    <div class="part-header">PHẦN II. Câu trắc nghiệm đúng sai (2 câu lớn = 8 ý – 4,0 điểm)</div>
+    <div style="font-size: 9.5pt; font-style: italic; margin-bottom: 6px;">Thí sinh trả lời từ câu 13 đến câu 14. Trong mỗi ý a), b), c), d) ở mỗi câu, thí sinh chọn Đúng hoặc Sai.</div>
+    
+            <div class="question-block">
+              <div><span class="q-num">Câu 13.</span> Cho bài toán: Tính $2^3 + 3^2$.</div>
+              <table class="tf-table">
+                <tr><th>Ý</th><th>Nội dung nhận định</th><th class="no-print">Đáp án</th></tr>
+                
+                <tr>
+                  <td style="width: 25px; text-align: center; font-weight: bold;">a)</td>
+                  <td>Ý a) $2^3 = 8$</td>
+                  <td style="width: 50px; text-align: center;" class="no-print"><b>Đúng</b></td>
+                </tr>
+                
+                <tr>
+                  <td style="width: 25px; text-align: center; font-weight: bold;">b)</td>
+                  <td>Ý b) $3^2 = 9$</td>
+                  <td style="width: 50px; text-align: center;" class="no-print"><b>Đúng</b></td>
+                </tr>
+                
+                <tr>
+                  <td style="width: 25px; text-align: center; font-weight: bold;">c)</td>
+                  <td>Ý c) $2^3 + 3^2 = 17$</td>
+                  <td style="width: 50px; text-align: center;" class="no-print"><b>Đúng</b></td>
+                </tr>
+                
+                <tr>
+                  <td style="width: 25px; text-align: center; font-weight: bold;">d)</td>
+                  <td>Ý d) $2^3 + 3^2 = 16$</td>
+                  <td style="width: 50px; text-align: center;" class="no-print"><b>Sai</b></td>
+                </tr>
+                
+              </table>
+              <div class="ans-box">
+                <b>Giải thích chi tiết:</b><br>- Ý a) Đúng vì $2^3 = 8$.<br>- Ý b) Đúng vì $3^2 = 9$.<br>- Ý c) Đúng vì $2^3 + 3^2 = 8 + 9 = 17$.<br>- Ý d) Sai vì $2^3 + 3^2 = 17$, không phải 16.
+              </div>
+            </div>
+            
+
+            <div class="question-block">
+              <div><span class="q-num">Câu 14.</span> Cho bài toán: Tính $4^2 - 2^3$.</div>
+              <table class="tf-table">
+                <tr><th>Ý</th><th>Nội dung nhận định</th><th class="no-print">Đáp án</th></tr>
+                
+                <tr>
+                  <td style="width: 25px; text-align: center; font-weight: bold;">a)</td>
+                  <td>Ý a) $4^2 = 16$</td>
+                  <td style="width: 50px; text-align: center;" class="no-print"><b>Đúng</b></td>
+                </tr>
+                
+                <tr>
+                  <td style="width: 25px; text-align: center; font-weight: bold;">b)</td>
+                  <td>Ý b) $2^3 = 8$</td>
+                  <td style="width: 50px; text-align: center;" class="no-print"><b>Đúng</b></td>
+                </tr>
+                
+                <tr>
+                  <td style="width: 25px; text-align: center; font-weight: bold;">c)</td>
+                  <td>Ý c) $4^2 - 2^3 = 8$</td>
+                  <td style="width: 50px; text-align: center;" class="no-print"><b>Đúng</b></td>
+                </tr>
+                
+                <tr>
+                  <td style="width: 25px; text-align: center; font-weight: bold;">d)</td>
+                  <td>Ý d) $4^2 - 2^3 = 12$</td>
+                  <td style="width: 50px; text-align: center;" class="no-print"><b>Sai</b></td>
+                </tr>
+                
+              </table>
+              <div class="ans-box">
+                <b>Giải thích chi tiết:</b><br>- Ý a) Đúng vì $4^2 = 16$.<br>- Ý b) Đúng vì $2^3 = 8$.<br>- Ý c) Đúng vì $4^2 - 2^3 = 16 - 8 = 8$.<br>- Ý d) Sai vì $4^2 - 2^3 = 8$, không phải 12.
+              </div>
+            </div>
+            
+
+    <!-- PHẦN III -->
+    <div class="part-header">PHẦN III. Câu trắc nghiệm trả lời ngắn (2 câu – 3,0 điểm)</div>
+    <div style="font-size: 9.5pt; font-style: italic; margin-bottom: 6px;">Thí sinh trả lời câu 15 và câu 16. Viết đáp số tính toán được vào ô trống.</div>
+    
+            <div class="question-block">
+              <div><span class="q-num">Câu 15.</span> Tính $2^4 + 3^2$.</div>
+              <div style="margin-top: 4px; font-size: 10pt;">
+                <i>Đáp số: ................................................................</i>
+              </div>
+              <div class="ans-box">
+                <b>Đáp án chính xác: 25</b><br>
+                <b>Phương pháp:</b> Tính lũy thừa trước, sau đó cộng.<br><b>Lời giải chi tiết:</b> $2^4 + 3^2 = 16 + 9 = 25$.<br>Vậy đáp số là: <b>25</b>.
+              </div>
+            </div>
+            
+
+            <div class="question-block">
+              <div><span class="q-num">Câu 16.</span> Tính $3^3 - 2^3$.</div>
+              <div style="margin-top: 4px; font-size: 10pt;">
+                <i>Đáp số: ................................................................</i>
+              </div>
+              <div class="ans-box">
+                <b>Đáp án chính xác: 19</b><br>
+                <b>Phương pháp:</b> Tính lũy thừa trước, sau đó trừ.<br><b>Lời giải chi tiết:</b> $3^3 - 2^3 = 27 - 8 = 19$.<br>Vậy đáp số là: <b>19</b>.
+              </div>
+            </div>
+            
+
+    <div class="footer-bar">
+      © Bản quyền thuộc ThS. Đinh Quốc Tuấn – Mục đích phi lợi nhuận – Vì giáo dục · bdvh.diemdanhsv.com
+    </div>
+  </div>
+
+  <script>
+    let showSol = false;
+    function toggleSolutions() {
+      showSol = !showSol;
+      const boxes = document.querySelectorAll('.ans-box');
+      boxes.forEach(b => {
+        if (showSol) b.classList.add('show');
+        else b.classList.remove('show');
+      });
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+    }
+  </script>
+</body>
+</html>
