@@ -121,7 +121,7 @@ main {
   flex-direction: column;
 }
 
-/* Thẻ Câu Hỏi Hiện Tại chuẩn Times New Roman */
+/* Thẻ Câu Hỏi Hiện Tại */
 .q-card {
   background: #fff;
   border-radius: 16px;
@@ -180,7 +180,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin: 14px 0;
+  margin: 14px 0 16px;
 }
 .ans-btn {
   display: flex;
@@ -220,12 +220,22 @@ main {
   flex: 1;
 }
 
-/* Trạng thái được chọn */
+/* Trạng thái được chọn trước khi nộp */
 .ans-btn.selected {
+  border-color: #2563EB;
+  background: #EFF6FF;
+}
+.ans-btn.selected .ans-key {
+  background: #2563EB;
+  color: #fff;
+}
+
+/* Trạng thái đã nộp thành công */
+.ans-btn.submitted {
   border-color: var(--luc);
   background: var(--luc-nhe);
 }
-.ans-btn.selected .ans-key {
+.ans-btn.submitted .ans-key {
   background: var(--luc);
   color: #fff;
 }
@@ -248,26 +258,75 @@ main {
   color: #fff;
 }
 
-/* Thanh trạng thái gửi phiếu */
-.submit-status-bar {
-  background: #F8FAFC;
-  border: 1px solid #CBD5E1;
-  border-radius: 10px;
-  padding: 10px 12px;
+/* =====================================================================
+   NÚT SUBMIT / XÁC NHẬN NỘP BÀI RÕ RÀNG
+   ===================================================================== */
+.submit-area {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-submit-vote {
+  width: 100%;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #0F6B55 0%, #10B981 100%);
+  color: #ffffff;
+  border: 0;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(15,107,85,0.25);
+  transition: all .15s ease;
+  font-family: var(--sans);
+}
+.btn-submit-vote:hover {
+  filter: brightness(1.08);
+}
+.btn-submit-vote:active {
+  transform: scale(0.98);
+}
+.btn-submit-vote:disabled {
+  background: #94A3B8;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.submit-success-card {
+  background: #ECFDF5;
+  border: 2px solid #10B981;
+  border-radius: 12px;
+  padding: 12px 14px;
   text-align: center;
-  font-size: 13.5px;
-  font-weight: 600;
-  color: #475569;
 }
-.submit-status-bar.ok {
-  background: #DCFCE7;
-  border-color: #86EFAC;
-  color: #15803D;
+.submit-success-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #065F46;
+  margin-bottom: 4px;
 }
-.submit-status-bar.locked {
-  background: #FEE2E2;
-  border-color: #FCA5A5;
-  color: #B91C1C;
+.submit-success-sub {
+  font-size: 13px;
+  color: #047857;
+  margin-bottom: 8px;
+}
+.btn-change-choice {
+  background: #fff;
+  border: 1px solid #10B981;
+  color: #065F46;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-block;
 }
 
 /* Banner Thông Báo Kết Quả Khi Thầy Chiếu Đáp Án */
@@ -406,7 +465,7 @@ main {
 .history-tag.wrong { background: #FEE2E2; color: #B91C1C; }
 </style>
 
-<!-- MathJax 3 Cấu Hình An Toàn & Chuẩn Phông -->
+<!-- MathJax 3 Cấu Hình An Toàn -->
 <script>
 window.MathJax = {
   tex: {
@@ -418,7 +477,7 @@ window.MathJax = {
     ready: () => {
       MathJax.startup.defaultReady();
       MathJax.startup.promise.then(() => {
-        triggerMathJaxSv();
+        if (typeof triggerMathJaxSv === 'function') triggerMathJaxSv();
       });
     }
   },
@@ -478,8 +537,9 @@ window.MathJax = {
         <!-- 4 nút A, B, C, D -->
       </div>
 
-      <div class="submit-status-bar" id="submit-status">
-        Chạm vào một phương án để chọn đáp án
+      <!-- KHU VỰC NỘP BÀI (SUBMIT) RÕ RÀNG -->
+      <div class="submit-area" id="submit-area-box">
+        <!-- Nút submit hoặc hộp đã nộp thành công -->
       </div>
 
       <!-- Banner kết quả khi thầy chốt đáp án -->
@@ -715,19 +775,21 @@ function saveStudentName() {
   document.getElementById('nameModal').classList.remove('on');
 }
 
-// BỘ ĐỆM ĐÁP ÁN ĐÃ CHỌN CỦA HỌC SINH
+// BỘ ĐỆM ĐÁP ÁN ĐÃ NỘP & ĐANG CHỌN
 let myVotes = {};
 try {
   const saved = localStorage.getItem('toan7_my_votes');
   if (saved) myVotes = JSON.parse(saved);
 } catch(e) {}
 
+let selectedChoice = null; // Lựa chọn tạm thời trước khi bấm nút Nộp
+let isEditingChoice = false;
+
 // ENGINE ĐỒNG BỘ REALTIME TỪ SLIDE GIÁO VIÊN
 let currentExamState = { current_q: 1, slide_type: 'cover', is_locked: false };
 let displayedQ = 0;
 let displayedSlideType = '';
 
-// XỬ LÝ MATHJAX AN TOÀN TRÊN MOBILE
 let svMathRunning = false;
 let svMathQueued = false;
 function triggerMathJaxSv() {
@@ -738,10 +800,10 @@ function triggerMathJaxSv() {
   }
   svMathRunning = true;
   const qEl = document.getElementById('q-pane');
-  if (MathJax.typesetClear) {
+  if (MathJax.typesetClear && qEl) {
     try { MathJax.typesetClear([qEl]); } catch(e) {}
   }
-  MathJax.typesetPromise([qEl])
+  MathJax.typesetPromise(qEl ? [qEl] : [])
     .then(() => {
       svMathRunning = false;
       if (svMathQueued) {
@@ -756,6 +818,9 @@ function triggerMathJaxSv() {
 
 function renderQuestion(qObj) {
   displayedQ = qObj.id;
+  selectedChoice = myVotes[qObj.id] || null;
+  isEditingChoice = !myVotes[qObj.id];
+
   document.getElementById('q-number-badge').innerText = `CÂU ${qObj.id} / 12`;
   document.getElementById('q-title-text').innerHTML = `<b>Câu ${qObj.id}:</b> ${qObj.title}`;
 
@@ -767,59 +832,123 @@ function renderQuestion(qObj) {
     svgBox.style.display = 'none';
   }
 
-  const myChoice = myVotes[qObj.id];
+  renderAnsButtons(qObj);
+  renderSubmitArea();
+  triggerMathJaxSv();
+}
+
+function renderAnsButtons(qObj) {
   const btnsBox = document.getElementById('ans-buttons-box');
+  const targetChoice = selectedChoice;
+  const isSubmitted = !!myVotes[qObj.id] && !isEditingChoice;
+
   btnsBox.innerHTML = qObj.opts.map(o => `
-    <button type="button" class="ans-btn ${myChoice === o.k ? 'selected' : ''}" id="btn-ans-${o.k}" onclick="pickAnswer('${o.k}')">
+    <button type="button" class="ans-btn ${targetChoice === o.k ? (isSubmitted ? 'submitted' : 'selected') : ''}" id="btn-ans-${o.k}" onclick="onSelectChoice('${o.k}')">
       <div class="ans-key">${o.k}</div>
       <div class="ans-text">${o.t}</div>
     </button>
   `).join('');
-
-  updateSubmitStatus();
-  triggerMathJaxSv();
 }
 
-function updateSubmitStatus() {
-  const myChoice = myVotes[displayedQ];
-  const stEl = document.getElementById('submit-status');
-  const lockBadge = document.getElementById('q-lock-badge');
-
-  if (currentExamState.is_locked) {
-    lockBadge.classList.add('on');
-    stEl.className = 'submit-status-bar locked';
-    stEl.innerText = myChoice ? `🔒 Đã khóa nhận bài. Em đã chọn phương án [${myChoice}]` : '🔒 Thầy đã khóa nhận bài cho câu này';
-  } else {
-    lockBadge.classList.remove('on');
-    if (myChoice) {
-      stEl.className = 'submit-status-bar ok';
-      stEl.innerText = `✓ Đã ghi nhận đáp án: [${myChoice}]. Chạm chữ khác để đổi nếu muốn.`;
-    } else {
-      stEl.className = 'submit-status-bar';
-      stEl.innerText = 'Chạm vào A, B, C hoặc D để gửi câu trả lời';
-    }
-  }
-}
-
-function pickAnswer(k) {
+// Khi học sinh chạm vào một phương án
+function onSelectChoice(k) {
   if (currentExamState.is_locked) {
     alert('Thầy đã khóa nhận bài cho câu này rồi em nhé!');
     return;
   }
+  selectedChoice = k;
+  isEditingChoice = true;
+
+  const targetQ = QUESTIONS.find(q => q.id === displayedQ);
+  if (targetQ) renderAnsButtons(targetQ);
+  renderSubmitArea();
+}
+
+// Cập nhật khu vực Nút Nộp Bài
+function renderSubmitArea() {
+  const area = document.getElementById('submit-area-box');
+  const lockBadge = document.getElementById('q-lock-badge');
+
+  if (currentExamState.is_locked) {
+    lockBadge.classList.add('on');
+    const submitted = myVotes[displayedQ];
+    area.innerHTML = `
+      <div class="submit-status-bar locked" style="background:#FEE2E2; border:1px solid #FCA5A5; color:#B91C1C; padding:12px; border-radius:12px; font-weight:700;">
+        🔒 Thầy đã khóa nhận bài cho câu này. ${submitted ? `Phương án em đã gửi: [${submitted}]` : 'Em chưa kịp gửi đáp án.'}
+      </div>
+    `;
+    return;
+  }
+
+  lockBadge.classList.remove('on');
+
+  // Đã nộp và không đang sửa
+  if (myVotes[displayedQ] && !isEditingChoice) {
+    const k = myVotes[displayedQ];
+    area.innerHTML = `
+      <div class="submit-success-card">
+        <div class="submit-success-title">✓ ĐÃ NỘP BÀI THÀNH CÔNG!</div>
+        <div class="submit-success-sub">Em đã chọn phương án <b>[${k}]</b>. Đang kết nối lên màn hình của Thầy...</div>
+        <button type="button" class="btn-change-choice" onclick="enableChangeChoice()">✏️ Chọn lại phương án khác</button>
+      </div>
+    `;
+  } else if (selectedChoice) {
+    // Đã chọn một phương án ➔ Hiện nút Nộp bài
+    area.innerHTML = `
+      <button type="button" class="btn-submit-vote" onclick="submitMyVote()">
+        🚀 XÁC NHẬN NỘP BÀI: PHƯƠNG ÁN [${selectedChoice}]
+      </button>
+      <div style="font-size:12.5px; color:#64748B; text-align:center;">
+        Bấm nút trên để gửi câu trả lời lên màn hình chiếu của Thầy
+      </div>
+    `;
+  } else {
+    // Chưa chọn phương án nào
+    area.innerHTML = `
+      <div style="background:#F8FAFC; border:1px dashed #CBD5E1; padding:12px; border-radius:12px; text-align:center; font-size:14px; color:#64748B; font-weight:600;">
+        Chạm chọn <b>A, B, C hoặc D</b> rồi bấm Nộp Bài
+      </div>
+    `;
+  }
+}
+
+function enableChangeChoice() {
+  if (currentExamState.is_locked) {
+    alert('Thầy đã khóa nhận bài cho câu này rồi em nhé!');
+    return;
+  }
+  isEditingChoice = true;
+  const targetQ = QUESTIONS.find(q => q.id === displayedQ);
+  if (targetQ) renderAnsButtons(targetQ);
+  renderSubmitArea();
+}
+
+// BẤM NÚT NỘP BÀI (SUBMIT VOTE)
+function submitMyVote() {
+  if (!selectedChoice) {
+    alert('Vui lòng chọn 1 phương án trước khi nộp bài!');
+    return;
+  }
+  if (currentExamState.is_locked) {
+    alert('Thầy đã khóa nhận bài cho câu này rồi em nhé!');
+    return;
+  }
+
+  const k = selectedChoice;
   myVotes[displayedQ] = k;
+  isEditingChoice = false;
   localStorage.setItem('toan7_my_votes', JSON.stringify(myVotes));
 
-  // Cập nhật giao diện nút
-  ['A', 'B', 'C', 'D'].forEach(key => {
-    const b = document.getElementById(`btn-ans-${key}`);
-    if (b) b.classList.toggle('selected', key === k);
-  });
+  // Rung phản hồi nhẹ trên điện thoại
+  if (navigator.vibrate) navigator.vibrate([40, 60, 40]);
 
-  updateSubmitStatus();
+  const targetQ = QUESTIONS.find(q => q.id === displayedQ);
+  if (targetQ) renderAnsButtons(targetQ);
+  renderSubmitArea();
   updateHistoryTab();
 
   // Gửi API lên máy chủ
-  fetch('slido-api.php?action=vote&exam=toan7', {
+  fetch(`slido-api.php?action=vote&exam=toan7&_t=${Date.now()}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -831,7 +960,7 @@ function pickAnswer(k) {
   }).catch(() => {});
 }
 
-// CẬP NHẬT GIAO DIỆN THEO LOẠI SLIDE CỦA THẦY
+// CẬP NHẬT GIAO DIỆN KHI THẦY CHIẾU ĐÁP ÁN HOẶC GIẢI THÍCH
 function applyTeacherSlideType(type, qObj) {
   const resBanner = document.getElementById('res-banner');
   const solCard = document.getElementById('sol-card');
@@ -840,14 +969,9 @@ function applyTeacherSlideType(type, qObj) {
     resBanner.style.display = 'none';
     solCard.classList.remove('show');
 
-    // Khôi phục màu nút bình thường
-    ['A', 'B', 'C', 'D'].forEach(key => {
-      const b = document.getElementById(`btn-ans-${key}`);
-      if (b) {
-        b.classList.remove('is-correct', 'is-wrong');
-        b.classList.toggle('selected', myVotes[qObj.id] === key);
-      }
-    });
+    // Khôi phục nút
+    renderAnsButtons(qObj);
+    renderSubmitArea();
   } else if (type === 'answer') {
     const myChoice = myVotes[qObj.id];
     const isCorrect = (myChoice === qObj.correct);
@@ -858,14 +982,14 @@ function applyTeacherSlideType(type, qObj) {
       <div style="font-size:13.5px; margin-top:4px;">Em đã chọn đúng phương án <b>${qObj.correct}</b>. Em được cộng 1 điểm!</div>
     ` : `
       <div style="font-size:16px; font-weight:800;">💡 RẤT TIẾC, CHƯA CHÍNH XÁC!</div>
-      <div style="font-size:13.5px; margin-top:4px;">Em đã chọn <b>${myChoice || 'chưa chọn'}</b>. Đáp án đúng là <b>${qObj.correct}</b>.</div>
+      <div style="font-size:13.5px; margin-top:4px;">Em đã chọn <b>${myChoice || 'chưa nộp bài'}</b>. Đáp án đúng là <b>${qObj.correct}</b>.</div>
     `;
 
-    // Highlight nút đáp án đúng
+    // Highlight nút đáp án đúng và đáp án sai của học sinh
     ['A', 'B', 'C', 'D'].forEach(key => {
       const b = document.getElementById(`btn-ans-${key}`);
       if (b) {
-        b.classList.remove('is-correct', 'is-wrong');
+        b.classList.remove('is-correct', 'is-wrong', 'selected', 'submitted');
         if (key === qObj.correct) b.classList.add('is-correct');
         else if (key === myChoice) b.classList.add('is-wrong');
       }
@@ -881,9 +1005,9 @@ function applyTeacherSlideType(type, qObj) {
   }
 }
 
-// POLLING TRẠNG THÁI TỪ SLIDE GIÁO VIÊN (1.5 giây / lần)
+// POLLING ĐỒNG BỘ TRẠNG THÁI VỚI THẦY (1.5 giây / lần)
 function pollTeacherState() {
-  fetch('slido-api.php?action=get_state&exam=toan7')
+  fetch(`slido-api.php?action=get_state&exam=toan7&_t=${Date.now()}`)
     .then(r => r.json())
     .then(res => {
       if (res.status !== 'success') return;
@@ -907,12 +1031,11 @@ function pollTeacherState() {
       // Nếu thầy đổi sang câu hỏi mới
       if (displayedQ !== targetQ.id) {
         renderQuestion(targetQ);
+      } else {
+        renderSubmitArea();
       }
 
-      // Cập nhật trạng thái khóa
-      updateSubmitStatus();
-
-      // Nếu thầy đổi loại slide (Đề ➔ Đáp án ➔ Lời giải)
+      // Nếu thầy chuyển sang Slide Đáp án hoặc Lời giải
       if (displayedSlideType !== st.slide_type || displayedQ !== targetQ.id) {
         displayedSlideType = st.slide_type;
         applyTeacherSlideType(st.slide_type, targetQ);

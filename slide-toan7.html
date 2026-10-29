@@ -40,7 +40,7 @@ html, body {
   user-select: none;
 }
 
-/* Sân khấu 16:9 co giãn thông minh (không bao giờ lệch hay trôi) */
+/* Sân khấu 16:9 co giãn */
 #stage {
   position: fixed;
   inset: 0;
@@ -93,7 +93,7 @@ html, body {
   overflow: hidden;
 }
 
-/* Footer slide gọn gàng */
+/* Footer slide */
 .s-foot {
   height: 50px;
   flex: none;
@@ -473,8 +473,7 @@ html, body {
 .join-big-card code { font-size: 16px; color: var(--luc); font-weight: 800; font-family: var(--sans); }
 
 /* =====================================================================
-   THANH ĐIỀU KHIỂN SIÊU NHỎ GỌN (COMPACT DOCK ĐẶT GÓC DƯỚI BÊN PHẢI)
-   KHÔNG BAO GIỜ CHE BÀI TRÌNH CHIẾU
+   THANH ĐIỀU KHIỂN SIÊU GỌN - ĐẶT TẠI GÓC DƯỚI BÊN PHẢI
    ===================================================================== */
 #ctrl {
   position: fixed;
@@ -485,15 +484,15 @@ html, body {
   display: flex;
   gap: 4px;
   align-items: center;
-  background: rgba(16, 33, 43, 0.88);
+  background: rgba(16, 33, 43, 0.9);
   backdrop-filter: blur(8px);
   color: #fff;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: 99px;
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 600;
   z-index: 50;
-  opacity: 0.35;
+  opacity: 0.45;
   transition: opacity .2s;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
@@ -505,7 +504,7 @@ body.show-ctrl #ctrl, #ctrl:hover {
   border: 0;
   color: #fff;
   font: inherit;
-  padding: 4px 7px;
+  padding: 4px 8px;
   border-radius: 6px;
   cursor: pointer;
   display: inline-flex;
@@ -516,14 +515,14 @@ body.show-ctrl #ctrl, #ctrl:hover {
   white-space: nowrap;
 }
 #ctrl button:hover, #ctrl a:hover {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.22);
 }
 #ctrl .pos {
   font-variant-numeric: tabular-nums;
-  padding: 0 4px;
-  font-weight: 700;
+  padding: 0 6px;
+  font-weight: 800;
   color: #FBBF24;
-  font-size: 12px;
+  font-size: 13px;
 }
 #ctrl .sep {
   opacity: 0.3;
@@ -610,7 +609,7 @@ body.show-ctrl #ctrl, #ctrl:hover {
 #timer button:hover { color: #fff; }
 </style>
 
-<!-- MathJax 3 Cấu Hình Tự Động Định Dạng Phông Chuẩn -->
+<!-- MathJax 3 Cấu Hình An Toàn -->
 <script>
 window.MathJax = {
   tex: {
@@ -622,7 +621,7 @@ window.MathJax = {
     ready: () => {
       MathJax.startup.defaultReady();
       MathJax.startup.promise.then(() => {
-        triggerMathJax();
+        if (typeof triggerMathJax === 'function') triggerMathJax();
       });
     }
   },
@@ -648,7 +647,7 @@ window.MathJax = {
 <nav id="ctrl">
   <a href="giao-vien.html" title="Trở về trang Quản Lý Lớp Học">🏠 Quản lý</a>
   <button type="button" onclick="go(cur - 1)" title="Slide trước (←)">◀</button>
-  <span class="pos" id="pos">1 / 1</span>
+  <span class="pos" id="pos">1 / 38</span>
   <button type="button" onclick="go(cur + 1)" title="Slide sau (→, Space)">▶</button>
   <span class="sep">|</span>
   <button type="button" onclick="toggleLockVote()" id="btnLock" title="Khóa/Mở bình chọn (L)">🔒 Khóa</button>
@@ -686,7 +685,7 @@ function makeQrSvg(text, size) {
   }
 }
 
-// CƠ SỞ DỮ LIỆU ĐỀ THI TOÁN 7 - ĐÃ CHUẨN HOÁ PHÔNG TOÁN TIMES NEW ROMAN & LATEX
+// 12 CÂU HỎI ĐỀ THI TOÁN 7 - ĐÃ CHUẨN HOÁ LATEX & TYPOGRAPHY
 const EXAM_QUESTIONS = [
   {
     id: 1,
@@ -866,7 +865,7 @@ const EXAM_QUESTIONS = [
       { k: "D", t: "$360^\\circ$" }
     ],
     correct: "C",
-    solution: "Định lí cơ bản trong hình học 7: Trong một tam giác bất kì, tổng số đo ba góc trong luôn bằng $180^\\circ$. Trong $\\triangle ABC$: $\\widehat{A} + \\widehat{B} + \\widehat{C} = 180^\\circ$.",
+    solution: "Trong mọi tam giác, tổng số đo ba góc trong luôn bằng $180^\\circ$. Trong $\\triangle ABC$: $\\widehat{A} + \\widehat{B} + \\widehat{C} = 180^\\circ$.",
     theory: "<b>Hệ quả:</b> Trong tam giác vuông, hai góc nhọn phụ nhau (tổng bằng $90^\\circ$). Góc ngoài của tam giác bằng tổng hai góc trong không kề với nó.",
     trap: "Nhầm sang tổng 4 góc của tứ giác ($360^\\circ$) hoặc tổng 2 góc nhọn ($90^\\circ$)."
   }
@@ -1120,21 +1119,10 @@ function slideHtml(s, i) {
   if (s.is_cover) {
     return `<section class="slide cover"><div class="s-body">${s.html}</div></section>`;
   }
-  return `
-    <section class="slide">
-      <div class="s-body">${s.html}</div>
-      <div class="s-foot">
-        <img class="hcmus" src="${LOGO_HCMUS}" alt="HCMUS">
-        <span style="font-weight:600;">Lớp Toán 7 – ThS. Đinh Quốc Tuấn · Bồi Dưỡng Văn Hóa HCMUS</span>
-        <span class="grow"></span>
-        <span class="num">${i + 1} / ${S.length}</span>
-        <img class="sen" src="${LOGO_SEN}" alt="Sen">
-      </div>
-    </section>
-  `;
+  return `<section class="slide"><div class="s-body">${s.html}</div><div class="s-foot"><img class="hcmus" src="${LOGO_HCMUS}" alt="HCMUS"><span style="font-weight:600;">Lớp Toán 7 – ThS. Đinh Quốc Tuấn · Bồi Dưỡng Văn Hóa HCMUS</span><span class="grow"></span><span class="num">${i + 1} / ${S.length}</span><img class="sen" src="${LOGO_SEN}" alt="Sen"></div></section>`;
 }
 
-// XỬ LÝ MATHJAX CHỐNG XUNG ĐỘT & ĐẢM BẢO PHÔNG
+// XỬ LÝ MATHJAX AN TOÀN
 let mathRunning = false;
 let mathQueued = false;
 function triggerMathJax() {
@@ -1175,7 +1163,7 @@ function syncStateToBackend(qId, slideType) {
 
 // CẬP NHẬT KẾT QUẢ BÌNH CHỌN SLIDO REALTIME
 function fetchSlidoResults(qId) {
-  fetch(`slido-api.php?action=get_results&exam=toan7&q_id=${qId}`)
+  fetch(`slido-api.php?action=get_results&exam=toan7&q_id=${qId}&_t=${Date.now()}`)
     .then(r => r.json())
     .then(res => {
       if (res.status !== 'success') return;
@@ -1214,17 +1202,44 @@ function startPolling(qId) {
   pollTimer = setInterval(() => fetchSlidoResults(qId), 1500);
 }
 
+// HÀM CHUYỂN SLIDE CHỐNG LỖI DOM TEXTNODE
 function go(i) {
   if (i < 0) i = 0;
   if (i >= S.length) i = S.length - 1;
   cur = i;
+
   scaler.innerHTML = slideHtml(S[i], i);
-  scaler.firstChild.classList.add('enter');
-  document.getElementById('pos').innerText = `${i + 1} / ${S.length}`;
-  document.getElementById('progress').style.width = `${((i + 1) / S.length) * 100}%`;
+
+  // AN TOÀN: Dùng querySelector('.slide') thay vì firstChild (tránh TextNode crash)
+  const slideEl = scaler.querySelector('.slide');
+  if (slideEl) {
+    slideEl.classList.add('enter');
+  }
+
+  // Cập nhật số slide trên thanh điều khiển
+  const posEl = document.getElementById('pos');
+  if (posEl) {
+    posEl.innerText = `${i + 1} / ${S.length}`;
+  }
+
+  const progEl = document.getElementById('progress');
+  if (progEl) {
+    progEl.style.width = `${((i + 1) / S.length) * 100}%`;
+  }
 
   const curSlide = S[i];
-  if (curSlide.q_id) {
+  if (curSlide && curSlide.q_id) {
+    // Tự động mở bình chọn khi giáo viên qua câu mới
+    if (curSlide.slide_type === 'question') {
+      isLocked = false;
+      const btn = document.getElementById('btnLock');
+      if (btn) btn.innerHTML = '🔒 Khóa';
+      const pill = document.getElementById('live-status-pill');
+      if (pill) {
+        pill.className = 'live-pill active';
+        pill.innerHTML = '<span class="live-dot"></span> ĐANG BÌNH CHỌN';
+      }
+    }
     syncStateToBackend(curSlide.q_id, curSlide.slide_type);
     startPolling(curSlide.q_id);
   } else {
