@@ -20,9 +20,9 @@
   --do: #DC2626;
   --giay: #F8FAFC;
   --muc: #0F172A;
-  --line: #E2E8F0;
+  --line: #CBD5E1;
   --card: #FFFFFF;
-  --serif: 'Source Serif 4', Georgia, serif;
+  --serif: 'Times New Roman', Times, 'Source Serif 4', Georgia, serif;
   --sans: 'Be Vietnam Pro', -apple-system, sans-serif;
 }
 
@@ -40,7 +40,7 @@ html, body {
 header {
   background: linear-gradient(135deg, #102A43 0%, #1F4E79 100%);
   color: #fff;
-  padding: 12px 16px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -55,22 +55,22 @@ header {
   gap: 10px;
 }
 .brand-logo {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   background: #fff;
   border-radius: 8px;
   padding: 3px;
 }
 .brand-logo img { width: 100%; height: 100%; object-fit: contain; }
-.brand-text h1 { font-size: 15px; font-weight: 700; font-family: var(--serif); color: #fff; }
+.brand-text h1 { font-size: 14px; font-weight: 700; font-family: var(--serif); color: #fff; }
 .brand-text p { font-size: 11px; color: #CBD5E1; }
 
 .user-status {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-size: 12px;
-  background: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.14);
   padding: 5px 10px;
   border-radius: 20px;
   cursor: pointer;
@@ -89,12 +89,12 @@ header {
   background: #fff;
   border-bottom: 1px solid var(--line);
   position: sticky;
-  top: 60px;
+  top: 54px;
   z-index: 40;
 }
 .tab-btn {
   flex: 1;
-  padding: 12px 6px;
+  padding: 10px 6px;
   text-align: center;
   font-size: 13px;
   font-weight: 700;
@@ -113,7 +113,7 @@ header {
 /* Vùng nội dung chính */
 main {
   flex: 1;
-  padding: 16px;
+  padding: 14px;
   max-width: 600px;
   width: 100%;
   margin: 0 auto;
@@ -121,21 +121,21 @@ main {
   flex-direction: column;
 }
 
-/* Thẻ Câu Hỏi Hiện Tại */
+/* Thẻ Câu Hỏi Hiện Tại chuẩn Times New Roman */
 .q-card {
   background: #fff;
-  border-radius: 18px;
-  padding: 18px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
   border: 1px solid var(--line);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 .q-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
-  padding-bottom: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
   border-bottom: 1px dashed var(--line);
 }
 .q-badge {
@@ -143,34 +143,35 @@ main {
   color: #0369A1;
   font-size: 12px;
   font-weight: 800;
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 99px;
   text-transform: uppercase;
 }
 .lock-badge {
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 700;
   color: #DC2626;
   background: #FEE2E2;
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 99px;
   display: none;
 }
 .lock-badge.on { display: inline-block; }
 
 .q-title {
-  font-size: 18px;
+  font-family: var(--serif);
+  font-size: 18.5px;
   font-weight: 700;
   color: var(--muc);
-  line-height: 1.45;
-  margin-bottom: 14px;
+  line-height: 1.5;
+  margin-bottom: 12px;
 }
 .q-svg {
   text-align: center;
-  margin: 12px 0;
+  margin: 10px 0;
   background: #F8FAFC;
-  padding: 10px;
-  border-radius: 12px;
+  padding: 8px;
+  border-radius: 10px;
   border: 1px solid #E2E8F0;
 }
 
@@ -178,17 +179,17 @@ main {
 .ans-grid {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin: 16px 0;
+  gap: 10px;
+  margin: 14px 0;
 }
 .ans-btn {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   background: #FFFFFF;
   border: 2px solid var(--line);
-  border-radius: 14px;
-  padding: 14px 16px;
+  border-radius: 12px;
+  padding: 12px 14px;
   cursor: pointer;
   transition: all .15s ease;
   font-family: inherit;
@@ -198,20 +199,22 @@ main {
   transform: scale(0.98);
 }
 .ans-key {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   background: #F1F5F9;
   color: var(--lam);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 18px;
+  font-size: 17px;
   flex: none;
+  font-family: var(--sans);
 }
 .ans-text {
-  font-size: 16px;
+  font-family: var(--serif);
+  font-size: 17.5px;
   font-weight: 600;
   color: #1E293B;
   flex: 1;
@@ -249,10 +252,10 @@ main {
 .submit-status-bar {
   background: #F8FAFC;
   border: 1px solid #CBD5E1;
-  border-radius: 12px;
-  padding: 12px 14px;
+  border-radius: 10px;
+  padding: 10px 12px;
   text-align: center;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   color: #475569;
 }
@@ -269,11 +272,11 @@ main {
 
 /* Banner Thông Báo Kết Quả Khi Thầy Chiếu Đáp Án */
 .result-banner {
-  border-radius: 16px;
-  padding: 16px;
-  margin-top: 16px;
+  border-radius: 14px;
+  padding: 14px;
+  margin-top: 14px;
   display: none;
-  animation: fadeIn .3s ease;
+  animation: fadeIn .25s ease;
 }
 .result-banner.win {
   display: block;
@@ -288,61 +291,50 @@ main {
   color: #92400E;
 }
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 /* Hướng dẫn giải chi tiết */
 .sol-card {
   background: #fff;
-  border-radius: 18px;
-  padding: 18px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
   border: 1px solid var(--line);
   margin-top: 14px;
   display: none;
 }
 .sol-card.show { display: block; }
 .sol-card h3 {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--luc);
   margin-bottom: 8px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
-.sol-card p {
-  font-size: 14px;
+.sol-card .sol-content {
+  font-family: var(--serif);
+  font-size: 15px;
   line-height: 1.6;
   color: #334155;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 /* Màn hình Chờ / Bìa */
 .waiting-card {
   background: #fff;
-  border-radius: 18px;
-  padding: 30px 20px;
+  border-radius: 16px;
+  padding: 28px 18px;
   text-align: center;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
   border: 1px solid var(--line);
 }
-.waiting-icon {
-  font-size: 48px;
-  margin-bottom: 14px;
-}
-.waiting-card h2 {
-  font-size: 20px;
-  color: var(--lam);
-  font-family: var(--serif);
-  margin-bottom: 8px;
-}
-.waiting-card p {
-  font-size: 14px;
-  color: #64748B;
-  line-height: 1.5;
-}
+.waiting-icon { font-size: 42px; margin-bottom: 12px; }
+.waiting-card h2 { font-size: 19px; color: var(--lam); font-family: var(--serif); margin-bottom: 6px; }
+.waiting-card p { font-size: 13.5px; color: #64748B; line-height: 1.5; }
 
 /* Modal đổi tên */
 .name-modal {
@@ -358,32 +350,32 @@ main {
 .name-modal.on { display: flex; }
 .name-box {
   background: #fff;
-  border-radius: 18px;
-  padding: 24px;
+  border-radius: 16px;
+  padding: 20px;
   width: 100%;
-  max-width: 360px;
+  max-width: 340px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
-.name-box h3 { font-size: 18px; color: var(--muc); margin-bottom: 12px; }
+.name-box h3 { font-size: 17px; color: var(--muc); margin-bottom: 10px; }
 .name-input {
   width: 100%;
-  padding: 12px 14px;
+  padding: 10px 12px;
   border: 2px solid var(--line);
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 15px;
   outline: none;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   font-family: inherit;
 }
 .name-input:focus { border-color: var(--luc); }
 .name-submit-btn {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   background: var(--luc);
   color: #fff;
   border: 0;
-  border-radius: 10px;
-  font-size: 15px;
+  border-radius: 8px;
+  font-size: 14.5px;
   font-weight: 700;
   cursor: pointer;
 }
@@ -392,36 +384,47 @@ main {
 .history-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 .history-item {
   background: #fff;
-  border-radius: 14px;
-  padding: 12px 16px;
+  border-radius: 12px;
+  padding: 10px 14px;
   border: 1px solid var(--line);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.history-title { font-size: 14px; font-weight: 700; color: #1E293B; }
+.history-title { font-family: var(--serif); font-size: 14.5px; font-weight: 700; color: #1E293B; }
 .history-tag {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
-  padding: 3px 8px;
+  padding: 2px 7px;
   border-radius: 6px;
 }
 .history-tag.correct { background: #DCFCE7; color: #15803D; }
 .history-tag.wrong { background: #FEE2E2; color: #B91C1C; }
 </style>
 
-<!-- MathJax 3 -->
+<!-- MathJax 3 Cấu Hình An Toàn & Chuẩn Phông -->
 <script>
 window.MathJax = {
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
   },
-  options: { enableMenu: false }
+  startup: {
+    ready: () => {
+      MathJax.startup.defaultReady();
+      MathJax.startup.promise.then(() => {
+        triggerMathJaxSv();
+      });
+    }
+  },
+  options: {
+    enableMenu: false
+  }
 };
 </script>
 <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -458,7 +461,7 @@ window.MathJax = {
     <div class="waiting-card" id="waiting-pane" style="display:none;">
       <div class="waiting-icon">⏳</div>
       <h2>Phòng Học Đang Kết Nối...</h2>
-      <p>Thầy Đinh Quốc Tuấn đang chuẩn bị chiếu câu hỏi tiếp theo. Hãy giữ màn hình sáng và sẵn sàng chọn đáp án nhé!</p>
+      <p>Thầy Đinh Quốc Tuấn đang chuẩn bị chiếu câu hỏi. Hãy giữ màn hình sáng và sẵn sàng chọn đáp án nhé!</p>
     </div>
 
     <!-- MÀN HÌNH CÂU HỎI & CHỌN ĐÁP ÁN -->
@@ -472,7 +475,7 @@ window.MathJax = {
       <div class="q-svg" id="q-svg-box" style="display:none;"></div>
 
       <div class="ans-grid" id="ans-buttons-box">
-        <!-- 4 nút A, B, C, D sẽ được sinh động bằng JS -->
+        <!-- 4 nút A, B, C, D -->
       </div>
 
       <div class="submit-status-bar" id="submit-status">
@@ -487,22 +490,22 @@ window.MathJax = {
       <!-- Khung lời giải chi tiết -->
       <div class="sol-card" id="sol-card">
         <h3>💡 Lời Giải & Kiến Thức Cốt Lõi:</h3>
-        <p id="sol-text"></p>
-        <div style="background:#EFF6FF; border-left:4px solid #3B82F6; padding:10px; border-radius:8px; font-size:13px; color:#1E3A8A;" id="theory-text"></div>
+        <div class="sol-content" id="sol-text"></div>
+        <div style="background:#EFF6FF; border-left:4px solid #3B82F6; padding:10px; border-radius:8px; font-size:13.5px; color:#1E3A8A; font-family:var(--serif);" id="theory-text"></div>
       </div>
     </div>
   </div>
 
   <!-- TAB 2: LỊCH SỬ LÀM BÀI -->
   <div id="pane-history" style="display:none;">
-    <div style="background:#fff; border-radius:16px; padding:16px; margin-bottom:14px; border:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;">
+    <div style="background:#fff; border-radius:14px; padding:14px; margin-bottom:12px; border:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;">
       <div>
-        <div style="font-size:13px; color:#64748B;">Tổng số câu đã làm</div>
-        <div style="font-size:24px; font-weight:800; color:var(--lam);" id="stat-total-done">0 / 12</div>
+        <div style="font-size:12px; color:#64748B;">Tổng số câu đã làm</div>
+        <div style="font-size:22px; font-weight:800; color:var(--lam);" id="stat-total-done">0 / 12</div>
       </div>
       <div>
-        <div style="font-size:13px; color:#64748B;">Số câu làm đúng</div>
-        <div style="font-size:24px; font-weight:800; color:var(--luc-sang);" id="stat-correct-count">0</div>
+        <div style="font-size:12px; color:#64748B;">Số câu làm đúng</div>
+        <div style="font-size:22px; font-weight:800; color:var(--luc-sang);" id="stat-correct-count">0</div>
       </div>
     </div>
 
@@ -522,20 +525,20 @@ window.MathJax = {
 </div>
 
 <script>
-// 12 CÂU HỎI ĐỒNG BỘ VỚI SLIDE GIẢNG VIÊN
+// 12 CÂU HỎI ĐỒNG BỘ CHUẨN PHÔNG TOÁN VỚI SLIDE
 const QUESTIONS = [
   {
     id: 1,
     title: "Tập hợp các số hữu tỉ được kí hiệu là",
     opts: [
-      { k: "A", t: "$\\mathbb N$" },
-      { k: "B", t: "$\\mathbb Z$" },
-      { k: "C", t: "$\\mathbb Q$" },
-      { k: "D", t: "$\\mathbb R$" }
+      { k: "A", t: "$\\mathbb{N}$" },
+      { k: "B", t: "$\\mathbb{Z}$" },
+      { k: "C", t: "$\\mathbb{Q}$" },
+      { k: "D", t: "$\\mathbb{R}$" }
     ],
     correct: "C",
-    solution: "Tập hợp các số hữu tỉ được kí hiệu là $\\mathbb Q$ (Quotient).",
-    theory: "Số hữu tỉ là số viết được dưới dạng $\\dfrac{a}{b}$ ($a,b \\in \\mathbb Z, b \\ne 0$)."
+    solution: "Tập hợp các số hữu tỉ được kí hiệu là $\\mathbb{Q}$ (Quotient).",
+    theory: "Số hữu tỉ là số viết được dưới dạng $\\dfrac{a}{b}$ ($a,b \\in \\mathbb{Z}, b \\ne 0$)."
   },
   {
     id: 2,
@@ -592,7 +595,7 @@ const QUESTIONS = [
   {
     id: 6,
     title: "Các cạnh bên của hình hộp chữ nhật $ABCD.A'B'C'D'$ là:",
-    svg: `<svg width="150" height="95" viewBox="0 0 160 104" xmlns="http://www.w3.org/2000/svg" font-family="serif" font-size="11"><g fill="none" stroke="#1E293B" stroke-width="1.4"><polygon points="30,30 110,30 140,10 60,10"/><polygon points="30,90 110,90 110,30 30,30"/><line x1="110" y1="90" x2="140" y2="70"/><line x1="140" y1="70" x2="140" y2="10"/><line x1="60" y1="70" x2="140" y2="70" stroke-dasharray="3 2"/><line x1="60" y1="70" x2="60" y2="10" stroke-dasharray="3 2"/><line x1="60" y1="70" x2="30" y2="90" stroke-dasharray="3 2"/></g><text x="16" y="30">A</text><text x="114" y="30">D</text><text x="144" y="12">C</text><text x="54" y="8">B</text><text x="16" y="98">A'</text><text x="114" y="98">D'</text><text x="144" y="76">C'</text><text x="46" y="80">B'</text></svg>`,
+    svg: `<svg width="150" height="95" viewBox="0 0 160 104" xmlns="http://www.w3.org/2000/svg" font-family="'Times New Roman', serif" font-size="12"><g fill="none" stroke="#1E293B" stroke-width="1.4"><polygon points="30,30 110,30 140,10 60,10"/><polygon points="30,90 110,90 110,30 30,30"/><line x1="110" y1="90" x2="140" y2="70"/><line x1="140" y1="70" x2="140" y2="10"/><line x1="60" y1="70" x2="140" y2="70" stroke-dasharray="3 2"/><line x1="60" y1="70" x2="60" y2="10" stroke-dasharray="3 2"/><line x1="60" y1="70" x2="30" y2="90" stroke-dasharray="3 2"/></g><text x="16" y="30">A</text><text x="114" y="30">D</text><text x="144" y="12">C</text><text x="54" y="8">B</text><text x="16" y="98">A'</text><text x="114" y="98">D'</text><text x="144" y="76">C'</text><text x="46" y="80">B'</text></svg>`,
     opts: [
       { k: "A", t: "$AA', BB', CC', DD'$" },
       { k: "B", t: "$AB, AA', DD', BC'$" },
@@ -619,7 +622,7 @@ const QUESTIONS = [
   {
     id: 8,
     title: "Góc kề bù với góc $\\widehat{aOb}$ là",
-    svg: `<svg width="180" height="85" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" font-family="serif" font-size="12"><g stroke="#1E293B" stroke-width="1.5" fill="none"><line x1="10" y1="80" x2="190" y2="80"/><line x1="100" y1="80" x2="40" y2="20"/><line x1="100" y1="80" x2="118" y2="12"/></g><text x="28" y="16">b</text><text x="122" y="12">c</text><text x="6" y="94">a</text><text x="96" y="94">O</text><text x="186" y="94">d</text></svg>`,
+    svg: `<svg width="170" height="85" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" font-family="'Times New Roman', serif" font-size="13"><g stroke="#1E293B" stroke-width="1.5" fill="none"><line x1="10" y1="80" x2="190" y2="80"/><line x1="100" y1="80" x2="40" y2="20"/><line x1="100" y1="80" x2="118" y2="12"/></g><text x="28" y="16">b</text><text x="122" y="12">c</text><text x="6" y="94">a</text><text x="96" y="94">O</text><text x="186" y="94">d</text></svg>`,
     opts: [
       { k: "A", t: "$\\widehat{bOc}$" },
       { k: "B", t: "$\\widehat{bOd}$" },
@@ -724,6 +727,33 @@ let currentExamState = { current_q: 1, slide_type: 'cover', is_locked: false };
 let displayedQ = 0;
 let displayedSlideType = '';
 
+// XỬ LÝ MATHJAX AN TOÀN TRÊN MOBILE
+let svMathRunning = false;
+let svMathQueued = false;
+function triggerMathJaxSv() {
+  if (!window.MathJax || !window.MathJax.typesetPromise) return;
+  if (svMathRunning) {
+    svMathQueued = true;
+    return;
+  }
+  svMathRunning = true;
+  const qEl = document.getElementById('q-pane');
+  if (MathJax.typesetClear) {
+    try { MathJax.typesetClear([qEl]); } catch(e) {}
+  }
+  MathJax.typesetPromise([qEl])
+    .then(() => {
+      svMathRunning = false;
+      if (svMathQueued) {
+        svMathQueued = false;
+        triggerMathJaxSv();
+      }
+    })
+    .catch(() => {
+      svMathRunning = false;
+    });
+}
+
 function renderQuestion(qObj) {
   displayedQ = qObj.id;
   document.getElementById('q-number-badge').innerText = `CÂU ${qObj.id} / 12`;
@@ -747,10 +777,7 @@ function renderQuestion(qObj) {
   `).join('');
 
   updateSubmitStatus();
-
-  if (window.MathJax && window.MathJax.typesetPromise) {
-    window.MathJax.typesetPromise([document.getElementById('q-pane')]);
-  }
+  triggerMathJaxSv();
 }
 
 function updateSubmitStatus() {
@@ -827,11 +854,11 @@ function applyTeacherSlideType(type, qObj) {
 
     resBanner.className = isCorrect ? 'result-banner win' : 'result-banner lose';
     resBanner.innerHTML = isCorrect ? `
-      <div style="font-size:17px; font-weight:800;">🎉 CHÍNH XÁC! TUYỆT VỜI!</div>
-      <div style="font-size:14px; margin-top:4px;">Em đã chọn đúng phương án <b>${qObj.correct}</b>. Em được cộng 1 điểm!</div>
+      <div style="font-size:16px; font-weight:800;">🎉 CHÍNH XÁC! TUYỆT VỜI!</div>
+      <div style="font-size:13.5px; margin-top:4px;">Em đã chọn đúng phương án <b>${qObj.correct}</b>. Em được cộng 1 điểm!</div>
     ` : `
-      <div style="font-size:17px; font-weight:800;">💡 RẤT TIẾC, CHƯA CHÍNH XÁC!</div>
-      <div style="font-size:14px; margin-top:4px;">Em đã chọn <b>${myChoice || 'chưa chọn'}</b>. Đáp án đúng là <b>${qObj.correct}</b>.</div>
+      <div style="font-size:16px; font-weight:800;">💡 RẤT TIẾC, CHƯA CHÍNH XÁC!</div>
+      <div style="font-size:13.5px; margin-top:4px;">Em đã chọn <b>${myChoice || 'chưa chọn'}</b>. Đáp án đúng là <b>${qObj.correct}</b>.</div>
     `;
 
     // Highlight nút đáp án đúng
@@ -850,9 +877,7 @@ function applyTeacherSlideType(type, qObj) {
     solCard.classList.add('show');
     document.getElementById('sol-text').innerHTML = qObj.solution;
     document.getElementById('theory-text').innerHTML = `<b>Kiến thức SGK:</b> ${qObj.theory}`;
-    if (window.MathJax && window.MathJax.typesetPromise) {
-      window.MathJax.typesetPromise([solCard]);
-    }
+    triggerMathJaxSv();
   }
 }
 
@@ -919,7 +944,7 @@ function updateHistoryTab() {
       <div class="history-item">
         <div>
           <div class="history-title">Câu ${q.id}: ${q.title}</div>
-          <div style="font-size:12px; color:#64748B; margin-top:2px;">
+          <div style="font-size:12px; color:#64748B; margin-top:2px; font-family:var(--sans);">
             Em chọn: <b>${choice || 'Chưa làm'}</b> · Đáp án: <b>${q.correct}</b>
           </div>
         </div>
@@ -943,7 +968,6 @@ window.addEventListener('DOMContentLoaded', () => {
   pollTeacherState();
   setInterval(pollTeacherState, 1500);
 
-  // Nếu chưa có tên, mở popup hỏi tên
   if (studentName === 'Học sinh') {
     setTimeout(openNameModal, 600);
   }
