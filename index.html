@@ -452,8 +452,7 @@
             chapterId: 'c6_1',
             chapterTitle: 'Chương I: Tập Hợp Các Số Tự Nhiên',
             lessons: [
-              { id: 'toan6-01', week: 1, title: 'Bài 1: Tập hợp và phần tử của tập hợp', examCode: 'TOAN06_01', theory: 'Khái niệm tập hợp, các phần tử $a \\in A, b \\notin A$. Cách cho tập hợp: Liệt kê hoặc nêu dấu hiệu đặc trưng.', exercise: 'Viết tập hợp các chữ cái trong từ "HOC TOAN", biểu diễn tập hợp số tự nhiên nhỏ hơn 10.' },
-              { id: 'toan6-02', week: 1, title: 'Bài 2: Tập hợp các số tự nhiên. Ghi số tự nhiên', examCode: 'TOAN06_01', theory: 'Tập hợp $\\mathbb{N} = \\{0, 1, 2, 3...\\}$, tập hợp $\\mathbb{N}^* = \\{1, 2, 3...\\}$. Chữ số La Mã và cấu tạo thập phân.', exercise: 'Đọc và viết các số La Mã: XIV, XXIX, XLV; biểu diễn số $\\overline{ab} = 10a + b$.' },
+              { id: 'toan6-01', week: 1, title: 'Bài 1 & 2: Tập hợp số tự nhiên & Phép tính lũy thừa (Bộ sách Chân trời sáng tạo)', examCode: 'TOAN06_CTST_T09_01', examA4: 'de_thi_a4/TOAN06_CTST_T09_01.html', isCurrent: true, isExamFocus: true, theory: 'Khái niệm tập hợp $\\mathbb{N} = \\{0; 1; 2; 3; ...\\}$ (số nhỏ nhất là 0). Phép tính lũy thừa $a^n$, nhân chia lũy thừa cùng cơ số $a^m \\cdot a^n = a^{m+n}$, $a^m : a^n = a^{m-n}$.', exercise: 'Đề kiểm tra chuẩn Bộ GD&ĐT 2025 gồm 22 câu chi tiết: 12 trắc nghiệm ABCD + 2 câu Đúng/Sai (8 ý) + 2 câu điền đáp số tự luận.' },
               { id: 'toan6-03', week: 2, title: 'Bài 3: Các phép tính trong tập hợp số tự nhiên', examCode: 'TOAN06_01', theory: 'Tính chất giao hoán, kết hợp, phân phối của phép nhân đối với phép cộng: $a(b + c) = ab + ac$.', exercise: 'Tính nhanh: $25 \\times 37 + 25 \\times 63$; phép chia có dư: $a = b \\cdot q + r (0 \\le r < b)$.' },
               { id: 'toan6-04', week: 3, title: 'Bài 4: Lũy thừa với số mũ tự nhiên', examCode: 'TOAN06_01', theory: '$a^n = a \\cdot a \\dots a$ (n thừa số $a$). Nhân/chia hai lũy thừa cùng cơ số: $a^m \\cdot a^n = a^{m+n}$; $a^m : a^n = a^{m-n}$.', exercise: 'Tính giá trị: $2^3 \\cdot 2^2 = 2^5 = 32$; $3^4 : 3^2 = 9$. Tìm $x$ biết $3^x = 27$.' },
               { id: 'toan6-05', week: 4, title: 'Bài 5: Thứ tự thực hiện các phép tính', examCode: 'TOAN06_01', theory: 'Ưu tiên: Lũy thừa $\\rightarrow$ Nhân & Chia $\\rightarrow$ Cộng & Trừ. Trong ngoặc: $( ) \\rightarrow [ ] \\rightarrow \\{ \\}$.', exercise: 'Tính: $15 + 5 \\cdot 2^2 = 15 + 20 = 35$; $100 - [60 - (9 - 2)^2]$.' },
@@ -663,8 +662,8 @@
         titleEl.innerText = curData.title;
       }
 
-      container.innerHTML = curData.chapters.map(ch => {
-        const lessonsHtml = ch.lessons.map(ls => {
+      container.innerHTML = curData.chapters.map((ch, chIdx) => {
+        const lessonsHtml = ch.lessons.map((ls, lsIdx) => {
           const isCurrentBadge = ls.isCurrent ? `
             <span class="inline-flex items-center gap-1 bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-black px-2 py-0.5 rounded-full uppercase animate-pulse">
               <i class="fas fa-thumbtack text-amber-700"></i> Tuần 8 (Hiện tại)
@@ -678,18 +677,25 @@
 
           const focusClass = ls.isExamFocus ? 'border-2 border-amber-400 bg-amber-50/40 shadow-md' : 'border border-bac bg-white hover:border-luc/50';
 
+          const isOpenByDefault = ls.isCurrent || (chIdx === 0 && lsIdx === 0);
+          const a4Btn = ls.examA4 ? `
+            <a href="${ls.examA4}" target="_blank" onclick="event.stopPropagation()" class="inline-flex items-center gap-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-[11px] font-bold px-2.5 py-1.5 rounded-xl transition shadow-xs whitespace-nowrap">
+              <i class="fas fa-print text-luc"></i> In A4
+            </a>` : '';
+
           return `
             <div class="rounded-2xl ${focusClass} transition overflow-hidden">
-              <!-- HÀNG TEXT TIÊU ĐỀ BÀI HỌC (CLICK ĐỂ BUNG 3 PHẦN) -->
-              <div onclick="toggleLesson('${ls.id}')" class="p-4 sm:p-4.5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 cursor-pointer select-none hover:bg-emerald-50/30 transition">
+              <!-- HÀNG TEXT TIÊU ĐỀ BÀI HỌC VỚI NÚT HÀNH ĐỘNG RÕ RÀNG -->
+              <div onclick="toggleLesson('${ls.id}')" class="p-4 sm:p-4.5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 cursor-pointer select-none hover:bg-emerald-50/40 transition">
                 <div class="flex items-start sm:items-center gap-3">
-                  <span class="w-7 h-7 rounded-xl bg-gray-100 text-gray-700 text-xs font-mono font-bold flex items-center justify-center flex-none">
+                  <span class="w-8 h-8 rounded-xl bg-slate-100 text-lam text-xs font-mono font-bold flex items-center justify-center flex-none border border-bac">
                     ${ls.id.replace(/[^0-9]/g, '') || '★'}
                   </span>
                   <div>
                     <div class="flex items-center gap-2 flex-wrap">
                       <span class="text-xs font-mono text-gray-400 font-semibold">[${esc(ls.id)}]</span>
                       ${isCurrentBadge}
+                      ${ls.examCode ? `<span class="text-[10px] bg-purple-50 text-purple-700 border border-purple-200 px-2 py-0.5 rounded-full font-bold">Mã đề: ${esc(ls.examCode)}</span>` : ''}
                     </div>
                     <h4 class="font-bold text-sm sm:text-base text-gray-900 mt-0.5 ${ls.isExamFocus ? 'text-amber-900' : ''}">
                       ${esc(ls.title)}
@@ -697,14 +703,21 @@
                   </div>
                 </div>
 
-                <div class="flex items-center gap-2 self-end sm:self-auto text-xs text-luc font-bold">
-                  <span class="hidden sm:inline text-[11px] text-gray-400 font-normal">Xem bài học</span>
-                  <i id="icon-toggle-${ls.id}" class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                <!-- NÚT HÀNH ĐỘNG TRỰC TIẾP (KHÔNG BỊ ẨN) -->
+                <div class="flex items-center gap-2 self-stretch sm:self-auto justify-between sm:justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-100">
+                  ${a4Btn}
+                  <a href="${ls.examCode ? 'thi.html?exam_code=' + encodeURIComponent(ls.examCode) : 'thi.html?exam_id=' + (ls.examId || 1)}" onclick="event.stopPropagation()" class="inline-flex items-center gap-1.5 bg-gradient-to-r from-purple-700 to-indigo-700 hover:from-purple-800 hover:to-indigo-800 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl transition shadow-sm whitespace-nowrap">
+                    <i class="fas fa-play-circle text-amber-300"></i> Vào Thi
+                  </a>
+                  <button type="button" class="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-luc font-bold bg-white px-2.5 py-1.5 rounded-xl border border-bac">
+                    <span class="text-[11px]">Chi tiết</span>
+                    <i id="icon-toggle-${ls.id}" class="fas fa-chevron-down text-gray-400 transition-transform duration-300 ${isOpenByDefault ? 'rotate-180' : ''}"></i>
+                  </button>
                 </div>
               </div>
 
               <!-- KHUNG BÀI HỌC GỒM 3 PHẦN: LÝ THUYẾT, BÀI TẬP LỚP, TRẮC NGHIỆM TRỰC TUYẾN -->
-              <div id="panel-${ls.id}" class="hidden border-t border-bac bg-slate-50/70 p-4 sm:p-6 space-y-4 animate-fadeIn">
+              <div id="panel-${ls.id}" class="${isOpenByDefault ? '' : 'hidden'} border-t border-bac bg-slate-50/70 p-4 sm:p-6 space-y-4 animate-fadeIn">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <!-- PHẦN 1: LÝ THUYẾT TRỌNG TÂM -->
                   <div class="bg-white rounded-2xl p-4.5 border border-bac shadow-sm space-y-2">
