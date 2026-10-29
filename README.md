@@ -46,3 +46,23 @@ bdvh/
    - **Branch:** `main`
    - **Install directory:** Thư mục subdomain của `bdvh.diemdanhsv.com`.
 3. Bật **Auto-Deployment** để mỗi lần push commit mới, website sẽ tự động cập nhật ngay lập tức.
+
+---
+
+## 4. Phòng thi trực tiếp có giám sát (thi tại lớp)
+
+Kiểm tra trên lớp bằng điện thoại/laptop của học sinh — dùng chung cơ chế giám sát với hệ thống KIEMTRA (diemdanhsv.com/kiemtra).
+
+| Trang | Ai dùng | Việc |
+|---|---|---|
+| `giam-sat.html` (nút **Phòng Thi Trực Tiếp** ở thay-tuan.html) | Giáo viên | Nhập **đề kín** từ Excel, tạo phòng, chiếu QR, bảng giám sát, kết quả & phân tích câu |
+| `phong-thi.html?c=MÃPHÒNG` | Học sinh | Quét QR → đăng nhập tài khoản BDVH (họ tên + SĐT) → 5 phút chuẩn bị → làm bài → nộp |
+| `phong-thi-api.php` | — | Các action `room_*`, được `api.php` nạp (không gọi trực tiếp) |
+
+- **Giám sát**: rời trang/chuyển ứng dụng, mất tiêu điểm lâu, chia đôi màn hình, thoát toàn màn hình, copy/dán, tải lại trang, đăng nhập tài khoản trên máy thứ hai. Vượt ngưỡng → khoá bài, GV nhập PIN tại máy HS hoặc mở trên bảng giám sát.
+- **Đề kín** (`bdvh_exams.status = 'DRAFT'`): không hiện ở trang luyện tập, `get_exam`/`submit_exam` từ chối. Khi một đề đang dùng trong phòng (LOBBY/RUNNING), đề đó cũng bị khoá ở chế độ luyện tập; phiếu `ket-qua.html` của bài trong phòng chỉ mở sau khi GV **Công bố đáp án**.
+- **Kết quả** ghi vào `bdvh_submissions` như bài thường (có phiếu báo điểm, nhận xét, hiện ở bảng điều khiển cũ); thêm phổ điểm, KR-20, độ khó p, độ phân biệt D, phân bố lựa chọn, xuất CSV.
+- **Bảng mới** (tự tạo khi gọi action `room_*` lần đầu): `bdvh_rooms`, `bdvh_room_attempts`, `bdvh_room_events`.
+- **Nhập đề kín**: cột `loai, cau_hoi, A, B, C, D, dap_an, giai_thich, phan` — `choice` (đáp án A–D), `true_false` (4 ý ở cột A–D, đáp án `Đ,S,Đ,S`), `short` (đáp số). Công thức LaTeX giữa hai dấu `$`.
+
+Kiểm thử trên máy (SQLite): `php -S 127.0.0.1:8091` rồi `python3 tools/phong-thi-test.py http://127.0.0.1:8091 Tuan@2026`.
