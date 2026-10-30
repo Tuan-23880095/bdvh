@@ -1194,5 +1194,465 @@
         "exp": "<b>Phương pháp:</b> Tính lũy thừa trước, sau đó trừ.<br><b>Lời giải chi tiết:</b> $3^3 - 2^3 = 27 - 8 = 19$.<br>Vậy đáp số là: <b>19</b>."
       }
     ]
+  },
+  {
+    "exam_code": "TOAN12_2025_01",
+    "grade": "L12",
+    "subject": "TOAN",
+    "title": "Đấu Trường Toán 12: Đạo Hàm, Khảo Sát Hàm Số & Tọa Độ Oxyz Chuẩn 2025",
+    "description": "Đề thi chuẩn hóa theo cấu trúc mới 2025 của Bộ GD&ĐT; tích hợp câu hỏi phân hóa từ Nhận biết, Thông hiểu đến Vận dụng.",
+    "time_minutes": 45,
+    "questions": [
+      {
+        "q": "Cho hàm số \n\ny\nf x\n\n có bảng xét dấu đạo hàm như sau: \n \nMệnh đề nào sau đây đúng",
+        "opts": [
+          "\n\n\n\n1;1\nmax\n0\nf x\nf\n\n",
+          "\n\n\n\n0;max\n1\nf x\nf\n\n",
+          "\n\n\n\n\n; 1\nmin\n1\nf\nx\nf\n\n\n",
+          "\n\n\n\n1;min\n0\nf\nx\nf\n\n\n"
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B. \nTừ bảng xét dấu, ta có bảng biến thiên sau:"
+      },
+      {
+        "q": "Đồ thị trong hình vẽ là đồ thị của hàm số nào trong các hàm số sau:",
+        "opts": [
+          "2\n1\n1\nx\ny\nx\n\n\n\n.",
+          "2\n1\n1\nx\nx\ny\nx\n\n\n\n\n.",
+          "2\n1\n1\nx\nx\ny\nx\n\n\n\n\n.",
+          "2\n1\n1\nx\nx\ny\nx\n\n\n\n\n\n."
+        ],
+        "ans": 2,
+        "exp": "Lời giải \nChọn C. \nDựa vào đồ thị ta thấy \nHàm số có dạng \n2\nax\nbx\nc\ny\nmx\nn\n\n\n\n\n nên loại đáp án A. \nHàm số có 2 điểm cực trị và .\n0\na m \n. Loại đáp án D. \nĐồ thị hàm số có tiệm cận đứng \n0\n0\nx\nx\n\n\n. Suy ra loại đáp án B \nVậy đáp án đúng là C"
+      },
+      {
+        "q": "Cho hình lập phương \n. '\n'\n'\n'\nABCD A B C D . Gọi O là tâm của hình lập phương.  \n \nKhẳng định nào sau đây là đúng?",
+        "opts": [
+          "\n\n1\n'\n3\nAO\nAB\nAD\nAA\n\n\n\n\n\n\n\n.",
+          "\n\n1\n'\n2\nAO\nAB\nAD\nAA\n\n\n\n\n\n\n\n.",
+          "\n\n1\n'\n4\nAO\nAB\nAD\nAA\n\n\n\n\n\n\n\n.",
+          "\n\n2\n'\n3\nAO\nAB\nAD\nAA\n\n\n\n\n\n\n\n."
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B \nTa có AC\nAB\nAD\nAA\n\n\n\n\n\n\n\n\n\n \nMặt khác O là trung điểm \n\n\n1\n1\n2\n2\nAC\nAO\nAC\nAB\nAD\nAA\n\n\n\n\n\n\n\n\n\n\n\n\n\n."
+      },
+      {
+        "q": "Trong không gian \n,\nOxyz cho ba điểm \n( 1; 2;3)\nA \n \n(0;3;1)\nB\n, \n(4;2;2)\nC\n. Cosin của góc \nBAC là",
+        "opts": [
+          "9\n35\n.",
+          "9\n35\n\n.",
+          "9\n2 35\n\n.",
+          "9\n2 35\n."
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D \nTa có\n\n\n1;5; 2\nAB\n\n\n ; \n\n\n5;4; 1\nAC\n\n\n."
+      },
+      {
+        "q": "Trong không gian với hệ trục tọa độ \n,\nOxyz cho vectơ \n2\n3\n4 .\nu\ni\nj\nk\n\n\n\n\n\n\n\n Tọa độ của vectơ u\n\n là:",
+        "opts": [
+          "\n\n2;3;4 .",
+          "\n\n4; 3;2\n\n.",
+          "\n\n2; 3;4\n\n.",
+          "\n\n3;2;4\n\n."
+        ],
+        "ans": 2,
+        "exp": "Lời giải \nChọn C. \nTọa độ của vectơ u\n\n là: \n\n2; 3;4\n\n."
+      },
+      {
+        "q": "Trong không gian với hệ tọa độ Oxyz, cho các điểm $A(1;0;3)$, $B(2;3;-4)$, $C(-3;1;2)$. Tìm tọa độ điểm $D$ sao cho $ABCD$ là hình bình hành.",
+        "opts": [
+          "\n\n4;\n2;9\nD \n\n.",
+          "\n\n4;2;9\nD \n.",
+          "\n\n4;\n2;9\nD\n\n.",
+          "\n\n4;2;\n9\nD\n\n."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A \nGọi \n\n\n; ;\nD x y z .  \nĐể ABCD là hình bình hành \n\n\n\n\n\n\n4\n1;3;\n7\n3\n;1\n;2\n2\n4;\n2;9\n9\nx\nAB\nDC\nx\ny\nz\ny\nD\nz\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n."
+      },
+      {
+        "q": "Bảng dưới biểu diễn mẫu số liệu ghép nhóm về số tiền (đơn vị: nghìn đồng) mà 120 khách hàng mua sách ở một cửa hàng trong một ngày. Nhóm [40;50) [50;60) [60;70) [70;80) [80;90) Tần số 6 12 38 46 18 Khoảng biến thiên của mẫu số liệu ghép nhóm trên là:",
+        "opts": [
+          "30.",
+          "40.",
+          "50.",
+          "60."
+        ],
+        "ans": 2,
+        "exp": "Lời giải \nChọn C. \nKhoảng biến thiên của mẫu số liệu ghép nhóm trên là: \n90\n40\n50\nR \n\n"
+      },
+      {
+        "q": "Cho hàm số \n\ny\nf x\n\n xác định trên  và có đồ thị bên dưới.  \n \nMệnh đề nào dưới đây đúng?",
+        "opts": [
+          "Hàm số đã cho nghịch biến trên khoảng\n\n1;2\n\n.",
+          "Hàm số đã cho đồng biến trên các khoảng \n\n;1\n\n và \n\n2;.",
+          "Hàm số đã cho có điểm cực tiểu bằng 3\n.",
+          "Hàm số đã cho có giá trị cực đại bằng 1."
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D. \nTừ  đồ thị đã cho, ta có \nHàm số đã cho đồng biến trên khoảng\n\n1;2\n\n; nghịch biến trên các khoảng \n\n;1\n\n và \n\n2;. \nHàm số đã cho có điểm cực tiểu \n1\nx  và giá trị cực tiểu bằng \n3\ny   \nHàm số đã cho có điểm cực đại \n2\nx \n và giá trị cực đại bằng \n1\ny ."
+      },
+      {
+        "q": "Người ta ghi lại tiền lãi (đơn vị: triệu đồng) của một số nhà đầu tư vào hai lĩnh vực A cho kết \nquả như sau: \nTiền lãi (triệu đồng) \n[5;10) \n[10;15) \n[15;20) \n[20;25) \n[25;30) \nSố nhà đầu tư vào lĩnh vực A \n2 \n5 \n8 \n6 \n4 \n \nTính số trung bình của mẫu số liệu trên.",
+        "opts": [
+          "17,9 (triệu đồng).",
+          "19,5(triệu đồng).",
+          "16,9(triệu đồng).",
+          "18,5(triệu đồng)."
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D. \nTa có mẫu số liệu ghép nhóm với giá tri đại diện là: \nTiền lãi (triệu đồng) \n[5;10) \n[10;15) \n[15;20) \n[20;25) \n[25;30) \nGiá trị đại diện \n7,5 \n12,5 \n17,5 \n22,5 \n27,5 \nSố nhà đầu tư vào lĩnh vực A \n2 \n5 \n8 \n6 \n4 \n \nTiền lãi trung bình khi đầu tư vào lĩnh vực A là: \n7,5.2\n12,5.5 17,5.8\n22,5.6\n27,5.4\n18,5\n2\n5\n8\n6\n4\nA\nx\n\n\n\n\n\n\n\n\n (triệu đồng)"
+      },
+      {
+        "q": "Cho hàm số $y = x^3 - 3x^2 + 2$. Điểm cực đại của đồ thị hàm số là điểm:",
+        "opts": [
+          "$(0; 2)$",
+          "$(2; -2)$",
+          "$(0; 0)$",
+          "$(2; 2)$"
+        ],
+        "ans": 0,
+        "exp": "<b>Lời giải chi tiết:</b><br>Tập xác định $D = \\mathbb{R}$.<br>Ta có đạo hàm: $y' = 3x^2 - 6x = 3x(x - 2)$.<br>Cho $y' = 0 \\iff x = 0$ hoặc $x = 2$.<br>Bảng xét dấu $y'$:<br>• Qua $x = 0$, $y'$ đổi dấu từ dương sang âm $\\implies$ điểm cực đại là $x = 0$, tung độ tương ứng $y(0) = 2$.<br>• Qua $x = 2$, $y'$ đổi dấu từ âm sang dương $\\implies$ điểm cực tiểu là $x = 2, y(2) = -2$.<br>Vậy điểm cực đại của đồ thị hàm số là $(0; 2)$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Đồ thị sau đây là của hàm số nào?",
+        "opts": [
+          "3\n3\n1\ny\nx\nx\n\n\n.",
+          "3\n3\n1\ny\nx\nx\n\n\n.",
+          "3\n3\n1\ny\nx\nx\n\n\n.",
+          "3\n3\n1\ny\nx\nx\n\n\n."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A. \nĐồ thị hàm số trên là đồ thị hàm số bậc ba \n3\n2\ny\nax\nbx\ncx\nd\n\n\n\n\n \n\n0\na \n. \nNhìn vào nhánh phải của đồ thị ta thấy đồ thị có hướng đi lên suy ra \n0\na \n. \nĐồ thị hàm số cắt trục tung tại điểm có tung độ \n1\ny . Vậy hàm số thỏa đề là \n3\n3\n1\ny\nx\nx\n\n\n."
+      },
+      {
+        "q": "Cho hàm số $y = f(x)$ có bảng biến thiên với $f'(x) > 0$ trên $(-\\infty; 1)$ và $(3; +\\infty)$, $f'(x) < 0$ trên $(1; 3)$. Hàm số đã cho nghịch biến trên khoảng nào?",
+        "opts": [
+          "$(1; 3)$",
+          "$(-\\infty; 1)$",
+          "$(3; +\\infty)$",
+          "$(0; 2)$"
+        ],
+        "ans": 0,
+        "exp": "<b>Định lý:</b> Hàm số nghịch biến trên khoảng mà đạo hàm $f'(x) < 0$.<br>Theo giả thiết, $f'(x) < 0$ với mọi $x \\in (1; 3)$ nên hàm số nghịch biến trên khoảng $(1; 3)$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Đồ thị sau đây là của hàm số nào?\n\nPhương án:\nA. $y = \\frac{x^3 - 3x + 1}{x^2 - x + 1}$\nB. $y = \\frac{x^3 - 3x - 1}{x^2 - x - 1}$\nC. $y = \\frac{x^3 - 3x - 1}{x^2 - x + 1}$\nD. $y = \\frac{x^3 - 3x + 1}{x^2 - x - 1}$\n\nĐáp án sơ bộ: A",
+        "opts": [
+          "3\n3\n1\ny\nx\nx\n\n\n.",
+          "3\n3\n1\ny\nx\nx\n\n\n.",
+          "3\n3\n1\ny\nx\nx\n\n\n.",
+          "3\n3\n1\ny\nx\nx\n\n\n."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A. \nĐồ thị hàm số trên là đồ thị hàm số bậc ba \n3\n2\ny\nax\nbx\ncx\nd\n\n\n\n\n \n\n0\na \n. \nNhìn vào nhánh phải của đồ thị ta thấy đồ thị có hướng đi lên suy ra \n0\na \n. \nĐồ thị hàm số cắt trục tung tại điểm có tung độ \n1\ny . Vậy hàm số thỏa đề là \n3\n3\n1\ny\nx\nx\n\n\n."
+      },
+      {
+        "q": "Cho hình lập phương \n.\nABCD A B C D\n (minh họa như hình bên). Mệnh đề nào sau đây sai?",
+        "opts": [
+          "AB\nCD\n\n\n\n.",
+          "AB\nAD\nAA\nAC\n\n\n\n\n\n\n\n\n\n.",
+          "AC\nAB\nAD\n\n\n\n\n\n.",
+          "AB\nCD\n\n\n\n."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A. \nTa có AB\nDC\n\n\n\n."
+      },
+      {
+        "q": "Hàm số nào sau đây mà đồ thị có dạng như hình vẽ bên dưới? \n\n--- TRANG 188 ---\nĐề ôn kiểm tra kì 1 –Toán 12 – Năm học 2025-2026 – Dùng cho 3 bộ sách                   Trắc nghiệm gồm 3 phần có lời giải        \nhttps://www.facebook.com/truongngocvy8/                                                                          Trương Ngọc Vỹ  0978 333 093 \nTrang 10",
+        "opts": [
+          "1\nx\ny\nx\n\n.",
+          "1\n1\nx\ny\nx\n\n\n.",
+          "1\n1\nx\ny\nx\n\n\n.",
+          "1\nx\ny\nx\n\n."
+        ],
+        "ans": 2,
+        "exp": "Lời giải \nChọn C. \nĐồ thị trong hình bên có đường tiệm cận ngang \n1\ny  và tiệm cận đứng \n1\nx  nên loại đáp A,B,D \nVậy chọn C"
+      },
+      {
+        "q": "Nếu thay tất cả các tần số trong mẫu số liệu ghép nhóm trên bằng 4 thì số đặc trưng nào sau đây \nkhông thay đổi?",
+        "opts": [
+          "Khoảng biến thiên.",
+          "Khoảng tứ phân vị.",
+          "Phương sai.",
+          "Độ lệch chuẩn. \n\n--- TRANG 68 ---\nĐề ôn kiểm tra kì 1 –Toán 12 – Năm học 2025-2026 – Dùng cho 3 bộ sách                   Trắc nghiệm gồm 3 phần có lời giải        \nhttps://www.facebook.com/truongngocvy8/                                                                          Trương Ngọc Vỹ  0978 333 093 \nTrang 10"
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A. \nNếu thay tất cả các tần số trong mẫu số liệu ghép nhóm trên bằng 4 thì số đặc trưng không đổi là khoảng \nbiến thiên."
+      },
+      {
+        "q": "Cho hình chóp .\nS ABCD có đáy ABCD là hình bình hành tâm O .  \n \n\n--- TRANG 128 ---\nĐề ôn kiểm tra kì 1 –Toán 12 – Năm học 2025-2026 – Dùng cho 3 bộ sách                   Trắc nghiệm gồm 3 phần có lời giải        \nhttps://www.facebook.com/truongngocvy8/                                                                          Trương Ngọc Vỹ  0978 333 093 \nTrang 12\nTổng SA\nSB\nSC\nSD\n\n\n\n\n\n\n\n bằng",
+        "opts": [
+          "4SO\n\n.",
+          "8SO\n\n.",
+          "3SO\n\n.",
+          "2SO\n\n."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A. \nVì O là trung điểm của AC và BD nên \n0\nOA\nOC\n\n\n\n\n\n và \n0\nOB\nOD\n\n\n\n\n\n. \nTừ đó \n4\n4\nSA\nSB\nSC\nSD\nSO\nOA\nOB\nOC\nOD\nSO\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n."
+      },
+      {
+        "q": "Cho hàm số bậc ba \n\ny\nf x\n\n có đồ thị đạo hàm \n\ny\nf\nx\n\n\n như hình sau \n \nHàm số đã cho nghịch biến trên khoảng",
+        "opts": [
+          "\n\n1;0\n\n.",
+          "\n\n3;4 .",
+          "\n\n2;3 .",
+          "\n\n1;2 ."
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D. \nTrên khoảng \n\n1;2 ta thấy \n\n0\nf\nx\n\n\n nên hàm số đã cho nghịch biến trên khoảng \n\n1;2"
+      },
+      {
+        "q": "Cho hàm số \n\n3\n2\ny\nf x\nax\nbx\ncx\nd\n\n\n\n\n\n có bảng biến thiên sau: \n \nĐồ thị nào thể hiện hàm số \n\ny\nf x\n\n?",
+        "opts": [
+          ".I",
+          ".\nII",
+          ".\nIII",
+          ".\nIV"
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A."
+      },
+      {
+        "q": "Cho tứ diện đều ABCD có cạnh bằng 1.  \nB\nD\nC\nA\n \nGiá trị biểu thức S\nAB\nAD\nAC\n\n\n\n\n\n\n bằng",
+        "opts": [
+          "6\n2 .",
+          "3 .",
+          "2 3 .",
+          "6  \n\n--- TRANG 148 ---\nĐề ôn kiểm tra kì 1 –Toán 12 – Năm học 2025-2026 – Dùng cho 3 bộ sách                   Trắc nghiệm gồm 3 phần có lời giải        \nhttps://www.facebook.com/truongngocvy8/                                                                          Trương Ngọc Vỹ  0978 333 093 \nTrang 11"
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D. \nM\nG\nB\nD\nC\nA\n \nGọi G là trọng tâm tam giác BCD nên ta có: \n3\n3\nAB\nAC\nAD\nAG\nAB\nAC\nAD\nAG\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \nTa có \n2\n2\n2\n2\n2\n3\n2\n1\n3\n2\n3\nAG\nAB\nBG\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n, suy ra \n3\n6.\nS\nAG\n\n"
+      }
+    ]
+  },
+  {
+    "exam_code": "TOAN09_2025_01",
+    "grade": "L09",
+    "subject": "TOAN",
+    "title": "Đấu Trường Toán 9: Ôn Thi Tuyển Sinh Vào Lớp 10 (Chuẩn GDPT 2018)",
+    "description": "Đề thi khảo sát chất lượng giữa kì 1 và bồi dưỡng ôn thi vào lớp 10 theo cấu trúc mới: Hệ phương trình, Căn thức và Hệ thức lượng tam giác vuông.",
+    "time_minutes": 45,
+    "questions": [
+      {
+        "q": "Bất phương trình nào sau đây là bất phương trình bậc nhất một ẩn?",
+        "opts": [
+          "8\nx\ny\n+\n\n.",
+          "0\n5\n0\nx +\n\n.",
+          "2 –3\n4 \nx\n\n.",
+          "2\n6\n1\n0.\nx\nx\n\n−\n+"
+        ],
+        "ans": 2,
+        "exp": "Lời giải \nChọn C \nBất phương trình có dạng \n0\nax\nb\n+ \n (hoặc \n0;\n0;\n0)\nax\nb\nax\nb\nax\nb\n+\n\n+\n\n+\n\n trong đó ,\na b là \nhai số đã cho, \n0\na \n được gọi là bất phương trình bậc nhất một ẩn .x \n Bất phương trình \n8\nx\ny\n+\n\n có hai ẩn ,x y nên không phải là bất phương trình bậc nhất một \nẩn. \n Bất phương trình 0\n5\n0\nx +\n\n có dạng \n0\nax\nb\n+ \n và \n0\na =\n nên không phải là bất phương trình \nbậc nhất một ẩn. \n Ta có 2 –3\n4 \nx\n\n hay 2 – 7\n0 \nx\n\n. Bất phương trình 2 – 7\n0 \nx\n\n có dạng \n0\nax\nb\n+\n\n và \n2\na =\n \nnên là bất phương trình bậc nhất một ẩn. \n Bất phương trình \n2\n6\n1\n0\nx\nx +\n−\n\n có vế trái là đa thức bậc hai, vế phải là 0 nên không phải là \nbất phương trình bậc nhất một ẩn. \nVậy chọn đán án \nC."
+      },
+      {
+        "q": "Cho hệ phương trình \n8\n.\n2\n3\n9\nx\ny\nx\ny\n−\n=\n\n\n+\n= −\n\n Cho các khẳng định sau: \n(i) Từ phương trình thứ nhất của hệ, biểu diễn y theo ,x ta được: \n8\ny\nx\n=\n−. \n(ii) Từ phương trình thứ nhất của hệ, biểu diễn x theo ,y ta được: \n8\n.\nx\ny\n=\n−\n \n(iii) Nghiệm của hệ là cặp số (\n)\n3;\n5\n−\n. \nSố khẳng định đúng trong các khẳng định trên là",
+        "opts": [
+          "0.",
+          "1.",
+          "2.",
+          "3."
+        ],
+        "ans": 2,
+        "exp": "Lời giải \nChọn C \n⦁ Từ phương trình thứ nhất của hệ, biểu diễn x theo ,y ta được: \n8\n.\nx\ny\n=\n+\n \n⦁ Từ phương trình thứ nhất của hệ, biểu diễn y theo ,x ta được: \n8\ny\nx\n=\n−. \nThế \n8\ny\nx\n=\n− vào phương trình thứ hai của hệ, ta được: \n(\n)\n2\n3\n8\n9,\nx\nx\n+\n−\n= −\n hay 2\n3\n24\n9\nx\nx\n+\n−\n= − suy ra 5\n15\nx =\n nên \n3.\nx =\n \nThay \n3\nx = vào phương trình \n8\ny\nx\n=\n−, ta được: \n3 8\n5.\ny =\n−\n= −\n \nDo đó hệ phương trình có nghiệm là (\n)\n3;\n5\n−\n. \nNhư vậy, có 2 khẳng định đúng là (i), (iii). Ta chọn phương án \nC."
+      },
+      {
+        "q": "Cho tam giác ABC vuông tại A . Hệ thức nào sau đây là sai?",
+        "opts": [
+          "sin\nAC\nBC\nB\n=\n.",
+          "sin\nAB\nBC\nC\n=\n.",
+          "cos\nAC\nBC\nC\n=\n.",
+          "tan\nAC\nAB\nC\n=\n."
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D  \nXét ABC\n\n vuông tại A , ta có: \n⦁ \nsin\ncos\nAC\nBC\nB\nBC\nC\n=\n\n=\n\n nên \nsin\ncos\nAC\nAC\nBC\nB\nC\n=\n=\n; \n⦁ \nsin\nAB\nBC\nC\n=\n\n nên \nsin\nAB\nBC\nC\n=\n. \n⦁ cot\nAC\nC\nAB\n=\n nên \ncot\nAC\nAB\nC\n=\n. \nVậy hệ thức ở phương án D là sai. \n \n \nPHẦN 2: TRẮC NGHIỆM ĐÚNG SAI"
+      },
+      {
+        "q": "Cặp số $(x; y)$ nào sau đây là nghiệm của hệ phương trình $\\begin{cases} 2x + y = 5 \\\\ x - y = 1 \\end{cases}$?",
+        "opts": [
+          "$(2; 1)$",
+          "$(1; 2)$",
+          "$(3; -1)$",
+          "$(0; 5)$"
+        ],
+        "ans": 0,
+        "exp": "<b>Giải hệ phương trình bằng phương pháp cộng đại số:</b><br>Cộng vế theo vế hai phương trình:<br>$(2x + y) + (x - y) = 5 + 1 \\iff 3x = 6 \\iff x = 2$.<br>Thay $x = 2$ vào phương trình thứ hai: $2 - y = 1 \\iff y = 1$.<br>Vậy nghiệm của hệ là $(2; 1)$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Phương trình nào dưới đây nhận cặp số (\n)\n2; 4\n−\n làm nghiệm?",
+        "opts": [
+          "2\n0.\nx\ny\n−\n=",
+          "2\n0.\nx\ny\n+\n=",
+          "2.\nx\ny\n−\n=",
+          "2\n1\n0.\nx\ny\n+\n+ ="
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B \nThay \n2;\n4\nx\ny\n= −\n=\n vào từng phương trình ta được: \n⦁ \n2\n2\n2 4\n10\n0\nx\ny\n−\n= −−\n= −\n\n nên loại \nA. \n⦁ \n(\n)\n2\n2\n2\n4\n0\nx\ny\n+\n= −\n+\n=\n nên chọn \nB. \n⦁ \n2\n4\n6\n0\nx\ny\n−\n= −−\n= −\n nên loại C. \n⦁ \n2\n1\n2\n2 4 1\n7\n0\nx\ny\n+\n+ = −+ + =\n\n nên loại D."
+      },
+      {
+        "q": "Cho tam giác MNP vuông tại M . Khi đó tanMNP bằng",
+        "opts": [
+          "MN\nNP .",
+          "MP\nNP .",
+          "MN\nMP .",
+          "MP\nMN ."
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D \nXét MNP\n\n vuông tại M , ta có: tan\nMP\nMNP\nMN\n=\n."
+      },
+      {
+        "q": "Khẳng định nào sau đây sai?",
+        "opts": [
+          "Nếu \n\na\nb thì \n+ \n+\na\nc\nb\nc với mọi số c.",
+          "Nếu \n\na\nb thì \n\nac\nbc với \n0\n\nc\n.",
+          "Nếu \n\na\nb thì \n\nac\nbc với \n0\n\nc\n.",
+          "Nếu \n\na\nb thì \n−\n−\na\nc\nb\nc với mọi số c."
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D \nPhép nhân cả hai vế của bất đẳng thức với một số âm phải đổi chiều bất đẳng thức. \nA. Đúng (Cộng cùng một số). \nB. Đúng (Nhân số dương). \nC. Đúng (Nhân số âm và đổi chiều). \nD. Sai. Nếu \n\na\nb thì \n(\n)\n(\n)\n+ −\n\n+ −\na\nc\nb\nc , tức là \n−\n−\na\nc\nb\nc ."
+      },
+      {
+        "q": "Cho  và  là hai góc nhọn bất kì thỏa mãn \n90\n\n\n+\n=\n và sin\n0,5.\n=\n Khẳng định nào sau \nđây là đúng?",
+        "opts": [
+          "sin\n0,5.\n=",
+          "cos\n0,5.\n=",
+          "tan\n0,5.\n=",
+          "cot\n0,5.\n="
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B \nDo \n90\n\n\n+\n=\n nên cos\nsin\n0,5.\n\n\n=\n="
+      },
+      {
+        "q": "Nghiệm lớn nhất của phương trình (\n)(\n)\n4\n2\n1\n0\nx\nx\n−\n+\n=\n là bao nhiêu?",
+        "opts": [
+          ".3\n= −\nx",
+          ".3\n=\nx",
+          "1\nx =",
+          "2\nx ="
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D \nTa có (\n)(\n)\n4\n2\n1\n0\nx\nx\n−\n+\n=\n \n4\n2\n0\nx\n−\n= hoặc \n1\n0\nx+ =\n \n2\n4\nx =\n hoặc \n1\nx = − \n2\nx =\n hoặc \n1\nx = −. \nDo đó phương trình có hai nghiệm \n2\nx =\n; \n1\nx = − nên nghiệm lớn nhất của phương trình là \n2.\nx ="
+      },
+      {
+        "q": "Điều kiện xác định của biểu thức căn thức bậc hai $\\sqrt{2x - 6}$ là:",
+        "opts": [
+          "$x \\ge 3$",
+          "$x > 3$",
+          "$x \\le 3$",
+          "$x \\ge -3$"
+        ],
+        "ans": 0,
+        "exp": "<b>Quy tắc:</b> Biểu thức $\\sqrt{A}$ xác định khi và chỉ khi $A \\ge 0$.<br>Ta có: $2x - 6 \\ge 0 \\iff 2x \\ge 6 \\iff x \\ge 3$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Tập nghiệm của bất phương trình \n5\n1\n−−\nx\n là:",
+        "opts": [
+          "4\n\nx\n.",
+          "4\n\nx\n.",
+          "6\n−\nx\n.",
+          "6\n−\nx\n."
+        ],
+        "ans": 0,
+        "exp": "Lời giải"
+      },
+      {
+        "q": "Cặp số nào sau đây là nghiệm của phương trình 2\n3\n−\n=\nx\ny\n?",
+        "opts": [
+          "(\n) (\n)\n;\n1;1\n=\nx y\n.",
+          "(\n)\n(\n)\n;\n2;1\n=\nx y\n.",
+          "(\n)\n(\n)\n;\n0;3\n=\nx y\n.",
+          "(\n)\n(\n)\n;\n3;0\n=\nx y\n."
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B \nThay các cặp số vào phương trình 2\n3\n−\n=\nx\ny\n: \nA. ( )\n2 1\n1\n2 1 1\n3\n−=\n−= \n. (Loại) \nB. ( )\n2 2\n1\n4 1\n3\n−=\n−= . (Đúng) \nC. ( )\n2 0\n3\n3\n3\n−= −\n. (Loại) \nD. ( )\n2 3\n0\n6\n3\n−=\n\n. (Loại)"
+      },
+      {
+        "q": "Cho hình bình hành ABCD có AC\nAD\n⊥\n và \n;\n50\n3,5\nA\nD\nD\n=\n=\n. Hỏi diện tích của hình bình \nhành là bao nhiêu? (Kết quả làm tròn đến hàng phần mười)",
+        "opts": [
+          "14.",
+          "14,6.",
+          "14,5.",
+          "14,9."
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B \n \nXét ADC\n\n vuông tại \n,\nA ta có: \ntan\n 3,5 tan50 .\nA\nD\nADC\nC\nA\n=\n\n=\n\n \nKhi đó gọi S là diện tích hình bình hành, ta có: \n3,5 3,5tan50\n14,6\nS\nAD AC\n=\n\n=\n\n\n (đvdt) \nVậy diện tích của hình bình hành là 14,6. \nPHẦN 2: TRẮC NGHIỆM ĐÚNG SAI"
+      },
+      {
+        "q": "Biển báo giao thông R.306 (hình bên báo tốc độ tối thiểu cho các xe cơ giới. Biển \ncó hiệu lực bắt buộc các loại xe cơ giới vận hành với tốc độ không nhỏ hơn trị số \nghi trên biển trong điều kiện giao thông thuận lợi và an toàn. Nếu một ô tô đi trên \nđường đó với tốc độ \n(\n)\nkm/h\na\n thì a phải thỏa mãn điều kiện gì?",
+        "opts": [
+          "60.\na ",
+          "60.\na ",
+          "60.\na =",
+          "60.\na "
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A"
+      },
+      {
+        "q": "Cho \n\na\nb . Khi nhân cả hai vế của bất đẳng thức này với \n5\n= −\nm\n, ta được bất đẳng thức nào sau \nđây?",
+        "opts": [
+          "5\n5\n−\n−\na\nb .",
+          "5\n5\n−\n−\na\nb.",
+          "5\n5\n−\n−\na\nb .",
+          "5\n5\n−\n−\na\nb ."
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B \nNhân cả hai vế của bất đẳng thức \n\na\nb với số âm \n5\n= −\nm\n, ta phải đổi chiều bất đẳng thức. \n(\n)\n(\n)\n5\n5\n5\n5\n\n−\n−\n−\n−\na\nb\na\nb\na\nb ."
+      },
+      {
+        "q": "Mẫu thức chung của phương trình \n1\n3\n0\n1\n1\nx\nx\n+\n=\n−\n+\n là",
+        "opts": [
+          "(\n)(\n)\n1\n1\nx\nx\n−\n+\n.",
+          "(\n)\n2\n1\nx −\n.",
+          "(\n)\n2\n1\nx +\n.",
+          "(\n)(\n)\n1\n1\nx x\nx\n−\n+\n."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A \nMẫu thức chung của phương trình \n1\n3\n0\n1\n1\nx\nx\n+\n=\n−\n+\n là (\n)(\n)\n1\n1\nx\nx\n−\n+\n."
+      },
+      {
+        "q": "Phương trình \n(\n)\n2\n3\n1\n6\n2\n0\nx\nx\nx\n−\n+\n−\n=\n có nghiệm là",
+        "opts": [
+          "1.\n3\nx =",
+          "1\n3\nx =\n và \n1\nx = −.",
+          "1\nx = −.",
+          "1\nx = và \n1.\n3\nx = −"
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B \nTa có: \n(\n)\n2\n3\n1\n6\n2\n0\nx\nx\nx\n−\n+\n−\n=\n \n(\n)\n(\n)\n2\n3\n1\n2 3\n1\n0\nx\nx\nx\n−\n+\n−\n=\n \n(\n)(\n)\n3\n1 2\n2\n0\nx\nx\n−\n+\n= \n(\n)(\n)\n2 3\n1\n1\n0\nx\nx\n−\n+\n=\n \n3\n1\n0\nx−=\n hoặc \n1\n0\nx+ =\n \n1\n3\nx =\n hoặc \n1\nx = −. \nVậy nghiệm của phương trình là \n1\n3\nx =\n và \n1\nx = −."
+      },
+      {
+        "q": "Biển báo giao thông trong hình bên báo đường cấm các xe cơ giới và thô sơ (kể \ncả các xe được ưu tiên theo quy định) có độ dài toàn bộ kể cả xe và hàng lớn hơn \ntrị số ghi trên biển đi qua. Nếu xe có chiều rộng lớn hơn 3,2 m thì không được \nphép lưu thông để đảm bảo an toàn cho cả xe và các phương tiện khác, cũng như tránh \ngây cản trở giao thông. Nếu một xe tải đi trên đường đó có chiều rộng \n( )\nm\na\n \nthỏa mãn điều kiện gì?",
+        "opts": [
+          "3,2.\na =",
+          "3,2.\na ",
+          "3,2.\na ",
+          "3,2.\na "
+        ],
+        "ans": 2,
+        "exp": "Lời giải \nChọn C \nTheo đề bài, nếu xe có chiều rộng lớn hơn 3,2 m thì không được phép lưu thông nghĩa là xe đó \n(không phải xe cơ giới và thô sơ) có chiều rộng nhỏ hơn hoặc bằng 3,2 m được phép lưu thông. \nDo đó, nếu một xe tải đi trên đường đó có chiều rộng ( )\nm\na\n thì \n3,2.\na "
+      },
+      {
+        "q": "Bất phương trình nào sau đây là bất phương trình bậc nhất một ẩn?",
+        "opts": [
+          "2\n0\nx\ny\n+\n\n.",
+          "1\n3\n0\nx −\n\n.",
+          "2\n1\n0\nx + \n.",
+          "1\n0\n2\nx + \n."
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D \nBất phương trình \n2\n0\nx\ny\n+\n\n có hai ẩn nên không phải là bất phương trình bậc nhất một ẩn. \nBất phương trình 1\n3\n0\nx −\n\n có chứa ẩn x dưới mẫu nên không phải là bất phương trình bậc nhất \nmột ẩn. \nBất phương trình \n2\n1\n0\nx + \n có chứa \n2x nên không phải là bất phương trình bậc nhất một ẩn. \nBất phương trình \n1\n0\n2\nx + \n hay 1\n1\n0\n2 x + \n là bất phương trình bậc nhất một ẩn có dạng \n0\nax\nb\n+\n\n với \n1\n0\n2\na =\n\n và \n1.\nb =\n \nVậy ta chọn phương án \nD."
+      },
+      {
+        "q": "Cặp số nào sau đây là nghiệm của hệ phương trình 3\n4\n42?\n10\n9\n6\nx\ny\nx\ny\n+\n=\n\n\n−\n=\n",
+        "opts": [
+          "(\n)\n6;\n6\n−\n.",
+          "(\n)\n6; 6 .",
+          "354 402\n;\n13\n13\n\n\n−\n\n\n\n\n.",
+          "354 402\n;\n13\n13\n\n\n\n\n\n\n."
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B \n Sử dụng MTCT để tìm nghiệm của hệ hai phương trình 3\n4\n42\n10\n9\n6.\nx\ny\nx\ny\n+\n=\n\n\n−\n=\n\n \nVới MTCT phù hợp, ta bấm lần lượt các phím: \n5\n1\n3\n4\n4\n2\n1\n0\n9\n6\nMODE\n=\n=\n=\n=\n−\n=\n=\n= \nTrên màn hình cho kết quả \n6,\nx =\n ta bấm tiếp phím \n,\n=\n màn hình cho kết quả \n6.\ny =\n \nVậy cặp số (\n)\n6; 6 là nghiệm của hệ phương trình 3\n4\n42\n10\n9\n6.\nx\ny\nx\ny\n+\n=\n\n\n−\n=\n"
+      }
+    ]
   }
 ]
