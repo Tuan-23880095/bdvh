@@ -997,7 +997,7 @@
           "3"
         ],
         "ans": 0,
-        "exp": "<b>Phương pháp giải:</b> Theo khái niệm chuẩn SGK CTST, tập hợp số tự nhiên $\\mathbb{N} = \\{0; 1; 2; 3; ...\\}$.<br><b>Lời giải chi tiết:</b> Số tự nhiên nhỏ nhất là 0.<br>Chọn đáp án <b>A</b>"
+        "exp": "<b>Phương pháp giải:</b> Theo khái niệm chuẩn SGK, tập hợp số tự nhiên $\\mathbb{N} = \\{0; 1; 2; 3; ...\\}$.<br><b>Lời giải chi tiết:</b> Số tự nhiên nhỏ nhất là 0.<br>Chọn đáp án <b>A</b>"
       },
       {
         "type": "choice",
