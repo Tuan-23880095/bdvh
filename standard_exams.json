@@ -2340,5 +2340,202 @@
         "exp": "Căn bậc hai số học của 0,25 là 0,5 vì 0,5^2 = 0,25."
       }
     ]
+  },
+  {
+    "exam_code": "TOAN06_2025_02",
+    "grade": "L06",
+    "subject": "TOAN",
+    "title": "Đấu Trường Toán 6: Số Tự Nhiên, Tính Chia Hết & Ước Bội",
+    "description": "Đề luyện thi khảo sát kiến thức Toán 6 chuẩn GDPT 2018.",
+    "time_minutes": 40,
+    "questions": [
+      {
+        "q": "Số tự nhiên nhỏ nhất là?",
+        "opts": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "ans": 0,
+        "exp": "<b>Phương pháp giải:</b> Theo khái niệm chuẩn SGK, tập hợp số tự nhiên $\\mathbb{N} = \\{0; 1; 2; 3; ...\\}$.<br><b>Lời giải chi tiết:</b> Số tự nhiên nhỏ nhất là 0.<br>Chọn đáp án <b>A</b>"
+      },
+      {
+        "q": "Tìm số tự nhiên $x$ thỏa mãn đẳng thức: $3^x = 27$?",
+        "opts": [
+          "$x = 2$",
+          "$x = 3$",
+          "$x = 4$",
+          "$x = 9$"
+        ],
+        "ans": 1,
+        "exp": "<b>Phương pháp giải:</b> Đưa hai vế về cùng cơ số $a$ dạng $a^x = a^n \\Rightarrow x = n$.<br><br><b>Lời giải chi tiết:</b><br>Ta phân tích số $27$ ra thừa số nguyên tố: $27 = 3 \\cdot 3 \\cdot 3 = 3^3$.<br>Khi đó phương trình trở thành:<br>$$3^x = 3^3 \\Rightarrow x = 3$$<br><b>Kết luận:</b> Số tự nhiên cần tìm là $x = 3$. Chọn đáp án <b>B</b>."
+      },
+      {
+        "q": "Tính $5^2 : 5^1$?",
+        "opts": [
+          "0",
+          "1",
+          "5",
+          "25"
+        ],
+        "ans": 2,
+        "exp": "<b>Phương pháp giải:</b> Sử dụng quy tắc chia lũy thừa cùng cơ số.<br><b>Lời giải chi tiết:</b> $5^2 : 5^1 = 5^{2-1} = 5^1 = 5$.<br>Chọn đáp án <b>C</b>"
+      },
+      {
+        "q": "Tính $3^3 - 2^3$?",
+        "opts": [
+          "1",
+          "5",
+          "7",
+          "9"
+        ],
+        "ans": 2,
+        "exp": "<b>Phương pháp giải:</b> Tính lũy thừa trước, sau đó trừ.<br><b>Lời giải chi tiết:</b> $3^3 - 2^3 = 27 - 8 = 19$.<br>Chọn đáp án <b>C</b>"
+      },
+      {
+        "q": "Giá trị của biểu thức $15 + 5 \\cdot 2^2$ là:",
+        "opts": [
+          "$40$",
+          "$35$",
+          "$80$",
+          "$25$"
+        ],
+        "ans": 1,
+        "exp": "<b>Quy tắc thứ tự thực hiện phép tính:</b><br>1. Tính lũy thừa trước.<br>2. Thực hiện phép nhân và phép chia.<br>3. Cuối cùng thực hiện phép cộng và phép trừ.<br><br><b>Lời giải từng bước:</b><br>Bước 1 (Tính lũy thừa): $2^2 = 4$.<br>Bước 2 (Thực hiện phép nhân): $5 \\cdot 4 = 20$.<br>Bước 3 (Thực hiện phép cộng): $15 + 20 = 35$.<br><br><b>Kết luận:</b> Giá trị biểu thức bằng $35$. Chọn đáp án <b>B</b>."
+      },
+      {
+        "q": "Tính $3^2 + 2^3$?",
+        "opts": [
+          "5",
+          "11",
+          "13",
+          "17"
+        ],
+        "ans": 1,
+        "exp": "<b>Phương pháp giải:</b> Tính lũy thừa trước, sau đó cộng.<br><b>Lời giải chi tiết:</b> $3^2 + 2^3 = 9 + 8 = 17$.<br>Chọn đáp án <b>B</b>"
+      },
+      {
+        "q": "Tính $3^2 \\cdot 3^3$?",
+        "opts": [
+          "27",
+          "81",
+          "243",
+          "729"
+        ],
+        "ans": 1,
+        "exp": "<b>Phương pháp giải:</b> Sử dụng quy tắc nhân lũy thừa cùng cơ số.<br><b>Lời giải chi tiết:</b> $3^2 \\cdot 3^3 = 3^{2+3} = 3^5 = 243$.<br>Chọn đáp án <b>B</b>"
+      },
+      {
+        "q": "Tính $2^3 \\cdot 3^2$?",
+        "opts": [
+          "6",
+          "12",
+          "18",
+          "36"
+        ],
+        "ans": 3,
+        "exp": "<b>Phương pháp giải:</b> Tính lũy thừa trước, sau đó nhân.<br><b>Lời giải chi tiết:</b> $2^3 \\cdot 3^2 = 8 \\cdot 9 = 72$.<br>Chọn đáp án <b>D</b>"
+      },
+      {
+        "q": "Tính $2^4 + 3^2$?",
+        "opts": [
+          "5",
+          "11",
+          "13",
+          "17"
+        ],
+        "ans": 3,
+        "exp": "<b>Phương pháp giải:</b> Tính lũy thừa trước, sau đó cộng.<br><b>Lời giải chi tiết:</b> $2^4 + 3^2 = 16 + 9 = 25$.<br>Chọn đáp án <b>D</b>"
+      },
+      {
+        "q": "Tính $4^2 - 2^3$?",
+        "opts": [
+          "0",
+          "4",
+          "8",
+          "12"
+        ],
+        "ans": 1,
+        "exp": "<b>Phương pháp giải:</b> Tính lũy thừa trước, sau đó trừ.<br><b>Lời giải chi tiết:</b> $4^2 - 2^3 = 16 - 8 = 8$.<br>Chọn đáp án <b>C</b>"
+      },
+      {
+        "q": "Trong các số sau, số nào chia hết cho cả 2 và 5?",
+        "opts": [
+          "124",
+          "235",
+          "450",
+          "502"
+        ],
+        "ans": 2,
+        "exp": "<b>Dấu hiệu chia hết:</b><br>• Số có chữ số tận cùng là 0, 2, 4, 6, 8 thì chia hết cho 2.<br>• Số có chữ số tận cùng là 0 hoặc 5 thì chia hết cho 5.<br>⇒ Số chia hết cho cả 2 và 5 phải có <b>chữ số tận cùng là chữ số 0</b>.<br><br><b>Xét các phương án:</b><br>- Số 124 có chữ số tận cùng là 4 (chỉ chia hết cho 2).<br>- Số 235 có chữ số tận cùng là 5 (chỉ chia hết cho 5).<br>- Số 450 có chữ số tận cùng là 0 (chia hết cho cả 2 và 5).<br>- Số 502 có chữ số tận cùng là 2 (chỉ chia hết cho 2).<br><br><b>Kết luận:</b> Số 450 thỏa mãn yêu cầu bài toán. Chọn đáp án <b>C</b>."
+      },
+      {
+        "q": "Tính $2^3$?",
+        "opts": [
+          "2",
+          "6",
+          "8",
+          "16"
+        ],
+        "ans": 2,
+        "exp": "<b>Phương pháp giải:</b> Sử dụng quy tắc lũy thừa.<br><b>Lời giải chi tiết:</b> $2^3 = 2 \\cdot 2 \\cdot 2 = 8$.<br>Chọn đáp án <b>C</b>"
+      },
+      {
+        "q": "Thứ tự thực hiện đúng các dấu ngoặc trong một biểu thức toán học là:",
+        "opts": [
+          "Ngoặc tròn $( )$ $\\rightarrow$ Ngoặc vuông $[ ]$ $\\rightarrow$ Ngoặc nhọn $\\{ \\}$",
+          "Ngoặc nhọn $\\{ \\}$ $\\rightarrow$ Ngoặc vuông $[ ]$ $\\rightarrow$ Ngoặc tròn $( )$",
+          "Ngoặc vuông $[ ]$ $\\rightarrow$ Ngoặc tròn $( )$ $\\rightarrow$ Ngoặc nhọn $\\{ \\}$",
+          "Ngoặc tròn $( )$ $\\rightarrow$ Ngoặc nhọn $\\{ \\}$ $\\rightarrow$ Ngoặc vuông $[ ]$"
+        ],
+        "ans": 0,
+        "exp": "<b>Quy ước sư phạm chuẩn:</b><br>Khi thực hiện các phép tính trong biểu thức có nhiều dấu ngoặc, ta tính toán theo thứ tự ưu tiên từ trong ra ngoài:<br>$$\\text{Ngoặc tròn } ( ) \\longrightarrow \\text{Ngoặc vuông } [ ] \\longrightarrow \\text{Ngoặc nhọn } \\{ \\}$$<br><b>Kết luận:</b> Thứ tự đúng là $( ) \\rightarrow [ ] \\rightarrow \\{ \\}$. Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Tính $2^4 : 2^2$?",
+        "opts": [
+          "2",
+          "4",
+          "8",
+          "16"
+        ],
+        "ans": 1,
+        "exp": "<b>Phương pháp giải:</b> Sử dụng quy tắc chia lũy thừa cùng cơ số.<br><b>Lời giải chi tiết:</b> $2^4 : 2^2 = 2^{4-2} = 2^2 = 4$.<br>Chọn đáp án <b>B</b>"
+      },
+      {
+        "q": "Kết quả của phép tính $2^3 \\cdot 2^2$ bằng bao nhiêu?",
+        "opts": [
+          "$2^5 = 32$",
+          "$2^6 = 64$",
+          "$4^5 = 1024$",
+          "$4^6 = 4096$"
+        ],
+        "ans": 0,
+        "exp": "<b>Phương pháp giải:</b> Áp dụng quy tắc nhân hai lũy thừa cùng cơ số:<br>$$a^m \\cdot a^n = a^{m+n} \\quad (a \\in \\mathbb{N}^*; m, n \\in \\mathbb{N})$$<br><b>Lời giải chi tiết:</b><br>Với $a = 2, m = 3, n = 2$, ta có:<br>$$2^3 \\cdot 2^2 = 2^{3+2} = 2^5 = 32$$<br><b>Kết luận:</b> Kết quả của phép tính là $2^5 = 32$. Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Tính $5^0$?",
+        "opts": [
+          "0",
+          "1",
+          "5",
+          "10"
+        ],
+        "ans": 1,
+        "exp": "<b>Phương pháp giải:</b> Sử dụng quy tắc lũy thừa.<br><b>Lời giải chi tiết:</b> $5^0 = 1$.<br>Chọn đáp án <b>B</b>"
+      },
+      {
+        "q": "Tính $4^2$?",
+        "opts": [
+          "4",
+          "8",
+          "16",
+          "32"
+        ],
+        "ans": 2,
+        "exp": "<b>Phương pháp giải:</b> Sử dụng quy tắc lũy thừa.<br><b>Lời giải chi tiết:</b> $4^2 = 4 \\cdot 4 = 16$.<br>Chọn đáp án <b>C</b>"
+      }
+    ]
   }
 ]
