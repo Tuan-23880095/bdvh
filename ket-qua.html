@@ -116,6 +116,45 @@
       <p class="text-xs text-gray-500 italic">Hệ thống khảo thí thông minh hỗ trợ bởi Trợ lý Hệ Thống Khảo Thí - ThS. Đinh Quốc Tuấn</p>
     </div>
 
+    <!-- KHỐI BÁO CHƯA CÓ BÀI LÀM (EMPTY STATE - HIỆN KHI CHƯA CÓ DỮ LIỆU) -->
+    <div id="empty-state-view" class="hidden bg-white rounded-3xl p-8 sm:p-12 border border-bac shadow-md text-center max-w-2xl mx-auto space-y-6">
+      <div class="w-20 h-20 rounded-3xl bg-emerald-50 text-luc mx-auto flex items-center justify-center text-3xl shadow-sm border border-emerald-100">
+        <i class="fas fa-clipboard-list"></i>
+      </div>
+      <div class="space-y-2">
+        <h3 class="text-2xl font-bold title-serif text-lam">Chưa Tìm Thấy Bài Làm Nào</h3>
+        <p class="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-md mx-auto">
+          Hệ thống sẽ tự động tổng hợp điểm số, đo đạc tốc độ tư duy và chỉ ra từng bẫy sai lầm ngay sau khi em nộp bài thi trắc nghiệm.
+        </p>
+      </div>
+
+      <!-- Ô tra cứu mã bài làm nếu có -->
+      <div class="bg-giay p-4 rounded-2xl border border-bac max-w-md mx-auto space-y-2 text-left">
+        <label class="block text-xs font-bold text-gray-700">Tra cứu bằng Mã bài nộp (Sub ID):</label>
+        <div class="flex gap-2">
+          <input type="number" id="manualSubIdInput" placeholder="Ví dụ: 1, 2, 3..." class="w-full px-3.5 py-2 border border-bac rounded-xl text-sm outline-none focus:border-luc">
+          <button onclick="lookupManualSub()" class="bg-lam hover:bg-blue-900 text-white font-bold px-4 py-2 rounded-xl text-xs whitespace-nowrap transition shadow-sm">
+            Tra Cứu
+          </button>
+        </div>
+      </div>
+
+      <!-- Nút điều hướng -->
+      <div class="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+        <a href="index.html#grade-syllabus-section" class="bg-luc hover:bg-emerald-800 text-white font-bold py-3 px-6 rounded-2xl text-xs sm:text-sm transition shadow flex items-center justify-center gap-2">
+          <i class="fas fa-play-circle text-amber-300"></i>
+          <span>Vào Chọn Đề Bắt Đầu Làm Bài</span>
+        </a>
+        <a href="sv-toan7.html" class="bg-slate-900 hover:bg-black text-amber-300 font-bold py-3 px-6 rounded-2xl text-xs sm:text-sm transition flex items-center justify-center gap-2 border border-slate-700">
+          <i class="fas fa-mobile-alt text-white"></i>
+          <span>Vào Lớp Slido Trực Tiếp</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- KHỐI BÁO CÁO KẾT QUẢ CHI TIẾT -->
+    <div id="report-view-container" class="space-y-6">
+
     <!-- KHỐI TỔNG KẾT ĐIỂM SỐ -->
     <div class="bg-white rounded-2xl p-6 sm:p-8 border border-bac shadow-md card-shadow flex flex-col sm:flex-row items-center justify-between gap-6">
       <div class="flex items-center gap-6">
@@ -275,6 +314,7 @@
       </div>
     </div>
 
+    </div> <!-- /report-view-container -->
   </main>
 
   <!-- FOOTER -->
@@ -311,11 +351,73 @@
         } catch (e) {}
       }
 
-      alert('Không tìm thấy thông tin bài làm!');
-      window.location.href = 'index.html';
+      // 3. Dự phòng từ bộ nhớ dài hạn (localStorage)
+      const storedLocal = localStorage.getItem('bdvh_last_submission');
+      if (storedLocal) {
+        try {
+          const data = JSON.parse(storedLocal);
+          renderResults(data);
+          return;
+        } catch (e) {}
+      }
+
+      const localSubId = localStorage.getItem('bdvh_last_sub_id');
+      if (localSubId && localSubId !== '0') {
+        try {
+          const res = await fetch(`api.php?action=get_submission&sub_id=${localSubId}`);
+          const d = await res.json();
+          if (d.status === 'success' && d.submission) {
+            renderResults(d.submission);
+            return;
+          }
+        } catch (e) {}
+      }
+
+      // 4. Thử lấy bài làm mới nhất từ máy chủ
+      try {
+        const res = await fetch('api.php?action=get_latest_submission');
+        const d = await res.json();
+        if (d.status === 'success' && d.submission) {
+          renderResults(d.submission);
+          return;
+        }
+      } catch (e) {}
+
+      // 5. Nếu chưa có bài làm nào: hiển thị giao diện rỗng thân thiện
+      showEmptyState();
+      return;
+
+    }
+
+    function showEmptyState() {
+      const reportView = document.getElementById('report-view-container');
+      const emptyView = document.getElementById('empty-state-view');
+      if (reportView) reportView.classList.add('hidden');
+      if (emptyView) emptyView.classList.remove('hidden');
+    }
+
+    async function lookupManualSub() {
+      const input = document.getElementById('manualSubIdInput');
+      const id = input ? input.value.trim() : '';
+      if (!id) return alert('Vui lòng nhập mã bài làm (sub_id).');
+      try {
+        const res = await fetch(`api.php?action=get_submission&sub_id=${id}`);
+        const d = await res.json();
+        if (d.status === 'success' && d.submission) {
+          renderResults(d.submission);
+        } else {
+          alert(d.message || 'Không tìm thấy bài làm với mã này!');
+        }
+      } catch (e) {
+        alert('Lỗi tra cứu: ' + e.message);
+      }
     }
 
     function renderResults(data) {
+      const reportView = document.getElementById('report-view-container');
+      const emptyView = document.getElementById('empty-state-view');
+      if (reportView) reportView.classList.remove('hidden');
+      if (emptyView) emptyView.classList.add('hidden');
       document.getElementById('res-score').innerText = data.score.toFixed(1);
       document.getElementById('res-stats').innerText = 
         `Đúng: ${data.correct_count}/${data.total_questions} câu · Thời gian làm: ${data.duration_seconds}s`;

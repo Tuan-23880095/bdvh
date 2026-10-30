@@ -1063,6 +1063,25 @@ switch ($action) {
         break;
 
     // 6b. Lấy chi tiết bài làm đã nộp (dành cho Giảng Viên & Học Sinh xem lại chi tiết)
+    // 6c. Lấy bài nộp gần nhất (khi vào ket-qua.html trực tiếp)
+    case 'get_latest_submission':
+        $userId = isset($_SESSION['bdvh_user_id']) ? (int)$_SESSION['bdvh_user_id'] : 0;
+        $latestSubId = 0;
+        if ($userId > 0) {
+            $stmt = $pdo->prepare("SELECT sub_id FROM bdvh_submissions WHERE user_id = ? ORDER BY sub_id DESC LIMIT 1");
+            $stmt->execute([$userId]);
+            $latestSubId = (int)$stmt->fetchColumn();
+        }
+        if ($latestSubId <= 0) {
+            $stmt = $pdo->query("SELECT sub_id FROM bdvh_submissions ORDER BY sub_id DESC LIMIT 1");
+            $latestSubId = (int)($stmt ? $stmt->fetchColumn() : 0);
+        }
+        if ($latestSubId > 0) {
+            $_GET['sub_id'] = $latestSubId;
+        } else {
+            json_out(['status' => 'error', 'message' => 'Chưa có bài làm nào trong hệ thống.'], 404);
+        }
+
     case 'get_submission':
         $subId = (int)($_GET['sub_id'] ?? $inputData['sub_id'] ?? 0);
         if ($subId <= 0) {
