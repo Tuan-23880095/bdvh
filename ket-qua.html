@@ -438,7 +438,7 @@
         document.getElementById('ai-tip').innerText = ai.exclusive_tip;
 
         const causesList = document.getElementById('ai-root-causes');
-        causesList.innerHTML = ai.root_causes.map(c => `<li>${esc(c)}</li>`).join('');
+        causesList.innerHTML = ai.root_causes.map(c => `<li>${c}</li>`).join('');
 
         // Cập nhật phân tích thời gian làm bài
         const t = ai.time_analysis;
@@ -501,7 +501,11 @@
       }
 
       // totalLeft check
-      document.getElementById('res-trials-left').innerText = totalLeft + ' lượt';
+      const trialsLeftEl = document.getElementById('res-trials-left');
+      if (trialsLeftEl) {
+        const totalLeft = (data && data.total_left !== undefined) ? data.total_left : 5;
+        trialsLeftEl.innerText = totalLeft + ' lượt';
+      }
 
       // Chi tiết câu hỏi
       const container = document.getElementById('answers-breakdown');
@@ -590,9 +594,15 @@ ${d.is_explanation_locked ? `
         `;
       }).join('');
 
-      // MathJax re-render
+      // MathJax re-render toàn diện
       if (window.MathJax && window.MathJax.typesetPromise) {
-        window.MathJax.typesetPromise();
+        window.MathJax.typesetPromise([
+          document.getElementById('ai-teacher-remark'),
+          document.getElementById('ai-root-causes'),
+          document.getElementById('answers-breakdown')
+        ]).catch(err => {
+          window.MathJax.typesetPromise().catch(e => console.warn(e));
+        });
       }
     }
 
