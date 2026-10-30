@@ -342,77 +342,140 @@
     <div style="font-size: 9.5pt; font-style: italic; margin-bottom: 6px;">Thí sinh trả lời từ câu 13 đến câu 14. Trong mỗi ý a), b), c), d) ở mỗi câu, thí sinh chọn Đúng hoặc Sai.</div>
     
             <div class="question-block">
-              <div><span class="q-num">Câu 13.</span> Cho bài toán: Tính $2^3 + 3^2$.</div>
+              <div><span class="q-num">Câu 13.</span> Một trường THCS tổ chức cho học sinh khối 6 tham gia hoạt động trải nghiệm dã ngoại ngoài trời. Khi xếp hàng 12 học sinh, hàng 15 học sinh hay hàng 18 học sinh đều vừa đủ, không thừa bạn nào. Biết số học sinh khối 6 của trường trong khoảng từ 300 đến 400 em. Xét tính đúng sai của các khẳng định sau:</div>
               <table class="tf-table">
-                <tr><th>Ý</th><th>Nội dung nhận định</th><th class="no-print">Đáp án</th></tr>
-                
-                <tr>
-                  <td style="width: 25px; text-align: center; font-weight: bold;">a)</td>
-                  <td>Ý a) $2^3 = 8$</td>
-                  <td style="width: 50px; text-align: center;" class="no-print"><b>Đúng</b></td>
-                </tr>
-                
-                <tr>
-                  <td style="width: 25px; text-align: center; font-weight: bold;">b)</td>
-                  <td>Ý b) $3^2 = 9$</td>
-                  <td style="width: 50px; text-align: center;" class="no-print"><b>Đúng</b></td>
-                </tr>
-                
-                <tr>
-                  <td style="width: 25px; text-align: center; font-weight: bold;">c)</td>
-                  <td>Ý c) $2^3 + 3^2 = 17$</td>
-                  <td style="width: 50px; text-align: center;" class="no-print"><b>Đúng</b></td>
-                </tr>
-                
-                <tr>
-                  <td style="width: 25px; text-align: center; font-weight: bold;">d)</td>
-                  <td>Ý d) $2^3 + 3^2 = 16$</td>
-                  <td style="width: 50px; text-align: center;" class="no-print"><b>Sai</b></td>
-                </tr>
-                
+                <thead>
+                  <tr style="background:#f0f4f8;">
+                    <th style="width: 32px; text-align: center;">Ý</th>
+                    <th style="text-align: left;">Mệnh đề khẳng định</th>
+                    <th style="width: 55px; text-align: center;">Đúng</th>
+                    <th style="width: 55px; text-align: center;">Sai</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="text-align: center; font-weight: bold;">a)</td>
+                    <td>Số học sinh khối 6 là một bội chung của 12, 15 và 18.</td>
+                    <td style="text-align: center;" class="tf-tag-true">✔</td>
+                    <td style="text-align: center; color: #cbd5e1;">○</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center; font-weight: bold;">b)</td>
+                    <td>Bội chung nhỏ nhất của 12, 15 và 18 là $\text{BCNN}(12, 15, 18) = 180$.</td>
+                    <td style="text-align: center;" class="tf-tag-true">✔</td>
+                    <td style="text-align: center; color: #cbd5e1;">○</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center; font-weight: bold;">c)</td>
+                    <td>Số học sinh khối 6 của trường đi tham quan là 360 học sinh.</td>
+                    <td style="text-align: center;" class="tf-tag-true">✔</td>
+                    <td style="text-align: center; color: #cbd5e1;">○</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center; font-weight: bold;">d)</td>
+                    <td>Nếu mỗi xe ô tô chở được 45 học sinh thì trường cần thuê ít nhất 9 xe ô tô để chở hết học sinh.</td>
+                    <td style="text-align: center; color: #cbd5e1;">○</td>
+                    <td style="text-align: center;" class="tf-tag-false">✔</td>
+                  </tr>
+                </tbody>
               </table>
               <div class="ans-box">
-                <b>Giải thích chi tiết:</b><br>- Ý a) Đúng vì $2^3 = 8$.<br>- Ý b) Đúng vì $3^2 = 9$.<br>- Ý c) Đúng vì $2^3 + 3^2 = 8 + 9 = 17$.<br>- Ý d) Sai vì $2^3 + 3^2 = 17$, không phải 16.
+                <b>Giải thích chi tiết:</b><br>
+                - <b>Ý a) Đúng:</b> Vì số học sinh xếp thành từng hàng 12, 15, 18 đều vừa đủ nên số học sinh là bội chung của 12, 15 và 18.<br>
+                - <b>Ý b) Đúng:</b> Ta có: $12 = 2^2 \cdot 3$, $15 = 3 \cdot 5$, $18 = 2 \cdot 3^2$. Do đó $\text{BCNN}(12, 15, 18) = 2^2 \cdot 3^2 \cdot 5 = 180$.<br>
+                - <b>Ý c) Đúng:</b> Bội chung của 12, 15, 18 là các bội của 180: $\text{BC}(12, 15, 18) = \{0; 180; 360; 540; \dots\}$. Vì số học sinh trong khoảng từ 300 đến 400 em nên số học sinh chính xác là 360 em.<br>
+                - <b>Ý d) Sai:</b> Vì $360 : 45 = 8$ xe (vừa đúng), nên trường chỉ cần thuê đúng 8 xe ô tô loại 45 chỗ, không phải 9 xe.
               </div>
             </div>
             
 
             <div class="question-block">
-              <div><span class="q-num">Câu 14.</span> Cho bài toán: Tính $4^2 - 2^3$.</div>
+              <div><span class="q-num">Câu 14.</span> Cho hình vẽ, biết đường thẳng $a$ vuông góc với đoạn thẳng $CD$ tại $C$, đường thẳng $b$ vuông góc với đoạn thẳng $CD$ tại $D$ và góc $\widehat{B_4} = 120^\circ$. Xét tính đúng sai của các mệnh đề sau:</div>
+              <div style="text-align: center; margin: 8px 0;">
+                <svg viewBox="0 0 460 205" width="100%" height="190" style="max-width: 440px; display: inline-block; background: #ffffff;" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Đường thẳng a và b -->
+                  <line x1="40" y1="50" x2="420" y2="50" stroke="#1d4ed8" stroke-width="2" />
+                  <text x="430" y="55" font-family="'Times New Roman', serif" font-style="italic" font-size="16" fill="#111827">a</text>
+                  <line x1="40" y1="150" x2="420" y2="150" stroke="#1d4ed8" stroke-width="2" />
+                  <text x="430" y="155" font-family="'Times New Roman', serif" font-style="italic" font-size="16" fill="#111827">b</text>
+
+                  <!-- Đường thẳng vuông góc qua C và D -->
+                  <line x1="90" y1="20" x2="90" y2="185" stroke="#1d4ed8" stroke-width="2" />
+
+                  <!-- Ký hiệu góc vuông tại C và D -->
+                  <polyline points="90,40 100,40 100,50" fill="none" stroke="#6b7280" stroke-width="1.5" />
+                  <polyline points="90,140 100,140 100,150" fill="none" stroke="#6b7280" stroke-width="1.5" />
+
+                  <!-- Cát tuyến AB -->
+                  <line x1="180" y1="190" x2="270" y2="10" stroke="#1d4ed8" stroke-width="2" />
+
+                  <!-- Các điểm đỉnh C, D, A, B (chấm tròn đỏ) -->
+                  <circle cx="90" cy="50" r="3.5" fill="#dc2626" />
+                  <circle cx="90" cy="150" r="3.5" fill="#dc2626" />
+                  <circle cx="250" cy="50" r="3.5" fill="#dc2626" />
+                  <circle cx="200" cy="150" r="3.5" fill="#dc2626" />
+
+                  <!-- Tên các đỉnh C, D, A, B -->
+                  <text x="75" y="44" font-family="'Times New Roman', serif" font-style="italic" font-size="16" font-weight="bold" fill="#111827">C</text>
+                  <text x="75" y="144" font-family="'Times New Roman', serif" font-style="italic" font-size="16" font-weight="bold" fill="#111827">D</text>
+                  <text x="245" y="38" font-family="'Times New Roman', serif" font-style="italic" font-size="16" font-weight="bold" fill="#111827">A</text>
+                  <text x="178" y="144" font-family="'Times New Roman', serif" font-style="italic" font-size="16" font-weight="bold" fill="#111827">B</text>
+
+                  <!-- Góc A_1 -->
+                  <text x="238" y="72" font-family="'Times New Roman', serif" font-size="13" font-weight="bold" fill="#111827">1</text>
+
+                  <!-- Các góc quanh B: 4 (trên-trái), 3 (trên-phải), 2 (dưới-phải), 1 (dưới-trái) -->
+                  <text x="188" y="140" font-family="'Times New Roman', serif" font-size="13" font-weight="bold" fill="#111827">4</text>
+                  <text x="212" y="140" font-family="'Times New Roman', serif" font-size="13" font-weight="bold" fill="#111827">3</text>
+                  <text x="210" y="168" font-family="'Times New Roman', serif" font-size="13" font-weight="bold" fill="#111827">2</text>
+                  <text x="186" y="168" font-family="'Times New Roman', serif" font-size="13" font-weight="bold" fill="#111827">1</text>
+                </svg>
+              </div>
               <table class="tf-table">
-                <tr><th>Ý</th><th>Nội dung nhận định</th><th class="no-print">Đáp án</th></tr>
-                
-                <tr>
-                  <td style="width: 25px; text-align: center; font-weight: bold;">a)</td>
-                  <td>Ý a) $4^2 = 16$</td>
-                  <td style="width: 50px; text-align: center;" class="no-print"><b>Đúng</b></td>
-                </tr>
-                
-                <tr>
-                  <td style="width: 25px; text-align: center; font-weight: bold;">b)</td>
-                  <td>Ý b) $2^3 = 8$</td>
-                  <td style="width: 50px; text-align: center;" class="no-print"><b>Đúng</b></td>
-                </tr>
-                
-                <tr>
-                  <td style="width: 25px; text-align: center; font-weight: bold;">c)</td>
-                  <td>Ý c) $4^2 - 2^3 = 8$</td>
-                  <td style="width: 50px; text-align: center;" class="no-print"><b>Đúng</b></td>
-                </tr>
-                
-                <tr>
-                  <td style="width: 25px; text-align: center; font-weight: bold;">d)</td>
-                  <td>Ý d) $4^2 - 2^3 = 12$</td>
-                  <td style="width: 50px; text-align: center;" class="no-print"><b>Sai</b></td>
-                </tr>
-                
+                <thead>
+                  <tr style="background:#f0f4f8;">
+                    <th style="width: 32px; text-align: center;">Ý</th>
+                    <th style="text-align: left;">Mệnh đề khẳng định</th>
+                    <th style="width: 55px; text-align: center;">Đúng</th>
+                    <th style="width: 55px; text-align: center;">Sai</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="text-align: center; font-weight: bold;">a)</td>
+                    <td>$\widehat{B_2} = 120^\circ$.</td>
+                    <td style="text-align: center;" class="tf-tag-true">✔</td>
+                    <td style="text-align: center; color: #cbd5e1;">○</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center; font-weight: bold;">b)</td>
+                    <td>$\widehat{B_3} = 60^\circ$.</td>
+                    <td style="text-align: center;" class="tf-tag-true">✔</td>
+                    <td style="text-align: center; color: #cbd5e1;">○</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center; font-weight: bold;">c)</td>
+                    <td>$a \parallel b$.</td>
+                    <td style="text-align: center;" class="tf-tag-true">✔</td>
+                    <td style="text-align: center; color: #cbd5e1;">○</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center; font-weight: bold;">d)</td>
+                    <td>Góc kề bù với góc $\widehat{A_1}$ bằng $150^\circ$.</td>
+                    <td style="text-align: center; color: #cbd5e1;">○</td>
+                    <td style="text-align: center;" class="tf-tag-false">✔</td>
+                  </tr>
+                </tbody>
               </table>
               <div class="ans-box">
-                <b>Giải thích chi tiết:</b><br>- Ý a) Đúng vì $4^2 = 16$.<br>- Ý b) Đúng vì $2^3 = 8$.<br>- Ý c) Đúng vì $4^2 - 2^3 = 16 - 8 = 8$.<br>- Ý d) Sai vì $4^2 - 2^3 = 8$, không phải 12.
+                <b>Giải thích chi tiết:</b><br>
+                - <b>Ý a) Đúng:</b> Vì góc $\widehat{B_2}$ và góc $\widehat{B_4}$ là hai góc đối đỉnh nên $\widehat{B_2} = \widehat{B_4} = 120^\circ$.<br>
+                - <b>Ý b) Đúng:</b> Vì góc $\widehat{B_3}$ và góc $\widehat{B_4}$ là hai góc kề bù nên $\widehat{B_3} + \widehat{B_4} = 180^\circ \implies \widehat{B_3} = 180^\circ - 120^\circ = 60^\circ$.<br>
+                - <b>Ý c) Đúng:</b> Vì đường thẳng $a \perp CD$ tại $C$ và đường thẳng $b \perp CD$ tại $D$ nên $a \parallel b$ (hai đường thẳng phân biệt cùng vuông góc với đường thẳng thứ ba thì song song với nhau).<br>
+                - <b>Ý d) Sai:</b> Vì $a \parallel b$ nên góc $\widehat{A_1} = \widehat{B_3} = 60^\circ$ (hai góc so le trong). Do đó góc kề bù với góc $\widehat{A_1}$ có số đo là $180^\circ - 60^\circ = 120^\circ$, không phải $150^\circ$.
               </div>
             </div>
             
-
     <!-- PHẦN III -->
     <div class="part-header">PHẦN III. Câu trắc nghiệm trả lời ngắn (2 câu – 3,0 điểm)</div>
     <div style="font-size: 9.5pt; font-style: italic; margin-bottom: 6px;">Thí sinh trả lời câu 15 và câu 16. Viết đáp số tính toán được vào ô trống.</div>

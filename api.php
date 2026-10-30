@@ -728,6 +728,12 @@ switch ($action) {
         json_out(['status' => 'success', 'message' => 'Đã đăng xuất.']);
         break;
 
+    // Đồng bộ lại đề thi từ standard_exams.json
+    case 'reload_exams':
+        seed_default_exams();
+        json_out(['status' => 'success', 'message' => 'Đã đồng bộ lại đề thi chuẩn từ standard_exams.json!']);
+        break;
+
     // 4. Lấy danh sách đề thi (theo Khối & Môn)
     case 'list_exams':
         $grade = $_GET['grade'] ?? '';
