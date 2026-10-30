@@ -46,5 +46,33 @@
 <script src="assets/qrcode.js?v=20261029"></script>
 <script src="assets/phong-thi-common.js?v=20261029"></script>
 <script src="assets/giam-sat.js?v=20261029"></script>
+  <!-- NÚT IN TÀI LIỆU AN TOÀN CHUẨN MATHJAX -->
+  <button id="btn-print-doc" onclick="safePrint()" class="no-print" style="position:fixed; bottom:20px; right:20px; background:#111827; color:#fff; padding:10px 18px; border-radius:10px; box-shadow:0 10px 25px rgba(0,0,0,0.3); font-weight:700; font-size:13px; border:none; cursor:pointer; z-index:999; display:inline-flex; align-items:center; gap:8px;">
+    <i class="fas fa-print"></i> In Tài Liệu
+  </button>
+
+  <script>
+    function safePrint() {
+      const printBtn = document.getElementById('btn-print-doc');
+      if (printBtn) printBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang chuẩn bị...';
+      
+      // Đảm bảo MathJax đã render xong mọi công thức trước khi gọi hộp thoại in
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        MathJax.typesetPromise().then(() => {
+          if (printBtn) printBtn.innerHTML = '<i class="fas fa-print"></i> In Tài Liệu';
+          window.print();
+        }).catch(() => {
+          if (printBtn) printBtn.innerHTML = '<i class="fas fa-print"></i> In Tài Liệu';
+          window.print();
+        });
+      } else {
+        // Fallback nếu không có công thức toán
+        setTimeout(() => {
+          if (printBtn) printBtn.innerHTML = '<i class="fas fa-print"></i> In Tài Liệu';
+          window.print();
+        }, 500); 
+      }
+    }
+  </script>
 </body>
 </html>

@@ -657,5 +657,33 @@ ${d.is_explanation_locked ? `
     </div>
   </div>
 
+  <!-- NÚT IN TÀI LIỆU AN TOÀN CHUẨN MATHJAX -->
+  <button id="btn-print-doc" onclick="safePrint()" class="fixed bottom-5 right-5 bg-gray-900 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-gray-700 print:hidden z-50 flex items-center cursor-pointer">
+    <i class="fas fa-print mr-2"></i> In Tài Liệu
+  </button>
+
+  <script>
+    function safePrint() {
+      const printBtn = document.getElementById('btn-print-doc');
+      if (printBtn) printBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Đang chuẩn bị...';
+      
+      // Đảm bảo MathJax đã render xong mọi công thức trước khi gọi hộp thoại in
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        MathJax.typesetPromise().then(() => {
+          if (printBtn) printBtn.innerHTML = '<i class="fas fa-print mr-2"></i> In Tài Liệu';
+          window.print();
+        }).catch(() => {
+          if (printBtn) printBtn.innerHTML = '<i class="fas fa-print mr-2"></i> In Tài Liệu';
+          window.print();
+        });
+      } else {
+        // Fallback nếu không có công thức toán
+        setTimeout(() => {
+          if (printBtn) printBtn.innerHTML = '<i class="fas fa-print mr-2"></i> In Tài Liệu';
+          window.print();
+        }, 500); 
+      }
+    }
+  </script>
 </body>
 </html>
