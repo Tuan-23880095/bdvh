@@ -1654,5 +1654,235 @@
         "exp": "Lời giải \nChọn B \n Sử dụng MTCT để tìm nghiệm của hệ hai phương trình 3\n4\n42\n10\n9\n6.\nx\ny\nx\ny\n+\n=\n\n\n−\n=\n\n \nVới MTCT phù hợp, ta bấm lần lượt các phím: \n5\n1\n3\n4\n4\n2\n1\n0\n9\n6\nMODE\n=\n=\n=\n=\n−\n=\n=\n= \nTrên màn hình cho kết quả \n6,\nx =\n ta bấm tiếp phím \n,\n=\n màn hình cho kết quả \n6.\ny =\n \nVậy cặp số (\n)\n6; 6 là nghiệm của hệ phương trình 3\n4\n42\n10\n9\n6.\nx\ny\nx\ny\n+\n=\n\n\n−\n=\n"
       }
     ]
+  },
+  {
+    "exam_code": "TOAN10_2025_02",
+    "grade": "L10",
+    "subject": "TOAN",
+    "title": "Đấu Trường Toán 10: Mệnh Đề, Bất Phương Trình & Vectơ Chuẩn 2025",
+    "description": "Bộ đề kiểm tra tổng hợp kiến thức Toán 10 học kì 1 theo chuẩn mới GDPT 2018 KNTT.",
+    "time_minutes": 40,
+    "questions": [
+      {
+        "q": "Cho hình vuông ABCD cạnh a . Gọi M,N lần lượt là trung điểm của đoạn thẳng BC và AD . \nTính NC\nMC\n\n\n\n.",
+        "opts": [
+          "2 .a",
+          "5\n1 .\n2\n+ a",
+          "2.\na",
+          ".a"
+        ],
+        "ans": 2,
+        "exp": "Lời giải \nChọn C \n \nDo NC\nAM\n\n\n\n nên \n2\nNC\nMC\nAM\nMC\nAC\nAC\na\n\n\n\n\n\n\n\n\n\n\n\n."
+      },
+      {
+        "q": "Cho các vectơ , , ,\n\n\n\n\na b c u và v như trong hình bên. \n \nHỏi có bao nhiêu vectơ cùng hướng với vectơ u ?",
+        "opts": [
+          "4 .",
+          "2 .",
+          "3.",
+          "1."
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B \nCác vetơ cùng hướng với vectơ u là vectơ a và v."
+      },
+      {
+        "q": "Cho hai tập hợp số $A = [-2; 3)$ và $B = (1; 5]$. Giao của hai tập hợp $A \\cap B$ là:",
+        "opts": [
+          "$[-2; 5]$",
+          "$(1; 3)$",
+          "$[1; 3)$",
+          "$(1; 3]$"
+        ],
+        "ans": 1,
+        "exp": "<b>Định nghĩa giao của hai tập hợp:</b><br>$$A \\cap B = \\{x \\in \\mathbb{R} \\mid x \\in A \\text{ và } x \\in B\\}$$<br><b>Lời giải chi tiết:</b><br>- Tập $A = [-2; 3) = \\{x \\in \\mathbb{R} \\mid -2 \\le x < 3\\}$.<br>- Tập $B = (1; 5] = \\{x \\in \\mathbb{R} \\mid 1 < x \\le 5\\}$.<br>Giao của hai khoảng là các giá trị đồng thời thỏa mãn $-2 \\le x < 3$ và $1 < x \\le 5$:<br>$$\\max(-2, 1) < x < \\min(3, 5) \\iff 1 < x < 3$$<br>Biểu diễn dưới dạng khoảng: $A \\cap B = (1; 3)$.<br><br><b>Kết luận:</b> Giao của hai tập hợp là khoảng $(1; 3)$. Chọn đáp án <b>B</b>."
+      },
+      {
+        "q": "Một con thuyền di chuyển trên sông với vận tốc riêng được biểu diễn bởi vectơ \n\nrv , vận tốc của \ndòng nước được biểu diễn bởi vectơ \n\nnv và vận tốc thực tế của con thuyền được biểu diễn bởi \nvectơ \n\nv . Khẳng định nào sau đây đúng?",
+        "opts": [
+          "+\n=\n\n\n\nr\nn\nv\nv\nv .",
+          "−\n=\n\n\n\nn\nr\nv\nv\nv .",
+          "+\n=\n\n\n\nr\nn\nv\nv\nv.",
+          "−\n=\n\n\n\nr\nn\nv\nv\nv ."
+        ],
+        "ans": 2,
+        "exp": "Lời giải \nChọn C \n \nTheo quy tắc hình bình hành ta có được \n+\n=\n\n\n\nr\nn\nv\nv\nv."
+      },
+      {
+        "q": "Kết quả đo chiều dài của một cây thước được ghi là 40\n0,2 (cm)\n±\n. Sai số tương đối của phép đo \nchiều dài cây thước là:",
+        "opts": [
+          "0.2.\n∆≤",
+          "2 .\n10\nδ =",
+          "0.2.\n∆=",
+          "1 .\n200\nδ ≤\n \n\n--- TRANG 49 ---\n \n \n \nPage 5 \n \nSưu tầm và biên soạn"
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D \nTa có \n0.2\n1\n0.2\n40\n200\nd\nδ\nδ\n=\n⇒\n≤\n⇒\n≤"
+      },
+      {
+        "q": "Trong tam giác $ABC$ bất kỳ với các cạnh $a = BC, b = CA, c = AB$, công thức định lý Cosin nào sau đây là ĐÚNG?",
+        "opts": [
+          "$a^2 = b^2 + c^2 - 2bc \\cos A$",
+          "$a^2 = b^2 + c^2 + 2bc \\cos A$",
+          "$a^2 = b^2 + c^2 - 2bc \\sin A$",
+          "$a^2 = b^2 + c^2 - bc \\cos A$"
+        ],
+        "ans": 0,
+        "exp": "<b>Định lý Cosin trong tam giác:</b><br>Trong tam giác $ABC$ bất kỳ, bình phương một cạnh bằng tổng bình phương hai cạnh còn lại trừ đi hai lần tích của hai cạnh đó với cosin của góc xen giữa:<br>$$a^2 = b^2 + c^2 - 2bc \\cos A$$<br>$$b^2 = a^2 + c^2 - 2ac \\cos B$$<br>$$c^2 = a^2 + b^2 - 2ab \\cos C$$<br><b>Kết luận:</b> Khẳng định chuẩn xác là $a^2 = b^2 + c^2 - 2bc \\cos A$. Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Trong các câu sau, câu nào là <b>mệnh đề toán học</b>?",
+        "opts": [
+          "Hôm nay trời đẹp quá!",
+          "Số 15 là số nguyên tố.",
+          "Bạn có thích học Toán không?",
+          "+ 2 > 5$."
+        ],
+        "ans": 1,
+        "exp": "Câu B là mệnh đề sai nhưng là một khẳng định đúng hoặc sai rõ ràng nên là mệnh đề toán học."
+      },
+      {
+        "q": "Chiều cao của một ngọn đồi là \n347,13\n0,2\nh\nm\nm\n\n\n. Độ chính xác d của phép đo trên là",
+        "opts": [
+          "347,13\nd\nm\n\n.",
+          "347,33m .",
+          "0,2\nd\nm\n\n.",
+          "346,93\nd\nm\n\n."
+        ],
+        "ans": 2,
+        "exp": "Lời giải \nChọn C \nTa có a là số gần đúng của a với độ chính xác d qui ước viết gọn là a\na\nd\n\n\n. Vậy độ chính xác \ncủa phép đo là \n0,2\nd\nm\n\n."
+      },
+      {
+        "q": "Trong mặt phẳng tọa độ Oxy , cho (\n)\n(\n)\n2;1 ,\n4;5\nA\nB\n−\n. Tìm tọa độ điểm C sao cho tam giác ABC \ncó trọng tâm là điểm \n(0;4)\nG\n.",
+        "opts": [
+          "(\n)\n2;6\nC\n.",
+          "(\n)\n2;6\nC −\n.",
+          "2 10\n;\n3\n3\nC \n\n\n\n\n\n.",
+          "2\n10\n;\n3\n3\nC −\n−\n\n\n\n\n\n\n."
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B \nGọi \n( ; )\nC x y ."
+      },
+      {
+        "q": "Điểm nào sau đây thuộc miền nghiệm của bất phương trình: 2x - y + 1 > 0?",
+        "opts": [
+          "(0; 2)",
+          "(1; 4)",
+          "(2; 1)",
+          "(-1; 0)"
+        ],
+        "ans": 2,
+        "exp": "<b>Phương pháp kiểm tra điểm thuộc miền nghiệm:</b><br>Thay tọa độ (x₀; y₀) của từng điểm vào vế trái f(x, y) = 2x - y + 1.<br>Nếu f(x₀, y₀) &gt; 0 thì điểm đó thuộc miền nghiệm.<br><br><b>Kiểm tra từng phương án:</b><br>• Với điểm (0; 2): f(0, 2) = 2(0) - 2 + 1 = -1 &lt; 0 (Loại).<br>• Với điểm (1; 4): f(1, 4) = 2(1) - 4 + 1 = -1 &lt; 0 (Loại).<br>• Với điểm (2; 1): f(2, 1) = 2(2) - 1 + 1 = 4 &gt; 0 (Thỏa mãn bất phương trình).<br>• Với điểm (-1; 0): f(-1, 0) = 2(-1) - 0 + 1 = -1 &lt; 0 (Loại).<br><br><b>Kết luận:</b> Điểm (2; 1) thuộc miền nghiệm. Chọn đáp án <b>C</b>."
+      },
+      {
+        "q": "Phần không gạch chéo (không kể bờ) ở hình sau đây là biểu diễn miền nghiệm của hệ bất phương \ntrình nào trong bốn hệ A,B,C,D?",
+        "opts": [
+          "0\n3\n2\n6\nx\nx\ny\n>\n\n\n+\n<\n",
+          "0\n3\n2\n6\ny\nx\ny\n>\n\n\n+\n< −\n",
+          "0\n3\n2\n6\nx\nx\ny\n>\n\n\n+\n> −\n",
+          "0\n3\n2\n6\ny\nx\ny\n>\n\n\n+\n<\n"
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D \nMiền không bị gạch nằm trên trục hoành ( không kể bờ là trục Ox nên các điểm nằm trong \nmiền có tung dộ \n0\ny \n \nĐường thẳng đi qua hai điểm \n\n\n\n2;0 ;\n0;3\nA\nB\ncó phương trình: 3\n2\n6\n0\nx\ny\n\n\n\n \nPhần không bị gạch chứa điểm gốc tọa độ \n\n\n1;1\nM\n mà ta có: 3.1\n2.1\n6\n1\n0\n\n\n \nNên miền không bị gạch chứa miền nghiệm của bpt: 3\n2\n6\n0\n3\n2\n6\nx\ny\nx\ny\n\n\n\n\n\n \nDo đó phần không gạch chéo (không kể bờ) ở hình sau đây là biểu diễn miền nghiệm của hệ bất \nphương trình \n0\n3\n2\n6\ny\nx\ny\n>\n\n\n+\n<\n"
+      },
+      {
+        "q": "Vectơ MQ\nPM\nPQ\n+\n−\n\n\n\n bằng vectơ nào trong các vectơ sau?",
+        "opts": [
+          "MQ\n\n.",
+          "PQ\n\n.",
+          "0\n\n.",
+          "2MQ\n\n."
+        ],
+        "ans": 2,
+        "exp": "Lời giải \nChọn C \nTa có \n0\nMQ\nPM\nPQ\nMQ\nQP\nPM\nMP\nPM\n+\n−\n=\n+\n+\n=\n+\n=\n\n\n\n\n\n\n\n\n"
+      },
+      {
+        "q": "Cho tam giác có ba cạnh lần lượt là 5, 7, 9 . Góc lớn nhất của tam giác có cosin bằng bao nhiêu ?",
+        "opts": [
+          "5\n6 .",
+          "1\n5\n−\n.",
+          "1\n10\n−\n.",
+          "19\n30"
+        ],
+        "ans": 2,
+        "exp": "Lời giải \nChọn C \nGóc lớn nhất của tam giác có cosin là \n2\n2\n2\n5\n7\n9\n1\n2.5.7\n10\n+\n−\n= −\n."
+      },
+      {
+        "q": "Hình nào sau đây (phần không bị gạch chéo) biểu diễn miền nghiệm của bất phương trình \n1\n−\n≥\nx\ny\n?",
+        "opts": [
+          ".",
+          ".",
+          ".",
+          "."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A \nTa có (\n)\n0;0 không là nghiệm của bất phương trình nên phương án C, D sai. \nTa có (\n)\n0;1 không thuộc đường thẳng \n1\nx\ny\n−\n= nên B sai. \nTa có (\n)\n0;0 không là nghiệm của bất phương trình đồng thời đường thẳng \n1\nx\ny\n−\n= đi qua \n(\n) (\n)\n0; 1 , 1;0\n−\n nên A đúng. \nPHẦN II. Câu trắc nghiệm đúng sai. Thí sinh trả lời từ câu 1 đến câu 4. Trong mỗi ý a), b), c), d) ở mỗi \ncâu, thí sinh chọn đúng hoặc sai."
+      },
+      {
+        "q": "Trong hệ tọa độ \n,\nOxy cho ba điểm \n\n2; 1\nA\n, \n\n0; \n3\nB\n\n, \n\n3; 1\nC\n. Tìm tọa độ điểm D để ABCD \nlà hình bình hành.",
+        "opts": [
+          "\n\n5; 5 .",
+          "\n\n5; \n2\n\n.",
+          "\n\n5; \n4\n\n.",
+          "\n\n1; \n4\n\n\n."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A \n \nGọi \n\n\n;\n,\nD x y\n ABCD là hình bình hành \n\n\n\n\n2; \n1\n3; 4\nAD\nBC\nx\ny\n\n\n\n\n\n\n\n\n \n2\n3\n5\n1\n4\n5\nx\nx\ny\ny\n\n\n\n\n\n\n\n\n\n\n\n\n\n \nVậy \n\n\n5; 5\nD\n."
+      },
+      {
+        "q": "Thu nhập hàng tháng (đơn vị: triệu đồng) của 7 nhân viên trong công ti A được cho như sau: 3,5 \n6,5 6,8 7,2 8,2 8,5 9,2 . Số trung vị của mẫu số liệu trên bằng",
+        "opts": [
+          "6,8",
+          "3,5",
+          "9,2",
+          "7,2"
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D \nTa có \n7\nn =\nnên số trung vị \n4\n7,2\ne\nM\nx\n=\n=\n."
+      },
+      {
+        "q": "Mệnh đề phủ định của mệnh đề P: \"Với mọi số thực x, x² > 0\" là:",
+        "opts": [
+          "Tồn tại số thực x sao cho x² ≤ 0",
+          "Tồn tại số thực x sao cho x² < 0",
+          "Với mọi số thực x, x² ≤ 0",
+          "Tồn tại số thực x không thuộc R sao cho x² ≤ 0"
+        ],
+        "ans": 0,
+        "exp": "<b>Quy tắc phủ định mệnh đề chứa lượng từ:</b><br>• Phủ định của lượng từ \"với mọi\" (∀) là lượng từ \"tồn tại\" (∃).<br>• Phủ định của bất đẳng thức lớn hơn (&gt;) là nhỏ hơn hoặc bằng (≤).<br><br><b>Lời giải chi tiết:</b><br>Cho mệnh đề: P = \"∀ x ∈ ℝ, x² &gt; 0\".<br>Mệnh đề phủ định là:<br>$$\\overline{P}: \\exists x \\in \\mathbb{R}, x^2 \\le 0$$<br>• <i>Giải thích thêm: Với x = 0 thì 0² = 0 ≤ 0 (thỏa mãn), do đó mệnh đề phủ định này là một mệnh đề đúng.</i><br><br><b>Kết luận:</b> Mệnh đề phủ định đúng là: \"Tồn tại số thực x sao cho x² ≤ 0\". Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Cho tam giác đều ABC có cạnh a . Tính \n.\nCACB\n\n.",
+        "opts": [
+          "2\na .",
+          "2 3\n2\na\n.",
+          "2\n2\na .",
+          "2\na\n−\n."
+        ],
+        "ans": 2,
+        "exp": "Lời giải \nChọn C \nTam giác đều ABC có (\n)\n\n,\n60\n=\n=\n°\n\nCA CB\nACB\n. \nTa có \n2\n1\n.\n.\n.cos60\n. . 2\n2\n=\n° =\n=\n\na\nCACB\nCACB\na a\n."
+      },
+      {
+        "q": "Vectơ có điểm đầu là $A$ và điểm cuối là $B$ được ký hiệu chuẩn là:",
+        "opts": [
+          "$AB$",
+          "$|\\vec{AB}|$",
+          "$\\vec{AB}$",
+          "$\\vec{BA}$"
+        ],
+        "ans": 2,
+        "exp": "<b>Quy ước ký hiệu vectơ trong hình học:</b><br>- Một đoạn thẳng có hướng được gọi là vectơ.<br>- Khi điểm đầu là $A$ và điểm cuối là $B$, mũi tên chỉ từ $A$ sang $B$, ký hiệu là $\\vec{AB}$.<br>- Phân biệt: $AB$ là độ dài đoạn thẳng, $|\\vec{AB}|$ là độ dài của vectơ, còn $\\vec{BA}$ là vectơ ngược hướng (điểm đầu $B$, điểm cuối $A$).<br><br><b>Kết luận:</b> Ký hiệu chuẩn là $\\vec{AB}$. Chọn đáp án <b>C</b>."
+      },
+      {
+        "q": "Trong hình vẽ dưới đây, phần mặt phẳng không bị gạch (kể cả bờ) biểu diễn miền nghiệm của hệ \nbất phương trình nào dưới đây?",
+        "opts": [
+          "2\n0\n3\n2\nx\ny\nx\ny\n−\n≤\n\n+\n≥−\n\n.",
+          "2\n0\n3\n2\nx\ny\nx\ny\n−\n≥\n\n+\n≥−\n\n.",
+          "2\n0\n3\n2\nx\ny\nx\ny\n−\n<\n\n+\n> −\n\n.",
+          "2\n0\n3\n2\nx\ny\nx\ny\n−\n≤\n\n+\n≤−\n\n."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nVì miền nghiệm của hệ bất phương trình bao gồm cả bờ nên loại đáp án C. \nChọn điểm \n(\n)\n0;1\nM\n thuộc miền nghiệm. \nThay toạ độ điểm vào \n(\n)\n0;1\nM\n bất hệ phương trình \n2\n0\n3\n2\nx\ny\nx\ny\n−\n≥\n\n+\n≥−\n\n \ncủa đáp án B ta thấy không \nthoả mãn. \nThay toạ độ điểm vào \n(\n)\n0;1\nM\n bất hệ phương trình \n2\n0\n3\n2\nx\ny\nx\ny\n−\n≤\n\n+\n≤−\n\n \ncủa đáp án D ta thấy không \nthoả mãn. Vậy Chọn A"
+      }
+    ]
   }
 ]
