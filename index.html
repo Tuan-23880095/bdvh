@@ -81,6 +81,18 @@
       to { opacity: 1; transform: translateY(0); }
     }
     .animate-fadeIn { animation: fadeIn 0.25s ease-out forwards; }
+  
+    /* QUY CHUẨN IN ẤN PHIẾU BÀI TẬP A4 THEO YÊU CẦU THẦY TUẤN */
+    @media print {
+      @page { size: A4 portrait; margin: 12mm 15mm; }
+      body * { visibility: hidden !important; }
+      #modal-exercise, #modal-exercise * { visibility: visible !important; }
+      #modal-exercise { position: absolute !important; left: 0 !important; top: 0 !important; width: 100% !important; background: transparent !important; padding: 0 !important; }
+      #modal-exercise > div { max-width: 100% !important; max-height: none !important; border: none !important; box-shadow: none !important; border-radius: 0 !important; }
+      .no-print { display: none !important; }
+      .print-a4-sheet { padding: 0 !important; overflow: visible !important; }
+    }
+
   </style>
 
   <!-- MathJax 3 Cấu hình hỗ trợ công thức toán học chuẩn -->
@@ -620,6 +632,116 @@
   </div>
 
   <!-- =====================================================================
+       MODAL 3: BÀI GIẢNG LÝ THUYẾT CHI TIẾT CÓ MATHJAX
+       ===================================================================== -->
+  <div id="modal-theory" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-5 no-print">
+    <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-bac animate-fadeIn overflow-hidden">
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-bac flex items-center justify-between bg-slate-50/80">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center text-lg font-bold">
+            <i class="fas fa-book-reader"></i>
+          </div>
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">Bài Giảng Lý Thuyết Cốt Lõi</span>
+            <h3 id="modal-theory-title" class="font-bold text-base sm:text-lg text-muc title-serif mt-0.5">Tiêu đề bài giảng</h3>
+          </div>
+        </div>
+        <button onclick="closeTheoryModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-gray-500 hover:text-muc flex items-center justify-center text-base font-bold transition">✕</button>
+      </div>
+
+      <!-- Modal Body -->
+      <div id="modal-theory-body" class="p-6 overflow-y-auto space-y-4 text-xs sm:text-sm leading-relaxed text-slate-800">
+        <!-- Nội dung lý thuyết render bằng MathJax -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-3.5 border-t border-bac bg-slate-50 flex items-center justify-between">
+        <span class="text-[11px] text-gray-500 italic">Hệ thống khảo thí thông minh · ThS. Đinh Quốc Tuấn</span>
+        <button onclick="closeTheoryModal()" class="px-5 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-bold transition">
+          Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       MODAL 4: PHIẾU BÀI TẬP TỰ LUẬN KHỔ A4 (CHUẨN HAI LOGO HAI BÊN & CANH GIỮA TIÊU ĐỀ)
+       ===================================================================== -->
+  <div id="modal-exercise" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-5">
+    <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-bac animate-fadeIn overflow-hidden">
+      <!-- Modal Header (no-print) -->
+      <div class="px-6 py-4 border-b border-bac flex items-center justify-between bg-slate-50/80 no-print">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-luc flex items-center justify-center text-lg font-bold">
+            <i class="fas fa-file-invoice"></i>
+          </div>
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-luc bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Phiếu Bài Tập Rèn Luyện Tự Luận</span>
+            <h3 id="modal-exercise-title" class="font-bold text-base sm:text-lg text-muc title-serif mt-0.5">Tiêu đề phiếu bài tập</h3>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="printExerciseSheet()" class="px-4 py-2 bg-luc hover:bg-emerald-800 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fas fa-print"></i> <span>In Phiếu A4</span>
+          </button>
+          <button onclick="closeExerciseModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-gray-500 hover:text-muc flex items-center justify-center text-base font-bold transition">✕</button>
+        </div>
+      </div>
+
+      <!-- Printable A4 Area -->
+      <div class="p-6 sm:p-8 overflow-y-auto space-y-5 text-xs sm:text-sm text-slate-800 print-a4-sheet" id="exercise-printable-area">
+        <!-- HEADER PHIẾU A4 CHUẨN: 2 LOGO HAI BÊN & VĂN BẢN CANH GIỮA THEO ĐÚNG YÊU CẦU THẦY TUẤN -->
+        <table class="w-full border-b-2 border-[#1F4E79] pb-3 mb-4" style="border-collapse: collapse;">
+          <tr>
+            <td style="width: 65px; vertical-align: middle; text-align: left;">
+              <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/ttbdvh.jpg?alt=media&token=f270aa9b-a2bc-48e8-8910-80742b542615" alt="Logo TTBDVH" style="height: 48px; object-fit: contain;">
+            </td>
+            <td style="vertical-align: middle; text-align: center; padding: 0 10px;">
+              <div style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 800; font-size: 11.5pt; color: #1F4E79; text-transform: uppercase; letter-spacing: 0.5px;">
+                TRUNG TÂM BỒI DƯỠNG VĂN HÓA & KHẢO THÍ ĐGNL
+              </div>
+              <div style="font-family: 'Be Vietnam Pro', sans-serif; font-weight: 600; font-size: 8.5pt; color: #0F6B55; margin-top: 2px;">
+                TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN, ĐHQG-HCM · THS. ĐINH QUỐC TUẤN
+              </div>
+              <div style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 7.5pt; color: #64748B; font-style: italic; margin-top: 2px;">
+                Hệ thống phiếu học tập phân dạng chuẩn chương trình GDPT 2018
+              </div>
+            </td>
+            <td style="width: 70px; vertical-align: middle; text-align: right;">
+              <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738" alt="Logo HCMUS" style="height: 48px; object-fit: contain;">
+            </td>
+          </tr>
+        </table>
+
+        <!-- Tiêu đề đề bài -->
+        <div class="text-center space-y-1 mb-4">
+          <h2 id="sheet-title" class="font-bold text-base sm:text-lg text-[#1F4E79] title-serif uppercase tracking-wide">
+            PHIẾU HỌC TẬP & BÀI TẬP RÈN LUYỆN
+          </h2>
+          <p id="sheet-subtitle" class="text-xs text-gray-500 italic">Môn: Toán · Chương trình GDPT 2018</p>
+        </div>
+
+        <!-- Khung điền thông tin học sinh -->
+        <div class="flex items-center justify-between text-xs border border-dashed border-slate-300 p-2.5 rounded-xl bg-slate-50/50 mb-4">
+          <span><b>Họ và tên học sinh:</b> ............................................................................</span>
+          <span><b>Lớp:</b> ............... <b>Ngày học:</b> ....../....../2026</span>
+        </div>
+
+        <!-- Phần nội dung bài tập tự luận -->
+        <div id="modal-exercise-body" class="space-y-4">
+          <!-- Nội dung chi tiết các bài tập -->
+        </div>
+
+        <!-- Chân trang phiếu A4 -->
+        <div class="pt-6 mt-6 border-t border-slate-200 text-center text-[10px] text-gray-400 italic">
+          © Bản quyền tài liệu thuộc ThS. Đinh Quốc Tuấn · Trung Tâm Bồi Dưỡng Văn Hóa HCMUS · Vì mục đích giáo dục
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
        MODAL 2: NHẬP MÃ LỚP HỌC (DÙNG CHO TOÀN KHÓA)
        ===================================================================== -->
   <div id="modal-class" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
@@ -783,7 +905,68 @@
             chapterId: 'c10_1',
             chapterTitle: 'Chương I: Mệnh Đề & Tập Hợp',
             lessons: [
-              { id: 'toan10-01', week: 1, title: 'Bài 1: Mệnh đề toán học, kéo theo, phủ định', examCode: 'TOAN10_01', theory: 'Mệnh đề là khẳng định đúng hoặc sai. Mệnh đề $P \\Rightarrow Q$; phủ định $\\overline{P}$.', exercise: 'Xét tính đúng sai của mệnh đề, lập mệnh đề đảo.' },
+              { 
+                id: 'toan10-01', 
+                week: 1, 
+                title: 'Bài 1: Mệnh đề toán học, kéo theo, phủ định', 
+                examCode: 'TOAN10_01', 
+                theory: 'Mệnh đề là khẳng định đúng hoặc sai. Mệnh đề kéo theo $P \\Rightarrow Q$; mệnh đề đảo $Q \\Rightarrow P$; phủ định $\\overline{P}$.', 
+                exercise: 'Xét tính đúng sai của mệnh đề toán học, lập mệnh đề đảo, phủ định mệnh đề chứa $\\forall, \\exists$.',
+                detailTheory: `
+                  <div class="space-y-4">
+                    <div class="p-4 bg-blue-50/70 rounded-2xl border border-blue-200">
+                      <h4 class="font-bold text-sm text-lam border-b border-blue-200/60 pb-1.5 mb-2">
+                        <i class="fas fa-bookmark text-blue-600 mr-1.5"></i> I. Định Nghĩa & Phân Loại Mệnh Đề
+                      </h4>
+                      <ul class="list-disc list-inside space-y-1.5 text-xs text-slate-700 leading-relaxed">
+                        <li><b>Mệnh đề toán học:</b> Là một khẳng định có tính đúng hoặc sai rõ ràng. Một mệnh đề không thể vừa đúng vừa sai.</li>
+                        <li><b>Câu không phải mệnh đề:</b> Câu nghi vấn (hỏi?), câu cảm thán (than thở!), câu cầu khiến (mệnh lệnh).</li>
+                        <li><b>Mệnh đề chứa biến:</b> Câu khẳng định chứa biến $x, y...$ mà tính đúng sai phụ thuộc vào giá trị cụ thể của biến. Ví dụ: $P(x): \"x + 2 > 5\"$.</li>
+                      </ul>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-bac">
+                      <h4 class="font-bold text-sm text-lam border-b border-bac pb-1.5 mb-2">
+                        <i class="fas fa-cube text-blue-600 mr-1.5"></i> II. Các Dạng Mệnh Đề Thường Gặp
+                      </h4>
+                      <div class="space-y-2 text-xs text-slate-700 leading-relaxed">
+                        <p><b>1. Mệnh đề phủ định $\\overline{P}$:</b> Đúng khi $P$ sai, và sai khi $P$ đúng.</p>
+                        <p><b>2. Mệnh đề kéo theo $P \\Rightarrow Q$:</b> \"Nếu $P$ thì $Q$\". Mệnh đề này <i>chỉ sai khi $P$ đúng mà $Q$ sai</i>.</p>
+                        <p><b>3. Mệnh đề đảo $Q \\Rightarrow P$:</b> Là mệnh đề đảo của $P \\Rightarrow Q$ (tính đúng sai độc lập với mệnh đề thuận).</p>
+                        <p><b>4. Mệnh đề tương đương $P \\Leftrightarrow Q$:</b> \"P khi và chỉ khi Q\" (đúng khi cả hai cùng đúng hoặc cùng sai).</p>
+                        <p><b>5. Ký hiệu phổ quát $\\forall$ & Ký hiệu tồn tại $\\exists$:</b> Phủ định của $\\forall x \\in X, P(x)$ là $\\exists x \\in X, \\overline{P(x)}$.</p>
+                      </div>
+                    </div>
+                  </div>
+                `,
+                detailExercise: `
+                  <div class="space-y-4">
+                    <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                      <b class="text-emerald-900 font-bold">Bài 1 (Nhận biết):</b> Trong các câu sau, câu nào là mệnh đề toán học? Xét tính đúng sai của nó:
+                      <div class="mt-2 pl-3 space-y-1 text-slate-700">
+                        <p>a) $15$ là số nguyên tố.</p>
+                        <p>b) $x^2 + 1 > 0$ với mọi số thực $x$.</p>
+                        <p>c) Thời tiết hôm nay đẹp quá!</p>
+                        <p>d) $2x - 3 = 5$.</p>
+                      </div>
+                    </div>
+                    <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                      <b class="text-emerald-900 font-bold">Bài 2 (Thông hiểu):</b> Cho mệnh đề $P$: \"Nếu tứ giác $ABCD$ là hình thoi thì $ABCD$ có hai đường chéo vuông góc với nhau\".
+                      <div class="mt-2 pl-3 space-y-1 text-slate-700">
+                        <p>a) Phát biểu mệnh đề đảo của mệnh đề $P$.</p>
+                        <p>b) Mệnh đề đảo có phải là một khẳng định đúng không? Vì sao?</p>
+                      </div>
+                    </div>
+                    <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
+                      <b class="text-emerald-900 font-bold">Bài 3 (Vận dụng):</b> Lập mệnh đề phủ định của các mệnh đề sau và xét tính đúng sai:
+                      <div class="mt-2 pl-3 space-y-1 text-slate-700">
+                        <p>a) $P: \"\\forall x \\in \\mathbb{R}, x^2 - x + 1 > 0\"$.</p>
+                        <p>b) $Q: \"\\exists n \\in \\mathbb{N}, n^2 + 1 \\text{ chia hết cho } 3\"$.</p>
+                      </div>
+                    </div>
+                  </div>
+                `
+              },
               { id: 'toan10-02', week: 2, title: 'Bài 2: Tập hợp và các phép toán tập hợp', examCode: 'TOAN10_01', theory: 'Giao $A \\cap B$, Hợp $A \\cup B$, Hiệu $A \\setminus B$. Khoảng, đoạn, nửa khoảng.', exercise: 'Cho $A = (-3; 4], B = [1; 6)$. Tìm $A \\cap B, A \\cup B$.' }
             ]
           },
@@ -1036,26 +1219,42 @@
               <!-- KHUNG BÀI HỌC CHI TIẾT (LÝ THUYẾT, BÀI TẬP LỚP, TRẮC NGHIỆM ONLINE) -->
               <div id="panel-${ls.id}" class="${isOpenByDefault ? '' : 'hidden'} border-t border-bac bg-slate-50/70 p-4 sm:p-6 space-y-4 animate-fadeIn">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <!-- PHẦN 1: LÝ THUYẾT CỐT LÕI -->
-                  <div class="bg-white rounded-2xl p-4.5 border border-bac shadow-sm space-y-2">
-                    <div class="flex items-center justify-between">
-                      <h5 class="font-bold text-xs uppercase tracking-wider text-lam flex items-center gap-1.5">
-                        <i class="fas fa-file-alt text-blue-600"></i> 1. Lý Thuyết Cốt Lõi
-                      </h5>
-                      <span class="text-[10px] text-gray-400">Tóm tắt chuẩn</span>
+                  <!-- PHẦN 1: LÝ THUYẾT CỐT LÕI (NÂNG CẤP TƯƠNG TÁC) -->
+                  <div onclick="openTheoryModal('${ls.id}')" class="group bg-white hover:bg-blue-50/40 rounded-2xl p-4.5 border border-bac hover:border-blue-300 shadow-sm transition cursor-pointer space-y-2.5 flex flex-col justify-between">
+                    <div>
+                      <div class="flex items-center justify-between">
+                        <h5 class="font-bold text-xs uppercase tracking-wider text-lam flex items-center gap-1.5">
+                          <i class="fas fa-book-reader text-blue-600"></i> 1. Lý Thuyết Cốt Lõi
+                        </h5>
+                        <span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200 group-hover:bg-blue-600 group-hover:text-white transition">
+                          📖 Xem bài giảng
+                        </span>
+                      </div>
+                      <p class="text-xs text-gray-700 leading-relaxed mt-2 line-clamp-2">${esc(ls.theory)}</p>
                     </div>
-                    <p class="text-xs text-gray-700 leading-relaxed">${esc(ls.theory)}</p>
+                    <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-blue-700 font-semibold">
+                      <span>Mở toàn văn bài giảng & công thức</span>
+                      <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </div>
                   </div>
 
-                  <!-- PHẦN 2: BÀI TẬP TRÊN LỚP -->
-                  <div class="bg-white rounded-2xl p-4.5 border border-bac shadow-sm space-y-2">
-                    <div class="flex items-center justify-between">
-                      <h5 class="font-bold text-xs uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
-                        <i class="fas fa-edit text-luc"></i> 2. Bài Tập Trên Lớp
-                      </h5>
-                      <span class="text-[10px] text-gray-400">Rèn luyện tự luận</span>
+                  <!-- PHẦN 2: BÀI TẬP TRÊN LỚP (NÂNG CẤP TƯƠNG TÁC & IN A4) -->
+                  <div onclick="openExerciseModal('${ls.id}')" class="group bg-white hover:bg-emerald-50/40 rounded-2xl p-4.5 border border-bac hover:border-emerald-300 shadow-sm transition cursor-pointer space-y-2.5 flex flex-col justify-between">
+                    <div>
+                      <div class="flex items-center justify-between">
+                        <h5 class="font-bold text-xs uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
+                          <i class="fas fa-file-signature text-luc"></i> 2. Bài Tập Trên Lớp & Tự Luyện
+                        </h5>
+                        <span class="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 group-hover:bg-luc group-hover:text-white transition">
+                          📝 Xem & In phiếu A4
+                        </span>
+                      </div>
+                      <p class="text-xs text-gray-700 leading-relaxed mt-2 line-clamp-2">${esc(ls.exercise)}</p>
                     </div>
-                    <p class="text-xs text-gray-700 leading-relaxed">${esc(ls.exercise)}</p>
+                    <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-emerald-800 font-semibold">
+                      <span>Bài tập phân dạng & In phiếu khổ A4</span>
+                      <i class="fas fa-print group-hover:scale-110 transition-transform"></i>
+                    </div>
                   </div>
                 </div>
 
@@ -1249,6 +1448,100 @@
         }
       } catch (e) {
         alert("Lỗi kết nối: " + e.message);
+      }
+    }
+
+    // XỬ LÝ MODAL LÝ THUYẾT & BÀI TẬP TỰ LUẬN A4
+    function findLessonById(lessonId) {
+      for (const gradeKey in CURRICULUM) {
+        const grade = CURRICULUM[gradeKey];
+        for (const chapter of grade.chapters) {
+          for (const ls of chapter.lessons) {
+            if (ls.id === lessonId) return { lesson: ls, chapter: chapter, grade: grade };
+          }
+        }
+      }
+      return null;
+    }
+
+    function openTheoryModal(lessonId) {
+      const data = findLessonById(lessonId);
+      if (!data) return;
+      const ls = data.lesson;
+      
+      document.getElementById('modal-theory-title').innerText = ls.title;
+      const bodyEl = document.getElementById('modal-theory-body');
+      
+      if (ls.detailTheory) {
+        bodyEl.innerHTML = ls.detailTheory;
+      } else {
+        bodyEl.innerHTML = `
+          <div class="p-4 bg-blue-50/60 rounded-2xl border border-blue-200 space-y-2">
+            <h4 class="font-bold text-sm text-lam"><i class="fas fa-lightbulb text-amber-500 mr-1.5"></i> Tóm Tắt Trọng Tâm Kiến Thức</h4>
+            <p class="text-xs sm:text-sm text-slate-800 leading-relaxed">${ls.theory}</p>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-2xl border border-bac text-xs text-slate-600 leading-relaxed">
+            <p><b>Ghi chú sư phạm của Thầy Đinh Quốc Tuấn:</b> Học sinh cần đọc kỹ phần định nghĩa và các điều kiện ràng buộc trong sách giáo khoa Kết Nối Tri Thức / Chân Trời Sáng Tạo trước khi làm bài tập tự luận và trắc nghiệm.</p>
+          </div>
+        `;
+      }
+      
+      document.getElementById('modal-theory').classList.remove('hidden');
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([bodyEl]).catch(e => console.warn(e));
+      }
+    }
+
+    function closeTheoryModal() {
+      document.getElementById('modal-theory').classList.add('hidden');
+    }
+
+    function openExerciseModal(lessonId) {
+      const data = findLessonById(lessonId);
+      if (!data) return;
+      const ls = data.lesson;
+      
+      document.getElementById('modal-exercise-title').innerText = ls.title;
+      document.getElementById('sheet-title').innerText = 'PHIẾU BÀI TẬP: ' + ls.title.toUpperCase();
+      document.getElementById('sheet-subtitle').innerText = data.chapter.chapterTitle + ' · ' + data.grade.title;
+      
+      const bodyEl = document.getElementById('modal-exercise-body');
+      if (ls.detailExercise) {
+        bodyEl.innerHTML = ls.detailExercise;
+      } else {
+        bodyEl.innerHTML = `
+          <div class="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-200 space-y-2">
+            <h4 class="font-bold text-sm text-emerald-900"><i class="fas fa-tasks text-luc mr-1.5"></i> Nhiệm Vụ Rèn Luyện Trên Lớp</h4>
+            <p class="text-xs sm:text-sm text-slate-800 leading-relaxed">${ls.exercise}</p>
+          </div>
+          <div class="p-4 bg-slate-50 rounded-2xl border border-bac space-y-2 text-xs text-slate-700">
+            <p><b>Yêu cầu rèn luyện:</b> Em hãy trình bày lời giải chi tiết vào vở tự luận hoặc in phiếu này ra giấy A4 để nộp lại cho Thầy/Cô chấm điểm và sửa lỗi tư duy.</p>
+          </div>
+        `;
+      }
+      
+      document.getElementById('modal-exercise').classList.remove('hidden');
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([bodyEl]).catch(e => console.warn(e));
+      }
+    }
+
+    function closeExerciseModal() {
+      document.getElementById('modal-exercise').classList.add('hidden');
+    }
+
+    function printExerciseSheet() {
+      const area = document.getElementById('exercise-printable-area');
+      if (!area) return;
+      
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise([area]).then(() => {
+          window.print();
+        }).catch(() => {
+          window.print();
+        });
+      } else {
+        window.print();
       }
     }
 
