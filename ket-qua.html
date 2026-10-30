@@ -524,8 +524,45 @@
             </div>
 
             <div class="text-xs space-y-1.5 pl-10">
-              <p><b>Lựa chọn của em:</b> <span class="${isRight ? 'text-luc font-bold' : 'text-son font-bold'}">${d.chosen >= 0 ? ['A', 'B', 'C', 'D'][d.chosen] + '. ' + esc(d.opts[d.chosen]) : 'Chưa chọn'}</span></p>
-              ${!isRight ? `<p><b>Đáp án đúng:</b> <span class="text-luc font-bold">${['A', 'B', 'C', 'D'][d.correct_ans]}. ${esc(d.opts[d.correct_ans])}</span></p>` : ''}
+              ${(() => {
+                if (d.type === 'true_false') {
+                  const subLabels = ['a', 'b', 'c', 'd'];
+                  const chosenArr = Array.isArray(d.chosen) ? d.chosen : [];
+                  const correctArr = Array.isArray(d.correct_ans) ? d.correct_ans : [];
+                  return `
+                    <div class="mt-2 space-y-1.5">
+                      <b class="text-gray-700">Chi tiết 4 mệnh đề đúng sai:</b>
+                      ${(d.items || []).map((it, sIdx) => {
+                        const cVal = chosenArr[sIdx];
+                        const tVal = correctArr[sIdx];
+                        const match = (cVal !== undefined && parseInt(cVal) === parseInt(tVal));
+                        const cText = cVal === 1 ? 'Đúng' : (cVal === 0 ? 'Sai' : 'Chưa chọn');
+                        const tText = tVal === 1 ? 'Đúng' : 'Sai';
+                        return `
+                          <div class="flex items-center justify-between p-2 rounded-lg border ${match ? 'bg-emerald-50/50 border-emerald-200' : 'bg-red-50/50 border-red-200'}">
+                            <span class="text-gray-800"><b>${subLabels[sIdx]})</b> ${esc(it)}</span>
+                            <span class="${match ? 'text-luc font-bold' : 'text-son font-bold'} flex-none ml-3">
+                              ${cText} ${match ? '✔' : `<span class="text-luc ml-1">(Đ/A: ${tText})</span>`}
+                            </span>
+                          </div>
+                        `;
+                      }).join('')}
+                    </div>
+                  `;
+                } else if (d.type === 'short') {
+                  return `
+                    <p><b>Đáp số của em:</b> <span class="${isRight ? 'text-luc font-bold' : 'text-son font-bold'}">${esc(d.chosen || 'Chưa điền')}</span></p>
+                    ${!isRight ? `<p><b>Đáp án đúng:</b> <span class="text-luc font-bold">${esc(d.correct_ans)}</span></p>` : ''}
+                  `;
+                } else {
+                  const chosenText = (d.opts && d.chosen !== null && d.chosen >= 0 && d.opts[d.chosen]) ? ['A', 'B', 'C', 'D'][d.chosen] + '. ' + esc(d.opts[d.chosen]) : 'Chưa chọn';
+                  const correctText = (d.opts && d.correct_ans !== null && d.correct_ans >= 0 && d.opts[d.correct_ans]) ? ['A', 'B', 'C', 'D'][d.correct_ans] + '. ' + esc(d.opts[d.correct_ans]) : '';
+                  return `
+                    <p><b>Lựa chọn của em:</b> <span class="${isRight ? 'text-luc font-bold' : 'text-son font-bold'}">${chosenText}</span></p>
+                    ${!isRight && correctText ? `<p><b>Đáp án đúng:</b> <span class="text-luc font-bold">${correctText}</span></p>` : ''}
+                  `;
+                }
+              })()}
               ${d.explanation ? `
 ${d.is_explanation_locked ? `
                 <div class="bg-amber-50/80 p-3.5 rounded-xl border border-amber-200 text-gray-700 mt-3 text-xs flex items-center justify-between gap-3 shadow-sm">
