@@ -730,7 +730,7 @@ switch ($action) {
 
     // Đồng bộ lại đề thi từ standard_exams.json
     case 'reload_exams':
-        seed_default_exams();
+        seed_default_exams($pdo);
         json_out(['status' => 'success', 'message' => 'Đã đồng bộ lại đề thi chuẩn từ standard_exams.json!']);
         break;
 
