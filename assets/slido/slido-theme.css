@@ -1,0 +1,612 @@
+/**
+ * slido-theme.css — Phong cách giao diện Trình chiếu Slido & Phòng Học Sinh
+ * Bộ nhận diện thương hiệu ThS. Đinh Quốc Tuấn (Bồi Dưỡng Văn Hóa HCMUS)
+ */
+
+:root {
+  --luc: #0F6B55;
+  --luc-sang: #10B981;
+  --luc-nhe: #ECFDF5;
+  --lam: #1F4E79;
+  --lam-dam: #102A43;
+  --vang: #D97706;
+  --vang-nhe: #FEF3C7;
+  --son: #C0392B;
+  --giay: #F6F7F3;
+  --muc: #10212B;
+  --line: #CBD5E1;
+  --card: #FFFFFF;
+  --serif: 'Times New Roman', Times, 'Source Serif 4', Georgia, serif;
+  --sans: 'Be Vietnam Pro', -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ==================== SÂN KHẤU TRÌNH CHIẾU GIÁO VIÊN (16:9) ==================== */
+body.slido-teacher-body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #0B1924;
+  color: var(--muc);
+  font-family: var(--sans);
+  user-select: none;
+}
+
+#stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#scaler {
+  width: 1600px;
+  height: 900px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: center center;
+  transform: translate(-50%, -50%);
+  background: var(--giay);
+  border-radius: 12px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background: var(--giay);
+  display: flex;
+  flex-direction: column;
+  padding: 30px 48px 16px;
+  opacity: 1;
+}
+
+.slide.enter {
+  animation: slideFadeIn .22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.s-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.s-foot {
+  height: 44px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  font-size: 15px;
+  color: #64748B;
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.s-foot-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.s-foot-brand img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+/* Kicker tag */
+.s-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 4px 12px;
+  border-radius: 6px;
+  width: fit-content;
+  margin-bottom: 8px;
+}
+
+.sec-q { background: #E0F2FE; color: var(--lam); border: 1px solid #BAE6FD; }
+.sec-ans { background: #DCFCE7; color: var(--luc); border: 1px solid #BBF7D0; }
+.sec-exp { background: #FEF3C7; color: var(--vang); border: 1px solid #FDE68A; }
+
+.s-title {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--muc);
+  margin-bottom: 14px;
+}
+
+/* ==================== BỐ CỤC 2 CỘT SLIDO ==================== */
+.slido-layout {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+}
+
+.q-pane {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px 26px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+}
+
+.opts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.opts-grid.single-col {
+  grid-template-columns: 1fr;
+}
+
+.opt-box {
+  background: var(--giay);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all .15s ease;
+}
+
+.opt-box.correct {
+  background: var(--luc-nhe);
+  border-color: var(--luc);
+  box-shadow: 0 0 0 2px var(--luc);
+}
+
+.opt-label {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: #E2E8F0;
+  color: #334155;
+  font-weight: 800;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.opt-box.correct .opt-label {
+  background: var(--luc);
+  color: #fff;
+}
+
+.opt-text {
+  font-size: 21px;
+  font-family: var(--serif);
+  color: var(--muc);
+  line-height: 1.3;
+}
+
+/* Khung kết quả Slido bên phải */
+.slido-pane {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+}
+
+.slido-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #F1F5F9;
+  color: #64748B;
+}
+
+.live-pill.active {
+  background: #ECFDF5;
+  color: var(--luc);
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+  animation: pulseDot 1.4s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.slido-stat {
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748B;
+}
+
+/* Các thanh bar tỉ lệ phần trăm */
+.slido-bars {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.bar-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.bar-track {
+  width: 100%;
+  height: 18px;
+  background: #F1F5F9;
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 9px;
+  transition: width .35s ease;
+}
+
+.fill-A { background: #3B82F6; }
+.fill-B { background: #10B981; }
+.fill-C { background: #F59E0B; }
+.fill-D { background: #8B5CF6; }
+
+/* Khung hướng dẫn quét mã QR mini */
+.slido-join {
+  margin-top: auto;
+  border-top: 1px dashed var(--line);
+  padding-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.qr-mini {
+  width: 72px;
+  height: 72px;
+  flex: none;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.qr-mini svg, .qr-mini canvas, .qr-mini img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.join-info b { display: block; font-size: 14px; color: var(--muc); }
+.join-info code {
+  display: inline-block;
+  margin-top: 2px;
+  background: #F1F5F9;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--lam);
+}
+
+/* ==================== BỐ CỤC SLIDE 3 (GIẢI THÍCH & LÝ THUYẾT) ==================== */
+.explain-layout {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 22px;
+}
+
+.exp-box {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px 24px;
+  overflow-y: auto;
+}
+
+.exp-box h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--lam);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 2px solid #E2E8F0;
+  padding-bottom: 6px;
+}
+
+.exp-content {
+  font-size: 20px;
+  font-family: var(--serif);
+  line-height: 1.6;
+  color: #1E293B;
+}
+
+.exp-trap {
+  margin-top: 14px;
+  background: #FEF2F2;
+  border-left: 4px solid var(--son);
+  padding: 10px 14px;
+  border-radius: 0 8px 8px 0;
+  font-size: 17px;
+  color: #991B1B;
+}
+
+/* ==================== MINI CONTROL DOCK NỔI DƯỚI ĐÁY ==================== */
+#mini-dock {
+  position: fixed;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 6px 14px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-size: 13px;
+  transition: opacity .2s ease;
+}
+
+#mini-dock:hover {
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.dock-btn {
+  background: transparent;
+  color: #E2E8F0;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--sans);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all .15s ease;
+}
+
+.dock-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+.dock-btn.primary {
+  background: var(--luc);
+  color: #fff;
+}
+
+.dock-btn.primary:hover {
+  background: #10B981;
+}
+
+.dock-pos {
+  font-size: 13px;
+  font-weight: 700;
+  color: #F8FAFC;
+  padding: 0 8px;
+  font-variant-numeric: tabular-nums;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Drawer Mục lục slide */
+#toc-drawer {
+  position: fixed;
+  top: 0;
+  right: -360px;
+  width: 350px;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.96);
+  backdrop-filter: blur(12px);
+  z-index: 150;
+  box-shadow: -5px 0 25px rgba(0,0,0,0.5);
+  transition: right .25s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  color: #fff;
+}
+
+#toc-drawer.open { right: 0; }
+
+.toc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.toc-list {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.toc-item {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #CBD5E1;
+  cursor: pointer;
+  transition: background .12s ease;
+}
+
+.toc-item:hover, .toc-item.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ==================== PHÒNG HỌC SINH MOBILE (sv-toan7) ==================== */
+body.slido-student-body {
+  background-color: #F1F5F9;
+  color: var(--muc);
+  font-family: var(--sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.stu-header {
+  background: linear-gradient(135deg, #102A43 0%, #1F4E79 100%);
+  color: #fff;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.stu-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  padding: 18px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  margin: 14px 12px;
+}
+
+.stu-opt-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #F8FAFC;
+  border: 2px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--muc);
+  cursor: pointer;
+  transition: all .15s ease;
+  margin-bottom: 10px;
+}
+
+.stu-opt-btn.selected {
+  background: var(--luc-nhe);
+  border-color: var(--luc);
+  box-shadow: 0 0 0 2px var(--luc);
+}
+
+.stu-opt-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #E2E8F0;
+  color: #334155;
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.stu-opt-btn.selected .stu-opt-badge {
+  background: var(--luc);
+  color: #fff;
+}
+
+.btn-submit-vote {
+  width: 100%;
+  background: var(--luc);
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--sans);
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(15, 107, 85, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  transition: all .15s ease;
+}
+
+.btn-submit-vote:disabled {
+  background: #94A3B8;
+  box-shadow: none;
+  cursor: not-allowed;
+}
