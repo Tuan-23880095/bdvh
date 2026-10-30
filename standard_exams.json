@@ -2537,5 +2537,235 @@
         "exp": "<b>Phương pháp giải:</b> Sử dụng quy tắc lũy thừa.<br><b>Lời giải chi tiết:</b> $4^2 = 4 \\cdot 4 = 16$.<br>Chọn đáp án <b>C</b>"
       }
     ]
+  },
+  {
+    "exam_code": "TOAN11_2025_02",
+    "grade": "L11",
+    "subject": "TOAN",
+    "title": "Đấu Trường Toán 11: Lượng Giác, Cấp Số & Hình Học Không Gian Chuẩn 2025",
+    "description": "Bộ đề kiểm tra định kỳ Toán 11 cấu trúc mới 2025 GDPT 2018 Kết Nối Tri Thức Với Cuộc Sống.",
+    "time_minutes": 40,
+    "questions": [
+      {
+        "q": "Trong không gian, qua hai đường thẳng cắt nhau có thể xác định được bao nhiêu mặt phẳng?",
+        "opts": [
+          "Duy nhất 1 mặt phẳng",
+          "Vô số mặt phẳng",
+          "2 mặt phẳng",
+          "Không có mặt phẳng nào"
+        ],
+        "ans": 0,
+        "exp": "<b>Định lý xác định mặt phẳng:</b> Một mặt phẳng được hoàn toàn xác định nếu nó đi qua hai đường thẳng cắt nhau.<br><b>Kết luận:</b> Có duy nhất 1 mặt phẳng. Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Cho hình chóp SABCD có đáy ABCD là hình bình hành tâm O . Gọi M là trung điểm của cạnh \nbên SD . Gọi K là giao điểm của đường thẳng BM với mặt phẳng (\n)\nSAC . Khi đó tỷ số diện \ntích \nSBK\nSMK\nS\nS\n bằng",
+        "opts": [
+          "4 .",
+          "3 .",
+          "1.",
+          "2 ."
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D \n \nTa có:(\n)\n(\n)\nSBD\nSAC\nSO\n\n=\n. \nXét (\n)\nSBD có SO\nBM\nK\n\n=\nK\n\nlà giao điểm của BM với (\n)\nSAC . \nTrong SBD\n\n có \n,\nBM SO là hai đường trung tuyến. \nMặt khác BM\nSO\nK\nK\n\n=\n\nlà trọng tâm của \n2\nSBD\nKM\nKB\n\n\n=\n. \nTa có sin\nsin\nSKB\nSKM\n=\n. \nSuy ra: \n1\n.\n.sin\n2\n2\n1\n.\n.sin\n2\nSBK\nSMK\nSK KB\nSKB\nS\nKB\nS\nKM\nSK KM\nSKM\n=\n=\n=\n."
+      },
+      {
+        "q": "Cho phương trình \n2\nsin\n3sin\n4\n0\nx\nx\n+\n−\n=\n. Ta đặt \nsin\nt\nx\n=\n, phương trình thu được có dạng",
+        "opts": [
+          "2\n3\n4\n0\nt\nt\n−\n−\n=\n.",
+          "2\n3\n4\n0\nt\nt\n+\n−\n=\n.",
+          "2\n3\n4\n0\nt\nt\n−\n+\n−\n=\n.",
+          "2\n3\n4\n0\nt\nt\n+\n+\n=\n."
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B \nCho phương trình \n2\nsin\n3sin\n4\n0\nx\nx\n+\n−\n=\n. \nĐặt \nsin\nt\nx\n=\n, phương trình thu được có dạng 2\n3\n4\n0\nt\nt\n+\n−\n=\n."
+      },
+      {
+        "q": "Cho hình chóp .\nS ABCD có đáy ABCD là hình bình hành. Gọi M là điểm trên đoạn AB ( M \nkhác A và khác B ). Qua M vẽ mặt phẳng ( )\n song song với (\n)\nSBC . Thiết diện tạo bởi mặt \nphẳng ( )\n và hình chóp .\nS ABCD là hình gì?",
+        "opts": [
+          "Hình thang.",
+          "Hình bình hành.",
+          "Hình tam giác.",
+          "Ngũ giác."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A \n \nQua M vẽ mặt phẳng ( )\n song song với (\n)\nSBC : \n(\n)\n/ /\nMN\nBC N\nDC\n\n(\n)\n,\n/ /\n,\nMQ\nSB Q\nSB\n\n(\n)\n/ /\n/ /\nQP\nAD\nBC P\nSD\n\n \nVậy thiết diện là hình thang."
+      },
+      {
+        "q": "Tập giá trị của hàm số \nsin 2\n3\ny\nx\n=\n+ là:",
+        "opts": [
+          "\n\n1;1\n−\n.",
+          "\n\n2;3 .",
+          "\n\n3;4 .",
+          "\n\n2;4 ."
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D \nTa có 1\nsin 2\n1\nx\n−\n \n2\nsin 2\n3\n4\nx\n\n\n+\n\n2\n4\ny\n\n\n\n. \nVậy tập giá trị của hàm số \nsin 2\n3\ny\nx\n=\n+ là \n\n\n2;4\nT =\n."
+      },
+      {
+        "q": "Tập xác định của hàm số \ntan\ny\nx\n=\n là:",
+        "opts": [
+          "\\\n,\n4\nk\nk\nZ\n\n\n\n\n+\n\n\n\n\n\n.",
+          "\\\n,\n2\nk\nk\nZ\n\n\n\n\n+\n\n\n\n\n\n.",
+          "\\\n2 ,\n2\nk\nk\nZ\n\n\n\n\n+\n\n\n\n\n\n.",
+          "\n\n\\\n,\nk\nk\nZ\n\n\n."
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B \nĐiều kiện xác định: cos\n0\n2\nx\nx\nk\n\n\n\n\n\n+\n \nVậy tập xác định: \n\\\n,\n2\nD\nk\nk\nZ\n\n\n\n\n=\n+\n\n\n\n\n\n."
+      },
+      {
+        "q": "Mệnh đề nào sau đây sai?",
+        "opts": [
+          "Qua một điểm nằm ngoài một mặt phẳng cho trước có một và chỉ một mặt phẳng song song \nvới mặt phẳng đã cho.",
+          "Hai mặt phẳng ( )\nP và ( )\nQ được gọi là song song với nhau nếu chúng không có điểm chung.",
+          "Nếu mặt phẳng ( )\nP chứa hai đường thẳng ,a b và ,a b cùng song song với mặt phẳng ( )\nQ \nthì ( )\nP song song với ( )\nQ .",
+          "Hai mặt phẳng phân biệt cùng song song với mặt phẳng thứ ba thì song song với nhau."
+        ],
+        "ans": 2,
+        "exp": "Lời giải \nChọn C \n \nNếu \n( )\n,a b\nP\n\n mà ,a b cùng song song với ( )\nQ và a song song b thì không suy ra được ( )\nP \nsong song với ( )\nQ ."
+      },
+      {
+        "q": "Cho tứ diện ABCD . Gọi M là trung điểm của cạnh AD , G là trọng tâm tam giác ABD và N \nlà điểm thuộc cạnh BC sao cho \n2\nNB\nNC\n=\n. Kết luận nào sau đây sai?",
+        "opts": [
+          "(\n)\n// \nNG\nBCM .",
+          "(\n)\n// \nNG\nACD .",
+          "NG và AB chéo nhau.",
+          "// \nNG\nCM ."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A \n \nTa có \n(\n)\nNG\nBCM\n\n do NG không song song (\n)\nBCM ."
+      },
+      {
+        "q": "Cho a và b lần lượt là số hạng thứ nhất và số hạng thứ năm của một cấp số cộng có công sai \n0\nd \n. Giá trị của b\na\nd\n−\n bằng",
+        "opts": [
+          "6 .",
+          "5 .",
+          "3 .",
+          "4 ."
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D"
+      },
+      {
+        "q": "Tìm giá trị lớn nhất của hàm số \n2cos\n3\n3\ny\nx\n\n\n\n=\n−\n+\n\n\n\n\n?",
+        "opts": [
+          "9 .",
+          "5 .",
+          "1.",
+          "7 ."
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B \nTa có: 1\ncos\n1\n2\n2cos\n2\n1\n2cos\n3\n5\n1\n5\n3\n3\n3\nx\nx\nx\ny\n\n\n\n\n\n\n\n\n\n−\n−\n−\n−\n\n\n−\n+\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n \nVậy min\n5\ncos\n1\n2 ,\n3\n3\ny\nx\nx\nk\nk\n\n\n\n\n\n=\n\n−\n= \n=\n+\n\n\n\n\n"
+      },
+      {
+        "q": "Tập xác định của hàm số \nsin\ny\nx\n=\n là",
+        "opts": [
+          "D =\n.",
+          "\n\n\\\n,\nD\nk\n=\n\n.",
+          "\\\n,\n2\nD\nk\n\n\n\n\n=\n+\n\n\n\n\n\n.",
+          "\n\\ 0\nD =\n."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A \nTập xác định của hàm số \nsin\ny\nx\n=\n là D =\n."
+      },
+      {
+        "q": "Tập nghiệm của phương trình cot\n0\nx =\n là",
+        "opts": [
+          ",\n2\nS\nk\nk\n\n\n\n\n=\n+\n\n\n\n\n\n.",
+          "2 ,\n2\nS\nk\nk\n\n\n\n\n=\n+\n\n\n\n\n\n.",
+          "\n\n2 ,\nS\nk\nk\n\n=\n\n.",
+          "\n\n,\nS\nk\nk\n\n=\n\n."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A \nTa có cot\n0\nx =\n \n;\n2\nx\nk\nk\n\n\n\n=\n+\n\n."
+      },
+      {
+        "q": "Trong không gian, khẳng định nào trong các khẳng định sau là đúng?",
+        "opts": [
+          "Luôn có một mặt phẳng đi qua bốn điểm phân biệt không thẳng hàng.",
+          "Nếu hai mặt phẳng phân biệt có một điểm chung thì chúng có một đường thẳng chung.",
+          "Có duy nhất một mặt phẳng đi qua một điểm và một đường thẳng.",
+          "Không có mặt phẳng nào đi qua hai đường thẳng cắt nhau."
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B \nCâu A sai vì không có mặt phẳng nào đi qua 4 đỉnh của một tứ diện. \nCâu B đúng và đường thẳng đó được gọi là giao tuyến của hai mặt phẳng. \nCâu C sai vì nếu điểm đó thuộc đường thẳng thì có vô số mặt phẳng chứa đường thẳng đó. \nCâu D sai vì hai đường thẳng cắt nhau xác định một mặt phẳng."
+      },
+      {
+        "q": "Cho hình lăng trụ \n.\nABC A B C\n. Gọi I , J , K lần lượt là trọng tâm của các tam giác ABC , \nAA C\n\n, A B C\n. Mặt phẳng nào sau đây song song với mặt phẳng (\n)\nIJK ?",
+        "opts": [
+          "(\n)\nA BC\n\n.",
+          "(\n)\nAA B\n\n.",
+          "(\n)\nBB C\n\n.",
+          "(\n)\nAA C\n\n."
+        ],
+        "ans": 2,
+        "exp": "Lời giải \nChọn C \n \nDo I , J , K lần lượt là trọng tâm của các tam giác ABC , AA C\n\n, A B C\n nên: \n(\n)\n2\n//\n//\n3\nAI\nAJ\nIJ\nMN\nIJ\nBCC B\nAM\nAN\n\n=\n=\n\n\n. \nTương tự: \n(\n)\n(\n) (\n)\n//\n//\nIK\nBCC B\nIJK\nBCC B\n\n\n\n. Hay (\n) (\n)\n//\nIJK\nBB C\n\n."
+      },
+      {
+        "q": "Cho cấp số nhân (\n)\nnu\n với \n1\n2\nu =\n \n2\n6\nu =\n. Công bội của cấp số nhân này bằng",
+        "opts": [
+          "3 .",
+          "1\n3 .",
+          "4 .",
+          "12."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A \nCông bội của cấp số nhân \n2\n1\n6\n3\n2\nu\nq\nu\n=\n=\n=\n."
+      },
+      {
+        "q": "Trên khoảng (\n)\n0;, phương trình sin\n1\nx = có bao nhiêu nghiệm?",
+        "opts": [
+          "1.",
+          "2 .",
+          "3 .",
+          "Vô số."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A \nsin\n1\n,\n2\nx\nx\nk\nk\n\n\n= \n=\n+\n\n. \nDo \n(\n)\n0;\nx\n\n\n nên có 1 giá trị \n2\nx\n\n=\n thỏa mãn. Vậy phương trình có 1 nghiệm."
+      },
+      {
+        "q": "Hàm số nào dưới đây có đồ thị đối xứng qua trục tung?",
+        "opts": [
+          "cos\ny\nx\n=\n.",
+          "cot\ny\nx\n=\n.",
+          "tan\ny\nx\n=\n.",
+          "sin\ny\nx\n=\n."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A \nHàm số \ncos\ny\nx\n=\n là hàm số chẵn nên có đồ thị đối xứng qua trục tung."
+      },
+      {
+        "q": "Các họ nghiệm của phương trình sin\nsin 2\nx\nx\n= −\n.",
+        "opts": [
+          "2 ;\n2\n3\nk\nx\nx\nk\n\n\n\n=\n=\n+\n.",
+          "2\n;\n3\nx\nk\nx\nk\n\n\n\n\n=\n+\n=\n+\n.",
+          "2\n2 ;\n2\n3\nk\nx\nk\nx\n\n\n\n=\n+\n=\n.",
+          "2\n;\n3\nx\nk\nx\nk\n\n\n\n=\n=\n+\n."
+        ],
+        "ans": 0,
+        "exp": "Lời giải \nChọn A \n(\n)\n2\n2\n2\nsin\nsin 2\nsin 2\nsin\n3\n2\n2\n2\nk\nx\nx\nk\nx\nx\nx\nx\nx\nx\nx\nk\nx\nk\n\n\n\n\n\n\n\n= −+\n=\n\n\n= −\n\n=\n−\n\n\n\n\n=\n+\n+\n\n=\n+\n\n."
+      },
+      {
+        "q": "Trong không gian, cho hai mặt phẳng phân biệt ( )\n và ( )\n. Có bao nhiêu vị trí tương đối giữa \n( )\n và ( )\n?",
+        "opts": [
+          "4 .",
+          "3 .",
+          "1.",
+          "2 ."
+        ],
+        "ans": 3,
+        "exp": "Lời giải \nChọn D \nCác vị trí tương đối giữa 2 mặt phẳng phân biệt là: song song, cắt nhau."
+      },
+      {
+        "q": "Cho cấp số nhân (\n)\nn\nu\n biết \n4\n10\n7,\n56\nu\nu\n=\n=\n. Tìm công bội q .",
+        "opts": [
+          "2\nq = \n.",
+          "2\nq = \n.",
+          "2\nq =\n.",
+          "2\nq =\n."
+        ],
+        "ans": 1,
+        "exp": "Lời giải \nChọn B \nGọi \n1u và q là số hạng đầu và công bội của cấp số nhân (\n)\nn\nu\n, \n1\n0\nu \n, \n0\nq \n. \nTa có: \n3\n4\n1\n9\n10\n1\n.\n7\n56\nu\nu q\nu\nu q\n\n=\n=\n\n=\n=\n\n \n4\n6\n10\n1\n7\n1\n56\n8\nu\nu\nq\n\n=\n=\n=\n \n6\n8\n2\nq\nq\n\n=\n\n= \n."
+      }
+    ]
   }
 ]
