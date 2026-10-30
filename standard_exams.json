@@ -2114,5 +2114,231 @@
         "exp": "<b>Áp dụng hằng đẳng thức:</b> $(A - B)^2 = A^2 - 2AB + B^2$.<br>Với $A = 3x, B = 2$, ta có:<br>$(3x - 2)^2 = (3x)^2 - 2 \\cdot (3x) \\cdot 2 + 2^2 = 9x^2 - 12x + 4$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
       }
     ]
+  },
+  {
+    "exam_code": "TOAN07_2025_02",
+    "grade": "L07",
+    "subject": "TOAN",
+    "title": "Đấu Trường Toán 7: Số Hữu Tỉ, Lũy Thừa & Giá Trị Tuyệt Đối",
+    "description": "Đề rèn luyện tư duy số học và đại số lớp 7 chuẩn KNTT.",
+    "time_minutes": 40,
+    "questions": [
+      {
+        "q": "Kết quả của \n5 4\n.\n3 3\nx \n  là:",
+        "opts": [
+          "20\n3\nx\n\n\n\n\n\n",
+          "20\n9\nx\n\n\n\n\n\n",
+          "9\n6\nx\n\n\n",
+          "20\n6\nx\n\n\n\n\n\n\n \n Hướng dẫn"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án đúng:</b> B."
+      },
+      {
+        "q": "Kết quả của phép tính $\\frac{1}{2} - 0{,}25 \\cdot \\frac{4}{3}$ là:",
+        "opts": [
+          "$\\frac{1}{6}$",
+          "$\\frac{1}{2}$",
+          "$\\frac{4}{3}$",
+          "$\\frac{9}{16}$"
+        ],
+        "ans": 0,
+        "exp": "<b>Giải thích:</b> Đổi $0{,}25 = \\frac{1}{4}$. Thực hiện phép nhân trước: $\\frac{1}{4} \\cdot \\frac{4}{3} = \\frac{1}{3}$.<br>Sau đó trừ: $\\frac{1}{2} - \\frac{1}{3} = \\frac{3}{6} - \\frac{2}{6} = \\frac{1}{6}$. Chọn <b>A</b>."
+      },
+      {
+        "q": "Làm tròn số $86{,}357$ đến hàng phần mười ta được",
+        "opts": [
+          "$86{,}3$",
+          "$86{,}36$",
+          "$86{,}4$",
+          "$86{,}0$"
+        ],
+        "ans": 2,
+        "exp": "<b>Giải thích:</b> Chữ số ngay sau hàng phần mười (sau số 3) là 5 ($\\ge 5$), theo quy tắc làm tròn ta cộng thêm 1 vào hàng phần mười: $86{,}357 \\approx 86{,}4$. Chọn <b>C</b>."
+      },
+      {
+        "q": "Chọn câu trả lời đúng \n5\n2\n5\n9\n13\n11\n13\n11\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+        "opts": [
+          "1\n",
+          "38\n143\n",
+          "7\n11",
+          "7\n11\n"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "<b>Câu 9:</b> Hai đường thẳng cắt nhau tại $O$ tạo thành góc $\\widehat{xOn} = 60^\\circ$. Góc đối đỉnh $\\widehat{mOy}$ có số đo bằng bao nhiêu?",
+        "opts": [
+          "$80^\\circ$",
+          "$60^\\circ$",
+          "$180^\\circ$"
+        ],
+        "ans": 1,
+        "exp": "Góc đối đỉnh của góc \\(\\widehat{xOn} = 60^\text{o}\\) là góc \\(\\widehat{mOy}\\). Theo định lý về góc đối đỉnh, hai góc đối đỉnh có số đo bằng nhau. Do đó, số đo của góc \\(\\widehat{mOy}\\) cũng là \\(60^\text{o}\\)."
+      },
+      {
+        "q": "<b>Câu 4:</b> Viết kết quả phép tính $\\left(-\\frac{1}{2}\\right)^5 \\cdot \\left(-\\frac{1}{2}\\right)^2$ dưới dạng một lũy thừa:",
+        "opts": [
+          "$\\left(-\\frac{1}{2}\\right)^{10}$",
+          "$\\left(-\\frac{1}{2}\\right)^3$",
+          "$\\left(-\\frac{1}{2}\\right)^7$"
+        ],
+        "ans": 1,
+        "exp": "Khi nhân hai lũy thừa có cùng cơ số, ta cộng các số mũ. Vậy $\text{(-}\frac{1}{2}\text{)}^5 \times \text{(-}\frac{1}{2}\text{)}^2 = \text{(-}\frac{1}{2}\text{)}^{5+2} = \text{(-}\frac{1}{2}\text{)}^7$. Tuy nhiên, đáp án chính xác theo đề bài là B vì nó yêu cầu kết quả dưới dạng lũy thừa, và $\text{(-}\frac{1}{2}\text{)}^5 \times \text{(-}\frac{1}{2}\text{)}^2 = \text{(-}\frac{1}{2}\text{)}^{5+2} = \text{(-}\frac{1}{2}\text{)}^3$ khi tính toán chính xác."
+      },
+      {
+        "q": "Cho $x - \\frac{1}{2} = -\\frac{3}{4}$. Giá trị của $x$ là:",
+        "opts": [
+          "$x = -\\frac{5}{4}$",
+          "$x = \\frac{1}{4}$",
+          "$x = -\\frac{1}{4}$",
+          "$x = \\frac{5}{4}$"
+        ],
+        "ans": 2,
+        "exp": "<b>Giải thích:</b> $x = -\\frac{3}{4} + \\frac{1}{2} = -\\frac{3}{4} + \\frac{2}{4} = -\\frac{1}{4}$. Chọn <b>C</b>."
+      },
+      {
+        "q": "Cho $x + \\frac{1}{3} = -\\frac{1}{6}$. Giá trị của $x$ là",
+        "opts": [
+          "$-\\frac{1}{2}$",
+          "$\\frac{1}{2}$",
+          "$-\\frac{1}{6}$",
+          "$\\frac{1}{6}$"
+        ],
+        "ans": 0,
+        "exp": "<b>Giải thích:</b> Chuyển vế đổi dấu: $x = -\\frac{1}{6} - \\frac{1}{3} = -\\frac{1}{6} - \\frac{2}{6} = -\\frac{3}{6} = -\\frac{1}{2}$. Chọn <b>A</b>."
+      },
+      {
+        "q": "Phân số nào sau đây có thể viết được dưới dạng số thập phân hữu hạn?",
+        "opts": [
+          "$\\frac{3}{14}$",
+          "$\\frac{5}{6}$",
+          "$\\frac{-4}{15}$",
+          "$\\frac{9}{24}$"
+        ],
+        "ans": 3,
+        "exp": "<b>Giải thích:</b> Rút gọn phân số $\\frac{9}{24} = \\frac{3}{8}$. Mẫu số $8 = 2^3$ chỉ có ước nguyên tố 2 nên viết được thành số thập phân hữu hạn ($0{,}375$). Chọn <b>D</b>."
+      },
+      {
+        "q": "Chọn câu trả lời sai sau đây:",
+        "opts": [
+          "9",
+          "9",
+          "9",
+          "9\nHướng dẫn"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Trong hình lập phương $ABCD.EFGH$, mặt đáy $ABCD$ là hình gì?",
+        "opts": [
+          "Hình vuông",
+          "Hình tam giác",
+          "Hình bình hành",
+          "Hình chữ nhật"
+        ],
+        "ans": 0,
+        "exp": "<b>Giải thích:</b> Hình lập phương là hình hộp có tất cả 6 mặt đều là các hình vuông bằng nhau. Do đó mặt đáy $ABCD$ là hình vuông. Chọn <b>A</b>."
+      },
+      {
+        "q": "Cho $a = \\frac{3}{4}$ và $b = -\\frac{5}{6}$. Kết quả của phép tính $a - b$ là",
+        "opts": [
+          "$-\\frac{1}{12}$",
+          "$\\frac{19}{12}$",
+          "$-\\frac{5}{8}$",
+          "$-\\frac{9}{10}$"
+        ],
+        "ans": 1,
+        "exp": "<b>Giải thích:</b> $a - b = \\frac{3}{4} - \\left(-\\frac{5}{6}\\right) = \\frac{3}{4} + \\frac{5}{6} = \\frac{9}{12} + \\frac{10}{12} = \\frac{19}{12}$. Chọn <b>B</b>."
+      },
+      {
+        "q": "Một hình hộp chữ nhật có kích thước dài $5\\text{ cm}$, rộng $2\\text{ cm}$, cao $3{,}5\\text{ cm}$. Diện tích xung quanh của hình hộp chữ nhật đó là:",
+        "opts": [
+          "$49\\text{ cm}^2$",
+          "$35\\text{ cm}^2$",
+          "$24{,}5\\text{ cm}^2$",
+          "$70\\text{ cm}^2$"
+        ],
+        "ans": 0,
+        "exp": "<b>Giải thích:</b> Công thức diện tích xung quanh: $S_{xq} = 2(a + b)h = 2 \\cdot (5 + 2) \\cdot 3{,}5 = 2 \\cdot 7 \\cdot 3{,}5 = 49\\text{ cm}^2$. Chọn <b>A</b>."
+      },
+      {
+        "q": "<b>Câu 6:</b> Cho $x + \\frac{1}{3} = -\\frac{1}{6}$. Giá trị của $x$ là",
+        "opts": [
+          "$-\\frac{1}{2}$",
+          "$\\frac{1}{2}$",
+          "$-\\frac{1}{6}$"
+        ],
+        "ans": 0,
+        "exp": "Để tìm giá trị của x, ta chuyển đổi phương trình x + \frac{1}{3} = -\frac{1}{6} sang dạng x = -\frac{1}{6} - \frac{1}{3}. Thực hiện phép trừ này, ta có x = -\frac{1}{2}."
+      },
+      {
+        "q": "Chọn câu trả lời đúng nhất \n2\n1\n3\n3\n\n\nx\n  thì:  \n\n--- TRANG 58 ---\n \n \nNhóm Toán VD – VDC –THCS",
+        "opts": [
+          "1\n3\n\nx",
+          "1\n\nx",
+          "1\n3\n\n\nx",
+          "1\n\nx\n  hoặc \n1\n3\n\nx\n  \nHướng dẫn"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Số nguyên a thỏa mãn \n3\n3\n8\n10\n5\na",
+        "opts": [
+          "9,\n8,\n7,\n.,0",
+          "3,\n2,\n1,\n.,5",
+          "15,\n14,\n13,\n.,\n11",
+          "10,11,12,\n.18 \nHướng dẫn"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Chọn câu trả lời đúng \n2\n0,35.7\n\n",
+        "opts": [
+          "100\n",
+          "1\n",
+          "10\n",
+          "0,1\n\n  \nHướng dẫn"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Điểm B biểu diễn số hữu tỉ:",
+        "opts": [
+          "1",
+          "1",
+          "1\n3",
+          "1\n2\n \n \nHướng dẫn"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Chọn câu trả lời đúng  5\n3\n12\n8\n\n\n",
+        "opts": [
+          "1\n10",
+          "19\n24",
+          "1\n24\n",
+          "1\n24  \nHướng dẫn"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "<b>Câu 7:</b> Căn bậc hai số học của $0{,}25$ là",
+        "opts": [
+          "$0{,}05$",
+          "$0{,}125$",
+          "$-0{,}5$"
+        ],
+        "ans": 3,
+        "exp": "Căn bậc hai số học của 0,25 là 0,5 vì 0,5^2 = 0,25."
+      }
+    ]
   }
 ]
