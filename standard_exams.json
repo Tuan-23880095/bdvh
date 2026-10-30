@@ -1884,5 +1884,235 @@
         "exp": "Lời giải \nVì miền nghiệm của hệ bất phương trình bao gồm cả bờ nên loại đáp án C. \nChọn điểm \n(\n)\n0;1\nM\n thuộc miền nghiệm. \nThay toạ độ điểm vào \n(\n)\n0;1\nM\n bất hệ phương trình \n2\n0\n3\n2\nx\ny\nx\ny\n−\n≥\n\n+\n≥−\n\n \ncủa đáp án B ta thấy không \nthoả mãn. \nThay toạ độ điểm vào \n(\n)\n0;1\nM\n bất hệ phương trình \n2\n0\n3\n2\nx\ny\nx\ny\n−\n≤\n\n+\n≤−\n\n \ncủa đáp án D ta thấy không \nthoả mãn. Vậy Chọn A"
       }
     ]
+  },
+  {
+    "exam_code": "TOAN08_2025_02",
+    "grade": "L08",
+    "subject": "TOAN",
+    "title": "Đấu Trường Toán 8: Hằng Đẳng Thức, Phân Thức & Tứ Giác (Chuẩn GDPT 2018)",
+    "description": "Đề ôn luyện trắc nghiệm Toán 8 theo chương trình GDPT 2018 KNTT.",
+    "time_minutes": 40,
+    "questions": [
+      {
+        "q": "Hãy chọn câu sai:",
+        "opts": [
+          "Hình thang có hai góc kềmột đáy bằng nhau là hình bình hành.",
+          "Tứgiác có hai cặp cạnh đối song song là hình bình hành.",
+          "Tứgiác có hai cặp cạnh đối bằng nhau là hình bình hành.",
+          "Tứgiác có hai cặp góc đối bằng nhau là hình bình hành."
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Cho biểu thức P = 2x(x2 −4) + x2(x2 −9). Hãy chọn câu đúng",
+        "opts": [
+          "Giá trịcủa biểu thức P tại x = −2 là 30.",
+          "Giá trịcủa biểu thức P tại x = 0 là 1.",
+          "Giá trịcủa biểu thức P tại x = 2 là −20.",
+          "Giá trịcủa biểu thức P tại x = −9 là 0."
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Hãy chọn câu đúng. Cho hình vẽ. Tứgiác là hình vuông theo dấu hiệu:",
+        "opts": [
+          "Hình thoi có một góc vuông..",
+          "Tứgiác có hai đường chéo bằng nhau..",
+          "Hình bình hành có hai đường chéo bằng nhau..",
+          "Hình thoi có hai đường chéo bằng nhau.."
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Kết quả của phép nhân đơn thức $2x$ với đa thức $(3x - 4y)$ là:",
+        "opts": [
+          "$6x^2 - 8xy$",
+          "$6x^2 - 4y$",
+          "$6x - 8xy$",
+          "$5x^2 - 8xy$"
+        ],
+        "ans": 0,
+        "exp": "<b>Quy tắc nhân đơn thức với đa thức:</b> $A(B - C) = A \\cdot B - A \\cdot C$.<br><b>Lời giải:</b><br>$2x(3x - 4y) = 2x \\cdot 3x - 2x \\cdot 4y = 6x^2 - 8xy$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Gọi x0 là giá trịthỏa mãn x4 −4x3 + 8x2 −16x + 16 = 0. Chọn câu đúng",
+        "opts": [
+          "x0 < 3.",
+          "x0 > 2.",
+          "x0 < 1.",
+          "x0 > 4."
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Hãy chọn câu sai.",
+        "opts": [
+          "Tứgiác có 4 cạnh bằng nhau là hình thoi.",
+          "Hình bình hành có hai đường chéo vuông góc với nhau là hình thoi.",
+          "Hình bình hành có đường chéo là phân giác của một góc là hình thoi.",
+          "Tứgiác có hai đường chéo vuông góc với nhau và bằng nhau là hình thoi."
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Trong các hình tứ giác sau, hình nào luôn có hai đường chéo vuông góc với nhau?",
+        "opts": [
+          "Hình chữ nhật",
+          "Hình bình hành",
+          "Hình thoi",
+          "Hình thang cân"
+        ],
+        "ans": 2,
+        "exp": "<b>Tính chất hình học:</b><br>• Hình thoi có hai đường chéo vuông góc với nhau và cắt nhau tại trung điểm của mỗi đường (đây cũng là tính chất của hình vuông vì hình vuông là hình thoi đặc biệt).<br>• Hình chữ nhật và hình thang cân có hai đường chéo bằng nhau nhưng không nhất thiết vuông góc.<br><b>Kết luận:</b> Chọn đáp án <b>C</b> (Hình thoi)."
+      },
+      {
+        "q": "Hãy chọn câu sai. Hình chữnhật có",
+        "opts": [
+          "Bốn góc.",
+          "Các cạnh đối bằng nhau.",
+          "Hai đường chéo vuông góc với nhau.",
+          "Hai đường chéo giao nhau tại trung điểm mỗi đường."
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Hãy chọn câu sai. Cho ABCD là hình chữnhật có O là giao điểm hai đường chéo. Khi\nđó",
+        "opts": [
+          "AB = CD, AD = BC.",
+          "AC = BD.",
+          "AO = OB.",
+          "OC > OD."
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Hãy chọn câu đúng. Cho hình vẽ. Tứgiác là hình vuông theo dấu hiệu:",
+        "opts": [
+          "Hình thoi có hai đường chéo bằng nhau.",
+          "Hình bình hành có hai đường chéo bằng nhau.",
+          "Tứgiác có hai đường chéo bằng nhau.",
+          "Hình thoi có một góc vuông."
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Điền biểu thức thích hợp vào chỗ trống để được đẳng thức đúng: $x^3 - 8 = (x - 2)(\\dots\\dots)$",
+        "opts": [
+          "$x^2 + 2x + 4$",
+          "$x^2 - 2x + 4$",
+          "$x^2 + 4x + 4$",
+          "$x^2 - 4$"
+        ],
+        "ans": 0,
+        "exp": "<b>Hằng đẳng thức hiệu hai lập phương:</b> $A^3 - B^3 = (A - B)(A^2 + AB + B^2)$.<br>Với $A = x, B = 2$ ($B^3 = 2^3 = 8$):<br>$x^3 - 8 = (x - 2)(x^2 + 2x + 4)$.<br><b>Kết luận:</b> Biểu thức cần điền là $x^2 + 2x + 4$. Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Hãy chọn câu sai.",
+        "opts": [
+          "Hình bình hành có hai góc đối bằng nhau.",
+          "Hình bình hành có hai đường chéo cắt nhau tại trung điểm mỗi đường.",
+          "Hình bình hành có hai đường chéo vuông góc với nhau.",
+          "Hình bình hành có hai cặp cạnh đối song song."
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Chọn câu sai. Tứgiác nào có hai đường chéo bằng nhau?",
+        "opts": [
+          "Hình thoi.",
+          "Hình vuông.",
+          "Hình chữnhật.",
+          "Hình thang cân."
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Chọn câu trảlời đúng nhất.",
+        "opts": [
+          "Thu thập dữliệu trực tiếp là việc thu thập dữliệu thông qua quan sát, làm thí nghiệm,\nlập bảng hỏi, phỏng vấn;. . . .",
+          "Thu thập dữliệu gián tiếp là việc thu thập dữliệu từnhững nguồn có sẵn như sách, báo,\nmạng internet;. . . .",
+          "CảA, B đều đúng.",
+          "CảA và B đều sai."
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Hãy chọn câu sai",
+        "opts": [
+          "Tứgiác lồi là tứgiác luôn nằm trong một nửa mặt phẳng có bờlà đường thẳng chứa bất\nkỳcạnh nào của tứgiác.",
+          "Tổng các góc của một tứgiác bằng 360◦.",
+          "Tổng các góc của một tứgiác bằng 180◦.",
+          "Tứgiác ABCD là hình gồm đoạn thẳng AB, BC, CD, DA, trong đó bất kì hai đoạn\nthẳng nào cũng không nằm trên một đường thẳng."
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Cho M = x2ny2n : (−xnyn)2 (với n ∈N, x, y̸ = 0). Chọn câu đúng",
+        "opts": [
+          "Giá trịcủa M luôn là sốdương.",
+          "Giá trịcủa M luôn là sốâm.",
+          "Giá trịcủa M luôn bằng 0.",
+          "Giá trịcủa M luôn bằng 1."
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Chọn câu trảlời đúng nhất",
+        "opts": [
+          "Mỗi đa thức được coi là một đơn thức.",
+          "Mỗi đơn thức được coi là một đa thức.",
+          "CảA, B đều đúng.",
+          "CảA, B đều sai."
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Kết quả của phép chia $(12x^3y^2 - 8x^2y^3) : 4xy^2$ là:",
+        "opts": [
+          "$3x^2 - 2xy$",
+          "$3x^2 - 2y$",
+          "$3x - 2xy$",
+          "$3x^2y - 2xy$"
+        ],
+        "ans": 0,
+        "exp": "<b>Quy tắc chia đa thức cho đơn thức:</b> Chia từng hạng tử của đa thức cho đơn thức rồi cộng các kết quả lại.<br><b>Lời giải:</b><br>$\\frac{12x^3y^2}{4xy^2} - \\frac{8x^2y^3}{4xy^2} = 3x^{3-1}y^{2-2} - 2x^{2-1}y^{3-2} = 3x^2 - 2xy$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      },
+      {
+        "q": "Chọn câu đúng nhất",
+        "opts": [
+          "Hình thang cân là hình thang có hai góc kềmột đáy bằng nhau.",
+          "Trong hình thang cân, hai cạnh bên bằng nhau.",
+          "Trong hình thang cân, hai đường chéo bằng nhau.",
+          "CảA, B, C đều đúng."
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án đúng:</b> C."
+      },
+      {
+        "q": "Khai triển hằng đẳng thức $(3x - 2)^2$ ta được kết quả là:",
+        "opts": [
+          "$9x^2 - 12x + 4$",
+          "$9x^2 - 6x + 4$",
+          "$9x^2 - 4$",
+          "$3x^2 - 12x + 4$"
+        ],
+        "ans": 0,
+        "exp": "<b>Áp dụng hằng đẳng thức:</b> $(A - B)^2 = A^2 - 2AB + B^2$.<br>Với $A = 3x, B = 2$, ta có:<br>$(3x - 2)^2 = (3x)^2 - 2 \\cdot (3x) \\cdot 2 + 2^2 = 9x^2 - 12x + 4$.<br><b>Kết luận:</b> Chọn đáp án <b>A</b>."
+      }
+    ]
   }
 ]
