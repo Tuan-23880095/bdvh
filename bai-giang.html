@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bài giảng trình chiếu · Trung tâm Bồi dưỡng Văn hóa</title>
+  <meta name="theme-color" content="#0F6B55">
+  <link rel="icon" type="image/svg+xml" href="assets/logo-sen.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+  <link rel="stylesheet" href="assets/bdvh-ui.css?v=20261031">
+  <style>
+    .bg-wrap { padding: 40px 0 72px; }
+    .the { background: #fff; border: 1px solid var(--vien); border-radius: var(--r); padding: 22px 24px; margin-bottom: 20px; }
+    .the h2 { font-size: 21px; margin-bottom: 6px; }
+    .the > p { color: var(--muc-2); font-size: 14.5px; }
+    .buoc-nhap { margin: 12px 0 0; padding-left: 20px; color: var(--muc-2); font-size: 14px; }
+    .buoc-nhap li { margin-bottom: 4px; }
+    .drop { display: block; margin-top: 16px; border: 2px dashed var(--bac); border-radius: var(--r); padding: 26px; text-align: center; color: var(--muc-2); cursor: pointer; transition: border-color .15s, background .15s; }
+    .drop:hover, .drop.keo { border-color: var(--luc); background: var(--luc-nhat); }
+    .drop b { color: var(--luc); }
+    .xem-truoc { margin-top: 18px; }
+    .xt-file { border: 1px solid var(--vien); border-radius: var(--r-sm); padding: 14px 16px; margin-bottom: 12px; }
+    .xt-file .hang { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .xt-file .input { height: 38px; flex: 1; min-width: 240px; }
+    .xt-tom { font-size: 13.5px; color: var(--muc-2); margin-top: 8px; }
+    .xt-canh-bao { font-size: 13px; color: var(--tho-chu); background: var(--tho-nhat); border-radius: var(--r-sm); padding: 8px 12px; margin-top: 8px; }
+    .xt-cau { margin-top: 8px; font-size: 13px; max-height: 220px; overflow: auto; border-top: 1px solid var(--vien); }
+    .xt-cau div { display: grid; grid-template-columns: 70px 100px 70px 1fr; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--vien); }
+    .xt-cau span:last-child { color: var(--muc-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bo { display: grid; grid-template-columns: 1fr auto; gap: 10px 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--vien); }
+    .bo:last-child { border-bottom: 0; }
+    .bo-ten { font-weight: 600; font-size: 16px; }
+    .bo-meta { font-size: 13px; color: var(--muc-3); margin-top: 2px; }
+    .bo-act { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+    .thanh { height: 6px; background: var(--vien); border-radius: 3px; overflow: hidden; margin-top: 8px; max-width: 320px; }
+    .thanh i { display: block; height: 100%; background: var(--luc); width: 0; transition: width .3s; }
+    .duyet { grid-column: 1 / -1; display: none; }
+    .duyet.mo { display: block; }
+    .dc { border: 1px solid var(--vien); border-radius: var(--r-sm); padding: 12px 14px; margin-top: 10px; background: var(--giay); }
+    .dc-head { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+    .dc-head b { color: var(--lam); }
+    .dc-head .de-tom { color: var(--muc-2); font-size: 14px; flex: 1; min-width: 200px; }
+    .chip { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--vien); color: var(--muc-2); white-space: nowrap; }
+    .chip.ok { background: var(--luc-nhat); color: var(--luc); }
+    .chip.lech { background: var(--son-nhat); color: var(--son); }
+    .chip.duyet-ok { background: var(--lam-nhat); color: var(--lam); }
+    .dc-giai { font-size: 14px; margin-top: 8px; }
+    .dc-giai ol { margin: 4px 0; padding-left: 20px; }
+    .dc-giai .gv { color: var(--son); font-size: 13px; }
+    .dc-act { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+    .sua textarea { width: 100%; min-height: 64px; font: 14px/1.5 var(--sans); padding: 8px 10px; border: 1px solid var(--bac); border-radius: var(--r-sm); }
+    .sua label { display: block; font-size: 12.5px; font-weight: 600; margin: 8px 0 4px; }
+    .can-dn { background: var(--tho-nhat); color: var(--tho-chu); border-left: 3px solid var(--tho); padding: 12px 16px; border-radius: 0 var(--r-sm) var(--r-sm) 0; margin-bottom: 20px; font-size: 14.5px; }
+    .trong-ds { padding: 20px 0; color: var(--muc-3); text-align: center; }
+    @media (max-width: 640px) { .bo { grid-template-columns: 1fr; } .bo-act { justify-content: flex-start; } .xt-cau div { grid-template-columns: 56px 1fr; } .xt-cau div span:nth-child(3), .xt-cau div span:nth-child(4) { display: none; } }
+  </style>
+  <script>
+    window.MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }, options: { enableMenu: false } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a href="index.html" class="brand" aria-label="Trang chủ">
+      <span class="dqt-logo-o brand-sen"><img src="assets/logo-sen.svg" alt="Logo sen ThS. Đinh Quốc Tuấn"></span>
+      <span class="brand-text">
+        <span class="brand-ten">Bài giảng trình chiếu</span>
+        <span class="brand-phu">Trung tâm Bồi dưỡng Văn hóa · ThS. Đinh Quốc Tuấn</span>
+      </span>
+    </a>
+    <div class="head-actions" style="margin-left:auto">
+      <a class="btn btn-vien" href="index.html">Trang chủ</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap bg-wrap">
+  <div class="can-dn" id="can-dn" hidden>Đăng nhập giảng viên tại <a href="thay-tuan.html">trang quản trị</a> để nhập đề và tạo lời giải bằng Gemini. Học sinh vẫn xem được các bài giảng bên dưới.</div>
+
+  <section class="the" id="the-nhap" hidden>
+    <h2>Nhập đề từ Google Drive</h2>
+    <p>Mỗi câu của đề sẽ thành 3 slide: <b>Đề</b> (chữ to, tự co giãn lấp đầy khung) → <b>Đáp án</b> → <b>Giải thích từng bước</b> cho học sinh yếu (Gemini soạn, thầy duyệt).</p>
+    <ol class="buoc-nhap">
+      <li>Mở Google Drive → thư mục <b>DAYKEM</b> → Toan6 / Toan7 / Toan8 / KHTN…</li>
+      <li>Chọn file đề <code>.html</code> → bấm <b>Tải xuống</b> (có thể chọn nhiều file một lần).</li>
+      <li>Kéo các file vừa tải vào ô dưới đây, kiểm tra bảng xem trước rồi bấm <b>Lưu bộ bài giảng</b>.</li>
+    </ol>
+    <label class="drop" id="drop">
+      <input type="file" id="file" accept=".html,.htm,text/html" multiple hidden>
+      <b>Chọn file đề .html</b> hoặc kéo thả vào đây
+    </label>
+    <div class="xem-truoc" id="xem-truoc"></div>
+  </section>
+
+  <section class="the" id="the-dong-bo" hidden>
+    <h2>Đồng bộ tự động từ Google Drive</h2>
+    <p>Mỗi giờ, một đoạn Google Apps Script trong tài khoản Google của thầy tự tìm file đề trong <b>DAYKEM</b> có ngày ở đầu tên từ <b>hôm nay</b> trở đi
+      (ví dụ <code>2026-10-31_Toan7_….html</code>), đưa lên đây thành bài giảng và nhờ Gemini soạn sẵn lời giải. Sáng ra chỉ việc bấm <b>Chiếu bài hôm nay</b>.</p>
+    <ol class="buoc-nhap">
+      <li>Bấm <b>Tạo mã đồng bộ</b> rồi <b>Sao chép script</b> (mã đã được điền sẵn trong script).</li>
+      <li>Mở <a href="https://script.google.com/home/projects/create" target="_blank" rel="noopener">script.google.com → Dự án mới</a>, xoá mã mẫu, dán script, bấm Lưu.</li>
+      <li>Chọn hàm <code>caiDat</code> → <b>Chạy</b> → cấp quyền (đọc Drive, kết nối ra ngoài). Xong — từ giờ tự chạy mỗi giờ.</li>
+    </ol>
+    <div class="hang" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center">
+      <button class="btn btn-chinh" type="button" id="tao-ma">Tạo mã đồng bộ</button>
+      <button class="btn btn-vien" type="button" id="chep-script" hidden>Sao chép script</button>
+      <span class="xt-tom" id="ma-tt" style="margin:0"></span>
+    </div>
+    <textarea id="script-xem" class="input" readonly hidden style="height:180px;margin-top:12px;font:12.5px/1.5 var(--mono);padding:10px"></textarea>
+  </section>
+
+  <section class="the">
+    <div class="sec-head" style="margin-bottom:6px">
+      <div><h2>Các bộ bài giảng</h2><p class="xt-tom" id="gemini-tt"></p></div>
+    </div>
+    <div id="ds-bo"><p class="trong-ds">Đang tải…</p></div>
+  </section>
+</main>
+
+<div class="toast-host" id="toast-host" aria-live="assertive"></div>
+
+<script src="assets/doc-de-drive.js?v=20261031"></script>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const LOAI = { abcd: 'A–D', dung_sai: 'Đúng/Sai', tra_loi_ngan: 'Trả lời ngắn', tu_luan: 'Tự luận' };
+let laGV = false, coGemini = false, dsBo = [], choLuu = [];
+const daGiaiChiTiet = {};
+
+function toast(m, loai) { const t = document.createElement('div'); t.className = 'toast ' + (loai || ''); t.textContent = m; $('toast-host').appendChild(t); setTimeout(() => t.remove(), 4500); }
+async function api(action, body) {
+  const r = await fetch('api.php?action=' + action, body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {});
+  const d = await r.json().catch(() => ({ status: 'error', message: 'Máy chủ trả về không hợp lệ.' }));
+  if (d.status !== 'success') throw new Error(d.message || 'Lỗi máy chủ');
+  return d.data;
+}
+const vanBan = (html) => { const d = document.createElement('div'); d.innerHTML = html || ''; return (d.textContent || '').replace(/\s+/g, ' ').trim(); };
+const typeset = (el) => window.MathJax && MathJax.typesetPromise ? MathJax.typesetPromise([el]).catch(() => {}) : null;
+
+/* ---------- Nhập file ---------- */
+async function docFiles(files) {
+  for (const f of files) {
+    const text = await f.text();
+    const r = DocDeDrive.parse(text, f.name);
+    choLuu.push(r);
+  }
+  veXemTruoc();
+}
+function veXemTruoc() {
+  const nut = choLuu.length > 1 ? `<div class="hang" style="margin-bottom:10px"><button class="btn btn-chinh" type="button" id="luu-het">Lưu tất cả ${choLuu.length} đề</button></div>` : '';
+  $('xem-truoc').innerHTML = nut + choLuu.map((r, i) => {
+    const dem = r.cau.reduce((a, c) => (a[c.loai] = (a[c.loai] || 0) + 1, a), {});
+    const tom = Object.entries(dem).map(([k, v]) => `${v} ${LOAI[k]}`).join(' · ');
+    return `<div class="xt-file">
+      <div class="hang"><input class="input" data-ten="${i}" value="${esc(r.tieu_de)}" aria-label="Tên bộ bài giảng">
+        <button class="btn btn-chinh btn-sm" type="button" data-luu="${i}" ${r.cau.length ? '' : 'disabled'}>Lưu bộ bài giảng</button>
+        <button class="btn btn-vien btn-sm" type="button" data-bo="${i}">Bỏ</button></div>
+      <div class="xt-tom">${esc(r.nguon)} · <b>${r.cau.length} câu</b> (${tom || 'không có câu'}) · ${r.cau.length * 3} slide</div>
+      ${r.canh_bao.length ? `<div class="xt-canh-bao">${r.canh_bao.map(esc).join('<br>')}</div>` : ''}
+      <div class="xt-cau">${r.cau.map((c) => `<div><span>${esc(c.so)}</span><span>${LOAI[c.loai]}</span><span>${esc(c.dap_an || (c.dap_an_html ? 'có lời giải' : '—'))}</span><span>${esc(vanBan(c.de_html).slice(0, 120))}</span></div>`).join('')}</div>
+    </div>`;
+  }).join('');
+}
+$('xem-truoc').addEventListener('click', async (e) => {
+  if (e.target.id === 'luu-het') {
+    e.target.disabled = true;
+    let ok = 0;
+    for (const r of [...choLuu]) {
+      if (!r.cau.length) continue;
+      e.target.textContent = `Đang lưu ${ok + 1}/${choLuu.length}…`;
+      try { await api('bg_save', { tieu_de: r.tieu_de, ma: r.ma, khoi: r.khoi, mon: r.mon, nguon: r.nguon, ngay: r.ngay, cau: r.cau }); ok++; choLuu.splice(choLuu.indexOf(r), 1); }
+      catch (err) { toast(r.nguon + ': ' + err.message, 'loi'); }
+    }
+    toast('Đã lưu ' + ok + ' bộ bài giảng.', 'ok'); veXemTruoc(); taiDs(); return;
+  }
+  const luu = e.target.closest('[data-luu]'), bo = e.target.closest('[data-bo]');
+  if (bo) { choLuu.splice(+bo.dataset.bo, 1); veXemTruoc(); return; }
+  if (!luu) return;
+  const i = +luu.dataset.luu, r = choLuu[i];
+  const ten = document.querySelector(`[data-ten="${i}"]`).value.trim() || r.tieu_de;
+  luu.disabled = true; luu.textContent = 'Đang lưu…';
+  try {
+    await api('bg_save', { tieu_de: ten, ma: r.ma, khoi: r.khoi, mon: r.mon, nguon: r.nguon, ngay: r.ngay, cau: r.cau });
+    toast('Đã lưu "' + ten + '" (' + r.cau.length + ' câu).', 'ok');
+    choLuu.splice(i, 1); veXemTruoc(); taiDs();
+  } catch (err) { toast(err.message, 'loi'); luu.disabled = false; luu.textContent = 'Lưu bộ bài giảng'; }
+});
+$('file').addEventListener('change', (e) => { docFiles([...e.target.files]); e.target.value = ''; });
+['dragover', 'dragenter'].forEach((ev) => $('drop').addEventListener(ev, (e) => { e.preventDefault(); $('drop').classList.add('keo'); }));
+['dragleave', 'drop'].forEach((ev) => $('drop').addEventListener(ev, () => $('drop').classList.remove('keo')));
+$('drop').addEventListener('drop', (e) => { e.preventDefault(); docFiles([...e.dataTransfer.files].filter((f) => /\.html?$/i.test(f.name))); });
+
+/* ---------- Danh sách bộ ---------- */
+async function taiDs() {
+  try { dsBo = await api('bg_list'); } catch (e) { $('ds-bo').innerHTML = `<p class="trong-ds">${esc(e.message)}</p>`; return; }
+  if (!dsBo.length) { $('ds-bo').innerHTML = '<p class="trong-ds">Chưa có bộ bài giảng nào.' + (laGV ? ' Nhập file đề ở khung phía trên.' : '') + '</p>'; return; }
+  $('ds-bo').innerHTML = dsBo.map((b) => `
+    <div class="bo" id="bo-${b.bo_id}">
+      <div>
+        <div class="bo-ten">${b.hom_nay ? '<span class="chip ok" style="margin-right:6px">Hôm nay</span>' : ''}${esc(b.tieu_de)}</div>
+        <div class="bo-meta">${b.ngay ? 'Ngày ' + esc(b.ngay.split('-').reverse().join('/')) + ' · ' : ''}${esc(b.mon || '')}${b.khoi ? ' · Lớp ' + esc(String(b.khoi).replace(/^L0?/, '')) : ''} · ${b.so_cau} câu · ${b.so_cau * 3} slide · lời giải từng bước: <b id="dem-${b.bo_id}">${b.so_da_giai}/${b.so_cau}</b></div>
+        <div class="thanh"><i id="thanh-${b.bo_id}" style="width:${b.so_cau ? b.so_da_giai / b.so_cau * 100 : 0}%"></i></div>
+      </div>
+      <div class="bo-act">
+        <a class="btn btn-chinh btn-sm" href="trinh-chieu.html?bo=${encodeURIComponent(b.ma)}">Trình chiếu</a>
+        ${laGV ? `<button class="btn btn-vien btn-sm" type="button" data-tao="${b.bo_id}" ${coGemini ? '' : 'disabled title="Chưa cấu hình khoá Gemini"'}>${b.so_da_giai < b.so_cau ? 'Tạo lời giải (Gemini)' : 'Đã đủ lời giải'}</button>
+        <button class="btn btn-vien btn-sm" type="button" data-duyet="${b.bo_id}">Duyệt lời giải</button>
+        <button class="btn btn-chu btn-sm" type="button" data-xoa="${b.bo_id}">Xoá</button>` : ''}
+      </div>
+      <div class="duyet" id="duyet-${b.bo_id}"></div>
+    </div>`).join('');
+}
+
+async function taoTatCa(boId, btn) {
+  const b = await api('bg_get&bo_id=' + boId);
+  const can = b.cau.filter((c) => !(c.giai && c.giai.cac_buoc && c.giai.cac_buoc.length));
+  if (!can.length) { toast('Bộ này đã có đủ lời giải.', 'ok'); return; }
+  btn.disabled = true;
+  let xong = b.cau.length - can.length, loi = 0;
+  const capNhat = () => { btn.textContent = `Gemini đang soạn… ${xong}/${b.cau.length}`; $('dem-' + boId).textContent = `${xong}/${b.cau.length}`; $('thanh-' + boId).style.width = (xong / b.cau.length * 100) + '%'; };
+  capNhat();
+  const hang = [...can];
+  async function tho() {
+    while (hang.length) {
+      const c = hang.shift();
+      try { await api('bg_giai', { bo_id: boId, cau_id: c.id }); xong++; }
+      catch (e) { loi++; if (/khoá|key|403|401/i.test(e.message)) { toast(e.message, 'loi'); hang.length = 0; } }
+      capNhat();
+    }
+  }
+  await Promise.all([tho(), tho()]);   // 2 luồng song song cho nhanh mà không vượt hạn mức
+  btn.disabled = false;
+  btn.textContent = loi ? `Tạo tiếp (${loi} câu lỗi)` : 'Đã đủ lời giải';
+  toast(loi ? `Xong, ${loi} câu chưa tạo được — bấm lại để thử tiếp.` : 'Đã tạo đủ lời giải. Thầy nên bấm "Duyệt lời giải" để rà trước khi chiếu.', loi ? 'loi' : 'ok');
+  if (daGiaiChiTiet[boId]) moDuyet(boId, true);
+}
+
+async function moDuyet(boId, ep) {
+  const box = $('duyet-' + boId);
+  if (box.classList.contains('mo') && !ep) { box.classList.remove('mo'); return; }
+  box.classList.add('mo'); box.innerHTML = '<p class="trong-ds">Đang tải…</p>';
+  const b = await api('bg_get&bo_id=' + boId);
+  daGiaiChiTiet[boId] = b;
+  box.innerHTML = b.cau.map((c) => veDuyetCau(b, c)).join('');
+  typeset(box);
+}
+function veDuyetCau(b, c) {
+  const g = c.giai;
+  const chip = !g || !g.cac_buoc?.length ? '<span class="chip">chưa có lời giải</span>'
+    : `<span class="chip ${g.kiem_tra_dap_an === 'khop' ? 'ok' : g.kiem_tra_dap_an === 'khong_khop' ? 'lech' : ''}">${g.kiem_tra_dap_an === 'khop' ? 'Gemini khớp đáp án' : g.kiem_tra_dap_an === 'khong_khop' ? 'Gemini ra kết quả KHÁC đáp án' : 'chưa kiểm được đáp án'}</span>${g.da_duyet ? '<span class="chip duyet-ok">đã duyệt</span>' : ''}`;
+  return `<div class="dc" id="dc-${b.bo_id}-${c.id}">
+    <div class="dc-head"><b>${esc(c.so)}</b><span class="chip">${LOAI[c.loai]}${c.dap_an ? ' · ĐA ' + esc(c.dap_an) : ''}</span>${chip}<span class="de-tom">${esc(vanBan(c.de_html).slice(0, 140))}</span></div>
+    ${g && g.cac_buoc?.length ? `<div class="dc-giai">
+      ${g.kien_thuc ? `<div><b>Cần nhớ:</b> ${esc(g.kien_thuc)}</div>` : ''}
+      <ol>${g.cac_buoc.map((s) => `<li>${s.tieu_de ? '<b>' + esc(s.tieu_de) + ':</b> ' : ''}${esc(s.noi_dung)}</li>`).join('')}</ol>
+      ${g.loi_thuong_gap ? `<div><b>Lỗi hay gặp:</b> ${esc(g.loi_thuong_gap)}</div>` : ''}
+      ${g.ghi_chu_giao_vien ? `<div class="gv"><b>Ghi chú cho thầy:</b> ${esc(g.ghi_chu_giao_vien)}</div>` : ''}
+      <div class="xt-tom">Nguồn: ${esc(g.nguon || '')} · ${esc(g.luc || '')}</div></div>` : ''}
+    <div class="dc-act">
+      <button class="btn btn-vien btn-sm" type="button" data-c-tao="${b.bo_id}|${c.id}" ${coGemini ? '' : 'disabled'}>${g && g.cac_buoc?.length ? 'Tạo lại' : 'Tạo bằng Gemini'}</button>
+      ${g && g.cac_buoc?.length ? `<button class="btn btn-vien btn-sm" type="button" data-c-sua="${b.bo_id}|${c.id}">Sửa</button>
+      ${g.da_duyet ? '' : `<button class="btn btn-chinh btn-sm" type="button" data-c-duyet="${b.bo_id}|${c.id}">Đánh dấu đã duyệt</button>`}` : ''}
+      <a class="btn btn-chu btn-sm" href="trinh-chieu.html?bo=${encodeURIComponent(b.ma)}&s=${1 + b.cau.indexOf(c) * 3}" target="_blank" rel="noopener">Xem slide</a>
+    </div></div>`;
+}
+function capNhatCau(boId, cauId, giai) {
+  const b = daGiaiChiTiet[boId]; if (!b) return;
+  const c = b.cau.find((x) => x.id === cauId); c.giai = giai;
+  const el = $(`dc-${boId}-${cauId}`); el.outerHTML = veDuyetCau(b, c);
+  typeset($(`dc-${boId}-${cauId}`));
+}
+function moSua(boId, cauId) {
+  const c = daGiaiChiTiet[boId].cau.find((x) => x.id === cauId), g = c.giai || {};
+  const el = $(`dc-${boId}-${cauId}`);
+  el.insertAdjacentHTML('beforeend', `<div class="sua">
+    <label>Cần nhớ</label><textarea data-f="kien_thuc">${esc(g.kien_thuc || '')}</textarea>
+    <label>Các bước (mỗi dòng một bước; dạng "Tiêu đề: nội dung")</label><textarea data-f="buoc" style="min-height:120px">${esc((g.cac_buoc || []).map((s) => (s.tieu_de ? s.tieu_de + ': ' : '') + s.noi_dung).join('\n'))}</textarea>
+    <label>Lỗi hay gặp</label><textarea data-f="loi_thuong_gap">${esc(g.loi_thuong_gap || '')}</textarea>
+    <div class="dc-act"><button class="btn btn-chinh btn-sm" type="button" data-c-luu="${boId}|${cauId}">Lưu và đánh dấu đã duyệt</button></div></div>`);
+}
+
+$('ds-bo').addEventListener('click', async (e) => {
+  const t = e.target.closest('button'); if (!t) return;
+  const d = t.dataset;
+  try {
+    if (d.tao) return taoTatCa(+d.tao, t);
+    if (d.duyet) return moDuyet(+d.duyet);
+    if (d.xoa) {
+      const b = dsBo.find((x) => x.bo_id === +d.xoa);
+      if (!confirm('Xoá bộ bài giảng "' + b.tieu_de + '" và toàn bộ lời giải đã tạo?')) return;
+      await api('bg_delete', { bo_id: +d.xoa }); toast('Đã xoá.', 'ok'); return taiDs();
+    }
+    const [boId, cauId] = (d.cTao || d.cSua || d.cDuyet || d.cLuu || '').split('|');
+    if (d.cTao) {
+      t.disabled = true; t.textContent = 'Gemini đang soạn…';
+      const r = await api('bg_giai', { bo_id: +boId, cau_id: cauId, ghi_de: true });
+      capNhatCau(+boId, cauId, r.giai); taiDsNhe(+boId);
+    } else if (d.cSua) moSua(+boId, cauId);
+    else if (d.cDuyet || d.cLuu) {
+      const c = daGiaiChiTiet[+boId].cau.find((x) => x.id === cauId);
+      const g = Object.assign({}, c.giai, { da_duyet: true });
+      if (d.cLuu) {
+        const box = t.closest('.sua'), f = (k) => box.querySelector(`[data-f="${k}"]`).value.trim();
+        g.kien_thuc = f('kien_thuc'); g.loi_thuong_gap = f('loi_thuong_gap');
+        g.cac_buoc = f('buoc').split('\n').map((s) => s.trim()).filter(Boolean).map((s) => {
+          const m = s.match(/^([^:]{1,60}):\s*(.+)$/); return m ? { tieu_de: m[1], noi_dung: m[2] } : { tieu_de: '', noi_dung: s };
+        });
+      }
+      await api('bg_sua_giai', { bo_id: +boId, cau_id: cauId, giai: g });
+      capNhatCau(+boId, cauId, g); toast('Đã lưu.', 'ok');
+    }
+  } catch (err) { toast(err.message, 'loi'); t.disabled = false; }
+});
+async function taiDsNhe(boId) {
+  const b = await api('bg_get&bo_id=' + boId);
+  const n = b.cau.filter((c) => c.giai && c.giai.cac_buoc && c.giai.cac_buoc.length).length;
+  $('dem-' + boId).textContent = `${n}/${b.cau.length}`; $('thanh-' + boId).style.width = (n / b.cau.length * 100) + '%';
+}
+
+let maVuaTao = '';
+$('tao-ma').addEventListener('click', async (e) => {
+  if ($('ma-tt').dataset.co === '1' && !confirm('Tạo mã mới thì mã cũ (script đang chạy) hết hiệu lực — thầy phải dán lại script. Tiếp tục?')) return;
+  try {
+    maVuaTao = (await api('bg_token_tao', {})).token;
+    $('ma-tt').innerHTML = 'Mã mới: <code>' + esc(maVuaTao) + '</code> — chỉ hiện một lần, đã điền sẵn trong script.';
+    $('ma-tt').dataset.co = '1';
+    const goc = await (await fetch('assets/dong-bo-drive.gs?v=' + Date.now())).text();
+    const sc = goc.replace("'DAN_MA_DONG_BO_VAO_DAY'", "'" + maVuaTao + "'").replace("'https://bdvh.diemdanhsv.com/api.php'", "'" + new URL('api.php', location.href).href + "'");
+    $('script-xem').value = sc; $('script-xem').hidden = false; $('chep-script').hidden = false;
+  } catch (err) { toast(err.message, 'loi'); }
+});
+$('chep-script').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText($('script-xem').value); toast('Đã sao chép script — dán vào script.google.com.', 'ok'); }
+  catch (e) { $('script-xem').select(); document.execCommand('copy'); toast('Đã chọn sẵn script, bấm Ctrl+C để sao chép.', 'ok'); }
+});
+
+(async function () {
+  try {
+    const tt = await api('bg_trang_thai');
+    laGV = !!tt.giao_vien; coGemini = !!tt.gemini;
+    $('the-dong-bo').hidden = !laGV;
+    if (laGV) { $('ma-tt').textContent = tt.token_luc ? 'Đã có mã đồng bộ (tạo lúc ' + tt.token_luc + ').' : 'Chưa có mã đồng bộ.'; $('ma-tt').dataset.co = tt.token_luc ? '1' : ''; }
+  } catch (e) {}
+  $('can-dn').hidden = laGV;
+  $('the-nhap').hidden = !laGV;
+  if (laGV) $('gemini-tt').innerHTML = coGemini ? 'Gemini đã sẵn sàng (dùng chung khoá trong cấu hình máy chủ của diemdanhsv).' : '<b style="color:var(--son)">Chưa có khoá Gemini</b> — thêm <code>\'gemini\' => [\'api_key\' => \'…\']</code> vào <code>private/config.php</code>.';
+  taiDs();
+})();
+</script>
+</body>
+</html>
