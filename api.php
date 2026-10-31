@@ -382,6 +382,8 @@ function verify_class_code_check(PDO $pdo, string $code): array {
 // PHÒNG THI TRỰC TIẾP CÓ GIÁM SÁT (action room_*) — xem phong-thi-api.php
 define('BDVH_API', true);
 require_once __DIR__ . '/phong-thi-api.php';
+// BÀI GIẢNG TRÌNH CHIẾU TỪ ĐỀ TRÊN DRIVE + LỜI GIẢI GEMINI (action bg_*) — xem bai-giang-api.php
+require_once __DIR__ . '/bai-giang-api.php';
 
 // ROUTER CÁC CHỨC NĂNG
 // -------------------------------------------------------------

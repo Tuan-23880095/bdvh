@@ -3,1588 +3,696 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Trung Tâm Bồi Dưỡng Văn Hóa · Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM</title>
-  
+  <title>Trung tâm Bồi dưỡng Văn hóa · Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM</title>
+  <meta name="description" content="Chương trình học, phiếu bài tập và đề kiểm tra tính giờ môn Toán lớp 6–12 và luyện thi Đánh giá năng lực ĐHQG-HCM.">
+  <meta name="theme-color" content="#0F6B55">
   <link rel="icon" type="image/svg+xml" href="assets/logo-sen.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+  <link rel="stylesheet" href="assets/bdvh-ui.css?v=20261031">
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            luc: '#0F6B55',
-            'luc-non': '#46A385',
-            'luc-sang': '#8FE0BD',
-            lam: '#1F4E79',
-            'lam-suong': '#2F6DB0',
-            muc: '#10212B',
-            giay: '#F6F7F3',
-            son: '#D2492A',
-            tho: '#D6A130',
-            bac: '#D5DCE1'
-          },
-          fontFamily: {
-            serif: ['"Source Serif 4"', 'Georgia', 'serif'],
-            sans: ['"Be Vietnam Pro"', 'system-ui', 'sans-serif']
-          }
-        }
-      }
-    }
-  </script>
-
-  <style>
-    body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #F6F7F3; color: #10212B; }
-    .title-serif { font-family: 'Source Serif 4', Georgia, serif; }
-    
-    /* Ô trắng bảo vệ logo sen theo chuẩn tuan-thuong-hieu */
-    .dqt-logo-o {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #FFFFFF;
-      border-radius: 20%;
-      padding: 6px;
-      box-shadow: 0 2px 10px rgba(16, 33, 43, 0.08);
-      flex: none;
-    }
-    
-    .glass-card {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(213, 220, 225, 0.8);
-    }
-    
-    .hero-glow {
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(70, 163, 133, 0.25) 0%, rgba(31, 78, 121, 0) 70%);
-      border-radius: 50%;
-      filter: blur(50px);
-      pointer-events: none;
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.6; transform: scale(1); }
-      50% { opacity: 0.9; transform: scale(1.05); }
-    }
-    .pulse-glow { animation: pulseGlow 3s infinite ease-in-out; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fadeIn { animation: fadeIn 0.25s ease-out forwards; }
-  
-    /* QUY CHUẨN IN ẤN PHIẾU BÀI TẬP A4 THEO YÊU CẦU THẦY TUẤN */
-    @media print {
-      @page { size: A4 portrait; margin: 12mm 15mm; }
-      body * { visibility: hidden !important; }
-      #modal-exercise, #modal-exercise * { visibility: visible !important; }
-      #modal-exercise { position: absolute !important; left: 0 !important; top: 0 !important; width: 100% !important; background: transparent !important; padding: 0 !important; }
-      #modal-exercise > div { max-width: 100% !important; max-height: none !important; border: none !important; box-shadow: none !important; border-radius: 0 !important; }
-      .no-print { display: none !important; }
-      .print-a4-sheet { padding: 0 !important; overflow: visible !important; }
-    }
-
-  </style>
-
-  <!-- MathJax 3 Cấu hình hỗ trợ công thức toán học chuẩn -->
-  <script>
-  window.MathJax = {
-    tex: {
-      inlineMath: [['$', '$'], ['\\(', '\\)']],
-      displayMath: [['$$', '$$'], ['\\[', '\\]']],
-      processEscapes: true
-    },
-    options: { enableMenu: false }
-  };
-  </script>
-  <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-</head>
-<body class="min-h-screen flex flex-col antialiased">
-
-  <!-- =====================================================================
-       HEADER CHUẨN THƯƠNG HIỆU: ĐH KHOA HỌC TỰ NHIÊN & THS. ĐINH QUỐC TUẤN
-       ===================================================================== -->
-  <header class="bg-white/95 backdrop-blur-md border-b border-bac sticky top-0 z-50 shadow-sm transition">
-    <div class="max-w-7xl mx-auto px-4 py-2.5 flex justify-between items-center gap-3">
-      
-      <!-- KHỐI LOGO & TÊN CƠ QUAN -->
-      <a href="index.html" class="flex items-center gap-3 group text-decoration-none">
-        <img class="h-11 sm:h-12 w-auto object-contain" src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738" alt="Logo Trường ĐH Khoa học Tự nhiên - ĐHQG-HCM">
-        <div class="h-9 w-[1px] bg-bac hidden sm:block"></div>
-        <div class="dqt-logo-o w-10 h-10 sm:w-11 sm:h-11 hidden sm:inline-flex group-hover:scale-105 transition-transform">
-          <img src="assets/logo-sen.svg" alt="Logo sen ThS. Đinh Quốc Tuấn" class="w-full h-full">
-        </div>
-        <div>
-          <h1 class="text-sm sm:text-base font-extrabold text-lam uppercase tracking-wide leading-tight group-hover:text-luc transition">
-            Trung Tâm Bồi Dưỡng Văn Hóa
-          </h1>
-          <p class="text-[11px] sm:text-xs text-luc font-semibold leading-tight">
-            Trường ĐH Khoa học Tự nhiên · ThS. Đinh Quốc Tuấn
-          </p>
-        </div>
-      </a>
-
-      <!-- THANH ĐIỀU HƯỚNG & HÀNH ĐỘNG NHANH -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        
-        <!-- NÚT 1: LỚP HỌC TRỰC TIẾP SLIDO -->
-        <a href="giao-vien.html" class="bg-gradient-to-r from-emerald-900 to-slate-900 hover:from-black text-amber-300 border border-amber-400/40 px-3 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 shadow-sm whitespace-nowrap">
-          <i class="fas fa-broadcast-tower text-amber-400 text-xs animate-pulse"></i>
-          <span class="hidden sm:inline">Phòng Chiếu Slido</span>
-          <span class="sm:hidden">Slido</span>
-        </a>
-
-        <!-- NÚT 2: NHẬP MÃ LỚP CỐ ĐỊNH (LUÔN HIỆN DIỆN) -->
-        <button id="btn-header-class-code" onclick="openClassModal()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-3 py-2 rounded-xl text-xs sm:text-sm transition flex items-center gap-1.5 shadow-sm whitespace-nowrap cursor-pointer">
-          <i class="fas fa-key text-slate-950"></i>
-          <span id="header-class-label">Nhập Mã Lớp</span>
-        </button>
-
-        <!-- NÚT 3: TÀI KHOẢN HỌC SINH -->
-        <div id="auth-box" class="flex items-center">
-          <button onclick="openModal('modal-guest')" class="bg-luc hover:bg-emerald-800 text-white px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 shadow-sm whitespace-nowrap">
-            <i class="fas fa-user-plus"></i>
-            <span class="hidden sm:inline">Đăng Ký Khách</span>
-            <span class="sm:hidden">Tài Khoản</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- =====================================================================
-       HERO BANNER: TRUNG TÂM KHẢO THÍ & BÀI GIẢNG ĐIỆN TỬ TƯƠNG TÁC
-       ===================================================================== -->
-  <section class="relative bg-gradient-to-br from-lam via-[#173A5C] to-luc text-white py-12 px-4 overflow-hidden">
-    <div class="hero-glow -top-32 -left-32"></div>
-    <div class="hero-glow -bottom-32 -right-32 opacity-70"></div>
-
-    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-10 relative z-10">
-      
-      <!-- CỘT TRÁI: THÔNG ĐIỆP SƯ PHẠM VÀ HÀNH ĐỘNG CHÍNH -->
-      <div class="max-w-2xl space-y-5 text-center lg:text-left">
-        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-semibold text-emerald-200 border border-white/20">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          <span>Hệ Thống Trình Chiếu Slido & Khảo Thí Năng Lực Toán 2026</span>
-        </div>
-
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold title-serif leading-tight">
-          Học Tương Tác Sư Phạm · <br class="hidden sm:block">
-          Luyện Thi & Khảo Thí Trực Tuyến
-        </h2>
-
-        <p class="text-white/85 text-sm sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0">
-          Trực thuộc <b>Trung Tâm Bồi Dưỡng Văn Hóa – Trường ĐH Khoa học Tự nhiên</b>. Tích hợp phòng chiếu tương tác Slido trực tiếp, đề thi trắc nghiệm bấm giờ từ <b>Lớp 6 đến Lớp 12</b> và bộ đề thi thử <b>Đánh Giá Năng Lực ĐHQG-HCM</b>. Sau mỗi bài nộp, hệ thống phân tích tức thì lỗ hổng tư duy và bẫy sai lầm.
-        </p>
-
-        <!-- CÁC NÚT HÀNH ĐỘNG HERO -->
-        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
-          <a href="#featured-slido" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-black px-5 py-3 rounded-2xl text-xs sm:text-sm transition shadow-lg flex items-center gap-2 whitespace-nowrap transform hover:-translate-y-0.5">
-            <i class="fas fa-chalkboard-teacher text-base"></i>
-            <span>Vào Lớp Trực Tiếp Slido</span>
-            <i class="fas fa-arrow-down text-xs"></i>
-          </a>
-
-          <a href="#grade-syllabus-section" class="bg-white/15 hover:bg-white/25 text-white border border-white/30 font-bold px-4 py-3 rounded-2xl text-xs sm:text-sm transition flex items-center gap-2 whitespace-nowrap">
-            <i class="fas fa-book-open text-emerald-300"></i>
-            <span>Mục Lục Bài Học & Đề Thi</span>
-          </a>
-
-          <a href="ket-qua.html" class="bg-slate-900/40 hover:bg-slate-900/60 text-white/90 border border-white/20 font-semibold px-4 py-3 rounded-2xl text-xs sm:text-sm transition flex items-center gap-2 whitespace-nowrap">
-            <i class="fas fa-chart-line text-amber-300"></i>
-            <span>Xem Báo Cáo Kết Quả</span>
-          </a>
-        </div>
-
-        <!-- CÁC HUY HIỆU CAM KẾT CHẤT LƯỢNG -->
-        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 pt-3">
-          <span class="inline-flex items-center gap-1.5 text-xs bg-white/10 px-3 py-1 rounded-xl border border-white/10 text-emerald-200">
-            <i class="fas fa-check-circle text-emerald-400"></i> Miễn phí thi thử có chấm điểm
-          </span>
-          <span class="inline-flex items-center gap-1.5 text-xs bg-white/10 px-3 py-1 rounded-xl border border-white/10 text-amber-200">
-            <i class="fas fa-mobile-alt text-amber-300"></i> Đồng bộ điện thoại học sinh & bảng Thầy
-          </span>
-          <span class="inline-flex items-center gap-1.5 text-xs bg-white/10 px-3 py-1 rounded-xl border border-white/10 text-sky-200">
-            <i class="fas fa-file-pdf text-sky-300"></i> Xuất bản in A4 gửi phụ huynh
-          </span>
-        </div>
-      </div>
-
-      <!-- CỘT PHẢI: HỘP THÔNG TIN TÀI KHOẢN & KÍCH HOẠT MÃ LỚP DÙNG TOÀN KHÓA -->
-      <div class="w-full lg:w-96 glass-card rounded-3xl p-6 shadow-2xl text-muc space-y-4 border border-white/40">
-        <div class="flex items-center justify-between pb-3 border-b border-bac">
-          <span class="text-xs font-black text-gray-700 uppercase tracking-wider flex items-center gap-2">
-            <i class="fas fa-id-card text-luc text-base"></i> Cổng Vào Nhanh Của Em
-          </span>
-          <span id="hero-badge-status" class="text-[11px] bg-emerald-100 text-luc font-bold px-2.5 py-0.5 rounded-full">
-            Sẵn sàng
-          </span>
-        </div>
-
-        <div id="hero-account-info" class="space-y-3.5 text-xs">
-          <!-- Thông tin học sinh -->
-          <div class="bg-giay p-3.5 rounded-2xl border border-bac">
-            <div class="text-[11px] text-gray-500 font-medium">Học sinh / Thí sinh:</div>
-            <div id="hero-student-name" class="font-extrabold text-muc text-base truncate mt-0.5">
-              Học sinh vãng lai
-            </div>
-            <div id="hero-class-status" class="text-[11px] text-gray-600 mt-1">
-              Chưa kích hoạt mã lớp
-            </div>
-          </div>
-
-          <!-- Nhập mã lớp nhanh lưu dùng toàn khóa -->
-          <div class="space-y-2">
-            <label class="block text-[11px] font-bold text-gray-700">Mã Lớp Thầy Cô Chiếu Trên Bảng:</label>
-            <div class="flex gap-2">
-              <input type="text" id="quickClassCode" maxlength="8" placeholder="VD: 7K8B" class="w-full px-3 py-2.5 border-2 border-amber-300 bg-amber-50/50 rounded-xl text-center text-base font-black uppercase tracking-wider text-slate-800 outline-none focus:border-amber-500 font-mono">
-              <button onclick="saveQuickClassCode()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black px-4 py-2.5 rounded-xl text-xs whitespace-nowrap transition shadow">
-                Kích Hoạt
-              </button>
-            </div>
-            <p class="text-[10px] text-gray-500 italic leading-snug">
-              Nhập 1 lần và dùng cho toàn bộ buổi học / toàn khóa học không cần nhập lại.
-            </p>
-          </div>
-
-          <!-- Nút đăng ký tài khoản khách & Hotline Zalo Thầy Tuấn -->
-          <div class="pt-2 border-t border-bac flex items-center justify-between gap-2">
-            <button onclick="openModal('modal-guest')" class="text-luc font-bold hover:underline flex items-center gap-1 text-xs">
-              <i class="fas fa-user-edit"></i>
-              <span id="hero-auth-btn-label">Đăng Ký / Đổi Tên</span>
-            </button>
-            <a href="https://zalo.me/0903052119" target="_blank" class="text-gray-600 hover:text-luc text-[11px] font-semibold flex items-center gap-1">
-              <i class="fab fa-whatsapp text-luc"></i> Zalo: 0903.052.119
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =====================================================================
-       SECTION ĐẶC BIỆT: HỆ THỐNG TRÌNH CHIẾU SLIDO TRỰC TIẾP (FEATURED)
-       ===================================================================== -->
-  <section id="featured-slido" class="max-w-7xl mx-auto px-4 pt-10 pb-4">
-    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3 mb-6">
-      <div>
-        <div class="inline-flex items-center gap-2 text-xs font-bold text-luc uppercase tracking-wider mb-1">
-          <i class="fas fa-satellite-dish text-luc"></i> Giảng Dạy Trực Tiếp Sư Phạm
-        </div>
-        <h3 class="text-2xl sm:text-3xl font-bold title-serif text-lam">
-          Phòng Chiếu Slido & Slide Bài Giảng Tương Tác
-        </h3>
-        <p class="text-xs sm:text-sm text-gray-600 mt-1">
-          Học sinh dùng điện thoại chọn đáp án $\to$ Màn hình chiếu của Thầy nhảy kết quả realtime $\to$ Chiếu đáp án và hướng dẫn giải chi tiết.
-        </p>
-      </div>
-
-      <a href="giao-vien.html" class="inline-flex items-center gap-1.5 bg-slate-900 hover:bg-black text-white font-bold text-xs px-4 py-2.5 rounded-xl transition shadow">
-        <i class="fas fa-chalkboard text-amber-400"></i>
-        <span>Vào Bảng Quản Lý Giảng Viên</span>
-        <i class="fas fa-arrow-right text-[10px]"></i>
-      </a>
-    </div>
-
-    <!-- CÁC CARD TRÌNH CHIẾU NỔI BẬT -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-      <!-- CARD 1: TOÁN 7 - ĐỀ CUỐI HỌC KỲ I (THCS TƯỜNG BÌNH HIỆP - TPHCM) -->
-      <div class="bg-white rounded-3xl p-6 border-2 border-emerald-500 shadow-xl relative overflow-hidden flex flex-col justify-between group hover:shadow-2xl transition">
-        <div class="absolute top-0 right-0 bg-emerald-600 text-white text-[10px] font-black px-3 py-1 rounded-bl-xl uppercase tracking-wider flex items-center gap-1">
-          <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span> Đang Trực Tiếp
-        </div>
-
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 text-luc flex items-center justify-center text-xl font-black">
-              7
-            </div>
-            <div>
-              <span class="text-[10px] font-bold text-luc uppercase tracking-wider">LỚP TOÁN 7 · HK1</span>
-              <h4 class="text-base font-extrabold text-muc leading-tight mt-0.5">
-                Khảo Sát Toán 7 (THCS Tường Bình Hiệp)
-              </h4>
-            </div>
-          </div>
-
-          <p class="text-xs text-gray-600 leading-relaxed mb-4">
-            Quy trình chuẩn 3 slide/câu: <b>(1) Đề & Slido trực tiếp</b> $\to$ <b>(2) Chốt đáp án đúng</b> $\to$ <b>(3) Giải chi tiết & Lý thuyết SGK</b>.
-          </p>
-
-          <div class="bg-giay p-3 rounded-xl border border-bac mb-4 space-y-1 text-xs">
-            <div class="flex justify-between text-gray-600">
-              <span>Quy mô:</span> <b class="text-muc">12 câu trắc nghiệm trọng tâm</b>
-            </div>
-            <div class="flex justify-between text-gray-600">
-              <span>Định dạng:</span> <b class="text-luc">Slide 16:9 + MathJax chuẩn</b>
-            </div>
-          </div>
-        </div>
-
-        <div class="space-y-2 pt-2 border-t border-bac">
-          <!-- Nút học sinh vào làm bài -->
-          <a href="sv-toan7.html" target="_blank" class="w-full bg-luc hover:bg-emerald-800 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition shadow flex items-center justify-center gap-2">
-            <i class="fas fa-mobile-alt text-amber-300"></i>
-            <span>📱 Học Sinh Vào Làm Bài Trực Tiếp</span>
-          </a>
-
-          <!-- Nút Thầy chiếu slide -->
-          <a href="slide-toan7.html" target="_blank" class="w-full bg-slate-900 hover:bg-black text-amber-300 font-bold py-2 px-4 rounded-xl text-xs transition flex items-center justify-center gap-2 border border-slate-700">
-            <i class="fas fa-desktop text-white"></i>
-            <span>🖥️ Giáo Viên Chiếu Slide Lên Bảng</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- CARD 2: TOÁN 6 - ĐẤU TRƯỜNG LŨY THỪA & THỨ TỰ PHÉP TÍNH -->
-      <div class="bg-white rounded-3xl p-6 border border-bac shadow-md hover:shadow-xl transition flex flex-col justify-between">
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200 text-lam flex items-center justify-center text-xl font-black">
-              6
-            </div>
-            <div>
-              <span class="text-[10px] font-bold text-lam uppercase tracking-wider">LỚP TOÁN 6 · GDPT 2018</span>
-              <h4 class="text-base font-extrabold text-muc leading-tight mt-0.5">
-                Bài Học & Slide Trình Chiếu Toán 6
-              </h4>
-            </div>
-          </div>
-
-          <p class="text-xs text-gray-600 leading-relaxed mb-4">
-            Bộ slide điện tử tương tác Số học: Lũy thừa, Thứ tự phép tính, Dấu hiệu chia hết, ƯCLN & BCNN (Chương trình GDPT 2018).
-          </p>
-
-          <div class="bg-giay p-3 rounded-xl border border-bac mb-4 space-y-1 text-xs">
-            <div class="flex justify-between text-gray-600">
-              <span>Nội dung:</span> <b class="text-muc">Chương I & II Số học</b>
-            </div>
-            <div class="flex justify-between text-gray-600">
-              <span>Đề in A4:</span> <b class="text-luc">Đã tích hợp sẵn file PDF</b>
-            </div>
-          </div>
-        </div>
-
-        <div class="space-y-2 pt-2 border-t border-bac">
-          <a href="slide-toan6.html" target="_blank" class="w-full bg-lam hover:bg-blue-900 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition shadow flex items-center justify-center gap-2">
-            <i class="fas fa-chalkboard"></i>
-            <span>Mở Slide Trình Chiếu Toán 6</span>
-          </a>
-          <a href="de_thi_a4/TOAN06_CTST_T09_01.html" target="_blank" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl text-xs transition flex items-center justify-center gap-1.5 border border-slate-300">
-            <i class="fas fa-print text-luc"></i>
-            <span>Xem & In Đề Thi Khổ A4</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- CARD 3: KHOA HỌC TỰ NHIÊN 6 (KHTN 6) -->
-      <div class="bg-white rounded-3xl p-6 border border-bac shadow-md hover:shadow-xl transition flex flex-col justify-between">
-        <div>
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center text-xl font-black">
-              🔬
-            </div>
-            <div>
-              <span class="text-[10px] font-bold text-amber-800 uppercase tracking-wider">KHOA HỌC TỰ NHIÊN 6</span>
-              <h4 class="text-base font-extrabold text-muc leading-tight mt-0.5">
-                Slide Giảng Dạy & Trắc Nghiệm KHTN 6
-              </h4>
-            </div>
-          </div>
-
-          <p class="text-xs text-gray-600 leading-relaxed mb-4">
-            Bài giảng điện tử KHTN lớp 6: Các phép đo cơ bản, Thang nhiệt độ Celsius, Khối lượng & Thể tích, Tế bào - Đơn vị cơ sở của sự sống.
-          </p>
-
-          <div class="bg-giay p-3 rounded-xl border border-bac mb-4 space-y-1 text-xs">
-            <div class="flex justify-between text-gray-600">
-              <span>Hình thức:</span> <b class="text-muc">Slide hình ảnh trực quan</b>
-            </div>
-            <div class="flex justify-between text-gray-600">
-              <span>Đánh giá:</span> <b class="text-luc">Trắc nghiệm nhanh trên lớp</b>
-            </div>
-          </div>
-        </div>
-
-        <div class="space-y-2 pt-2 border-t border-bac">
-          <a href="slide-khtn6.html" target="_blank" class="w-full bg-slate-900 hover:bg-black text-amber-300 font-bold py-2.5 px-4 rounded-xl text-xs transition shadow flex items-center justify-center gap-2">
-            <i class="fas fa-play-circle text-white"></i>
-            <span>Mở Slide Trình Chiếu KHTN 6</span>
-          </a>
-          <a href="giao-vien.html" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 px-4 rounded-xl text-xs transition flex items-center justify-center gap-1.5 border border-slate-300">
-            <i class="fas fa-cog text-gray-500"></i>
-            <span>Thiết Lập Phòng Chiếu</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- =====================================================================
-       SECTION: MỤC LỤC CHƯƠNG TRÌNH & ĐỀ THI TRẮC NGHIỆM TÍNH GIỜ (LỚP 6 - 12 & ĐGNL)
-       ===================================================================== -->
-  <main id="grade-syllabus-section" class="flex-grow max-w-7xl w-full mx-auto px-4 py-8 space-y-8">
-    
-    <!-- BANNER PHÂN TÍCH TIẾN ĐỘ NĂM HỌC BỘ GD&ĐT -->
-    <section>
-      <div class="bg-gradient-to-r from-blue-950 via-emerald-950 to-slate-900 rounded-3xl p-6 sm:p-7 text-white shadow-xl border border-white/10 relative overflow-hidden">
-        <div class="absolute -right-8 -bottom-8 w-40 h-40 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
-        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-5 relative z-10">
-          <div class="space-y-2">
-            <div class="inline-flex items-center gap-2 bg-amber-400 text-slate-950 px-3.5 py-1 rounded-full text-xs font-black shadow-sm tracking-wide">
-              <i class="fas fa-calendar-check"></i> TUẦN 8 NĂM HỌC · CAO ĐIỂM ÔN TẬP & KIỂM TRA GIỮA KÌ I
-            </div>
-            <h3 class="text-xl sm:text-2xl font-bold title-serif text-white">
-              Tiến Độ Giảng Dạy & Gợi Ý Học Tập Tuần Này
-            </h3>
-            <p class="text-xs sm:text-sm text-gray-200 leading-relaxed max-w-3xl">
-              Theo chuẩn khung thời gian năm học của Bộ Giáo dục & Đào tạo, các trường THCS & THPT trên toàn quốc đang hoàn thành bài học cuối chương và bước vào <b>ĐỢT KIỂM TRA ĐÁNH GIÁ GIỮA HỌC KỲ I</b>. Học sinh nên ưu tiên rèn tốc độ làm đề trắc nghiệm bấm giờ để kiểm soát áp lực phòng thi.
-            </p>
-          </div>
-          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 text-center lg:text-right w-full lg:w-auto flex-none space-y-1">
-            <div class="text-[11px] text-amber-300 font-bold uppercase tracking-wider">Trọng Tâm Tuần Này:</div>
-            <div class="text-base font-black text-white">LUYỆN ĐỀ ÔN TẬP GIỮA KÌ I</div>
-            <div class="text-[11px] text-gray-300">Rèn phản xạ tốc độ & tránh bẫy sai lầm</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- THANH CHỌN KHỐI LỚP (GRADE TABS) -->
-    <div class="bg-white p-3 rounded-2xl border border-bac shadow-sm flex items-center gap-2 overflow-x-auto" id="grade-tabs">
-      <button onclick="selectGrade('ALL', this)" class="grade-btn active px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap bg-luc text-white">Tất Cả Khối</button>
-      <button onclick="selectGrade('L06', this)" class="grade-btn px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap bg-giay text-gray-700 hover:bg-gray-200">Lớp 6</button>
-      <button onclick="selectGrade('L07', this)" class="grade-btn px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap bg-giay text-gray-700 hover:bg-gray-200">Lớp 7</button>
-      <button onclick="selectGrade('L08', this)" class="grade-btn px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap bg-giay text-gray-700 hover:bg-gray-200">Lớp 8</button>
-      <button onclick="selectGrade('L09', this)" class="grade-btn px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap bg-giay text-gray-700 hover:bg-gray-200">Lớp 9</button>
-      <button onclick="selectGrade('L10', this)" class="grade-btn px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap bg-giay text-gray-700 hover:bg-gray-200">Lớp 10</button>
-      <button onclick="selectGrade('L11', this)" class="grade-btn px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap bg-giay text-gray-700 hover:bg-gray-200">Lớp 11</button>
-      <button onclick="selectGrade('L12', this)" class="grade-btn px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap bg-giay text-gray-700 hover:bg-gray-200">Lớp 12</button>
-      <button onclick="selectGrade('DGNL', this)" class="grade-btn px-4 py-2 rounded-xl text-xs font-bold transition whitespace-nowrap bg-amber-100 text-amber-900 border border-amber-300 hover:bg-amber-200">⭐ Ôn Thi ĐGNL ĐHQG</button>
-    </div>
-
-    <!-- KHU VỰC 1: MỤC LỤC BÀI HỌC THEO TIẾN ĐỘ TUẦN -->
-    <section>
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
-        <div>
-          <h3 class="text-xl sm:text-2xl font-bold title-serif text-lam flex items-center gap-2.5">
-            <i class="fas fa-list-ol text-luc"></i> <span id="syllabus-title">Mục Lục Chương Trình & Bài Học</span>
-          </h3>
-          <p class="text-xs text-gray-500 mt-1">Bấm vào tên từng bài học để xem <b>Lý thuyết</b>, <b>Bài tập trên lớp</b>, <b>In khổ A4</b> và <b>Vào thi trắc nghiệm tính giờ</b>.</p>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-xs bg-emerald-50 text-luc border border-emerald-200 px-3 py-1.5 rounded-xl font-bold">
-            <i class="fas fa-circle text-[8px] text-luc animate-pulse"></i> Tuần 8: Hoàn thành chương & Ôn Giữa Kì
-          </span>
-        </div>
-      </div>
-
-      <!-- Container hiển thị mục lục phân cấp dạng Text -->
-      <div id="syllabus-tree-container" class="space-y-4">
-        <!-- Render tự động theo khối lớp qua hàm renderCurriculumSyllabus() -->
-      </div>
-    </section>
-
-    <!-- KHU VỰC 2: KHO ĐỀ THI TRẮC NGHIỆM TRỰC TUYẾN CÓ SẴN (DATABASE) -->
-    <section class="pt-4">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
-        <div>
-          <h3 class="text-xl sm:text-2xl font-bold title-serif text-lam flex items-center gap-2">
-            <i class="fas fa-stopwatch text-purple-700"></i> Kho Đề Thi Trắc Nghiệm Tính Giờ Có Sẵn
-          </h3>
-          <p class="text-xs text-gray-500">Được biên soạn chuẩn cấu trúc ma trận khảo thí, đo đạc tốc độ tư duy và phân tích lỗ hổng kiến thức.</p>
-        </div>
-        <span id="exam-count-badge" class="text-xs bg-purple-50 text-purple-700 border border-purple-200 px-3 py-1.5 rounded-xl font-bold">
-          Đang tải danh sách...
-        </span>
-      </div>
-
-      <!-- Lưới các đề thi trắc nghiệm -->
-      <div id="exams-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <!-- Tự động nạp từ API máy chủ qua loadExams() -->
-      </div>
-    </section>
-
-    <!-- KHU VỰC 3: GIỚI THIỆU QUY TRÌNH KHẢO THÍ SƯ PHẠM 4 BƯỚC -->
-    <section class="bg-white rounded-3xl p-6 sm:p-8 border border-bac shadow-sm">
-      <div class="text-center max-w-2xl mx-auto mb-8 space-y-2">
-        <span class="text-xs font-bold text-luc uppercase tracking-wider">Phương Pháp Sư Phạm HCMUS</span>
-        <h3 class="text-2xl font-bold title-serif text-lam">Quy Trình Khảo Thí & Phân Tích Tư Duy 4 Bước</h3>
-        <p class="text-xs sm:text-sm text-gray-600">Giúp học sinh không chỉ biết điểm số, mà hiểu rõ từng bẫy đề thi và phương pháp giải tối ưu.</p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div class="p-5 rounded-2xl bg-giay border border-bac space-y-2.5">
-          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-luc font-black flex items-center justify-center text-base">1</div>
-          <h4 class="font-bold text-sm text-muc">Thi Bấm Giờ Thực Tế</h4>
-          <p class="text-xs text-gray-600 leading-relaxed">Học sinh làm bài dưới áp lực đồng hồ đếm ngược, rèn phản xạ phân bố thời gian cho từng câu.</p>
-        </div>
-
-        <div class="p-5 rounded-2xl bg-giay border border-bac space-y-2.5">
-          <div class="w-10 h-10 rounded-xl bg-blue-100 text-lam font-black flex items-center justify-center text-base">2</div>
-          <h4 class="font-bold text-sm text-muc">Chấm Điểm Tức Thì</h4>
-          <p class="text-xs text-gray-600 leading-relaxed">Hệ thống ghi nhận kết quả ngay khi nộp bài, so sánh đáp án học sinh chọn với đáp án chuẩn của Thầy.</p>
-        </div>
-
-        <div class="p-5 rounded-2xl bg-giay border border-bac space-y-2.5">
-          <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 font-black flex items-center justify-center text-base">3</div>
-          <h4 class="font-bold text-sm text-muc">Chỉ Ra Bẫy Sai Lầm</h4>
-          <p class="text-xs text-gray-600 leading-relaxed">Phân tích vì sao chọn phương án nhiễu, liên hệ trực tiếp với định lý SGK để bù đắp lỗ hổng tư duy.</p>
-        </div>
-
-        <div class="p-5 rounded-2xl bg-giay border border-bac space-y-2.5">
-          <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-800 font-black flex items-center justify-center text-base">4</div>
-          <h4 class="font-bold text-sm text-muc">Báo Cáo Gửi Phụ Huynh</h4>
-          <p class="text-xs text-gray-600 leading-relaxed">Xuất phiếu kết quả khổ A4 tiêu chuẩn có chữ ký và nhận xét chuyên môn, dễ dàng lưu trữ hoặc in ấn.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- =====================================================================
-       FOOTER CHUẨN THƯƠNG HIỆU THS. ĐINH QUỐC TUẤN & HCMUS
-       ===================================================================== -->
-  <footer class="bg-white border-t border-bac py-10 text-xs text-gray-600 mt-12">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
-      
-      <!-- LOGO & CƠ QUAN -->
-      <div class="flex items-center gap-3">
-        <img class="h-12 w-auto object-contain" src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738" alt="Logo HCMUS">
-        <div class="h-9 w-[1px] bg-bac"></div>
-        <div class="dqt-logo-o w-11 h-11">
-          <img src="assets/logo-sen.svg" alt="Logo Sen" class="w-full h-full">
-        </div>
-        <div>
-          <p class="font-extrabold text-muc text-sm title-serif">
-            Trung Tâm Bồi Dưỡng Văn Hóa — Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM
-          </p>
-          <p class="text-xs text-gray-600">
-            Phụ trách chuyên môn Toán & Khảo thí: <b>ThS. Đinh Quốc Tuấn</b> · Email: <a href="mailto:dqtuanhcmus@gmail.com" class="text-luc hover:underline">dqtuanhcmus@gmail.com</a>
-          </p>
-        </div>
-      </div>
-
-      <!-- LIÊN KẾT NHANH -->
-      <div class="flex items-center gap-4 text-xs font-bold text-gray-600 flex-wrap justify-center">
-        <a href="giao-vien.html" class="hover:text-luc transition flex items-center gap-1.5"><i class="fas fa-chalkboard-teacher text-luc"></i> Lớp Trực Tiếp</a>
-        <a href="thay-tuan.html" class="hover:text-luc transition flex items-center gap-1.5"><i class="fas fa-user-shield text-lam"></i> Quản Trị Giảng Viên</a>
-        <a href="https://zalo.me/0903052119" target="_blank" class="hover:text-luc transition flex items-center gap-1.5"><i class="fab fa-whatsapp text-luc"></i> Hotline Zalo: 0903.052.119</a>
-      </div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-4 pt-4 mt-6 border-t border-bac text-center flex flex-col sm:flex-row justify-between items-center gap-2">
-      <p class="text-[11px] text-gray-500">© 2026 Trung Tâm Bồi Dưỡng Văn Hóa HCMUS. Bảo lưu mọi quyền.</p>
-      <p class="text-[11px] italic text-gray-600 font-serif">Hệ thống khảo thí năng lực trực tuyến phục vụ học sinh & giáo viên.</p>
-    </div>
-  </footer>
-
-  <!-- =====================================================================
-       MODAL 1: ĐĂNG KÝ TÀI KHOẢN KHÁCH NHANH
-       ===================================================================== -->
-  <div id="modal-guest" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-bac animate-fadeIn">
-      <div class="flex justify-between items-center pb-3 border-b border-bac mb-4">
-        <h3 class="font-bold text-lg text-lam title-serif flex items-center gap-2">
-          <i class="fas fa-user-plus text-luc"></i> Đăng Ký Tài Khoản Khách (Miễn Phí)
-        </h3>
-        <button onclick="closeModal('modal-guest')" class="text-gray-400 hover:text-gray-700 text-xl font-bold">✕</button>
-      </div>
-      <p class="text-xs text-gray-600 mb-4 leading-relaxed">
-        Mỗi học sinh được cấp ngay <b>2 lượt làm bài thi tính giờ hoàn toàn miễn phí</b> có hệ thống chấm điểm và phân tích tư duy chi tiết.
-      </p>
-      <form onsubmit="handleGuestLogin(event)" class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Họ và tên của em <span class="text-son">*</span></label>
-          <input type="text" id="guest-name" required placeholder="Ví dụ: Nguyễn Minh Triết" class="w-full px-3.5 py-2.5 border border-bac rounded-xl text-sm focus:outline-none focus:border-luc">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Số điện thoại (để lưu kết quả học tập)</label>
-          <input type="tel" id="guest-phone" placeholder="Ví dụ: 0912345678" class="w-full px-3.5 py-2.5 border border-bac rounded-xl text-sm focus:outline-none focus:border-luc">
-        </div>
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Khối lớp đang theo học</label>
-          <select id="guest-grade" class="w-full px-3.5 py-2.5 border border-bac rounded-xl text-sm focus:outline-none focus:border-luc bg-white">
-            <option value="L06">Lớp 6</option>
-            <option value="L07" selected>Lớp 7</option>
-            <option value="L08">Lớp 8</option>
-            <option value="L09">Lớp 9</option>
-            <option value="L10">Lớp 10</option>
-            <option value="L11">Lớp 11</option>
-            <option value="L12">Lớp 12</option>
-            <option value="DGNL">Luyện thi Đánh Giá Năng Lực</option>
-          </select>
-        </div>
-        <button type="submit" class="w-full bg-luc hover:bg-emerald-800 text-white font-bold py-3 rounded-xl text-sm transition shadow-md flex items-center justify-center gap-2">
-          <i class="fas fa-check-circle"></i> Bắt đầu thi thử ngay (Nhận 2 lượt)
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- =====================================================================
-       MODAL 3: BÀI GIẢNG LÝ THUYẾT CHI TIẾT CÓ MATHJAX
-       ===================================================================== -->
-  <div id="modal-theory" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-5 no-print">
-    <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-bac animate-fadeIn overflow-hidden">
-      <!-- Modal Header -->
-      <div class="px-6 py-4 border-b border-bac flex items-center justify-between bg-slate-50/80">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center text-lg font-bold">
-            <i class="fas fa-book-reader"></i>
-          </div>
-          <div>
-            <span class="text-[10px] font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">Bài Giảng Lý Thuyết Cốt Lõi</span>
-            <h3 id="modal-theory-title" class="font-bold text-base sm:text-lg text-muc title-serif mt-0.5">Tiêu đề bài giảng</h3>
-          </div>
-        </div>
-        <button onclick="closeTheoryModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-gray-500 hover:text-muc flex items-center justify-center text-base font-bold transition">✕</button>
-      </div>
-
-      <!-- Modal Body -->
-      <div id="modal-theory-body" class="p-6 overflow-y-auto space-y-4 text-xs sm:text-sm leading-relaxed text-slate-800">
-        <!-- Nội dung lý thuyết render bằng MathJax -->
-      </div>
-
-      <!-- Modal Footer -->
-      <div class="px-6 py-3.5 border-t border-bac bg-slate-50 flex items-center justify-between">
-        <span class="text-[11px] text-gray-500 italic">Hệ thống khảo thí thông minh · ThS. Đinh Quốc Tuấn</span>
-        <button onclick="closeTheoryModal()" class="px-5 py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-xl text-xs font-bold transition">
-          Đóng
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- =====================================================================
-       MODAL 4: PHIẾU BÀI TẬP TỰ LUẬN KHỔ A4 (CHUẨN HAI LOGO HAI BÊN & CANH GIỮA TIÊU ĐỀ)
-       ===================================================================== -->
-  <div id="modal-exercise" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-5">
-    <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-bac animate-fadeIn overflow-hidden">
-      <!-- Modal Header (no-print) -->
-      <div class="px-6 py-4 border-b border-bac flex items-center justify-between bg-slate-50/80 no-print">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-luc flex items-center justify-center text-lg font-bold">
-            <i class="fas fa-file-invoice"></i>
-          </div>
-          <div>
-            <span class="text-[10px] font-bold uppercase tracking-wider text-luc bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Phiếu Bài Tập Rèn Luyện Tự Luận</span>
-            <h3 id="modal-exercise-title" class="font-bold text-base sm:text-lg text-muc title-serif mt-0.5">Tiêu đề phiếu bài tập</h3>
-          </div>
-        </div>
-        <div class="flex items-center gap-2">
-          <button onclick="printExerciseSheet()" class="px-4 py-2 bg-luc hover:bg-emerald-800 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center gap-1.5 cursor-pointer">
-            <i class="fas fa-print"></i> <span>In Phiếu A4</span>
-          </button>
-          <button onclick="closeExerciseModal()" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-gray-500 hover:text-muc flex items-center justify-center text-base font-bold transition">✕</button>
-        </div>
-      </div>
-
-      <!-- Printable A4 Area -->
-      <div class="p-6 sm:p-8 overflow-y-auto space-y-5 text-xs sm:text-sm text-slate-800 print-a4-sheet" id="exercise-printable-area">
-        <!-- HEADER PHIẾU A4 CHUẨN: 2 LOGO HAI BÊN & VĂN BẢN CANH GIỮA THEO ĐÚNG YÊU CẦU THẦY TUẤN -->
-        <table class="w-full border-b-2 border-[#1F4E79] pb-3 mb-4" style="border-collapse: collapse;">
-          <tr>
-            <td style="width: 65px; vertical-align: middle; text-align: left;">
-              <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/ttbdvh.jpg?alt=media&token=f270aa9b-a2bc-48e8-8910-80742b542615" alt="Logo TTBDVH" style="height: 48px; object-fit: contain;">
-            </td>
-            <td style="vertical-align: middle; text-align: center; padding: 0 10px;">
-              <div style="font-family: 'Source Serif 4', Georgia, serif; font-weight: 800; font-size: 11.5pt; color: #1F4E79; text-transform: uppercase; letter-spacing: 0.5px;">
-                TRUNG TÂM BỒI DƯỠNG VĂN HÓA & KHẢO THÍ ĐGNL
-              </div>
-              <div style="font-family: 'Be Vietnam Pro', sans-serif; font-weight: 600; font-size: 8.5pt; color: #0F6B55; margin-top: 2px;">
-                TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN, ĐHQG-HCM · THS. ĐINH QUỐC TUẤN
-              </div>
-              <div style="font-family: 'Be Vietnam Pro', sans-serif; font-size: 7.5pt; color: #64748B; font-style: italic; margin-top: 2px;">
-                Hệ thống phiếu học tập phân dạng chuẩn chương trình GDPT 2018
-              </div>
-            </td>
-            <td style="width: 70px; vertical-align: middle; text-align: right;">
-              <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738" alt="Logo HCMUS" style="height: 48px; object-fit: contain;">
-            </td>
-          </tr>
-        </table>
-
-        <!-- Tiêu đề đề bài -->
-        <div class="text-center space-y-1 mb-4">
-          <h2 id="sheet-title" class="font-bold text-base sm:text-lg text-[#1F4E79] title-serif uppercase tracking-wide">
-            PHIẾU HỌC TẬP & BÀI TẬP RÈN LUYỆN
-          </h2>
-          <p id="sheet-subtitle" class="text-xs text-gray-500 italic">Môn: Toán · Chương trình GDPT 2018</p>
-        </div>
-
-        <!-- Khung điền thông tin học sinh -->
-        <div class="flex items-center justify-between text-xs border border-dashed border-slate-300 p-2.5 rounded-xl bg-slate-50/50 mb-4">
-          <span><b>Họ và tên học sinh:</b> ............................................................................</span>
-          <span><b>Lớp:</b> ............... <b>Ngày học:</b> ....../....../2026</span>
-        </div>
-
-        <!-- Phần nội dung bài tập tự luận -->
-        <div id="modal-exercise-body" class="space-y-4">
-          <!-- Nội dung chi tiết các bài tập -->
-        </div>
-
-        <!-- Chân trang phiếu A4 -->
-        <div class="pt-6 mt-6 border-t border-slate-200 text-center text-[10px] text-gray-400 italic">
-          © Bản quyền tài liệu thuộc ThS. Đinh Quốc Tuấn · Trung Tâm Bồi Dưỡng Văn Hóa HCMUS · Vì mục đích giáo dục
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- =====================================================================
-       MODAL 2: NHẬP MÃ LỚP HỌC (DÙNG CHO TOÀN KHÓA)
-       ===================================================================== -->
-  <div id="modal-class" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-bac space-y-5 animate-fadeIn">
-      <div class="flex items-start justify-between">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg font-bold">
-            <i class="fas fa-key"></i>
-          </div>
-          <div>
-            <h3 class="font-bold text-lg text-muc title-serif">Mã Lớp Học Giáo Viên Cấp</h3>
-            <p class="text-xs text-gray-500">Dành riêng cho học sinh của Thầy Tuấn & GV Đối Tác</p>
-          </div>
-        </div>
-        <button onclick="closeClassModal()" class="text-gray-400 hover:text-muc text-lg font-bold">✕</button>
-      </div>
-
-      <p class="text-xs text-gray-600 leading-relaxed">
-        Nhập mã lớp do Thầy Tuấn hoặc Thầy/Cô phụ trách lớp chiếu trên bảng để <b>mở khóa học tập & làm bài thi không giới hạn</b> cho toàn bộ buổi học / toàn khóa học:
-      </p>
-
-      <div class="space-y-4">
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Họ và tên của em:</label>
-          <input type="text" id="classStudentName" placeholder="Ví dụ: Nguyễn Văn An" class="w-full px-3.5 py-2.5 border border-bac rounded-xl text-sm focus:ring-2 focus:ring-amber-500 outline-none">
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Mã lớp (4 - 8 ký tự):</label>
-          <input type="text" id="classCodeInput" maxlength="8" placeholder="VD: 7K8B" class="w-full px-4 py-3 border-2 border-amber-400 bg-amber-50/40 rounded-xl text-center text-2xl font-black uppercase tracking-widest text-slate-800 outline-none focus:border-amber-600 font-mono">
-        </div>
-
-        <button onclick="submitClassCode()" class="w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black text-sm rounded-xl shadow-lg transition flex items-center justify-center gap-2">
-          <i class="fas fa-unlock"></i> Xác Nhận Kích Hoạt Lớp Học
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- =====================================================================
-       SCRIPT XỬ LÝ FRONTEND, ĐỒNG BỘ DỮ LIỆU & HỆ THỐNG MỤC LỤC
-       ===================================================================== -->
-  <script>
-    let currentGrade = 'ALL';
-    let currentUser = null;
-
-    // CƠ SỞ DỮ LIỆU MỤC LỤC BÀI HỌC THEO TIẾN ĐỘ CHUẨN NĂM HỌC
-    const SYLLABUS_DATA = {
-      'L06': {
-        title: 'Chương Trình Toán 6 (Kết Nối Tri Thức / Cánh Diều / Chân Trời)',
-        currentWeek: 8,
-        currentWeekFocus: 'Tuần 8: Bài 10 (Bội chung nhỏ nhất) & LUYỆN ĐỀ ÔN TẬP GIỮA HỌC KÌ I',
-        chapters: [
-          {
-            chapterId: 'c6_1',
-            chapterTitle: 'Chương I: Tập Hợp Các Số Tự Nhiên',
-            lessons: [
-              { id: 'toan6-01', week: 1, title: 'Bài 1 & 2: Tập hợp số tự nhiên & Phép tính lũy thừa (Chương trình GDPT 2018)', examCode: 'TOAN06_CTST_T09_01', examA4: 'de_thi_a4/TOAN06_CTST_T09_01.html', isCurrent: true, isExamFocus: true, theory: 'Khái niệm tập hợp $\\mathbb{N} = \\{0; 1; 2; 3; ...\\}$ (số nhỏ nhất là 0). Phép tính lũy thừa $a^n$, nhân chia lũy thừa cùng cơ số $a^m \\cdot a^n = a^{m+n}$, $a^m : a^n = a^{m-n}$.', exercise: 'Đề kiểm tra chuẩn Bộ GD&ĐT gồm 22 câu chi tiết: 12 trắc nghiệm ABCD + 2 câu Đúng/Sai (8 ý) + 2 câu điền đáp số tự luận.' },
-              { id: 'toan6-03', week: 2, title: 'Bài 3: Các phép tính trong tập hợp số tự nhiên', examCode: 'TOAN06_01', theory: 'Tính chất giao hoán, kết hợp, phân phối của phép nhân đối với phép cộng: $a(b + c) = ab + ac$.', exercise: 'Tính nhanh: $25 \\times 37 + 25 \\times 63$; phép chia có dư: $a = b \\cdot q + r (0 \\le r < b)$.' },
-              { id: 'toan6-04', week: 3, title: 'Bài 4: Lũy thừa với số mũ tự nhiên', examCode: 'TOAN06_01', theory: '$a^n = a \\cdot a \\dots a$ ($n$ thừa số $a$). Nhân/chia hai lũy thừa cùng cơ số: $a^m \\cdot a^n = a^{m+n}$; $a^m : a^n = a^{m-n}$.', exercise: 'Tính giá trị: $2^3 \\cdot 2^2 = 2^5 = 32$; $3^4 : 3^2 = 9$. Tìm $x$ biết $3^x = 27$.' },
-              { id: 'toan6-05', week: 4, title: 'Bài 5: Thứ tự thực hiện các phép tính', examCode: 'TOAN06_01', theory: 'Ưu tiên: Lũy thừa $\\rightarrow$ Nhân & Chia $\\rightarrow$ Cộng & Trừ. Trong ngoặc: $( ) \\rightarrow [ ] \\rightarrow \\{ \\}$.', exercise: 'Tính: $15 + 5 \\cdot 2^2 = 15 + 20 = 35$; $100 - [60 - (9 - 2)^2]$.' },
-              { id: 'toan6-06', week: 5, title: 'Bài 6: Chia hết và dấu hiệu chia hết cho 2, cho 5', examCode: 'TOAN06_01', theory: 'Tính chất chia hết của một tổng: $a \\vdots m$ và $b \\vdots m \\Rightarrow (a+b) \\vdots m$. Dấu hiệu chia hết cho 2 (tận cùng chẵn), cho 5 (tận cùng 0 hoặc 5).', exercise: 'Xét xem tổng $120 + 45$ có chia hết cho 5 không? Tìm chữ số $x$ để số $\\overline{47x}$ chia hết cho 2.' },
-              { id: 'toan6-07', week: 5, title: 'Bài 7: Dấu hiệu chia hết cho 3, cho 9', examCode: 'TOAN06_01', theory: 'Số chia hết cho 9 khi tổng các chữ số chia hết cho 9. Số chia hết cho 3 khi tổng các chữ số chia hết cho 3.', exercise: 'Tìm chữ số $x$ để $\\overline{1x5}$ chia hết cho 9; số nào chia hết cho cả 2, 3, 5, 9?' },
-              { id: 'toan6-08', week: 6, title: 'Bài 8: Số nguyên tố. Hợp số. Phân tích ra thừa số nguyên tố', examCode: 'TOAN06_01', theory: 'Số nguyên tố là số tự nhiên lớn hơn 1 chỉ có 2 ước là 1 và chính nó. Phân tích số ra tích các thừa số nguyên tố.', exercise: 'Các số 2, 3, 5, 7, 11 là số nguyên tố; phân tích số $120 = 2^3 \\cdot 3 \\cdot 5$.' },
-              { id: 'toan6-09', week: 7, title: 'Bài 9: Ước chung. Ước chung lớn nhất (ƯCLN)', examCode: 'TOAN06_01', theory: 'ƯCLN là số lớn nhất trong tập hợp các ước chung. Các bước tìm ƯCLN bằng cách phân tích ra thừa số nguyên tố.', exercise: 'Tìm $\\text{ƯCLN}(36, 84)$; bài toán thực tế chia đều 48 cây bút và 72 quyển vở vào các túi quà.' },
-              { id: 'toan6-10', week: 8, title: 'Bài 10: Bội chung. Bội chung nhỏ nhất (BCNN)', examCode: 'TOAN06_01', isCurrent: true, theory: 'BCNN là số nhỏ nhất khác 0 trong tập hợp các bội chung. Chọn thừa số chung và riêng với số mũ lớn nhất.', exercise: 'Tìm $\\text{BCNN}(12, 18) = 36$; bài toán chu kỳ xe buýt hoặc đèn tín hiệu giao thông.' },
-              { id: 'toan6-mid', week: 8, title: '⭐ ĐỀ ÔN TẬP & KIỂM TRA GIỮA HỌC KỲ I (TRỌNG TÂM TUẦN 8)', examCode: 'TOAN06_01', isExamFocus: true, isCurrent: true, theory: 'Tổng hợp toàn bộ kiến thức Số học (Lũy thừa, Chia hết, ƯCLN, BCNN) & Hình học trực quan (Hình vuông, Tam giác đều, Hình chữ nhật, Hình thoi).', exercise: 'Bộ đề kiểm tra giữa kì tiêu chuẩn 20 câu trắc nghiệm theo ma trận của Bộ GD&ĐT.' }
-            ]
-          },
-          {
-            chapterId: 'c6_2',
-            chapterTitle: 'Chương II: Số Nguyên (Chuẩn Bị Học)',
-            lessons: [
-              { id: 'toan6-11', week: 9, title: 'Bài 11: Số nguyên âm và tập hợp các số nguyên', examCode: 'TOAN06_01', theory: 'Tập hợp số nguyên $\\mathbb{Z} = \\{... -3, -2, -1, 0, 1, 2, 3...\\}$. Biểu diễn trên trục số và ứng dụng nhiệt độ dưới 0°C.', exercise: 'Biểu diễn các điểm $-3, 2, -1$ trên trục số; so sánh số nguyên.' },
-              { id: 'toan6-12', week: 10, title: 'Bài 12: Thứ tự trong tập hợp các số nguyên', examCode: 'TOAN06_01', theory: 'Mọi số âm đều nhỏ hơn 0 và nhỏ hơn mọi số dương. Số đối của $a$ là $-a$.', exercise: 'Sắp xếp các số sau theo thứ tự tăng dần: $-15, 0, 7, -2, 11$.' }
-            ]
-          }
-        ]
-      },
-      'L07': {
-        title: 'Chương Trình Toán 7 (Kết Nối Tri Thức / Cánh Diều / Chân Trời)',
-        currentWeek: 8,
-        currentWeekFocus: 'Tuần 8: Bài 7 (Tập hợp các số thực) & LUYỆN ĐỀ ÔN TẬP GIỮA HỌC KÌ I',
-        chapters: [
-          {
-            chapterId: 'c7_1',
-            chapterTitle: 'Chương I: Số Hữu Tỉ',
-            lessons: [
-              { id: 'toan7-01', week: 1, title: 'Bài 1: Tập hợp các số hữu tỉ', examCode: 'TOAN07_01', theory: 'Số hữu tỉ là số viết được dưới dạng phân số $\\frac{a}{b}$ với $a, b \\in \\mathbb{Z}, b \\neq 0$. Kí hiệu tập hợp $\\mathbb{Q}$.', exercise: 'So sánh các số hữu tỉ, biểu diễn trên trục số.' },
-              { id: 'toan7-02', week: 2, title: 'Bài 2: Các phép tính cộng, trừ, nhân, chia số hữu tỉ', examCode: 'TOAN07_01', theory: 'Quy tắc cộng trừ phân số, quy tắc nhân chia và tính chất phân phối.', exercise: 'Tính giá trị biểu thức phân số và số thập phân.' },
-              { id: 'toan7-03', week: 3, title: 'Bài 3: Lũy thừa của một số hữu tỉ', examCode: 'TOAN07_01', theory: 'Lũy thừa với số mũ tự nhiên: $(x \\cdot y)^n = x^n \\cdot y^n$; $(x^m)^n = x^{m \\cdot n}$.', exercise: 'Tính giá trị: $(-\\frac{1}{2})^3 = -\\frac{1}{8}$; so sánh $2^{30}$ và $3^{20}$.' },
-              { id: 'toan7-04', week: 4, title: 'Bài 4: Quy tắc dấu ngoặc và quy tắc chuyển vế', examCode: 'TOAN07_01', theory: 'Khi bỏ dấu ngoặc có dấu "-" đằng trước phải đổi dấu tất cả các số hạng. Quy tắc chuyển vế: $x + a = b \\Rightarrow x = b - a$.', exercise: 'Tìm $x$: $x - \\frac{2}{3} = \\frac{1}{2}$; rút gọn biểu thức có nhiều tầng ngoặc.' }
-            ]
-          },
-          {
-            chapterId: 'c7_2',
-            chapterTitle: 'Chương II: Số Thực & Căn Bậc Hai Số Học',
-            lessons: [
-              { id: 'toan7-05', week: 5, title: 'Bài 5: Số thập phân vô hạn tuần hoàn', examCode: 'TOAN07_01', theory: 'Mỗi số hữu tỉ biểu diễn bởi số thập phân hữu hạn hoặc vô hạn tuần hoàn.', exercise: 'Chuyển phân số $\\frac{1}{3} = 0,(3)$ sang số thập phân tuần hoàn.' },
-              { id: 'toan7-06', week: 6, title: 'Bài 6: Số vô tỉ. Căn bậc hai số học', examCode: 'TOAN07_01', theory: 'Căn bậc hai số học của số $a \\ge 0$ là số $x \\ge 0$ sao cho $x^2 = a$. Kí hiệu $\\sqrt{a}$.', exercise: 'Tính $\\sqrt{25} = 5, \\sqrt{0.64} = 0.8$.' },
-              { id: 'toan7-07', week: 8, title: 'Bài 7: Tập hợp các số thực (Tuần 8)', examCode: 'TOAN07_01', isCurrent: true, theory: 'Số thực $\\mathbb{R}$ bao gồm số hữu tỉ và số vô tỉ. Trục số thực biểu diễn liên tục mọi số thực.', exercise: 'So sánh các số thực, tính giá trị tuyệt đối $|x|$.' },
-              { id: 'toan7-mid', week: 8, title: '⭐ ĐỀ ÔN TẬP GIỮA HỌC KỲ I TOÁN 7', examCode: 'TOAN07_01', isExamFocus: true, isCurrent: true, theory: 'Toàn bộ Số hữu tỉ, Lũy thừa, Góc đối đỉnh, Tia phân giác, Hai đường thẳng song song.', exercise: 'Đề thi 20 câu trắc nghiệm chuẩn ma trận Sở GD&ĐT TP.HCM.' },
-              { id: 'toan7-ck1', week: 8, title: '🔥 ĐỀ THI CUỐI KÌ I TOÁN 7 - THCS TƯỜNG BÌNH HIỆP TP.HCM (SLIDO BÌNH CHỌN)', examCode: 'TOAN07_CK1_KNTT', isCurrent: true, isExamFocus: true, theory: 'Bộ 12 câu trắc nghiệm bao quát toàn diện Số hữu tỉ, Số thực, Hình hộp chữ nhật, Hình lăng trụ đứng và Tiên đề Euclid.', exercise: 'Học sinh làm bài trực tiếp trên điện thoại tại sv-toan7.html hoặc thi trắc nghiệm tính giờ.' }
-            ]
-          }
-        ]
-      },
-      'L08': {
-        title: 'Chương Trình Toán 8 (Kết Nối Tri Thức / Cánh Diều / Chân Trời)',
-        currentWeek: 8,
-        currentWeekFocus: 'Tuần 8: Phân tích đa thức thành nhân tử & LUYỆN ĐỀ ÔN TẬP GIỮA HỌC KÌ I',
-        chapters: [
-          {
-            chapterId: 'c8_1',
-            chapterTitle: 'Chương I: Đa Thức Nhiều Biến',
-            lessons: [
-              { id: 'toan8-01', week: 1, title: 'Bài 1: Đơn thức và đa thức nhiều biến', examCode: 'TOAN08_01', theory: 'Đơn thức nhiều biến là biểu thức gồm tích giữa các số và các biến. Bậc của đơn thức có hệ số khác 0 là tổng số mũ của tất cả các biến.', exercise: 'Thu gọn đơn thức $2x^3y \\cdot (-3xy^2)$, tìm bậc của đa thức.' },
-              { id: 'toan8-02', week: 2, title: 'Bài 2: Các phép tính cộng, trừ đa thức nhiều biến', examCode: 'TOAN08_01', theory: 'Quy tắc cộng trừ đa thức: Bỏ dấu ngoặc rồi nhóm các hạng tử đồng dạng lại với nhau.', exercise: 'Cho $P = 2x^2y - 3xy + 1$ và $Q = -x^2y + xy - 5$. Tính $P + Q$ và $P - Q$.' }
-            ]
-          },
-          {
-            chapterId: 'c8_2',
-            chapterTitle: 'Chương II: Hằng Đẳng Thức Đáng Nhớ & Ứng Dụng',
-            lessons: [
-              { id: 'toan8-04', week: 4, title: 'Bài 4: Bảy hằng đẳng thức đáng nhớ', examCode: 'TOAN08_01', theory: '$(a \\pm b)^2 = a^2 \\pm 2ab + b^2$; $a^2 - b^2 = (a-b)(a+b)$; $(a \\pm b)^3 = a^3 \\pm 3a^2b + 3ab^2 \\pm b^3$.', exercise: 'Khai triển $(3x - 2)^2$, tính nhanh $101^2$ và $99 \\cdot 101$.' },
-              { id: 'toan8-05', week: 6, title: 'Bài 5: Phân tích đa thức thành nhân tử', examCode: 'TOAN08_01', theory: 'Các phương pháp: Đặt nhân tử chung, dùng hằng đẳng thức, nhóm hạng tử và phối hợp nhiều phương pháp.', exercise: 'Phân tích thành nhân tử: $6x^2y - 9xy^2$; $x^2 - 2xy + y^2 - 9$.' },
-              { id: 'toan8-mid', week: 8, title: '⭐ ĐỀ ÔN TẬP GIỮA HỌC KỲ I TOÁN 8 (BỘ ĐỀ 120 PHÚT)', examCode: 'TOAN08_01', isExamFocus: true, isCurrent: true, theory: 'Tổng hợp toàn bộ Đa thức, Hằng đẳng thức, Phân tích nhân tử và Tứ giác.', exercise: 'Đề thi chuẩn 15 câu trắc nghiệm + bài tập tự luận có chấm điểm tự động.' }
-            ]
-          }
-        ]
-      },
-      'L09': {
-        title: 'Chương Trình Toán 9 (Chương Trình GDPT 2018 Mới)',
-        currentWeek: 8,
-        currentWeekFocus: 'Tuần 8: Hệ phương trình bậc nhất hai ẩn & HỆ THỨC LƯỢNG TAM GIÁC VUÔNG',
-        chapters: [
-          {
-            chapterId: 'c9_1',
-            chapterTitle: 'Chương I: Phương Trình & Hệ Hai Phương Trình Bậc Nhất Hai Ẩn',
-            lessons: [
-              { id: 'toan9-01', week: 1, title: 'Bài 1: Khái niệm phương trình & hệ phương trình bậc nhất hai ẩn', examCode: 'TOAN09_01', theory: 'Dạng tổng quát $ax + by = c$. Nghiệm của hệ là cặp số $(x_0; y_0)$ thỏa mãn cả hai phương trình.', exercise: 'Kiểm tra cặp số $(2; 1)$ có là nghiệm của hệ phương trình hay không.' },
-              { id: 'toan9-02', week: 3, title: 'Bài 2: Phương pháp giải hệ thế & cộng đại số', examCode: 'TOAN09_01', theory: 'Quy tắc thế: Rút một ẩn rồi thế vào phương trình còn lại. Quy tắc cộng: Cân bằng hệ số rồi triệt tiêu một ẩn.', exercise: 'Giải hệ: $\\begin{cases} 2x + y = 5 \\\\ x - y = 1 \\end{cases}$.' }
-            ]
-          },
-          {
-            chapterId: 'c9_2',
-            chapterTitle: 'Chương II: Căn Thức Bậc Hai & Hệ Thức Lượng Tam Giác Vuông',
-            lessons: [
-              { id: 'toan9-04', week: 6, title: 'Bài 4: Căn bậc hai & Trục căn thức ở mẫu', examCode: 'TOAN09_01', theory: 'Điều kiện $\\sqrt{A}$ có nghĩa là $A \\ge 0$. Nhân liên hợp: $\\frac{c}{\\sqrt{a} \\pm b}$.', exercise: 'Tìm điều kiện xác định của $\\sqrt{2x-6}$; trục căn thức $\\frac{2}{\\sqrt{3}-1}$.' },
-              { id: 'toan9-mid', week: 8, title: '⭐ ĐỀ ÔN TẬP GIỮA HỌC KỲ I TOÁN 9', examCode: 'TOAN09_01', isExamFocus: true, isCurrent: true, theory: 'Tổng hợp Hệ phương trình 2 ẩn, Căn thức bậc hai, Tỉ số lượng giác và Giải tam giác vuông.', exercise: 'Đề thi trắc nghiệm bấm giờ 25 phút kèm bài giải chi tiết từng bước.' }
-            ]
-          }
-        ]
-      },
-      'L10': {
-        title: 'Chương Trình Toán 10 (Chương Trình GDPT 2018 Mới)',
-        currentWeek: 8,
-        currentWeekFocus: 'Tuần 8: Bất phương trình bậc nhất hai ẩn & HỆ THỨC LƯỢNG TAM GIÁC',
-        chapters: [
-          {
-            chapterId: 'c10_1',
-            chapterTitle: 'Chương I: Mệnh Đề & Tập Hợp',
-            lessons: [
-              { 
-                id: 'toan10-01', 
-                week: 1, 
-                title: 'Bài 1: Mệnh đề toán học, kéo theo, phủ định', 
-                examCode: 'TOAN10_01', 
-                theory: 'Mệnh đề là khẳng định đúng hoặc sai. Mệnh đề kéo theo $P \\Rightarrow Q$; mệnh đề đảo $Q \\Rightarrow P$; phủ định $\\overline{P}$.', 
-                exercise: 'Xét tính đúng sai của mệnh đề toán học, lập mệnh đề đảo, phủ định mệnh đề chứa $\\forall, \\exists$.',
-                detailTheory: `
-                  <div class="space-y-4">
-                    <div class="p-4 bg-blue-50/70 rounded-2xl border border-blue-200">
-                      <h4 class="font-bold text-sm text-lam border-b border-blue-200/60 pb-1.5 mb-2">
-                        <i class="fas fa-bookmark text-blue-600 mr-1.5"></i> I. Định Nghĩa & Phân Loại Mệnh Đề
-                      </h4>
-                      <ul class="list-disc list-inside space-y-1.5 text-xs text-slate-700 leading-relaxed">
-                        <li><b>Mệnh đề toán học:</b> Là một khẳng định có tính đúng hoặc sai rõ ràng. Một mệnh đề không thể vừa đúng vừa sai.</li>
-                        <li><b>Câu không phải mệnh đề:</b> Câu nghi vấn (hỏi?), câu cảm thán (than thở!), câu cầu khiến (mệnh lệnh).</li>
-                        <li><b>Mệnh đề chứa biến:</b> Câu khẳng định chứa biến $x, y...$ mà tính đúng sai phụ thuộc vào giá trị cụ thể của biến. Ví dụ: $P(x): \"x + 2 > 5\"$.</li>
-                      </ul>
-                    </div>
-
-                    <div class="p-4 bg-slate-50 rounded-2xl border border-bac">
-                      <h4 class="font-bold text-sm text-lam border-b border-bac pb-1.5 mb-2">
-                        <i class="fas fa-cube text-blue-600 mr-1.5"></i> II. Các Dạng Mệnh Đề Thường Gặp
-                      </h4>
-                      <div class="space-y-2 text-xs text-slate-700 leading-relaxed">
-                        <p><b>1. Mệnh đề phủ định $\\overline{P}$:</b> Đúng khi $P$ sai, và sai khi $P$ đúng.</p>
-                        <p><b>2. Mệnh đề kéo theo $P \\Rightarrow Q$:</b> \"Nếu $P$ thì $Q$\". Mệnh đề này <i>chỉ sai khi $P$ đúng mà $Q$ sai</i>.</p>
-                        <p><b>3. Mệnh đề đảo $Q \\Rightarrow P$:</b> Là mệnh đề đảo của $P \\Rightarrow Q$ (tính đúng sai độc lập với mệnh đề thuận).</p>
-                        <p><b>4. Mệnh đề tương đương $P \\Leftrightarrow Q$:</b> \"P khi và chỉ khi Q\" (đúng khi cả hai cùng đúng hoặc cùng sai).</p>
-                        <p><b>5. Ký hiệu phổ quát $\\forall$ & Ký hiệu tồn tại $\\exists$:</b> Phủ định của $\\forall x \\in X, P(x)$ là $\\exists x \\in X, \\overline{P(x)}$.</p>
-                      </div>
-                    </div>
-                  </div>
-                `,
-                detailExercise: `
-                  <div class="space-y-4">
-                    <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
-                      <b class="text-emerald-900 font-bold">Bài 1 (Nhận biết):</b> Trong các câu sau, câu nào là mệnh đề toán học? Xét tính đúng sai của nó:
-                      <div class="mt-2 pl-3 space-y-1 text-slate-700">
-                        <p>a) $15$ là số nguyên tố.</p>
-                        <p>b) $x^2 + 1 > 0$ với mọi số thực $x$.</p>
-                        <p>c) Thời tiết hôm nay đẹp quá!</p>
-                        <p>d) $2x - 3 = 5$.</p>
-                      </div>
-                    </div>
-                    <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
-                      <b class="text-emerald-900 font-bold">Bài 2 (Thông hiểu):</b> Cho mệnh đề $P$: \"Nếu tứ giác $ABCD$ là hình thoi thì $ABCD$ có hai đường chéo vuông góc với nhau\".
-                      <div class="mt-2 pl-3 space-y-1 text-slate-700">
-                        <p>a) Phát biểu mệnh đề đảo của mệnh đề $P$.</p>
-                        <p>b) Mệnh đề đảo có phải là một khẳng định đúng không? Vì sao?</p>
-                      </div>
-                    </div>
-                    <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200">
-                      <b class="text-emerald-900 font-bold">Bài 3 (Vận dụng):</b> Lập mệnh đề phủ định của các mệnh đề sau và xét tính đúng sai:
-                      <div class="mt-2 pl-3 space-y-1 text-slate-700">
-                        <p>a) $P: \"\\forall x \\in \\mathbb{R}, x^2 - x + 1 > 0\"$.</p>
-                        <p>b) $Q: \"\\exists n \\in \\mathbb{N}, n^2 + 1 \\text{ chia hết cho } 3\"$.</p>
-                      </div>
-                    </div>
-                  </div>
-                `
-              },
-              { id: 'toan10-02', week: 2, title: 'Bài 2: Tập hợp và các phép toán tập hợp', examCode: 'TOAN10_01', theory: 'Giao $A \\cap B$, Hợp $A \\cup B$, Hiệu $A \\setminus B$. Khoảng, đoạn, nửa khoảng.', exercise: 'Cho $A = (-3; 4], B = [1; 6)$. Tìm $A \\cap B, A \\cup B$.' }
-            ]
-          },
-          {
-            chapterId: 'c10_2',
-            chapterTitle: 'Chương II: Bất Phương Trình Bậc Nhất Hai Ẩn',
-            lessons: [
-              { id: 'toan10-03', week: 4, title: 'Bài 3: Miền nghiệm bất phương trình $ax + by \\le c$', examCode: 'TOAN10_01', theory: 'Biểu diễn miền nghiệm bằng nửa mặt phẳng trên mặt phẳng tọa độ $Oxy$.', exercise: 'Xác định miền nghiệm và kiểm tra điểm thuộc miền nghiệm.' },
-              { id: 'toan10-mid', week: 8, title: '⭐ ĐỀ ÔN TẬP GIỮA HỌC KỲ I TOÁN 10', examCode: 'TOAN10_01', isExamFocus: true, isCurrent: true, theory: 'Mệnh đề, Tập hợp, Miền nghiệm BPT bậc nhất hai ẩn, Định lý Sin, Cosin tam giác.', exercise: 'Bộ đề thi rèn tư duy logic và kỹ năng bấm máy Casio.' }
-            ]
-          }
-        ]
-      },
-      'L11': {
-        title: 'Chương Trình Toán 11 (Chương Trình GDPT 2018 Mới)',
-        currentWeek: 8,
-        currentWeekFocus: 'Tuần 8: Hàm số lượng giác, Phương trình lượng giác & HÌNH HỌC KHÔNG GIAN',
-        chapters: [
-          {
-            chapterId: 'c11_1',
-            chapterTitle: 'Chương I: Hàm Số Lượng Giác & Phương Trình Lượng Giác',
-            lessons: [
-              { id: 'toan11-01', week: 1, title: 'Bài 1: Góc lượng giác và công thức biến đổi', examCode: 'TOAN11_01', theory: 'Công thức cơ bản: $\\sin^2\\alpha + \\cos^2\\alpha = 1$, $\\sin 2a = 2\\sin a \\cos a$, $\\cos 2a = \\cos^2 a - \\sin^2 a$.', exercise: 'Cho $\\cos\\alpha = -3/5$, tính $\\sin\\alpha$ và $\\tan 2\\alpha$.' },
-              { id: 'toan11-03', week: 5, title: 'Bài 3: Phương trình lượng giác cơ bản', examCode: 'TOAN11_01', theory: '$\\sin x = \\sin\\alpha \\iff x = \\alpha + k2\\pi$ hoặc $x = \\pi - \\alpha + k2\\pi$; $\\cos x = \\cos\\alpha \\iff x = \\pm\\alpha + k2\\pi$.', exercise: 'Giải phương trình: $\\cos x = -1/2$; $\\sin(2x - \\pi/3) = \\sqrt{3}/2$.' },
-              { id: 'toan11-mid', week: 8, title: '⭐ ĐỀ ÔN TẬP GIỮA HỌC KỲ I TOÁN 11', examCode: 'TOAN11_01', isExamFocus: true, isCurrent: true, theory: 'Tổng hợp Lượng giác (Góc, Đồ thị, Phương trình) và Hình học không gian quan hệ song song.', exercise: 'Bộ đề trắc nghiệm chuẩn 4 lựa chọn + đúng sai + trả lời ngắn.' }
-            ]
-          }
-        ]
-      },
-      'L12': {
-        title: 'Chương Trình Toán 12 (Chương Trình GDPT 2018 Mới)',
-        currentWeek: 8,
-        currentWeekFocus: 'Tuần 8: Ứng dụng đạo hàm khảo sát hàm số & TOẠ ĐỘ VECTƠ OXYZ',
-        chapters: [
-          {
-            chapterId: 'c12_1',
-            chapterTitle: 'Chương I: Ứng Dụng Đạo Hàm Khảo Sát & Vẽ Đồ Thị Hàm Số',
-            lessons: [
-              { id: 'toan12-01', week: 1, title: 'Bài 1: Tính đơn điệu & Cực trị hàm số', examCode: 'TOAN12_01', theory: 'Hàm số đồng biến khi $f\'(x) \\ge 0$, nghịch biến khi $f\'(x) \\le 0$. Cực trị đổi dấu $f\'(x)$.', exercise: 'Tìm các khoảng đơn điệu và toạ độ cực trị của hàm $y = x^3 - 3x^2 + 2$.' },
-              { id: 'toan12-04', week: 6, title: 'Bài 4: Đường tiệm cận của đồ thị hàm số', examCode: 'TOAN12_01', theory: 'Tiệm cận ngang: $\\lim_{x \\to \\pm\\infty} f(x) = y_0$. Tiệm cận đứng: $\\lim_{x \\to x_0} f(x) = \\pm\\infty$.', exercise: 'Xác định tiệm cận của hàm số $y = \\frac{2x - 1}{x + 3}$.' },
-              { id: 'toan12-mid', week: 8, title: '⭐ ĐỀ ÔN TẬP GIỮA HỌC KỲ I TOÁN 12 (TRỌNG TÂM TN THPT)', examCode: 'TOAN12_01', isExamFocus: true, isCurrent: true, theory: 'Khảo sát hàm số, Bảng biến thiên, Cực trị, Tiệm cận và Toạ độ vectơ không gian Oxyz.', exercise: 'Đề thi trắc nghiệm 4 lựa chọn bấm giờ có đo đạc tốc độ tư duy.' }
-            ]
-          }
-        ]
-      },
-      'DGNL': {
-        title: 'Chuyên Đề Luyện Thi ĐGNL ĐHQG-HCM 2026',
-        currentWeek: 8,
-        currentWeekFocus: 'Tuần 8: Tư duy Định lượng, Suy luận Logic & Xử lý số liệu bảng biểu',
-        chapters: [
-          {
-            chapterId: 'cdgnl_1',
-            chapterTitle: 'Phần 1: Tư Duy Định Lượng (Toán Học & Suy Luận Số Liệu)',
-            lessons: [
-              { id: 'dgnl-01', week: 8, title: 'Đề số 01: Tư duy Định lượng & Logic suy luận (Bộ đề chuẩn)', examCode: 'DGNL_2026_01', isExamFocus: true, isCurrent: true, theory: 'Cấu trúc đề ĐHQG-HCM: Đại số, Hình học, Xác suất thống kê, Đọc hiểu biểu đồ ma trận.', exercise: '30 câu trắc nghiệm 4 lựa chọn, phân tích tốc độ dưới 1.5 phút/câu.' },
-              { id: 'dgnl-02', week: 8, title: 'Đề số 02: Xử lý bảng biểu dữ liệu thực tế & Logic sắp xếp', examCode: 'DGNL_2026_02', isExamFocus: true, isCurrent: true, theory: 'Quy tắc suy luận Modus Ponens, bài toán xếp chỗ, tính tỷ trọng doanh thu và xác suất Venn.', exercise: 'Thực hành phân tích ma trận dữ liệu thực tế đề thi 2026.' }
-            ]
-          }
-        ]
-      }
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], processEscapes: true },
+      options: { enableMenu: false }
     };
-
-    // ĐỒNG BỘ TRẠNG THÁI GIAO DIỆN TÀI KHOẢN & MÃ LỚP
-    function syncAccountAndClassUI() {
-      const studentName = localStorage.getItem('bdvh_student_name') || (currentUser ? currentUser.full_name : '');
-      const classCode = localStorage.getItem('bdvh_class_code') || '';
-      
-      const nameEl = document.getElementById('hero-student-name');
-      const statusEl = document.getElementById('hero-class-status');
-      const badgeEl = document.getElementById('hero-badge-status');
-      const btnLabel = document.getElementById('hero-auth-btn-label');
-      const quickInput = document.getElementById('quickClassCode');
-      
-      if (nameEl) {
-        nameEl.innerText = studentName || 'Học sinh vãng lai';
-      }
-      if (btnLabel) {
-        btnLabel.innerText = studentName ? 'Đổi tài khoản' : 'Đăng Ký / Đăng Nhập';
-      }
-      if (statusEl) {
-        if (classCode) {
-          statusEl.innerHTML = `<span class="text-luc font-bold"><i class="fas fa-check-circle"></i> Đã kích hoạt Lớp: <span class="font-mono text-xs uppercase">${esc(classCode)}</span> (Toàn khóa)</span>`;
-          if (badgeEl) {
-            badgeEl.className = 'text-[11px] bg-emerald-100 text-luc font-bold px-2.5 py-0.5 rounded-full';
-            badgeEl.innerText = 'Đã mở khóa';
-          }
-          if (quickInput) quickInput.value = classCode;
-        } else {
-          statusEl.innerText = 'Chưa nhập mã lớp giáo viên cấp';
-          if (badgeEl) {
-            badgeEl.className = 'text-[11px] bg-amber-100 text-amber-800 font-bold px-2.5 py-0.5 rounded-full';
-            badgeEl.innerText = 'Cần mã lớp';
-          }
-        }
-      }
-    }
-
-    // LƯU MÃ LỚP NHANH TỪ KHUNG HERO
-    async function saveQuickClassCode() {
-      const input = document.getElementById('quickClassCode');
-      const code = input ? input.value.trim().toUpperCase() : '';
-      if (!code) {
-        alert('Vui lòng nhập mã lớp do Thầy/Cô cung cấp (VD: 7K8B).');
-        return;
-      }
-      const studentName = localStorage.getItem('bdvh_student_name') || (currentUser ? currentUser.full_name : 'Học sinh');
-      try {
-        const res = await fetch('api.php?action=verify_class_code', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ code: code, student_name: studentName })
-        });
-        const data = await res.json();
-        if (data.status === 'success') {
-          localStorage.setItem('bdvh_class_code', code);
-          localStorage.setItem('bdvh_unlocked', '1');
-          sessionStorage.setItem('bdvh_class_code', code);
-          sessionStorage.setItem('bdvh_unlocked', '1');
-          syncAccountAndClassUI();
-          updateClassCodeHeaderButton();
-          alert(data.message || `Đã kích hoạt lớp ${code} thành công! Mã được lưu dùng cho toàn khóa học.`);
-        } else {
-          alert(data.message || 'Mã lớp không hợp lệ hoặc đã hết hạn.');
-        }
-      } catch (e) {
-        alert('Lỗi kết nối kiểm tra mã lớp: ' + e.message);
-      }
-    }
-
-    // CẬP NHẬT NÚT MÃ LỚP TRÊN THANH HEADER
-    function updateClassCodeHeaderButton() {
-      const code = localStorage.getItem('bdvh_class_code') || '';
-      const btn = document.getElementById('btn-header-class-code');
-      const label = document.getElementById('header-class-label');
-      if (btn && label) {
-        if (code) {
-          label.innerHTML = `Lớp: <span class="font-mono">${esc(code)}</span>`;
-          btn.className = 'bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl text-xs sm:text-sm transition flex items-center gap-1.5 shadow-sm whitespace-nowrap cursor-pointer';
-        } else {
-          label.innerText = 'Nhập Mã Lớp';
-          btn.className = 'bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-3 py-2 rounded-xl text-xs sm:text-sm transition flex items-center gap-1.5 shadow-sm whitespace-nowrap cursor-pointer';
-        }
-      }
-    }
-
-    // KIỂM TRA PHIÊN ĐĂNG NHẬP
-    async function checkAuth() {
-      try {
-        const res = await fetch('api.php?action=check_auth');
-        const data = await res.json();
-        const authBox = document.getElementById('auth-box');
-
-        if (data.status === 'logged_in') {
-          currentUser = data.user;
-          authBox.innerHTML = `
-            <div class="flex items-center gap-2">
-              <span class="text-xs text-gray-700 font-bold flex items-center gap-1.5">
-                <i class="fas fa-user-circle text-luc text-base"></i> ${esc(currentUser.full_name)}
-              </span>
-              <button onclick="logout()" class="text-xs text-son hover:underline font-semibold ml-1">Thoát</button>
-            </div>
-          `;
-        } else {
-          currentUser = null;
-          authBox.innerHTML = `
-            <button onclick="openModal('modal-guest')" class="bg-luc hover:bg-emerald-800 text-white px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition flex items-center gap-1.5 shadow-sm whitespace-nowrap">
-              <i class="fas fa-user-plus"></i> <span class="hidden sm:inline">Đăng Ký Khách</span><span class="sm:hidden">Tài Khoản</span>
-            </button>
-          `;
-        }
-      } catch (err) {
-        console.warn('checkAuth warning:', err);
-      }
-    }
-
-    // ĐĂNG XUẤT
-    async function logout() {
-      try {
-        await fetch('api.php?action=logout');
-      } catch(e) {}
-      localStorage.removeItem('bdvh_student_name');
-      localStorage.removeItem('bdvh_class_code');
-      location.reload();
-    }
-
-    // RENDER MỤC LỤC BÀI HỌC THEO KHỐI LỚP
-    function renderCurriculumSyllabus(grade) {
-      const container = document.getElementById('syllabus-tree-container');
-      const titleEl = document.getElementById('syllabus-title');
-      if (!container) return;
-
-      const targetGrade = (grade === 'ALL') ? 'L06' : grade;
-      const curData = SYLLABUS_DATA[targetGrade] || SYLLABUS_DATA['L06'];
-      if (titleEl) {
-        titleEl.innerText = curData.title;
-      }
-
-      container.innerHTML = curData.chapters.map((ch, chIdx) => {
-        const lessonsHtml = ch.lessons.map((ls, lsIdx) => {
-          const isCurrentBadge = ls.isCurrent ? `
-            <span class="inline-flex items-center gap-1 bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">
-              <i class="fas fa-thumbtack text-amber-700"></i> Tuần 8 (Hiện tại)
-            </span>` : (ls.week < 8 ? `
-            <span class="text-[10px] text-gray-400 font-semibold bg-gray-100 px-2 py-0.5 rounded-full">
-              Tuần ${ls.week} · Đã học
-            </span>` : `
-            <span class="text-[10px] text-blue-600 font-semibold bg-blue-50 px-2 py-0.5 rounded-full">
-              Tuần ${ls.week} · Sắp học
-            </span>`);
-
-          const focusClass = ls.isExamFocus ? 'border-2 border-amber-400 bg-amber-50/40 shadow-sm' : 'border border-bac bg-white hover:border-luc/50';
-          const isOpenByDefault = ls.isCurrent || (chIdx === 0 && lsIdx === 0);
-          
-          const a4Btn = ls.examA4 ? `
-            <a href="${ls.examA4}" target="_blank" onclick="event.stopPropagation()" class="inline-flex items-center gap-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 text-[11px] font-bold px-2.5 py-1.5 rounded-xl transition shadow-xs whitespace-nowrap">
-              <i class="fas fa-print text-luc"></i> In A4
-            </a>` : '';
-
-          return `
-            <div class="rounded-2xl ${focusClass} transition overflow-hidden">
-              <div onclick="toggleLesson('${ls.id}')" class="p-4 sm:p-4.5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 cursor-pointer select-none hover:bg-emerald-50/40 transition">
-                <div class="flex items-start sm:items-center gap-3">
-                  <span class="w-8 h-8 rounded-xl bg-slate-100 text-lam text-xs font-mono font-bold flex items-center justify-center flex-none border border-bac">
-                    ${ls.id.replace(/[^0-9]/g, '') || '★'}
-                  </span>
-                  <div>
-                    <div class="flex items-center gap-2 flex-wrap">
-                      <span class="text-xs font-mono text-gray-400 font-semibold">[${esc(ls.id)}]</span>
-                      ${isCurrentBadge}
-                      ${ls.examCode ? `<span class="text-[10px] bg-purple-50 text-purple-700 border border-purple-200 px-2 py-0.5 rounded-full font-bold">Mã đề: ${esc(ls.examCode)}</span>` : ''}
-                    </div>
-                    <h4 class="font-bold text-sm sm:text-base text-gray-900 mt-0.5 ${ls.isExamFocus ? 'text-amber-900' : ''}">
-                      ${esc(ls.title)}
-                    </h4>
-                  </div>
-                </div>
-
-                <div class="flex items-center gap-2 self-stretch sm:self-auto justify-between sm:justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-gray-100">
-                  ${a4Btn}
-                  <a href="${ls.examCode ? 'thi.html?exam_code=' + encodeURIComponent(ls.examCode) : 'thi.html?exam_id=' + (ls.examId || 1)}" onclick="event.stopPropagation()" class="inline-flex items-center gap-1.5 bg-gradient-to-r from-purple-700 to-indigo-700 hover:from-purple-800 hover:to-indigo-800 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl transition shadow-sm whitespace-nowrap">
-                    <i class="fas fa-play-circle text-amber-300"></i> Vào Thi
-                  </a>
-                  <button type="button" class="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-luc font-bold bg-white px-2.5 py-1.5 rounded-xl border border-bac">
-                    <span class="text-[11px]">Chi tiết</span>
-                    <i id="icon-toggle-${ls.id}" class="fas fa-chevron-down text-gray-400 transition-transform duration-300 ${isOpenByDefault ? 'rotate-180' : ''}"></i>
-                  </button>
-                </div>
-              </div>
-
-              <!-- KHUNG BÀI HỌC CHI TIẾT (LÝ THUYẾT, BÀI TẬP LỚP, TRẮC NGHIỆM ONLINE) -->
-              <div id="panel-${ls.id}" class="${isOpenByDefault ? '' : 'hidden'} border-t border-bac bg-slate-50/70 p-4 sm:p-6 space-y-4 animate-fadeIn">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <!-- PHẦN 1: LÝ THUYẾT CỐT LÕI (NÂNG CẤP TƯƠNG TÁC) -->
-                  <div onclick="openTheoryModal('${ls.id}')" class="group bg-white hover:bg-blue-50/40 rounded-2xl p-4.5 border border-bac hover:border-blue-300 shadow-sm transition cursor-pointer space-y-2.5 flex flex-col justify-between">
-                    <div>
-                      <div class="flex items-center justify-between">
-                        <h5 class="font-bold text-xs uppercase tracking-wider text-lam flex items-center gap-1.5">
-                          <i class="fas fa-book-reader text-blue-600"></i> 1. Lý Thuyết Cốt Lõi
-                        </h5>
-                        <span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200 group-hover:bg-blue-600 group-hover:text-white transition">
-                          📖 Xem bài giảng
-                        </span>
-                      </div>
-                      <p class="text-xs text-gray-700 leading-relaxed mt-2 line-clamp-2">${esc(ls.theory)}</p>
-                    </div>
-                    <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-blue-700 font-semibold">
-                      <span>Mở toàn văn bài giảng & công thức</span>
-                      <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
-                    </div>
-                  </div>
-
-                  <!-- PHẦN 2: BÀI TẬP TRÊN LỚP (NÂNG CẤP TƯƠNG TÁC & IN A4) -->
-                  <div onclick="openExerciseModal('${ls.id}')" class="group bg-white hover:bg-emerald-50/40 rounded-2xl p-4.5 border border-bac hover:border-emerald-300 shadow-sm transition cursor-pointer space-y-2.5 flex flex-col justify-between">
-                    <div>
-                      <div class="flex items-center justify-between">
-                        <h5 class="font-bold text-xs uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
-                          <i class="fas fa-file-signature text-luc"></i> 2. Bài Tập Trên Lớp & Tự Luyện
-                        </h5>
-                        <span class="text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 group-hover:bg-luc group-hover:text-white transition">
-                          📝 Xem & In phiếu A4
-                        </span>
-                      </div>
-                      <p class="text-xs text-gray-700 leading-relaxed mt-2 line-clamp-2">${esc(ls.exercise)}</p>
-                    </div>
-                    <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-emerald-800 font-semibold">
-                      <span>Bài tập phân dạng & In phiếu khổ A4</span>
-                      <i class="fas fa-print group-hover:scale-110 transition-transform"></i>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- PHẦN 3: TRẮC NGHIỆM TRỰC TUYẾN -->
-                <div class="bg-white rounded-2xl p-4 sm:p-5 border border-purple-200 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                  <div class="space-y-1">
-                    <div class="flex items-center gap-2">
-                      <span class="text-xs font-bold text-purple-900 uppercase tracking-wider flex items-center gap-1.5">
-                        <i class="fas fa-stopwatch text-purple-600"></i> 3. Trắc Nghiệm Trực Tuyến (Tính Thời Gian)
-                      </span>
-                      <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Chấm điểm & Phân tích ma trận tư duy</span>
-                    </div>
-                    <p class="text-xs text-gray-600">Làm bài thi trắc nghiệm theo chuẩn cấu trúc thời gian để hệ thống đo đạc tốc độ và chỉ ra lỗ hổng kiến thức.</p>
-                  </div>
-                  <a href="${ls.examCode ? 'thi.html?exam_code=' + encodeURIComponent(ls.examCode) : 'thi.html?exam_id=' + (ls.examId || 1)}" class="w-full sm:w-auto bg-gradient-to-r from-purple-700 to-indigo-700 hover:from-purple-800 hover:to-indigo-800 text-white font-bold py-2.5 px-6 rounded-xl text-xs transition shadow flex items-center justify-center gap-2 whitespace-nowrap flex-none">
-                    <i class="fas fa-play-circle"></i> <span>Vào Thi Ngay</span> <i class="fas fa-arrow-right"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          `;
-        }).join('');
-
-        return `
-          <div class="bg-white/90 rounded-3xl p-5 sm:p-6 border border-bac shadow-sm space-y-3.5">
-            <h4 class="font-bold text-base sm:text-lg text-lam title-serif flex items-center gap-2 pb-2 border-b border-bac">
-              <i class="fas fa-book-open text-luc"></i> ${esc(ch.chapterTitle)}
-            </h4>
-            <div class="space-y-3">
-              ${lessonsHtml}
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      if (window.MathJax && window.MathJax.typesetPromise) {
-        window.MathJax.typesetPromise().catch(() => {});
-      }
-    }
-
-    function toggleLesson(lessonId) {
-      const panel = document.getElementById('panel-' + lessonId);
-      const icon = document.getElementById('icon-toggle-' + lessonId);
-      if (!panel) return;
-
-      const isHidden = panel.classList.contains('hidden');
-      if (isHidden) {
-        panel.classList.remove('hidden');
-        if (icon) icon.classList.add('rotate-180');
-      } else {
-        panel.classList.add('hidden');
-        if (icon) icon.classList.remove('rotate-180');
-      }
-
-      if (window.MathJax && window.MathJax.typesetPromise) {
-        window.MathJax.typesetPromise().catch(() => {});
-      }
-    }
-
-    // TẢI KHO ĐỀ THI TỪ MÁY CHỦ
-    async function loadExams() {
-      const container = document.getElementById('exams-container');
-      const badge = document.getElementById('exam-count-badge');
-      if (!container) return;
-
-      let url = 'api.php?action=list_exams';
-      if (currentGrade !== 'ALL') {
-        url += '&grade=' + currentGrade;
-      }
-      try {
-        const res = await fetch(url);
-        const data = await res.json();
-        if (data.status === 'success' && Array.isArray(data.exams)) {
-          if (badge) badge.innerText = `${data.exams.length} bộ đề sẵn sàng`;
-          if (data.exams.length === 0) {
-            container.innerHTML = '<div class="col-span-3 text-center py-10 text-gray-500 bg-white rounded-2xl border border-bac">Chưa có đề thi riêng cho khối này trong hệ thống. Học sinh có thể xem mục lục bài học ở trên!</div>';
-            return;
-          }
-          container.innerHTML = data.exams.map(ex => `
-            <div class="bg-white rounded-3xl p-5 border border-bac shadow-sm hover:shadow-md transition flex flex-col justify-between">
-              <div>
-                <div class="flex justify-between items-center gap-2 mb-2.5">
-                  <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${ex.grade === 'DGNL' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-luc'}">
-                    ${ex.grade === 'DGNL' ? '⭐ ĐGNL ĐHQG' : 'Khối ' + ex.grade.replace('L', '')}
-                  </span>
-                  <span class="text-xs text-gray-500 font-semibold"><i class="fas fa-clock text-amber-600"></i> ${ex.time_minutes} phút</span>
-                </div>
-                <h4 class="font-extrabold text-base text-lam mb-2 leading-snug">${esc(ex.title)}</h4>
-                <p class="text-xs text-gray-600 line-clamp-2 mb-4 leading-relaxed">${esc(ex.description || 'Đề rèn luyện phản xạ tính toán và kiểm tra năng lực tư duy.')}</p>
-              </div>
-              <div class="pt-3 border-t border-bac flex justify-between items-center">
-                <span class="text-[11px] text-gray-500 font-medium"><i class="fas fa-brain text-luc"></i> Chấm điểm tức thì</span>
-                <button onclick="startExam(${ex.exam_id}, '${ex.exam_code}')" class="bg-lam hover:bg-blue-900 text-white px-4 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
-                  <span>Vào thi</span> <i class="fas fa-arrow-right"></i>
-                </button>
-              </div>
-            </div>
-          `).join('');
-        }
-      } catch (err) {
-        if (badge) badge.innerText = 'Lỗi nạp đề';
-        container.innerHTML = '<div class="col-span-3 text-center py-8 text-son">Không thể nạp danh sách đề thi từ máy chủ. Vui lòng tải lại trang!</div>';
-      }
-    }
-
-    // CHỌN KHỐI LỚP
-    function selectGrade(g, btnEl) {
-      currentGrade = g;
-      document.querySelectorAll('.grade-btn').forEach(btn => {
-        btn.classList.remove('bg-luc', 'text-white');
-        btn.classList.add('bg-giay', 'text-gray-700');
-      });
-      const target = btnEl || (window.event ? (window.event.currentTarget || window.event.target) : null);
-      if (target && target.classList) {
-        target.classList.add('bg-luc', 'text-white');
-        target.classList.remove('bg-giay', 'text-gray-700');
-      }
-      loadExams();
-      renderCurriculumSyllabus(g === 'ALL' ? 'L06' : g);
-    }
-
-    // BẮT ĐẦU VÀO PHÒNG THI
-    function startExam(examId, examCode) {
-      if (examCode) {
-        window.location.href = `thi.html?exam_code=${encodeURIComponent(examCode)}`;
-      } else {
-        window.location.href = `thi.html?exam_id=${examId}`;
-      }
-    }
-
-    // ĐĂNG KÝ KHÁCH
-    async function handleGuestLogin(e) {
-      e.preventDefault();
-      const fullName = document.getElementById('guest-name').value.trim();
-      const phone = document.getElementById('guest-phone').value.trim();
-      const grade = document.getElementById('guest-grade').value;
-
-      try {
-        const res = await fetch('api.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'guest_login', full_name: fullName, phone: phone, grade: grade })
-        });
-        const data = await res.json();
-        if (data.status === 'success') {
-          localStorage.setItem('bdvh_student_name', fullName);
-          closeModal('modal-guest');
-          await checkAuth();
-          syncAccountAndClassUI();
-          updateClassCodeHeaderButton();
-          alert(data.message || 'Đăng ký tài khoản khách thành công! Em đã có 2 lượt thi thử miễn phí.');
-        } else {
-          alert(data.message || 'Lỗi tạo tài khoản');
-        }
-      } catch (err) {
-        alert('Lỗi kết nối máy chủ!');
-      }
-    }
-
-    // MODAL MÃ LỚP HỌC
-    function openClassModal() {
-      document.getElementById('modal-class').classList.remove('hidden');
-      setTimeout(() => document.getElementById('classCodeInput').focus(), 100);
-    }
-    function closeClassModal() {
-      document.getElementById('modal-class').classList.add('hidden');
-    }
-    async function submitClassCode() {
-      const code = document.getElementById('classCodeInput').value.trim().toUpperCase();
-      const name = document.getElementById('classStudentName').value.trim();
-      if (!code) return alert("Vui lòng nhập mã lớp học.");
-      try {
-        const res = await fetch('api.php?action=verify_class_code', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ code, student_name: name })
-        });
-        const data = await res.json();
-        if (data.status === 'success') {
-          if (name) localStorage.setItem('bdvh_student_name', name);
-          localStorage.setItem('bdvh_class_code', code);
-          localStorage.setItem('bdvh_unlocked', '1');
-          sessionStorage.setItem('bdvh_class_code', code);
-          sessionStorage.setItem('bdvh_unlocked', '1');
-          closeClassModal();
-          syncAccountAndClassUI();
-          updateClassCodeHeaderButton();
-          alert(data.message || "Xác nhận vào lớp thành công!");
-        } else {
-          alert(data.message || "Mã lớp không hợp lệ hoặc đã hết hạn.");
-        }
-      } catch (e) {
-        alert("Lỗi kết nối: " + e.message);
-      }
-    }
-
-    // XỬ LÝ MODAL LÝ THUYẾT & BÀI TẬP TỰ LUẬN A4
-    function findLessonById(lessonId) {
-      for (const gradeKey in CURRICULUM) {
-        const grade = CURRICULUM[gradeKey];
-        for (const chapter of grade.chapters) {
-          for (const ls of chapter.lessons) {
-            if (ls.id === lessonId) return { lesson: ls, chapter: chapter, grade: grade };
-          }
-        }
-      }
-      return null;
-    }
-
-    function openTheoryModal(lessonId) {
-      const data = findLessonById(lessonId);
-      if (!data) return;
-      const ls = data.lesson;
-      
-      document.getElementById('modal-theory-title').innerText = ls.title;
-      const bodyEl = document.getElementById('modal-theory-body');
-      
-      if (ls.detailTheory) {
-        bodyEl.innerHTML = ls.detailTheory;
-      } else {
-        bodyEl.innerHTML = `
-          <div class="p-4 bg-blue-50/60 rounded-2xl border border-blue-200 space-y-2">
-            <h4 class="font-bold text-sm text-lam"><i class="fas fa-lightbulb text-amber-500 mr-1.5"></i> Tóm Tắt Trọng Tâm Kiến Thức</h4>
-            <p class="text-xs sm:text-sm text-slate-800 leading-relaxed">${ls.theory}</p>
-          </div>
-          <div class="p-4 bg-slate-50 rounded-2xl border border-bac text-xs text-slate-600 leading-relaxed">
-            <p><b>Ghi chú sư phạm của Thầy Đinh Quốc Tuấn:</b> Học sinh cần đọc kỹ phần định nghĩa và các điều kiện ràng buộc trong sách giáo khoa Kết Nối Tri Thức / Chân Trời Sáng Tạo trước khi làm bài tập tự luận và trắc nghiệm.</p>
-          </div>
-        `;
-      }
-      
-      document.getElementById('modal-theory').classList.remove('hidden');
-      if (window.MathJax && window.MathJax.typesetPromise) {
-        window.MathJax.typesetPromise([bodyEl]).catch(e => console.warn(e));
-      }
-    }
-
-    function closeTheoryModal() {
-      document.getElementById('modal-theory').classList.add('hidden');
-    }
-
-    function openExerciseModal(lessonId) {
-      const data = findLessonById(lessonId);
-      if (!data) return;
-      const ls = data.lesson;
-      
-      document.getElementById('modal-exercise-title').innerText = ls.title;
-      document.getElementById('sheet-title').innerText = 'PHIẾU BÀI TẬP: ' + ls.title.toUpperCase();
-      document.getElementById('sheet-subtitle').innerText = data.chapter.chapterTitle + ' · ' + data.grade.title;
-      
-      const bodyEl = document.getElementById('modal-exercise-body');
-      if (ls.detailExercise) {
-        bodyEl.innerHTML = ls.detailExercise;
-      } else {
-        bodyEl.innerHTML = `
-          <div class="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-200 space-y-2">
-            <h4 class="font-bold text-sm text-emerald-900"><i class="fas fa-tasks text-luc mr-1.5"></i> Nhiệm Vụ Rèn Luyện Trên Lớp</h4>
-            <p class="text-xs sm:text-sm text-slate-800 leading-relaxed">${ls.exercise}</p>
-          </div>
-          <div class="p-4 bg-slate-50 rounded-2xl border border-bac space-y-2 text-xs text-slate-700">
-            <p><b>Yêu cầu rèn luyện:</b> Em hãy trình bày lời giải chi tiết vào vở tự luận hoặc in phiếu này ra giấy A4 để nộp lại cho Thầy/Cô chấm điểm và sửa lỗi tư duy.</p>
-          </div>
-        `;
-      }
-      
-      document.getElementById('modal-exercise').classList.remove('hidden');
-      if (window.MathJax && window.MathJax.typesetPromise) {
-        window.MathJax.typesetPromise([bodyEl]).catch(e => console.warn(e));
-      }
-    }
-
-    function closeExerciseModal() {
-      document.getElementById('modal-exercise').classList.add('hidden');
-    }
-
-    function printExerciseSheet() {
-      const area = document.getElementById('exercise-printable-area');
-      if (!area) return;
-      
-      if (window.MathJax && window.MathJax.typesetPromise) {
-        window.MathJax.typesetPromise([area]).then(() => {
-          window.print();
-        }).catch(() => {
-          window.print();
-        });
-      } else {
-        window.print();
-      }
-    }
-
-    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
-    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
-    function esc(s) { return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
-
-    // KHỞI ĐỘNG TRANG
-    document.addEventListener('DOMContentLoaded', async () => {
-      await checkAuth();
-      syncAccountAndClassUI();
-      updateClassCodeHeaderButton();
-      await loadExams();
-      renderCurriculumSyllabus('L06');
-    });
   </script>
-  <!-- NÚT IN TÀI LIỆU AN TOÀN CHUẨN MATHJAX -->
-  <button id="btn-print-doc" onclick="safePrint()" class="fixed bottom-5 right-5 bg-gray-900 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-gray-700 print:hidden z-50 flex items-center cursor-pointer">
-    <i class="fas fa-print mr-2"></i> In Tài Liệu
-  </button>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
 
-  <script>
-    function safePrint() {
-      const printBtn = document.getElementById('btn-print-doc');
-      if (printBtn) printBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Đang chuẩn bị...';
-      
-      // Đảm bảo MathJax đã render xong mọi công thức trước khi gọi hộp thoại in
-      if (window.MathJax && window.MathJax.typesetPromise) {
-        MathJax.typesetPromise().then(() => {
-          if (printBtn) printBtn.innerHTML = '<i class="fas fa-print mr-2"></i> In Tài Liệu';
-          window.print();
-        }).catch(() => {
-          if (printBtn) printBtn.innerHTML = '<i class="fas fa-print mr-2"></i> In Tài Liệu';
-          window.print();
-        });
-      } else {
-        // Fallback nếu không có công thức toán
-        setTimeout(() => {
-          if (printBtn) printBtn.innerHTML = '<i class="fas fa-print mr-2"></i> In Tài Liệu';
-          window.print();
-        }, 500); 
-      }
+<!-- Bộ biểu tượng dùng chung (SVG, thay Font Awesome) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.3-9.3M16 7l3 3M18 5l2 2"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5Z"/><path d="M4 19a2 2 0 0 1 2-2h13"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-print" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M7 9V3h10v6M7 17H4v-7h16v7h-3"/><path d="M7 14h10v7H7z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></symbol>
+</svg>
+
+<!-- ============================ ĐẦU TRANG ============================ -->
+<header class="site-head">
+  <div class="wrap">
+    <a href="index.html" class="brand" aria-label="Trang chủ Trung tâm Bồi dưỡng Văn hóa">
+      <img class="brand-hcmus" src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738" alt="Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM">
+      <span class="brand-sep"></span>
+      <span class="dqt-logo-o brand-sen"><img src="assets/logo-sen.svg" alt="Logo sen ThS. Đinh Quốc Tuấn"></span>
+      <span class="brand-text">
+        <span class="brand-ten">Trung tâm Bồi dưỡng Văn hóa</span>
+        <span class="brand-phu">Trường ĐH Khoa học Tự nhiên · ThS. Đinh Quốc Tuấn</span>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Điều hướng chính">
+      <a href="#chuong-trinh">Chương trình học</a>
+      <a href="#de-kiem-tra">Đề kiểm tra</a>
+      <a href="#lop-truc-tiep">Lớp trực tiếp</a>
+    </nav>
+
+    <div class="head-actions">
+      <button class="btn btn-vien an-mobile" id="btn-ma-lop" type="button" onclick="moMaLop()">
+        <svg class="ico"><use href="#i-key"/></svg><span id="btn-ma-lop-text">Nhập mã lớp</span>
+      </button>
+      <button class="btn btn-chinh an-mobile" id="btn-tai-khoan" type="button" onclick="moTaiKhoan()">
+        <svg class="ico"><use href="#i-user"/></svg><span id="btn-tai-khoan-text">Đăng nhập</span>
+      </button>
+      <button class="btn btn-vien btn-menu" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="drawer" onclick="toggleMenu(this)">
+        <svg class="ico" style="font-size:20px"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="drawer" id="drawer">
+    <nav aria-label="Menu di động">
+      <a href="#chuong-trinh" onclick="dongMenu()">Chương trình học</a>
+      <a href="#de-kiem-tra" onclick="dongMenu()">Đề kiểm tra</a>
+      <a href="#lop-truc-tiep" onclick="dongMenu()">Lớp trực tiếp</a>
+      <button type="button" onclick="dongMenu();moMaLop()" id="drawer-ma-lop">Nhập mã lớp</button>
+      <button type="button" onclick="dongMenu();moTaiKhoan()" id="drawer-tai-khoan">Đăng nhập</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ============================ MỞ ĐẦU ============================ -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Toán THCS · THPT · Đánh giá năng lực ĐHQG-HCM</p>
+        <h1>Học theo tiến độ, luyện tập có phản hồi, kiểm tra có đo lường</h1>
+        <p class="lead">Mục lục bài học theo tuần của chương trình GDPT 2018 cho lớp 6–12: tóm tắt lý thuyết, phiếu bài tập in A4 và đề trắc nghiệm tính giờ được chấm điểm ngay sau khi nộp.</p>
+        <div class="hero-cta">
+          <a class="btn btn-chinh" href="#chuong-trinh">Xem chương trình học <svg class="ico"><use href="#i-arrow"/></svg></a>
+          <button class="btn btn-vien" type="button" onclick="moMaLop()"><svg class="ico"><use href="#i-key"/></svg>Em có mã lớp</button>
+        </div>
+        <div class="tac-gia">
+          <span class="dqt-logo-o"><img src="assets/logo-sen.svg" alt=""></span>
+          <div><b>ThS. Đinh Quốc Tuấn</b><span>Phụ trách chuyên môn Toán &amp; Khảo thí · Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM</span></div>
+        </div>
+        <div class="hero-facts">
+          <span><b>7 khối lớp</b> và chuyên đề ĐGNL</span>
+          <span><b id="fact-so-de">—</b> đề kiểm tra tính giờ</span>
+          <span><b>Phiếu A4</b> cho học sinh và phụ huynh</span>
+        </div>
+      </div>
+
+      <aside class="panel tuan-card" aria-label="Tuần học hiện tại">
+        <div class="tuan-head">
+          <div class="tuan-nhan" id="tuan-nam-hoc">Năm học</div>
+          <div class="tuan-so" id="tuan-so">Tuần —</div>
+          <div class="tuan-ngay" id="tuan-ngay"></div>
+        </div>
+        <div class="tuan-trongtam">
+          <b>Trọng tâm tuần này</b>
+          <span id="tuan-trong-tam">Đang tải…</span>
+        </div>
+        <div class="hs-box">
+          <div class="hs-dong"><span>Học sinh</span><span id="hs-ten">Chưa đăng nhập</span></div>
+          <div class="hs-dong"><span>Lớp học</span><span id="hs-lop" class="trang-thai"><i class="cham"></i>Chưa nhập mã lớp</span></div>
+          <div class="hs-dong" id="hs-ket-qua-dong" hidden><span>Bài làm gần nhất</span><span><a href="ket-qua.html">Xem phiếu kết quả</a></span></div>
+          <button class="btn btn-vien btn-full" type="button" id="hs-hanh-dong" onclick="moMaLop()">Nhập mã lớp do giáo viên cung cấp</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============================ CHƯƠNG TRÌNH HỌC ============================ -->
+  <section class="section" id="chuong-trinh">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>Chương trình học</h2>
+          <p>Chọn khối lớp. Mỗi bài gồm tóm tắt lý thuyết, phiếu bài tập in A4 và bài trắc nghiệm tính giờ.</p>
+        </div>
+      </div>
+
+      <div class="ct-layout">
+        <nav class="khoi-nav" aria-label="Chọn khối lớp">
+          <h3>Khối lớp</h3>
+          <ul class="khoi-list" id="khoi-list"></ul>
+        </nav>
+
+        <div id="ct-noi-dung" aria-live="polite">
+          <h3 class="ct-title" id="ct-title"></h3>
+          <div class="ct-note" id="ct-note" hidden><svg class="ico"><use href="#i-pin"/></svg><span></span></div>
+          <div id="ct-chuong"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ ĐỀ KIỂM TRA ============================ -->
+  <section class="section" id="de-kiem-tra">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>Đề kiểm tra tính giờ</h2>
+          <p>Làm bài với đồng hồ đếm ngược; hệ thống chấm điểm, chỉ ra câu sai và gợi ý phân bổ thời gian.</p>
+        </div>
+        <div class="de-bar">
+          <div class="seg" role="group" aria-label="Phạm vi đề">
+            <button type="button" id="seg-khoi" aria-pressed="true" onclick="chonPhamViDe('khoi')">Khối đang chọn</button>
+            <button type="button" id="seg-tat-ca" aria-pressed="false" onclick="chonPhamViDe('tat-ca')">Tất cả khối</button>
+          </div>
+        </div>
+      </div>
+      <table class="de-table">
+        <thead><tr><th>Đề</th><th>Khối</th><th>Thời gian</th><th class="col-act"><span class="sr-only">Làm bài</span></th></tr></thead>
+        <tbody id="de-tbody"><tr><td colspan="4" class="trong">Đang tải danh sách đề…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================ LỚP TRỰC TIẾP ============================ -->
+  <section class="section" id="lop-truc-tiep">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>Lớp học trực tiếp</h2>
+          <p>Giáo viên trình chiếu trên bảng, học sinh trả lời bằng điện thoại; kết quả bình chọn hiện ngay trên màn hình lớp.</p>
+        </div>
+        <a class="btn btn-chu" href="giao-vien.html">Bảng điều khiển phòng chiếu <svg class="ico"><use href="#i-arrow"/></svg></a>
+      </div>
+      <div class="lop-grid">
+        <article class="panel lop">
+          <span class="lop-nhan">Mọi khối lớp · Từ đề trên Google Drive</span>
+          <h3>Bài giảng trình chiếu theo từng câu</h3>
+          <p>Mỗi câu 3 slide: đề chữ to lấp đầy khung, đáp án, rồi giải thích từng bước cho học sinh yếu (Gemini soạn, giáo viên duyệt).</p>
+          <div class="lop-links">
+            <a class="btn btn-chinh" href="trinh-chieu.html?hom_nay=1">Chiếu bài hôm nay</a>
+            <a class="btn btn-vien" href="bai-giang.html">Tất cả bài giảng</a>
+          </div>
+        </article>
+        <article class="panel lop">
+          <span class="lop-nhan">Toán 7 · Học kì I</span>
+          <h3>Khảo sát Toán 7 có bình chọn trực tiếp</h3>
+          <p>12 câu trắc nghiệm, mỗi câu ba bước: đề và bình chọn, chốt đáp án, lời giải kèm lý thuyết SGK.</p>
+          <div class="lop-links">
+            <a class="btn btn-chinh" href="sv-toan7.html" target="_blank" rel="noopener">Học sinh tham gia</a>
+            <a class="btn btn-vien" href="slide-toan7.html" target="_blank" rel="noopener">Giáo viên trình chiếu</a>
+          </div>
+        </article>
+        <article class="panel lop">
+          <span class="lop-nhan">Toán 6 · GDPT 2018</span>
+          <h3>Slide bài giảng Số học</h3>
+          <p>Lũy thừa, thứ tự thực hiện phép tính, dấu hiệu chia hết, ƯCLN và BCNN; kèm đề in khổ A4.</p>
+          <div class="lop-links">
+            <a class="btn btn-chinh" href="slide-toan6.html" target="_blank" rel="noopener">Mở slide trình chiếu</a>
+            <a class="btn btn-vien" href="de_thi_a4/TOAN06_CTST_T09_01.html" target="_blank" rel="noopener"><svg class="ico"><use href="#i-print"/></svg>Đề in A4</a>
+          </div>
+        </article>
+        <article class="panel lop">
+          <span class="lop-nhan">Khoa học tự nhiên 6</span>
+          <h3>Slide giảng dạy KHTN 6</h3>
+          <p>Các phép đo cơ bản, thang nhiệt độ Celsius, khối lượng và thể tích, tế bào — đơn vị cơ sở của sự sống.</p>
+          <div class="lop-links">
+            <a class="btn btn-chinh" href="slide-khtn6.html" target="_blank" rel="noopener">Mở slide trình chiếu</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PHƯƠNG PHÁP ============================ -->
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head"><div><h2>Quy trình kiểm tra và phản hồi</h2></div></div>
+      <div class="buoc-grid">
+        <div class="buoc"><h3>Làm bài tính giờ</h3><p>Đồng hồ đếm ngược giúp học sinh tập phân bổ thời gian cho từng phần của đề.</p></div>
+        <div class="buoc"><h3>Chấm điểm ngay</h3><p>Bài làm được chấm trên máy chủ ngay khi nộp, so với đáp án của giáo viên.</p></div>
+        <div class="buoc"><h3>Xem lại câu sai</h3><p>Đối chiếu phương án đã chọn với đáp án đúng và lời giải, liên hệ kiến thức SGK.</p></div>
+        <div class="buoc"><h3>Phiếu kết quả A4</h3><p>Phiếu báo điểm khổ A4 có nhận xét, thuận tiện lưu trữ hoặc gửi phụ huynh.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============================ CHÂN TRANG ============================ -->
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="foot-logos">
+          <img class="hcmus" src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738" alt="Logo HCMUS">
+          <span class="dqt-logo-o"><img src="assets/logo-sen.svg" alt="Logo sen ThS. Đinh Quốc Tuấn"></span>
+        </div>
+        <div>
+          <b>Trung tâm Bồi dưỡng Văn hóa</b>
+          Trường Đại học Khoa học Tự nhiên, ĐHQG-HCM
+          <span class="chu-ky">ThS. Đinh Quốc Tuấn</span>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Học sinh</h4>
+        <ul>
+          <li><a href="#chuong-trinh">Chương trình học</a></li>
+          <li><a href="#de-kiem-tra">Đề kiểm tra</a></li>
+          <li><a href="ket-qua.html">Phiếu kết quả</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Giáo viên</h4>
+        <ul>
+          <li><a href="bai-giang.html">Bài giảng trình chiếu</a></li>
+          <li><a href="giao-vien.html">Phòng chiếu</a></li>
+          <li><a href="thay-tuan.html">Quản trị</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li><a href="mailto:dqtuanhcmus@gmail.com">dqtuanhcmus@gmail.com</a></li>
+          <li><a href="https://zalo.me/0903052119" target="_blank" rel="noopener">Zalo 0903 052 119</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 ThS. Đinh Quốc Tuấn · Trung tâm Bồi dưỡng Văn hóa — Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM</span>
+      <span>Tài liệu phục vụ mục đích giáo dục</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================ HỘP THOẠI ============================ -->
+
+<!-- Mã lớp -->
+<dialog id="dlg-ma-lop" aria-labelledby="dlg-ma-lop-title">
+  <form class="dlg" method="dialog" onsubmit="event.preventDefault(); guiMaLop()">
+    <div class="dlg-head">
+      <div><small>Lớp học</small><h2 id="dlg-ma-lop-title">Nhập mã lớp</h2></div>
+      <button class="btn-x" type="button" aria-label="Đóng" onclick="dong('dlg-ma-lop')"><svg class="ico"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="dlg-body">
+      <p class="dlg-mota">Mã lớp do Thầy/Cô chiếu trên bảng. Sau khi xác nhận, em được làm bài và xem lời giải không giới hạn trong khóa học.</p>
+      <div class="field">
+        <label for="ml-ten">Họ và tên</label>
+        <input class="input" id="ml-ten" autocomplete="name" placeholder="Nguyễn Văn An">
+      </div>
+      <div class="field">
+        <label for="ml-ma">Mã lớp</label>
+        <input class="input input-ma" id="ml-ma" maxlength="8" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="7K8B" required>
+        <span class="goi-y">Từ 4 đến 8 ký tự, không phân biệt chữ hoa/thường.</span>
+      </div>
+    </div>
+    <div class="dlg-foot">
+      <button class="btn btn-vien" type="button" onclick="dong('dlg-ma-lop')">Để sau</button>
+      <button class="btn btn-chinh" type="submit" id="ml-gui">Xác nhận</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Tài khoản -->
+<dialog id="dlg-tai-khoan" aria-labelledby="dlg-tk-title">
+  <form class="dlg" onsubmit="event.preventDefault(); dangNhapKhach()">
+    <div class="dlg-head">
+      <div><small>Tài khoản học sinh</small><h2 id="dlg-tk-title">Đăng nhập để lưu kết quả</h2></div>
+      <button class="btn-x" type="button" aria-label="Đóng" onclick="dong('dlg-tai-khoan')"><svg class="ico"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="dlg-body">
+      <p class="dlg-mota">Tài khoản miễn phí, gồm 2 lượt làm bài có chấm điểm và phân tích. Học sinh có mã lớp được mở không giới hạn.</p>
+      <div class="field">
+        <label for="tk-ten">Họ và tên</label>
+        <input class="input" id="tk-ten" autocomplete="name" required placeholder="Nguyễn Minh Triết">
+      </div>
+      <div class="field">
+        <label for="tk-sdt">Số điện thoại</label>
+        <input class="input" id="tk-sdt" type="tel" inputmode="numeric" autocomplete="tel" placeholder="0912 345 678">
+        <span class="goi-y">Dùng để lưu và tra cứu kết quả học tập.</span>
+      </div>
+      <div class="field">
+        <label for="tk-khoi">Khối lớp</label>
+        <select class="input" id="tk-khoi">
+          <option value="L06">Lớp 6</option><option value="L07" selected>Lớp 7</option><option value="L08">Lớp 8</option>
+          <option value="L09">Lớp 9</option><option value="L10">Lớp 10</option><option value="L11">Lớp 11</option>
+          <option value="L12">Lớp 12</option><option value="DGNL">Luyện thi Đánh giá năng lực</option>
+        </select>
+      </div>
+    </div>
+    <div class="dlg-foot">
+      <button class="btn btn-vien" type="button" onclick="dong('dlg-tai-khoan')">Huỷ</button>
+      <button class="btn btn-chinh" type="submit">Đăng nhập</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Lý thuyết -->
+<dialog id="dlg-ly-thuyet" class="rong" aria-labelledby="lt-title">
+  <div class="dlg">
+    <div class="dlg-head">
+      <div><small>Tóm tắt lý thuyết</small><h2 id="lt-title"></h2></div>
+      <button class="btn-x" type="button" aria-label="Đóng" onclick="dong('dlg-ly-thuyet')"><svg class="ico"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="dlg-body doc-body" id="lt-body"></div>
+    <div class="dlg-foot">
+      <button class="btn btn-vien" type="button" onclick="dong('dlg-ly-thuyet')">Đóng</button>
+      <a class="btn btn-chinh" id="lt-lam-bai" href="#">Làm bài trắc nghiệm <svg class="ico"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</dialog>
+
+<!-- Phiếu bài tập A4 -->
+<dialog id="dlg-phieu" class="rong" aria-labelledby="ph-title">
+  <div class="dlg">
+    <div class="dlg-head">
+      <div><small>Phiếu bài tập</small><h2 id="ph-title"></h2></div>
+      <button class="btn-x" type="button" aria-label="Đóng" onclick="dong('dlg-phieu')"><svg class="ico"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="dlg-body">
+      <div class="phieu-head">
+        <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/ttbdvh.jpg?alt=media&token=f270aa9b-a2bc-48e8-8910-80742b542615" alt="Logo Trung tâm BDVH">
+        <div class="phieu-co-quan">
+          <b>Trung tâm Bồi dưỡng Văn hóa &amp; Khảo thí ĐGNL</b>
+          <span>Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM · ThS. Đinh Quốc Tuấn</span>
+        </div>
+        <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738" alt="Logo HCMUS">
+      </div>
+      <div class="phieu-ten">
+        <h3 id="ph-ten-phieu">Phiếu bài tập</h3>
+        <p id="ph-phu-de"></p>
+      </div>
+      <div class="phieu-hs">
+        <span>Họ và tên: ......................................................................</span>
+        <span>Lớp: .............. Ngày: ......./......./20....</span>
+      </div>
+      <div class="doc-body" id="ph-body"></div>
+      <div class="phieu-chan">© ThS. Đinh Quốc Tuấn · Trung tâm Bồi dưỡng Văn hóa HCMUS · Tài liệu phục vụ mục đích giáo dục</div>
+    </div>
+    <div class="dlg-foot">
+      <button class="btn btn-vien" type="button" onclick="dong('dlg-phieu')">Đóng</button>
+      <button class="btn btn-chinh" type="button" onclick="inPhieu()"><svg class="ico"><use href="#i-print"/></svg>In phiếu A4</button>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast-host" id="toast-host" aria-live="assertive"></div>
+
+<script src="assets/syllabus-data.js?v=20261031"></script>
+<script>
+/* ==========================================================================
+   CẤU HÌNH NĂM HỌC — chỉ cần sửa ngày thứ Hai của tuần 1 mỗi năm học.
+   Tuần hiện tại được tính tự động, không phải sửa tay mỗi tuần.
+   ========================================================================== */
+const NAM_HOC = { ten: '2026 – 2027', batDau: '2026-09-07' };
+
+const KHOI = [
+  { ma: 'L06', ten: 'Lớp 6' }, { ma: 'L07', ten: 'Lớp 7' }, { ma: 'L08', ten: 'Lớp 8' },
+  { ma: 'L09', ten: 'Lớp 9' }, { ma: 'L10', ten: 'Lớp 10' }, { ma: 'L11', ten: 'Lớp 11' },
+  { ma: 'L12', ten: 'Lớp 12' }, { ma: 'DGNL', ten: 'Luyện thi ĐGNL' }
+];
+const DATA = window.SYLLABUS_DATA || {};
+
+/* ---------- Lưu trữ cục bộ ---------- */
+function luuTruFactory() {
+  return {
+    get(k) { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+    del(k) { try { localStorage.removeItem(k); } catch (e) {} },
+    ss(k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
+  };
+}
+const luuTru = luuTruFactory();
+
+let khoiDangChon = luuTru.get('bdvh_grade') || 'L06';
+if (!DATA[khoiDangChon]) khoiDangChon = 'L06';
+let phamViDe = 'khoi';
+let nguoiDung = null;
+const TUAN = tinhTuan();
+
+/* ---------- Tiện ích ---------- */
+
+function esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function $(id) { return document.getElementById(id); }
+function moHop(id) { const d = $(id); if (d && !d.open) d.showModal(); }
+function dong(id) { const d = $(id); if (d && d.open) d.close(); }
+function toast(msg, loai) {
+  const t = document.createElement('div');
+  t.className = 'toast ' + (loai || '');
+  t.textContent = msg;
+  $('toast-host').appendChild(t);
+  setTimeout(() => t.remove(), 4200);
+}
+function typeset(el) {
+  if (window.MathJax && MathJax.typesetPromise) return MathJax.typesetPromise(el ? [el] : undefined).catch(() => {});
+  return Promise.resolve();
+}
+function linkLamBai(ls) {
+  return ls.examCode ? 'thi.html?exam_code=' + encodeURIComponent(ls.examCode) : 'thi.html?exam_id=' + (ls.examId || 1);
+}
+async function api(action, body) {
+  const opt = body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {};
+  const res = await fetch('api.php?action=' + action, opt);
+  return res.json();
+}
+
+/* ---------- Tuần học ---------- */
+function tinhTuan() {
+  const goc = new Date(NAM_HOC.batDau + 'T00:00:00');
+  const nay = new Date();
+  const so = Math.floor((nay - goc) / (7 * 864e5)) + 1;
+  const dau = new Date(goc.getTime() + (so - 1) * 7 * 864e5);
+  const cuoi = new Date(dau.getTime() + 6 * 864e5);
+  const f = d => String(d.getDate()).padStart(2, '0') + '/' + String(d.getMonth() + 1).padStart(2, '0');
+  return { so: Math.max(1, so), tu: f(dau), den: f(cuoi) + '/' + cuoi.getFullYear() };
+}
+function veTuan() {
+  $('tuan-nam-hoc').textContent = 'Năm học ' + NAM_HOC.ten;
+  $('tuan-so').textContent = 'Tuần ' + TUAN.so;
+  $('tuan-ngay').textContent = TUAN.tu + ' – ' + TUAN.den;
+  const cur = DATA[khoiDangChon];
+  const trongTam = cur && cur.currentWeek === TUAN.so ? cur.currentWeekFocus.replace(/^Tuần\s*\d+:\s*/i, '') : '';
+  $('tuan-trong-tam').textContent = trongTam
+    ? (KHOI.find(k => k.ma === khoiDangChon) || {}).ten + ': ' + viThuong(trongTam)
+    : 'Ôn tập theo mục lục bài học của khối lớp em.';
+}
+/* Chuyển chuỗi VIẾT HOA trong dữ liệu cũ về dạng câu thường cho dễ đọc */
+function viThuong(s) {
+  const LA_MA = /^(I|II|III|IV|V|VI|VII|VIII|IX|X)$/;
+  return s.replace(/[A-ZÀ-Ỹ][A-ZÀ-Ỹ\s&]{6,}[A-ZÀ-Ỹ]/g, (m, viTri) => {
+    let t = m.split(/(\s+)/).map(w => LA_MA.test(w) ? w : w.toLowerCase()).join('');
+    if (viTri === 0) t = t.charAt(0).toUpperCase() + t.slice(1);
+    return t;
+  });
+}
+
+/* ---------- Chọn khối & mục lục ---------- */
+function veKhoi() {
+  $('khoi-list').innerHTML = KHOI.filter(k => DATA[k.ma]).map(k => {
+    const n = DATA[k.ma].chapters.reduce((a, c) => a + c.lessons.length, 0);
+    return `<li><button type="button" class="khoi-btn" aria-pressed="${k.ma === khoiDangChon}" onclick="chonKhoi('${k.ma}')">${k.ten}<small>${n} bài</small></button></li>`;
+  }).join('');
+}
+function chonKhoi(ma) {
+  khoiDangChon = ma;
+  luuTru.set('bdvh_grade', ma);
+  veKhoi(); veMucLuc(); veTuan(); taiDe();
+  const btn = document.querySelector('.khoi-btn[aria-pressed="true"]');
+  if (btn && btn.scrollIntoView && window.innerWidth <= 1020) btn.scrollIntoView({ inline: 'center', block: 'nearest' });
+}
+function tieuDeSach(t) {
+  return t.replace(/^⭐\s*/, '').replace(/\s*\(TRỌNG TÂM[^)]*\)/i, '');
+}
+function veMucLuc() {
+  const cur = DATA[khoiDangChon];
+  if (!cur) return;
+  $('ct-title').textContent = cur.title;
+  const note = $('ct-note');
+  if (cur.currentWeek === TUAN.so && cur.currentWeekFocus) {
+    note.hidden = false;
+    note.querySelector('span').textContent = viThuong(cur.currentWeekFocus);
+  } else note.hidden = true;
+
+  $('ct-chuong').innerHTML = cur.chapters.map(ch => `
+    <section class="chuong">
+      <h3>${esc(viThuong(ch.chapterTitle))}</h3>
+      <ol class="bai-list">
+        ${ch.lessons.map((ls, i) => veBai(ls, i)).join('')}
+      </ol>
+    </section>`).join('');
+  typeset($('ct-chuong'));
+}
+function veBai(ls, i) {
+  const w = ls.week;
+  const trangThai = w === TUAN.so ? `<span class="nhan tho"><i class="cham tho"></i>Tuần ${w} · tuần này</span>`
+    : w < TUAN.so ? `<span class="nhan ok">Tuần ${w} · đã học</span>`
+    : `<span class="nhan">Tuần ${w} · sắp học</span>`;
+  const so = (ls.title.match(/^Bài\s+([\d\s&]+)/i) || [])[1];
+  const tenBai = tieuDeSach(ls.title).replace(/^Bài\s+[\d\s&]+:\s*/i, '');
+  const cls = ['bai', w === TUAN.so ? 'hien-tai' : '', ls.isExamFocus && !so ? 'on-tap' : ''].join(' ');
+  return `
+    <li class="${cls}">
+      <span class="bai-so">${so ? esc(so.trim().replace(/\s*&\s*/, '–')) : '★'}</span>
+      <div>
+        <div class="bai-ten">${esc(viThuong(tenBai))}</div>
+        <div class="bai-meta">${trangThai}${ls.examA4 ? '<span>Có đề in A4</span>' : ''}</div>
+      </div>
+      <div class="bai-actions">
+        <button type="button" class="btn btn-chu btn-sm" onclick="moLyThuyet('${ls.id}')"><svg class="ico"><use href="#i-book"/></svg>Lý thuyết</button>
+        <button type="button" class="btn btn-chu btn-sm" onclick="moPhieu('${ls.id}')"><svg class="ico"><use href="#i-doc"/></svg>Phiếu A4</button>
+        <a class="btn btn-vien btn-sm" href="${linkLamBai(ls)}" title="Mã đề: ${esc(ls.examCode || '')}">Làm bài <svg class="ico"><use href="#i-arrow"/></svg></a>
+      </div>
+    </li>`;
+}
+function timBai(id) {
+  for (const k in DATA) for (const ch of DATA[k].chapters) for (const ls of ch.lessons)
+    if (ls.id === id) return { ls, ch, khoi: DATA[k] };
+  return null;
+}
+
+/* ---------- Lý thuyết & phiếu A4 (sửa lỗi biến CURRICULUM không tồn tại) ---------- */
+function moLyThuyet(id) {
+  const r = timBai(id); if (!r) return;
+  $('lt-title').textContent = tieuDeSach(r.ls.title);
+  $('lt-lam-bai').href = linkLamBai(r.ls);
+  $('lt-body').innerHTML = r.ls.detailTheory || `
+    <div class="muc-tom" style="border-left:3px solid var(--lam);padding:4px 0 4px 16px">${r.ls.theory}</div>
+    <p class="ghi-chu">Đọc kỹ định nghĩa và các điều kiện trong sách giáo khoa trước khi làm bài tập tự luận và trắc nghiệm.</p>`;
+  moHop('dlg-ly-thuyet');
+  typeset($('lt-body'));
+}
+function moPhieu(id) {
+  const r = timBai(id); if (!r) return;
+  const ten = tieuDeSach(r.ls.title);
+  $('ph-title').textContent = ten;
+  $('ph-ten-phieu').textContent = 'Phiếu bài tập: ' + ten;
+  $('ph-phu-de').textContent = viThuong(r.ch.chapterTitle) + ' · ' + r.khoi.title;
+  $('ph-body').innerHTML = r.ls.detailExercise || `
+    <div style="border-left:3px solid var(--luc);padding:4px 0 4px 16px">${r.ls.exercise}</div>
+    <p class="ghi-chu">Trình bày lời giải chi tiết vào vở hoặc vào phiếu này và nộp lại cho Thầy/Cô.</p>`;
+  moHop('dlg-phieu');
+  typeset($('ph-body'));
+}
+function inPhieu() { typeset($('dlg-phieu')).then(() => window.print()); }
+
+/* ---------- Kho đề ---------- */
+function chonPhamViDe(v) {
+  phamViDe = v;
+  $('seg-khoi').setAttribute('aria-pressed', v === 'khoi');
+  $('seg-tat-ca').setAttribute('aria-pressed', v === 'tat-ca');
+  taiDe();
+}
+function tenKhoi(g) { return g === 'DGNL' ? 'ĐGNL ĐHQG-HCM' : 'Lớp ' + String(g).replace(/^L0?/, ''); }
+async function taiDe() {
+  const tb = $('de-tbody');
+  try {
+    const q = phamViDe === 'khoi' ? '&grade=' + encodeURIComponent(khoiDangChon) : '';
+    const res = await fetch('api.php?action=list_exams' + q);
+    const d = await res.json();
+    if (d.status !== 'success' || !Array.isArray(d.exams)) throw new Error();
+    if (phamViDe === 'tat-ca') $('fact-so-de').textContent = d.exams.length;
+    if (!d.exams.length) {
+      tb.innerHTML = `<tr><td colspan="4" class="trong">Chưa có đề riêng cho khối này. <button class="btn btn-chu btn-sm" type="button" onclick="chonPhamViDe('tat-ca')">Xem đề của tất cả khối</button></td></tr>`;
+      return;
     }
-  </script>
+    tb.innerHTML = d.exams.map(ex => `
+      <tr>
+        <td><div class="de-ten">${esc(ex.title)}</div><div class="de-mota">${esc(ex.description || '')}</div></td>
+        <td class="de-khoi">${esc(tenKhoi(ex.grade))}</td>
+        <td class="de-tg"><svg class="ico"><use href="#i-clock"/></svg> ${parseInt(ex.time_minutes, 10) || '—'} phút</td>
+        <td class="col-act"><a class="btn btn-chinh btn-sm" href="thi.html?exam_code=${encodeURIComponent(ex.exam_code || '')}">Làm bài</a></td>
+      </tr>`).join('');
+  } catch (e) {
+    tb.innerHTML = `<tr><td colspan="4" class="trong">Không tải được danh sách đề. <button class="btn btn-chu btn-sm" type="button" onclick="taiDe()">Thử lại</button></td></tr>`;
+  }
+}
+async function demTongDe() {
+  try { const d = await api('list_exams'); if (d.status === 'success') $('fact-so-de').textContent = d.exams.length; } catch (e) {}
+}
+
+/* ---------- Tài khoản & mã lớp ---------- */
+function veTaiKhoan() {
+  const ten = luuTru.get('bdvh_student_name') || (nguoiDung && nguoiDung.full_name) || '';
+  const ma = luuTru.get('bdvh_class_code');
+  $('hs-ten').textContent = ten || 'Chưa đăng nhập';
+  $('hs-lop').innerHTML = ma
+    ? `<i class="cham ok"></i><span class="ma-lop-pill">${esc(ma)}</span>`
+    : '<i class="cham"></i>Chưa nhập mã lớp';
+  $('btn-ma-lop-text').innerHTML = ma ? 'Lớp <span class="ma-lop-pill">' + esc(ma) + '</span>' : 'Nhập mã lớp';
+  $('drawer-ma-lop').textContent = ma ? 'Mã lớp: ' + ma : 'Nhập mã lớp';
+  const btnTk = ten ? (ten.split(' ').slice(-1)[0] || ten) : 'Đăng nhập';
+  $('btn-tai-khoan-text').textContent = btnTk;
+  $('drawer-tai-khoan').textContent = ten ? 'Đăng xuất (' + ten + ')' : 'Đăng nhập';
+  const act = $('hs-hanh-dong');
+  if (!ma) { act.textContent = 'Nhập mã lớp do giáo viên cung cấp'; act.onclick = moMaLop; act.hidden = false; }
+  else if (!ten) { act.textContent = 'Đăng nhập để lưu kết quả'; act.onclick = moTaiKhoan; act.hidden = false; }
+  else act.hidden = true;
+  $('hs-ket-qua-dong').hidden = !luuTru.get('bdvh_last_sub_id');
+}
+async function kiemTraDangNhap() {
+  try {
+    const d = await api('check_auth');
+    nguoiDung = d.status === 'logged_in' ? d.user : null;
+  } catch (e) { nguoiDung = null; }
+  veTaiKhoan();
+}
+function moMaLop() {
+  $('ml-ten').value = luuTru.get('bdvh_student_name') || (nguoiDung && nguoiDung.full_name) || '';
+  $('ml-ma').value = luuTru.get('bdvh_class_code') || '';
+  moHop('dlg-ma-lop');
+  setTimeout(() => ($('ml-ten').value ? $('ml-ma') : $('ml-ten')).focus(), 50);
+}
+async function guiMaLop() {
+  const ma = $('ml-ma').value.trim().toUpperCase();
+  const ten = $('ml-ten').value.trim();
+  if (ma.length < 3) { toast('Mã lớp gồm 4 đến 8 ký tự.', 'loi'); return; }
+  const btn = $('ml-gui'); btn.disabled = true; btn.textContent = 'Đang kiểm tra…';
+  try {
+    const d = await api('verify_class_code', { code: ma, student_name: ten });
+    if (d.status === 'success') {
+      if (ten) { luuTru.set('bdvh_student_name', ten); luuTru.ss('bdvh_student_name', ten); }
+      luuTru.set('bdvh_class_code', ma); luuTru.set('bdvh_unlocked', '1');
+      luuTru.ss('bdvh_class_code', ma); luuTru.ss('bdvh_unlocked', '1');
+      dong('dlg-ma-lop'); veTaiKhoan();
+      const lop = d.class_info && d.class_info.label ? ' — ' + d.class_info.label : '';
+      toast('Đã vào lớp ' + ma + lop + '.', 'ok');
+    } else toast(d.message || 'Mã lớp không hợp lệ hoặc đã hết hạn.', 'loi');
+  } catch (e) { toast('Không kết nối được máy chủ. Em thử lại sau.', 'loi'); }
+  btn.disabled = false; btn.textContent = 'Xác nhận';
+}
+function moTaiKhoan() {
+  const ten = luuTru.get('bdvh_student_name') || (nguoiDung && nguoiDung.full_name);
+  if (ten && confirm('Đăng xuất tài khoản "' + ten + '"?')) { dangXuat(); return; }
+  if (ten) return;
+  if (DATA[khoiDangChon]) $('tk-khoi').value = khoiDangChon;
+  moHop('dlg-tai-khoan');
+}
+async function dangNhapKhach() {
+  const ten = $('tk-ten').value.trim(), sdt = $('tk-sdt').value.trim(), khoi = $('tk-khoi').value;
+  if (!ten) return;
+  try {
+    const res = await fetch('api.php', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'guest_login', full_name: ten, phone: sdt, grade: khoi }) });
+    const d = await res.json();
+    if (d.status === 'success') {
+      luuTru.set('bdvh_student_name', ten); luuTru.ss('bdvh_student_name', ten);
+      dong('dlg-tai-khoan');
+      await kiemTraDangNhap();
+      if (DATA[khoi] && khoi !== khoiDangChon) chonKhoi(khoi);
+      toast(d.message || 'Đăng nhập thành công.', 'ok');
+    } else toast(d.message || 'Không tạo được tài khoản.', 'loi');
+  } catch (e) { toast('Không kết nối được máy chủ.', 'loi'); }
+}
+async function dangXuat() {
+  try { await fetch('api.php?action=logout'); } catch (e) {}
+  ['bdvh_student_name', 'bdvh_class_code', 'bdvh_unlocked'].forEach(luuTru.del);
+  location.reload();
+}
+
+/* ---------- Menu di động ---------- */
+function toggleMenu(btn) {
+  const mo = $('drawer').classList.toggle('mo');
+  btn.setAttribute('aria-expanded', mo);
+}
+function dongMenu() { $('drawer').classList.remove('mo'); document.querySelector('.btn-menu').setAttribute('aria-expanded', false); }
+
+/* ---------- Khởi động ---------- */
+document.querySelectorAll('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) d.close(); }));
+veKhoi(); veMucLuc(); veTuan(); veTaiKhoan();
+kiemTraDangNhap(); taiDe(); demTongDe();
+</script>
 </body>
 </html>
