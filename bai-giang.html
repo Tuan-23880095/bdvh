@@ -95,6 +95,20 @@
     <div class="xem-truoc" id="xem-truoc"></div>
   </section>
 
+  <section class="the" id="the-gemini" hidden>
+    <h2>Khoá Gemini</h2>
+    <p id="gm-tt">Đang kiểm tra…</p>
+    <ol class="buoc-nhap" id="gm-hd">
+      <li>Mở <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>, đăng nhập tài khoản Google của thầy.</li>
+      <li>Bấm <b>Create API key</b> (Tạo khoá API) → sao chép khoá (dạng <code>AIza…</code>, khoảng 39 ký tự).</li>
+      <li>Dán vào ô dưới đây → <b>Lưu khoá</b>. Máy chủ sẽ thử khoá với Google trước khi lưu; khoá không bao giờ hiện lại trên trình duyệt.</li>
+    </ol>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+      <input class="input" id="gm-key" type="password" autocomplete="off" spellcheck="false" placeholder="AIza…" style="max-width:420px;height:40px">
+      <button class="btn btn-chinh" type="button" id="gm-luu">Lưu khoá</button>
+    </div>
+  </section>
+
   <section class="the" id="the-dong-bo" hidden>
     <h2>Đồng bộ tự động từ Google Drive</h2>
     <p>Mỗi giờ, một đoạn Google Apps Script trong tài khoản Google của thầy tự tìm file đề trong <b>DAYKEM</b> có ngày ở đầu tên từ <b>hôm nay</b> trở đi
@@ -320,6 +334,29 @@ async function taiDsNhe(boId) {
   $('dem-' + boId).textContent = `${n}/${b.cau.length}`; $('thanh-' + boId).style.width = (n / b.cau.length * 100) + '%';
 }
 
+function veGemini(tt) {
+  const nguon = { web: 'khoá thầy đã dán trên trang này', config: 'khoá trong private/config.php của diemdanhsv', env: 'biến môi trường của máy chủ' }[tt.gemini_nguon] || '';
+  $('gm-tt').innerHTML = tt.gemini
+    ? '<b style="color:var(--luc)">Đã có khoá</b> (…' + esc(tt.gemini_duoi || '') + ', ' + nguon + '). Muốn đổi khoá thì dán khoá mới bên dưới.'
+    : '<b style="color:var(--son)">Chưa có khoá Gemini.</b> Máy chủ bdvh không đọc được khoá nào, nên chưa tạo được lời giải. Làm 3 bước sau (miễn phí, khoảng 1 phút):';
+  $('gm-hd').hidden = !!tt.gemini;
+}
+$('gm-luu').addEventListener('click', async (e) => {
+  const k = $('gm-key').value.trim();
+  if (!k) { toast('Dán khoá vào ô trước đã.', 'loi'); return; }
+  e.target.disabled = true; e.target.textContent = 'Đang thử khoá với Google…';
+  try {
+    const r = await api('bg_gemini_luu', { api_key: k });
+    $('gm-key').value = '';
+    coGemini = true;
+    veGemini({ gemini: true, gemini_nguon: 'web', gemini_duoi: r.duoi });
+    $('gemini-tt').innerHTML = 'Gemini đã sẵn sàng.';
+    toast('Khoá hợp lệ, đã lưu. Giờ bấm "Tạo lời giải (Gemini)" ở bộ bài giảng.', 'ok');
+    taiDs();
+  } catch (err) { toast(err.message, 'loi'); }
+  e.target.disabled = false; e.target.textContent = 'Lưu khoá';
+});
+
 let maVuaTao = '';
 $('tao-ma').addEventListener('click', async (e) => {
   if ($('ma-tt').dataset.co === '1' && !confirm('Tạo mã mới thì mã cũ (script đang chạy) hết hiệu lực — thầy phải dán lại script. Tiếp tục?')) return;
@@ -342,11 +379,13 @@ $('chep-script').addEventListener('click', async () => {
     const tt = await api('bg_trang_thai');
     laGV = !!tt.giao_vien; coGemini = !!tt.gemini;
     $('the-dong-bo').hidden = !laGV;
+    $('the-gemini').hidden = !laGV;
+    if (laGV) veGemini(tt);
     if (laGV) { $('ma-tt').textContent = tt.token_luc ? 'Đã có mã đồng bộ (tạo lúc ' + tt.token_luc + ').' : 'Chưa có mã đồng bộ.'; $('ma-tt').dataset.co = tt.token_luc ? '1' : ''; }
   } catch (e) {}
   $('can-dn').hidden = laGV;
   $('the-nhap').hidden = !laGV;
-  if (laGV) $('gemini-tt').innerHTML = coGemini ? 'Gemini đã sẵn sàng (dùng chung khoá trong cấu hình máy chủ của diemdanhsv).' : '<b style="color:var(--son)">Chưa có khoá Gemini</b> — thêm <code>\'gemini\' => [\'api_key\' => \'…\']</code> vào <code>private/config.php</code>.';
+  if (laGV) $('gemini-tt').innerHTML = coGemini ? 'Gemini đã sẵn sàng.' : '<b style="color:var(--son)">Chưa có khoá Gemini</b> — dán khoá ở khung "Khoá Gemini" phía trên.';
   taiDs();
 })();
 </script>
