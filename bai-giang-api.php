@@ -182,22 +182,52 @@ function bg_public(array $row, bool $full): array
 
 /* ============================ Gemini ============================ */
 
+/**
+ * Tìm khoá Gemini theo thứ tự: (1) khoá thầy dán trên trang bai-giang.html (lưu trong CSDL, không bao giờ trả về trình duyệt);
+ * (2) mục 'gemini' trong private/config.php của diemdanhsv (dùng chung với KHTD) — thử cả khi api.php chạy SQLite
+ * vì thư mục subdomain nằm ngoài public_html; (3) biến môi trường GEMINI_API_KEY.
+ */
 function bg_gemini_cfg(): array
 {
-    $key = ''; $prefer = [];
-    if (function_exists('app_config')) {
-        try {
-            $g = app_config()['gemini'] ?? [];
-            if (is_array($g)) {
-                $key = (string) ($g['api_key'] ?? '');
-                if (!empty($g['model'])) { $prefer[] = (string) $g['model']; }
-                foreach ((array) ($g['models'] ?? []) as $m) { $prefer[] = (string) $m; }
-            }
-        } catch (Throwable $e) {}
+    $key = ''; $prefer = []; $nguon = '';
+    try {
+        $v = rq_val('SELECT v FROM bdvh_bg_cau_hinh WHERE k = ?', ['gemini_key']);
+        if (is_string($v) && $v !== '') { $key = $v; $nguon = 'web'; }
+        $m = rq_val('SELECT v FROM bdvh_bg_cau_hinh WHERE k = ?', ['gemini_model']);
+        if (is_string($m) && $m !== '') { $prefer[] = $m; }
+    } catch (Throwable $e) {}
+    $cfgs = [];
+    if (function_exists('app_config')) { try { $cfgs[] = app_config(); } catch (Throwable $e) {} }
+    foreach ([dirname(__DIR__) . '/../private/config.php', dirname(__DIR__) . '/private/config.php',
+              dirname(__DIR__, 2) . '/private/config.php', dirname(__DIR__, 3) . '/private/config.php'] as $f) {
+        if (!$cfgs && is_file($f)) { try { $c = include $f; if (is_array($c)) { $cfgs[] = $c; } } catch (Throwable $e) {} }
     }
-    if ($key === '') { $key = (string) getenv('GEMINI_API_KEY'); }
+    foreach ($cfgs as $c) {
+        $g = $c['gemini'] ?? null;
+        if (!is_array($g)) { continue; }
+        if ($key === '' && !empty($g['api_key'])) { $key = (string) $g['api_key']; $nguon = 'config'; }
+        if (!empty($g['model'])) { $prefer[] = (string) $g['model']; }
+        foreach ((array) ($g['models'] ?? []) as $m) { $prefer[] = (string) $m; }
+    }
+    if ($key === '' && getenv('GEMINI_API_KEY')) { $key = (string) getenv('GEMINI_API_KEY'); $nguon = 'env'; }
     if ($m = getenv('GEMINI_MODEL')) { array_unshift($prefer, (string) $m); }
-    return ['key' => $key, 'prefer' => array_values(array_unique(array_filter($prefer)))];
+    return ['key' => $key, 'prefer' => array_values(array_unique(array_filter($prefer))), 'nguon' => $nguon, 'co_config' => (bool) $cfgs];
+}
+
+/** GV dán khoá Gemini (lấy ở aistudio.google.com/apikey). Máy chủ thử khoá với Google trước khi lưu; xoá khi gửi khoá rỗng. */
+function action_bg_gemini_luu(array $in): void
+{
+    r_teacher();
+    $k = trim((string) ($in['api_key'] ?? ''));
+    if ($k === '') { rq('DELETE FROM bdvh_bg_cau_hinh WHERE k = ?', ['gemini_key']); rok(['da_xoa' => true]); }
+    if (!preg_match('/^[A-Za-z0-9_\-]{30,80}$/', $k)) { rfail('Khoá không đúng dạng. Khoá Gemini thường bắt đầu bằng "AIza…" và dài khoảng 39 ký tự.'); }
+    $r = bg_http('https://generativelanguage.googleapis.com/v1beta/models?pageSize=5', $k, null, 20);
+    if ($r['http'] === 0) { rfail('Máy chủ không kết nối được tới Google để thử khoá: ' . $r['msg']); }
+    if ($r['http'] !== 200) { rfail('Google từ chối khoá này (HTTP ' . $r['http'] . '): ' . $r['msg']); }
+    rq('DELETE FROM bdvh_bg_cau_hinh WHERE k = ?', ['gemini_key']);
+    rq('INSERT INTO bdvh_bg_cau_hinh (k, v) VALUES (?, ?)', ['gemini_key', $k]);
+    @array_map('unlink', glob(sys_get_temp_dir() . '/bdvh_gemini_models_*') ?: []);
+    rok(['duoi' => substr($k, -4)]);
 }
 
 function bg_http(string $url, string $key, ?array $body, int $timeout): array
@@ -473,7 +503,7 @@ function action_bg_giai(array $in): void
 {
     bg_quyen($in);
     $cfg = bg_gemini_cfg();
-    if ($cfg['key'] === '') { rfail('Chưa có khoá Gemini: thêm mục \'gemini\' => [\'api_key\' => …] vào private/config.php.'); }
+    if ($cfg['key'] === '') { rfail('Chưa có khoá Gemini — dán khoá ở trang Bài giảng (khung "Khoá Gemini").'); }
     $row = bg_load($in);
     $cid = (string) ($in['cau_id'] ?? '');
     $idx = null;
@@ -528,7 +558,9 @@ function action_bg_sua_giai(array $in): void
 function action_bg_trang_thai(array $in): void
 {
     $gv = r_is_teacher();
-    rok(['giao_vien' => $gv, 'gemini' => $gv ? bg_gemini_cfg()['key'] !== '' : null, 'hom_nay' => bg_hom_nay(),
+    $g = $gv ? bg_gemini_cfg() : null;
+    rok(['giao_vien' => $gv, 'gemini' => $g ? $g['key'] !== '' : null, 'gemini_nguon' => $g['nguon'] ?? null,
+         'gemini_duoi' => $g && $g['key'] !== '' ? substr($g['key'], -4) : null, 'hom_nay' => bg_hom_nay(),
          'token_luc' => $gv ? (rq_val('SELECT v FROM bdvh_bg_cau_hinh WHERE k = ?', ['token_luc']) ?: null) : null]);
 }
 
@@ -537,7 +569,7 @@ function bg_dispatch(string $action, array $in): void
     bg_ensure_tables();
     $map = ['bg_list' => 'action_bg_list', 'bg_get' => 'action_bg_get', 'bg_save' => 'action_bg_save', 'bg_delete' => 'action_bg_delete',
             'bg_giai' => 'action_bg_giai', 'bg_sua_giai' => 'action_bg_sua_giai', 'bg_trang_thai' => 'action_bg_trang_thai',
-            'bg_nhap' => 'action_bg_nhap', 'bg_hom_nay' => 'action_bg_hom_nay', 'bg_token_tao' => 'action_bg_token_tao'];
+            'bg_nhap' => 'action_bg_nhap', 'bg_gemini_luu' => 'action_bg_gemini_luu', 'bg_hom_nay' => 'action_bg_hom_nay', 'bg_token_tao' => 'action_bg_token_tao'];
     if (!isset($map[$action])) { json_out(['status' => 'error', 'message' => 'Thao tác bài giảng không hợp lệ.'], 404); }
     try {
         ($map[$action])($in);

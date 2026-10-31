@@ -125,7 +125,7 @@
       body = `<div class="gt-tieu-de">${esc(c.so)} · Giải thích</div>
         ${tom ? `<div class="can-nho"><b>Lời giải tóm tắt:</b> ${tom}</div>` : ''}
         <p class="chua-co">Chưa có lời giải từng bước cho câu này.</p>
-        ${laGV ? `<button class="btn-gemini" type="button" data-tao="${esc(c.id)}">${coGemini ? 'Tạo lời giải bằng Gemini' : 'Chưa cấu hình khoá Gemini'}</button>` : ''}`;
+        ${laGV ? `<button class="btn-gemini" type="button" data-tao="${esc(c.id)}">${coGemini ? 'Tạo lời giải bằng Gemini' : 'Chưa có khoá Gemini (dán ở trang Bài giảng)'}</button>` : ''}`;
     }
     return `${top(c, 'giai')}<div class="s-body"><div class="fit"><div>${body}</div></div></div>`;
   }
