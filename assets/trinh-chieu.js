@@ -27,7 +27,12 @@
     if (n <= 6) return 132; if (n <= 12) return 112; if (n <= 22) return 96; if (n <= 40) return 80;
     if (n <= 70) return 66; if (n <= 110) return 56; return 48;
   }
-  function vua(box, noi) { return noi.scrollHeight <= box.clientHeight + 1 && noi.scrollWidth <= box.clientWidth + 1; }
+  // Vừa khung = không tràn khung VÀ không ô phương án / đáp án nào bị tràn (công thức MathJax không xuống dòng,
+  // tràn ra ngoài ô thì chồng lên ô bên cạnh mà khung ngoài không phát hiện được).
+  function oTran(noi) {
+    return [...noi.querySelectorAll('.lc .o, .da-lon')].some((o) => o.scrollWidth > o.clientWidth + 1);
+  }
+  function vua(box, noi) { return noi.scrollHeight <= box.clientHeight + 1 && noi.scrollWidth <= box.clientWidth + 1 && !oTran(noi); }
   function fit(box) {
     const noi = box.firstElementChild;
     if (!noi) return;
@@ -44,7 +49,26 @@
     box.style.fontSize = lo + 'px';
     box.style.setProperty('--co', lo + 'px');
   }
-  function fitAll(root) { root.querySelectorAll('.fit').forEach(fit); }
+  /* Lựa chọn A–D: số cột ước lượng theo số ký tự chỉ là điểm xuất phát — công thức (vd \mathbb{R}\setminus\{-2;2\})
+     đếm ra ít ký tự nhưng vẽ ra rất rộng. Sau khi đã có chữ/công thức thật, thử 4 → 2 → 1 cột (từ mức ước lượng trở xuống)
+     và giữ cách xếp cho chữ TO NHẤT mà không ô nào tràn. */
+  const COT = ['c4', 'c2', 'c1'];
+  function datCot(lc, c) { COT.forEach((x) => lc.classList.remove(x)); lc.classList.add(c); }
+  function fitLuaChon(box) {
+    const lcs = [...box.querySelectorAll('.lc')];
+    if (!lcs.length) return fit(box);
+    const batDau = Math.min(...lcs.map((l) => Math.max(0, COT.findIndex((c) => l.classList.contains(c)))));
+    let tot = null;
+    for (let i = batDau; i < COT.length; i++) {
+      lcs.forEach((l) => datCot(l, COT[i]));
+      fit(box);
+      const co = parseFloat(box.style.fontSize) || 0;
+      if (!tot || co > tot.co + 0.5) tot = { i, co };   // ngang nhau thì giữ ít hàng hơn
+    }
+    lcs.forEach((l) => datCot(l, COT[tot.i]));
+    fit(box);
+  }
+  function fitAll(root) { root.querySelectorAll('.fit').forEach(fitLuaChon); }
 
   /* ---------- Dựng slide ---------- */
   function top(c, loai) {
