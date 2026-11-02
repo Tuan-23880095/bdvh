@@ -142,7 +142,7 @@
 <script>
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const LOAI = { abcd: 'A–D', dung_sai: 'Đúng/Sai', tra_loi_ngan: 'Trả lời ngắn', tu_luan: 'Tự luận' };
+const LOAI = { abcd: 'A–D', dung_sai: 'Đúng/Sai', dung_sai_4: 'Đ/S 4 ý', tra_loi_ngan: 'Trả lời ngắn', tu_luan: 'Tự luận' };
 let laGV = false, coGemini = false, dsBo = [], choLuu = [];
 const daGiaiChiTiet = {};
 
@@ -199,8 +199,8 @@ $('xem-truoc').addEventListener('click', async (e) => {
   const ten = document.querySelector(`[data-ten="${i}"]`).value.trim() || r.tieu_de;
   luu.disabled = true; luu.textContent = 'Đang lưu…';
   try {
-    await api('bg_save', { tieu_de: ten, ma: r.ma, khoi: r.khoi, mon: r.mon, nguon: r.nguon, ngay: r.ngay, cau: r.cau });
-    toast('Đã lưu "' + ten + '" (' + r.cau.length + ' câu).', 'ok');
+    const kq = await api('bg_save', { tieu_de: ten, ma: r.ma, khoi: r.khoi, mon: r.mon, nguon: r.nguon, ngay: r.ngay, cau: r.cau });
+    toast((kq && kq.moi === false ? 'Đã cập nhật "' : 'Đã lưu "') + ten + '" (' + r.cau.length + ' câu' + (kq && kq.moi === false ? ', giữ lời giải cũ' : '') + ').', 'ok');
     choLuu.splice(i, 1); veXemTruoc(); taiDs();
   } catch (err) { toast(err.message, 'loi'); luu.disabled = false; luu.textContent = 'Lưu bộ bài giảng'; }
 });

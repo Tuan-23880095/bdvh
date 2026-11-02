@@ -100,7 +100,7 @@ function bg_str($v, int $max): string { return mb_substr(trim((string) $v), 0, $
 /** Chuẩn hoá một câu hỏi do trình duyệt tách gửi lên. */
 function bg_norm_cau(array $c, int $i): array
 {
-    $loai = in_array($c['loai'] ?? '', ['abcd', 'dung_sai', 'tra_loi_ngan', 'tu_luan'], true) ? $c['loai'] : 'tu_luan';
+    $loai = in_array($c['loai'] ?? '', ['abcd', 'dung_sai', 'dung_sai_4', 'tra_loi_ngan', 'tu_luan'], true) ? $c['loai'] : 'tu_luan';
     $lc = [];
     foreach ((array) ($c['lua_chon'] ?? []) as $o) {
         if (!is_array($o)) { continue; }
@@ -124,23 +124,60 @@ function bg_norm_cau(array $c, int $i): array
     return $out;
 }
 
+/** Vá LaTeX Gemini trả về bị hỏng dấu \ (giống suaTex trong assets/trinh-chieu.js). */
+const BG_LENH = ['overrightarrow', 'Leftrightarrow', 'rightarrow', 'Rightarrow', 'leftarrow', 'Leftarrow', 'overline', 'setminus', 'widehat',
+    'mathbb', 'forall', 'exists', 'dfrac', 'infty', 'times', 'frac', 'sqrt', 'cdot', 'circ', 'perp', 'vec', 'cap', 'cup', 'leq', 'geq', 'neq',
+    'sin', 'cos', 'tan', 'le', 'ge', 'ne', 'in', 'pi'];
+function bg_tach_lenh(string $w): ?array
+{
+    if ($w === '') return [];
+    foreach (BG_LENH as $l) {
+        if (str_starts_with($w, $l)) { $r = bg_tach_lenh(substr($w, strlen($l))); if ($r !== null) return array_merge([$l], $r); }
+    }
+    return null;
+}
+function bg_sua_tex(string $t): string
+{
+    if ($t === '') return $t;
+    $t = preg_replace('/\x08\{?(circ|frac|dfrac|beta|bar)\}?/', '\\\\$1', $t);
+    $t = strtr($t, ["\x08" => '\b', "\x0c" => '\f', "\t" => '\t', "\r" => '\r']);
+    $t = preg_replace_callback('/(^|[^\\\\A-Za-z])([A-Za-z]{4,})(?=[^A-Za-z]|$)/', static function ($m) {
+        $p = bg_tach_lenh($m[2]);
+        return $p !== null ? $m[1] . implode('', array_map(static fn ($x) => '\\' . $x, $p)) : $m[0];
+    }, $t);
+    $t = preg_replace('/(^|[^\\\\A-Za-z])vec(?=\{)/', '$1\\\\vec', $t);
+    if (preg_match('/\\\\[A-Za-z]/', $t) && !preg_match('/\$|\\\\\(|\\\\\[/', $t)) {
+        $t = preg_replace_callback('/[^\s]*\\\\[A-Za-z][^\s]*/u', static function ($m) {
+            $k = preg_match('/[,.;:]+$/', $m[0], $kk) ? $kk[0] : '';
+            return '$' . substr($m[0], 0, strlen($m[0]) - strlen($k)) . '$' . $k;
+        }, $t);
+    }
+    return $t;
+}
+
+/** Trước json_decode: LaTeX viết một dấu \ (\frac, \circ…) là chuỗi JSON sai/biến thành ký tự điều khiển → nhân đôi dấu \. */
+function bg_sua_json(string $text): string
+{
+    return preg_replace('/(?<!\\\\)\\\\(?!u[0-9a-fA-F]{4})(?=[A-Za-z]{2,})/', '\\\\\\\\', $text);
+}
+
 function bg_norm_giai(array $g): array
 {
     $buoc = [];
     foreach ((array) ($g['cac_buoc'] ?? []) as $b) {
         if (is_string($b)) { $b = ['tieu_de' => '', 'noi_dung' => $b]; }
         if (!is_array($b)) { continue; }
-        $nd = bg_str($b['noi_dung'] ?? '', 1200);
+        $nd = bg_sua_tex(bg_str($b['noi_dung'] ?? '', 1200));
         if ($nd === '') { continue; }
-        $buoc[] = ['tieu_de' => bg_str($b['tieu_de'] ?? '', 120), 'noi_dung' => $nd];
+        $buoc[] = ['tieu_de' => bg_sua_tex(bg_str($b['tieu_de'] ?? '', 120)), 'noi_dung' => $nd];
         if (count($buoc) >= 8) { break; }
     }
     $kt = (string) ($g['kiem_tra_dap_an'] ?? '');
     return [
-        'dap_an_ngan' => bg_str($g['dap_an_ngan'] ?? '', 600),
-        'kien_thuc' => bg_str($g['kien_thuc'] ?? '', 800),
+        'dap_an_ngan' => bg_sua_tex(bg_str($g['dap_an_ngan'] ?? '', 600)),
+        'kien_thuc' => bg_sua_tex(bg_str($g['kien_thuc'] ?? '', 800)),
         'cac_buoc' => $buoc,
-        'loi_thuong_gap' => bg_str($g['loi_thuong_gap'] ?? '', 600),
+        'loi_thuong_gap' => bg_sua_tex(bg_str($g['loi_thuong_gap'] ?? '', 600)),
         'kiem_tra_dap_an' => in_array($kt, ['khop', 'khong_khop', 'khong_xac_dinh'], true) ? $kt : 'khong_xac_dinh',
         'ghi_chu_giao_vien' => bg_str($g['ghi_chu_giao_vien'] ?? '', 600),
         'nguon' => bg_str($g['nguon'] ?? 'gemini', 60),
@@ -323,12 +360,13 @@ function bg_html_text(string $html): string
 
 function bg_prompt(array $c, array $info): string
 {
-    $loaiTen = ['abcd' => 'trắc nghiệm 4 lựa chọn', 'dung_sai' => 'trắc nghiệm Đúng/Sai', 'tra_loi_ngan' => 'trả lời ngắn', 'tu_luan' => 'tự luận'];
+    $loaiTen = ['abcd' => 'trắc nghiệm 4 lựa chọn', 'dung_sai' => 'trắc nghiệm Đúng/Sai', 'dung_sai_4' => 'Đúng/Sai cho từng ý a, b, c, d', 'tra_loi_ngan' => 'trả lời ngắn', 'tu_luan' => 'tự luận'];
     $p = "Môn: " . ($info['mon'] ?? 'Toán') . " · " . ($info['khoi'] ?? '') . "\n";
     $p .= "Loại câu: " . ($loaiTen[$c['loai']] ?? $c['loai']) . "\n\n";
     $p .= "ĐỀ (" . $c['so'] . "):\n" . bg_html_text($c['de_html']) . "\n";
     foreach ($c['lua_chon'] as $o) {
         if ($c['loai'] === 'abcd') { $p .= $o['k'] . ". " . bg_html_text($o['html']) . "\n"; }
+        if ($c['loai'] === 'dung_sai_4') { $p .= $o['k'] . ") " . bg_html_text($o['html']) . "\n"; }
     }
     if ($c['co_hinh']) { $p .= "(Câu có hình vẽ; chỉ dùng các số liệu được ghi trong đề, không tự thêm dữ kiện.)\n"; }
     $da = trim($c['dap_an'] . ' ' . bg_html_text($c['dap_an_html']));
@@ -348,7 +386,7 @@ function bg_gemini_body(string $prompt): array
         . "3. kien_thuc: quy tắc/công thức cần nhớ để làm câu này, 1–2 câu.\n"
         . "4. loi_thuong_gap: một lỗi học sinh hay mắc ở câu này và cách tránh.\n"
         . "5. dap_an_ngan: câu trả lời gọn (ví dụ: \"C. \$5^5\$\" hoặc \"Sai\" hoặc \"x = 3\").\n"
-        . "6. Công thức viết LaTeX trong \$...\$ (ví dụ \$\\dfrac{3}{4}\$). Không dùng markdown (**, #). Tiếng Việt chuẩn, xưng \"em\" với học sinh.\n"
+        . "6. Công thức viết LaTeX và LUÔN đặt trong \$...\$ (ví dụ \$\\dfrac{3}{4}\$, \$60^\\circ\$). Trong chuỗi JSON mỗi dấu \\ của LaTeX phải viết thành \\\\. Không dùng markdown (**, #). Tiếng Việt chuẩn, xưng \"em\" với học sinh.\n"
         . "7. Không bịa số liệu không có trong đề.";
     $schema = [
         'type' => 'OBJECT',
@@ -390,7 +428,7 @@ function action_bg_get(array $in): void
  * Thêm mới hoặc cập nhật một bộ bài giảng. Khi cập nhật: giữ lời giải đã có của câu cùng mã (nhập lại đề không mất lời giải).
  * $theoMa = true: nếu đã có bộ cùng mã thì cập nhật bộ đó (dùng cho đồng bộ tự động từ Drive, tránh tạo bản trùng).
  */
-function bg_upsert(array $in, bool $theoMa): array
+function bg_upsert(array $in, bool $theoMa, ?bool $giuTen = null): array
 {
     $cauIn = (array) ($in['cau'] ?? []);
     if (!$cauIn) { rfail('Không có câu hỏi nào để lưu.'); }
@@ -420,7 +458,7 @@ function bg_upsert(array $in, bool $theoMa): array
         unset($c);
         $old['du_lieu'] = ['thong_tin' => $info, 'cau' => $cau];
         // Đồng bộ tự động giữ tên GV đã đặt; lưu tay thì lấy tên mới
-        $ten = $theoMa ? $old['tieu_de'] : $tieuDe;
+        $ten = ($giuTen ?? $theoMa) ? $old['tieu_de'] : $tieuDe;
         rq('UPDATE bdvh_bai_giang SET tieu_de = ?, khoi = ?, mon = ?, nguon = ? WHERE bo_id = ?', [$ten, $info['khoi'], $info['mon'], $info['nguon'], $id]);
         bg_store($old);
         $moi = false;
@@ -446,7 +484,8 @@ function bg_upsert(array $in, bool $theoMa): array
 function action_bg_save(array $in): void
 {
     r_teacher();
-    rok(bg_upsert($in, false));
+    // Nhập lại cùng file đề (cùng mã) → cập nhật bộ cũ, giữ lời giải; tên lấy theo ô thầy vừa nhập
+    rok(bg_upsert($in, true, false));
 }
 
 /** Google Apps Script gửi nguyên file đề .html từ Drive → máy chủ tự tách câu và lưu (cập nhật nếu đã có). */
@@ -514,7 +553,8 @@ function action_bg_giai(array $in): void
 
     [$text, $model] = bg_gemini_generate($cfg, bg_gemini_body(bg_prompt($c, $row['du_lieu']['thong_tin'] ?? [])));
     $text = trim(preg_replace('/^```(?:json)?|```$/m', '', $text));
-    $g = json_decode($text, true);
+    $g = json_decode(bg_sua_json($text), true);
+    if (!is_array($g)) { $g = json_decode($text, true); }
     if (!is_array($g) || empty($g['cac_buoc'])) { rfail('Gemini trả về không đúng định dạng, bấm tạo lại.'); }
     $g['nguon'] = $model;
     $g['luc'] = rnow();

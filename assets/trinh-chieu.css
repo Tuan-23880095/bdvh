@@ -135,3 +135,14 @@ body.tc { background: #0c1820; color: var(--muc); font-family: var(--sans); over
 .btn-gemini[disabled] { opacity: .6; cursor: wait; }
 .thong-bao { position: fixed; left: 50%; top: 18px; transform: translateX(-50%); background: var(--muc); color: #fff; padding: 10px 18px; border-radius: 8px; z-index: 30; font-size: 14px; border-left: 4px solid var(--son); }
 .loading { color: #c6cfd4; font-size: 18px; }
+
+/* Đúng / Sai từng ý (a, b, c, d) */
+.ds4 { display: grid; gap: .3em; margin-top: .5em; }
+.ds4 .r { display: grid; grid-template-columns: 1.4em minmax(0, 1fr) auto; gap: .45em; align-items: center; padding: .25em .5em; background: #fff; border: 2px solid var(--bac); border-radius: .3em; }
+.ds4 .y { color: var(--lam); }
+.ds4 .t { min-width: 0; }
+.dsb { font-weight: 800; font-size: .8em; padding: .15em .55em; border-radius: .3em; white-space: nowrap; }
+.dsb.trong { color: var(--muc-3); border: 2px dashed var(--bac); font-weight: 600; }
+.dsb.dung { background: var(--luc); color: #fff; }
+.dsb.sai { background: var(--son); color: #fff; }
+.tex-loi { font-family: "Times New Roman", serif; font-style: italic; }

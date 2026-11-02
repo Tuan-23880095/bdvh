@@ -27,7 +27,7 @@
     if (!b) return;
     const p = b.parentNode;
     b.remove();
-    if (p && p.firstChild && p.firstChild.nodeType === 3) p.firstChild.textContent = p.firstChild.textContent.replace(/^\s*[.:]?\s*/, '');
+    if (p && p.firstChild && p.firstChild.nodeType === 3) p.firstChild.textContent = p.firstChild.textContent.replace(/^\s*[.:]?\s*/, '').replace(/^\((Đúng\s*\/\s*Sai|Đúng\s*[–-]\s*Sai|Đ\s*\/\s*S)\)\s*[.:]?\s*/i, '');
   }
 
   function phanLoaiPhan(text) {
@@ -57,6 +57,63 @@
       }
     });
     return map;
+  }
+
+  /** Đáp án trắc nghiệm viết thành dòng: "Trắc nghiệm: 1-C, 2-A, 3-C …" (đề Toán 10). */
+  function docDongDapAn(details) {
+    const map = {};
+    if (!details) return map;
+    details.querySelectorAll('p, li, div').forEach((p) => {
+      const t = norm(p.textContent);
+      if (!/(trắc nghiệm|đáp án)\s*:/i.test(t)) return;
+      const re = /(?:^|[\s,;:])(\d{1,2})\s*[-–.:)]\s*([A-D])(?![A-Za-z])/g;
+      let m, n = 0;
+      const tam = {};
+      while ((m = re.exec(t))) { tam[parseInt(m[1], 10)] = m[2]; n++; }
+      if (n >= 2) Object.keys(tam).forEach((k) => { if (!map[k]) map[k] = tam[k]; });
+    });
+    return map;
+  }
+
+  /** Lời giải trắc nghiệm dạng "<b>Giải TN:</b> 1) … 2) …". */
+  function docGiaiTNSo(details) {
+    const out = {};
+    if (!details) return out;
+    details.querySelectorAll(':scope > p').forEach((p) => {
+      const html = p.innerHTML.trim();
+      const m0 = html.match(/^<b>\s*Giải\s*(TN|trắc nghiệm)\s*:?\s*<\/b>\s*/i);
+      if (!m0) return;
+      const body = html.slice(m0[0].length);
+      const re = /(?:^|\s)(\d{1,2})\)\s/g;
+      const idx = [];
+      let m;
+      while ((m = re.exec(body))) idx.push({ n: parseInt(m[1], 10), start: m.index, bodyStart: re.lastIndex });
+      idx.forEach((it, k) => {
+        const seg = body.slice(it.bodyStart, k + 1 < idx.length ? idx[k + 1].start : body.length).trim().replace(/[\s.;]+$/, '');
+        if (seg && !out[it.n]) out[it.n] = seg + '.';
+      });
+    });
+    return out;
+  }
+
+  /** Câu Đúng/Sai 4 ý: "<b>Câu 13:</b> a) Đúng; b) … → Đ, Đ, S, Đ." */
+  function docDapAnDS4(details) {
+    const out = {};
+    if (!details) return out;
+    details.querySelectorAll(':scope > p').forEach((p) => {
+      const html = p.innerHTML.trim();
+      const m = html.match(/^<b>\s*Câu\s*(\d+)\s*[:.]\s*<\/b>\s*/i);
+      if (!m) return;
+      const rest = html.slice(m[0].length);
+      const t = norm(p.textContent);
+      let seq = (t.match(/(?:→|=>)\s*([ĐĐSs](?:\s*[,;]\s*[ĐĐSs]){1,5})\s*\.?\s*$/) || [])[1];
+      if (!seq) {
+        const ys = [...t.matchAll(/(?:^|\s|;)([a-d])\)\s*(Đúng|Sai)/gi)].map((x) => (/^s/i.test(x[2]) ? 'S' : 'Đ'));
+        if (ys.length >= 2) seq = ys.join(',');
+      }
+      out[parseInt(m[1], 10)] = { html: rest, seq: seq ? seq.toUpperCase().replace(/\s+/g, '').replace(/;/g, ',') : '' };
+    });
+    return out;
   }
 
   /** Ghi chú trắc nghiệm dạng "C1: …. C6: …" hoặc "Câu 6: …" trong một đoạn. */
@@ -100,6 +157,11 @@
             else if (cur) them(cur, '<p>' + li.innerHTML + '</p>');
           });
         } else if (cur) them(cur, el.outerHTML);
+        else if (el.tagName === 'OL' && lis.length >= 2 && !Object.keys(out).length) {
+          // <ol> không nhãn: mục thứ i là lời giải Bài i
+          const batDau = parseInt(el.getAttribute('start') || '1', 10) || 1;
+          lis.forEach((li, i) => them(batDau + i, '<p>' + li.innerHTML.trim() + '</p>'));
+        }
         return;
       }
       if (el.tagName === 'P') {
@@ -152,7 +214,17 @@
       const opts = optsEl ? [...optsEl.children] : [];
       let loai = phan === 'tl' || nhan.kieu === 'bai' ? 'tu_luan' : phan === 'ds' ? 'dung_sai' : phan === 'tln' ? 'tra_loi_ngan' : 'abcd';
       const luaChon = [];
-      if (opts.length && opts.every((o) => /^[☐□]\s*[ĐS]\s*$/.test(norm(o.textContent)))) {
+      const nhanDS = /đúng\s*\/\s*sai|đúng\s*[–-]\s*sai|\(đ\s*\/\s*s\)/i.test(norm(el.querySelector('p') ? el.querySelector('p').textContent : '').slice(0, 40));
+      if (loai !== 'tu_luan' && (nhanDS || phan === 'ds') && opts.length >= 2 && opts.every((o) => /^[a-d]\s*\)/.test(norm(o.textContent)))) {
+        opts.forEach((o) => {
+          const b = o.querySelector('b, strong');
+          const k = norm(o.textContent).charAt(0);
+          if (b && /^[a-d]\s*\)?$/.test(norm(b.textContent))) b.remove();
+          luaChon.push({ k, html: o.innerHTML.replace(/^\s*[a-d]\s*\)\s*/, '').trim() });
+        });
+        loai = 'dung_sai_4';
+        optsEl.remove();
+      } else if (opts.length && opts.every((o) => /^[☐□]\s*[ĐS]\s*$/.test(norm(o.textContent)))) {
         loai = 'dung_sai';
         optsEl.remove();
       } else if (opts.length && loai !== 'tu_luan' && opts.every((o) => /^[A-D]\s*[.)]/.test(norm(o.textContent)))) {
@@ -178,7 +250,16 @@
     const bang = docBangDapAn(details);
     const ghiChu = docGhiChuTN(details);
     const loiGiaiTL = docLoiGiaiTL(details);
+    const dongDA = docDongDapAn(details);
+    const giaiSo = docGiaiTNSo(details);
+    const ds4 = docDapAnDS4(details);
     cau.forEach((c) => {
+      if (c.loai === 'dung_sai_4') {
+        const k = ds4[c.so_n];
+        if (k) { c.dap_an = k.seq; c.ghi_chu_html = k.html; }
+        if (!c.dap_an) canhBao.push(c.so + ' (Đúng/Sai 4 ý): chưa tìm thấy đáp án.');
+        return;
+      }
       if (c.loai === 'tu_luan') {
         c.dap_an_html = loiGiaiTL[c.so_n] || '';
         if (!c.dap_an_html) canhBao.push(c.so + ' (tự luận): chưa tìm thấy lời giải trong phần đáp án.');
@@ -190,7 +271,9 @@
         else if (c.loai === 'dung_sai') c.dap_an = /^s/i.test(a.text) ? 'Sai' : /^(đ|d)/i.test(a.text) ? 'Đúng' : a.text;
         else { c.dap_an = a.text; c.dap_an_html = a.html; }
       }
+      if (!c.dap_an && c.loai === 'abcd' && dongDA[c.so_n]) c.dap_an = dongDA[c.so_n];
       if (ghiChu[c.so_n]) c.ghi_chu_html = ghiChu[c.so_n];
+      else if (giaiSo[c.so_n] && c.loai === 'abcd') c.ghi_chu_html = giaiSo[c.so_n];
       if (!c.dap_an) canhBao.push(c.so + ': chưa tìm thấy đáp án trong bảng đáp án.');
       if (c.loai === 'abcd' && c.lua_chon.length !== 4) canhBao.push(c.so + ': có ' + c.lua_chon.length + ' lựa chọn (thường là 4).');
     });

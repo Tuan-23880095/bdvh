@@ -14,6 +14,29 @@
 
   let bo = null, slides = [], cur = 0, laGV = false, coGemini = false;
 
+  /* ---------- Vá công thức Gemini trả về bị hỏng dấu \ (\circ thành ký tự lạ, \overrightarrow mất \) ---------- */
+  const LENH = ['overrightarrow', 'Leftrightarrow', 'rightarrow', 'Rightarrow', 'leftarrow', 'Leftarrow', 'overline', 'setminus', 'widehat',
+    'mathbb', 'forall', 'exists', 'dfrac', 'infty', 'times', 'frac', 'sqrt', 'cdot', 'circ', 'perp', 'vec', 'cap', 'cup', 'leq', 'geq', 'neq',
+    'sin', 'cos', 'tan', 'le', 'ge', 'ne', 'in', 'pi'];
+  /** Tách một dãy chữ thành các lệnh LaTeX đã biết (cdotoverrightarrow → cdot + overrightarrow); không tách được → null. */
+  function tachLenh(w) {
+    if (!w) return [];
+    for (const l of LENH) { if (w.startsWith(l)) { const r = tachLenh(w.slice(l.length)); if (r) return [l, ...r]; } }
+    return null;
+  }
+  function suaTex(s) {
+    if (!s) return s;
+    let t = String(s).replace(/\u0008\{?(circ|frac|dfrac|beta|bar)\}?/g, '\\$1').replace(/\u0008/g, '\\b').replace(/\u000c/g, '\\f')
+      .replace(/\t/g, '\\t').replace(/\r/g, '\\r');
+    // Lệnh bị mất dấu \ (Gemini trả "overrightarrow{AB}cdot…"): chỉ sửa dãy chữ ≥ 4 ký tự tách trọn được thành lệnh đã biết
+    t = t.replace(/(^|[^\\A-Za-z])([A-Za-z]{4,})(?=[^A-Za-z]|$)/g, (m, a, w) => { const p = tachLenh(w); return p ? a + p.map((x) => '\\' + x).join('') : m; });
+    t = t.replace(/(^|[^\\A-Za-z])vec(?=\{)/g, '$1\\vec');
+    // Có lệnh mà không nằm trong $…$ → bọc từng cụm công thức (không bọc cả câu chữ)
+    if (/\\[A-Za-z]/.test(t) && !/\$|\\\(|\\\[/.test(t)) t = t.replace(/[^\s]*\\[A-Za-z][^\s]*/g, (m) => { const k = m.match(/[,.;:]+$/); const c = k ? m.slice(0, -k[0].length) : m; return '$' + c + '$' + (k ? k[0] : ''); });
+    return t;
+  }
+  const escTex = (s) => esc(suaTex(s));
+
   /* ---------- Sân khấu 16:9 co theo cửa sổ ---------- */
   function scale() {
     const s = Math.min(window.innerWidth / W, window.innerHeight / H);
@@ -89,7 +112,7 @@
     return m <= 14 ? 'c4' : m <= 34 ? 'c2' : 'c1';
   }
   function loaiTen(c) {
-    return { abcd: 'Trắc nghiệm', dung_sai: 'Đúng hay Sai', tra_loi_ngan: 'Trả lời ngắn', tu_luan: 'Tự luận' }[c.loai] || '';
+    return { abcd: 'Trắc nghiệm', dung_sai: 'Đúng hay Sai', dung_sai_4: 'Đúng / Sai từng ý', tra_loi_ngan: 'Trả lời ngắn', tu_luan: 'Tự luận' }[c.loai] || '';
   }
   function deHtml(c) {
     return `<div class="so-cau">${esc(c.so)} <small>${loaiTen(c)}</small></div><div class="de">${c.de_html}</div>`;
@@ -99,6 +122,14 @@
       return `<div class="lc ${cotLuaChon(c.lua_chon)}">${c.lua_chon.map((o) => {
         const cls = hienDapAn ? (o.k === c.dap_an ? 'dung' : 'mo') : '';
         return `<div class="o ${cls}"><span class="k">${esc(o.k)}</span><span class="t">${o.html}</span></div>`;
+      }).join('')}</div>`;
+    }
+    if (c.loai === 'dung_sai_4' && c.lua_chon.length) {
+      const da = String(c.dap_an || '').split(/\s*[,;]\s*/);
+      return `<div class="ds4">${c.lua_chon.map((o, i) => {
+        const v = hienDapAn ? (/^s/i.test(da[i] || '') ? 'S' : /^(đ|d)/i.test(da[i] || '') ? 'Đ' : '?') : '';
+        const nhan = v === 'S' ? '<span class="dsb sai">Sai</span>' : v === 'Đ' ? '<span class="dsb dung">Đúng</span>' : v ? '<span class="dsb">?</span>' : '<span class="dsb trong">Đ / S</span>';
+        return `<div class="r"><b class="y">${esc(o.k)})</b><span class="t">${o.html}</span>${nhan}</div>`;
       }).join('')}</div>`;
     }
     if (c.loai === 'dung_sai' && !hienDapAn) return '<div class="ds"><div class="o">Đúng</div><div class="o">Sai</div></div>';
@@ -113,10 +144,15 @@
   function slideDapAn(c) {
     let body = '';
     const g = c.giai || {};
-    if (c.loai === 'abcd') {
+    if (c.loai === 'dung_sai_4') {
+      body = `<div class="so-cau">${esc(c.so)} <small>Đáp án từng ý</small></div>
+        <div class="de" style="font-size:.62em">${c.de_html}</div>${luaChonHtml(c, true)}`;
+    } else if (c.loai === 'abcd') {
+      // Thiếu đáp án trong file đề → tạm dùng chữ cái đầu đáp án Gemini (A. / B. …)
+      if (!c.dap_an && /^\s*([A-D])[.)]/.test(g.dap_an_ngan || '')) c.dap_an = g.dap_an_ngan.trim().charAt(0);
       const o = c.lua_chon.find((x) => x.k === c.dap_an);
       body = `<div class="so-cau">${esc(c.so)} <small>Đáp án đúng</small></div>
-        <div class="da-lon"><span class="k">${esc(c.dap_an || '?')}</span><span class="t">${o ? o.html : esc(g.dap_an_ngan || '')}</span></div>
+        <div class="da-lon"><span class="k">${esc(c.dap_an || '?')}</span><span class="t">${o ? o.html : escTex(g.dap_an_ngan || '')}</span></div>
         <div class="de" style="font-size:.62em">${c.de_html}</div>${luaChonHtml(c, true).replace('class="lc', 'style="font-size:.7em" class="lc')}`;
     } else if (c.loai === 'dung_sai') {
       const sai = /^s/i.test(c.dap_an);
@@ -131,7 +167,7 @@
         ${c.ghi_chu_html ? `<div class="ly-do">${c.ghi_chu_html}</div>` : ''}`;
     } else {
       body = `<div class="so-cau">${esc(c.so)} <small>Đáp án</small></div>
-        <div class="loi-giai-tl">${c.dap_an_html || (g.dap_an_ngan ? esc(g.dap_an_ngan) : '<p class="chua-co">Chưa có đáp án trong file đề.</p>')}</div>`;
+        <div class="loi-giai-tl">${c.dap_an_html || (g.dap_an_ngan ? escTex(g.dap_an_ngan) : '<p class="chua-co">Chưa có đáp án trong file đề.</p>')}</div>`;
     }
     return `${top(c, 'dap-an')}<div class="s-body"><div class="fit"><div>${body}</div></div></div>`;
   }
@@ -141,9 +177,9 @@
     let body;
     if (g && g.cac_buoc && g.cac_buoc.length) {
       body = `<div class="gt-tieu-de">${esc(c.so)} · Giải thích từng bước</div>
-        ${g.kien_thuc ? `<div class="can-nho"><b>Cần nhớ:</b> ${esc(g.kien_thuc)}</div>` : ''}
-        <ol class="buoc">${g.cac_buoc.map((b) => `<li><div>${b.tieu_de ? `<b>${esc(b.tieu_de)}:</b> ` : ''}<span>${esc(b.noi_dung)}</span></div></li>`).join('')}</ol>
-        ${g.loi_thuong_gap ? `<div class="loi-hay-gap"><b>Lỗi hay gặp:</b> ${esc(g.loi_thuong_gap)}</div>` : ''}`;
+        ${g.kien_thuc ? `<div class="can-nho"><b>Cần nhớ:</b> ${escTex(g.kien_thuc)}</div>` : ''}
+        <ol class="buoc">${g.cac_buoc.map((b) => `<li><div>${b.tieu_de ? `<b>${escTex(b.tieu_de)}:</b> ` : ''}<span>${escTex(b.noi_dung)}</span></div></li>`).join('')}</ol>
+        ${g.loi_thuong_gap ? `<div class="loi-hay-gap"><b>Lỗi hay gặp:</b> ${escTex(g.loi_thuong_gap)}</div>` : ''}`;
     } else {
       const tom = c.ghi_chu_html || (c.loai === 'tu_luan' ? c.dap_an_html : '');
       body = `<div class="gt-tieu-de">${esc(c.so)} · Giải thích</div>
@@ -182,10 +218,29 @@
     fitAll(el);
     if (window.MathJax && MathJax.typesetPromise) {
       try { await MathJax.typesetPromise([el]); } catch (e) {}
+      boLoiCongThuc(el);
       if (slides[cur] === s) fitAll(el);
     }
     $('vt').textContent = s.loai === 'bia' ? 'Bìa' : `Câu ${bo.cau.indexOf(s.c) + 1}/${bo.cau.length} · ${{ de: 'Đề', 'dap-an': 'Đáp án', giai: 'Giải thích' }[s.loai]}`;
     const u = new URL(location.href); u.searchParams.set('s', cur); history.replaceState(null, '', u);
+  }
+
+  /** Công thức MathJax không đọc được → hiện nguyên văn bản thường, không hiện ô vàng "Math input error". */
+  function boLoiCongThuc(el) {
+    try {
+      const items = MathJax.startup.document.getMathItemsWithin(el);
+      for (const m of items) {
+        const r = m.typesetRoot;
+        if (r && r.querySelector && r.querySelector('mjx-merror')) {
+          const sp = document.createElement('span');
+          sp.className = 'tex-loi';
+          sp.textContent = String(m.math || '').replace(/\\(left|right|,|;|!)/g, '').replace(/[{}]/g, '');
+          r.replaceWith(sp);
+        }
+      }
+    } catch (e) {
+      el.querySelectorAll('mjx-merror').forEach((x) => { const c = x.closest('mjx-container'); if (c) c.replaceWith(document.createTextNode(c.textContent)); });
+    }
   }
 
   /* ---------- Tạo lời giải ngay trên slide (chỉ giáo viên) ---------- */
