@@ -27,10 +27,14 @@
   function suaTex(s) {
     if (!s) return s;
     let t = String(s).replace(/\u0008\{?(circ|frac|dfrac|beta|bar)\}?/g, '\\$1').replace(/\u0008/g, '\\b').replace(/\u000c/g, '\\f')
-      .replace(/\t/g, '\\t').replace(/\r/g, '\\r');
+      .replace(/\t(?=(?:imes|ext|an|heta|au|o|riangle|frac|op|ilde)(?![a-z]))/g, '\\t').replace(/\r(?=(?:ho|ight|angle|m|ceil|floor)(?![a-z]))/g, '\\r')
+      .replace(/\t/g, ' ').replace(/\r/g, '')
+      .replace(/\n(?=(?:eq|abla|otin|ot|eg|e|leq|geq)(?![a-z]))/g, '\\n');
     // Lệnh bị mất dấu \ (Gemini trả "overrightarrow{AB}cdot…"): chỉ sửa dãy chữ ≥ 4 ký tự tách trọn được thành lệnh đã biết
     t = t.replace(/(^|[^\\A-Za-z])([A-Za-z]{4,})(?=[^A-Za-z]|$)/g, (m, a, w) => { const p = tachLenh(w); return p ? a + p.map((x) => '\\' + x).join('') : m; });
     t = t.replace(/(^|[^\\A-Za-z])vec(?=\{)/g, '$1\\vec');
+    // Ký hiệu độ viết sai (^\rho, ^\text{o}, ^o) → ^\circ
+    t = t.replace(/\^\s*(?:\{\s*)?(?:\\rho|\\text\{\s*o\s*\}|\\mathrm\{\s*o\s*\}|o(?![A-Za-z])|°)(?:\s*\})?/g, '^\\circ');
     // Có lệnh mà không nằm trong $…$ → bọc từng cụm công thức (không bọc cả câu chữ)
     if (/\\[A-Za-z]/.test(t) && !/\$|\\\(|\\\[/.test(t)) t = t.replace(/[^\s]*\\[A-Za-z][^\s]*/g, (m) => { const k = m.match(/[,.;:]+$/); const c = k ? m.slice(0, -k[0].length) : m; return '$' + c + '$' + (k ? k[0] : ''); });
     return t;

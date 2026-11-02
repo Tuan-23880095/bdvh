@@ -140,12 +140,16 @@ function bg_sua_tex(string $t): string
 {
     if ($t === '') return $t;
     $t = preg_replace('/\x08\{?(circ|frac|dfrac|beta|bar)\}?/', '\\\\$1', $t);
-    $t = strtr($t, ["\x08" => '\b', "\x0c" => '\f', "\t" => '\t', "\r" => '\r']);
+    $t = strtr($t, ["\x08" => '\b', "\x0c" => '\f']);
+    $t = preg_replace(['/\t(?=(?:imes|ext|an|heta|au|o|riangle|frac|op|ilde)(?![a-z]))/', '/\r(?=(?:ho|ight|angle|m|ceil|floor)(?![a-z]))/'], ['\\\\t', '\\\\r'], $t);
+    $t = strtr($t, ["\t" => ' ', "\r" => '']);
+    $t = preg_replace('/\n(?=(?:eq|abla|otin|ot\b|eg\b|e\b|leq|geq)(?![a-z]))/', '\\\\n', $t);   // \neq bị đọc thành xuống dòng
     $t = preg_replace_callback('/(^|[^\\\\A-Za-z])([A-Za-z]{4,})(?=[^A-Za-z]|$)/', static function ($m) {
         $p = bg_tach_lenh($m[2]);
         return $p !== null ? $m[1] . implode('', array_map(static fn ($x) => '\\' . $x, $p)) : $m[0];
     }, $t);
     $t = preg_replace('/(^|[^\\\\A-Za-z])vec(?=\{)/', '$1\\\\vec', $t);
+    $t = bg_sua_do($t);
     if (preg_match('/\\\\[A-Za-z]/', $t) && !preg_match('/\$|\\\\\(|\\\\\[/', $t)) {
         $t = preg_replace_callback('/[^\s]*\\\\[A-Za-z][^\s]*/u', static function ($m) {
             $k = preg_match('/[,.;:]+$/', $m[0], $kk) ? $kk[0] : '';
@@ -155,10 +159,22 @@ function bg_sua_tex(string $t): string
     return $t;
 }
 
-/** Trước json_decode: LaTeX viết một dấu \ (\frac, \circ…) là chuỗi JSON sai/biến thành ký tự điều khiển → nhân đôi dấu \. */
+/** Trước json_decode: LaTeX viết một dấu \ (\frac, \circ…) là chuỗi JSON sai hoặc bị đổi thành ký tự điều khiển (\f, \t, \r, \b, \n)
+ *  → nhân đôi dấu \. Với 5 chữ b f n r t chỉ nhân đôi khi phía sau đúng là lệnh LaTeX (\times, \frac, \rho…), để giữ \n xuống dòng thật. */
+const BG_LENH_BFNRT = 'b(?:eta|ar|ullet|ig|inom|oxed|ot|egin)|f(?:rac|orall)|n(?:eq|e\b|abla|ot|i\b|u\b|eg|leq|geq|otin)|r(?:ho|ight|angle|m\b|ceil|floor)|t(?:imes|ext|an|heta|au|o\b|riangle|frac|op|ilde|extbf|extit)';
 function bg_sua_json(string $text): string
 {
-    return preg_replace('/(?<!\\\\)\\\\(?!u[0-9a-fA-F]{4})(?=[A-Za-z]{2,})/', '\\\\\\\\', $text);
+    return preg_replace(
+        ['/(?<!\\\\)((?:\\\\\\\\)*)\\\\(?=(?:' . BG_LENH_BFNRT . '))/', '/(?<!\\\\)((?:\\\\\\\\)*)\\\\(?=[ac-eg-mo-qsv-zA-Z]|u(?![0-9a-fA-F]{4}))/'],
+        ['$1\\\\\\\\', '$1\\\\\\\\'],
+        $text
+    );
+}
+
+/** Ký hiệu độ Gemini hay viết sai: ^\rho, ^\text{o}, ^{o}, ^o → ^\circ */
+function bg_sua_do(string $t): string
+{
+    return preg_replace('/\^\s*(?:\{\s*)?(?:\\\\rho|\\\\text\{\s*o\s*\}|\\\\mathrm\{\s*o\s*\}|o(?![A-Za-z])|°)(?:\s*\})?/u', '^\\\\circ', $t);
 }
 
 function bg_norm_giai(array $g): array
@@ -305,8 +321,8 @@ function bg_gemini_models(array $cfg): array
             $s = static function (string $n): float {
                 $v = str_contains($n, 'flash') ? 1000 : (str_contains($n, 'pro') ? 500 : 100);
                 if (preg_match('/(\d+(?:\.\d+)?)/', $n, $mm)) { $v += (float) $mm[1] * 10; }
-                if (str_contains($n, 'lite')) { $v -= 6; }
-                if (preg_match('/preview|exp|thinking/i', $n)) { $v -= 12; }
+                if (str_contains($n, 'lite')) { $v -= 40; }   // bản lite giải toán kém, chỉ dùng khi không còn flash
+                if (preg_match('/preview|exp|thinking/i', $n)) { $v -= 8; }
                 return $v;
             };
             return $s($b) <=> $s($a);
