@@ -80,7 +80,14 @@
 </header>
 
 <main class="wrap bg-wrap">
-  <div class="can-dn" id="can-dn" hidden>Đăng nhập giảng viên tại <a href="thay-tuan.html">trang quản trị</a> để nhập đề và tạo lời giải bằng Gemini. Học sinh vẫn xem được các bài giảng bên dưới.</div>
+  <section class="the" id="the-dang-nhap" hidden style="max-width:460px;margin:24px auto">
+    <h2>Đăng nhập giảng viên</h2>
+    <p>Bài giảng có đáp án và lời giải nên chỉ giảng viên xem được. Dùng mật khẩu quản trị BDVH (giống trang <a href="thay-tuan.html">Quản trị</a>).</p>
+    <form id="form-dn" style="display:grid;gap:10px;margin-top:14px">
+      <input class="input" id="mk" type="password" autocomplete="current-password" placeholder="Mật khẩu quản trị" required>
+      <button class="btn btn-chinh" type="submit" id="nut-dn">Đăng nhập</button>
+    </form>
+  </section>
 
   <section class="the" id="the-nhap" hidden>
     <h2>Nhập đề từ Google Drive</h2>
@@ -128,7 +135,7 @@
     <textarea id="script-xem" class="input" readonly hidden style="height:180px;margin-top:12px;font:12.5px/1.5 var(--mono);padding:10px"></textarea>
   </section>
 
-  <section class="the">
+  <section class="the" id="the-ds" hidden>
     <div class="sec-head" style="margin-bottom:6px">
       <div><h2>Các bộ bài giảng</h2><p class="xt-tom" id="gemini-tt"></p></div>
     </div>
@@ -142,7 +149,7 @@
 <script>
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const LOAI = { abcd: 'A–D', dung_sai: 'Đúng/Sai', tra_loi_ngan: 'Trả lời ngắn', tu_luan: 'Tự luận' };
+const LOAI = { abcd: 'A–D', dung_sai: 'Đúng/Sai', dung_sai_4: 'Đ/S 4 ý', tra_loi_ngan: 'Trả lời ngắn', tu_luan: 'Tự luận' };
 let laGV = false, coGemini = false, dsBo = [], choLuu = [];
 const daGiaiChiTiet = {};
 
@@ -199,8 +206,8 @@ $('xem-truoc').addEventListener('click', async (e) => {
   const ten = document.querySelector(`[data-ten="${i}"]`).value.trim() || r.tieu_de;
   luu.disabled = true; luu.textContent = 'Đang lưu…';
   try {
-    await api('bg_save', { tieu_de: ten, ma: r.ma, khoi: r.khoi, mon: r.mon, nguon: r.nguon, ngay: r.ngay, cau: r.cau });
-    toast('Đã lưu "' + ten + '" (' + r.cau.length + ' câu).', 'ok');
+    const kq = await api('bg_save', { tieu_de: ten, ma: r.ma, khoi: r.khoi, mon: r.mon, nguon: r.nguon, ngay: r.ngay, cau: r.cau });
+    toast((kq && kq.moi === false ? 'Đã cập nhật "' : 'Đã lưu "') + ten + '" (' + r.cau.length + ' câu' + (kq && kq.moi === false ? ', giữ lời giải cũ' : '') + ').', 'ok');
     choLuu.splice(i, 1); veXemTruoc(); taiDs();
   } catch (err) { toast(err.message, 'loi'); luu.disabled = false; luu.textContent = 'Lưu bộ bài giảng'; }
 });
@@ -359,6 +366,17 @@ $('gm-luu').addEventListener('click', async (e) => {
   e.target.disabled = false; e.target.textContent = 'Lưu khoá';
 });
 
+$('form-dn').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const nut = $('nut-dn'); nut.disabled = true; nut.textContent = 'Đang đăng nhập…';
+  try {
+    const r = await fetch('api.php?action=teacher_login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: $('mk').value }) });
+    const d = await r.json();
+    if (d.status !== 'success') throw new Error(d.message || 'Sai mật khẩu.');
+    location.reload();
+  } catch (err) { toast(err.message, 'loi'); nut.disabled = false; nut.textContent = 'Đăng nhập'; $('mk').select(); }
+});
+
 let maVuaTao = '';
 $('tao-ma').addEventListener('click', async (e) => {
   if ($('ma-tt').dataset.co === '1' && !confirm('Tạo mã mới thì mã cũ (script đang chạy) hết hiệu lực — thầy phải dán lại script. Tiếp tục?')) return;
@@ -385,7 +403,11 @@ $('chep-script').addEventListener('click', async () => {
     if (laGV) veGemini(tt);
     if (laGV) { $('ma-tt').textContent = tt.token_luc ? 'Đã có mã đồng bộ (tạo lúc ' + tt.token_luc + ').' : 'Chưa có mã đồng bộ.'; $('ma-tt').dataset.co = tt.token_luc ? '1' : ''; }
   } catch (e) {}
-  $('can-dn').hidden = laGV;
+  const tiep = new URLSearchParams(location.search).get('tiep');
+  if (laGV && tiep && /^trinh-chieu\.html\?/.test(tiep)) { location.replace(tiep); return; }
+  $('the-dang-nhap').hidden = laGV;
+  $('the-ds').hidden = !laGV;
+  if (!laGV) { setTimeout(() => $('mk').focus(), 50); return; }
   $('the-nhap').hidden = !laGV;
   if (laGV) $('gemini-tt').innerHTML = coGemini ? 'Gemini đã sẵn sàng.' : '<b style="color:var(--son)">Chưa có khoá Gemini</b> — dán khoá ở khung "Khoá Gemini" phía trên.';
   taiDs();

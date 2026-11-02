@@ -65,6 +65,64 @@ function dd_bang_dap_an(?DOMElement $details): array
     return $map;
 }
 
+/** Đáp án trắc nghiệm viết thành dòng: "Trắc nghiệm: 1-C, 2-A, …". */
+function dd_dong_dap_an(?DOMElement $details): array
+{
+    $map = [];
+    if (!$details) return $map;
+    foreach ((new DOMXPath($details->ownerDocument))->query('.//p|.//li|.//div', $details) as $p) {
+        $t = dd_norm($p->textContent);
+        if (!preg_match('/(trắc nghiệm|đáp án)\s*:/iu', $t)) continue;
+        if (preg_match_all('/(?:^|[\s,;:])(\d{1,2})\s*[-–.:)]\s*([A-D])(?![A-Za-z])/u', $t, $m, PREG_SET_ORDER) >= 2) {
+            foreach ($m as $x) { $k = (int) $x[1]; if (!isset($map[$k])) $map[$k] = $x[2]; }
+        }
+    }
+    return $map;
+}
+
+/** Lời giải trắc nghiệm dạng "<b>Giải TN:</b> 1) … 2) …". */
+function dd_giai_tn_so(?DOMElement $details): array
+{
+    $out = [];
+    if (!$details) return $out;
+    foreach (dd_elems($details) as $p) {
+        if ($p->tagName !== 'p') continue;
+        $html = trim(dd_inner($p));
+        if (!preg_match('#^<b>\s*Giải\s*(TN|trắc nghiệm)\s*:?\s*</b>\s*#iu', $html, $m0)) continue;
+        $body = substr($html, strlen($m0[0]));
+        if (!preg_match_all('/(?:^|\s)(\d{1,2})\)\s/u', $body, $m, PREG_OFFSET_CAPTURE)) continue;
+        $cnt = count($m[0]);
+        for ($k = 0; $k < $cnt; $k++) {
+            $start = $m[0][$k][1] + strlen($m[0][$k][0]);
+            $end = $k + 1 < $cnt ? $m[0][$k + 1][1] : strlen($body);
+            $seg = preg_replace('/[\s.;]+$/u', '', trim(substr($body, $start, $end - $start)));
+            $n = (int) $m[1][$k][0];
+            if ($seg !== '' && !isset($out[$n])) $out[$n] = $seg . '.';
+        }
+    }
+    return $out;
+}
+
+/** Câu Đúng/Sai 4 ý: "<b>Câu 13:</b> a) Đúng; … → Đ, Đ, S, Đ." */
+function dd_dap_an_ds4(?DOMElement $details): array
+{
+    $out = [];
+    if (!$details) return $out;
+    foreach (dd_elems($details) as $p) {
+        if ($p->tagName !== 'p') continue;
+        $html = trim(dd_inner($p));
+        if (!preg_match('#^<b>\s*Câu\s*(\d+)\s*[:.]\s*</b>\s*#iu', $html, $m)) continue;
+        $t = dd_norm($p->textContent);
+        $seq = '';
+        if (preg_match('/(?:→|=>)\s*([ĐS](?:\s*[,;]\s*[ĐS]){1,5})\s*\.?\s*$/iu', $t, $mm)) { $seq = $mm[1]; }
+        elseif (preg_match_all('/(?:^|\s|;)([a-d])\)\s*(Đúng|Sai)/iu', $t, $ys) >= 2) {
+            $seq = implode(',', array_map(static fn ($x) => preg_match('/^s/iu', $x) ? 'S' : 'Đ', $ys[2]));
+        }
+        $out[(int) $m[1]] = ['html' => substr($html, strlen($m[0])), 'seq' => $seq !== '' ? str_replace(';', ',', preg_replace('/\s+/u', '', mb_strtoupper($seq))) : ''];
+    }
+    return $out;
+}
+
 function dd_ghi_chu_tn(?DOMElement $details): array
 {
     $out = [];
@@ -112,6 +170,10 @@ function dd_loi_giai_tl(?DOMElement $details): array
                     elseif ($cur) $them($cur, '<p>' . dd_inner($li) . '</p>');
                 }
             } elseif ($cur) $them($cur, $el->ownerDocument->saveHTML($el));
+            elseif ($tag === 'ol' && count($lis) >= 2 && !$out) {
+                $bd = (int) ($el->getAttribute('start') ?: 1) ?: 1;
+                foreach ($lis as $i => $li) { $them($bd + $i, '<p>' . trim(dd_inner($li)) . '</p>'); }
+            }
             continue;
         }
         if ($tag === 'p') {
@@ -182,7 +244,8 @@ function bg_parse_html(string $html, string $tenFile): array
         if ($lb) {
             $par = $lb->parentNode; $par->removeChild($lb);
             if ($par->firstChild && $par->firstChild->nodeType === XML_TEXT_NODE) {
-                $par->firstChild->nodeValue = preg_replace('/^\s*[.:]?\s*/u', '', $par->firstChild->nodeValue);
+                $v = preg_replace('/^\s*[.:]?\s*/u', '', $par->firstChild->nodeValue);
+                $par->firstChild->nodeValue = preg_replace('/^\((Đúng\s*\/\s*Sai|Đúng\s*[–-]\s*Sai|Đ\s*\/\s*S)\)\s*[.:]?\s*/iu', '', $v);
             }
         }
         foreach (iterator_to_array($xp->query(".//*[contains(concat(' ', normalize-space(@class), ' '), ' workspace ') or contains(concat(' ', normalize-space(@class), ' '), ' lines ')]|.//details|.//script", $block)) as $x) {
@@ -192,9 +255,21 @@ function bg_parse_html(string $html, string $tenFile): array
         $opts = $optsEl ? dd_elems($optsEl) : [];
         $loai = ($phan === 'tl' || $kieu === 'bai') ? 'tu_luan' : ($phan === 'ds' ? 'dung_sai' : ($phan === 'tln' ? 'tra_loi_ngan' : 'abcd'));
         $luaChon = [];
+        $pDau = $xp->query('.//p', $el)->item(0);
+        $nhanDS = (bool) preg_match('/đúng\s*\/\s*sai|đúng\s*[–-]\s*sai|\(đ\s*\/\s*s\)/iu', mb_substr(dd_norm($pDau ? $pDau->textContent : ''), 0, 40));
+        $allAD = $opts && count(array_filter($opts, static fn ($o) => preg_match('/^[a-d]\s*\)/u', dd_norm($o->textContent)))) === count($opts);
         $allDS = $opts && count(array_filter($opts, static fn ($o) => preg_match('/^[☐□]\s*[ĐS]\s*$/u', dd_norm($o->textContent)))) === count($opts);
         $allABCD = $opts && count(array_filter($opts, static fn ($o) => preg_match('/^[A-D]\s*[.)]/u', dd_norm($o->textContent)))) === count($opts);
-        if ($allDS) { $loai = 'dung_sai'; $optsEl->parentNode->removeChild($optsEl); }
+        if ($loai !== 'tu_luan' && ($nhanDS || $phan === 'ds') && count($opts) >= 2 && $allAD) {
+            foreach ($opts as $o) {
+                $k = mb_substr(dd_norm($o->textContent), 0, 1);
+                $ob = dd_first_b($o);
+                if ($ob && preg_match('/^[a-d]\s*\)?$/u', dd_norm($ob->textContent))) $ob->parentNode->removeChild($ob);
+                $luaChon[] = ['k' => $k, 'html' => trim(preg_replace('/^\s*[a-d]\s*\)\s*/u', '', dd_inner($o)))];
+            }
+            $loai = 'dung_sai_4';
+            $optsEl->parentNode->removeChild($optsEl);
+        } elseif ($allDS) { $loai = 'dung_sai'; $optsEl->parentNode->removeChild($optsEl); }
         elseif ($allABCD && $loai !== 'tu_luan') {
             foreach ($opts as $o) {
                 $k = mb_substr(dd_norm($o->textContent), 0, 1);
@@ -215,7 +290,15 @@ function bg_parse_html(string $html, string $tenFile): array
     $bang = dd_bang_dap_an($details);
     $ghiChu = dd_ghi_chu_tn($details);
     $tl = dd_loi_giai_tl($details);
+    $dongDA = dd_dong_dap_an($details);
+    $giaiSo = dd_giai_tn_so($details);
+    $ds4 = dd_dap_an_ds4($details);
     foreach ($cau as &$c) {
+        if ($c['loai'] === 'dung_sai_4') {
+            if (isset($ds4[$c['so_n']])) { $c['dap_an'] = $ds4[$c['so_n']]['seq']; $c['ghi_chu_html'] = $ds4[$c['so_n']]['html']; }
+            if ($c['dap_an'] === '') $canhBao[] = $c['so'] . ' (Đúng/Sai 4 ý): chưa tìm thấy đáp án.';
+            continue;
+        }
         if ($c['loai'] === 'tu_luan') {
             $c['dap_an_html'] = $tl[$c['so_n']] ?? '';
             if ($c['dap_an_html'] === '') $canhBao[] = $c['so'] . ' (tự luận): chưa tìm thấy lời giải trong phần đáp án.';
@@ -227,7 +310,9 @@ function bg_parse_html(string $html, string $tenFile): array
             elseif ($c['loai'] === 'dung_sai') $c['dap_an'] = preg_match('/^s/iu', $a['text']) ? 'Sai' : (preg_match('/^(đ|d)/iu', $a['text']) ? 'Đúng' : $a['text']);
             else { $c['dap_an'] = $a['text']; $c['dap_an_html'] = $a['html']; }
         }
+        if ($c['dap_an'] === '' && $c['loai'] === 'abcd' && isset($dongDA[$c['so_n']])) $c['dap_an'] = $dongDA[$c['so_n']];
         if (isset($ghiChu[$c['so_n']])) $c['ghi_chu_html'] = $ghiChu[$c['so_n']];
+        elseif (isset($giaiSo[$c['so_n']]) && $c['loai'] === 'abcd') $c['ghi_chu_html'] = $giaiSo[$c['so_n']];
         if ($c['dap_an'] === '') $canhBao[] = $c['so'] . ': chưa tìm thấy đáp án trong bảng đáp án.';
         if ($c['loai'] === 'abcd' && count($c['lua_chon']) !== 4) $canhBao[] = $c['so'] . ': có ' . count($c['lua_chon']) . ' lựa chọn (thường là 4).';
     }
