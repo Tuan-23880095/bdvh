@@ -18,6 +18,7 @@
     };
   </script>
   <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script src="https://diemdanhsv.com/js/ui/menu-he-thong.js?v=20261102" defer onerror="var s=document.createElement('script');s.src='assets/menu-he-thong.js?v=20261102';document.head.appendChild(s)"></script>
 </head>
 <body>
 
@@ -55,6 +56,7 @@
     </nav>
 
     <div class="head-actions">
+      <span data-menu-he-thong></span>
       <button class="btn btn-vien an-mobile" id="btn-ma-lop" type="button" onclick="moMaLop()">
         <svg class="ico"><use href="#i-key"/></svg><span id="btn-ma-lop-text">Nhập mã lớp</span>
       </button>
@@ -74,6 +76,7 @@
       <a href="#lop-truc-tiep" onclick="dongMenu()">Lớp trực tiếp</a>
       <button type="button" onclick="dongMenu();moMaLop()" id="drawer-ma-lop">Nhập mã lớp</button>
       <button type="button" onclick="dongMenu();moTaiKhoan()" id="drawer-tai-khoan">Đăng nhập</button>
+      <button type="button" onclick="dongMenu();window.MenuHeThong&&MenuHeThong.mo()">Tất cả trang của hệ thống</button>
     </nav>
   </div>
 </header>
