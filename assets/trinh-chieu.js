@@ -306,7 +306,9 @@
     if (!ma && qs.has('hom_nay')) {
       // Mở thẳng bài của hôm nay (ngày ở đầu tên file Drive). Nhiều bài thì lọc theo ?khoi=L07, không thì về danh sách.
       try {
-        const h = (await fetch('api.php?action=bg_hom_nay').then((r) => r.json())).data;
+        const hj = await fetch('api.php?action=bg_hom_nay').then((r) => r.json());
+        if (hj.can_dang_nhap) { location.replace('bai-giang.html?tiep=' + encodeURIComponent('trinh-chieu.html' + location.search)); return; }
+        const h = hj.data;
         let ds = h.bo;
         if (qs.get('khoi')) ds = ds.filter((b) => b.khoi === qs.get('khoi'));
         if (ds.length === 1) { ma = ds[0].ma; const u = new URL(location.href); u.searchParams.set('bo', ma); history.replaceState(null, '', u); }
@@ -318,6 +320,7 @@
         fetch('api.php?action=bg_get&ma=' + encodeURIComponent(ma)).then((r) => r.json()),
         fetch('api.php?action=bg_trang_thai').then((r) => r.json()).catch(() => ({})),
       ]);
+      if (r1.can_dang_nhap) { location.replace('bai-giang.html?tiep=' + encodeURIComponent('trinh-chieu.html' + location.search)); return; }
       if (r1.status !== 'success') throw new Error(r1.message || 'Không tải được bài giảng.');
       bo = r1.data;
       laGV = !!(r2.data && r2.data.giao_vien);

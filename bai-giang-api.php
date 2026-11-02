@@ -56,7 +56,7 @@ function bg_token_ok(array $in): bool
 }
 function bg_quyen(array $in): void
 {
-    if (!r_is_teacher() && !bg_token_ok($in)) { rfail('Cần đăng nhập giảng viên hoặc mã đồng bộ hợp lệ.'); }
+    if (!r_is_teacher() && !bg_token_ok($in)) { json_out(['status' => 'error', 'can_dang_nhap' => true, 'message' => 'Bài giảng có đáp án và lời giải — cần đăng nhập giảng viên.'], 401); }
 }
 function bg_hom_nay(): string { return (new DateTime('now', new DateTimeZone('Asia/Ho_Chi_Minh')))->format('Y-m-d'); }
 
@@ -413,6 +413,7 @@ function bg_gemini_body(string $prompt): array
 
 function action_bg_list(array $in): void
 {
+    bg_quyen($in);   // bài giảng có đáp án + lời giải → chỉ giáo viên
     $rows = rq_all('SELECT bo_id, ma, tieu_de, khoi, mon, nguon, so_cau, sua_luc, du_lieu FROM bdvh_bai_giang ORDER BY sua_luc DESC');
     $ds = array_map(static function ($r) { $r['du_lieu'] = rjd($r['du_lieu'], []); return bg_public($r, false); }, $rows);
     usort($ds, static fn ($a, $b) => [$b['hom_nay'], $b['ngay'], $b['sua_luc']] <=> [$a['hom_nay'], $a['ngay'], $a['sua_luc']]);
@@ -421,6 +422,7 @@ function action_bg_list(array $in): void
 
 function action_bg_get(array $in): void
 {
+    bg_quyen($in);   // bài giảng có đáp án + lời giải → chỉ giáo viên
     rok(bg_public(bg_load($in), true));
 }
 
@@ -507,6 +509,7 @@ function action_bg_nhap(array $in): void
 /** Bài giảng của ngày hôm nay (theo ngày ở đầu tên file Drive: 2026-10-31_Toan7_…). */
 function action_bg_hom_nay(array $in): void
 {
+    bg_quyen($in);   // bài giảng có đáp án + lời giải → chỉ giáo viên
     $hom = bg_hom_nay();
     $rows = rq_all('SELECT bo_id, ma, tieu_de, khoi, mon, nguon, so_cau, sua_luc, du_lieu FROM bdvh_bai_giang');
     $ds = [];
