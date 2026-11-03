@@ -404,7 +404,7 @@ $('chep-script').addEventListener('click', async () => {
     if (laGV) { $('ma-tt').textContent = tt.token_luc ? 'Đã có mã đồng bộ (tạo lúc ' + tt.token_luc + ').' : 'Chưa có mã đồng bộ.'; $('ma-tt').dataset.co = tt.token_luc ? '1' : ''; }
   } catch (e) {}
   const tiep = new URLSearchParams(location.search).get('tiep');
-  if (laGV && tiep && /^trinh-chieu\.html\?/.test(tiep)) { location.replace(tiep); return; }
+  if (laGV && tiep && /^(trinh-chieu\.html\?|giao-vien\.html)/.test(tiep)) { location.replace(tiep); return; }
   $('the-dang-nhap').hidden = laGV;
   $('the-ds').hidden = !laGV;
   if (!laGV) { setTimeout(() => $('mk').focus(), 50); return; }
