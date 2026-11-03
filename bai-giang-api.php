@@ -623,12 +623,219 @@ function action_bg_trang_thai(array $in): void
          'token_luc' => $gv ? (rq_val('SELECT v FROM bdvh_bg_cau_hinh WHERE k = ?', ['token_luc']) ?: null) : null]);
 }
 
+/* ============================ Tương tác kiểu Slido: học sinh bình chọn bằng điện thoại ============================
+ * Mỗi bộ bài giảng có một "phòng" (mã 5 ký tự). Giáo viên chiếu slide nào thì phòng ghi câu + loại slide đó.
+ * Học sinh (hs.html?p=MÃ) chỉ thấy đúng câu đang chiếu, KHÔNG thấy đáp án cho tới khi thầy qua slide Đáp án.
+ * Thầy bấm Khoá → ngừng nhận bình chọn. Qua slide Đáp án → tự khoá. */
+
+const BG_MA_KY_TU = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+function bg_phong_bang(): void
+{
+    global $pdo;
+    static $xong = false;
+    if ($xong) { return; }
+    $xong = true;
+    try { $pdo->query('SELECT 1 FROM bdvh_bg_phieu LIMIT 1'); return; } catch (Throwable $e) {}
+    if (r_sqlite()) {
+        $pdo->exec("CREATE TABLE IF NOT EXISTS bdvh_bg_phong (bo_id INTEGER PRIMARY KEY, ma_phong TEXT NOT NULL UNIQUE, cau INTEGER NOT NULL DEFAULT 0,
+            loai TEXT NOT NULL DEFAULT 'bia', khoa INTEGER NOT NULL DEFAULT 0, sua_luc INTEGER NOT NULL DEFAULT 0)");
+        $pdo->exec("CREATE TABLE IF NOT EXISTS bdvh_bg_phieu (id INTEGER PRIMARY KEY AUTOINCREMENT, bo_id INTEGER NOT NULL, cau INTEGER NOT NULL,
+            client_id TEXT NOT NULL, ten TEXT NOT NULL DEFAULT '', tra_loi TEXT NOT NULL, luc INTEGER NOT NULL, UNIQUE(bo_id, cau, client_id))");
+    } else {
+        $e = ' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci';
+        $pdo->exec("CREATE TABLE IF NOT EXISTS bdvh_bg_phong (bo_id INT PRIMARY KEY, ma_phong VARCHAR(8) NOT NULL, cau INT NOT NULL DEFAULT 0,
+            loai VARCHAR(10) NOT NULL DEFAULT 'bia', khoa TINYINT NOT NULL DEFAULT 0, sua_luc INT NOT NULL DEFAULT 0, UNIQUE KEY uq_bg_phong (ma_phong))" . $e);
+        $pdo->exec("CREATE TABLE IF NOT EXISTS bdvh_bg_phieu (id INT AUTO_INCREMENT PRIMARY KEY, bo_id INT NOT NULL, cau INT NOT NULL,
+            client_id VARCHAR(64) NOT NULL, ten VARCHAR(80) NOT NULL DEFAULT '', tra_loi VARCHAR(40) NOT NULL, luc INT NOT NULL,
+            UNIQUE KEY uq_bg_phieu (bo_id, cau, client_id), KEY k_bg_phieu (bo_id, cau))" . $e);
+    }
+}
+
+function bg_gv(): void
+{
+    if (!r_is_teacher()) { json_out(['status' => 'error', 'can_dang_nhap' => true, 'message' => 'Cần đăng nhập giảng viên.'], 401); }
+}
+
+/** Phòng của một bộ (tạo mã lần đầu). */
+function bg_phong_cua(int $boId): array
+{
+    bg_phong_bang();
+    $p = rq_one('SELECT * FROM bdvh_bg_phong WHERE bo_id = ?', [$boId]);
+    if ($p) { return $p; }
+    for ($i = 0; $i < 20; $i++) {
+        $ma = '';
+        for ($j = 0; $j < 5; $j++) { $ma .= BG_MA_KY_TU[random_int(0, strlen(BG_MA_KY_TU) - 1)]; }
+        if (!rq_val('SELECT COUNT(*) FROM bdvh_bg_phong WHERE ma_phong = ?', [$ma])) {
+            rq('INSERT INTO bdvh_bg_phong (bo_id, ma_phong, cau, loai, khoa, sua_luc) VALUES (?, ?, 0, ?, 0, ?)', [$boId, $ma, 'bia', time()]);
+            return rq_one('SELECT * FROM bdvh_bg_phong WHERE bo_id = ?', [$boId]);
+        }
+    }
+    rfail('Không tạo được mã phòng, thử lại.');
+}
+
+/** Câu có bình chọn được không và chuẩn hoá câu trả lời của học sinh. null = không hợp lệ. */
+function bg_chuan_tra_loi(array $c, string $t): ?string
+{
+    $t = trim($t);
+    switch ($c['loai']) {
+        case 'abcd':
+            $t = strtoupper($t);
+            $keys = array_map(static fn ($o) => strtoupper((string) $o['k']), $c['lua_chon'] ?? []);
+            if (!$keys) { $keys = ['A', 'B', 'C', 'D']; }
+            return in_array($t, $keys, true) ? $t : null;
+        case 'dung_sai':
+            $t = strtoupper(str_replace(['Đ', 'đ'], 'D', $t));
+            return in_array($t, ['D', 'S'], true) ? $t : null;
+        case 'dung_sai_4':
+            $t = strtoupper(str_replace(['Đ', 'đ'], 'D', $t));
+            $n = max(1, min(8, count($c['lua_chon'] ?? []) ?: 4));
+            return preg_match('/^[DS]{' . $n . '}$/', $t) ? $t : null;
+        case 'tra_loi_ngan':
+            $t = preg_replace('/\s+/u', ' ', $t);
+            return ($t !== '' && mb_strlen($t) <= 40) ? $t : null;
+    }
+    return null;   // tự luận: không bình chọn
+}
+
+/** Đáp án đúng ở dạng giống câu trả lời học sinh (để tô đúng/sai). '' = không rõ. */
+function bg_dap_an_chuan(array $c): string
+{
+    $da = (string) ($c['dap_an'] ?? '');
+    switch ($c['loai']) {
+        case 'abcd':
+            if ($da === '' && preg_match('/^\s*([A-D])[.)]/u', (string) ($c['giai']['dap_an_ngan'] ?? ''), $m)) { $da = $m[1]; }
+            return strtoupper($da);
+        case 'dung_sai':
+            return $da === '' ? '' : (preg_match('/^s/iu', $da) ? 'S' : 'D');
+        case 'dung_sai_4':
+            $out = '';
+            foreach (preg_split('/\s*[,;]\s*/u', $da) as $x) {
+                if (preg_match('/^s/iu', $x)) { $out .= 'S'; } elseif (preg_match('/^(đ|d)/iu', $x)) { $out .= 'D'; } else { return ''; }
+            }
+            return $out;
+        case 'tra_loi_ngan':
+            return trim(strip_tags($da !== '' ? $da : (string) ($c['dap_an_html'] ?? '')));
+    }
+    return '';
+}
+
+/** GV: báo slide đang chiếu (cau = 1..n, 0 = bìa). Qua slide Đáp án/Giải thích thì tự khoá. */
+function action_bg_phong_dat(array $in): void
+{
+    bg_gv();
+    $boId = (int) ($in['bo_id'] ?? 0);
+    if (!rq_val('SELECT COUNT(*) FROM bdvh_bai_giang WHERE bo_id = ?', [$boId])) { rfail('Không tìm thấy bộ bài giảng.'); }
+    $p = bg_phong_cua($boId);
+    $cau = max(0, (int) ($in['cau'] ?? 0));
+    $loai = in_array($in['loai'] ?? '', ['bia', 'de', 'dap-an', 'giai', 'ket'], true) ? $in['loai'] : 'bia';
+    $khoa = array_key_exists('khoa', $in) ? (int) !empty($in['khoa']) : (($loai === 'dap-an' || $loai === 'giai') ? 1 : 0);
+    rq('UPDATE bdvh_bg_phong SET cau = ?, loai = ?, khoa = ?, sua_luc = ? WHERE bo_id = ?', [$cau, $loai, $khoa, time(), $boId]);
+    rok(['ma_phong' => $p['ma_phong'], 'cau' => $cau, 'loai' => $loai, 'khoa' => (bool) $khoa]);
+}
+
+/** GV: kết quả bình chọn một câu. */
+function action_bg_phong_kq(array $in): void
+{
+    bg_gv();
+    bg_phong_bang();
+    $boId = (int) ($in['bo_id'] ?? $_GET['bo_id'] ?? 0);
+    $cau = (int) ($in['cau'] ?? $_GET['cau'] ?? 0);
+    $rows = rq_all('SELECT ten, tra_loi, luc FROM bdvh_bg_phieu WHERE bo_id = ? AND cau = ? ORDER BY luc DESC', [$boId, $cau]);
+    $dem = []; $y = [];
+    foreach ($rows as $r) {
+        $t = (string) $r['tra_loi'];
+        $dem[$t] = ($dem[$t] ?? 0) + 1;
+        if (preg_match('/^[DS]{2,8}$/', $t)) {
+            foreach (str_split($t) as $i => $ch) { $y[$i] = $y[$i] ?? ['D' => 0, 'S' => 0]; $y[$i][$ch]++; }
+        }
+    }
+    arsort($dem);
+    $ganDay = array_map(static fn ($r) => ['ten' => $r['ten'], 'tra_loi' => $r['tra_loi']], array_slice($rows, 0, 12));
+    rok(['tong' => count($rows), 'dem' => $dem ?: new stdClass(), 'tung_y' => $y, 'gan_day' => $ganDay]);
+}
+
+/** GV: xoá bình chọn một câu (cau > 0) hoặc cả bộ (cau = 0). */
+function action_bg_phong_xoa(array $in): void
+{
+    bg_gv();
+    bg_phong_bang();
+    $boId = (int) ($in['bo_id'] ?? 0); $cau = (int) ($in['cau'] ?? 0);
+    if ($cau > 0) { rq('DELETE FROM bdvh_bg_phieu WHERE bo_id = ? AND cau = ?', [$boId, $cau]); }
+    else { rq('DELETE FROM bdvh_bg_phieu WHERE bo_id = ?', [$boId]); }
+    rok(true);
+}
+
+/** Học sinh: trạng thái phòng + đúng câu đang chiếu (không kèm đáp án khi còn ở slide Đề).
+ *  Gửi kèm k (khoá trạng thái lần trước) → không đổi thì chỉ trả {doi:false}, đỡ tải máy chủ khi cả lớp cùng hỏi. */
+function action_bg_hs_xem(array $in): void
+{
+    bg_phong_bang();
+    $ma = strtoupper(preg_replace('/[^A-Za-z0-9]/', '', (string) ($in['p'] ?? $_GET['p'] ?? '')));
+    $p = $ma !== '' ? rq_one('SELECT * FROM bdvh_bg_phong WHERE ma_phong = ?', [$ma]) : null;
+    if (!$p) { rfail('Mã phòng không đúng. Em xem lại mã trên màn chiếu.'); }
+    $k = $p['cau'] . '|' . $p['loai'] . '|' . $p['khoa'];
+    if ((string) ($in['k'] ?? $_GET['k'] ?? '') === $k) { rok(['doi' => false, 'k' => $k]); }
+    $row = bg_load(['bo_id' => (int) $p['bo_id']]);
+    $ds = $row['du_lieu']['cau'] ?? [];
+    $o = ['doi' => true, 'k' => $k, 'tieu_de' => $row['tieu_de'], 'so_cau' => count($ds), 'cau' => (int) $p['cau'],
+          'loai_slide' => $p['loai'], 'khoa' => (bool) $p['khoa']];
+    $c = $ds[(int) $p['cau'] - 1] ?? null;
+    if ($c && (int) $p['cau'] > 0) {
+        $q = ['so' => $c['so'], 'loai' => $c['loai'], 'de_html' => $c['de_html'],
+              'lua_chon' => array_map(static fn ($x) => ['k' => $x['k'], 'html' => $x['html']], $c['lua_chon'] ?? []),
+              'binh_chon' => in_array($c['loai'], ['abcd', 'dung_sai', 'dung_sai_4', 'tra_loi_ngan'], true)];
+        if ($p['loai'] !== 'de') {   // đã qua slide Đáp án: mới cho xem đáp án + lời giải tóm tắt
+            $g = $c['giai'] ?? [];
+            $q['dap_an'] = bg_dap_an_chuan($c);
+            $q['dap_an_html'] = $c['dap_an_html'] ?? '';
+            $q['dap_an_ngan'] = (string) ($g['dap_an_ngan'] ?? '');
+            $q['cac_buoc'] = array_slice((array) ($g['cac_buoc'] ?? []), 0, 8);
+        }
+        $cid = (string) ($in['client_id'] ?? $_GET['client_id'] ?? '');
+        if ($cid !== '') {
+            $q['cua_em'] = rq_val('SELECT tra_loi FROM bdvh_bg_phieu WHERE bo_id = ? AND cau = ? AND client_id = ?', [(int) $p['bo_id'], (int) $p['cau'], $cid]) ?: '';
+        }
+        $o['cau_hoi'] = $q;
+    }
+    rok($o);
+}
+
+/** Học sinh gửi bình chọn cho câu đang chiếu (chỉ khi thầy đang ở slide Đề và chưa khoá). */
+function action_bg_hs_chon(array $in): void
+{
+    bg_phong_bang();
+    $ma = strtoupper(preg_replace('/[^A-Za-z0-9]/', '', (string) ($in['p'] ?? '')));
+    $p = $ma !== '' ? rq_one('SELECT * FROM bdvh_bg_phong WHERE ma_phong = ?', [$ma]) : null;
+    if (!$p) { rfail('Mã phòng không đúng.'); }
+    $cau = (int) ($in['cau'] ?? 0);
+    if ($cau !== (int) $p['cau'] || $p['loai'] !== 'de') { rfail('Thầy đã chuyển sang câu khác.'); }
+    if ((int) $p['khoa'] === 1) { rfail('Thầy đã khoá bình chọn câu này.'); }
+    $cid = preg_replace('/[^A-Za-z0-9_\-]/', '', (string) ($in['client_id'] ?? ''));
+    if (strlen($cid) < 8) { rfail('Thiếu mã thiết bị, em tải lại trang.'); }
+    $row = bg_load(['bo_id' => (int) $p['bo_id']]);
+    $c = ($row['du_lieu']['cau'] ?? [])[$cau - 1] ?? null;
+    if (!$c) { rfail('Không tìm thấy câu hỏi.'); }
+    $t = bg_chuan_tra_loi($c, (string) ($in['tra_loi'] ?? ''));
+    if ($t === null) { rfail('Câu trả lời không hợp lệ.'); }
+    $ten = mb_substr(trim(strip_tags((string) ($in['ten'] ?? ''))), 0, 80) ?: 'Học sinh';
+    $sql = r_sqlite()
+        ? 'INSERT INTO bdvh_bg_phieu (bo_id, cau, client_id, ten, tra_loi, luc) VALUES (?, ?, ?, ?, ?, ?)
+           ON CONFLICT(bo_id, cau, client_id) DO UPDATE SET ten = excluded.ten, tra_loi = excluded.tra_loi, luc = excluded.luc'
+        : 'INSERT INTO bdvh_bg_phieu (bo_id, cau, client_id, ten, tra_loi, luc) VALUES (?, ?, ?, ?, ?, ?)
+           ON DUPLICATE KEY UPDATE ten = VALUES(ten), tra_loi = VALUES(tra_loi), luc = VALUES(luc)';
+    rq($sql, [(int) $p['bo_id'], $cau, $cid, $ten, $t, time()]);
+    rok(['tra_loi' => $t]);
+}
+
 function bg_dispatch(string $action, array $in): void
 {
     bg_ensure_tables();
     $map = ['bg_list' => 'action_bg_list', 'bg_get' => 'action_bg_get', 'bg_save' => 'action_bg_save', 'bg_delete' => 'action_bg_delete',
             'bg_giai' => 'action_bg_giai', 'bg_sua_giai' => 'action_bg_sua_giai', 'bg_trang_thai' => 'action_bg_trang_thai',
-            'bg_nhap' => 'action_bg_nhap', 'bg_gemini_luu' => 'action_bg_gemini_luu', 'bg_hom_nay' => 'action_bg_hom_nay', 'bg_token_tao' => 'action_bg_token_tao'];
+            'bg_nhap' => 'action_bg_nhap', 'bg_gemini_luu' => 'action_bg_gemini_luu', 'bg_hom_nay' => 'action_bg_hom_nay', 'bg_token_tao' => 'action_bg_token_tao',
+            'bg_phong_dat' => 'action_bg_phong_dat', 'bg_phong_kq' => 'action_bg_phong_kq', 'bg_phong_xoa' => 'action_bg_phong_xoa',
+            'bg_hs_xem' => 'action_bg_hs_xem', 'bg_hs_chon' => 'action_bg_hs_chon'];
     if (!isset($map[$action])) { json_out(['status' => 'error', 'message' => 'Thao tác bài giảng không hợp lệ.'], 404); }
     try {
         ($map[$action])($in);
