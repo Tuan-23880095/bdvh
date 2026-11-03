@@ -13,6 +13,9 @@
   const SEN = 'assets/logo-sen.svg';
 
   let bo = null, slides = [], cur = 0, laGV = false, coGemini = false;
+  /* Tương tác kiểu Slido: phòng (mã 5 ký tự), khoá bình chọn, bật/tắt tương tác */
+  let phong = '', khoa = false, hoiKq = null, lanBao = 0;
+  let tuongTac = (() => { try { return localStorage.getItem('tc_tuong_tac') !== '0'; } catch (e) { return true; } })();
 
   /* ---------- Vá công thức Gemini trả về bị hỏng dấu \ (\circ thành ký tự lạ, \overrightarrow mất \) ---------- */
   const LENH = ['overrightarrow', 'Leftrightarrow', 'rightarrow', 'Rightarrow', 'leftarrow', 'Leftarrow', 'overline', 'setminus', 'widehat',
@@ -40,6 +43,118 @@
     return t;
   }
   const escTex = (s) => esc(suaTex(s));
+
+  /* ---------- Bình chọn trực tiếp (giống Slido) ---------- */
+  const LOAI_BC = ['abcd', 'dung_sai', 'dung_sai_4', 'tra_loi_ngan'];
+  const coBinhChon = (c) => tuongTac && c && LOAI_BC.includes(c.loai);
+  const linkHs = () => location.origin + location.pathname.replace(/[^/]*$/, '') + 'hs.html?p=' + phong;
+  const linkHsNgan = () => location.host + location.pathname.replace(/[^/]*$/, '') + 'hs.html';
+  function qrSvg(url) {
+    try { const q = qrcode(0, 'M'); q.addData(url); q.make(); return q.createSvgTag({ cellSize: 4, margin: 2, scalable: true }); }
+    catch (e) { return ''; }
+  }
+  /** Đáp án đúng ở dạng giống câu trả lời học sinh (A / D / S / DSDD / chữ). */
+  function dapAnChuan(c) {
+    const da = String(c.dap_an || '');
+    if (c.loai === 'abcd') return (da || ((c.giai && c.giai.dap_an_ngan || '').match(/^\s*([A-D])[.)]/) || [])[1] || '').toUpperCase();
+    if (c.loai === 'dung_sai') return da ? (/^s/i.test(da) ? 'S' : 'D') : '';
+    if (c.loai === 'dung_sai_4') { const v = da.split(/\s*[,;]\s*/).map((x) => /^s/i.test(x) ? 'S' : /^(đ|d)/i.test(x) ? 'D' : '?'); return v.includes('?') ? '' : v.join(''); }
+    if (c.loai === 'tra_loi_ngan') { const d = document.createElement('div'); d.innerHTML = c.dap_an_html || esc(da); return d.textContent.trim(); }
+    return '';
+  }
+  const chuanSo = (t) => String(t || '').toLowerCase().replace(/\s+/g, '').replace(/,/g, '.').replace(/^\$|\$$/g, '');
+  /** Khung bình chọn bên phải slide Đề / Đáp án. */
+  function khungSlido(c, loai) {
+    const chot = loai === 'dap-an';
+    return `<aside class="slido ${chot ? 'chot' : ''}">
+      <div class="sl-dau"><span class="pill ${chot || khoa ? '' : 'song'}" data-pill>${chot ? '🔒 Đã chốt đáp án' : khoa ? '🔒 Đã khoá bình chọn' : '<i></i> Đang bình chọn'}</span>
+        <b class="sl-tong" data-tong>0 bạn</b></div>
+      <div class="sl-cot" data-kq>${veKq(c, { tong: 0, dem: {}, tung_y: [] }, chot)}</div>
+      ${chot ? '' : `<div class="sl-ten" data-ten></div>
+      <div class="sl-vao"><span class="qr" data-qr>${phong ? qrSvg(linkHs()) : ''}</span>
+        <div><small>Vào bình chọn</small><b>${esc(linkHsNgan())}</b><small>Mã phòng</small><b class="ma" data-ma>${phong || '·····'}</b></div></div>`}
+    </aside>`;
+  }
+  function thanh(nhan, n, tong, dung) {
+    const pct = tong ? Math.round((n / tong) * 100) : 0;
+    return `<div class="sl-hang ${dung ? 'dung' : ''}"><div class="sl-nhan"><span>${nhan}</span><span>${pct}% <small>(${n})</small></span></div>
+      <div class="sl-ray"><i style="width:${pct}%"></i></div></div>`;
+  }
+  function veKq(c, kq, chot) {
+    const tong = kq.tong || 0, dem = kq.dem || {}, da = chot ? dapAnChuan(c) : '';
+    if (c.loai === 'abcd') return (c.lua_chon.length ? c.lua_chon.map((o) => o.k.toUpperCase()) : ['A', 'B', 'C', 'D'])
+      .map((k) => thanh(`${chot && k === da ? '✓ ' : ''}Phương án ${k}`, dem[k] || 0, tong, chot && k === da)).join('');
+    if (c.loai === 'dung_sai') return [['D', 'Đúng'], ['S', 'Sai']].map(([k, t]) => thanh(`${chot && k === da ? '✓ ' : ''}${t}`, dem[k] || 0, tong, chot && k === da)).join('');
+    if (c.loai === 'dung_sai_4') return c.lua_chon.map((o, i) => {
+      const y = (kq.tung_y || [])[i] || { D: 0, S: 0 }, n = (y.D || 0) + (y.S || 0), pd = n ? Math.round((y.D / n) * 100) : 0;
+      const dungY = chot && da ? (da[i] === 'D' ? 'Đúng' : 'Sai') : '';
+      return `<div class="sl-hang ds"><div class="sl-nhan"><span>Ý ${esc(o.k)}) ${dungY ? `<em class="${da[i] === 'D' ? 'd' : 's'}">${dungY}</em>` : ''}</span><span>${pd}% Đ · ${n ? 100 - pd : 0}% S</span></div>
+        <div class="sl-ray ds"><i style="width:${pd}%"></i></div></div>`;
+    }).join('');
+    // Trả lời ngắn: các đáp số học sinh gửi nhiều nhất
+    const ds = Object.entries(dem).sort((a, b) => b[1] - a[1]).slice(0, 6);
+    if (!ds.length) return '<p class="sl-trong">Chưa có câu trả lời</p>';
+    return ds.map(([t, n]) => thanh(esc(t), n, tong, chot && da && chuanSo(t) === chuanSo(da))).join('');
+  }
+  async function goiPhong(than) {
+    const r = await fetch('api.php?action=bg_phong_dat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(than) });
+    return r.json();
+  }
+  /** Báo máy chủ slide đang chiếu → điện thoại học sinh tự chuyển theo. */
+  async function baoPhong(s) {
+    if (!tuongTac) return;
+    const lan = ++lanBao;
+    try {
+      const d = await goiPhong({ bo_id: bo.bo_id, cau: s.c ? bo.cau.indexOf(s.c) + 1 : 0, loai: s.loai });
+      if (d.status !== 'success' || lan !== lanBao) return;
+      const moi = !phong;
+      phong = d.data.ma_phong; khoa = !!d.data.khoa;
+      if (moi) $('khung').querySelectorAll('[data-qr]').forEach((x) => { x.innerHTML = qrSvg(linkHs()); });
+      $('khung').querySelectorAll('[data-ma]').forEach((x) => { x.textContent = phong; });
+      nutKhoa();
+    } catch (e) {}
+  }
+  function nutKhoa() {
+    const s = slides[cur], b = $('btn-khoa');
+    if (!b) return;
+    b.hidden = !(s && s.loai === 'de' && coBinhChon(s.c));
+    b.textContent = khoa ? '🔓 Mở bình chọn' : '🔒 Khoá';
+    b.classList.toggle('chinh', khoa);
+    $('khung').querySelectorAll('[data-pill]').forEach((x) => {
+      if (s.loai !== 'de') return;
+      x.classList.toggle('song', !khoa);
+      x.innerHTML = khoa ? '🔒 Đã khoá bình chọn' : '<i></i> Đang bình chọn';
+    });
+  }
+  async function doiKhoa() {
+    const s = slides[cur];
+    if (!(s && s.loai === 'de' && coBinhChon(s.c))) return;
+    khoa = !khoa; nutKhoa();
+    try { await goiPhong({ bo_id: bo.bo_id, cau: bo.cau.indexOf(s.c) + 1, loai: 'de', khoa: khoa ? 1 : 0 }); } catch (e) {}
+  }
+  function theoDoiKq(s) {
+    clearInterval(hoiKq); hoiKq = null;
+    if (!(s.c && coBinhChon(s.c) && (s.loai === 'de' || s.loai === 'dap-an'))) return;
+    const cau = bo.cau.indexOf(s.c) + 1, chot = s.loai === 'dap-an';
+    const lay = async () => {
+      try {
+        const d = await fetch(`api.php?action=bg_phong_kq&bo_id=${bo.bo_id}&cau=${cau}&_=${Date.now()}`).then((r) => r.json());
+        if (d.status !== 'success' || slides[cur] !== s) return;
+        const k = d.data, el = $('khung');
+        const t = el.querySelector('[data-tong]'); if (t) t.textContent = `${k.tong} bạn`;
+        const q = el.querySelector('[data-kq]'); if (q) q.innerHTML = veKq(s.c, k, chot);
+        const n = el.querySelector('[data-ten]'); if (n) n.innerHTML = (k.gan_day || []).slice(0, 8).map((x) => `<span>${esc(x.ten)}</span>`).join('');
+      } catch (e) {}
+    };
+    lay(); hoiKq = setInterval(lay, 2000);
+  }
+  function doiTuongTac() {
+    tuongTac = !tuongTac;
+    try { localStorage.setItem('tc_tuong_tac', tuongTac ? '1' : '0'); } catch (e) {}
+    $('btn-tt').classList.toggle('chinh', tuongTac);
+    thongBao(tuongTac ? 'Đã bật bình chọn trên điện thoại học sinh.' : 'Đã tắt bình chọn — chỉ trình chiếu.');
+    ve(cur);
+  }
 
   /* ---------- Sân khấu 16:9 co theo cửa sổ ---------- */
   function scale() {
@@ -142,7 +257,8 @@
   }
 
   function slideDe(c) {
-    return `${top(c, 'de')}<div class="s-body"><div class="fit"><div>${deHtml(c)}${luaChonHtml(c, false)}</div></div></div>`;
+    const sl = coBinhChon(c);
+    return `${top(c, 'de')}<div class="s-body ${sl ? 'co-slido' : ''}"><div class="fit"><div>${deHtml(c)}${luaChonHtml(c, false)}</div></div>${sl ? khungSlido(c, 'de') : ''}</div>`;
   }
 
   function slideDapAn(c) {
@@ -173,7 +289,8 @@
       body = `<div class="so-cau">${esc(c.so)} <small>Đáp án</small></div>
         <div class="loi-giai-tl">${c.dap_an_html || (g.dap_an_ngan ? escTex(g.dap_an_ngan) : '<p class="chua-co">Chưa có đáp án trong file đề.</p>')}</div>`;
     }
-    return `${top(c, 'dap-an')}<div class="s-body"><div class="fit"><div>${body}</div></div></div>`;
+    const sl = coBinhChon(c);
+    return `${top(c, 'dap-an')}<div class="s-body ${sl ? 'co-slido' : ''}"><div class="fit"><div>${body}</div></div>${sl ? khungSlido(c, 'dap-an') : ''}</div>`;
   }
 
   function slideGiai(c) {
@@ -200,7 +317,9 @@
       <div class="eyebrow">${esc([bo.mon, bo.khoi ? 'Lớp ' + String(bo.khoi).replace(/^L0?/, '') : ''].filter(Boolean).join(' · '))} · ${bo.cau.length} câu</div>
       <h1>${esc(bo.tieu_de)}</h1>
       <div class="tac-gia"><b>ThS. Đinh Quốc Tuấn</b>Trung tâm Bồi dưỡng Văn hóa · Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM</div>
-      <div class="huong-dan">Mỗi câu 3 slide: Đề → Đáp án → Giải thích từng bước · Phím → để bắt đầu</div></div>`;
+      <div class="huong-dan">Mỗi câu 3 slide: Đề → Đáp án → Giải thích từng bước · Phím → để bắt đầu</div>
+      ${tuongTac ? `<div class="bia-vao"><span class="qr" data-qr>${phong ? qrSvg(linkHs()) : ''}</span>
+        <div><small>Học sinh quét mã hoặc vào</small><b>${esc(linkHsNgan())}</b><small>rồi nhập mã phòng</small><b class="ma" data-ma>${phong || '·····'}</b></div></div>` : ''}</div>`;
   }
 
   function dungDanhSach() {
@@ -225,6 +344,7 @@
       boLoiCongThuc(el);
       if (slides[cur] === s) fitAll(el);
     }
+    baoPhong(s); theoDoiKq(s); nutKhoa();
     $('vt').textContent = s.loai === 'bia' ? 'Bìa' : `Câu ${bo.cau.indexOf(s.c) + 1}/${bo.cau.length} · ${{ de: 'Đề', 'dap-an': 'Đáp án', giai: 'Giải thích' }[s.loai]}`;
     const u = new URL(location.href); u.searchParams.set('s', cur); history.replaceState(null, '', u);
   }
@@ -298,6 +418,7 @@
     else if (k === 'End') ve(slides.length - 1);
     else if (k.toLowerCase() === 'f') toanManHinh();
     else if (k.toLowerCase() === 'm') moMucLuc(true);
+    else if (k.toLowerCase() === 'l') doiKhoa();
     else if (['1', '2', '3'].includes(k) && slides[cur].c) {
       const base = 1 + bo.cau.indexOf(slides[cur].c) * 3; ve(base + Number(k) - 1);
     }
@@ -350,6 +471,9 @@
     $('btn-sau').onclick = () => ve(cur + 1);
     $('btn-ml').onclick = () => moMucLuc(true);
     $('btn-fs').onclick = toanManHinh;
+    $('btn-khoa').onclick = doiKhoa;
+    $('btn-tt').onclick = doiTuongTac;
+    $('btn-tt').classList.toggle('chinh', tuongTac);
     $('muc-luc').addEventListener('click', (e) => {
       const b = e.target.closest('[data-den]');
       if (b) { moMucLuc(false); ve(Number(b.dataset.den)); } else if (e.target.id === 'muc-luc') moMucLuc(false);

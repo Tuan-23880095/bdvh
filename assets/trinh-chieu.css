@@ -146,3 +146,42 @@ body.tc { background: #0c1820; color: var(--muc); font-family: var(--sans); over
 .dsb.dung { background: var(--luc); color: #fff; }
 .dsb.sai { background: var(--son); color: #fff; }
 .tex-loi { font-family: "Times New Roman", serif; font-style: italic; }
+
+/* ---------- Bình chọn trực tiếp kiểu Slido (khung phải slide Đề / Đáp án, bìa có mã vào phòng) ---------- */
+#dock [hidden] { display: none !important; }
+.s-body.co-slido { gap: 32px; padding-right: 40px; }
+.s-body.co-slido .fit { flex: 1; min-width: 0; }
+.slido { flex: none; width: 400px; display: flex; flex-direction: column; gap: 14px; background: #fff; border: 1px solid var(--bac); border-radius: 18px; padding: 20px 22px; box-shadow: 0 6px 24px rgba(16,33,43,.06); font-size: 18px; }
+.slido.chot { border-color: var(--luc-non); }
+.sl-dau { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.pill { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 7px 12px; border-radius: 999px; background: var(--son-nhat); color: var(--son); }
+.pill.song { background: var(--luc-nhat); color: var(--luc); }
+.pill.song i { width: 10px; height: 10px; border-radius: 50%; background: var(--luc); animation: nhip 1.2s infinite; }
+@keyframes nhip { 50% { opacity: .25; transform: scale(.7); } }
+.sl-tong { font-size: 22px; color: var(--lam); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sl-cot { display: flex; flex-direction: column; gap: 12px; }
+.sl-hang .sl-nhan { display: flex; justify-content: space-between; gap: 8px; font-weight: 600; color: var(--muc-2); margin-bottom: 5px; font-variant-numeric: tabular-nums; }
+.sl-hang .sl-nhan small { color: var(--muc-3); font-weight: 500; }
+.sl-ray { height: 16px; border-radius: 99px; background: #EEF1F3; overflow: hidden; }
+.sl-ray i { display: block; height: 100%; border-radius: 99px; background: var(--lam-suong); transition: width .5s ease; }
+.sl-ray.ds { background: var(--son-nhat); }
+.sl-ray.ds i { background: var(--luc-non); }
+.sl-hang.dung .sl-nhan { color: var(--luc); font-weight: 800; }
+.sl-hang.dung .sl-ray i { background: var(--luc); }
+.sl-hang em { font-style: normal; font-size: 13px; font-weight: 800; padding: 2px 8px; border-radius: 6px; margin-left: 4px; }
+.sl-hang em.d { background: var(--luc-nhat); color: var(--luc); }
+.sl-hang em.s { background: var(--son-nhat); color: var(--son); }
+.sl-trong { margin: 0; color: var(--muc-3); font-style: italic; }
+.sl-ten { display: flex; flex-wrap: wrap; gap: 6px; min-height: 28px; }
+.sl-ten span { font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 99px; background: var(--lam-nhat); color: var(--lam); }
+.sl-vao { margin-top: auto; display: flex; gap: 14px; align-items: center; padding-top: 14px; border-top: 1px dashed var(--bac); }
+.sl-vao .qr { width: 118px; height: 118px; flex: none; }
+.sl-vao small, .bia-vao small { display: block; font-size: 13px; color: var(--muc-3); font-weight: 600; }
+.sl-vao b { display: block; font-size: 15px; color: var(--lam); word-break: break-all; margin-bottom: 4px; }
+.sl-vao b.ma, .bia-vao b.ma { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 34px; letter-spacing: .14em; color: var(--muc); background: var(--tho-nhat); border: 2px solid var(--tho); border-radius: 10px; padding: 2px 10px; display: inline-block; }
+.qr svg { width: 100%; height: 100%; display: block; }
+.bia-vao { margin-top: 28px; display: inline-flex; gap: 22px; align-items: center; text-align: left; background: #fff; border: 1px solid var(--bac); border-radius: 18px; padding: 16px 24px; box-shadow: 0 6px 24px rgba(16,33,43,.08); }
+.bia-vao .qr { width: 170px; height: 170px; flex: none; }
+.bia-vao b { display: block; font-size: 22px; color: var(--lam); margin-bottom: 6px; }
+.bia-vao b.ma { font-size: 46px; }
+.bia .bia-vao { align-self: flex-start; }

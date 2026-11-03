@@ -267,10 +267,10 @@
       const b = BO_DRIVE[key];
       const lecture = b ? {
         title: b.tieu_de,
-        subtitle: `Từ Google Drive · ${b.so_cau} câu · ${b.so_cau * 3} slide: Đề ➔ Đáp án ➔ Lời giải từng bước (${b.so_da_giai}/${b.so_cau} câu đã có lời giải)`,
+        subtitle: `Từ Google Drive · ${b.so_cau} câu · Đề (học sinh bình chọn trên điện thoại) ➔ Đáp án ➔ Lời giải từng bước (${b.so_da_giai}/${b.so_cau} câu đã có lời giải)`,
         slideUrl: 'trinh-chieu.html?bo=' + encodeURIComponent(b.ma),
         tag: [b.mon, b.khoi ? 'Lớp ' + String(b.khoi).replace(/^L0*/i, '') : '', b.ngay ? b.ngay.split('-').reverse().join('/') : ''].filter(Boolean).join(' · '),
-        svUrl: ''
+        svUrl: 'hs.html'
       } : LECTURES[key];
       if (!lecture) return;
       hienBai(lecture);
