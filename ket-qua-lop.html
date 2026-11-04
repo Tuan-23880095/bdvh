@@ -28,6 +28,11 @@
     th { background: var(--giay); font-size: 12.5px; color: var(--muc-2); position: sticky; top: 0; }
     td.ten, th.ten { text-align: left; position: sticky; left: 0; background: #fff; z-index: 1; min-width: 160px; }
     th.ten { background: var(--giay); z-index: 2; }
+    td.pct { min-width: 120px; text-align: left; }
+    td.pct .vach { display: inline-block; vertical-align: middle; width: 64px; height: 8px; border-radius: 4px; background: var(--vien); overflow: hidden; margin-right: 8px; }
+    td.pct .vach i { display: block; height: 100%; background: var(--luc); }
+    td.pct b { font-variant-numeric: tabular-nums; color: var(--luc); }
+    td.hang { font-weight: 700; color: var(--muc-2); }
     td.diem { font-weight: 700; color: var(--lam); font-variant-numeric: tabular-nums; }
     .o { display: inline-block; min-width: 34px; padding: 2px 6px; border-radius: 6px; font-weight: 700; font-size: 13px; }
     .o.d { background: var(--luc-nhat); color: var(--luc); }
@@ -89,21 +94,33 @@
     bc = d.data; ve();
   }
 
+  /** Điểm % tương đối: em đúng nhiều nhất buổi = 100%, các em khác tính theo tỉ lệ với em đó. */
+  function tinhDiem() {
+    const max = Math.max(0, ...bc.hoc_sinh.map((h) => h.dung));
+    let hang = 0, truoc = null;
+    bc.hoc_sinh.forEach((h, i) => {
+      h.pct = max ? Math.round((h.dung / max) * 100) : 0;
+      if (h.dung !== truoc) { hang = i + 1; truoc = h.dung; }   // bằng điểm thì đồng hạng
+      h.hang = hang;
+    });
+    return max;
+  }
   function ve() {
     const cau = bc.cau.filter((c) => c.binh_chon), hs = bc.hoc_sinh;
+    const maxDung = tinhDiem();
     const tb = hs.length ? (hs.reduce((s, h) => s + h.dung, 0) / hs.length) : 0;
     const coDA = cau.filter((c) => c.dap_an).length;
     const buoiOpt = bc.cac_buoi.map((b) => `<option value="${b}" ${b === bc.buoi ? 'selected' : ''}>Buổi ${b}${b === bc.buoi_hien_tai ? ' (đang chạy)' : ''}</option>`).join('');
     let bang = '';
     if (!hs.length) bang = '<p class="trong-ds">Buổi này chưa có học sinh nào bình chọn.</p>';
     else {
-      bang = `<div class="bang-cuon"><table><thead><tr><th class="ten">Học sinh</th><th>Đúng</th>${cau.map((c) => `<th>${esc(c.so.replace(/^Câu\s*/i, 'C'))}<small>${c.dap_an ? 'ĐA: ' + esc(hienTL(c, c.dap_an)) : 'chưa có ĐA'}</small></th>`).join('')}</tr></thead><tbody>
-        ${hs.map((h) => `<tr><td class="ten">${esc(h.ten)}</td><td class="diem">${h.dung}/${coDA}</td>${cau.map((c) => {
+      bang = `<div class="bang-cuon"><table><thead><tr><th>Hạng</th><th class="ten">Học sinh</th><th>Điểm<small>cao nhất = 100%</small></th><th>Đúng</th>${cau.map((c) => `<th>${esc(c.so.replace(/^Câu\s*/i, 'C'))}<small>${c.dap_an ? 'ĐA: ' + esc(hienTL(c, c.dap_an)) : 'chưa có ĐA'}</small></th>`).join('')}</tr></thead><tbody>
+        ${hs.map((h) => `<tr><td class="hang">${h.hang === 1 ? '🥇' : h.hang === 2 ? '🥈' : h.hang === 3 ? '🥉' : h.hang}</td><td class="ten">${esc(h.ten)}</td><td class="pct"><span class="vach"><i style="width:${h.pct}%"></i></span><b>${h.pct}%</b></td><td class="diem">${h.dung}/${coDA}</td>${cau.map((c) => {
           const x = h.tra_loi[c.stt];
           if (!x) return '<td><span class="o trong">—</span></td>';
           return `<td><span class="o ${x.d === 1 ? 'd' : x.d === 0 ? 's' : 'c'}" title="${x.d === 1 ? 'Đúng' : x.d === 0 ? 'Sai' : 'Chưa có đáp án'}">${esc(hienTL(c, x.t))}</span></td>`;
         }).join('')}</tr>`).join('')}
-        <tr class="tk"><td class="ten">Tỉ lệ đúng</td><td></td>${cau.map((c) => `<td>${c.tong ? Math.round((c.dung / c.tong) * 100) + '%' : '—'}<br><small>${c.dung}/${c.tong}</small></td>`).join('')}</tr>
+        <tr class="tk"><td></td><td class="ten">Tỉ lệ đúng</td><td></td><td></td>${cau.map((c) => `<td>${c.tong ? Math.round((c.dung / c.tong) * 100) + '%' : '—'}<br><small>${c.dung}/${c.tong}</small></td>`).join('')}</tr>
       </tbody></table></div>`;
     }
     const khoNhat = cau.filter((c) => c.tong && c.dap_an).sort((a, b) => a.dung / a.tong - b.dung / b.tong).slice(0, 3);
@@ -122,11 +139,12 @@
           <div><b>${hs.length}</b><span>học sinh tham gia</span></div>
           <div><b>${cau.length}</b><span>câu có bình chọn</span></div>
           <div><b>${hs.length ? tb.toFixed(1) : '—'}</b><span>số câu đúng trung bình / ${coDA}</span></div>
+          <div><b>${hs.length ? Math.round(hs.reduce((x, h) => x + h.pct, 0) / hs.length) + '%' : '—'}</b><span>điểm trung bình (em cao nhất ${maxDung} câu = 100%)</span></div>
           <div><b>${khoNhat.length ? khoNhat.map((c) => esc(c.so.replace(/^Câu\s*/i, ''))).join(', ') : '—'}</b><span>câu sai nhiều nhất</span></div>
         </div>
       </section>
       <section class="the"><h2>Bảng kết quả từng học sinh</h2>${bang}
-        <p class="meta khong-in" style="margin-top:10px">Ô xanh: đúng · ô đỏ: sai · — : không trả lời. Câu Đúng/Sai 4 ý chỉ tính đúng khi cả 4 ý đúng. Câu tự luận không có bình chọn nên không có trong bảng.</p></section>`;
+        <p class="meta khong-in" style="margin-top:10px">Điểm %: em đúng nhiều câu nhất buổi được 100%, các em khác = số câu đúng ÷ số câu đúng của em đó. Ô xanh: đúng · ô đỏ: sai · — : không trả lời. Câu Đúng/Sai 4 ý chỉ tính đúng khi cả 4 ý đúng. Câu tự luận không có bình chọn nên không có trong bảng.</p></section>`;
     $('chon-buoi').onchange = (e) => { const u = new URL(location.href); u.searchParams.set('buoi', e.target.value); location.href = u; };
     $('tai-excel').onclick = taiExcel;
     $('buoi-moi').onclick = async () => {
@@ -139,10 +157,11 @@
   function taiExcel() {
     const cau = bc.cau.filter((c) => c.binh_chon);
     const o = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
-    const dong = [['STT', 'Học sinh', 'Số câu đúng', ...cau.map((c) => c.so)].map(o).join(',')];
-    dong.push(['', 'ĐÁP ÁN', '', ...cau.map((c) => c.dap_an ? hienTL(c, c.dap_an) : '')].map(o).join(','));
-    bc.hoc_sinh.forEach((h, i) => dong.push([i + 1, h.ten, h.dung, ...cau.map((c) => { const x = h.tra_loi[c.stt]; return x ? hienTL(c, x.t) + (x.d === 1 ? ' ✓' : x.d === 0 ? ' ✗' : '') : ''; })].map(o).join(',')));
-    dong.push(['', 'Tỉ lệ đúng', '', ...cau.map((c) => c.tong ? Math.round((c.dung / c.tong) * 100) + '%' : '')].map(o).join(','));
+    tinhDiem();
+    const dong = [['Hạng', 'Học sinh', 'Điểm % (cao nhất = 100%)', 'Số câu đúng', ...cau.map((c) => c.so)].map(o).join(',')];
+    dong.push(['', 'ĐÁP ÁN', '', '', ...cau.map((c) => c.dap_an ? hienTL(c, c.dap_an) : '')].map(o).join(','));
+    bc.hoc_sinh.forEach((h) => dong.push([h.hang, h.ten, h.pct + '%', h.dung, ...cau.map((c) => { const x = h.tra_loi[c.stt]; return x ? hienTL(c, x.t) + (x.d === 1 ? ' ✓' : x.d === 0 ? ' ✗' : '') : ''; })].map(o).join(',')));
+    dong.push(['', 'Tỉ lệ đúng', '', '', ...cau.map((c) => c.tong ? Math.round((c.dung / c.tong) * 100) + '%' : '')].map(o).join(','));
     const blob = new Blob(['﻿' + dong.join('\r\n')], { type: 'text/csv;charset=utf-8' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
