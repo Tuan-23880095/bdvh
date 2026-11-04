@@ -299,39 +299,60 @@ function bg_http(string $url, string $key, ?array $body, int $timeout): array
     return ['http' => $http, 'data' => is_array($d) ? $d : null, 'msg' => substr((string) ($d['error']['message'] ?? $resp), 0, 250)];
 }
 
-/** Danh sách model thử lần lượt: model trong cấu hình trước, rồi model flash mới nhất mà khoá dùng được (đệm 6 giờ). */
+/** Điểm xếp hạng model: bản MỚI NHẤT trước (3.5 > 3 > 2.5…), cùng thế hệ thì flash > flash-lite > pro (pro chậm). */
+function bg_diem_model(string $n): float
+{
+    $v = preg_match('/gemini-(\d+(?:\.\d+)?)/i', $n, $m) ? (float) $m[1] * 100 : 0;
+    if (str_contains($n, 'flash')) { $v += 30; } elseif (str_contains($n, 'pro')) { $v += 10; } else { $v -= 50; }
+    if (str_contains($n, 'lite')) { $v -= 15; }
+    if (preg_match('/preview|exp|thinking/i', $n)) { $v -= 5; }
+    if (str_contains($n, 'latest')) { $v -= 2; }
+    return $v;
+}
+
+/** Model đã bị Google ngừng / không dùng được với khoá này → nhớ 24 giờ để bỏ qua. */
+function bg_model_chet_file(array $cfg): string { return sys_get_temp_dir() . '/bdvh_gemini_chet_' . substr(sha1($cfg['key']), 0, 12) . '.json'; }
+function bg_model_chet(array $cfg): array
+{
+    $d = json_decode((string) @file_get_contents(bg_model_chet_file($cfg)), true);
+    return is_array($d) ? array_filter($d, static fn ($t) => time() - (int) $t < 86400) : [];
+}
+function bg_danh_dau_chet(array $cfg, string $model): void
+{
+    $d = bg_model_chet($cfg); $d[$model] = time();
+    @file_put_contents(bg_model_chet_file($cfg), json_encode($d));
+}
+
+/** Danh sách model thử lần lượt: lấy từ Google (ListModels, đệm 6 giờ), xếp bản mới nhất trước; model ghi trong cấu hình
+ *  chỉ được dùng nếu Google còn liệt kê. Không bao giờ cố định tên model cũ trong code (Google ngừng model định kỳ). */
 function bg_gemini_models(array $cfg): array
 {
-    $list = $cfg['prefer'];
     $cache = sys_get_temp_dir() . '/bdvh_gemini_models_' . substr(sha1($cfg['key']), 0, 12) . '.json';
     $found = null;
     if (is_file($cache) && time() - (int) filemtime($cache) < 6 * 3600) {
         $found = json_decode((string) @file_get_contents($cache), true);
     }
-    if (!is_array($found)) {
+    if (!is_array($found) || !$found) {
         $found = [];
-        $r = bg_http('https://generativelanguage.googleapis.com/v1beta/models?pageSize=200', $cfg['key'], null, 25);
+        $r = bg_http('https://generativelanguage.googleapis.com/v1beta/models?pageSize=1000', $cfg['key'], null, 25);
         foreach ((array) ($r['data']['models'] ?? []) as $m) {
             if (!in_array('generateContent', (array) ($m['supportedGenerationMethods'] ?? []), true)) { continue; }
             $id = preg_replace('#^models/#', '', (string) ($m['name'] ?? ''));
-            if ($id === '' || preg_match('/embedding|aqa|tts|imagen|veo|audio|live|image|learnlm|gemma/i', $id)) { continue; }
+            if ($id === '' || !str_starts_with($id, 'gemini-')) { continue; }
+            if (preg_match('/embedding|aqa|tts|imagen|veo|audio|live|image|learnlm|gemma|robotics|computer-use|nano|banana|search|deep-research|native/i', $id)) { continue; }
+            if (preg_match('/deprecat|discontinu|no longer/i', (string) ($m['description'] ?? ''))) { continue; }
             $found[] = $id;
         }
-        usort($found, static function (string $a, string $b): int {
-            $s = static function (string $n): float {
-                $v = str_contains($n, 'flash') ? 1000 : (str_contains($n, 'pro') ? 500 : 100);
-                if (preg_match('/(\d+(?:\.\d+)?)/', $n, $mm)) { $v += (float) $mm[1] * 10; }
-                if (str_contains($n, 'lite')) { $v -= 40; }   // bản lite giải toán kém, chỉ dùng khi không còn flash
-                if (preg_match('/preview|exp|thinking/i', $n)) { $v -= 8; }
-                return $v;
-            };
-            return $s($b) <=> $s($a);
-        });
         if ($found) { @file_put_contents($cache, json_encode($found)); }
     }
+    $chet = bg_model_chet($cfg);
+    $list = [];
+    foreach ($cfg['prefer'] as $m) { if (!$found || in_array($m, $found, true)) { $list[] = $m; } }
+    usort($found, static fn ($a, $b) => bg_diem_model($b) <=> bg_diem_model($a));
     foreach ($found as $m) { $list[] = $m; }
-    $list = array_values(array_unique($list));
-    return $list ? array_slice($list, 0, 5) : ['gemini-2.5-flash', 'gemini-2.0-flash'];
+    if (!$list) { $list = ['gemini-flash-latest', 'gemini-flash-lite-latest']; }   // không lấy được danh sách: dùng bí danh "mới nhất" của Google
+    $list = array_values(array_filter(array_unique($list), static fn ($m) => !isset($chet[$m])));
+    return array_slice($list, 0, 6);
 }
 
 /** Gọi Gemini, trả [text, model]. Thử tắt "suy nghĩ" trước để không tốn token trước khi xuất JSON. */
@@ -366,6 +387,11 @@ function bg_gemini_generate(array $cfg, array $body): array
             }
             $last = 'Gemini ' . $model . ' lỗi ' . ($r['http'] ?: 'kết nối') . ': ' . $r['msg'];
             if ($r['http'] === 429) { $het++; }
+            if ($r['http'] === 404 || preg_match('/no longer available|not found|is not supported for generateContent|deprecated/i', (string) $r['msg'])) {
+                bg_danh_dau_chet($cfg, $model);   // model đã ngừng → lần sau bỏ qua, sang model khác ngay
+                $last = 'Gemini ' . $model . ' đã ngừng hoạt động.';
+                break;
+            }
             if ($r['http'] === 400 && $cfgTh) { continue; }          // tham số suy nghĩ không hợp với model này → thử kiểu khác
             if (in_array($r['http'], [401, 403], true)) { break 2; } // khoá sai / bị chặn: thử model khác cũng vô ích
             break;                                                    // 404, 429, 5xx, quá giờ → sang model kế tiếp
@@ -962,6 +988,7 @@ function action_bg_gemini_thu(array $in): void
     $cfg = bg_gemini_cfg();
     if ($cfg['key'] === '') { rfail('Chưa có khoá Gemini.'); }
     @array_map('unlink', glob(sys_get_temp_dir() . '/bdvh_gemini_models_*') ?: []);   // lấy lại danh sách model mới nhất
+    @unlink(bg_model_chet_file($cfg));
     $out = [];
     $body = bg_gemini_body("Môn: Toán\nLoại câu: trắc nghiệm 4 lựa chọn\n\nĐỀ (Câu 1):\nTính \$2+3\$.\nA. 4\nB. 5\nC. 6\nD. 7\nĐÁP ÁN CỦA GIÁO VIÊN: B");
     foreach (bg_gemini_models($cfg) as $model) {
@@ -977,6 +1004,7 @@ function action_bg_gemini_thu(array $in): void
             $g = $ok ? json_decode(bg_sua_json(trim(preg_replace('/^```(?:json)?|```$/m', '', $txt))), true) : null;
             $out[] = ['model' => $model, 'suy_nghi' => $cfgTh ? json_encode($cfgTh) : 'mặc định', 'http' => $r['http'], 'giay' => round(microtime(true) - $t0, 1),
                       'ket_qua' => $ok ? (is_array($g) && !empty($g['cac_buoc']) ? 'OK — ' . mb_substr((string) ($g['dap_an_ngan'] ?? ''), 0, 40) : 'trả về sai định dạng: ' . mb_substr($txt, 0, 120)) : $r['msg']];
+            if ($r['http'] === 404 || preg_match('/no longer available|not found|deprecated/i', (string) $r['msg'])) { bg_danh_dau_chet($cfg, $model); }
             if ($ok || !($r['http'] === 400 && $cfgTh)) { break; }
         }
         if (count($out) >= 8) { break; }
