@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kết quả bình chọn trên lớp · Trung tâm Bồi dưỡng Văn hóa</title>
+  <meta name="theme-color" content="#0F6B55">
+  <link rel="icon" type="image/svg+xml" href="assets/logo-sen.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+  <link rel="stylesheet" href="assets/bdvh-ui.css?v=20261031">
+  <style>
+    .kq-wrap { padding: 32px 0 72px; }
+    .the { background: #fff; border: 1px solid var(--vien); border-radius: var(--r); padding: 22px 24px; margin-bottom: 20px; }
+    .the h1 { font-size: 26px; margin: 0 0 4px; }
+    .the h2 { font-size: 19px; margin: 0 0 10px; }
+    .meta { color: var(--muc-3); font-size: 14px; }
+    .thanh-cong-cu { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 14px; }
+    .thanh-cong-cu select { height: 36px; border: 1px solid var(--vien-dam); border-radius: var(--r-sm); padding: 0 10px; font: inherit; font-size: 14px; background: #fff; }
+    .so-lieu { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 16px; }
+    .so-lieu div { border: 1px solid var(--vien); border-radius: var(--r-sm); padding: 12px 14px; }
+    .so-lieu b { display: block; font-size: 26px; color: var(--lam); font-variant-numeric: tabular-nums; }
+    .so-lieu span { font-size: 13px; color: var(--muc-3); }
+    .bang-cuon { overflow-x: auto; border: 1px solid var(--vien); border-radius: var(--r-sm); }
+    table { border-collapse: collapse; width: 100%; font-size: 14px; }
+    th, td { padding: 8px 10px; border-bottom: 1px solid var(--vien); text-align: center; white-space: nowrap; }
+    th { background: var(--giay); font-size: 12.5px; color: var(--muc-2); position: sticky; top: 0; }
+    td.ten, th.ten { text-align: left; position: sticky; left: 0; background: #fff; z-index: 1; min-width: 160px; }
+    th.ten { background: var(--giay); z-index: 2; }
+    td.pct { min-width: 120px; text-align: left; }
+    td.pct .vach { display: inline-block; vertical-align: middle; width: 64px; height: 8px; border-radius: 4px; background: var(--vien); overflow: hidden; margin-right: 8px; }
+    td.pct .vach i { display: block; height: 100%; background: var(--luc); }
+    td.pct b { font-variant-numeric: tabular-nums; color: var(--luc); }
+    td.hang { font-weight: 700; color: var(--muc-2); }
+    td.diem { font-weight: 700; color: var(--lam); font-variant-numeric: tabular-nums; }
+    .o { display: inline-block; min-width: 34px; padding: 2px 6px; border-radius: 6px; font-weight: 700; font-size: 13px; }
+    .o.d { background: var(--luc-nhat); color: var(--luc); }
+    .o.s { background: var(--son-nhat); color: var(--son); }
+    .o.c { background: var(--vien); color: var(--muc-2); }
+    .o.trong { color: var(--muc-3); font-weight: 400; }
+    tr.tk td { background: var(--giay); font-size: 12.5px; color: var(--muc-2); }
+    th small { display: block; font-weight: 500; color: var(--muc-3); }
+    .trong-ds { padding: 28px 0; text-align: center; color: var(--muc-3); }
+    .can-dn { max-width: 460px; margin: 24px auto; }
+    @media print { .site-head, .thanh-cong-cu, .khong-in { display: none !important; } .the { border: 0; padding: 0; } td.ten, th.ten { position: static; } }
+  </style>
+<script src="https://diemdanhsv.com/js/ui/menu-he-thong.js?v=20261102" defer onerror="var s=document.createElement('script');s.src='assets/menu-he-thong.js?v=20261102';document.head.appendChild(s)"></script>
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a href="index.html" class="brand" aria-label="Trang chủ">
+      <span class="dqt-logo-o brand-sen"><img src="assets/logo-sen.svg" alt="Logo sen ThS. Đinh Quốc Tuấn"></span>
+      <span class="brand-text">
+        <span class="brand-ten">Kết quả bình chọn trên lớp</span>
+        <span class="brand-phu">Trung tâm Bồi dưỡng Văn hóa · ThS. Đinh Quốc Tuấn</span>
+      </span>
+    </a>
+    <div class="head-actions" style="margin-left:auto">
+      <span data-menu-he-thong></span>
+      <a class="btn btn-vien" href="thay-tuan.html">Quản trị</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap kq-wrap" id="app">
+  <p class="trong-ds">Đang tải kết quả…</p>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const qs = new URLSearchParams(location.search);
+  let bc = null;
+
+  async function api(action, body) {
+    const r = await fetch('api.php?action=' + action, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) });
+    return r.json();
+  }
+  const ngay = (s) => s ? s.slice(8, 10) + '/' + s.slice(5, 7) + '/' + s.slice(0, 4) + ' ' + s.slice(11) : '';
+  // Đáp số có công thức (\(\widehat{bOx}\)) → bỏ dấu công thức cho dễ đọc trong bảng / Excel
+  const goTex = (t) => String(t).replace(/\\[()\[\]]|\$/g, '').replace(/\\[dt]?frac\{([^}]*)\}\{([^}]*)\}/g, '$1/$2').replace(/\\(widehat|hat|overline)\{([^}]*)\}/g, '$2').replace(/\\[a-z]+/gi, '').replace(/[{}]/g, '').trim();
+  const hienTL = (c, t) => c.loai === 'dung_sai' ? (t === 'S' ? 'S' : 'Đ') : c.loai === 'dung_sai_4' ? t.replace(/D/g, 'Đ') : goTex(t);
+
+  async function tai() {
+    const ma = qs.get('bo'), id = qs.get('bo_id');
+    if (!ma && !id) { $('app').innerHTML = '<div class="the"><p class="trong-ds">Chưa chọn bộ bài giảng. Mở từ trang <a href="thay-tuan.html">Quản trị</a>.</p></div>'; return; }
+    const d = await api('bg_phong_bao_cao', { ma, bo_id: id ? +id : undefined, buoi: +(qs.get('buoi') || 0) });
+    if (d.can_dang_nhap) { location.replace('bai-giang.html?tiep=' + encodeURIComponent('ket-qua-lop.html' + location.search)); return; }
+    if (d.status !== 'success') { $('app').innerHTML = `<div class="the"><p class="trong-ds">${esc(d.message || 'Không tải được kết quả.')}</p></div>`; return; }
+    bc = d.data; ve();
+  }
+
+  /** Điểm % tương đối: em đúng nhiều nhất buổi = 100%, các em khác tính theo tỉ lệ với em đó. */
+  function tinhDiem() {
+    const max = Math.max(0, ...bc.hoc_sinh.map((h) => h.dung));
+    let hang = 0, truoc = null;
+    bc.hoc_sinh.forEach((h, i) => {
+      h.pct = max ? Math.round((h.dung / max) * 100) : 0;
+      if (h.dung !== truoc) { hang = i + 1; truoc = h.dung; }   // bằng điểm thì đồng hạng
+      h.hang = hang;
+    });
+    return max;
+  }
+  function ve() {
+    const cau = bc.cau.filter((c) => c.binh_chon), hs = bc.hoc_sinh;
+    const maxDung = tinhDiem();
+    const tb = hs.length ? (hs.reduce((s, h) => s + h.dung, 0) / hs.length) : 0;
+    const coDA = cau.filter((c) => c.dap_an).length;
+    const buoiOpt = bc.cac_buoi.map((b) => `<option value="${b}" ${b === bc.buoi ? 'selected' : ''}>Buổi ${b}${b === bc.buoi_hien_tai ? ' (đang chạy)' : ''}</option>`).join('');
+    let bang = '';
+    if (!hs.length) bang = '<p class="trong-ds">Buổi này chưa có học sinh nào bình chọn.</p>';
+    else {
+      bang = `<div class="bang-cuon"><table><thead><tr><th>Hạng</th><th class="ten">Học sinh</th><th>Điểm<small>cao nhất = 100%</small></th><th>Đúng</th>${cau.map((c) => `<th>${esc(c.so.replace(/^Câu\s*/i, 'C'))}<small>${c.dap_an ? 'ĐA: ' + esc(hienTL(c, c.dap_an)) : 'chưa có ĐA'}</small></th>`).join('')}</tr></thead><tbody>
+        ${hs.map((h) => `<tr><td class="hang">${h.hang === 1 ? '🥇' : h.hang === 2 ? '🥈' : h.hang === 3 ? '🥉' : h.hang}</td><td class="ten">${esc(h.ten)}</td><td class="pct"><span class="vach"><i style="width:${h.pct}%"></i></span><b>${h.pct}%</b></td><td class="diem">${h.dung}/${coDA}</td>${cau.map((c) => {
+          const x = h.tra_loi[c.stt];
+          if (!x) return '<td><span class="o trong">—</span></td>';
+          return `<td><span class="o ${x.d === 1 ? 'd' : x.d === 0 ? 's' : 'c'}" title="${x.d === 1 ? 'Đúng' : x.d === 0 ? 'Sai' : 'Chưa có đáp án'}">${esc(hienTL(c, x.t))}</span></td>`;
+        }).join('')}</tr>`).join('')}
+        <tr class="tk"><td></td><td class="ten">Tỉ lệ đúng</td><td></td><td></td>${cau.map((c) => `<td>${c.tong ? Math.round((c.dung / c.tong) * 100) + '%' : '—'}<br><small>${c.dung}/${c.tong}</small></td>`).join('')}</tr>
+      </tbody></table></div>`;
+    }
+    const khoNhat = cau.filter((c) => c.tong && c.dap_an).sort((a, b) => a.dung / a.tong - b.dung / b.tong).slice(0, 3);
+    $('app').innerHTML = `
+      <section class="the">
+        <h1>${esc(bc.tieu_de)}</h1>
+        <div class="meta">Buổi ${bc.buoi}${bc.bat_dau ? ' · ' + ngay(bc.bat_dau) + ' → ' + bc.ket_thuc.slice(11) : ''}</div>
+        <div class="thanh-cong-cu">
+          <select id="chon-buoi" aria-label="Chọn buổi">${buoiOpt}</select>
+          <button class="btn btn-chinh btn-sm" id="tai-excel" type="button" ${hs.length ? '' : 'disabled'}>Tải Excel (.csv)</button>
+          <button class="btn btn-vien btn-sm" type="button" onclick="print()">In</button>
+          <a class="btn btn-vien btn-sm" href="trinh-chieu.html?bo=${encodeURIComponent(bc.ma)}">Mở trình chiếu</a>
+          <button class="btn btn-chu btn-sm" id="buoi-moi" type="button" title="Lớp khác dùng lại bài này: kết quả buổi cũ vẫn giữ">+ Bắt đầu buổi mới</button>
+        </div>
+        <div class="so-lieu">
+          <div><b>${hs.length}</b><span>học sinh tham gia</span></div>
+          <div><b>${cau.length}</b><span>câu có bình chọn</span></div>
+          <div><b>${hs.length ? tb.toFixed(1) : '—'}</b><span>số câu đúng trung bình / ${coDA}</span></div>
+          <div><b>${hs.length ? Math.round(hs.reduce((x, h) => x + h.pct, 0) / hs.length) + '%' : '—'}</b><span>điểm trung bình (em cao nhất ${maxDung} câu = 100%)</span></div>
+          <div><b>${khoNhat.length ? khoNhat.map((c) => esc(c.so.replace(/^Câu\s*/i, ''))).join(', ') : '—'}</b><span>câu sai nhiều nhất</span></div>
+        </div>
+      </section>
+      <section class="the"><h2>Bảng kết quả từng học sinh</h2>${bang}
+        <p class="meta khong-in" style="margin-top:10px">Điểm %: em đúng nhiều câu nhất buổi được 100%, các em khác = số câu đúng ÷ số câu đúng của em đó. Ô xanh: đúng · ô đỏ: sai · — : không trả lời. Câu Đúng/Sai 4 ý chỉ tính đúng khi cả 4 ý đúng. Câu tự luận không có bình chọn nên không có trong bảng.</p></section>`;
+    $('chon-buoi').onchange = (e) => { const u = new URL(location.href); u.searchParams.set('buoi', e.target.value); location.href = u; };
+    $('tai-excel').onclick = taiExcel;
+    $('buoi-moi').onclick = async () => {
+      if (!confirm('Bắt đầu buổi mới cho bài này? Học sinh lớp mới sẽ bình chọn từ đầu; kết quả buổi ' + bc.buoi_hien_tai + ' vẫn được giữ.')) return;
+      const d = await api('bg_phong_buoi_moi', { bo_id: bc.bo_id });
+      if (d.status === 'success') { alert('Đã sang buổi ' + d.data.buoi + '. Mở trình chiếu để bắt đầu.'); tai(); } else alert(d.message || 'Không được.');
+    };
+  }
+
+  function taiExcel() {
+    const cau = bc.cau.filter((c) => c.binh_chon);
+    const o = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+    tinhDiem();
+    const dong = [['Hạng', 'Học sinh', 'Điểm % (cao nhất = 100%)', 'Số câu đúng', ...cau.map((c) => c.so)].map(o).join(',')];
+    dong.push(['', 'ĐÁP ÁN', '', '', ...cau.map((c) => c.dap_an ? hienTL(c, c.dap_an) : '')].map(o).join(','));
+    bc.hoc_sinh.forEach((h) => dong.push([h.hang, h.ten, h.pct + '%', h.dung, ...cau.map((c) => { const x = h.tra_loi[c.stt]; return x ? hienTL(c, x.t) + (x.d === 1 ? ' ✓' : x.d === 0 ? ' ✗' : '') : ''; })].map(o).join(',')));
+    dong.push(['', 'Tỉ lệ đúng', '', '', ...cau.map((c) => c.tong ? Math.round((c.dung / c.tong) * 100) + '%' : '')].map(o).join(','));
+    const blob = new Blob(['﻿' + dong.join('\r\n')], { type: 'text/csv;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `ket-qua_${bc.ma}_buoi-${bc.buoi}.csv`;
+    a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  }
+
+  tai();
+})();
+</script>
+</body>
+</html>
