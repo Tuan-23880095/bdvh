@@ -246,19 +246,30 @@ async function taoTatCa(boId, btn) {
   let xong = b.cau.length - can.length, loi = 0;
   const capNhat = () => { btn.textContent = `Gemini đang soạn… ${xong}/${b.cau.length}`; $('dem-' + boId).textContent = `${xong}/${b.cau.length}`; $('thanh-' + boId).style.width = (xong / b.cau.length * 100) + '%'; };
   capNhat();
-  const hang = [...can];
+  const hang = [...can], thuLai = {};
+  let loiCuoi = '';
+  const ngu = (ms) => new Promise((r) => setTimeout(r, ms));
   async function tho() {
     while (hang.length) {
       const c = hang.shift();
       try { await api('bg_giai', { bo_id: boId, cau_id: c.id }); xong++; }
-      catch (e) { loi++; if (/khoá|key|403|401/i.test(e.message)) { toast(e.message, 'loi'); hang.length = 0; } }
+      catch (e) {
+        loiCuoi = e.message;
+        if (/khoá|key|403|401/i.test(e.message) && !/429/.test(e.message)) { loi++; toast(e.message, 'loi'); hang.length = 0; }
+        else if ((thuLai[c.id] = (thuLai[c.id] || 0) + 1) <= 2) {
+          // Hết hạn mức / quá tải / quá giờ: chờ rồi thử lại câu này (tối đa 2 lần)
+          const cho = /429|hạn mức/i.test(e.message) ? 35000 : 5000;
+          btn.textContent = `Gemini bận, chờ ${Math.round(cho / 1000)} giây rồi thử lại… ${xong}/${b.cau.length}`;
+          await ngu(cho); hang.push(c);
+        } else loi++;
+      }
       capNhat();
     }
   }
   await Promise.all([tho(), tho()]);   // 2 luồng song song cho nhanh mà không vượt hạn mức
   btn.disabled = false;
   btn.textContent = loi ? `Tạo tiếp (${loi} câu lỗi)` : 'Đã đủ lời giải';
-  toast(loi ? `Xong, ${loi} câu chưa tạo được — bấm lại để thử tiếp.` : 'Đã tạo đủ lời giải. Thầy nên bấm "Duyệt lời giải" để rà trước khi chiếu.', loi ? 'loi' : 'ok');
+  toast(loi ? `Xong, ${loi} câu chưa tạo được — bấm lại để thử tiếp. Lỗi: ${loiCuoi}` : 'Đã tạo đủ lời giải. Thầy nên bấm "Duyệt lời giải" để rà trước khi chiếu.', loi ? 'loi' : 'ok');
   if (daGiaiChiTiet[boId]) moDuyet(boId, true);
 }
 

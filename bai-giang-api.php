@@ -335,25 +335,44 @@ function bg_gemini_models(array $cfg): array
 }
 
 /** Gọi Gemini, trả [text, model]. Thử tắt "suy nghĩ" trước để không tốn token trước khi xuất JSON. */
+/** Cấu hình "suy nghĩ" ít nhất cho từng thế hệ model: Gemini 3.x dùng thinkingLevel, Gemini 2.5 dùng thinkingBudget.
+ *  (Gửi thinkingBudget = 0 cho Gemini 3 bị từ chối → trước đây rơi về mức suy nghĩ mặc định "high", rất chậm, quá giờ máy chủ.) */
+function bg_thinking_it(string $model): ?array
+{
+    if (preg_match('/gemini-([3-9])/i', $model)) { return ['thinkingLevel' => stripos($model, 'pro') !== false ? 'low' : 'minimal']; }
+    if (preg_match('/gemini-2\.5/i', $model)) { return stripos($model, 'pro') !== false ? ['thinkingBudget' => 128] : ['thinkingBudget' => 0]; }
+    return null;
+}
+
 function bg_gemini_generate(array $cfg, array $body): array
 {
-    $last = '';
+    $last = ''; $het = 0;
+    $batDau = time();
     foreach (bg_gemini_models($cfg) as $model) {
-        foreach ([true, false] as $noThink) {
+        if (time() - $batDau > 100) { break; }   // không chờ quá lâu trên một câu — trả lỗi để trang tự thử lại
+        $th = bg_thinking_it($model);
+        foreach ($th ? [$th, ['thinkingLevel' => 'low'], null] : [null] as $cfgTh) {
             $b = $body;
-            if ($noThink) { $b['generationConfig']['thinkingConfig'] = ['thinkingBudget' => 0]; }
-            $r = bg_http('https://generativelanguage.googleapis.com/v1beta/models/' . rawurlencode($model) . ':generateContent', $cfg['key'], $b, 90);
+            if ($cfgTh) { $b['generationConfig']['thinkingConfig'] = $cfgTh; }
+            $r = bg_http('https://generativelanguage.googleapis.com/v1beta/models/' . rawurlencode($model) . ':generateContent', $cfg['key'], $b, 60);
             if ($r['http'] === 200) {
-                $t = (string) ($r['data']['candidates'][0]['content']['parts'][0]['text'] ?? '');
+                $t = '';
+                foreach ((array) ($r['data']['candidates'][0]['content']['parts'] ?? []) as $part) {
+                    if (empty($part['thought'])) { $t .= (string) ($part['text'] ?? ''); }
+                }
                 if (trim($t) !== '') { return [$t, $model]; }
-                $last = 'Gemini ' . $model . ' trả về rỗng.';
+                $last = 'Gemini ' . $model . ' trả về rỗng (' . ($r['data']['candidates'][0]['finishReason'] ?? '?') . ').';
                 break;
             }
-            $last = 'Gemini ' . $model . ' lỗi HTTP ' . $r['http'] . ': ' . $r['msg'];
-            if ($noThink && $r['http'] === 400) { continue; }
-            if (in_array($r['http'], [401, 403], true)) { break 2; }
-            break;
+            $last = 'Gemini ' . $model . ' lỗi ' . ($r['http'] ?: 'kết nối') . ': ' . $r['msg'];
+            if ($r['http'] === 429) { $het++; }
+            if ($r['http'] === 400 && $cfgTh) { continue; }          // tham số suy nghĩ không hợp với model này → thử kiểu khác
+            if (in_array($r['http'], [401, 403], true)) { break 2; } // khoá sai / bị chặn: thử model khác cũng vô ích
+            break;                                                    // 404, 429, 5xx, quá giờ → sang model kế tiếp
         }
+    }
+    if ($het > 0 && str_contains($last, '429')) {
+        throw new RoomError('Gemini báo hết hạn mức (429) — khoá miễn phí giới hạn số lần gọi mỗi phút/ngày. Chờ 1–2 phút rồi bấm lại, hoặc dùng khoá có trả phí. (' . $last . ')');
     }
     throw new RoomError($last ?: 'Gemini không phản hồi.');
 }
@@ -560,6 +579,7 @@ function action_bg_delete(array $in): void
 function action_bg_giai(array $in): void
 {
     bg_quyen($in);
+    @set_time_limit(180);   // gọi Gemini có thể mất 30–90 giây
     $cfg = bg_gemini_cfg();
     if ($cfg['key'] === '') { rfail('Chưa có khoá Gemini — dán khoá ở trang Bài giảng (khung "Khoá Gemini").'); }
     $row = bg_load($in);
