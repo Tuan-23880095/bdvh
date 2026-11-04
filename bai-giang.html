@@ -115,7 +115,9 @@
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
       <input class="input" id="gm-key" type="password" autocomplete="off" spellcheck="false" placeholder="AIza…" style="max-width:420px;height:40px">
       <button class="btn btn-chinh" type="button" id="gm-luu">Lưu khoá</button>
+      <button class="btn btn-vien" type="button" id="gm-thu">Kiểm tra Gemini</button>
     </div>
+    <div id="gm-thu-kq" style="margin-top:12px;font-size:13.5px;overflow-x:auto"></div>
   </section>
 
   <section class="the" id="the-dong-bo" hidden>
@@ -259,7 +261,7 @@ async function taoTatCa(boId, btn) {
         else if ((thuLai[c.id] = (thuLai[c.id] || 0) + 1) <= 2) {
           // Hết hạn mức / quá tải / quá giờ: chờ rồi thử lại câu này (tối đa 2 lần)
           const cho = /429|hạn mức/i.test(e.message) ? 35000 : 5000;
-          btn.textContent = `Gemini bận, chờ ${Math.round(cho / 1000)} giây rồi thử lại… ${xong}/${b.cau.length}`;
+          btn.textContent = `Lỗi: ${e.message.slice(0, 90)} — chờ ${Math.round(cho / 1000)} giây thử lại… ${xong}/${b.cau.length}`;
           await ngu(cho); hang.push(c);
         } else loi++;
       }
@@ -362,6 +364,17 @@ function veGemini(tt) {
     : '<b style="color:var(--son)">Chưa có khoá Gemini.</b> Máy chủ bdvh không đọc được khoá nào, nên chưa tạo được lời giải. Làm 3 bước sau (miễn phí, khoảng 1 phút):';
   $('gm-hd').hidden = !!tt.gemini;
 }
+$('gm-thu').addEventListener('click', async (e) => {
+  const nut = e.currentTarget, kq = $('gm-thu-kq');
+  nut.disabled = true; nut.textContent = 'Đang thử từng model… (tới 1–2 phút)'; kq.innerHTML = '';
+  try {
+    const d = await api('bg_gemini_thu', {});
+    kq.innerHTML = `<p>Khoá …${esc(d.duoi_khoa)} (nguồn: ${esc(d.nguon_khoa)}) · giới hạn thời gian PHP: ${d.max_execution_time || 'không giới hạn'} giây</p>
+      <table style="border-collapse:collapse;width:100%"><tr style="text-align:left;background:var(--giay)"><th style="padding:6px">Model</th><th>Suy nghĩ</th><th>HTTP</th><th>Giây</th><th>Kết quả</th></tr>
+      ${d.thu.map((t) => `<tr style="border-top:1px solid var(--vien)"><td style="padding:6px;white-space:nowrap">${esc(t.model)}</td><td>${esc(t.suy_nghi)}</td><td><b style="color:${t.http === 200 ? 'var(--luc)' : 'var(--son)'}">${t.http || '—'}</b></td><td>${t.giay}</td><td>${esc(t.ket_qua)}</td></tr>`).join('')}</table>`;
+  } catch (err) { kq.innerHTML = `<p style="color:var(--son)">${esc(err.message)}</p>`; }
+  nut.disabled = false; nut.textContent = 'Kiểm tra Gemini';
+});
 $('gm-luu').addEventListener('click', async (e) => {
   const k = $('gm-key').value.trim();
   if (!k) { toast('Dán khoá vào ô trước đã.', 'loi'); return; }

@@ -349,12 +349,12 @@ function bg_gemini_generate(array $cfg, array $body): array
     $last = ''; $het = 0;
     $batDau = time();
     foreach (bg_gemini_models($cfg) as $model) {
-        if (time() - $batDau > 100) { break; }   // không chờ quá lâu trên một câu — trả lỗi để trang tự thử lại
+        if (time() - $batDau > 120) { break; }   // không chờ quá lâu trên một câu — trả lỗi để trang tự thử lại
         $th = bg_thinking_it($model);
         foreach ($th ? [$th, ['thinkingLevel' => 'low'], null] : [null] as $cfgTh) {
             $b = $body;
             if ($cfgTh) { $b['generationConfig']['thinkingConfig'] = $cfgTh; }
-            $r = bg_http('https://generativelanguage.googleapis.com/v1beta/models/' . rawurlencode($model) . ':generateContent', $cfg['key'], $b, 60);
+            $r = bg_http('https://generativelanguage.googleapis.com/v1beta/models/' . rawurlencode($model) . ':generateContent', $cfg['key'], $b, 85);
             if ($r['http'] === 200) {
                 $t = '';
                 foreach ((array) ($r['data']['candidates'][0]['content']['parts'] ?? []) as $part) {
@@ -954,6 +954,36 @@ function action_bg_phong_buoi_moi(array $in): void
     rok(['buoi' => (int) rq_val('SELECT buoi FROM bdvh_bg_phong WHERE bo_id = ?', [$boId])]);
 }
 
+/** GV: chẩn đoán Gemini — thử một yêu cầu nhỏ với từng model trong danh sách, báo mã lỗi + thời gian. */
+function action_bg_gemini_thu(array $in): void
+{
+    r_teacher();
+    @set_time_limit(180);
+    $cfg = bg_gemini_cfg();
+    if ($cfg['key'] === '') { rfail('Chưa có khoá Gemini.'); }
+    @array_map('unlink', glob(sys_get_temp_dir() . '/bdvh_gemini_models_*') ?: []);   // lấy lại danh sách model mới nhất
+    $out = [];
+    $body = bg_gemini_body("Môn: Toán\nLoại câu: trắc nghiệm 4 lựa chọn\n\nĐỀ (Câu 1):\nTính \$2+3\$.\nA. 4\nB. 5\nC. 6\nD. 7\nĐÁP ÁN CỦA GIÁO VIÊN: B");
+    foreach (bg_gemini_models($cfg) as $model) {
+        $th = bg_thinking_it($model);
+        foreach ($th ? [$th, ['thinkingLevel' => 'low'], null] : [null] as $cfgTh) {
+            $b = $body;
+            if ($cfgTh) { $b['generationConfig']['thinkingConfig'] = $cfgTh; }
+            $t0 = microtime(true);
+            $r = bg_http('https://generativelanguage.googleapis.com/v1beta/models/' . rawurlencode($model) . ':generateContent', $cfg['key'], $b, 45);
+            $ok = $r['http'] === 200;
+            $txt = '';
+            if ($ok) { foreach ((array) ($r['data']['candidates'][0]['content']['parts'] ?? []) as $part) { if (empty($part['thought'])) { $txt .= (string) ($part['text'] ?? ''); } } }
+            $g = $ok ? json_decode(bg_sua_json(trim(preg_replace('/^```(?:json)?|```$/m', '', $txt))), true) : null;
+            $out[] = ['model' => $model, 'suy_nghi' => $cfgTh ? json_encode($cfgTh) : 'mặc định', 'http' => $r['http'], 'giay' => round(microtime(true) - $t0, 1),
+                      'ket_qua' => $ok ? (is_array($g) && !empty($g['cac_buoc']) ? 'OK — ' . mb_substr((string) ($g['dap_an_ngan'] ?? ''), 0, 40) : 'trả về sai định dạng: ' . mb_substr($txt, 0, 120)) : $r['msg']];
+            if ($ok || !($r['http'] === 400 && $cfgTh)) { break; }
+        }
+        if (count($out) >= 8) { break; }
+    }
+    rok(['nguon_khoa' => $cfg['nguon'], 'duoi_khoa' => substr($cfg['key'], -4), 'max_execution_time' => (int) ini_get('max_execution_time'), 'thu' => $out]);
+}
+
 function bg_dispatch(string $action, array $in): void
 {
     bg_ensure_tables();
@@ -962,7 +992,8 @@ function bg_dispatch(string $action, array $in): void
             'bg_nhap' => 'action_bg_nhap', 'bg_gemini_luu' => 'action_bg_gemini_luu', 'bg_hom_nay' => 'action_bg_hom_nay', 'bg_token_tao' => 'action_bg_token_tao',
             'bg_phong_dat' => 'action_bg_phong_dat', 'bg_phong_kq' => 'action_bg_phong_kq', 'bg_phong_xoa' => 'action_bg_phong_xoa',
             'bg_hs_xem' => 'action_bg_hs_xem', 'bg_hs_chon' => 'action_bg_hs_chon',
-            'bg_phong_tong_hop' => 'action_bg_phong_tong_hop', 'bg_phong_bao_cao' => 'action_bg_phong_bao_cao', 'bg_phong_buoi_moi' => 'action_bg_phong_buoi_moi'];
+            'bg_phong_tong_hop' => 'action_bg_phong_tong_hop', 'bg_phong_bao_cao' => 'action_bg_phong_bao_cao', 'bg_phong_buoi_moi' => 'action_bg_phong_buoi_moi',
+            'bg_gemini_thu' => 'action_bg_gemini_thu'];
     if (!isset($map[$action])) { json_out(['status' => 'error', 'message' => 'Thao tác bài giảng không hợp lệ.'], 404); }
     try {
         ($map[$action])($in);
