@@ -636,19 +636,40 @@ function bg_phong_bang(): void
     static $xong = false;
     if ($xong) { return; }
     $xong = true;
-    try { $pdo->query('SELECT 1 FROM bdvh_bg_phieu LIMIT 1'); return; } catch (Throwable $e) {}
+    try { $pdo->query('SELECT buoi FROM bdvh_bg_phieu LIMIT 1'); return; } catch (Throwable $e) {}
+    $coSan = true;
+    try { $pdo->query('SELECT 1 FROM bdvh_bg_phieu LIMIT 1'); } catch (Throwable $e) { $coSan = false; }
+    if ($coSan) {   // bảng đã tạo ở bản trước (chưa có "buổi") → thêm cột buoi, khoá trùng tính theo buổi
+        if (r_sqlite()) {
+            $pdo->exec('ALTER TABLE bdvh_bg_phong ADD COLUMN buoi INTEGER NOT NULL DEFAULT 1');
+            $pdo->exec('ALTER TABLE bdvh_bg_phieu RENAME TO bdvh_bg_phieu_cu');
+        } else {
+            // Mỗi lệnh bọc riêng: hai yêu cầu cùng lúc cùng nâng cấp thì lệnh thứ hai báo "đã có" — bỏ qua
+            foreach (['ALTER TABLE bdvh_bg_phong ADD COLUMN buoi INT NOT NULL DEFAULT 1',
+                      'ALTER TABLE bdvh_bg_phieu ADD COLUMN buoi INT NOT NULL DEFAULT 1 AFTER bo_id',
+                      'ALTER TABLE bdvh_bg_phieu DROP INDEX uq_bg_phieu, ADD UNIQUE KEY uq_bg_phieu (bo_id, buoi, cau, client_id)'] as $sql) {
+                try { $pdo->exec($sql); } catch (Throwable $e) { error_log('[bai-giang] nâng cấp bảng phiếu: ' . $e->getMessage()); }
+            }
+            return;
+        }
+    }
     if (r_sqlite()) {
         $pdo->exec("CREATE TABLE IF NOT EXISTS bdvh_bg_phong (bo_id INTEGER PRIMARY KEY, ma_phong TEXT NOT NULL UNIQUE, cau INTEGER NOT NULL DEFAULT 0,
-            loai TEXT NOT NULL DEFAULT 'bia', khoa INTEGER NOT NULL DEFAULT 0, sua_luc INTEGER NOT NULL DEFAULT 0)");
-        $pdo->exec("CREATE TABLE IF NOT EXISTS bdvh_bg_phieu (id INTEGER PRIMARY KEY AUTOINCREMENT, bo_id INTEGER NOT NULL, cau INTEGER NOT NULL,
-            client_id TEXT NOT NULL, ten TEXT NOT NULL DEFAULT '', tra_loi TEXT NOT NULL, luc INTEGER NOT NULL, UNIQUE(bo_id, cau, client_id))");
+            loai TEXT NOT NULL DEFAULT 'bia', khoa INTEGER NOT NULL DEFAULT 0, sua_luc INTEGER NOT NULL DEFAULT 0, buoi INTEGER NOT NULL DEFAULT 1)");
+        $pdo->exec("CREATE TABLE IF NOT EXISTS bdvh_bg_phieu (id INTEGER PRIMARY KEY AUTOINCREMENT, bo_id INTEGER NOT NULL, buoi INTEGER NOT NULL DEFAULT 1, cau INTEGER NOT NULL,
+            client_id TEXT NOT NULL, ten TEXT NOT NULL DEFAULT '', tra_loi TEXT NOT NULL, luc INTEGER NOT NULL, UNIQUE(bo_id, buoi, cau, client_id))");
+        if ($coSan) {
+            $pdo->exec('INSERT INTO bdvh_bg_phieu (bo_id, buoi, cau, client_id, ten, tra_loi, luc) SELECT bo_id, 1, cau, client_id, ten, tra_loi, luc FROM bdvh_bg_phieu_cu');
+            $pdo->exec('DROP TABLE bdvh_bg_phieu_cu');
+        }
     } else {
         $e = ' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci';
         $pdo->exec("CREATE TABLE IF NOT EXISTS bdvh_bg_phong (bo_id INT PRIMARY KEY, ma_phong VARCHAR(8) NOT NULL, cau INT NOT NULL DEFAULT 0,
-            loai VARCHAR(10) NOT NULL DEFAULT 'bia', khoa TINYINT NOT NULL DEFAULT 0, sua_luc INT NOT NULL DEFAULT 0, UNIQUE KEY uq_bg_phong (ma_phong))" . $e);
-        $pdo->exec("CREATE TABLE IF NOT EXISTS bdvh_bg_phieu (id INT AUTO_INCREMENT PRIMARY KEY, bo_id INT NOT NULL, cau INT NOT NULL,
+            loai VARCHAR(10) NOT NULL DEFAULT 'bia', khoa TINYINT NOT NULL DEFAULT 0, sua_luc INT NOT NULL DEFAULT 0, buoi INT NOT NULL DEFAULT 1,
+            UNIQUE KEY uq_bg_phong (ma_phong))" . $e);
+        $pdo->exec("CREATE TABLE IF NOT EXISTS bdvh_bg_phieu (id INT AUTO_INCREMENT PRIMARY KEY, bo_id INT NOT NULL, buoi INT NOT NULL DEFAULT 1, cau INT NOT NULL,
             client_id VARCHAR(64) NOT NULL, ten VARCHAR(80) NOT NULL DEFAULT '', tra_loi VARCHAR(40) NOT NULL, luc INT NOT NULL,
-            UNIQUE KEY uq_bg_phieu (bo_id, cau, client_id), KEY k_bg_phieu (bo_id, cau))" . $e);
+            UNIQUE KEY uq_bg_phieu (bo_id, buoi, cau, client_id), KEY k_bg_phieu (bo_id, buoi, cau))" . $e);
     }
 }
 
@@ -730,8 +751,13 @@ function action_bg_phong_dat(array $in): void
     $cau = max(0, (int) ($in['cau'] ?? 0));
     $loai = in_array($in['loai'] ?? '', ['bia', 'de', 'dap-an', 'giai', 'ket'], true) ? $in['loai'] : 'bia';
     $khoa = array_key_exists('khoa', $in) ? (int) !empty($in['khoa']) : (($loai === 'dap-an' || $loai === 'giai') ? 1 : 0);
+    $cuoi = (int) rq_val('SELECT MAX(luc) FROM bdvh_bg_phieu WHERE bo_id = ? AND buoi = ?', [$boId, (int) $p['buoi']]);
+    if ($cuoi > 0 && $cuoi < time() - 3 * 3600) {   // lớp mới (cách buổi trước > 3 giờ) → buổi mới, kết quả cũ vẫn giữ
+        rq('UPDATE bdvh_bg_phong SET buoi = buoi + 1 WHERE bo_id = ?', [$boId]);
+        $p['buoi'] = (int) $p['buoi'] + 1;
+    }
     rq('UPDATE bdvh_bg_phong SET cau = ?, loai = ?, khoa = ?, sua_luc = ? WHERE bo_id = ?', [$cau, $loai, $khoa, time(), $boId]);
-    rok(['ma_phong' => $p['ma_phong'], 'cau' => $cau, 'loai' => $loai, 'khoa' => (bool) $khoa]);
+    rok(['ma_phong' => $p['ma_phong'], 'cau' => $cau, 'loai' => $loai, 'khoa' => (bool) $khoa, 'buoi' => (int) $p['buoi']]);
 }
 
 /** GV: kết quả bình chọn một câu. */
@@ -741,7 +767,8 @@ function action_bg_phong_kq(array $in): void
     bg_phong_bang();
     $boId = (int) ($in['bo_id'] ?? $_GET['bo_id'] ?? 0);
     $cau = (int) ($in['cau'] ?? $_GET['cau'] ?? 0);
-    $rows = rq_all('SELECT ten, tra_loi, luc FROM bdvh_bg_phieu WHERE bo_id = ? AND cau = ? ORDER BY luc DESC', [$boId, $cau]);
+    $buoi = (int) (rq_val('SELECT buoi FROM bdvh_bg_phong WHERE bo_id = ?', [$boId]) ?: 1);
+    $rows = rq_all('SELECT ten, tra_loi, luc FROM bdvh_bg_phieu WHERE bo_id = ? AND buoi = ? AND cau = ? ORDER BY luc DESC', [$boId, $buoi, $cau]);
     $dem = []; $y = [];
     foreach ($rows as $r) {
         $t = (string) $r['tra_loi'];
@@ -761,8 +788,9 @@ function action_bg_phong_xoa(array $in): void
     bg_gv();
     bg_phong_bang();
     $boId = (int) ($in['bo_id'] ?? 0); $cau = (int) ($in['cau'] ?? 0);
-    if ($cau > 0) { rq('DELETE FROM bdvh_bg_phieu WHERE bo_id = ? AND cau = ?', [$boId, $cau]); }
-    else { rq('DELETE FROM bdvh_bg_phieu WHERE bo_id = ?', [$boId]); }
+    $buoi = (int) ($in['buoi'] ?? 0) ?: (int) (rq_val('SELECT buoi FROM bdvh_bg_phong WHERE bo_id = ?', [$boId]) ?: 1);
+    if ($cau > 0) { rq('DELETE FROM bdvh_bg_phieu WHERE bo_id = ? AND buoi = ? AND cau = ?', [$boId, $buoi, $cau]); }
+    else { rq('DELETE FROM bdvh_bg_phieu WHERE bo_id = ? AND buoi = ?', [$boId, $buoi]); }
     rok(true);
 }
 
@@ -794,7 +822,7 @@ function action_bg_hs_xem(array $in): void
         }
         $cid = (string) ($in['client_id'] ?? $_GET['client_id'] ?? '');
         if ($cid !== '') {
-            $q['cua_em'] = rq_val('SELECT tra_loi FROM bdvh_bg_phieu WHERE bo_id = ? AND cau = ? AND client_id = ?', [(int) $p['bo_id'], (int) $p['cau'], $cid]) ?: '';
+            $q['cua_em'] = rq_val('SELECT tra_loi FROM bdvh_bg_phieu WHERE bo_id = ? AND buoi = ? AND cau = ? AND client_id = ?', [(int) $p['bo_id'], (int) $p['buoi'], (int) $p['cau'], $cid]) ?: '';
         }
         $o['cau_hoi'] = $q;
     }
@@ -820,12 +848,90 @@ function action_bg_hs_chon(array $in): void
     if ($t === null) { rfail('Câu trả lời không hợp lệ.'); }
     $ten = mb_substr(trim(strip_tags((string) ($in['ten'] ?? ''))), 0, 80) ?: 'Học sinh';
     $sql = r_sqlite()
-        ? 'INSERT INTO bdvh_bg_phieu (bo_id, cau, client_id, ten, tra_loi, luc) VALUES (?, ?, ?, ?, ?, ?)
-           ON CONFLICT(bo_id, cau, client_id) DO UPDATE SET ten = excluded.ten, tra_loi = excluded.tra_loi, luc = excluded.luc'
-        : 'INSERT INTO bdvh_bg_phieu (bo_id, cau, client_id, ten, tra_loi, luc) VALUES (?, ?, ?, ?, ?, ?)
+        ? 'INSERT INTO bdvh_bg_phieu (bo_id, buoi, cau, client_id, ten, tra_loi, luc) VALUES (?, ?, ?, ?, ?, ?, ?)
+           ON CONFLICT(bo_id, buoi, cau, client_id) DO UPDATE SET ten = excluded.ten, tra_loi = excluded.tra_loi, luc = excluded.luc'
+        : 'INSERT INTO bdvh_bg_phieu (bo_id, buoi, cau, client_id, ten, tra_loi, luc) VALUES (?, ?, ?, ?, ?, ?, ?)
            ON DUPLICATE KEY UPDATE ten = VALUES(ten), tra_loi = VALUES(tra_loi), luc = VALUES(luc)';
-    rq($sql, [(int) $p['bo_id'], $cau, $cid, $ten, $t, time()]);
+    rq($sql, [(int) $p['bo_id'], (int) $p['buoi'], $cau, $cid, $ten, $t, time()]);
     rok(['tra_loi' => $t]);
+}
+
+/** Câu trả lời có đúng không: 1 = đúng, 0 = sai, null = chưa có đáp án để so. Đ/S 4 ý: đúng khi cả 4 ý đúng. */
+function bg_cham(array $c, string $da, string $t): ?int
+{
+    if ($da === '') { return null; }
+    if ($c['loai'] === 'tra_loi_ngan') {
+        $n = static fn ($x) => str_replace([' ', ','], ['', '.'], mb_strtolower(trim(strip_tags($x))));
+        return (int) ($n($t) === $n($da));
+    }
+    return (int) ($t === $da);
+}
+
+/** GV: danh sách các buổi đã có học sinh bình chọn (mọi bộ bài giảng) — hiện ở trang Quản trị. */
+function action_bg_phong_tong_hop(array $in): void
+{
+    bg_gv();
+    bg_phong_bang();
+    $rows = rq_all('SELECT p.bo_id, p.buoi, COUNT(DISTINCT p.client_id) AS so_hs, COUNT(*) AS so_phieu, MIN(p.luc) AS bat_dau, MAX(p.luc) AS ket_thuc,
+            b.ma, b.tieu_de FROM bdvh_bg_phieu p JOIN bdvh_bai_giang b ON b.bo_id = p.bo_id
+            GROUP BY p.bo_id, p.buoi, b.ma, b.tieu_de ORDER BY MAX(p.luc) DESC LIMIT 60');
+    $out = [];
+    foreach ($rows as $r) {
+        $out[] = ['bo_id' => (int) $r['bo_id'], 'ma' => $r['ma'], 'tieu_de' => $r['tieu_de'], 'buoi' => (int) $r['buoi'],
+                  'so_hs' => (int) $r['so_hs'], 'so_phieu' => (int) $r['so_phieu'],
+                  'bat_dau' => date('Y-m-d H:i', (int) $r['bat_dau']), 'ket_thuc' => date('Y-m-d H:i', (int) $r['ket_thuc'])];
+    }
+    rok($out);
+}
+
+/** GV: bảng kết quả một buổi — từng học sinh × từng câu, số câu đúng, thống kê từng câu. */
+function action_bg_phong_bao_cao(array $in): void
+{
+    bg_gv();
+    bg_phong_bang();
+    $row = bg_load($in);
+    $boId = (int) $row['bo_id'];
+    $hien = (int) (rq_val('SELECT buoi FROM bdvh_bg_phong WHERE bo_id = ?', [$boId]) ?: 1);
+    $cacBuoi = array_map('intval', array_column(rq_all('SELECT DISTINCT buoi FROM bdvh_bg_phieu WHERE bo_id = ? ORDER BY buoi DESC', [$boId]), 'buoi'));
+    $buoi = (int) ($in['buoi'] ?? $_GET['buoi'] ?? 0) ?: ($cacBuoi[0] ?? $hien);
+    $ds = $row['du_lieu']['cau'] ?? [];
+    $cau = []; $daChuan = [];
+    foreach ($ds as $i => $c) {
+        $daChuan[$i + 1] = bg_dap_an_chuan($c);
+        $cau[] = ['stt' => $i + 1, 'so' => $c['so'], 'loai' => $c['loai'], 'dap_an' => $daChuan[$i + 1],
+                  'binh_chon' => in_array($c['loai'], ['abcd', 'dung_sai', 'dung_sai_4', 'tra_loi_ngan'], true), 'tong' => 0, 'dung' => 0];
+    }
+    $phieu = rq_all('SELECT client_id, ten, cau, tra_loi, luc FROM bdvh_bg_phieu WHERE bo_id = ? AND buoi = ? ORDER BY luc', [$boId, $buoi]);
+    $hs = [];
+    foreach ($phieu as $p) {
+        $n = (int) $p['cau'];
+        if (!isset($ds[$n - 1])) { continue; }
+        $id = $p['client_id'];
+        $hs[$id] = $hs[$id] ?? ['ten' => '', 'tra_loi' => [], 'dung' => 0, 'da_lam' => 0, 'dau' => (int) $p['luc'], 'cuoi' => 0];
+        $hs[$id]['ten'] = $p['ten'];   // tên mới nhất
+        $hs[$id]['cuoi'] = max($hs[$id]['cuoi'], (int) $p['luc']);
+        $d = bg_cham($ds[$n - 1], $daChuan[$n], (string) $p['tra_loi']);
+        $hs[$id]['tra_loi'][$n] = ['t' => $p['tra_loi'], 'd' => $d];
+        $hs[$id]['da_lam']++;
+        $cau[$n - 1]['tong']++;
+        if ($d === 1) { $hs[$id]['dung']++; $cau[$n - 1]['dung']++; }
+    }
+    $hs = array_values($hs);
+    usort($hs, static fn ($a, $b) => [$b['dung'], $a['ten']] <=> [$a['dung'], $b['ten']]);
+    $soBc = count(array_filter($cau, static fn ($c) => $c['binh_chon']));
+    rok(['bo_id' => $boId, 'ma' => $row['ma'], 'tieu_de' => $row['tieu_de'], 'buoi' => $buoi, 'buoi_hien_tai' => $hien,
+         'cac_buoi' => $cacBuoi ?: [$hien], 'so_cau_bc' => $soBc, 'cau' => $cau, 'hoc_sinh' => $hs,
+         'bat_dau' => $phieu ? date('Y-m-d H:i', (int) $phieu[0]['luc']) : '', 'ket_thuc' => $phieu ? date('Y-m-d H:i', (int) end($phieu)['luc']) : '']);
+}
+
+/** GV: bắt đầu buổi mới cho bộ này (kết quả buổi cũ vẫn giữ để xem lại). */
+function action_bg_phong_buoi_moi(array $in): void
+{
+    bg_gv();
+    $boId = (int) ($in['bo_id'] ?? 0);
+    bg_phong_cua($boId);
+    rq('UPDATE bdvh_bg_phong SET buoi = buoi + 1 WHERE bo_id = ?', [$boId]);
+    rok(['buoi' => (int) rq_val('SELECT buoi FROM bdvh_bg_phong WHERE bo_id = ?', [$boId])]);
 }
 
 function bg_dispatch(string $action, array $in): void
@@ -835,7 +941,8 @@ function bg_dispatch(string $action, array $in): void
             'bg_giai' => 'action_bg_giai', 'bg_sua_giai' => 'action_bg_sua_giai', 'bg_trang_thai' => 'action_bg_trang_thai',
             'bg_nhap' => 'action_bg_nhap', 'bg_gemini_luu' => 'action_bg_gemini_luu', 'bg_hom_nay' => 'action_bg_hom_nay', 'bg_token_tao' => 'action_bg_token_tao',
             'bg_phong_dat' => 'action_bg_phong_dat', 'bg_phong_kq' => 'action_bg_phong_kq', 'bg_phong_xoa' => 'action_bg_phong_xoa',
-            'bg_hs_xem' => 'action_bg_hs_xem', 'bg_hs_chon' => 'action_bg_hs_chon'];
+            'bg_hs_xem' => 'action_bg_hs_xem', 'bg_hs_chon' => 'action_bg_hs_chon',
+            'bg_phong_tong_hop' => 'action_bg_phong_tong_hop', 'bg_phong_bao_cao' => 'action_bg_phong_bao_cao', 'bg_phong_buoi_moi' => 'action_bg_phong_buoi_moi'];
     if (!isset($map[$action])) { json_out(['status' => 'error', 'message' => 'Thao tác bài giảng không hợp lệ.'], 404); }
     try {
         ($map[$action])($in);

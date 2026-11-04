@@ -229,6 +229,7 @@ async function taiDs() {
       </div>
       <div class="bo-act">
         <a class="btn btn-chinh btn-sm" href="trinh-chieu.html?bo=${encodeURIComponent(b.ma)}">Trình chiếu</a>
+        <a class="btn btn-vien btn-sm" href="ket-qua-lop.html?bo=${encodeURIComponent(b.ma)}">Kết quả lớp</a>
         ${laGV ? `<button class="btn btn-vien btn-sm" type="button" data-tao="${b.bo_id}" ${coGemini ? '' : 'disabled title="Chưa cấu hình khoá Gemini"'}>${b.so_da_giai < b.so_cau ? 'Tạo lời giải (Gemini)' : 'Đã đủ lời giải'}</button>
         <button class="btn btn-vien btn-sm" type="button" data-duyet="${b.bo_id}">Duyệt lời giải</button>
         <button class="btn btn-chu btn-sm" type="button" data-xoa="${b.bo_id}">Xoá</button>` : ''}
@@ -404,7 +405,7 @@ $('chep-script').addEventListener('click', async () => {
     if (laGV) { $('ma-tt').textContent = tt.token_luc ? 'Đã có mã đồng bộ (tạo lúc ' + tt.token_luc + ').' : 'Chưa có mã đồng bộ.'; $('ma-tt').dataset.co = tt.token_luc ? '1' : ''; }
   } catch (e) {}
   const tiep = new URLSearchParams(location.search).get('tiep');
-  if (laGV && tiep && /^(trinh-chieu\.html\?|giao-vien\.html)/.test(tiep)) { location.replace(tiep); return; }
+  if (laGV && tiep && /^(trinh-chieu\.html\?|giao-vien\.html|ket-qua-lop\.html)/.test(tiep)) { location.replace(tiep); return; }
   $('the-dang-nhap').hidden = laGV;
   $('the-ds').hidden = !laGV;
   if (!laGV) { setTimeout(() => $('mk').focus(), 50); return; }

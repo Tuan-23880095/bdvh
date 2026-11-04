@@ -264,6 +264,39 @@
       </div>
     </div>
 
+    <!-- KẾT QUẢ BÌNH CHỌN TRÊN LỚP (trình chiếu bài từ Google Drive, học sinh vào hs.html) -->
+    <div class="bg-white rounded-2xl p-6 border border-bac shadow-sm space-y-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-emerald-50 text-luc font-bold flex items-center justify-center">📱</div>
+          <div>
+            <h3 class="font-bold text-base text-muc">Kết Quả Bình Chọn Trên Lớp (Trình Chiếu)</h3>
+            <p class="text-xs text-gray-500">Mỗi buổi chiếu bài từ Google Drive: số học sinh, thời gian — bấm để xem từng em đúng/sai từng câu, tải Excel.</p>
+          </div>
+        </div>
+        <button onclick="loadBinhChon()" class="px-3 py-1.5 border border-bac text-xs font-semibold rounded-lg hover:bg-slate-50 transition">
+          Làm mới ↻
+        </button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-slate-50 border-b border-bac text-gray-600 font-bold uppercase tracking-wider text-[11px]">
+              <th class="py-2.5 px-3">Bài giảng</th>
+              <th class="py-2.5 px-3 text-center">Buổi</th>
+              <th class="py-2.5 px-3 text-center">Học sinh</th>
+              <th class="py-2.5 px-3 text-center">Lượt chọn</th>
+              <th class="py-2.5 px-3 text-center">Thời gian</th>
+              <th class="py-2.5 px-3 text-right">Chi tiết</th>
+            </tr>
+          </thead>
+          <tbody id="binhChonTableBody" class="divide-y divide-bac">
+            <tr><td colspan="6" class="text-center py-6 text-gray-400 italic">Đang tải…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <!-- KHU VỰC 4: BẢNG THEO DÕI HỌC SINH LÀM BÀI TRỰC TIẾP (LIVE ROSTER) -->
     <div class="bg-white rounded-2xl p-6 border border-bac shadow-sm space-y-4">
       <div class="flex items-center justify-between">
@@ -371,6 +404,7 @@
       document.getElementById('authHeaderActions').classList.remove('hidden');
       fetchTeacherCode();
       loadDashboard();
+      loadBinhChon();
       loadBankSettings();
     }
 
@@ -550,6 +584,29 @@
       }
     }
 
+    async function loadBinhChon() {
+      const tb = document.getElementById('binhChonTableBody');
+      try {
+        const data = await fetch('api.php?action=bg_phong_tong_hop').then(r => r.json());
+        if (data.status !== 'success') throw new Error(data.message || 'Không tải được');
+        const ds = data.data || [];
+        const dd = (s) => s ? s.slice(8, 10) + '/' + s.slice(5, 7) + ' ' + s.slice(11) : '';
+        tb.innerHTML = ds.length ? ds.map(b => `
+          <tr class="hover:bg-slate-50 transition">
+            <td class="py-2.5 px-3 font-semibold text-muc">${esc(b.tieu_de)}</td>
+            <td class="py-2.5 px-3 text-center">${b.buoi}</td>
+            <td class="py-2.5 px-3 text-center font-bold text-lam">${b.so_hs}</td>
+            <td class="py-2.5 px-3 text-center">${b.so_phieu}</td>
+            <td class="py-2.5 px-3 text-center text-gray-500 text-[11px]">${dd(b.bat_dau)} → ${b.ket_thuc.slice(11)}</td>
+            <td class="py-2.5 px-3 text-right whitespace-nowrap">
+              <a href="ket-qua-lop.html?bo=${encodeURIComponent(b.ma)}&buoi=${b.buoi}" class="px-3 py-1.5 bg-luc hover:bg-emerald-800 text-white rounded-xl font-bold transition inline-flex items-center gap-1.5 text-xs shadow-sm">Xem kết quả</a>
+            </td>
+          </tr>`).join('') : `<tr><td colspan="6" class="text-center py-6 text-gray-400 italic">Chưa có buổi nào có học sinh bình chọn. Khi chiếu bài từ Drive, học sinh vào hs.html bằng mã phòng trên slide bìa.</td></tr>`;
+      } catch (e) {
+        tb.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-red-400">Lỗi nạp kết quả bình chọn: ${esc(e.message)}</td></tr>`;
+      }
+    }
+
     async function loadDashboard() {
       const tb = document.getElementById('submissionTableBody');
       try {
@@ -632,6 +689,7 @@
       const db = document.getElementById('mainDashboard');
       if (db && !db.classList.contains('hidden')) {
         loadDashboard();
+        loadBinhChon();
       }
     }, 15000);
 

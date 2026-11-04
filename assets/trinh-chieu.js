@@ -473,6 +473,7 @@
     $('btn-fs').onclick = toanManHinh;
     $('btn-khoa').onclick = doiKhoa;
     $('btn-tt').onclick = doiTuongTac;
+    $('btn-kq').href = 'ket-qua-lop.html?bo=' + encodeURIComponent(bo.ma);
     $('btn-tt').classList.toggle('chinh', tuongTac);
     $('muc-luc').addEventListener('click', (e) => {
       const b = e.target.closest('[data-den]');
