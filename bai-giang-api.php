@@ -273,7 +273,8 @@ function action_bg_gemini_luu(array $in): void
     r_teacher();
     $k = trim((string) ($in['api_key'] ?? ''));
     if ($k === '') { rq('DELETE FROM bdvh_bg_cau_hinh WHERE k = ?', ['gemini_key']); rok(['da_xoa' => true]); }
-    if (!preg_match('/^[A-Za-z0-9_\-]{30,80}$/', $k)) { rfail('Khoá không đúng dạng. Khoá Gemini thường bắt đầu bằng "AIza…" và dài khoảng 39 ký tự.'); }
+    // Hai dạng khoá Google AI Studio: kiểu cũ "AIza…" (39 ký tự) và kiểu mới "AQ.Ab…" (có dấu chấm, dài hơn).
+    if (!preg_match('/^[A-Za-z0-9_\-.]{30,200}$/', $k)) { rfail('Khoá không đúng dạng. Khoá Gemini bắt đầu bằng "AIza…" hoặc "AQ.…", chỉ gồm chữ, số và các dấu - _ . (kiểm tra xem có lỡ dán thừa dấu cách hay xuống dòng không).'); }
     $r = bg_http('https://generativelanguage.googleapis.com/v1beta/models?pageSize=5', $k, null, 20);
     if ($r['http'] === 0) { rfail('Máy chủ không kết nối được tới Google để thử khoá: ' . $r['msg']); }
     if ($r['http'] !== 200) { rfail('Google từ chối khoá này (HTTP ' . $r['http'] . '): ' . $r['msg']); }
