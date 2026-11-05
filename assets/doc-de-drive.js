@@ -96,22 +96,28 @@
     return out;
   }
 
-  /** Câu Đúng/Sai 4 ý: "<b>Câu 13:</b> a) Đúng; b) … → Đ, Đ, S, Đ." */
+  /** Câu Đúng/Sai 4 ý — hai kiểu: mỗi câu một đoạn "<b>Câu 13:</b> a) Đúng; b) … → Đ, Đ, S, Đ."
+   *  hoặc gộp chung "<b>Đúng/Sai.</b> Câu 13: a) S (…); b) Đ (…); … Câu 14: a) Đ …" */
   function docDapAnDS4(details) {
     const out = {};
     if (!details) return out;
+    const docY = (t) => {
+      const mm = t.match(/(?:→|=>)\s*([ĐS](?:\s*[,;]\s*[ĐS]){1,5})\s*\.?\s*$/i);
+      if (mm) return mm[1].toUpperCase().replace(/\s+/g, '').replace(/;/g, ',');
+      const ys = [...t.matchAll(/(?:^|\s|;)([a-d])\)\s*(Đúng|Sai|Đ|S)(?![\p{L}\p{N}])/giu)].map((x) => (/^s/i.test(x[2]) ? 'S' : 'Đ'));
+      return ys.length >= 2 ? ys.join(',') : '';
+    };
+    const escH = (x) => x.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
     details.querySelectorAll(':scope > p').forEach((p) => {
       const html = p.innerHTML.trim();
-      const m = html.match(/^<b>\s*Câu\s*(\d+)\s*[:.]\s*<\/b>\s*/i);
-      if (!m) return;
-      const rest = html.slice(m[0].length);
       const t = norm(p.textContent);
-      let seq = (t.match(/(?:→|=>)\s*([ĐĐSs](?:\s*[,;]\s*[ĐĐSs]){1,5})\s*\.?\s*$/) || [])[1];
-      if (!seq) {
-        const ys = [...t.matchAll(/(?:^|\s|;)([a-d])\)\s*(Đúng|Sai)/gi)].map((x) => (/^s/i.test(x[2]) ? 'S' : 'Đ'));
-        if (ys.length >= 2) seq = ys.join(',');
+      const m = html.match(/^<b>\s*Câu\s*(\d+)\s*[:.]\s*<\/b>\s*/i);
+      if (m) { out[parseInt(m[1], 10)] = { html: html.slice(m[0].length), seq: docY(t) }; return; }
+      const phan = t.split(/(?:^|\s)Câu\s*(\d+)\s*[:.]\s*/i);
+      for (let i = 1; i + 1 < phan.length; i += 2) {
+        const so = parseInt(phan[i], 10), seq = docY(phan[i + 1].trim());
+        if (seq && !(so in out)) out[so] = { html: escH(phan[i + 1].trim()), seq };
       }
-      out[parseInt(m[1], 10)] = { html: rest, seq: seq ? seq.toUpperCase().replace(/\s+/g, '').replace(/;/g, ',') : '' };
     });
     return out;
   }
@@ -199,8 +205,10 @@
       if (el.tagName !== 'DIV') {
         if (/^H[1-3]$/.test(el.tagName) || el.querySelector(':scope > b:first-child')) {
           const head = el.tagName === 'P' ? norm(el.querySelector('b').textContent) : norm(el.textContent);
-          const lp = phanLoaiPhan(head);
-          if (lp && (/^H/.test(el.tagName) || /^(phần|phan)\s*\d|^[IVX]+\./i.test(head))) { phan = lp; tenPhan = head.replace(/\(.*?\)\s*\.?$/, '').replace(/\.$/, ''); }
+          // "<p><b>Phần 2.</b> Đúng/Sai (2 câu).</p>": loại phần nằm NGOÀI thẻ <b> nên phải đọc cả đoạn.
+          const full = norm(el.textContent);
+          const lp = phanLoaiPhan(full);
+          if (lp && (/^H/.test(el.tagName) || /^(phần|phan)\s*\d|^[IVX]+\./i.test(head))) { phan = lp; tenPhan = full.replace(/\(.*?\)\s*\.?$/, '').replace(/\.$/, ''); }
         }
         return;
       }
@@ -214,7 +222,7 @@
       const opts = optsEl ? [...optsEl.children] : [];
       let loai = phan === 'tl' || nhan.kieu === 'bai' ? 'tu_luan' : phan === 'ds' ? 'dung_sai' : phan === 'tln' ? 'tra_loi_ngan' : 'abcd';
       const luaChon = [];
-      const nhanDS = /đúng\s*\/\s*sai|đúng\s*[–-]\s*sai|\(đ\s*\/\s*s\)/i.test(norm(el.querySelector('p') ? el.querySelector('p').textContent : '').slice(0, 40));
+      const nhanDS = /đúng\s*\/\s*sai|đúng\s*[–-]\s*sai|\(đ\s*\/\s*s\)|đúng\s+hoặc\s+sai|đúng\s+hay\s+sai/i.test(norm(el.querySelector('p') ? el.querySelector('p').textContent : ''));
       if (loai !== 'tu_luan' && (nhanDS || phan === 'ds') && opts.length >= 2 && opts.every((o) => /^[a-d]\s*\)/.test(norm(o.textContent)))) {
         opts.forEach((o) => {
           const b = o.querySelector('b, strong');

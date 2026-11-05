@@ -106,19 +106,31 @@ function dd_giai_tn_so(?DOMElement $details): array
 /** Câu Đúng/Sai 4 ý: "<b>Câu 13:</b> a) Đúng; … → Đ, Đ, S, Đ." */
 function dd_dap_an_ds4(?DOMElement $details): array
 {
+    // Hai kiểu: mỗi câu một đoạn "<b>Câu 13:</b> a) Đúng; b) … → Đ, Đ, S, Đ."
+    // hoặc gộp chung "<b>Đúng/Sai.</b> Câu 13: a) S (…); b) Đ (…); … Câu 14: a) Đ …"
     $out = [];
     if (!$details) return $out;
+    $docY = static function (string $t): string {
+        if (preg_match('/(?:→|=>)\s*([ĐS](?:\s*[,;]\s*[ĐS]){1,5})\s*\.?\s*$/iu', $t, $mm)) return str_replace(';', ',', preg_replace('/\s+/u', '', mb_strtoupper($mm[1])));
+        if (preg_match_all('/(?:^|\s|;)([a-d])\)\s*(Đúng|Sai|Đ|S)(?![\p{L}\p{N}])/iu', $t, $ys) >= 2) {
+            return implode(',', array_map(static fn ($x) => preg_match('/^s/iu', $x) ? 'S' : 'Đ', $ys[2]));
+        }
+        return '';
+    };
     foreach (dd_elems($details) as $p) {
         if ($p->tagName !== 'p') continue;
         $html = trim(dd_inner($p));
-        if (!preg_match('#^<b>\s*Câu\s*(\d+)\s*[:.]\s*</b>\s*#iu', $html, $m)) continue;
         $t = dd_norm($p->textContent);
-        $seq = '';
-        if (preg_match('/(?:→|=>)\s*([ĐS](?:\s*[,;]\s*[ĐS]){1,5})\s*\.?\s*$/iu', $t, $mm)) { $seq = $mm[1]; }
-        elseif (preg_match_all('/(?:^|\s|;)([a-d])\)\s*(Đúng|Sai)/iu', $t, $ys) >= 2) {
-            $seq = implode(',', array_map(static fn ($x) => preg_match('/^s/iu', $x) ? 'S' : 'Đ', $ys[2]));
+        if (preg_match('#^<b>\s*Câu\s*(\d+)\s*[:.]\s*</b>\s*#iu', $html, $m)) {
+            $out[(int) $m[1]] = ['html' => substr($html, strlen($m[0])), 'seq' => $docY($t)];
+            continue;
         }
-        $out[(int) $m[1]] = ['html' => substr($html, strlen($m[0])), 'seq' => $seq !== '' ? str_replace(';', ',', preg_replace('/\s+/u', '', mb_strtoupper($seq))) : ''];
+        $phan = preg_split('/(?:^|\s)Câu\s*(\d+)\s*[:.]\s*/iu', $t, -1, PREG_SPLIT_DELIM_CAPTURE);
+        for ($i = 1; $i + 1 < count($phan); $i += 2) {
+            $so = (int) $phan[$i];
+            $seq = $docY(trim($phan[$i + 1]));
+            if ($seq !== '' && !isset($out[$so])) $out[$so] = ['html' => htmlspecialchars(trim($phan[$i + 1]), ENT_QUOTES, 'UTF-8'), 'seq' => $seq];
+        }
     }
     return $out;
 }
@@ -224,10 +236,12 @@ function bg_parse_html(string $html, string $tenFile): array
             $laH = (bool) preg_match('/^h[1-3]$/', $el->tagName);
             if ($laH || ($first && $first->tagName === 'b')) {
                 $head = $el->tagName === 'p' ? dd_norm($first ? $first->textContent : '') : dd_norm($el->textContent);
-                $lp = dd_phan($head);
+                // "<p><b>Phần 2.</b> Đúng/Sai (2 câu).</p>": loại phần nằm NGOÀI thẻ <b> nên phải đọc cả đoạn.
+                $full = dd_norm($el->textContent);
+                $lp = dd_phan($full);
                 if ($lp && ($laH || preg_match('/^(phần|phan)\s*\d|^[IVX]+\./iu', $head))) {
                     $phan = $lp;
-                    $tenPhan = preg_replace('/\.$/', '', preg_replace('/\(.*?\)\s*\.?$/u', '', $head));
+                    $tenPhan = preg_replace('/\.$/', '', preg_replace('/\(.*?\)\s*\.?$/u', '', $full));
                 }
             }
             continue;
@@ -256,7 +270,7 @@ function bg_parse_html(string $html, string $tenFile): array
         $loai = ($phan === 'tl' || $kieu === 'bai') ? 'tu_luan' : ($phan === 'ds' ? 'dung_sai' : ($phan === 'tln' ? 'tra_loi_ngan' : 'abcd'));
         $luaChon = [];
         $pDau = $xp->query('.//p', $el)->item(0);
-        $nhanDS = (bool) preg_match('/đúng\s*\/\s*sai|đúng\s*[–-]\s*sai|\(đ\s*\/\s*s\)/iu', mb_substr(dd_norm($pDau ? $pDau->textContent : ''), 0, 40));
+        $nhanDS = (bool) preg_match('/đúng\s*\/\s*sai|đúng\s*[–-]\s*sai|\(đ\s*\/\s*s\)|đúng\s+hoặc\s+sai|đúng\s+hay\s+sai/iu', dd_norm($pDau ? $pDau->textContent : ''));
         $allAD = $opts && count(array_filter($opts, static fn ($o) => preg_match('/^[a-d]\s*\)/u', dd_norm($o->textContent)))) === count($opts);
         $allDS = $opts && count(array_filter($opts, static fn ($o) => preg_match('/^[☐□]\s*[ĐS]\s*$/u', dd_norm($o->textContent)))) === count($opts);
         $allABCD = $opts && count(array_filter($opts, static fn ($o) => preg_match('/^[A-D]\s*[.)]/u', dd_norm($o->textContent)))) === count($opts);
