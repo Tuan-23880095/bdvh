@@ -66,3 +66,19 @@ Kiểm tra trên lớp bằng điện thoại/laptop của học sinh — dùng 
 - **Nhập đề kín**: cột `loai, cau_hoi, A, B, C, D, dap_an, giai_thich, phan` — `choice` (đáp án A–D), `true_false` (4 ý ở cột A–D, đáp án `Đ,S,Đ,S`), `short` (đáp số). Công thức LaTeX giữa hai dấu `$`.
 
 Kiểm thử trên máy (SQLite): `php -S 127.0.0.1:8091` rồi `python3 tools/phong-thi-test.py http://127.0.0.1:8091 Tuan@2026`.
+
+
+---
+
+## 5. Ngân hàng câu hỏi & Tạo đề ngẫu nhiên (`ngan-hang-api.php`, action `nh_*`)
+
+Trang `bai-giang.html` (giảng viên) có khung **Tạo đề từ ngân hàng câu hỏi**: chọn lớp, môn, chương và số câu theo
+**loại × mức độ** (mẫu nhanh "Khuôn 2025 12·4·6"), xem trước, đổi từng câu, rồi **lưu thành một bộ bài giảng** như mọi bộ khác
+(trình chiếu 3 slide/câu, điện thoại học sinh, bình chọn, kết quả lớp). Câu đã dùng nhiều được ưu tiên đổi sang câu khác.
+
+- **Nguồn câu:** chỉ câu **thầy đã duyệt** (`da_duyet = 1`) trong ngân hàng v2 ở máy nhà (`D:\GPU-work\ngan_hang_v2.db` + Excel duyệt).
+  Script `D:\GPU-work\xuat_ngan_hang_web.py` xuất ra `xuat_web\ngan_hang_web.json` (ảnh hình vẽ / ảnh công thức gốc nhúng sẵn dạng PNG).
+- **Nạp lên web:** kéo file JSON vào mục "Nạp câu đã duyệt từ máy nhà", hoặc tạo **mã nạp** rồi chạy script với `--day`.
+  Mỗi lần nạp thay ngân hàng bằng đúng danh sách trong file (câu bỏ duyệt bị gỡ, số lần đã dùng của câu cũ được giữ).
+- **Bảng:** `bdvh_nh_cau` (tự tạo khi gọi `nh_*` lần đầu). Bộ bài giảng tạo ra lưu bản sao câu hỏi, nên nạp lại ngân hàng không làm hỏng bài cũ.
+- **Kiểm thử (SQLite):** `php -S 127.0.0.1:8092` rồi `python3 tools/ngan-hang-test.py http://127.0.0.1:8092 Tuan@2026 ngan_hang_web_THU.json`.

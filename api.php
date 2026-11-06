@@ -384,6 +384,8 @@ define('BDVH_API', true);
 require_once __DIR__ . '/phong-thi-api.php';
 // BÀI GIẢNG TRÌNH CHIẾU TỪ ĐỀ TRÊN DRIVE + LỜI GIẢI GEMINI (action bg_*) — xem bai-giang-api.php
 require_once __DIR__ . '/bai-giang-api.php';
+// NGÂN HÀNG CÂU HỎI & TẠO ĐỀ NGẪU NHIÊN (action nh_*) — xem ngan-hang-api.php
+require_once __DIR__ . '/ngan-hang-api.php';
 
 // ROUTER CÁC CHỨC NĂNG
 // -------------------------------------------------------------

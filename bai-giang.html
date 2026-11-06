@@ -54,6 +54,34 @@
     .sua label { display: block; font-size: 12.5px; font-weight: 600; margin: 8px 0 4px; }
     .can-dn { background: var(--tho-nhat); color: var(--tho-chu); border-left: 3px solid var(--tho); padding: 12px 16px; border-radius: 0 var(--r-sm) var(--r-sm) 0; margin-bottom: 20px; font-size: 14.5px; }
     .trong-ds { padding: 20px 0; color: var(--muc-3); text-align: center; }
+    /* Ngân hàng câu hỏi */
+    .nh-tom { display: flex; gap: 10px 18px; flex-wrap: wrap; align-items: center; margin-top: 10px; font-size: 14px; color: var(--muc-2); }
+    .nh-tom b { color: var(--luc); font-size: 20px; }
+    .nh-luoi { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 16px; margin-top: 16px; }
+    .nh-luoi label { display: grid; gap: 4px; font-size: 13px; font-weight: 600; color: var(--muc-2); }
+    .nh-luoi .input, .nh-luoi select { height: 38px; }
+    .nh-chuong { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 6px; font-size: 14px; }
+    .nh-chuong label { display: inline-flex; gap: 6px; align-items: center; font-weight: 400; color: var(--muc); }
+    .nh-chuong small { color: var(--muc-3); }
+    .nh-mt { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 14px; }
+    .nh-mt th, .nh-mt td { border-bottom: 1px solid var(--vien); padding: 7px 6px; text-align: center; }
+    .nh-mt th:first-child, .nh-mt td:first-child { text-align: left; }
+    .nh-mt input { width: 58px; height: 32px; text-align: center; border: 1px solid var(--bac); border-radius: var(--r-sm); font: inherit; }
+    .nh-mt small { display: block; color: var(--muc-3); font-size: 11.5px; }
+    .nh-mt input:disabled { background: var(--giay); color: var(--muc-3); }
+    .nh-cot-tong { font-weight: 700; color: var(--lam); }
+    .nh-act { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
+    .nh-xt { margin-top: 16px; }
+    .nh-c { border: 1px solid var(--vien); border-radius: var(--r-sm); padding: 12px 14px; margin-bottom: 10px; background: #fff; }
+    .nh-c-dau { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: 13px; color: var(--muc-3); margin-bottom: 6px; }
+    .nh-c-dau b { color: var(--lam); font-size: 15px; }
+    .nh-c-dau .btn { margin-left: auto; }
+    .nh-c .de { font-size: 15px; }
+    .nh-c .lc { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 4px 16px; margin-top: 6px; font-size: 14.5px; }
+    .nh-c .lc .dung { color: var(--luc); font-weight: 600; }
+    .nh-c .da { margin-top: 6px; font-size: 13.5px; color: var(--luc); font-weight: 600; }
+    .nh-thieu { background: var(--son-nhat); color: var(--son); border-radius: var(--r-sm); padding: 8px 12px; font-size: 13.5px; margin-top: 10px; }
+    .chip.muc { background: var(--tho-nhat); color: var(--tho-chu); }
     @media (max-width: 640px) { .bo { grid-template-columns: 1fr; } .bo-act { justify-content: flex-start; } .xt-cau div { grid-template-columns: 56px 1fr; } .xt-cau div span:nth-child(3), .xt-cau div span:nth-child(4) { display: none; } }
   </style>
   <script>
@@ -102,6 +130,55 @@
       <b>Chọn file đề .html</b> hoặc kéo thả vào đây
     </label>
     <div class="xem-truoc" id="xem-truoc"></div>
+  </section>
+
+  <section class="the" id="the-nh" hidden>
+    <h2>Tạo đề từ ngân hàng câu hỏi</h2>
+    <p>Rút ngẫu nhiên các câu <b>thầy đã duyệt</b> theo lớp, chương và số câu từng loại × mức độ, rồi lưu thành một bộ bài giảng như mọi bộ khác (trình chiếu, điện thoại học sinh, bình chọn, kết quả lớp). Câu nào đã dùng nhiều lần sẽ được ưu tiên đổi sang câu khác.</p>
+    <div class="nh-tom" id="nh-tom">Đang tải…</div>
+
+    <div id="nh-tao" hidden>
+      <div class="nh-luoi">
+        <label>Lớp<select class="input" id="nh-lop"></select></label>
+        <label>Môn<select class="input" id="nh-mon"></select></label>
+        <label>Tên đề<input class="input" id="nh-ten" maxlength="200" placeholder="vd Ôn tập giữa kì 1 – Đề số 1"></label>
+        <label>Ngày dạy<input class="input" id="nh-ngay" type="date"></label>
+      </div>
+      <div style="margin-top:14px;font-size:13px;font-weight:600;color:var(--muc-2)">Chương <button class="btn btn-chu btn-sm" type="button" id="nh-chon-het">Chọn hết / bỏ hết</button></div>
+      <div class="nh-chuong" id="nh-chuong"></div>
+      <div style="overflow-x:auto"><table class="nh-mt" id="nh-mt"></table></div>
+      <div class="nh-act">
+        <span class="xt-tom" style="margin:0">Mẫu nhanh:</span>
+        <button class="btn btn-vien btn-sm" type="button" data-mau="2025">Khuôn 2025 (12 · 4 · 6)</button>
+        <button class="btn btn-vien btn-sm" type="button" data-mau="10">10 câu A–D</button>
+        <button class="btn btn-vien btn-sm" type="button" data-mau="0">Xoá ma trận</button>
+        <label style="display:inline-flex;gap:6px;align-items:center;font-size:13.5px;margin-left:auto"><input type="checkbox" id="nh-it-dung" checked> Ưu tiên câu ít dùng</label>
+      </div>
+      <div class="nh-act">
+        <button class="btn btn-chinh" type="button" id="nh-xem">Xem trước đề</button>
+        <button class="btn btn-chinh" type="button" id="nh-luu" hidden>Lưu thành bộ bài giảng</button>
+        <span class="xt-tom" id="nh-xt-tom" style="margin:0"></span>
+      </div>
+      <div class="nh-xt" id="nh-xt"></div>
+    </div>
+
+    <details style="margin-top:18px">
+      <summary style="cursor:pointer;font-weight:600">Nạp câu đã duyệt từ máy nhà</summary>
+      <ol class="buoc-nhap">
+        <li>Trên máy nhà, duyệt câu trong file Excel <code>D:\GPU-work\duyet\*.xlsx</code> (cột <code>da_duyet</code> = 1; sửa <code>dap_an_cham</code> nếu cần làm tròn khác).</li>
+        <li>Chạy <code>xuat_ngan_hang_web.py</code> → được file <code>D:\GPU-work\xuat_web\ngan_hang_web.json</code>.</li>
+        <li>Kéo file đó vào ô dưới. Ngân hàng trên web sẽ <b>thay bằng đúng danh sách trong file</b> (câu thầy bỏ duyệt sẽ được gỡ; số lần đã dùng của câu cũ được giữ).</li>
+      </ol>
+      <label class="drop" id="nh-drop">
+        <input type="file" id="nh-file" accept=".json,application/json" hidden>
+        <b>Chọn file ngan_hang_web.json</b> hoặc kéo thả vào đây
+      </label>
+      <div class="xt-tom" id="nh-nap-tt"></div>
+      <div class="nh-act">
+        <button class="btn btn-vien btn-sm" type="button" id="nh-tao-ma">Tạo mã nạp tự động</button>
+        <span class="xt-tom" id="nh-ma-tt" style="margin:0">Dùng khi muốn script tự đẩy lên (<code>--day</code>), không cần kéo file.</span>
+      </div>
+    </details>
   </section>
 
   <section class="the" id="the-gemini" hidden>
@@ -402,6 +479,165 @@ $('form-dn').addEventListener('submit', async (e) => {
   } catch (err) { toast(err.message, 'loi'); nut.disabled = false; nut.textContent = 'Đăng nhập'; $('mk').select(); }
 });
 
+/* ---------- Ngân hàng câu hỏi: tạo đề ---------- */
+const NH_LOAI = ['abcd', 'dung_sai_4', 'tra_loi_ngan', 'dung_sai', 'tu_luan'];
+const NH_MUC = ['NB', 'TH', 'VD', 'VDC', '*'];
+const NH_MUC_TEN = { NB: 'Nhận biết', TH: 'Thông hiểu', VD: 'Vận dụng', VDC: 'Vận dụng cao', '*': 'Bất kỳ' };
+let nhTk = null, nhXt = [];
+const nhHomNay = () => { const d = new Date(); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0, 10); };
+
+async function nhTai() {
+  try { nhTk = await api('nh_thong_ke'); } catch (e) { $('nh-tom').textContent = e.message; return; }
+  $('nh-ma-tt').innerHTML = nhTk.token_luc ? 'Đã có mã nạp (tạo lúc ' + esc(nhTk.token_luc) + ').' : 'Dùng khi muốn script tự đẩy lên (<code>--day</code>), không cần kéo file.';
+  if (!nhTk.tong) {
+    $('nh-tom').innerHTML = '<span>Ngân hàng trên web <b>chưa có câu nào</b>. Duyệt câu trong Excel ở máy nhà rồi nạp lên (mục "Nạp câu đã duyệt" bên dưới).</span>';
+    $('nh-tao').hidden = true; return;
+  }
+  const lops = [...new Set(nhTk.nhom.map((g) => g.lop))];
+  $('nh-tom').innerHTML = `<span><b>${nhTk.tong}</b> câu đã duyệt</span><span>${lops.map((l) => 'Lớp ' + esc(l.replace(/^L0?/, ''))).join(' · ')}</span>${nhTk.nap_luc ? `<span>nạp lúc ${esc(nhTk.nap_luc)}</span>` : ''}`;
+  const lopCu = $('nh-lop').value;
+  $('nh-lop').innerHTML = lops.map((l) => `<option value="${esc(l)}">${/^L\d+$/.test(l) ? 'Lớp ' + esc(l.replace(/^L0?/, '')) : esc(l)}</option>`).join('');
+  if (lops.includes(lopCu)) $('nh-lop').value = lopCu;
+  if (!$('nh-ngay').value) $('nh-ngay').value = nhHomNay();
+  $('nh-tao').hidden = false;
+  nhVeMon();
+}
+function nhVeMon() {
+  const mons = [...new Set(nhTk.nhom.filter((g) => g.lop === $('nh-lop').value).map((g) => g.mon))];
+  $('nh-mon').innerHTML = mons.map((m) => `<option>${esc(m)}</option>`).join('');
+  nhVeChuong();
+}
+function nhNhomLoc(tatCaChuong) {
+  const ch = tatCaChuong ? null : new Set([...document.querySelectorAll('#nh-chuong input:checked')].map((x) => x.value));
+  return nhTk.nhom.filter((g) => g.lop === $('nh-lop').value && g.mon === $('nh-mon').value && (!ch || ch.has(g.chuong)));
+}
+function nhVeChuong() {
+  const dem = {};
+  nhNhomLoc(true).forEach((g) => { dem[g.chuong] = (dem[g.chuong] || 0) + g.n; });
+  $('nh-chuong').innerHTML = Object.entries(dem).map(([c, n]) => `<label><input type="checkbox" value="${esc(c)}" checked> ${esc(c)} <small>(${n})</small></label>`).join('');
+  nhVeMaTran();
+}
+function nhVeMaTran() {
+  const cu = nhDocMaTran();
+  const co = {};
+  nhNhomLoc(false).forEach((g) => { co[g.loai] = co[g.loai] || {}; co[g.loai][g.muc_do] = (co[g.loai][g.muc_do] || 0) + g.n; co[g.loai]['*'] = (co[g.loai]['*'] || 0) + g.n; });
+  const loais = NH_LOAI.filter((l) => co[l]);
+  $('nh-mt').innerHTML = `<tr><th>Loại câu</th>${NH_MUC.map((m) => `<th>${NH_MUC_TEN[m]}</th>`).join('')}<th>Cộng</th></tr>` +
+    (loais.length ? loais.map((l) => `<tr><td><b>${LOAI[l]}</b></td>${NH_MUC.map((m) => {
+      const n = (co[l] || {})[m] || 0;
+      return `<td><input type="number" min="0" max="${n}" data-l="${l}" data-m="${m}" value="${(cu[l] || {})[m] || 0}" ${n ? '' : 'disabled'}><small>có ${n}</small></td>`;
+    }).join('')}<td class="nh-cot-tong" data-tong="${l}">0</td></tr>`).join('') : '<tr><td colspan="7" class="trong-ds">Không có câu nào trong các chương đã chọn.</td></tr>') +
+    `<tr><td><b>Tổng số câu</b></td><td colspan="5"></td><td class="nh-cot-tong" id="nh-tong">0</td></tr>`;
+  nhCong();
+}
+function nhDocMaTran() {
+  const mt = {};
+  document.querySelectorAll('#nh-mt input').forEach((i) => { const v = parseInt(i.value, 10) || 0; if (v > 0) { mt[i.dataset.l] = mt[i.dataset.l] || {}; mt[i.dataset.l][i.dataset.m] = v; } });
+  return mt;
+}
+function nhCong() {
+  const mt = nhDocMaTran(); let t = 0;
+  document.querySelectorAll('[data-tong]').forEach((td) => { const s = Object.values(mt[td.dataset.tong] || {}).reduce((a, b) => a + b, 0); td.textContent = s; t += s; });
+  $('nh-tong').textContent = t;
+}
+function nhLoc() {
+  return { lop: $('nh-lop').value, mon: $('nh-mon').value, chuong: [...document.querySelectorAll('#nh-chuong input:checked')].map((x) => x.value),
+           uu_tien_it_dung: $('nh-it-dung').checked };
+}
+function nhVeCau(c, i) {
+  const lc = c.lua_chon || [];
+  const daDS = c.loai === 'dung_sai_4' ? c.dap_an.split(/\s*,\s*/) : [];
+  return `<div class="nh-c" data-i="${i}">
+    <div class="nh-c-dau"><b>Câu ${i + 1}</b><span class="chip">${LOAI[c.loai] || c.loai}</span><span class="chip muc">${esc(c.muc_do)}</span>
+      <span>${esc(c.chuong)}</span><span>· ${esc(c.nguon)}</span>${c.so_lan_dung ? `<span>· đã dùng ${c.so_lan_dung} lần</span>` : ''}
+      <button class="btn btn-vien btn-sm" type="button" data-doi="${i}">Đổi câu khác</button></div>
+    <div class="de">${c.de_html}</div>
+    ${lc.length ? `<div class="lc">${lc.map((o, k) => {
+      const dung = c.loai === 'abcd' ? o.k === c.dap_an : false;
+      const ds = c.loai === 'dung_sai_4' ? ` <b class="${daDS[k] === 'S' ? '' : 'dung'}">(${esc(daDS[k] || '?')})</b>` : '';
+      return `<div class="${dung ? 'dung' : ''}"><b>${esc(o.k)}${c.loai === 'abcd' ? '.' : ')'}</b> ${o.html}${ds}</div>`; }).join('')}</div>` : ''}
+    ${c.loai === 'tra_loi_ngan' ? `<div class="da">Đáp số: ${esc(c.dap_an)}</div>` : c.loai === 'abcd' ? `<div class="da">Đáp án: ${esc(c.dap_an)}</div>` : ''}
+  </div>`;
+}
+function nhVeXemTruoc(thieu) {
+  $('nh-xt').innerHTML = (thieu && thieu.length ? `<div class="nh-thieu">Không đủ câu: ${thieu.map((t) => `${LOAI[t.loai]} · ${NH_MUC_TEN[t.muc]}: cần ${t.can}, chỉ có ${t.co}`).join('; ')}. Đề dưới đây đã lấy hết số câu có.</div>` : '') +
+    nhXt.map(nhVeCau).join('');
+  $('nh-luu').hidden = !nhXt.length;
+  $('nh-xt-tom').textContent = nhXt.length ? `${nhXt.length} câu · ${nhXt.length * 3} slide` : '';
+  typeset($('nh-xt'));
+}
+$('nh-lop').addEventListener('change', nhVeMon);
+$('nh-mon').addEventListener('change', nhVeChuong);
+$('nh-chuong').addEventListener('change', nhVeMaTran);
+$('nh-mt').addEventListener('input', nhCong);
+$('nh-chon-het').addEventListener('click', () => { const bs = [...document.querySelectorAll('#nh-chuong input')]; const het = bs.every((b) => b.checked); bs.forEach((b) => { b.checked = !het; }); nhVeMaTran(); });
+document.querySelectorAll('[data-mau]').forEach((b) => b.addEventListener('click', () => {
+  const mau = { '2025': { abcd: 12, dung_sai_4: 4, tra_loi_ngan: 6 }, '10': { abcd: 10 }, '0': {} }[b.dataset.mau];
+  document.querySelectorAll('#nh-mt input').forEach((i) => { i.value = i.dataset.m === '*' && mau[i.dataset.l] && !i.disabled ? Math.min(mau[i.dataset.l], +i.max) : 0; });
+  nhCong();
+}));
+$('nh-xem').addEventListener('click', async (e) => {
+  const mt = nhDocMaTran();
+  if (!Object.keys(mt).length) { toast('Nhập số câu vào ma trận (hoặc bấm một mẫu nhanh).', 'loi'); return; }
+  e.target.disabled = true; e.target.textContent = 'Đang rút câu…';
+  try { const d = await api('nh_xem_truoc', { ...nhLoc(), ma_tran: mt }); nhXt = d.cau; nhVeXemTruoc(d.thieu); }
+  catch (err) { toast(err.message, 'loi'); }
+  e.target.disabled = false; e.target.textContent = 'Rút lại đề khác';
+});
+$('nh-xt').addEventListener('click', async (e) => {
+  const b = e.target.closest('[data-doi]'); if (!b) return;
+  const i = +b.dataset.doi, c = nhXt[i];
+  b.disabled = true;
+  try {
+    nhXt[i] = await api('nh_doi_cau', { ...nhLoc(), loai: c.loai, o: c.o, dang_co: nhXt.map((x) => x.id) });
+    const el = document.createElement('div'); el.innerHTML = nhVeCau(nhXt[i], i);
+    $('nh-xt').querySelector(`[data-i="${i}"]`).replaceWith(el.firstElementChild); typeset($('nh-xt'));
+  } catch (err) { toast(err.message, 'loi'); b.disabled = false; }
+});
+$('nh-luu').addEventListener('click', async (e) => {
+  const ten = $('nh-ten').value.trim();
+  if (!ten) { toast('Nhập tên đề.', 'loi'); $('nh-ten').focus(); return; }
+  e.target.disabled = true; e.target.textContent = 'Đang lưu…';
+  try {
+    const kq = await api('nh_tao_de', { ids: nhXt.map((c) => c.id), tieu_de: ten, ngay: $('nh-ngay').value });
+    toast(`Đã tạo bộ "${ten}" (${kq.so_cau} câu).`, 'ok');
+    $('nh-xt').innerHTML = `<div class="nh-c">Đã lưu <b>${esc(ten)}</b> · ${kq.so_cau} câu. <a class="btn btn-chinh btn-sm" href="trinh-chieu.html?bo=${encodeURIComponent(kq.ma)}">Trình chiếu ngay</a></div>`;
+    nhXt = []; $('nh-luu').hidden = true; $('nh-xt-tom').textContent = ''; $('nh-xem').textContent = 'Xem trước đề';
+    taiDs(); nhTai();
+  } catch (err) { toast(err.message, 'loi'); }
+  e.target.disabled = false; e.target.textContent = 'Lưu thành bộ bài giảng';
+});
+
+/* ---------- Ngân hàng: nạp file JSON từ máy nhà ---------- */
+async function nhNapFile(f) {
+  let d;
+  try { d = JSON.parse(await f.text()); } catch (e) { toast('File không phải JSON hợp lệ.', 'loi'); return; }
+  if (!d || !Array.isArray(d.cau) || !d.phien) { toast('File không đúng định dạng xuất của xuat_ngan_hang_web.py.', 'loi'); return; }
+  if (!d.cau.length) { toast('File chưa có câu nào được duyệt.', 'loi'); return; }
+  if (d.ban_thu && !confirm('Đây là BẢN THỬ, gồm cả câu CHƯA được duyệt. Chỉ nạp khi đang chạy thử. Tiếp tục?')) return;
+  if (!confirm(`Nạp ${d.cau.length} câu (xuất lúc ${d.tao_luc}). Ngân hàng trên web sẽ thay bằng đúng danh sách này. Tiếp tục?`)) return;
+  const tt = $('nh-nap-tt'); let xong = 0, loi = 0, lo = [], size = 0;
+  const gui = async () => { if (!lo.length) return; const k = await api('nh_nap', { phien: d.phien, cau: lo }); xong += lo.length; loi += k.so_loi; tt.textContent = `Đang nạp… ${xong}/${d.cau.length}`; if (k.so_loi) console.warn(k.loi); lo = []; size = 0; };
+  try {
+    for (const c of d.cau) { const b = JSON.stringify(c).length; if (lo.length && (size + b > 1500000 || lo.length >= 300)) await gui(); lo.push(c); size += b; }
+    await gui();
+    const k = await api('nh_nap_xong', { phien: d.phien });
+    tt.textContent = `Đã nạp xong: ngân hàng có ${k.con} câu${k.da_go ? `, gỡ ${k.da_go} câu không còn duyệt` : ''}${loi ? ` · ${loi} câu bị từ chối (xem Console)` : ''}.`;
+    toast('Đã nạp ngân hàng câu hỏi.', 'ok'); nhTai();
+  } catch (e) { tt.textContent = 'Lỗi: ' + e.message; toast(e.message, 'loi'); }
+}
+$('nh-file').addEventListener('change', (e) => { if (e.target.files[0]) nhNapFile(e.target.files[0]); e.target.value = ''; });
+['dragover', 'dragenter'].forEach((ev) => $('nh-drop').addEventListener(ev, (e) => { e.preventDefault(); $('nh-drop').classList.add('keo'); }));
+['dragleave', 'drop'].forEach((ev) => $('nh-drop').addEventListener(ev, () => $('nh-drop').classList.remove('keo')));
+$('nh-drop').addEventListener('drop', (e) => { e.preventDefault(); const f = [...e.dataTransfer.files].find((x) => /\.json$/i.test(x.name)); if (f) nhNapFile(f); });
+$('nh-tao-ma').addEventListener('click', async () => {
+  if (nhTk && nhTk.token_luc && !confirm('Tạo mã mới thì mã cũ hết hiệu lực. Tiếp tục?')) return;
+  try {
+    const t = (await api('nh_token_tao', {})).token;
+    $('nh-ma-tt').innerHTML = `Mã nạp (chỉ hiện một lần): <code>${esc(t)}</code> — lưu vào file <code>D:\\GPU-work\\.bdvh_ma_nap_ngan_hang</code> trên máy nhà.`;
+  } catch (e) { toast(e.message, 'loi'); }
+});
+
 let maVuaTao = '';
 $('tao-ma').addEventListener('click', async (e) => {
   if ($('ma-tt').dataset.co === '1' && !confirm('Tạo mã mới thì mã cũ (script đang chạy) hết hiệu lực — thầy phải dán lại script. Tiếp tục?')) return;
@@ -434,6 +670,8 @@ $('chep-script').addEventListener('click', async () => {
   $('the-ds').hidden = !laGV;
   if (!laGV) { setTimeout(() => $('mk').focus(), 50); return; }
   $('the-nhap').hidden = !laGV;
+  $('the-nh').hidden = !laGV;
+  if (laGV) nhTai();
   if (laGV) $('gemini-tt').innerHTML = coGemini ? 'Gemini đã sẵn sàng.' : '<b style="color:var(--son)">Chưa có khoá Gemini</b> — dán khoá ở khung "Khoá Gemini" phía trên.';
   taiDs();
 })();
