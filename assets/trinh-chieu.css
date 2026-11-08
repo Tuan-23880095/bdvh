@@ -60,7 +60,7 @@ body.tc { background: #0c1820; color: var(--muc); font-family: var(--sans); over
 .lc.c1 { grid-template-columns: 1fr; }
 .lc .o { display: flex; align-items: center; gap: .45em; padding: .28em .5em; border-radius: .3em; background: #fff; border: 2px solid var(--bac); min-width: 0; }
 .lc .o .k { flex: none; width: 1.45em; height: 1.45em; border-radius: 50%; display: grid; place-items: center; background: var(--lam); color: #fff; font-weight: 700; font-size: .8em; }
-.lc .o .t { min-width: 0; overflow-wrap: anywhere; }
+.lc .o .t { min-width: 0; overflow-wrap: normal; word-break: normal; }  /* không bẻ giữa từ/số: để fit() thấy tràn mà thu nhỏ chữ (tránh "19" thành "1/9") */
 .lc .o.dung { border-color: var(--luc); background: var(--luc-nhat); box-shadow: 0 0 0 3px var(--luc) inset; }
 .lc .o.dung .k { background: var(--luc); }
 .lc .o.mo { opacity: .38; }
