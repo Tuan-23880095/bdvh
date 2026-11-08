@@ -522,9 +522,15 @@
                   ${esc(d.q)}
                 </div>
               </div>
-              <span class="px-2.5 py-0.5 rounded text-[11px] font-bold flex-none ${isRight ? 'bg-emerald-100 text-luc' : 'bg-red-100 text-son'}">
-                ${isRight ? '✔ Đúng' : '✖ Sai'}
-              </span>
+              <div class="flex items-center gap-2 flex-none">
+                ${d.time_spent_seconds !== undefined ? `
+                  <span class="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-slate-100 text-slate-700 border border-slate-200" title="Thời gian làm câu này">
+                    <i class="fas fa-stopwatch text-lam"></i> ${d.time_spent_seconds}s
+                  </span>` : ''}
+                <span class="px-2.5 py-0.5 rounded text-[11px] font-bold ${isRight ? 'bg-emerald-100 text-luc' : 'bg-red-100 text-son'}">
+                  ${isRight ? '✔ Đúng' : '✖ Sai'}
+                </span>
+              </div>
             </div>
 
             <div class="text-xs space-y-1.5 pl-10">

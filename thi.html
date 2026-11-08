@@ -221,13 +221,19 @@
         const sectionBadge = q.section ? `<span class="text-[10px] uppercase font-bold text-luc bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded ml-2">${esc(q.section)}</span>` : '';
 
         return `
-          <div class="bg-white rounded-2xl p-5 border border-bac shadow-sm space-y-4" id="q-card-${idx}">
-            <div class="flex items-start gap-3">
-              <span class="w-8 h-8 rounded-full bg-slate-100 text-lam font-bold text-xs flex items-center justify-center flex-none border border-bac">
-                ${idx + 1}
-              </span>
-              <div class="font-medium text-sm sm:text-base text-muc leading-relaxed pt-1">
-                ${esc(q.q)} ${sectionBadge}
+          <div class="bg-white rounded-2xl p-5 border border-bac shadow-sm space-y-4" id="q-card-${idx}" onclick="setActiveQuestion(${idx})">
+            <div class="flex items-start justify-between gap-3">
+              <div class="flex items-start gap-3 flex-1">
+                <span class="w-8 h-8 rounded-full bg-slate-100 text-lam font-bold text-xs flex items-center justify-center flex-none border border-bac">
+                  ${idx + 1}
+                </span>
+                <div class="font-medium text-sm sm:text-base text-muc leading-relaxed pt-1">
+                  ${esc(q.q)} ${sectionBadge}
+                </div>
+              </div>
+              <div class="flex-none flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-xs font-mono text-gray-500 shadow-xs" title="Thời gian làm câu ${idx + 1}">
+                <i class="fas fa-stopwatch text-lam text-[10px]"></i>
+                <span id="q-time-${idx}">0s</span>
               </div>
             </div>
             ${q.svg ? `<div class="my-3 flex justify-center bg-white p-2 rounded-xl border border-gray-100 overflow-x-auto">${q.svg}</div>` : ''}
@@ -258,11 +264,13 @@
     }
 
     function selectOption(qIdx, optIdx) {
+      setActiveQuestion(qIdx);
       userAnswers[qIdx] = optIdx;
       updateProgress();
     }
 
     function selectTFOption(qIdx, sIdx, val) {
+      setActiveQuestion(qIdx);
       if (!userAnswers[qIdx] || typeof userAnswers[qIdx] !== 'object') {
         userAnswers[qIdx] = {};
       }
@@ -271,6 +279,7 @@
     }
 
     function selectShortAnswer(qIdx, val) {
+      setActiveQuestion(qIdx);
       userAnswers[qIdx] = val.trim();
       updateProgress();
     }
@@ -296,6 +305,10 @@
     }
 
     // TÍNH GIỜ THEO NHỊP ĐỘ: KHÔNG DỪNG BÀI KHI HẾT GIỜ, MÀ ĐO THỜI GIAN THỰC TẾ ĐỂ PHÂN TÍCH CHO HỌC SINH
+    function setActiveQuestion(idx) {
+      activeQIdx = idx;
+    }
+
     function startTimer(standardSeconds) {
       targetStandardSeconds = standardSeconds;
       durationSeconds = 0;
@@ -303,6 +316,16 @@
 
       timerInterval = setInterval(() => {
         durationSeconds++;
+        if (activeQIdx !== null && activeQIdx !== undefined && examData && examData.questions && activeQIdx < examData.questions.length) {
+          questionTimes[activeQIdx] = (questionTimes[activeQIdx] || 0) + 1;
+          const qTimeEl = document.getElementById(`q-time-${activeQIdx}`);
+          if (qTimeEl) {
+            const sec = questionTimes[activeQIdx];
+            const m = Math.floor(sec / 60);
+            const s = sec % 60;
+            qTimeEl.innerText = m > 0 ? `${m}m ${s}s` : `${s}s`;
+          }
+        }
         updateTimerDisplay();
       }, 1000);
     }
@@ -349,7 +372,8 @@
             student_name: currentStudentName,
             class_code: currentClassCode,
             answers: userAnswers,
-            duration_seconds: durationSeconds
+            duration_seconds: durationSeconds,
+            question_times: questionTimes
           })
         });
 

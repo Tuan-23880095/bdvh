@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Lý Thuyết Trọng Tâm & Phương Pháp Giải Toán 10 Cuối Kỳ I – ThS. Đinh Quốc Tuấn</title>
+<style>
+:root {
+  --luc: #0F6B55;
+  --lam: #1F4E79;
+  --muc: #10212B;
+  --giay: #F6F7F3;
+  --son: #B85042;
+  --tho: #D6A130;
+  --brown: #5A3E2B;
+  --slate: #36454F;
+  --ink: #1d1d1d;
+}
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html { background: #7f8c8d; }
+body {
+  margin: 0;
+  font-family: "Times New Roman", Times, "DejaVu Serif", serif;
+  font-size: 12.5pt;
+  line-height: 1.48;
+  color: var(--ink);
+}
+#flow {
+  width: 210mm;
+  margin: 0 auto;
+  background: #fff;
+  padding: 22mm 16mm 20mm 24mm;
+}
+.page {
+  width: 210mm;
+  height: 297mm;
+  margin: 8mm auto;
+  background: #fff;
+  position: relative;
+  box-shadow: 0 3px 14px rgba(0,0,0,.35);
+  overflow: hidden;
+}
+.page::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4.5mm;
+  background: linear-gradient(180deg, #1F4E79 0%, #0F6B55 50%, #B85042 100%);
+}
+.page .content {
+  position: absolute;
+  top: 22mm;
+  left: 22mm;
+  right: 15mm;
+  bottom: 20mm;
+  overflow: hidden;
+}
+.page .hdr {
+  position: absolute;
+  top: 7mm;
+  left: 22mm;
+  right: 15mm;
+  height: 11mm;
+  font-size: 9.5pt;
+  color: #444;
+  border-bottom: .8pt solid #1F4E79;
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  padding-bottom: 1mm;
+}
+.page .hdr img { height: 8.5mm; width: auto; object-fit: contain; }
+.page .hdr .l { flex: 1; font-weight: bold; color: #1F4E79; }
+.page .hdr .run { text-align: right; color: #0F6B55; font-style: italic; font-weight: bold; }
+.page .ftr {
+  position: absolute;
+  bottom: 7mm;
+  left: 22mm;
+  right: 15mm;
+  border-top: .6pt solid #bbb;
+  padding-top: 1.5mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 9pt;
+  color: #444;
+}
+.page .ftr .pn {
+  display: inline-block;
+  min-width: 7.5mm;
+  height: 7.5mm;
+  line-height: 7.5mm;
+  border-radius: 4mm;
+  background: #1F4E79;
+  color: #fff;
+  text-align: center;
+  font-size: 10pt;
+  font-weight: bold;
+}
+.page.cover::before, .page.cover .hdr, .page.cover .ftr { display: none; }
+.page.cover .content { top: 0; left: 0; right: 0; bottom: 0; }
+
+/* Bìa A4 chuẩn */
+.coverpage { height: 297mm; position: relative; }
+.cv {
+  position: absolute;
+  inset: 12mm 12mm 12mm 12mm;
+  border: 2.5pt double #1F4E79;
+  border-radius: 4mm;
+  padding: 8mm 10mm;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(circle at 88% 10%, #E8F4EE 0%, #fff 50%), #fff;
+}
+.logos { display: flex; align-items: center; justify-content: space-between; gap: 4mm; border-bottom: 1pt solid #D5DCE1; padding-bottom: 4mm; }
+.logos img { height: 22mm; width: auto; object-fit: contain; }
+.orgt { flex: 1; font-size: 11pt; line-height: 1.4; color: #1F4E79; }
+.orgt .o1 { font-weight: bold; text-transform: uppercase; }
+.orgt .o2 { font-weight: bold; color: #0F6B55; font-size: 11.5pt; }
+.band {
+  margin: 6mm auto 0;
+  padding: 2mm 7mm;
+  border-radius: 10mm;
+  background: linear-gradient(90deg, #1F4E79, #0F6B55);
+  color: #fff;
+  font-weight: bold;
+  font-size: 10.5pt;
+  letter-spacing: .4pt;
+  text-transform: uppercase;
+}
+.ttl { font-size: 23pt; font-weight: bold; color: #10212B; margin-top: 6mm; line-height: 1.25; text-transform: uppercase; }
+.ttl span { font-size: 14.5pt; color: #B85042; display: block; margin-top: 2mm; }
+.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 2mm; margin-top: 4mm; }
+.chip { padding: 1.2mm 4mm; border-radius: 5mm; font-size: 10.5pt; font-weight: bold; background: #F0FDF4; color: #0F6B55; border: .8pt solid #0F6B55; }
+.chip.alt { background: #EFF6FF; color: #1F4E79; border-color: #1F4E79; }
+.motto {
+  margin: 5mm auto 0;
+  padding: 3mm 8mm;
+  border-left: 3.5pt solid #D6A130;
+  border-right: 3.5pt solid #D6A130;
+  background: #FEF9E7;
+  border-radius: 2mm;
+  width: 92%;
+}
+.motto .mt { font-size: 13pt; font-weight: bold; font-style: italic; color: #7E5109; }
+.motto .ms { font-size: 9pt; color: #9A7D0A; text-transform: uppercase; letter-spacing: .8pt; margin-top: 1mm; }
+.stu {
+  margin-top: auto;
+  text-align: left;
+  font-size: 11.5pt;
+  line-height: 1.9;
+  border: 1pt dashed #95A5A6;
+  border-radius: 2.5mm;
+  padding: 2.5mm 5mm;
+  background: #FAFAFA;
+}
+.dl { display: inline-block; border-bottom: 1pt dotted #555; width: 110mm; }
+.dl.s { width: 42mm; }
+.au { margin-top: 4mm; font-size: 12pt; font-weight: bold; color: #1F4E79; }
+.cp { font-size: 9.5pt; color: #555; margin-top: 1mm; font-style: italic; }
+
+/* Định dạng nội dung lý thuyết */
+p { margin: 0 0 5pt; text-align: justify; }
+ul, ol { margin: 0 0 5pt; padding-left: 6.5mm; }
+li { margin: 0 0 2.5pt; text-align: justify; }
+h1.sec-head {
+  font-size: 15.5pt;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(90deg, #1F4E79, #0F6B55);
+  padding: 2.5mm 4mm;
+  border-radius: 2mm;
+  margin: 0 0 7pt;
+  line-height: 1.25;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+h1.sec-head .t-badge {
+  font-size: 10pt;
+  background: #FEF3C7;
+  color: #92400E;
+  padding: .8mm 3mm;
+  border-radius: 3mm;
+  font-weight: bold;
+}
+h2.sub-head {
+  font-size: 13.5pt;
+  color: #B85042;
+  border-bottom: 1.2pt solid #B85042;
+  padding-bottom: 1mm;
+  margin: 8pt 0 5pt;
+}
+h3.mini-head {
+  font-size: 12.5pt;
+  color: #1F4E79;
+  margin: 6pt 0 3pt;
+}
+.box {
+  border: .8pt solid #CBD5E0;
+  border-left: 3.5pt solid #1F4E79;
+  border-radius: 2.5mm;
+  padding: 4pt 8pt 3pt;
+  margin: 5pt 0 7pt;
+  background: #F8FAFC;
+}
+.box .bt { font-weight: bold; color: #1F4E79; margin-bottom: 2.5pt; font-size: 12.5pt; }
+.box.formula { background: #F0FDF4; border-color: #A7F3D0; border-left-color: #0F6B55; }
+.box.formula .bt { color: #0F6B55; }
+.box.method { background: #FFFBEB; border-color: #FDE68A; border-left-color: #D97706; }
+.box.method .bt { color: #B45309; }
+.box.warn { background: #FEF2F2; border-color: #FECACA; border-left-color: #DC2626; }
+.box.warn .bt { color: #B91C1C; }
+.box.example { background: #FCFBF8; border-color: #E2E8F0; border-left-color: #5A3E2B; }
+.box.example .bt { color: #5A3E2B; }
+
+table.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 5pt 0 8pt;
+  font-size: 11.5pt;
+}
+table.tbl th, table.tbl td {
+  border: .6pt solid #94A3B8;
+  padding: 3.5pt 6pt;
+  vertical-align: middle;
+}
+table.tbl th {
+  background: #E2E8F0;
+  color: #1E293B;
+  font-weight: bold;
+  text-align: center;
+}
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4mm;
+  align-items: start;
+}
+.pb { break-before: page; }
+.keep { break-inside: avoid; page-break-inside: avoid; }
+.center { text-align: center; }
+.tool {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  background: #10212B;
+  color: #fff;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font: 12.5px Arial, sans-serif;
+  box-shadow: 0 3px 12px rgba(0,0,0,.35);
+  z-index: 99;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.tool button {
+  background: #0F6B55;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.page .content, #flow { overflow-wrap: anywhere; }
+mjx-container { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+mjx-container[display="true"] { margin: 3pt 0 !important; }
+
+@media print {
+  html, body { background: #fff; }
+  .page { margin: 0; box-shadow: none; break-after: page; }
+  .tool { display: none !important; }
+}
+@page { size: A4; margin: 0; }
+</style>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  startup: {
+    pageReady: () => {
+      return MathJax.startup.defaultPageReady().then(() => {
+        if(typeof window.runPagination === 'function') window.runPagination();
+      });
+    }
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body data-left="Tài liệu Lý thuyết & Phương pháp giải Toán 10 Cuối Kỳ I">
+<div class="tool">
+  <b class="np">Đang tải MathJax và dàn trang...</b>
+  <button onclick="window.print()">🖨 In / Lưu PDF (Ctrl+P, khổ A4, lề 0)</button>
+</div>
+<div id="book"></div>
+<div id="flow">
+
+<div class="coverpage pb" data-run="Bìa & Khung chương trình">
+  <div class="cv">
+    <div class="logos">
+      <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/ttbdvh.jpg?alt=media&token=f270aa9b-a2bc-48e8-8910-80742b542615" alt="TTBDVH"/>
+      <div class="orgt">
+        <div class="o1">TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN – ĐHQG-HCM</div>
+        <div class="o2">TRUNG TÂM BỒI DƯỠNG VĂN HÓA &amp; LUYỆN THI</div>
+        <div style="font-size:10pt;color:#555;margin-top:1mm;">Hệ thống Giáo trình Chuẩn Chương trình GDPT 2018 · Kết nối tri thức &amp; Chân trời sáng tạo</div>
+      </div>
+      <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738" alt="HCMUS"/>
+    </div>
+    <div class="band">TÀI LIỆU LÝ THUYẾT CHUYÊN SÂU · GIẢNG DẠY TRONG 3 TIẾNG (180 PHÚT)</div>
+    <div class="ttl">
+      HỆ THỐNG LÝ THUYẾT TRỌNG TÂM &amp; PHƯƠNG PHÁP GIẢI<br/>TOÁN 10 – HỌC KỲ I
+      <span>Bám sát Đề CK1 THPT Lương Thế Vinh (Mã 100) &amp; Đề Cương Ôn Tập CK1 (Bộ 2)</span>
+    </div>
+    <div class="chips">
+      <span class="chip">1. Mệnh đề &amp; Tập hợp (25p)</span>
+      <span class="chip alt">2. BPT &amp; Hệ BPT bậc nhất 2 ẩn – Tối ưu (30p)</span>
+      <span class="chip">3. Hàm số &amp; Đồ thị Parabol bậc hai (35p)</span>
+      <span class="chip alt">4. Hệ thức lượng trong tam giác (30p)</span>
+      <span class="chip">5. Vectơ – Tích vô hướng – Tọa độ (40p)</span>
+      <span class="chip alt">6. Thống kê: Xu thế trung tâm &amp; Độ phân tán (20p)</span>
+    </div>
+
+    <svg viewBox="0 0 600 135" style="width:100%;height:auto;margin-top:5mm;">
+      <rect x="2" y="2" width="596" height="131" rx="10" fill="#F8FAFC" stroke="#CBD5E0" stroke-width="1.2"/>
+      <!-- Minh họa 1: Parabol cổng vòm -->
+      <g transform="translate(20,12)">
+        <rect x="0" y="0" width="170" height="110" rx="6" fill="#fff" stroke="#94A3B8"/>
+        <line x1="15" y1="92" x2="155" y2="92" stroke="#334155" stroke-width="1.2"/>
+        <line x1="85" y1="10" x2="85" y2="102" stroke="#334155" stroke-width="1.2"/>
+        <path d="M 35 92 Q 85 -25 135 92" fill="none" stroke="#B85042" stroke-width="2.2"/>
+        <rect x="60" y="48" width="50" height="44" fill="#FEF3C7" stroke="#D97706" stroke-width="1.2"/>
+        <text x="85" y="105" font-size="9.5" text-anchor="middle" font-weight="bold" fill="#1F4E79">Hàm bậc hai: Cổng Parabol</text>
+      </g>
+      <!-- Minh họa 2: Hệ thức lượng & Vectơ -->
+      <g transform="translate(215,12)">
+        <rect x="0" y="0" width="170" height="110" rx="6" fill="#fff" stroke="#94A3B8"/>
+        <polygon points="30,85 145,85 65,22" fill="#ECFDF5" stroke="#0F6B55" stroke-width="1.8"/>
+        <line x1="65" y1="22" x2="87.5" y2="85" stroke="#DC2626" stroke-width="1.4" stroke-dasharray="3,2"/>
+        <circle cx="80" cy="64" r="3" fill="#DC2626"/>
+        <text x="62" y="18" font-size="10" font-weight="bold" fill="#0F6B55">A</text>
+        <text x="20" y="88" font-size="10" font-weight="bold" fill="#0F6B55">B</text>
+        <text x="150" y="88" font-size="10" font-weight="bold" fill="#0F6B55">C</text>
+        <text x="88" y="65" font-size="9" font-weight="bold" fill="#DC2626">G</text>
+        <text x="85" y="105" font-size="9.5" text-anchor="middle" font-weight="bold" fill="#0F6B55">Hệ thức lượng &amp; Vectơ</text>
+      </g>
+      <!-- Minh họa 3: Quy hoạch tuyến tính & Boxplot -->
+      <g transform="translate(410,12)">
+        <rect x="0" y="0" width="170" height="110" rx="6" fill="#fff" stroke="#94A3B8"/>
+        <polygon points="25,85 25,35 65,25 115,50 135,85" fill="#DBEAFE" stroke="#1D4ED8" stroke-width="1.6"/>
+        <circle cx="65" cy="25" r="3.5" fill="#DC2626"/>
+        <circle cx="115" cy="50" r="3.5" fill="#DC2626"/>
+        <text x="82" y="62" font-size="9" font-weight="bold" fill="#1E40AF">Miền đa giác</text>
+        <text x="85" y="105" font-size="9.5" text-anchor="middle" font-weight="bold" fill="#1F4E79">Miền nghiệm &amp; Tối ưu F(x,y)</text>
+      </g>
+    </svg>
+
+    <div class="motto">
+      <div class="mt">“Nắm vững bản chất định lý – Làm chủ kỹ thuật biến đổi – Tự tin chinh phục 9+ Cuối kỳ I”</div>
+      <div class="ms">Tuyên ngôn Sư phạm · Thời lượng 180 phút lý thuyết thuần túy (Tách biệt thời gian giải đề)</div>
+    </div>
+
+    <div class="stu">
+      <div>👤 <b>Họ và tên học sinh:</b> <span class="dl"></span></div>
+      <div>🏫 <b>Trường / Lớp:</b> <span class="dl s"></span> &nbsp;&nbsp; 📅 <b>Ngày học:</b> <span class="dl s"></span></div>
+    </div>
+
+    <div class="au">Biên soạn &amp; Giảng dạy: ThS. Đinh Quốc Tuấn</div>
+    <div class="cp">© Bản quyền thuộc ThS. Đinh Quốc Tuấn – Mục đích phi lợi nhuận – Vì giáo dục.</div>
+  </div>
+</div>
+
+<div class="pb" data-run="Kế hoạch giảng dạy 180 phút">
+  <h1 class="sec-head"><span>KẾ HOẠCH PHÂN BỔ THỜI LƯỢNG GIẢNG DẠY LÝ THUYẾT (180 PHÚT)</span><span class="t-badge">3 Tiếng Lý Thuyết</span></h1>
+  <p>Tài liệu này tổng hợp <b>toàn bộ hệ thống lý thuyết nền tảng, công thức giải nhanh, phương pháp tư duy và các bẫy sai lầm thường gặp</b> của 2 tài liệu bài tập: <i>(1) Đề kiểm tra cuối kỳ I Toán 10 THPT Lương Thế Vinh – Mã đề 100</i> và <i>(2) Đề cương Ôn tập cuối kỳ I Toán 10 – Bộ 2 (12 TN + 2 Đ/S + 18 bài Tự luận)</i>. Thời gian làm bài tập thực hành của học sinh được bố trí ở buổi riêng, không tính vào 180 phút giảng lý thuyết này.</p>
+  <table class="tbl">
+    <thead>
+      <tr>
+        <th style="width:12%">Chuyên đề</th>
+        <th style="width:13%">Thời lượng</th>
+        <th style="width:45%">Nội dung lý thuyết &amp; kỹ năng cốt lõi</th>
+        <th style="width:30%">Đối chiếu câu hỏi trong 2 File</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="center"><b>Chuyên đề 1</b></td>
+        <td class="center"><b>25 phút</b><br/>(0:00 – 0:25)</td>
+        <td>Mệnh đề toán học, mệnh đề chứa biến, lượng từ $\forall, \exists$ và phủ định. Tập hợp con của $\mathbb{R}$, phép toán $A\cap B, A\cup B, A\setminus B, C_{\mathbb{R}}A$, bài toán chứa tham số $m$ và sơ đồ Ven 2 tập hợp.</td>
+        <td>• <b>Đề LTV:</b> Phần I – Câu 1, 2<br/>• <b>Bộ 2:</b> TN Câu 1, 2; Tự luận Bài 1, 2, 3</td>
+      </tr>
+      <tr>
+        <td class="center"><b>Chuyên đề 2</b></td>
+        <td class="center"><b>30 phút</b><br/>(0:25 – 0:55)</td>
+        <td>Bất phương trình &amp; Hệ BPT bậc nhất hai ẩn $ax+by \le c$. Quy tắc "Vẽ bờ – Thử điểm", đọc ngược hệ BPT từ hình vẽ miền nghiệm, và thuật toán 4 bước giải bài toán tối ưu kinh tế $F(x,y)=mx+ny$.</td>
+        <td>• <b>Đề LTV:</b> Phần I – Câu 3, 4<br/>• <b>Bộ 2:</b> TN Câu 3; Tự luận Bài 4, 5</td>
+      </tr>
+      <tr>
+        <td class="center"><b>Chuyên đề 3</b></td>
+        <td class="center"><b>35 phút</b><br/>(0:55 – 1:30)</td>
+        <td>Hàm số, Tập xác định, Hàm cho bởi nhiều công thức. Hàm số bậc hai $y=ax^2+bx+c$: Đỉnh $S$, trục đối xứng, sự biến thiên, vẽ Parabol, tìm hàm số và mô hình hóa bài toán thực tế (cổng Parabol, quỹ đạo bóng).</td>
+        <td>• <b>Đề LTV:</b> Phần I – Câu 5, 6, 7; Phần II – Câu 1, 2; Phần III – Câu 1, 2<br/>• <b>Bộ 2:</b> TN Câu 4, 5; Đ/S Câu 13; TL Bài 6, 7, 8, 9</td>
+      </tr>
+      <tr>
+        <td class="center"><b>Chuyên đề 4</b></td>
+        <td class="center"><b>30 phút</b><br/>(1:30 – 2:00)</td>
+        <td>Giá trị lượng giác góc từ $0^\circ$ đến $180^\circ$ (bù nhau, phụ nhau, hệ thức cơ bản). Định lý Côsin, Định lý Sin, 5 công thức diện tích tam giác và ứng dụng đo đạc khoảng cách thực tế.</td>
+        <td>• <b>Đề LTV:</b> Phần I – Câu 8, 9<br/>• <b>Bộ 2:</b> TN Câu 6, 7, 8; Tự luận Bài 10, 11, 12, 13</td>
+      </tr>
+      <tr>
+        <td class="center"><b>Chuyên đề 5</b></td>
+        <td class="center"><b>40 phút</b><br/>(2:00 – 2:40)</td>
+        <td>Vectơ: cùng phương, cùng hướng, hai vectơ bằng nhau. Quy tắc 3 điểm, hình bình hành, hiệu, trung điểm, trọng tâm. Kỹ thuật phân tích vectơ theo cơ sở $\vec{u},\vec{v}$ để chứng minh 3 điểm thẳng hàng. Tích vô hướng &amp; Hệ trục tọa độ $Oxy$.</td>
+        <td>• <b>Đề LTV:</b> Phần I – Câu 10–15; Phần II – Câu 3; Phần III – Câu 3a, 3b<br/>• <b>Bộ 2:</b> TN Câu 9, 10, 11; Tự luận Bài 14, 15, 16</td>
+      </tr>
+      <tr>
+        <td class="center"><b>Chuyên đề 6</b></td>
+        <td class="center"><b>20 phút</b><br/>(2:40 – 3:00)</td>
+        <td>Thống kê mẫu số liệu không ghép nhóm: Số trung bình $\bar{x}$, trung vị $M_e$, tứ phân vị $Q_1, Q_2, Q_3$, mốt $M_o$. Khoảng biến thiên $R$, khoảng tứ phân vị $\Delta_Q$, phương sai $s^2$, độ lệch chuẩn $s$ và phát hiện giá trị bất thường (Outliers).</td>
+        <td>• <b>Bộ 2:</b> TN Câu 12; Đ/S Câu 14; Tự luận Bài 17, 18</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="box note">
+    <div class="bt">💡 Định hướng sư phạm từ Bộ Não Thứ Hai (GDPT 2018 – Vùng giao thoa KNTT &amp; CTST)</div>
+    <p>Theo ma trận đối chiếu chương trình mới tại <code>D:\GPU-work\Bo-Nao</code>, học kỳ I lớp 10 tập trung kiểm tra năng lực <b>tư duy mô hình hóa thực tế</b> (bài toán cổng vòm Parabol, bài toán tối ưu sản xuất bàn ghế, đo khoảng cách qua sông) và <b>tư duy biến đổi đại số – hình học vectơ</b> (phân tích vectơ theo 2 vectơ không cùng phương, ứng dụng tích vô hướng chứng minh vuông góc). Giáo viên cần nhấn mạnh bản chất hình học song song với công thức đại số.</p>
+  </div>
+</div>
+
+<div class="pb" data-run="Chuyên đề 1 · Mệnh đề và Tập hợp (25 phút)">
+  <h1 class="sec-head"><span>CHUYÊN ĐỀ 1. MỆNH ĐỀ TOÁN HỌC VÀ TẬP HỢP</span><span class="t-badge">Thời lượng: 25 phút</span></h1>
+
+  <h2 class="sub-head">1.1. Mệnh đề, Mệnh đề chứa biến và Lượng từ ($\forall, \exists$)</h2>
+  <div class="box formula">
+    <div class="bt">📌 Định nghĩa &amp; Quy tắc Phủ định Mệnh đề có Lượng từ</div>
+    <ul>
+      <li><b>Mệnh đề lôgic:</b> Là một khẳng định có tính <b>Đúng</b> hoặc <b>Sai</b> rõ ràng (không thể vừa đúng vừa sai). Câu cảm thán, câu hỏi, hoặc câu phụ thuộc biến chưa gán giá trị (như $x+2 > 5$) <i>không phải</i> là mệnh đề (mà là mệnh đề chứa biến $P(x)$).</li>
+      <li><b>Ký hiệu phổ biến ($\forall$ – "với mọi") và tồn tại ($\exists$ – "tồn tại ít nhất một"):</b>
+        <ul>
+          <li>Mệnh đề "$\forall x \in X, P(x)$" <b>ĐÚNG</b> khi mọi phần tử $x_0 \in X$ đều làm cho $P(x_0)$ đúng. Muốn chứng minh nó <b>SAI</b>, chỉ cần chỉ ra <b>1 phản ví dụ</b> $x_0 \in X$ sao cho $P(x_0)$ sai.</li>
+          <li>Mệnh đề "$\exists x \in X, P(x)$" <b>ĐÚNG</b> khi tìm được ít nhất 1 giá trị $x_0 \in X$ làm cho $P(x_0)$ đúng.</li>
+        </ul>
+      </li>
+      <li><b>Quy tắc lấy phủ định (Đổi lượng từ $\leftrightarrow$ Phủ định tính chất):</b>
+        $$\overline{\forall x \in X,\ P(x)} \iff \exists x \in X,\ \overline{P(x)} \qquad\text{và}\qquad \overline{\exists x \in X,\ P(x)} \iff \forall x \in X,\ \overline{P(x)}$$
+      </li>
+    </ul>
+  </div>
+
+  <table class="tbl keep">
+    <thead>
+      <tr>
+        <th>Quan hệ ban đầu $P(x)$</th>
+        <th>Phủ định $\overline{P(x)}$</th>
+        <th>Ví dụ trong đề thi (Lương Thế Vinh &amp; Bộ 2)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="center">$A = B$</td>
+        <td class="center">$A \ne B$</td>
+        <td>Phủ định của "$\exists x\in\mathbb{R}, x^2+1=0$" là "$\forall x\in\mathbb{R}, x^2+1\ne 0$".</td>
+      </tr>
+      <tr>
+        <td class="center">$A > B$</td>
+        <td class="center">$A \le B$</td>
+        <td><b>Câu 1 (Đề LTV):</b> Phủ định của "$\forall x\in\mathbb{R}, x^2 > 2$" là "$\exists x\in\mathbb{R}, x^2 \le 2$".</td>
+      </tr>
+      <tr>
+        <td class="center">$A < B$</td>
+        <td class="center">$A \ge B$</td>
+        <td>Phủ định của "$\exists x\in\mathbb{Q}, x^2 < 0$" là "$\forall x\in\mathbb{Q}, x^2 \ge 0$".</td>
+      </tr>
+      <tr>
+        <td class="center">Chia hết cho $k$</td>
+        <td class="center">Không chia hết cho $k$</td>
+        <td><b>Câu 1 (Bộ 2):</b> "$\forall n\in\mathbb{N}, n^2+n \vdots 2$" là mệnh đề <b>Đúng</b> vì $n(n+1)$ là tích 2 số tự nhiên liên tiếp.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="box warn keep">
+    <div class="bt">⚠️ Hai lỗi sai kinh điển học sinh hay mắc</div>
+    <ol>
+      <li><b>Quên đổi dấu bằng khi phủ định bất đẳng thức:</b> Phủ định của "$x^2 > 2$" là "$x^2 \le 2$" chứ <b>không phải</b> "$x^2 < 2$" (bẫy phương án D ở Câu 1 đề LTV).</li>
+      <li><b>Đổi cả điều kiện thuộc tập hợp:</b> Khi phủ định "$\forall x \in \mathbb{R}, P(x)$", ta giữ nguyên "$\exists x \in \mathbb{R}$", tuyệt đối <b>không</b> đổi thành "$x \notin \mathbb{R}$".</li>
+    </ol>
+  </div>
+
+  <h2 class="sub-head">1.2. Các tập con của $\mathbb{R}$ và Phép toán trên Tập hợp</h2>
+  <div class="grid2 keep">
+    <div class="box formula" style="margin:0;">
+      <div class="bt">1. Bốn phép toán tập hợp cốt lõi</div>
+      <ul>
+        <li><b>Giao ($A \cap B$):</b> Gồm các phần tử thuộc <b>cả $A$ và $B$</b>:
+          $$x \in A \cap B \iff \begin{cases} x \in A \\ x \in B \end{cases}$$</li>
+        <li><b>Hợp ($A \cup B$):</b> Gồm các phần tử thuộc $A$ <b>hoặc</b> thuộc $B$:
+          $$x \in A \cup B \iff \left[\begin{array}{l} x \in A \\ x \in B \end{array}\right.$$</li>
+        <li><b>Hiệu ($A \setminus B$):</b> Thuộc $A$ nhưng <b>không thuộc $B$</b>:
+          $$x \in A \setminus B \iff \begin{cases} x \in A \\ x \notin B \end{cases}$$</li>
+        <li><b>Phần bù ($C_E A$):</b> Khi $A \subset E$ thì $C_E A = E \setminus A$. Đặc biệt $C_{\mathbb{R}} A = \mathbb{R} \setminus A$.</li>
+      </ul>
+    </div>
+    <div class="box method" style="margin:0;">
+      <div class="bt">2. Quy tắc đổi ngoặc khi lấy Hiệu / Phần bù</div>
+      <p>Khi lấy $A \setminus B$ hoặc $C_{\mathbb{R}} A$ tại các đầu mút biên:</p>
+      <ul>
+        <li>Nếu phần tử biên <b>đã thuộc $B$</b> (ngoặc vuông <code>[</code> hoặc <code>]</code> ở $B$), thì sau khi trừ đi $B$, phần tử đó <b>mất đi</b> $\rightarrow$ đổi thành ngoặc tròn <code>(</code> hoặc <code>)</code>.</li>
+        <li>Nếu phần tử biên <b>không thuộc $B$</b> (ngoặc tròn ở $B$), thì sau khi trừ đi $B$, phần tử đó <b>vẫn còn lại</b> $\rightarrow$ đổi thành ngoặc vuông <code>[</code> hoặc <code>]</code>.</li>
+        <li><i>Ví dụ (Bài 1 – Bộ 2):</i> Cho $A = [-1; 4)$ và $B = [2; +\infty)$:
+          <ul>
+            <li>$A \cap B = [2; 4)$ &nbsp;|&nbsp; $A \cup B = [-1; +\infty)$</li>
+            <li>$B \setminus A = [4; +\infty)$ (vì $4 \notin A$ nên $4 \in B\setminus A$)</li>
+            <li>$C_{\mathbb{R}} A = (-\infty; -1) \cup [4; +\infty)$</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="sub-head">1.3. Hai dạng toán vận dụng: Tham số $m$ và Biểu đồ Ven thực tế</h2>
+  <div class="grid2 keep">
+    <div class="box example" style="margin:0;">
+      <div class="bt">Dạng 1: Tìm $m$ để $A \subset B$ (Bài 2 – Bộ 2)</div>
+      <p><b>Phương pháp:</b> Vẽ sơ đồ trục số, sắp thứ tự các đầu mút từ trái sang phải rồi kiểm tra dấu bằng tại biên.</p>
+      <p><b>Ví dụ:</b> Tìm $m$ để $[m; m+2] \subset (-1; 5)$.</p>
+      <p>Vì $m < m+2$ luôn đúng (độ dài đoạn bằng $2 > 0$), để đoạn $[m; m+2]$ nằm trọn trong khoảng mở $(-1; 5)$:</p>
+      $$\begin{cases} -1 < m \\ m+2 < 5 \end{cases} \iff \begin{cases} m > -1 \\ m < 3 \end{cases} \iff -1 < m < 3.$$
+      <p><i>Lưu ý:</i> Nếu $m=-1$ thì $-1 \in [m;m+2]$ nhưng $-1 \notin (-1;5)$ nên không lấy dấu bằng!</p>
+    </div>
+    <div class="box example" style="margin:0;">
+      <div class="bt">Dạng 2: Công thức lực lượng &amp; Biểu đồ Ven (Bài 3 – Bộ 2)</div>
+      <p><b>Công thức hợp hai tập hữu hạn:</b></p>
+      $$n(A \cup B) = n(A) + n(B) - n(A \cap B)$$
+      <p>Số phần tử không thuộc cả $A$ và $B$ trong tập vũ trụ $U$:</p>
+      $$n(\overline{A \cup B}) = n(U) - n(A \cup B)$$
+      <p><b>Áp dụng Bài 3:</b> Lớp có $n(U)=45$, bóng đá $n(A)=20$, cầu lông $n(B)=18$, cả hai môn $n(A\cap B)=7$:</p>
+      <ul>
+        <li>Chơi ít nhất 1 môn: $n(A\cup B) = 20 + 18 - 7 = 31$.</li>
+        <li>Không chơi môn nào: $45 - 31 = 14$ (học sinh).</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="pb" data-run="Chuyên đề 2 · BPT và Hệ BPT bậc nhất hai ẩn (30 phút)">
+  <h1 class="sec-head"><span>CHUYÊN ĐỀ 2. BẤT PHƯƠNG TRÌNH &amp; HỆ BPT BẬC NHẤT HAI ẨN</span><span class="t-badge">Thời lượng: 30 phút</span></h1>
+
+  <h2 class="sub-head">2.1. Nhận diện Bất phương trình bậc nhất hai ẩn và Biểu diễn Miền nghiệm</h2>
+  <div class="box formula">
+    <div class="bt">📌 Định nghĩa chuẩn &amp; Cấu trúc Đường thẳng bờ</div>
+    <ul>
+      <li><b>Bất phương trình bậc nhất hai ẩn $x, y$</b> có dạng tổng quát:
+        $$ax + by \le c \quad (\text{hoặc } ax + by \ge c,\ ax + by < c,\ ax + by > c)$$
+        trong đó $a, b, c \in \mathbb{R}$ và $a, b$ không đồng thời bằng $0$ ($a^2 + b^2 > 0$). Số mũ của $x$ và $y$ bắt buộc là <b>bậc 1</b>, không có tích $xy$, không có $x^2, y^2$. (<i>Ứng dụng Câu 3 Đề LTV:</i> Chọn $x - 2y > 0$).</li>
+      <li><b>Đường thẳng bờ $\Delta: ax + by = c$</b> chia mặt phẳng tọa độ $Oxy$ thành hai nửa mặt phẳng:
+        <ul>
+          <li>BPT có dấu $\le$ hoặc $\ge$: Miền nghiệm <b>kể cả đường bờ $\Delta$</b> (vẽ đường nét liền).</li>
+          <li>BPT có dấu $<$ hoặc $>$: Miền nghiệm <b>không kể đường bờ $\Delta$</b> (vẽ đường nét đứt hoặc loại trừ bờ).</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <div class="box method keep">
+    <div class="bt">🛠️ Quy tắc 3 bước "Vẽ bờ – Thử điểm – Gạch bỏ" &amp; Đọc ngược hệ BPT từ hình vẽ</div>
+    <div class="grid2">
+      <div>
+        <p><b>Bài toán thuận (Biểu diễn miền nghiệm):</b></p>
+        <ol>
+          <li><b>Bước 1 (Vẽ bờ):</b> Vẽ đường thẳng $\Delta: ax + by = c$ bằng cách lấy 2 điểm thuộc $\Delta$ (thường cho $x=0 \Rightarrow y$ và $y=0 \Rightarrow x$).</li>
+          <li><b>Bước 2 (Thử điểm):</b> Chọn một điểm $M_0(x_0; y_0) \notin \Delta$ (ưu tiên gốc tọa độ $O(0;0)$ nếu $c \ne 0$; nếu $\Delta$ đi qua $O$ thì chọn $(1;0)$ hoặc $(0;1)$ hoặc điểm dễ nhìn trong miền trắng).</li>
+          <li><b>Bước 3 (Kết luận):</b> Thay $(x_0; y_0)$ vào BPT. Nếu đúng thì nửa mặt phẳng chứa $M_0$ là miền nghiệm (gạch bỏ nửa kia).</li>
+        </ol>
+      </div>
+      <div>
+        <p><b>Bài toán ngược (Nhận diện hệ BPT từ hình vẽ – Câu 4 Đề LTV):</b></p>
+        <ol>
+          <li><b>Kiểm tra đường bờ:</b> Đề ghi "kể cả bờ" $\rightarrow$ loại ngay các phương án dùng dấu $<$ hoặc $>$ (loại D).</li>
+          <li><b>Chọn 1 điểm đại diện nằm rõ trong miền không gạch:</b> Ví dụ trên hình Câu 4 Đề LTV, đường $d_1: x - 2y = 0$ đi qua $O(0;0)$, nên ta chọn điểm $M(0; 1)$ hoặc $N(-2; 1)$ nằm trong miền trắng phía trên:
+            <ul>
+              <li>Thay $M(0; 1)$ vào $x - 2y$: được $0 - 2(1) = -2 \le 0 \Rightarrow x - 2y \le 0$.</li>
+              <li>Thay $M(0; 1)$ vào $x + 3y + 2$: được $0 + 3 + 2 = 5 \ge 0 \iff x + 3y \ge -2$.</li>
+            </ul>
+            $\rightarrow$ Chọn ngay đáp án <b>C</b>!</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sub-head">2.2. Bài toán Tối ưu hóa Quy hoạch tuyến tính (Bài 4 &amp; Bài 5 – Bộ 2)</h2>
+  <div class="box formula keep">
+    <div class="bt">🏆 Định lý Cơ bản của Quy hoạch tuyến tính hai biến</div>
+    <p>Cho biểu thức bậc nhất $F(x, y) = mx + ny$ trên miền nghiệm $\Omega$ của một hệ bất phương trình bậc nhất hai ẩn. Nếu miền nghiệm $\Omega$ là một <b>miền đa giác lồi</b> (hữu hạn, khép kín), thì $F(x, y)$ luôn đạt <b>Giá trị lớn nhất (GTLN)</b> và <b>Giá trị nhỏ nhất (GTNN)</b> tại một trong các <b>đỉnh của đa giác $\Omega$</b>.</p>
+  </div>
+
+  <div class="box example keep">
+    <div class="bt">📐 Quy trình 4 bước chuẩn trình bày Tự luận (Minh họa chi tiết Bài 4 &amp; Bài 5 – Bộ 2)</div>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th style="width:22%">Các bước giải</th>
+          <th style="width:38%">Minh họa Bài 4 (Thuần toán học)</th>
+          <th style="width:40%">Minh họa Bài 5 (Toán thực tế kinh tế)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Bước 1:</b> Đặt ẩn, điều kiện và lập hệ BPT ràng buộc + hàm mục tiêu $F(x,y)$.</td>
+          <td>Hệ đã cho:<br/>$\begin{cases} x \ge 0,\ y \ge 0 \\ x + 2y \le 8 \quad (d_1) \\ 2x + y \le 10 \quad (d_2) \end{cases}$<br/>Hàm mục tiêu: $F(x,y) = 3x + 2y$.</td>
+          <td>Gọi $x, y$ là số bàn và số ghế làm mỗi ngày ($x, y \ge 0,\ x,y \in \mathbb{N}$).<br/>• Giờ gia công: $3x + y \le 24$.<br/>• Tổng sản phẩm: $x + y \le 12$.<br/>• Tiền lãi: $F(x,y) = 300x + 200y$ (nghìn đồng).</td>
+        </tr>
+        <tr>
+          <td><b>Bước 2:</b> Vẽ các đường bờ và xác định miền đa giác nghiệm $\Omega$.</td>
+          <td>Miền nghiệm là tứ giác lồi $OABC$ nằm ở góc phần tư thứ nhất.</td>
+          <td>Miền nghiệm là tứ giác lồi $OABC$ tạo bởi $Ox, Oy$, $d_1: 3x+y=24$ và $d_2: x+y=12$.</td>
+        </tr>
+        <tr>
+          <td><b>Bước 3:</b> Tìm tọa độ tất cả các đỉnh (bằng giao điểm từng cặp đường thẳng).</td>
+          <td>• $O(0; 0)$<br/>• $A(5; 0) = d_2 \cap Ox$<br/>• $B(4; 2) = d_1 \cap d_2$<br/>• $C(0; 4) = d_1 \cap Oy$</td>
+          <td>• $O(0; 0)$<br/>• $A(8; 0) = d_1 \cap Ox$<br/>• $B(6; 6)$ là nghiệm hệ $\begin{cases}3x+y=24\\x+y=12\end{cases}$<br/>• $C(0; 12) = d_2 \cap Oy$</td>
+        </tr>
+        <tr>
+          <td><b>Bước 4:</b> Tính $F(x,y)$ tại từng đỉnh và kết luận.</td>
+          <td>• $F(0;0) = 0$<br/>• $F(5;0) = 15$<br/>• $F(4;2) = 3(4)+2(2) = \mathbf{16}$<br/>• $F(0;4) = 8$<br/>$\Rightarrow \max F = 16$ tại $(x;y)=(4;2)$.</td>
+          <td>• $F(0;0) = 0$<br/>• $F(8;0) = 2400$<br/>• $F(6;6) = 300(6)+200(6) = \mathbf{3000}$<br/>• $F(0;12) = 2400$<br/>$\Rightarrow$ Lãi lớn nhất <b>3 triệu đồng</b> khi làm <b>6 bàn, 6 ghế</b>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="pb" data-run="Chuyên đề 3 · Hàm số và Đồ thị bậc hai (35 phút)">
+  <h1 class="sec-head"><span>CHUYÊN ĐỀ 3. HÀM SỐ VÀ ĐỒ THỊ HÀM SỐ BẬC HAI</span><span class="t-badge">Thời lượng: 35 phút</span></h1>
+
+  <h2 class="sub-head">3.1. Tập xác định của hàm số &amp; Hàm số cho bởi nhiều công thức</h2>
+  <div class="grid2 keep">
+    <div class="box formula" style="margin:0;">
+      <div class="bt">1. Ba quy tắc tìm Tập xác định $D$</div>
+      <ul>
+        <li><b>Phân thức $\dfrac{P(x)}{Q(x)}$:</b> Điều kiện $Q(x) \ne 0$.</li>
+        <li><b>Căn bậc chẵn $\sqrt{f(x)}$:</b> Điều kiện $f(x) \ge 0$.</li>
+        <li><b>Căn bậc chẵn dưới mẫu $\dfrac{1}{\sqrt{f(x)}}$:</b> Điều kiện $f(x) > 0$.</li>
+      </ul>
+      <p><i>Ví dụ (Bài 6 – Bộ 2):</i></p>
+      <ul>
+        <li>$y = \sqrt{x+3} + \dfrac{1}{x-1}$: ĐK $\begin{cases}x+3 \ge 0\\x-1 \ne 0\end{cases} \Rightarrow D = [-3; +\infty)\setminus\{1\}$.</li>
+        <li>$y = \dfrac{\sqrt{4-2x}}{x+2}$: ĐK $\begin{cases}4-2x \ge 0\\x+2 \ne 0\end{cases} \Rightarrow D = (-\infty; 2]\setminus\{-2\}$.</li>
+      </ul>
+    </div>
+    <div class="box method" style="margin:0;">
+      <div class="bt">2. Hàm số cho bởi nhiều công thức (Phần II Câu 1 – Đề LTV)</div>
+      <p>Xét hàm số: $f(x) = \begin{cases} -2x+1 & \text{khi } x \ge 2 \quad (1) \\ \dfrac{1}{x-2} & \text{khi } x < 2 \quad (2) \end{cases}$</p>
+      <ul>
+        <li><b>Tìm tập xác định:</b> Nhánh (1) xác định $\forall x \ge 2$. Nhánh (2) cần $x-2 \ne 0 \iff x \ne 2$, mà nhánh (2) chỉ xét trên $(-\infty; 2)$ nên luôn xác định! Vậy $D = [2;+\infty) \cup (-\infty;2) = \mathbb{R}$. <i>(Học sinh rất hay bị lừa chọn $D=\mathbb{R}\setminus\{2\}$!).</i></li>
+        <li><b>Tính $f(x_0)$:</b> Phải so sánh $x_0$ với mốc $2$ để <b>chọn đúng nhánh</b>:
+          <ul>
+            <li>$x_0 = 2 \ge 2 \rightarrow$ thay vào (1): $f(2) = -2(2)+1 = -3$.</li>
+            <li>$x_0 = 0 < 2 \rightarrow$ thay vào (2): $f(0) = \dfrac{1}{0-2} = -\dfrac{1}{2}$.</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="sub-head">3.2. Khảo sát Hàm số bậc hai $y = ax^2 + bx + c\ (a \ne 0)$</h2>
+  <div class="box formula keep">
+    <div class="bt">📌 Bảng Tổng hợp Tính chất Parabol $(P): y = ax^2 + bx + c\ (a \ne 0)$</div>
+    <ul>
+      <li><b>Tọa độ đỉnh:</b> $I\left(x_I; y_I\right)$ với $x_I = -\dfrac{b}{2a}$ và $y_I = f(x_I) = -\dfrac{\Delta}{4a}$ (trong đó $\Delta = b^2 - 4ac$).</li>
+      <li><b>Trục đối xứng:</b> Đường thẳng đứng $x = -\dfrac{b}{2a}$ (luôn đi qua đỉnh $I$).</li>
+    </ul>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th style="width:20%">Tiêu chí</th>
+          <th style="width:40%">Trường hợp $a > 0$ (Bề lõm quay lên $\cup$)</th>
+          <th style="width:40%">Trường hợp $a < 0$ (Bề lõm quay xuống $\cap$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center"><b>Chiều biến thiên</b></td>
+          <td>• Nghịch biến $\searrow$ trên $\left(-\infty; -\dfrac{b}{2a}\right)$<br/>• Đồng biến $\nearrow$ trên $\left(-\dfrac{b}{2a}; +\infty\right)$</td>
+          <td>• Đồng biến $\nearrow$ trên $\left(-\infty; -\dfrac{b}{2a}\right)$<br/>• Nghịch biến $\searrow$ trên $\left(-\dfrac{b}{2a}; +\infty\right)$</td>
+        </tr>
+        <tr>
+          <td class="center"><b>Cực trị (GTLN / GTNN)</b></td>
+          <td>Đạt <b>Giá trị nhỏ nhất (GTNN)</b> trên $\mathbb{R}$:<br/>$\min_{\mathbb{R}} y = y_I = -\dfrac{\Delta}{4a}$ tại $x = -\dfrac{b}{2a}$.</td>
+          <td>Đạt <b>Giá trị lớn nhất (GTLN)</b> trên $\mathbb{R}$:<br/>$\max_{\mathbb{R}} y = y_I = -\dfrac{\Delta}{4a}$ tại $x = -\dfrac{b}{2a}$.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="sub-head">3.3. Quy trình Vẽ Parabol, Tìm hàm số &amp; Bài toán Thực tế Cổng Parabol</h2>
+  <div class="grid2 keep">
+    <div class="box method" style="margin:0;">
+      <div class="bt">1. Năm bước vẽ đồ thị $(P)$ &amp; Xác định $(P)$</div>
+      <p><b>Quy trình vẽ chuẩn Tự luận (Câu 1 Đề LTV &amp; Bài 7 Bộ 2):</b></p>
+      <ol>
+        <li>Xác định tọa độ đỉnh $I\left(-\dfrac{b}{2a}; y_I\right)$.</li>
+        <li>Viết phương trình trục đối xứng $x = -\dfrac{b}{2a}$.</li>
+        <li>Lập bảng biến thiên (nêu khoảng đồng biến, nghịch biến).</li>
+        <li>Lập bảng 5 giá trị đối xứng qua $x_I$ (gồm $x_I$, hai giá trị bên trái, hai giá trị bên phải; tìm giao điểm với $Oy, Ox$).</li>
+        <li>Vẽ đường cong Parabol trơn, đối xứng qua trục $x = x_I$.</li>
+      </ol>
+      <p><b>Dạng viết phương trình $(P)$ biết đỉnh $S(x_S; y_S)$:</b> Dùng dạng chính tắc $y = a(x - x_S)^2 + y_S$. (Ví dụ Câu 2d Phần II Đề LTV: Đỉnh $S\left(\tfrac{1}{4}; -\tfrac{7}{8}\right)$ đi qua $A(1;2) \Rightarrow 2 = a\left(1-\tfrac{1}{4}\right)^2 - \tfrac{7}{8} \Rightarrow a = \tfrac{46}{9} \ne -2$).</p>
+    </div>
+    <div class="box example" style="margin:0;">
+      <div class="bt">2. Phương pháp gắn hệ trục giải Toán thực tế Cổng Parabol (Câu 2 Phần III – Đề LTV)</div>
+      <p><b>Đề bài:</b> Cổng Parabol cao $3\text{ m}$, bên dưới gắn cửa hình chữ nhật cao $2\text{ m}$, rộng $3\text{ m}$. Tính khoảng cách hai chân cổng $AB$.</p>
+      <p><b>Thuật toán gắn hệ trục tọa độ $Oxy$ tối ưu nhất:</b></p>
+      <ul>
+        <li>Chọn gốc $O(0;0)$ là trung điểm của đoạn chân cổng $AB$, trục $Ox$ trùng với mặt đất $AB$, trục $Oy$ đi qua đỉnh cổng $G$.</li>
+        <li>Khi đó đỉnh cổng là $G(0; 3) \Rightarrow$ Phương trình Parabol có dạng rút gọn:
+          $$(P): y = ax^2 + 3 \quad (a < 0)$$</li>
+        <li>Cửa hình chữ nhật rộng $3\text{ m}$ đối xứng qua $Oy$ và cao $2\text{ m} \Rightarrow$ góc trên bên phải của cửa có tọa độ $E\left(\dfrac{3}{2}; 2\right) \in (P)$.</li>
+        <li>Thay $E\left(\dfrac{3}{2}; 2\right)$ vào $(P)$: $2 = a\left(\dfrac{3}{2}\right)^2 + 3 \iff \dfrac{9}{4}a = -1 \iff a = -\dfrac{4}{9}$.</li>
+        <li>Chân cổng $A, B$ ứng với $y = 0$: $-\dfrac{4}{9}x^2 + 3 = 0 \iff x^2 = \dfrac{27}{4} \iff x = \pm\dfrac{3\sqrt{3}}{2}$.</li>
+        <li>Khoảng cách $AB = 2 \cdot \dfrac{3\sqrt{3}}{2} = 3\sqrt{3} \approx \mathbf{5{,}2\text{ m}}$.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="pb" data-run="Chuyên đề 4 · Hệ thức lượng trong tam giác (30 phút)">
+  <h1 class="sec-head"><span>CHUYÊN ĐỀ 4. GIÁ TRỊ LƯỢNG GIÁC &amp; HỆ THỨC LƯỢNG TRONG TAM GIÁC</span><span class="t-badge">Thời lượng: 30 phút</span></h1>
+
+  <h2 class="sub-head">4.1. Giá trị lượng giác của góc từ $0^\circ$ đến $180^\circ$</h2>
+  <div class="grid2 keep">
+    <div class="box formula" style="margin:0;">
+      <div class="bt">1. Quy tắc Dấu &amp; Góc phụ nhau – Góc bù nhau</div>
+      <ul>
+        <li><b>Dấu của giá trị lượng giác:</b>
+          <ul>
+            <li>Với mọi $\alpha \in (0^\circ; 180^\circ)$: luôn có $\mathbf{\sin\alpha > 0}$.</li>
+            <li><b>Góc nhọn ($0^\circ < \alpha < 90^\circ$):</b> $\cos\alpha > 0,\ \tan\alpha > 0,\ \cot\alpha > 0$.</li>
+            <li><b>Góc tù ($90^\circ < \alpha < 180^\circ$):</b> $\mathbf{\cos\alpha < 0,\ \tan\alpha < 0,\ \cot\alpha < 0}$.</li>
+          </ul>
+        </li>
+        <li><b>Hai góc phụ nhau ($\alpha$ và $90^\circ - \alpha$):</b> <i>"Phụ chéo"</i>
+          $$\sin(90^\circ - \alpha) = \cos\alpha; \qquad \cos(90^\circ - \alpha) = \sin\alpha$$
+          $$\tan(90^\circ - \alpha) = \cot\alpha; \qquad \cot(90^\circ - \alpha) = \tan\alpha$$
+        </li>
+        <li><b>Hai góc bù nhau ($\alpha$ và $180^\circ - \alpha$):</b> <i>"Sin bù, còn lại đối"</i>
+          $$\sin(180^\circ - \alpha) = \sin\alpha; \qquad \cos(180^\circ - \alpha) = -\cos\alpha$$
+          $$\tan(180^\circ - \alpha) = -\tan\alpha; \qquad \cot(180^\circ - \alpha) = -\cot\alpha$$
+        </li>
+      </ul>
+    </div>
+    <div class="box method" style="margin:0;">
+      <div class="bt">2. Hệ thức lượng giác cơ bản (Bài 10 – Bộ 2)</div>
+      <ul>
+        <li>$\sin^2\alpha + \cos^2\alpha = 1 \implies \cos\alpha = \pm\sqrt{1 - \sin^2\alpha}$</li>
+        <li>$\tan\alpha = \dfrac{\sin\alpha}{\cos\alpha}\ (\alpha \ne 90^\circ); \qquad \cot\alpha = \dfrac{\cos\alpha}{\sin\alpha}\ (\alpha \ne 0^\circ, 180^\circ)$</li>
+        <li>$\tan\alpha \cdot \cot\alpha = 1; \qquad 1 + \tan^2\alpha = \dfrac{1}{\cos^2\alpha}; \qquad 1 + \cot^2\alpha = \dfrac{1}{\sin^2\alpha}$</li>
+      </ul>
+      <p><b>Ví dụ mẫu (Bài 10b – Bộ 2):</b> Cho $\sin\alpha = \dfrac{3}{5}$ với $90^\circ < \alpha < 180^\circ$. Vì $\alpha$ là góc tù nên $\cos\alpha < 0$:</p>
+      $$\cos\alpha = -\sqrt{1 - \left(\dfrac{3}{5}\right)^2} = -\dfrac{4}{5} \implies \tan\alpha = \dfrac{\sin\alpha}{\cos\alpha} = -\dfrac{3}{4}.$$
+    </div>
+  </div>
+
+  <h2 class="sub-head">4.2. Định lý Côsin, Định lý Sin và 5 Công thức Diện tích Tam giác</h2>
+  <div class="box formula keep">
+    <div class="bt">📐 Hệ thống Công thức Giải Tam giác $ABC$ (với $BC=a,\ AC=b,\ AB=c$)</div>
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th style="width:24%">Tên định lý / Công thức</th>
+          <th style="width:42%">Biểu thức toán học</th>
+          <th style="width:34%">Khi nào sử dụng?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>1. Định lý Côsin</b></td>
+          <td>$a^2 = b^2 + c^2 - 2bc\cos A$<br/>$b^2 = a^2 + c^2 - 2ac\cos B$<br/>$c^2 = a^2 + b^2 - 2ab\cos C$</td>
+          <td>• Biết <b>2 cạnh và góc xen giữa</b> $(b, c, \widehat{A}) \rightarrow$ tìm cạnh thứ 3 ($a$). (Bài 11 Bộ 2)<br/>• Đặc biệt: $\widehat{A}=90^\circ \Rightarrow a^2 = b^2+c^2$ (Pythagore).</td>
+        </tr>
+        <tr>
+          <td><b>2. Hệ quả Côsin (Tính góc)</b></td>
+          <td>$\cos A = \dfrac{b^2 + c^2 - a^2}{2bc}; \quad \cos C = \dfrac{a^2 + b^2 - c^2}{2ab}$</td>
+          <td>• Biết <b>độ dài cả 3 cạnh</b> $(a,b,c) \rightarrow$ tìm số đo góc. (Câu 7 Bộ 2: $3,4,5 \Rightarrow \cos C = 0 \Rightarrow C=90^\circ$).</td>
+        </tr>
+        <tr>
+          <td><b>3. Định lý Sin</b></td>
+          <td>$\dfrac{a}{\sin A} = \dfrac{b}{\sin B} = \dfrac{c}{\sin C} = 2R$<br/>$\implies R = \dfrac{a}{2\sin A}$ và $a = 2R\sin A$</td>
+          <td>• Biết <b>1 cặp cạnh – góc đối diện</b> $(a, \widehat{A}) \rightarrow$ tính ngay bán kính ngoại tiếp $R$ (Câu 9 Đề LTV).<br/>• Biết <b>1 cạnh và 2 góc</b> (Bài 12, 13 Bộ 2).</td>
+        </tr>
+        <tr>
+          <td><b>4. Năm công thức Diện tích $S$</b></td>
+          <td>$S = \dfrac{1}{2}a h_a = \dfrac{1}{2}bc\sin A = \dfrac{abc}{4R} = p\cdot r$<br/>Công thức Heron: $S = \sqrt{p(p-a)(p-b)(p-c)}$</td>
+          <td>• Tính $S$ rồi suy ngược ra đường cao $h_a = \dfrac{2S}{a}$, bán kính nội tiếp $r = \dfrac{S}{p}$ hoặc ngoại tiếp $R = \dfrac{abc}{4S}$.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box example keep">
+    <div class="bt">🌉 Ứng dụng giải bài toán đo đạc thực tế qua sông (Bài 13 – Bộ 2)</div>
+    <p><b>Bài toán:</b> Hai điểm $A, B$ trên bờ sông cách nhau $AB = c = 100\text{ m}$ cùng nhìn cây $C$ bên kia sông với $\widehat{CAB} = 60^\circ,\ \widehat{CBA} = 75^\circ$. Tính khoảng cách $AC$.</p>
+    <p><b>Phương pháp giải 2 bước chuẩn:</b></p>
+    <ul>
+      <li><b>Bước 1 (Tìm góc đối diện với cạnh đã biết $AB$):</b> Trong $\triangle ABC$, ta có $\widehat{C} = 180^\circ - (\widehat{A} + \widehat{B}) = 180^\circ - (60^\circ + 75^\circ) = 45^\circ$.</li>
+      <li><b>Bước 2 (Áp dụng Định lý Sin):</b>
+        $$\dfrac{AC}{\sin B} = \dfrac{AB}{\sin C} \implies AC = \dfrac{AB \cdot \sin 75^\circ}{\sin 45^\circ} = \dfrac{100 \cdot \frac{\sqrt{6}+\sqrt{2}}{4}}{\frac{\sqrt{2}}{2}} = 50(\sqrt{3} + 1) \approx \mathbf{136{,}6\text{ m}}.$$</li>
+    </ul>
+  </div>
+</div>
+
+<div class="pb" data-run="Chuyên đề 5 · Vectơ, Tích vô hướng và Tọa độ (40 phút)">
+  <h1 class="sec-head"><span>CHUYÊN ĐỀ 5. VECTƠ – TÍCH VÔ HƯỚNG – HỆ TRỤC TỌA ĐỘ</span><span class="t-badge">Thời lượng: 40 phút</span></h1>
+
+  <h2 class="sub-head">5.1. Khái niệm Vectơ &amp; Các quy tắc Phép toán Vectơ trọng tâm</h2>
+  <div class="grid2 keep">
+    <div class="box formula" style="margin:0;">
+      <div class="bt">1. Phương, Hướng &amp; Hai vectơ bằng nhau</div>
+      <ul>
+        <li><b>Giá của vectơ $\overrightarrow{AB}$:</b> Là đường thẳng $AB$.</li>
+        <li><b>Cùng phương:</b> Hai vectơ có giá <b>song song hoặc trùng nhau</b>. (Trên lưới ô vuông Câu 11 Đề LTV: xét độ dời $(\Delta x; \Delta y)$ tỉ lệ).</li>
+        <li><b>Cùng hướng / Ngược hướng:</b> Hai vectơ cùng phương thì hoặc cùng hướng, hoặc ngược hướng.</li>
+        <li><b>Hai vectơ bằng nhau:</b> $\vec{a} = \vec{b} \iff \begin{cases} \vec{a}, \vec{b} \text{ cùng hướng} \\ |\vec{a}| = |\vec{b}| \end{cases}$<br/>
+        <i>Ví dụ (Câu 10 Đề LTV):</i> Hình vuông $ABCD \Rightarrow \overrightarrow{AB} = \overrightarrow{DC}$ (cẩn thận bẫy $\overrightarrow{AB} = \overrightarrow{CD}$ là hai vectơ đối nhau!).</li>
+      </ul>
+    </div>
+    <div class="box formula" style="margin:0;">
+      <div class="bt">2. Bốn quy tắc biến đổi đẳng thức Vectơ</div>
+      <ul>
+        <li><b>Quy tắc 3 điểm (Chèn điểm $C$):</b> $\overrightarrow{AB} + \overrightarrow{BC} = \overrightarrow{AC}$ (đầu nối đuôi).</li>
+        <li><b>Quy tắc hiệu (Chung gốc $O$):</b> $\overrightarrow{OA} - \overrightarrow{OB} = \overrightarrow{BA}$ (ngược thứ tự).</li>
+        <li><b>Quy tắc hình bình hành $ABCD$:</b> $\overrightarrow{AB} + \overrightarrow{AD} = \overrightarrow{AC}$ (chung gốc $A$).</li>
+        <li><b>Hệ thức Trung điểm $I$ của $AB$:</b>
+          $$\overrightarrow{IA} + \overrightarrow{IB} = \vec{0} \qquad\text{và}\qquad \overrightarrow{MA} + \overrightarrow{MB} = 2\overrightarrow{MI}\ (\forall M)$$</li>
+        <li><b>Hệ thức Trọng tâm $G$ của $\triangle ABC$:</b>
+          $$\overrightarrow{GA} + \overrightarrow{GB} + \overrightarrow{GC} = \vec{0} \quad\text{và}\quad \overrightarrow{MA} + \overrightarrow{MB} + \overrightarrow{MC} = 3\overrightarrow{MG}$$</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="sub-head">5.2. Kỹ thuật Phân tích Vectơ theo 2 vectơ cơ sở &amp; Chứng minh 3 điểm thẳng hàng</h2>
+  <div class="box method keep">
+    <div class="bt">🎯 Thuật toán chuẩn giải Câu 3b Phần III (Đề LTV) &amp; Bài 15 (Bộ 2)</div>
+    <p><b>Nguyên lý:</b> Để chứng minh 3 điểm $A, I, H$ thẳng hàng, ta chọn 2 vectơ gốc không cùng phương $\vec{u} = \overrightarrow{AB}$ và $\vec{v} = \overrightarrow{AC}$, sau đó biểu diễn $\overrightarrow{AH}$ và $\overrightarrow{AI}$ theo $\vec{u}, \vec{v}$ rồi lập tỉ số hệ số để suy ra $\overrightarrow{AH} = k\overrightarrow{AI}$.</p>
+    <div class="grid2" style="margin-top:3pt;">
+      <div style="background:#fff;padding:4pt 6pt;border:1px solid #E2E8F0;border-radius:2mm;">
+        <b>Minh họa Câu 3b (Đề LTV):</b> Cho $\triangle ABC$, $K$ là trung điểm $AC$, $\overrightarrow{BC}=5\overrightarrow{BH}$, $\overrightarrow{BK}=3\overrightarrow{BI}$. Chứng minh $A, I, H$ thẳng hàng.<br/>
+        • Đặt $\vec{u} = \overrightarrow{AB},\ \vec{v} = \overrightarrow{AC} \implies \overrightarrow{BC} = \vec{v} - \vec{u}$.<br/>
+        • Tính $\overrightarrow{AH}$: $\overrightarrow{AH} = \overrightarrow{AB} + \overrightarrow{BH} = \vec{u} + \dfrac{1}{5}\overrightarrow{BC} = \vec{u} + \dfrac{1}{5}(\vec{v} - \vec{u}) = \mathbf{\dfrac{4}{5}\vec{u} + \dfrac{1}{5}\vec{v}}$.<br/>
+        • Tính $\overrightarrow{AI}$: Vì $K$ là trung điểm $AC$ nên $\overrightarrow{AK} = \dfrac{1}{2}\vec{v}$. Ta có:<br/>
+        $\overrightarrow{AI} = \overrightarrow{AB} + \overrightarrow{BI} = \vec{u} + \dfrac{1}{3}\overrightarrow{BK} = \vec{u} + \dfrac{1}{3}(\overrightarrow{AK} - \overrightarrow{AB}) = \mathbf{\dfrac{2}{3}\vec{u} + \dfrac{1}{6}\vec{v}}$.<br/>
+        • Nhận xét tỉ số: $\dfrac{4/5}{2/3} = \dfrac{6}{5}$ và $\dfrac{1/5}{1/6} = \dfrac{6}{5} \implies \overrightarrow{AH} = \dfrac{6}{5}\overrightarrow{AI} \implies A, I, H$ thẳng hàng!
+      </div>
+      <div style="background:#fff;padding:4pt 6pt;border:1px solid #E2E8F0;border-radius:2mm;">
+        <b>Minh họa Bài 15 (Bộ 2):</b> Cho $\triangle ABC$, $I$ là trung điểm $AB$, điểm $M$ thỏa $\overrightarrow{MA} + \overrightarrow{MB} + 2\overrightarrow{MC} = \vec{0}$.<br/>
+        • <b>Ý a:</b> Vì $I$ là trung điểm $AB$ nên $\overrightarrow{MA} + \overrightarrow{MB} = 2\overrightarrow{MI}$. Thay vào giả thiết:<br/>
+        $2\overrightarrow{MI} + 2\overrightarrow{MC} = \vec{0} \iff \overrightarrow{MI} + \overrightarrow{MC} = \vec{0} \implies M$ là trung điểm của $IC$.<br/>
+        • <b>Ý b:</b> Vì $M$ là trung điểm $IC$ và $I$ là trung điểm $AB$ nên:<br/>
+        $$\overrightarrow{AM} = \dfrac{1}{2}\left(\overrightarrow{AI} + \overrightarrow{AC}\right) = \dfrac{1}{2}\left(\dfrac{1}{2}\overrightarrow{AB} + \overrightarrow{AC}\right) = \mathbf{\dfrac{1}{4}\overrightarrow{AB} + \dfrac{1}{2}\overrightarrow{AC}}.$$
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sub-head">5.3. Tích vô hướng của hai Vectơ &amp; Phương pháp Tọa độ $Oxy$</h2>
+  <div class="grid2 keep">
+    <div class="box formula" style="margin:0;">
+      <div class="bt">1. Tích vô hướng Hình học (Câu 14, 15, Phần II C3 – LTV)</div>
+      <ul>
+        <li><b>Công thức định nghĩa:</b>
+          $$\vec{a} \cdot \vec{b} = |\vec{a}| \cdot |\vec{b}| \cdot \cos(\vec{a}, \vec{b})$$
+          <i>Lưu ý:</i> Góc $(\vec{a}, \vec{b})$ chỉ đúng bằng góc hình học khi <b>hai vectơ chung điểm đầu</b>! Ví dụ: $(\overrightarrow{AB}, \overrightarrow{AC}) = \widehat{BAC}$, nhưng $(\overrightarrow{AB}, \overrightarrow{BC}) = 180^\circ - \widehat{B}$.</li>
+        <li><b>Bình phương vô hướng:</b> $\vec{a}^2 = |\vec{a}|^2 \implies \overrightarrow{AB}^2 = AB^2$.</li>
+        <li><b>Điều kiện vuông góc:</b> $AD \perp BE \iff \overrightarrow{AD} \cdot \overrightarrow{BE} = 0$.<br/>
+        <i>Áp dụng Câu 3 Phần II (Đề LTV):</i> Cho $AB=4\sqrt{2}, AC=6, \widehat{A}=45^\circ \Rightarrow \overrightarrow{AB}\cdot\overrightarrow{AC} = 4\sqrt{2}\cdot 6\cdot \cos 45^\circ = 24$. Khai triển $\overrightarrow{AD}\cdot\overrightarrow{BE} = \dfrac{1}{2}(\overrightarrow{AB}+\overrightarrow{AC})\cdot\left(\dfrac{5}{6}\overrightarrow{AC}-\overrightarrow{AB}\right) = -3 \ne 0 \Rightarrow AD \not\perp BE$.</li>
+      </ul>
+    </div>
+    <div class="box formula" style="margin:0;">
+      <div class="bt">2. Biểu thức Tọa độ trong mặt phẳng $Oxy$ (Bài 16 – Bộ 2)</div>
+      <p>Cho $A(x_A; y_A),\ B(x_B; y_B)$ và $\vec{a}=(x_1; y_1),\ \vec{b}=(x_2; y_2)$:</p>
+      <ul>
+        <li><b>Vectơ nối 2 điểm:</b> $\overrightarrow{AB} = (x_B - x_A;\ y_B - y_A)$ (Lấy sau trừ trước).</li>
+        <li><b>Độ dài:</b> $|\vec{a}| = \sqrt{x_1^2 + y_1^2}$; &nbsp; $AB = \sqrt{(x_B-x_A)^2 + (y_B-y_A)^2}$.</li>
+        <li><b>Tích vô hướng tọa độ:</b> $\vec{a}\cdot\vec{b} = x_1 x_2 + y_1 y_2$ (Hoành $\times$ Hoành + Tung $\times$ Tung).</li>
+        <li><b>Vuông góc:</b> $\vec{a} \perp \vec{b} \iff x_1 x_2 + y_1 y_2 = 0$.</li>
+        <li><b>Tìm đỉnh thứ 4 của hình bình hành / hình chữ nhật $ABCD$:</b>
+          $$\overrightarrow{AD} = \overrightarrow{BC} \iff \begin{cases} x_D - x_A = x_C - x_B \\ y_D - y_A = y_C - y_B \end{cases} \iff \begin{cases} x_D = x_A + x_C - x_B \\ y_D = y_A + y_C - y_B \end{cases}$$</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="pb" data-run="Chuyên đề 6 · Các số đặc trưng của mẫu số liệu (20 phút)">
+  <h1 class="sec-head"><span>CHUYÊN ĐỀ 6. CÁC SỐ ĐẶC TRƯNG CỦA MẪU SỐ LIỆU KHÔNG GHÉP NHÓM</span><span class="t-badge">Thời lượng: 20 phút</span></h1>
+
+  <h2 class="sub-head">6.1. Các số đặc trưng đo Xu thế trung tâm ($\bar{x},\ M_e,\ Q_1, Q_2, Q_3,\ M_o$)</h2>
+  <div class="box formula keep">
+    <div class="bt">📌 Quy trình 3 bước chuẩn tìm Trung vị $M_e$ và Tứ phân vị $Q_1, Q_2, Q_3$</div>
+    <ul>
+      <li><b>1. Số trung bình cộng ($\bar{x}$):</b> $\bar{x} = \dfrac{x_1 + x_2 + \dots + x_n}{n} = \dfrac{1}{n}\sum_{i=1}^n x_i$.</li>
+      <li><b>2. Mốt ($M_o$):</b> Là giá trị xuất hiện với <b>tần số lớn nhất</b> trong mẫu số liệu. (Câu 12 Bộ 2: Mẫu $3;5;5;6;7;7;7;9$ có số $7$ xuất hiện 3 lần $\Rightarrow M_o = 7$).</li>
+      <li><b>3. Trung vị ($M_e = Q_2$) và Tứ phân vị ($Q_1, Q_3$):</b>
+        <ul>
+          <li><b>Bước 1 (Bắt buộc):</b> Sắp xếp mẫu số liệu theo thứ tự <b>không giảm</b> (từ nhỏ đến lớn): $x_1 \le x_2 \le \dots \le x_n$.</li>
+          <li><b>Bước 2 (Tìm $Q_2 = M_e$):</b>
+            <ul>
+              <li>Nếu $n$ <b>lẻ</b> ($n = 2k+1$): $Q_2 = M_e = x_{k+1}$ (số đứng chính giữa). Nửa trái gồm $k$ số đầu (không tính $Q_2$), nửa phải gồm $k$ số cuối (không tính $Q_2$).</li>
+              <li>Nếu $n$ <b>chẵn</b> ($n = 2k$): $Q_2 = M_e = \dfrac{x_k + x_{k+1}}{2}$ (trung bình cộng 2 số giữa). Nửa trái gồm đúng $k$ số đầu ($x_1,\dots,x_k$), nửa phải gồm đúng $k$ số cuối ($x_{k+1},\dots,x_{2k}$).</li>
+            </ul>
+          </li>
+          <li><b>Bước 3 (Tìm $Q_1, Q_3$):</b> $Q_1$ là trung vị của nửa dữ liệu bên trái; $Q_3$ là trung vị của nửa dữ liệu bên phải.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <h2 class="sub-head">6.2. Các số đặc trưng đo Độ phân tán &amp; Phát hiện Giá trị bất thường (Outliers)</h2>
+  <div class="grid2 keep">
+    <div class="box formula" style="margin:0;">
+      <div class="bt">1. Khoảng biến thiên, Khoảng tứ phân vị, Phương sai &amp; Độ lệch chuẩn</div>
+      <ul>
+        <li><b>Khoảng biến thiên ($R$):</b> $R = x_{\max} - x_{\min}$.</li>
+        <li><b>Khoảng tứ phân vị ($\Delta_Q$):</b> $\Delta_Q = Q_3 - Q_1$.</li>
+        <li><b>Phương sai ($s^2$):</b>
+          $$s^2 = \dfrac{1}{n}\sum_{i=1}^n (x_i - \bar{x})^2 = \left(\dfrac{1}{n}\sum_{i=1}^n x_i^2\right) - \bar{x}^2$$</li>
+        <li><b>Độ lệch chuẩn ($s$):</b> $s = \sqrt{s^2}$ (cùng đơn vị đo với dữ liệu gốc).</li>
+        <li><b>Tiêu chuẩn Giá trị bất thường (Outlier):</b> Phần tử $x$ trong mẫu là giá trị bất thường nếu:
+          $$\mathbf{x < Q_1 - 1{,}5\Delta_Q} \quad\text{hoặc}\quad \mathbf{x > Q_3 + 1{,}5\Delta_Q}$$</li>
+      </ul>
+    </div>
+    <div class="box example" style="margin:0;">
+      <div class="bt">2. Minh họa chi tiết Bài 17 &amp; Bài 18 (Bộ 2)</div>
+      <p><b>Bài 17:</b> Mẫu $n=12$ đã sắp xếp: $\underbrace{1;\ 2;\ 2;\ 3;\ 3;\ 3}_{\text{Nửa trái (6 số)}}\ \big|\ \underbrace{4;\ 4;\ 5;\ 6;\ 7;\ 12}_{\text{Nửa phải (6 số)}}$</p>
+      <ul>
+        <li>$\bar{x} = \dfrac{52}{12} = \dfrac{13}{3} \approx 4{,}33$.</li>
+        <li>Trung vị $Q_2 = M_e = \dfrac{x_6 + x_7}{2} = \dfrac{3 + 4}{2} = 3{,}5$.</li>
+        <li>Nửa trái $(1;2;2;3;3;3) \Rightarrow Q_1 = \dfrac{2+3}{2} = 2{,}5$.</li>
+        <li>Nửa phải $(4;4;5;6;7;12) \Rightarrow Q_3 = \dfrac{5+6}{2} = 5{,}5$.</li>
+        <li>Khoảng tứ phân vị: $\Delta_Q = Q_3 - Q_1 = 5{,}5 - 2{,}5 = 3$.</li>
+        <li>Ngưỡng an toàn: $[Q_1 - 1{,}5\Delta_Q;\ Q_3 + 1{,}5\Delta_Q] = [-2;\ 10]$. Vì $12 > 10$ nên <b>$12$ là giá trị bất thường</b>!</li>
+      </ul>
+      <p><b>Bài 18:</b> Mẫu $3; 5; 6; 8; 8$ ($n=5$) có $\bar{x} = 6$:<br/>
+      $s^2 = \dfrac{(3-6)^2 + (5-6)^2 + (6-6)^2 + (8-6)^2 + (8-6)^2}{5} = \dfrac{18}{5} = \mathbf{3{,}6} \implies s = \sqrt{3{,}6} \approx \mathbf{1{,}90}$.</p>
+    </div>
+  </div>
+
+  <div class="box warn keep" style="margin-top:6pt;">
+    <div class="bt">📋 Bảng Tổng kết 10 Cạm bẫy Học sinh cần Kiểm tra trước khi Nộp bài</div>
+    <div class="grid2" style="font-size:11.2pt;">
+      <ol style="margin:0;">
+        <li>Phủ định của "$\forall x, x^2 > 2$" phải là "$\exists x, x^2 \le 2$" (có dấu bằng).</li>
+        <li>Khi lấy $B \setminus A$ với $A=[-1;4), B=[2;+\infty)$: vì $4 \notin A$ nên $4 \in B\setminus A \Rightarrow [4;+\infty)$.</li>
+        <li>Hàm nhiều công thức: kiểm tra kỹ điều kiện từng nhánh trước khi kết luận TXĐ.</li>
+        <li>Hoành độ đỉnh Parabol là $x_S = -\dfrac{b}{2a}$ (cẩn thận với $y=-2x^2+x-1$ thì $x_S = \dfrac{1}{4}$ chứ không phải $\dfrac{1}{2}$).</li>
+        <li>Góc tù ($90^\circ < \alpha < 180^\circ$) có $\sin\alpha > 0$ nhưng $\cos\alpha < 0,\ \tan\alpha < 0$.</li>
+      </ol>
+      <ol start="6" style="margin:0;">
+        <li>Định lý Sin: $\dfrac{a}{\sin A} = 2R \Rightarrow R = \dfrac{a}{2\sin A}$ (nhớ chia 2!).</li>
+        <li>Hình bình hành / Hình vuông $ABCD$: $\overrightarrow{AB} = \overrightarrow{DC}$ và $\overrightarrow{AB} + \overrightarrow{AD} = \overrightarrow{AC}$.</li>
+        <li>Quy tắc hiệu vectơ: $\overrightarrow{BE} = \overrightarrow{AE} - \overrightarrow{AB} = -\overrightarrow{AB} + \dfrac{5}{6}\overrightarrow{AC}$ (tránh nhầm dấu cộng ở Câu 3c Đề LTV).</li>
+        <li>Góc $\widehat{BAC} = 120^\circ \Rightarrow \cos 120^\circ = -\dfrac{1}{2}$, nên $\overrightarrow{AB}\cdot\overrightarrow{AC} < 0$ (số âm!).</li>
+        <li>Tìm $Q_1, Q_3$ của mẫu $n=8$ số: chia đôi thành 4 số đầu và 4 số cuối, lấy trung bình cộng vị trí $(2,3)$ và $(6,7)$.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+window.runPagination = function(){
+ function run(){
+  const flow=document.getElementById('flow'); if(!flow) return;
+  const LEFT=document.body.dataset.left||'';
+  const blocks=[...flow.children]; flow.remove();
+  const book=document.getElementById('book');
+  let page,box,pn=0,running='';
+  function newPage(cover){
+   pn++;
+   page=document.createElement('div');
+   page.className='page'+(cover?' cover':'');
+   const h=document.createElement('div');
+   h.className='hdr';
+   h.innerHTML='<img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/ttbdvh.jpg?alt=media&token=f270aa9b-a2bc-48e8-8910-80742b542615" alt="TTBDVH"/><img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738" alt="HCMUS"/><span class="l">'+LEFT+'</span><span class="run"></span>';
+   box=document.createElement('div');
+   box.className='content';
+   const f=document.createElement('div');
+   f.className='ftr';
+   f.innerHTML='<span>© Bản quyền thuộc ThS. Đinh Quốc Tuấn – Mục đích phi lợi nhuận – Vì giáo dục.</span><span class="pn">'+pn+'</span>';
+   page.append(h,box,f);
+   book.append(page);
+   page.querySelector('.run').textContent=running;
+  }
+  const fits=()=>box.scrollHeight<=box.clientHeight+1;
+  const isHead=e=>/^H[1-4]$/.test(e.tagName);
+  function splitInto(el){
+   if(el.classList&&(el.classList.contains('keep')||el.classList.contains('coverpage')))return null;
+   let shell,src,dst;
+   if(el.tagName==='TABLE'){
+     shell=el.cloneNode(false);
+     const th=el.querySelector('thead');
+     if(th)shell.append(th.cloneNode(true));
+     const tb=document.createElement('tbody');
+     shell.append(tb);
+     src=el.querySelector('tbody');
+     dst=tb;
+   } else if(['DIV','UL','OL'].includes(el.tagName)){
+     shell=el.cloneNode(false);
+     src=el;
+     dst=shell;
+     const bt=el.querySelector(':scope>.bt');
+     if(bt)dst.append(bt.cloneNode(true));
+   } else return null;
+   box.append(shell);
+   let moved=0;
+   while(src.firstElementChild){
+     const c=src.firstElementChild;
+     if(c.classList&&c.classList.contains('bt')&&src===el){c.remove();continue;}
+     dst.append(c);
+     if(!fits()){
+       dst.removeChild(c);
+       src.prepend(c);
+       break;
+     }
+     moved++;
+   }
+   if(!moved){
+     box.removeChild(shell);
+     const b0=shell.querySelector(':scope>.bt');
+     if(b0&&el.tagName!=='TABLE'&&!el.querySelector(':scope>.bt'))el.prepend(b0);
+     return null;
+   }
+   if(!src.firstElementChild)return 'done';
+   const sb=shell.querySelector(':scope>.bt');
+   if(sb&&el.tagName==='DIV'){
+     const c=sb.cloneNode(true);
+     c.textContent+=' (tiếp theo)';
+     el.prepend(c);
+   }
+   return el;
+  }
+  function place(el,guard){
+   if(el.dataset&&el.dataset.run!==undefined)running=el.dataset.run;
+   const forced=el.classList&&el.classList.contains('pb');
+   if(!page||(forced&&box.children.length))newPage(el.classList&&el.classList.contains('coverpage'));
+   if(forced)page.querySelector('.run').textContent=running;
+   box.append(el);
+   if(fits())return;
+   box.removeChild(el);
+   const carry=[];
+   if(!guard){
+     while(box.lastElementChild&&isHead(box.lastElementChild)){
+       carry.unshift(box.lastElementChild);
+       box.lastElementChild.remove();
+     }
+   }
+   if(box.children.length&&!carry.length){
+     const r=splitInto(el);
+     if(r==='done')return;
+     if(r){newPage();place(r,true);return;}
+   }
+   newPage();
+   carry.forEach(c=>box.append(c));
+   box.append(el);
+   if(fits())return;
+   box.removeChild(el);
+   const r=splitInto(el);
+   if(r==='done')return;
+   if(r){newPage();place(r,true);return;}
+   newPage();
+   box.append(el);
+  }
+  blocks.forEach(b=>place(b,false));
+  const tl=document.querySelector('.tool .np');
+  if(tl)tl.textContent=pn+' trang A4 chuẩn in';
+  document.body.dataset.paged='1';
+ }
+ run();
+};
+setTimeout(function(){ if(!document.body.dataset.paged && typeof window.runPagination==='function') window.runPagination(); }, 7000);
+</script>
+</body>
+</html>

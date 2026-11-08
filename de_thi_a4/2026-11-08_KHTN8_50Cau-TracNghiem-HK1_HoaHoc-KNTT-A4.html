@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>50 Câu Trắc Nghiệm Ôn Tập Hóa Học 8 HK1 (KNTT) – 08/11/2026</title>
+<link rel="icon" type="image/svg+xml" href="https://diemdanhsv.com/images/logo-sen.svg">
+<style>
+:root {
+  --luc: #0F6B55;
+  --luc-dam: #064E3B;
+  --lam: #1F4E79;
+  --son: #B85042;
+  --tho: #D97706;
+  --muc: #1d1d1d;
+  --xam-line: #CBD5E1;
+  --nen-nhe: #F8FAFC;
+}
+
+* { box-sizing: border-box; }
+html { background: #8a8f94; }
+body {
+  margin: 0;
+  font-family: "Times New Roman", Times, "DejaVu Serif", serif;
+  font-size: 12pt;
+  line-height: 1.42;
+  color: var(--muc);
+}
+
+#flow {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 10mm auto;
+  background: #fff;
+  padding: 15mm 18mm 18mm 25mm;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  position: relative;
+}
+
+/* Header nhận diện thương hiệu */
+.brand-hdr {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1.5pt solid var(--luc);
+  padding-bottom: 6pt;
+  margin-bottom: 10pt;
+}
+.brand-hdr .logos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-hdr .logos img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+.brand-hdr .info {
+  text-align: right;
+  font-size: 9.5pt;
+  line-height: 1.35;
+  color: #4B5563;
+}
+.brand-hdr .info .org {
+  font-weight: bold;
+  color: var(--luc-dam);
+  text-transform: uppercase;
+  font-size: 10pt;
+}
+.brand-hdr .info .author {
+  color: var(--son);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 15pt;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--luc-dam);
+  margin: 4pt 0 2pt;
+}
+.subtitle {
+  font-size: 10.5pt;
+  text-align: center;
+  font-style: italic;
+  color: #4B5563;
+  margin: 0 0 8pt;
+}
+.exam-meta {
+  display: flex;
+  justify-content: space-between;
+  background: var(--nen-nhe);
+  border: 1pt solid #E2E8F0;
+  border-radius: 4px;
+  padding: 4pt 10pt;
+  font-size: 10pt;
+  margin-bottom: 10pt;
+}
+
+h2 {
+  font-size: 12.5pt;
+  color: #fff;
+  background: var(--luc);
+  padding: 4pt 8pt;
+  border-radius: 3px;
+  margin: 12pt 0 6pt;
+  text-transform: uppercase;
+}
+
+p {
+  margin: 0 0 4pt;
+  text-align: justify;
+}
+
+.src {
+  font-size: 10pt;
+  color: #64748B;
+  font-style: italic;
+  margin-bottom: 8pt;
+}
+
+.q-block {
+  margin-bottom: 8pt;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.opts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2pt 6pt;
+  margin: 2pt 0 4pt 5mm;
+}
+.opts.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.opts.one {
+  grid-template-columns: 1fr;
+}
+
+.center {
+  text-align: center;
+  font-weight: bold;
+  margin: 14pt 0;
+  color: #64748B;
+}
+
+/* Bảng đáp án */
+.ds {
+  border-collapse: collapse;
+  margin: 4pt 0 8pt;
+  width: 100%;
+}
+.ds td, .ds th {
+  border: 0.5pt solid #64748B;
+  padding: 2.5pt 4pt;
+  text-align: center;
+  font-size: 9.5pt;
+}
+.ds th {
+  background: #F1F5F9;
+  font-weight: bold;
+}
+
+details.print-hidden {
+  background: #F1F5F9;
+  border: 1pt solid #CBD5E1;
+  border-radius: 5px;
+  padding: 8pt 12pt;
+  margin-top: 15pt;
+}
+details.print-hidden summary {
+  font-weight: bold;
+  color: var(--luc-dam);
+  cursor: pointer;
+  padding: 4pt 0;
+}
+
+.ftr-brand {
+  margin-top: 16pt;
+  border-top: 0.8pt solid var(--xam-line);
+  padding-top: 4pt;
+  font-size: 9pt;
+  color: #64748B;
+  display: flex;
+  justify-content: space-between;
+  font-style: italic;
+}
+
+@media print {
+  html { background: #fff; }
+  body { font-size: 11pt; line-height: 1.35; }
+  #flow {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+  .print-hidden { display: none !important; }
+  .q-block { break-inside: avoid; page-break-inside: avoid; }
+}
+
+@page {
+  size: A4;
+  margin: 12mm 15mm 15mm 20mm;
+}
+</style>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<div id="flow">
+
+  <!-- Header nhận diện thương hiệu -->
+  <div class="brand-hdr">
+    <div class="logos">
+      <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/ttbdvh.jpg?alt=media&token=f270aa9b-a2bc-48e8-8910-80742b542615" alt="TTBDVH Logo"/>
+      <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738" alt="HCMUS Logo"/>
+    </div>
+    <div class="info">
+      <div class="org">TT Bồi Dưỡng Văn Hóa · ĐH KHTN ĐHQG-HCM</div>
+      <div>Biên soạn: <span class="author">ThS. Đinh Quốc Tuấn</span></div>
+      <div><i>Học hiểu bản chất – Tự tin bứt phá</i></div>
+    </div>
+  </div>
+
+  <h1>50 CÂU TRẮC NGHIỆM ÔN TẬP HÓA HỌC LỚP 8 – HỌC KỲ 1</h1>
+  <p class="subtitle">Khoa học tự nhiên 8 · Phân môn Hóa học · Bộ sách Kết nối tri thức với cuộc sống (KNTT)</p>
+
+  <div class="exam-meta">
+    <div><b>Họ và tên học sinh:</b> ..............................................................</div>
+    <div><b>Lớp:</b> 8/......</div>
+    <div><b>Thời gian khuyến nghị:</b> 60 phút (theo dõi nhịp độ từng câu)</div>
+  </div>
+
+  <h2>PHẦN I. TRẮC NGHIỆM NHIỀU LỰA CHỌN</h2>
+  <p class="src"><i>Thí sinh chọn một phương án trả lời đúng duy nhất trong mỗi câu hỏi từ Câu 1 đến Câu 50.</i></p>
+  <div class="q-block">
+    <p><b>Câu 1:</b> Quá trình nào sau đây là hiện tượng hóa học?</p>
+    <div class="opts one">
+      <div><b>A.</b> Cồn để trong lọ hở miệng bị bay hơi dần.</div>
+      <div><b>B.</b> Đinh sắt để lâu trong không khí ẩm bị gỉ sét màu nâu đỏ.</div>
+      <div><b>C.</b> Nước lỏng được làm lạnh trong tủ đông hóa thành nước đá.</div>
+      <div><b>D.</b> Hòa tan muối ăn vào nước cất thu được dung dịch trong suốt.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 2:</b> Dấu hiệu rõ ràng nhất để phân biệt hiện tượng hóa học với hiện tượng vật lí là gì?</p>
+    <div class="opts one">
+      <div><b>A.</b> Có sự thay đổi về thể tích của các chất.</div>
+      <div><b>B.</b> Có sự tạo thành chất mới có tính chất khác chất ban đầu.</div>
+      <div><b>C.</b> Có sự biến đổi hình dạng bên ngoài của vật thể.</div>
+      <div><b>D.</b> Có sự tỏa nhiệt hoặc thu nhiệt nhẹ.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 3:</b> Trong các hiện tượng tự nhiên và đời sống sau, hiện tượng nào CHỈ là biến đổi vật lí?</p>
+    <div class="opts one">
+      <div><b>A.</b> Thắp sáng nến, sáp nến chảy lỏng rồi chuyển thành hơi nến.</div>
+      <div><b>B.</b> Đốt cháy que diêm trong không khí sinh ra tro than và khói cay.</div>
+      <div><b>C.</b> Lên men tinh bột gạo tạo thành cồn (rượu etylic).</div>
+      <div><b>D.</b> Sữa tươi để ngoài nhiệt độ cao lâu ngày bị chua và vón cục.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 4:</b> Đun nóng đường mía (sucrose) trong ống nghiệm, lúc đầu đường chảy lỏng thành chất lỏng màu vàng, sau đó chuyển sang màu đen sủi bọt và có hơi nước đọng lại ở miệng ống nghiệm. Giai đoạn đường bị cháy đen tạo than và hơi nước là:</p>
+    <div class="opts">
+      <div><b>A.</b> Hiện tượng vật lí.</div>
+      <div><b>B.</b> Hiện tượng hóa học.</div>
+      <div><b>C.</b> Hiện tượng quang học.</div>
+      <div><b>D.</b> Hiện tượng cơ học.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 5:</b> Trong một phản ứng hóa học, đại lượng nào sau đây KHÔNG bị thay đổi trước và sau phản ứng?</p>
+    <div class="opts two">
+      <div><b>A.</b> Số lượng phân tử của mỗi chất.</div>
+      <div><b>B.</b> Liên kết hóa học giữa các nguyên tử.</div>
+      <div><b>C.</b> Số lượng nguyên tử của mỗi nguyên tố.</div>
+      <div><b>D.</b> Tính chất vật lí và hóa học của các chất.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 6:</b> Khi nhỏ dung dịch hydrochloric acid (HCl) vào viên đá vôi (chứa calcium carbonate - $\text{CaCO}_3$), ta quan sát thấy hiện tượng nào chứng tỏ phản ứng hóa học đã diễn ra?</p>
+    <div class="opts one">
+      <div><b>A.</b> Dung dịch chuyển sang màu đỏ tím.</div>
+      <div><b>B.</b> Có chất khí sủi bọt thoát ra mạnh mẽ.</div>
+      <div><b>C.</b> Tạo thành kết tủa màu xanh lam lắng xuống đáy.</div>
+      <div><b>D.</b> Hỗn hợp bị đông đặc thành chất rắn.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 7:</b> Chất tham gia phản ứng (chất phản ứng) là:</p>
+    <div class="opts one">
+      <div><b>A.</b> Chất mới được sinh ra sau phản ứng hóa học.</div>
+      <div><b>B.</b> Chất ban đầu bị biến đổi trong phản ứng hóa học.</div>
+      <div><b>C.</b> Chất xúc tác làm phản ứng xảy ra nhanh hơn.</div>
+      <div><b>D.</b> Chất chỉ xuất hiện tạm thời ở trạng thái trung gian.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 8:</b> Cho phản ứng: Khí hydrogen + Khí oxygen $\rightarrow$ Nước. Khẳng định nào sau đây là ĐÚNG?</p>
+    <div class="opts one">
+      <div><b>A.</b> Chất phản ứng là hydrogen và nước.</div>
+      <div><b>B.</b> Sản phẩm của phản ứng là khí hydrogen.</div>
+      <div><b>C.</b> Chất tham gia là khí hydrogen và khí oxygen, sản phẩm là nước.</div>
+      <div><b>D.</b> Khối lượng sản phẩm luôn nhỏ hơn tổng khối lượng chất tham gia.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 9:</b> Phản ứng tỏa nhiệt là phản ứng hóa học trong đó:</p>
+    <div class="opts one">
+      <div><b>A.</b> Hấp thụ năng lượng dưới dạng nhiệt từ môi trường xung quanh.</div>
+      <div><b>B.</b> Giải phóng năng lượng dưới dạng nhiệt ra môi trường xung quanh.</div>
+      <div><b>C.</b> Nhiệt độ của hệ phản ứng và môi trường luôn giảm xuống.</div>
+      <div><b>D.</b> Phải liên tục đun nóng thì phản ứng mới tiếp tục diễn ra.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 10:</b> Phản ứng nào sau đây thuộc loại phản ứng thu nhiệt?</p>
+    <div class="opts one">
+      <div><b>A.</b> Phản ứng đốt cháy than đá để đun sôi nước.</div>
+      <div><b>B.</b> Phản ứng cháy của xăng dầu trong động cơ xe máy.</div>
+      <div><b>C.</b> Phản ứng nung đá vôi ($\text{CaCO}_3$) ở nhiệt độ khoảng $900-1000^\circ\text{C}$ để sản xuất vôi sống.</div>
+      <div><b>D.</b> Phản ứng đốt cồn y tế để khử trùng và sưởi ấm.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 11:</b> Khi quẹt diêm, ngọn lửa bùng cháy và tỏa ra nhiều nhiệt và ánh sáng. Đây là ví dụ của:</p>
+    <div class="opts two">
+      <div><b>A.</b> Hiện tượng vật lí thu nhiệt.</div>
+      <div><b>B.</b> Phản ứng hóa học tỏa nhiệt.</div>
+      <div><b>C.</b> Phản ứng hóa học thu nhiệt.</div>
+      <div><b>D.</b> Hiện tượng ngưng tụ năng lượng.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 12:</b> Để giảm tiêu hao năng lượng trong các nhà máy sản xuất vôi công nghiệp, người ta thường ứng dụng giải pháp nào?</p>
+    <div class="opts one">
+      <div><b>A.</b> Tận dụng nhiệt khí thải nóng của lò nung để sấy nóng đá vôi trước khi nung.</div>
+      <div><b>B.</b> Tưới thêm nước lạnh vào lò nung đá vôi.</div>
+      <div><b>C.</b> Nung đá vôi trong phòng lạnh.</div>
+      <div><b>D.</b> Giảm nồng độ khí oxygen trong lò đốt nhiên liệu.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 13:</b> Nội dung của Định luật bảo toàn khối lượng được phát biểu là:</p>
+    <div class="opts one">
+      <div><b>A.</b> Tổng thể tích các chất tham gia bằng tổng thể tích các chất sản phẩm.</div>
+      <div><b>B.</b> Trong một phản ứng hóa học, tổng khối lượng của các chất sản phẩm bằng tổng khối lượng của các chất tham gia phản ứng.</div>
+      <div><b>C.</b> Khối lượng của từng chất rắn trước và sau phản ứng không đổi.</div>
+      <div><b>D.</b> Tổng số mol các chất tham gia luôn bằng tổng số mol các chất sản phẩm.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 14:</b> Đốt cháy hoàn toàn $6\text{ g}$ kim loại magnesium (Mg) trong khí oxygen thu được $10\text{ g}$ magnesium oxide (MgO). Khối lượng khí oxygen đã tham gia phản ứng là:</p>
+    <div class="opts">
+      <div><b>A.</b> $4\text{ g}$</div>
+      <div><b>B.</b> $16\text{ g}$</div>
+      <div><b>C.</b> $8\text{ g}$</div>
+      <div><b>D.</b> $2\text{ g}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 15:</b> Nung $100\text{ g}$ đá vôi chứa calcium carbonate ($\text{CaCO}_3$), thu được $56\text{ g}$ calcium oxide ($\text{CaO}$) và khí carbon dioxide ($\text{CO}_2$). Khối lượng khí $\text{CO}_2$ bay ra là:</p>
+    <div class="opts">
+      <div><b>A.</b> $56\text{ g}$</div>
+      <div><b>B.</b> $44\text{ g}$</div>
+      <div><b>C.</b> $156\text{ g}$</div>
+      <div><b>D.</b> $22\text{ g}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 16:</b> Cho thanh kẽm (Zinc) nặng $13\text{ g}$ vào cốc chứa $100\text{ g}$ dung dịch hydrochloric acid (HCl). Sau phản ứng, thấy khối lượng dung dịch trong cốc tăng lên, đồng thời có $0,4\text{ g}$ khí hydrogen thoát ra. Tổng khối lượng cốc và dung dịch sau phản ứng là bao nhiêu (bỏ qua khối lượng cốc)?</p>
+    <div class="opts">
+      <div><b>A.</b> $113\text{ g}$</div>
+      <div><b>B.</b> $112,6\text{ g}$</div>
+      <div><b>C.</b> $113,4\text{ g}$</div>
+      <div><b>D.</b> $87\text{ g}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 17:</b> Phương trình hóa học nào sau đây đã được cân bằng ĐÚNG?</p>
+    <div class="opts one">
+      <div><b>A.</b> $\text{Al} + \text{O}_2 \rightarrow \text{Al}_2\text{O}_3$</div>
+      <div><b>B.</b> $2\text{Al} + 3\text{O}_2 \rightarrow 2\text{Al}_2\text{O}_3$</div>
+      <div><b>C.</b> $4\text{Al} + 3\text{O}_2 \rightarrow 2\text{Al}_2\text{O}_3$</div>
+      <div><b>D.</b> $4\text{Al} + 2\text{O}_2 \rightarrow 2\text{Al}_2\text{O}_3$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 18:</b> Hệ số thích hợp điền vào dấu ba chấm trong phương trình: $2\text{Fe} + \dots \text{Cl}_2 \xrightarrow{t^\circ} 2\text{FeCl}_3$ là:</p>
+    <div class="opts">
+      <div><b>A.</b> 1</div>
+      <div><b>B.</b> 2</div>
+      <div><b>C.</b> 3</div>
+      <div><b>D.</b> 4</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 19:</b> Cho phương trình hóa học: $\text{CH}_4 + 2\text{O}_2 \xrightarrow{t^\circ} \text{CO}_2 + 2\text{H}_2\text{O}$. Tỉ lệ số phân tử $\text{CH}_4$ : số phân tử $\text{O}_2$ : số phân tử $\text{CO}_2$ là:</p>
+    <div class="opts">
+      <div><b>A.</b> $1 : 2 : 1$</div>
+      <div><b>B.</b> $1 : 1 : 1$</div>
+      <div><b>C.</b> $2 : 1 : 2$</div>
+      <div><b>D.</b> $1 : 2 : 2$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 20:</b> Trong phản ứng: $a\text{Fe}_2\text{O}_3 + b\text{CO} \xrightarrow{t^\circ} c\text{Fe} + d\text{CO}_2$. Tổng hệ số các số nguyên tối giản $(a + b + c + d)$ là:</p>
+    <div class="opts">
+      <div><b>A.</b> 6</div>
+      <div><b>B.</b> 8</div>
+      <div><b>C.</b> 9</div>
+      <div><b>D.</b> 7</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 21:</b> Mol là lượng chất có chứa số hạt vi mô (nguyên tử hoặc phân tử) bằng bao nhiêu?</p>
+    <div class="opts">
+      <div><b>A.</b> $6,022 \times 10^{22}$</div>
+      <div><b>B.</b> $6,022 \times 10^{23}$</div>
+      <div><b>C.</b> $6,022 \times 10^{24}$</div>
+      <div><b>D.</b> $3,011 \times 10^{23}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 22:</b> Khối lượng mol phân tử của hợp chất sulfuric acid ($\text{H}_2\text{SO}_4$) là (cho $\text{H}=1, \text{S}=32, \text{O}=16$):</p>
+    <div class="opts">
+      <div><b>A.</b> $49\text{ g/mol}$</div>
+      <div><b>B.</b> $98\text{ g/mol}$</div>
+      <div><b>C.</b> $96\text{ g/mol}$</div>
+      <div><b>D.</b> $80\text{ g/mol}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 23:</b> Số mol của $11,2\text{ g}$ kim loại sắt (Iron - Fe, khối lượng mol $56\text{ g/mol}$) là:</p>
+    <div class="opts">
+      <div><b>A.</b> $0,1\text{ mol}$</div>
+      <div><b>B.</b> $0,2\text{ mol}$</div>
+      <div><b>C.</b> $0,5\text{ mol}$</div>
+      <div><b>D.</b> $2,0\text{ mol}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 24:</b> Khối lượng của $0,15\text{ mol}$ copper(II) oxide (CuO, cho $\text{Cu}=64, \text{O}=16$) là:</p>
+    <div class="opts">
+      <div><b>A.</b> $8,0\text{ g}$</div>
+      <div><b>B.</b> $12,0\text{ g}$</div>
+      <div><b>C.</b> $16,0\text{ g}$</div>
+      <div><b>D.</b> $14,4\text{ g}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 25:</b> Ở điều kiện chuẩn ($25^\circ\text{C}$ và $1\text{ bar}$), thể tích của $0,2\text{ mol}$ khí oxygen ($\text{O}_2$) là:</p>
+    <div class="opts">
+      <div><b>A.</b> $4,48\text{ lít}$</div>
+      <div><b>B.</b> $4,958\text{ lít}$</div>
+      <div><b>C.</b> $2,479\text{ lít}$</div>
+      <div><b>D.</b> $5,60\text{ lít}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 26:</b> Số mol của $7,437\text{ lít}$ khí hydrogen ($\text{H}_2$) đo ở điều kiện chuẩn ($25^\circ\text{C}, 1\text{ bar}$) là:</p>
+    <div class="opts">
+      <div><b>A.</b> $0,2\text{ mol}$</div>
+      <div><b>B.</b> $0,3\text{ mol}$</div>
+      <div><b>C.</b> $0,25\text{ mol}$</div>
+      <div><b>D.</b> $0,4\text{ mol}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 27:</b> Hỗn hợp khí gồm $0,1\text{ mol}$ $\text{N}_2$ và $0,1\text{ mol}$ $\text{CO}_2$ ở điều kiện chuẩn ($25^\circ\text{C}, 1\text{ bar}$) có tổng thể tích là:</p>
+    <div class="opts">
+      <div><b>A.</b> $2,479\text{ lít}$</div>
+      <div><b>B.</b> $4,958\text{ lít}$</div>
+      <div><b>C.</b> $9,916\text{ lít}$</div>
+      <div><b>D.</b> $4,48\text{ lít}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 28:</b> So sánh thể tích của $1\text{ mol}$ khí $\text{H}_2$ và $1\text{ mol}$ khí $\text{CO}_2$ ở cùng điều kiện chuẩn ($25^\circ\text{C}, 1\text{ bar}$):</p>
+    <div class="opts one">
+      <div><b>A.</b> Khí $\text{CO}_2$ có thể tích lớn hơn vì phân tử $\text{CO}_2$ nặng hơn.</div>
+      <div><b>B.</b> Khí $\text{H}_2$ có thể tích lớn hơn vì phân tử $\text{H}_2$ nhỏ nhẹ hơn.</div>
+      <div><b>C.</b> Thể tích hai khí hoàn toàn bằng nhau và đều bằng $24,79\text{ lít}$.</div>
+      <div><b>D.</b> Không so sánh được vì hai khí khác bản chất.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 29:</b> Công thức tính tỉ khối của khí A đối với khí B ($d_{A/B}$) là:</p>
+    <div class="opts two">
+      <div><b>A.</b> $d_{A/B} = \frac{M_A}{M_B}$</div>
+      <div><b>B.</b> $d_{A/B} = \frac{M_B}{M_A}$</div>
+      <div><b>C.</b> $d_{A/B} = M_A \times M_B$</div>
+      <div><b>D.</b> $d_{A/B} = \frac{V_A}{V_B}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 30:</b> Tỉ khối của khí sulfur dioxide ($\text{SO}_2$, khối lượng mol $64\text{ g/mol}$) đối với không khí (coi $M_{\text{kk}} = 29\text{ g/mol}$) xấp xỉ bằng:</p>
+    <div class="opts">
+      <div><b>A.</b> $0,45$</div>
+      <div><b>B.</b> $1,52$</div>
+      <div><b>C.</b> $2,21$</div>
+      <div><b>D.</b> $3,10$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 31:</b> Khí nào sau đây nhẹ hơn không khí và thường được ứng dụng để bơm vào bóng thám không?</p>
+    <div class="opts two">
+      <div><b>A.</b> Khí oxygen ($\text{O}_2$)</div>
+      <div><b>B.</b> Khí carbon dioxide ($\text{CO}_2$)</div>
+      <div><b>C.</b> Khí hydrogen ($\text{H}_2$)</div>
+      <div><b>D.</b> Khí chlorine ($\text{Cl}_2$)</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 32:</b> Để thu khí oxygen ($\text{O}_2$) vào lọ bằng phương pháp đẩy không khí, người ta phải đặt lọ như thế nào?</p>
+    <div class="opts one">
+      <div><b>A.</b> Đặt ngửa lọ vì khí oxygen nặng hơn không khí ($32 > 29$).</div>
+      <div><b>B.</b> Đặt úp ngược lọ vì khí oxygen nhẹ hơn không khí.</div>
+      <div><b>C.</b> Đặt nằm ngang lọ.</div>
+      <div><b>D.</b> Đặt nghiêng một góc $45^\circ$.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 33:</b> Cho phương trình: $\text{C} + \text{O}_2 \xrightarrow{t^\circ} \text{CO}_2$. Đốt cháy hoàn toàn $1,2\text{ g}$ carbon cần dùng bao nhiêu lít khí oxygen (đkc $25^\circ\text{C}, 1\text{ bar}$)?</p>
+    <div class="opts">
+      <div><b>A.</b> $2,24\text{ lít}$</div>
+      <div><b>B.</b> $2,479\text{ lít}$</div>
+      <div><b>C.</b> $4,958\text{ lít}$</div>
+      <div><b>D.</b> $1,2395\text{ lít}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 34:</b> Cho mẩu sắt tác dụng với dung dịch hydrochloric acid theo PTHH: $\text{Fe} + 2\text{HCl} \rightarrow \text{FeCl}_2 + \text{H}_2\uparrow$. Nếu thu được $0,2\text{ mol}$ khí $\text{H}_2$ thì khối lượng kim loại Fe đã phản ứng là:</p>
+    <div class="opts">
+      <div><b>A.</b> $5,6\text{ g}$</div>
+      <div><b>B.</b> $11,2\text{ g}$</div>
+      <div><b>C.</b> $2,8\text{ g}$</div>
+      <div><b>D.</b> $16,8\text{ g}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 35:</b> Cho $5,4\text{ g}$ nhôm (Al, $M=27$) tác dụng hết với dung dịch $\text{H}_2\text{SO}_4$ loãng: $2\text{Al} + 3\text{H}_2\text{SO}_4 \rightarrow \text{Al}_2(\text{SO}_4)_3 + 3\text{H}_2\uparrow$. Thể tích khí $\text{H}_2$ thu được ở điều kiện chuẩn ($25^\circ\text{C}, 1\text{ bar}$) là:</p>
+    <div class="opts">
+      <div><b>A.</b> $4,958\text{ lít}$</div>
+      <div><b>B.</b> $7,437\text{ lít}$</div>
+      <div><b>C.</b> $9,916\text{ lít}$</div>
+      <div><b>D.</b> $6,72\text{ lít}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 36:</b> Cho $0,2\text{ mol}$ kim loại kẽm (Zn) tác dụng với dung dịch chứa $0,3\text{ mol}$ hydrochloric acid (HCl): $\text{Zn} + 2\text{HCl} \rightarrow \text{ZnCl}_2 + \text{H}_2\uparrow$. Sau phản ứng kết thúc:</p>
+    <div class="opts two">
+      <div><b>A.</b> Kim loại Zn phản ứng hết, HCl còn dư.</div>
+      <div><b>B.</b> Acid HCl phản ứng hết, kim loại Zn còn dư.</div>
+      <div><b>C.</b> Cả hai chất cùng phản ứng vừa đủ.</div>
+      <div><b>D.</b> Không xác định được chất nào dư.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 37:</b> Nung $50\text{ g}$ calcium carbonate ($\text{CaCO}_3$, $M=100$) để sản xuất vôi sống (CaO, $M=56$). Biết hiệu suất phản ứng đạt $80\%$. Khối lượng CaO thực tế thu được là:</p>
+    <div class="opts">
+      <div><b>A.</b> $28\text{ g}$</div>
+      <div><b>B.</b> $22,4\text{ g}$</div>
+      <div><b>C.</b> $35\text{ g}$</div>
+      <div><b>D.</b> $20\text{ g}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 38:</b> Biết phản ứng nung vôi theo lí thuyết sinh ra $10\text{ g}$ CaO, nhưng thực tế người ta chỉ thu được $8,5\text{ g}$ CaO. Hiệu suất $H\%$ của phản ứng nung vôi là:</p>
+    <div class="opts">
+      <div><b>A.</b> $80\%$</div>
+      <div><b>B.</b> $85\%$</div>
+      <div><b>C.</b> $90\%$</div>
+      <div><b>D.</b> $75\%$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 39:</b> Yếu tố nào sau đây KHÔNG làm tăng tốc độ của một phản ứng hóa học?</p>
+    <div class="opts one">
+      <div><b>A.</b> Tăng nhiệt độ của hệ phản ứng.</div>
+      <div><b>B.</b> Tăng diện tích bề mặt tiếp xúc của chất rắn.</div>
+      <div><b>C.</b> Thêm nước cất để làm giảm nồng độ các chất tan tham gia phản ứng.</div>
+      <div><b>D.</b> Sử dụng chất xúc tác thích hợp.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 40:</b> Tại sao than tổ ong thường được đục các lỗ rỗng xuyên suốt thân viên than?</p>
+    <div class="opts one">
+      <div><b>A.</b> Để giảm trọng lượng khi vận chuyển.</div>
+      <div><b>B.</b> Để làm tăng diện tích bề mặt tiếp xúc của than với oxygen trong không khí, giúp than cháy nhanh và mạnh hơn.</div>
+      <div><b>C.</b> Để than dễ ngấm nước khi cần dập tắt.</div>
+      <div><b>D.</b> Để giảm bớt lượng tro xỉ sau khi đốt.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 41:</b> Chất xúc tác là chất:</p>
+    <div class="opts one">
+      <div><b>A.</b> Làm tăng tốc độ phản ứng hóa học nhưng không bị biến đổi về lượng và chất sau phản ứng.</div>
+      <div><b>B.</b> Làm giảm tốc độ phản ứng và bị tiêu hao hoàn toàn trong phản ứng.</div>
+      <div><b>C.</b> Chỉ làm phản ứng đổi màu mà không ảnh hưởng đến tốc độ.</div>
+      <div><b>D.</b> Bắt buộc phải là chất rắn tan được trong nước.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 42:</b> Hòa tan $15\text{ g}$ muối ăn (NaCl) vào $185\text{ g}$ nước cất. Nồng độ phần trăm ($C\%$) của dung dịch nước muối thu được là:</p>
+    <div class="opts">
+      <div><b>A.</b> $7,5\%$</div>
+      <div><b>B.</b> $8,1\%$</div>
+      <div><b>C.</b> $7,0\%$</div>
+      <div><b>D.</b> $10,0\%$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 43:</b> Hòa tan $0,2\text{ mol}$ sodium hydroxide (NaOH) vào nước thu được đúng $500\text{ mL}$ dung dịch. Nồng độ mol ($C_M$) của dung dịch là:</p>
+    <div class="opts">
+      <div><b>A.</b> $0,1\text{ M}$</div>
+      <div><b>B.</b> $0,4\text{ M}$</div>
+      <div><b>C.</b> $0,2\text{ M}$</div>
+      <div><b>D.</b> $0,5\text{ M}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 44:</b> Một bác sĩ cần dùng $500\text{ g}$ dung dịch nước muối sinh lí NaCl $0,9\%$ để súc họng sát khuẩn. Khối lượng muối NaCl tinh khiết có trong chai dung dịch đó là:</p>
+    <div class="opts">
+      <div><b>A.</b> $4,5\text{ g}$</div>
+      <div><b>B.</b> $9,0\text{ g}$</div>
+      <div><b>C.</b> $0,45\text{ g}$</div>
+      <div><b>D.</b> $45\text{ g}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 45:</b> Theo danh pháp quốc tế IUPAC, hợp chất có công thức hóa học $\text{HCl}$ có tên gọi chuẩn là:</p>
+    <div class="opts">
+      <div><b>A.</b> Axit clohidric</div>
+      <div><b>B.</b> Hydrochloric acid</div>
+      <div><b>C.</b> Hydrogen chloride lỏng</div>
+      <div><b>D.</b> Chloric acid</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 46:</b> Dung dịch chất nào sau đây làm đổi màu quỳ tím sang màu xanh và làm dung dịch phenolphtalein không màu hóa thành màu hồng?</p>
+    <div class="opts two">
+      <div><b>A.</b> Hydrochloric acid ($\text{HCl}$)</div>
+      <div><b>B.</b> Sodium chloride ($\text{NaCl}$)</div>
+      <div><b>C.</b> Sodium hydroxide ($\text{NaOH}$)</div>
+      <div><b>D.</b> Sulfuric acid ($\text{H}_2\text{SO}_4$)</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 47:</b> Nước cốt quả chanh có vị chua gắt. Giá trị pH của nước chanh xấp xỉ nằm trong khoảng nào sau đây?</p>
+    <div class="opts one">
+      <div><b>A.</b> $\text{pH} \approx 2 - 3$ (môi trường acid)</div>
+      <div><b>B.</b> $\text{pH} \approx 7$ (môi trường trung tính)</div>
+      <div><b>C.</b> $\text{pH} \approx 9 - 10$ (môi trường kiềm nhẹ)</div>
+      <div><b>D.</b> $\text{pH} \approx 12 - 13$ (môi trường kiềm mạnh)</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 48:</b> Người nông dân kiểm tra thấy đất ruộng có độ $\text{pH} = 4,8$. Để khử chua cải tạo đất giúp cây trồng phát triển tốt, biện pháp hiệu quả và tiết kiệm nhất là:</p>
+    <div class="opts one">
+      <div><b>A.</b> Bón thêm phân đạm urê.</div>
+      <div><b>B.</b> Tưới thêm dung dịch acid sulfuric loãng.</div>
+      <div><b>C.</b> Rắc vôi bột hoặc vôi sống (CaO) lên đất cày ải.</div>
+      <div><b>D.</b> Bón thật nhiều phân lân supephotphat.</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 49:</b> Dãy chất nào sau đây gồm toàn các acidic oxide (oxide acid)?</p>
+    <div class="opts one">
+      <div><b>A.</b> $\text{CaO, CuO, BaO}$</div>
+      <div><b>B.</b> $\text{CO}_2, \text{SO}_2, \text{P}_2\text{O}_5$</div>
+      <div><b>C.</b> $\text{Na}_2\text{O, Fe}_2\text{O}_3, \text{K}_2\text{O}$</div>
+      <div><b>D.</b> $\text{CaO, CO}_2, \text{MgO}$</div>
+    </div>
+  </div>
+  <div class="q-block">
+    <p><b>Câu 50:</b> Bao bì một loại phân bón hóa học có ghi ký hiệu NPK $16-16-8$. Ký hiệu này cung cấp cho người nông dân thông tin về tỉ lệ dinh dưỡng của những nguyên tố nào?</p>
+    <div class="opts one">
+      <div><b>A.</b> Sodium, Phosphorus, Potassium (Natri, Photpho, Kali)</div>
+      <div><b>B.</b> Nitrogen, Phosphorus, Potassium (Đạm, Lân, Kali)</div>
+      <div><b>C.</b> Nitrogen, Potassium, Krypton (Đạm, Kali, Kripton)</div>
+      <div><b>D.</b> Nickel, Phosphorus, Potassium (Niken, Photpho, Kali)</div>
+    </div>
+  </div>
+  <p class="center">——— HẾT ———</p>
+
+  <!-- Khối đáp án duy nhất đặt ở cuối flow, ẩn khi in ấn -->
+  <details class="print-hidden">
+    <summary>Đáp án &amp; Lời giải chi tiết (Dành cho Giáo viên &amp; Phụ huynh — bấm để mở)</summary>
+
+    <p><b>Bảng đáp án trắc nghiệm (Câu 1 – 25):</b></p>
+    <table class="ds">
+      <tr><th>Câu</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th><th>16</th><th>17</th><th>18</th><th>19</th><th>20</th><th>21</th><th>22</th><th>23</th><th>24</th><th>25</th></tr>
+      <tr><th>Đáp án</th><td>B</td><td>B</td><td>A</td><td>B</td><td>C</td><td>B</td><td>B</td><td>C</td><td>B</td><td>C</td><td>B</td><td>A</td><td>B</td><td>A</td><td>B</td><td>B</td><td>C</td><td>C</td><td>A</td><td>C</td><td>B</td><td>B</td><td>B</td><td>B</td><td>B</td></tr>
+    </table>
+
+    <p><b>Bảng đáp án trắc nghiệm (Câu 26 – 50):</b></p>
+    <table class="ds">
+      <tr><th>Câu</th><th>26</th><th>27</th><th>28</th><th>29</th><th>30</th><th>31</th><th>32</th><th>33</th><th>34</th><th>35</th><th>36</th><th>37</th><th>38</th><th>39</th><th>40</th><th>41</th><th>42</th><th>43</th><th>44</th><th>45</th><th>46</th><th>47</th><th>48</th><th>49</th><th>50</th></tr>
+      <tr><th>Đáp án</th><td>B</td><td>B</td><td>C</td><td>A</td><td>C</td><td>C</td><td>A</td><td>B</td><td>B</td><td>B</td><td>B</td><td>B</td><td>B</td><td>C</td><td>B</td><td>A</td><td>A</td><td>B</td><td>A</td><td>B</td><td>C</td><td>A</td><td>C</td><td>B</td><td>B</td></tr>
+    </table>
+
+    <p><b>Hướng dẫn giải chi tiết từng câu:</b></p>
+    <ul>
+      <li><b>Câu 1 (Đáp án B):</b> <b>Phương pháp:</b> Hiện tượng hóa học là hiện tượng có sự biến đổi từ chất này thành chất khác. Hiện tượng vật lí chỉ thay đổi trạng thái, hình dạng mà không tạo chất mới.<br><b>Giải chi tiết:</b> Đinh sắt (Fe) bị gỉ trong không khí ẩm tạo thành hợp chất gỉ sắt (oxit và hiđroxit của sắt) là hiện tượng hóa học. Các quá trình còn lại chỉ là biến đổi trạng thái vật lí.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 2 (Đáp án B):</b> <b>Phương pháp:</b> Khái niệm hiện tượng hóa học trong SGK KHTN 8 KNTT.<br><b>Giải chi tiết:</b> Dấu hiệu quyết định của hiện tượng hóa học là có sự biến đổi chất, tức là sinh ra chất mới có tính chất hóa học và vật lí khác với chất ban đầu.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 3 (Đáp án A):</b> <b>Giải chi tiết:</b> Sáp nến chảy lỏng và bay hơi chỉ là sự chuyển thể từ rắn sang lỏng và khí (hiện tượng vật lí). Ba hiện tượng còn lại đều có sự chuyển hóa tạo chất mới.<br><b>Chọn đáp án A.</b></li>
+      <li><b>Câu 4 (Đáp án B):</b> <b>Giải chi tiết:</b> Đường mía khi bị nhiệt phân hủy thành carbon (than màu đen) và nước là quá trình tạo chất mới, do đó là hiện tượng hóa học.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 5 (Đáp án C):</b> <b>Phương pháp:</b> Bản chất của phản ứng hóa học.<br><b>Giải chi tiết:</b> Trong phản ứng hóa học, chỉ có liên kết giữa các nguyên tử thay đổi, làm phân tử này biến đổi thành phân tử khác. Tổng số nguyên tử của từng nguyên tố được bảo toàn tuyệt đối.<br><b>Chọn đáp án C.</b></li>
+      <li><b>Câu 6 (Đáp án B):</b> <b>Giải chi tiết:</b> Phản ứng $\text{CaCO}_3 + 2\text{HCl} \rightarrow \text{CaCl}_2 + \text{CO}_2\uparrow + \text{H}_2\text{O}$ sinh ra bọt khí carbon dioxide ($\text{CO}_2$) không màu thoát ra.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 7 (Đáp án B):</b> <b>Giải chi tiết:</b> Chất ban đầu bị biến đổi trong phản ứng hóa học gọi là chất tham gia (chất phản ứng). Chất mới sinh ra gọi là sản phẩm.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 8 (Đáp án C):</b> <b>Giải chi tiết:</b> Hai chất ban đầu là hydrogen và oxygen (chất tham gia), chất sinh ra là nước (sản phẩm).<br><b>Chọn đáp án C.</b></li>
+      <li><b>Câu 9 (Đáp án B):</b> <b>Giải chi tiết:</b> Theo định nghĩa SGK KHTN 8 KNTT: Phản ứng tỏa nhiệt giải phóng năng lượng (dưới dạng nhiệt) ra môi trường xung quanh, làm môi trường nóng lên.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 10 (Đáp án C):</b> <b>Giải chi tiết:</b> Quá trình nung đá vôi cần liên tục cung cấp nhiệt năng từ bên ngoài thì phản ứng mới tiếp diễn; khi ngừng cung cấp nhiệt, phản ứng sẽ dừng lại. Đây là phản ứng thu nhiệt.<br><b>Chọn đáp án C.</b></li>
+      <li><b>Câu 11 (Đáp án B):</b> <b>Giải chi tiết:</b> Sự cháy que diêm tạo chất mới kèm theo giải phóng nhiệt và phát sáng là phản ứng hóa học tỏa nhiệt.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 12 (Đáp án A):</b> <b>Giải chi tiết:</b> Khí thải lò nung mang lượng nhiệt lớn, việc tận dụng dòng nhiệt này để sấy nóng đá vôi nguyên liệu giúp tiết kiệm nhiên liệu đốt lò đáng kể.<br><b>Chọn đáp án A.</b></li>
+      <li><b>Câu 13 (Đáp án B):</b> <b>Giải chi tiết:</b> Định luật bảo toàn khối lượng (Lomonosov - Lavoisier): Trong một phản ứng hóa học, tổng khối lượng của các chất sản phẩm bằng tổng khối lượng của các chất tham gia phản ứng.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 14 (Đáp án A):</b> <b>Phương pháp:</b> Áp dụng ĐLBTKL: $m_{\text{Mg}} + m_{\text{O}_2} = m_{\text{MgO}}$.<br><b>Tính toán:</b> $m_{\text{O}_2} = 10 - 6 = 4\text{ g}$.<br><b>Chọn đáp án A.</b></li>
+      <li><b>Câu 15 (Đáp án B):</b> <b>Tính toán:</b> $m_{\text{CO}_2} = m_{\text{CaCO}_3} - m_{\text{CaO}} = 100 - 56 = 44\text{ g}$.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 16 (Đáp án B):</b> <b>Tính toán:</b> Theo ĐLBTKL: $m_{\text{hỗn hợp sau}} = m_{\text{Zn}} + m_{\text{dd HCl}} - m_{\text{H}_2} = 13 + 100 - 0,4 = 112,6\text{ g}$.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 17 (Đáp án C):</b> <b>Giải chi tiết:</b> Vế trái có $4$ nguyên tử Al, $3 \times 2 = 6$ nguyên tử O. Vế phải có $2 \times 2 = 4$ nguyên tử Al, $2 \times 3 = 6$ nguyên tử O. Vậy phương trình $4\text{Al} + 3\text{O}_2 \rightarrow 2\text{Al}_2\text{O}_3$ cân bằng đúng.<br><b>Chọn đáp án C.</b></li>
+      <li><b>Câu 18 (Đáp án C):</b> <b>Giải chi tiết:</b> Vế phải có $2 \times 3 = 6$ nguyên tử Cl. Do đó vế trái cần $3$ phân tử $\text{Cl}_2$ ($3 \times 2 = 6$).<br><b>Chọn đáp án C.</b></li>
+      <li><b>Câu 19 (Đáp án A):</b> <b>Giải chi tiết:</b> Tỉ lệ số phân tử tương ứng với hệ số đứng trước mỗi chất trong PTHH đã cân bằng: $1 : 2 : 1$.<br><b>Chọn đáp án A.</b></li>
+      <li><b>Câu 20 (Đáp án C):</b> <b>Giải chi tiết:</b> Phương trình cân bằng: $\text{Fe}_2\text{O}_3 + 3\text{CO} \xrightarrow{t^\circ} 2\text{Fe} + 3\text{CO}_2$. Tổng hệ số: $1 + 3 + 2 + 3 = 9$.<br><b>Chọn đáp án C.</b></li>
+      <li><b>Câu 21 (Đáp án B):</b> <b>Giải chi tiết:</b> Theo chuẩn SI và SGK KHTN 8 KNTT, một mol chất chứa hằng số Avogadro $N_A \approx 6,022 \times 10^{23}$ hạt vi mô.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 22 (Đáp án B):</b> <b>Tính toán:</b> $M_{\text{H}_2\text{SO}_4} = 1 \times 2 + 32 + 16 \times 4 = 2 + 32 + 64 = 98\text{ g/mol}$.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 23 (Đáp án B):</b> <b>Tính toán:</b> $n_{\text{Fe}} = \frac{m}{M} = \frac{11,2}{56} = 0,2\text{ mol}$.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 24 (Đáp án B):</b> <b>Tính toán:</b> $M_{\text{CuO}} = 64 + 16 = 80\text{ g/mol}$. Khối lượng $m = n \times M = 0,15 \times 80 = 12,0\text{ g}$.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 25 (Đáp án B):</b> <b>Phương pháp:</b> Theo chuẩn GDPT 2018, điều kiện chuẩn $25^\circ\text{C}, 1\text{ bar}$ có công thức $V = n \times 24,79$.<br><b>Tính toán:</b> $V = 0,2 \times 24,79 = 4,958\text{ lít}$.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 26 (Đáp án B):</b> <b>Tính toán:</b> $n = \frac{V}{24,79} = \frac{7,437}{24,79} = 0,3\text{ mol}$.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 27 (Đáp án B):</b> <b>Tính toán:</b> Tổng số mol khí $n_{\text{hh}} = 0,1 + 0,1 = 0,2\text{ mol}$. Tổng thể tích $V = 0,2 \times 24,79 = 4,958\text{ lít}$.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 28 (Đáp án C):</b> <b>Giải chi tiết:</b> Ở cùng điều kiện nhiệt độ và áp suất, các chất khí có số mol bằng nhau đều chiếm những thể tích bằng nhau (ở đkc là $24,79\text{ L}$).<br><b>Chọn đáp án C.</b></li>
+      <li><b>Câu 29 (Đáp án A):</b> <b>Giải chi tiết:</b> Tỉ khối của khí A đối với khí B được xác định bởi tỉ số khối lượng mol: $d_{A/B} = \frac{M_A}{M_B}$.<br><b>Chọn đáp án A.</b></li>
+      <li><b>Câu 30 (Đáp án C):</b> <b>Tính toán:</b> $d_{\text{SO}_2/\text{kk}} = \frac{64}{29} \approx 2,21$.<br><b>Chọn đáp án C.</b></li>
+      <li><b>Câu 31 (Đáp án C):</b> <b>Giải chi tiết:</b> Khí $\text{H}_2$ có $M = 2\text{ g/mol} < 29\text{ g/mol}$, là chất khí nhẹ nhất trong tất cả các chất khí.<br><b>Chọn đáp án C.</b></li>
+      <li><b>Câu 32 (Đáp án A):</b> <b>Giải chi tiết:</b> Vì $d_{\text{O}_2/\text{kk}} = \frac{32}{29} \approx 1,1 > 1$, khí $\text{O}_2$ nặng hơn không khí nên sẽ chìm xuống đáy lọ, do đó cần đặt ngửa lọ để thu khí.<br><b>Chọn đáp án A.</b></li>
+      <li><b>Câu 33 (Đáp án B):</b> <b>Tính toán:</b> $n_{\text{C}} = \frac{1,2}{12} = 0,1\text{ mol}$. Theo PTHH: $n_{\text{O}_2} = n_{\text{C}} = 0,1\text{ mol}$. Thể tích khí $\text{O}_2$ (đkc): $V = 0,1 \times 24,79 = 2,479\text{ lít}$.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 34 (Đáp án B):</b> <b>Tính toán:</b> Theo PTHH: $n_{\text{Fe}} = n_{\text{H}_2} = 0,2\text{ mol}$. Khối lượng Fe: $m_{\text{Fe}} = 0,2 \times 56 = 11,2\text{ g}$.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 35 (Đáp án B):</b> <b>Tính toán:</b> $n_{\text{Al}} = \frac{5,4}{27} = 0,2\text{ mol}$. Theo PTHH: $n_{\text{H}_2} = \frac{3}{2} n_{\text{Al}} = 0,3\text{ mol}$. Thể tích khí $\text{H}_2$ ở đkc: $V = 0,3 \times 24,79 = 7,437\text{ lít}$.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 36 (Đáp án B):</b> <b>Phương pháp:</b> So sánh tỉ số $\frac{n_{\text{đề}}}{hệ\text{ }số}$: $\frac{n_{\text{Zn}}}{1} = 0,2 > \frac{n_{\text{HCl}}}{2} = \frac{0,3}{2} = 0,15$.<br><b>Kết luận:</b> Acid HCl phản ứng hết, kim loại Zn còn dư ($0,2 - 0,15 = 0,05\text{ mol}$).<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 37 (Đáp án B):</b> <b>Tính toán:</b> $n_{\text{CaCO}_3} = \frac{50}{100} = 0,5\text{ mol}$. Theo lí thuyết thu được $0,5\text{ mol}$ CaO tương ứng $m_{\text{lt}} = 0,5 \times 56 = 28\text{ g}$. Vì hiệu suất $80\%$, khối lượng thực tế: $m_{\text{tt}} = 28 \times \frac{80}{100} = 22,4\text{ g}$.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 38 (Đáp án B):</b> <b>Tính toán:</b> $H\% = \frac{m_{\text{thực tế}}}{m_{\text{lí thuyết}}} \times 100\% = \frac{8,5}{10} \times 100\% = 85\%$.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 39 (Đáp án C):</b> <b>Giải chi tiết:</b> Làm giảm nồng độ chất phản ứng sẽ làm giảm số lần va chạm hiệu quả giữa các phân tử, do đó làm giảm tốc độ phản ứng.<br><b>Chọn đáp án C.</b></li>
+      <li><b>Câu 40 (Đáp án B):</b> <b>Giải chi tiết:</b> Các lỗ rỗng giúp không khí lưu thông và làm tăng mạnh diện tích bề mặt tiếp xúc giữa than (carbon) và khí oxygen, nâng cao tốc độ phản ứng cháy.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 41 (Đáp án A):</b> <b>Giải chi tiết:</b> Theo định nghĩa: Chất xúc tác là chất làm tăng tốc độ phản ứng hóa học nhưng không bị tiêu hao hay biến đổi hóa học sau khi kết thúc phản ứng.<br><b>Chọn đáp án A.</b></li>
+      <li><b>Câu 42 (Đáp án A):</b> <b>Tính toán:</b> Khối lượng dung dịch $m_{\text{dd}} = m_{\text{ct}} + m_{\text{nước}} = 15 + 185 = 200\text{ g}$. Nồng độ: $C\% = \frac{15}{200} \times 100\% = 7,5\%$.<br><b>Chọn đáp án A.</b></li>
+      <li><b>Câu 43 (Đáp án B):</b> <b>Tính toán:</b> Đổi $500\text{ mL} = 0,5\text{ lít}$. Nồng độ mol: $C_M = \frac{n}{V} = \frac{0,2}{0,5} = 0,4\text{ M}$.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 44 (Đáp án A):</b> <b>Tính toán:</b> $m_{\text{NaCl}} = \frac{m_{\text{dd}} \times C\%}{100\%} = \frac{500 \times 0,9}{100} = 4,5\text{ g}$.<br><b>Chọn đáp án A.</b></li>
+      <li><b>Câu 45 (Đáp án B):</b> <b>Giải chi tiết:</b> Chương trình GDPT 2018 quy định dùng danh pháp tiếng Anh chuẩn IUPAC: $\text{HCl}$ ở dạng dung dịch đọc là Hydrochloric acid.<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 46 (Đáp án C):</b> <b>Giải chi tiết:</b> Dung dịch kiềm (base tan) như NaOH làm quỳ tím hóa xanh và làm phenolphtalein không màu hóa hồng.<br><b>Chọn đáp án C.</b></li>
+      <li><b>Câu 47 (Đáp án A):</b> <b>Giải chi tiết:</b> Quả chanh chứa citric acid nên có tính acid mạnh, thang pH nằm trong khoảng $2 - 3 < 7$.<br><b>Chọn đáp án A.</b></li>
+      <li><b>Câu 48 (Đáp án C):</b> <b>Giải chi tiết:</b> Đất có $\text{pH} < 7$ là đất chua (thừa acid). Vôi sống (CaO) hoặc vôi bột khi gặp nước tạo dung dịch kiềm $\text{Ca(OH)}_2$ trung hòa acid trong đất.<br><b>Chọn đáp án C.</b></li>
+      <li><b>Câu 49 (Đáp án B):</b> <b>Giải chi tiết:</b> Acidic oxide thường là oxit của phi kim tương ứng với một axit: $\text{CO}_2$ (ứng với $\text{H}_2\text{CO}_3$), $\text{SO}_2$ (ứng với $\text{H}_2\text{SO}_3$), $\text{P}_2\text{O}_5$ (ứng với $\text{H}_3\text{PO}_4$).<br><b>Chọn đáp án B.</b></li>
+      <li><b>Câu 50 (Đáp án B):</b> <b>Giải chi tiết:</b> Phân NPK cung cấp 3 nguyên tố đa lượng quan trọng nhất cho cây trồng: N (Đạm - kích thích thân lá), P (Lân - kích thích rễ, hoa quả), K (Kali - tăng khả năng chống chịu sâu bệnh, rét hạn).<br><b>Chọn đáp án B.</b></li>
+    </ul>
+  </details>
+
+  <div class="ftr-brand">
+    <div>Hệ thống dạy kèm &amp; khảo thí BDVH — bdvh.diemdanhsv.com</div>
+    <div>© Bản quyền thuộc ThS. Đinh Quốc Tuấn – Mục đích phi lợi nhuận – Vì giáo dục</div>
+  </div>
+
+</div>
+</body>
+</html>

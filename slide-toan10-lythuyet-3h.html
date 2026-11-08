@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slide Bài Giảng Lý Thuyết Toán 10 (3 Tiếng) – ThS. Đinh Quốc Tuấn · HCMUS</title>
+<link rel="icon" type="image/svg+xml" href="https://diemdanhsv.com/images/logo-sen.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+<style>
+:root {
+  --luc: #0F6B55;
+  --luc-non: #46A385;
+  --lam: #1F4E79;
+  --muc: #10212B;
+  --giay: #F6F7F3;
+  --bac: #D5DCE1;
+  --son: #D2492A;
+  --tho: #D6A130;
+  --line: #D5DCE1;
+  --card: #FFFFFF;
+  --serif: 'Source Serif 4', Georgia, serif;
+  --sans: 'Be Vietnam Pro', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; margin: 0; background: #0d1a26; font-family: var(--sans); }
+
+/* Sân khấu 1600x900 co giãn vừa mọi màn hình */
+#stage { position: fixed; inset: 0; overflow: hidden; }
+#scaler {
+  width: 1600px;
+  height: 900px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  background: var(--giay);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 25px 70px rgba(0,0,0,.45);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--sans);
+  font-size: 22px;
+  line-height: 1.45;
+  padding: 40px 64px 0;
+  color: var(--muc);
+}
+
+.slide.enter { animation: sIn .3s cubic-bezier(.2,.8,.2,1); }
+@keyframes sIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+.s-body { flex: 1; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+.s-foot {
+  height: 60px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-top: 1px solid var(--line);
+  margin: 0 -64px;
+  padding: 0 64px;
+  font-size: 16px;
+  color: #5A6A78;
+  background: rgba(255,255,255,0.5);
+}
+.s-foot img.hcmus { height: 34px; width: auto; }
+.s-foot .sen-box {
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  border-radius: 20%;
+  padding: 3px;
+  border: 1px solid var(--line);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.s-foot .sen-box img { width: 100%; height: 100%; }
+.s-foot .grow { flex: 1; }
+.s-foot .time-pill {
+  background: #E8F4EE;
+  color: var(--luc);
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 15px;
+}
+.s-foot .num { font-variant-numeric: tabular-nums; font-weight: 800; color: var(--muc); font-size: 18px; }
+
+.s-kicker {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--lam);
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.s-kicker::before {
+  content: "";
+  width: 32px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--luc);
+}
+
+.s-title {
+  font: 700 40px/1.18 var(--serif);
+  color: var(--muc);
+  margin: 0 0 16px;
+  letter-spacing: -.01em;
+}
+
+/* Bố cục 2 cột */
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+.card {
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: 18px;
+  padding: 20px 24px;
+  box-shadow: 0 6px 20px rgba(16,33,43,.04);
+  overflow: hidden;
+}
+.card h3 {
+  font: 700 25px/1.25 var(--serif);
+  color: var(--lam);
+  margin: 0 0 10px;
+}
+.tag {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: #E8EEF5;
+  color: var(--lam);
+  margin-bottom: 8px;
+}
+
+ul.clean { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+ul.clean > li { padding-left: 24px; position: relative; }
+ul.clean > li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: .55em;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--luc);
+}
+ul.clean ul { padding-left: 20px; margin-top: 4px; display: grid; gap: 4px; }
+
+.eq-box {
+  background: #F8FAFC;
+  border: 1.5px dashed #94A3B8;
+  border-radius: 14px;
+  padding: 12px 18px;
+  text-align: center;
+  color: var(--lam);
+  font-weight: 600;
+}
+
+.ex-item {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-left: 5px solid var(--luc);
+  border-radius: 12px;
+  padding: 10px 14px;
+  line-height: 1.45;
+}
+
+.warn-banner {
+  background: #FEF2F2;
+  border: 1.5px solid #FECACA;
+  border-left: 6px solid #DC2626;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 18.5px;
+  color: #991B1B;
+  margin-top: 10px;
+}
+
+.ans-pill {
+  background: #DCFCE7;
+  border: 1.5px solid #10B981;
+  color: #065F46;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 19px;
+  margin-top: 8px;
+}
+
+table.styled-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 19px;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+}
+table.styled-tbl th {
+  background: var(--lam);
+  color: #fff;
+  padding: 12px 16px;
+  font-family: var(--serif);
+  font-weight: 700;
+  text-align: left;
+}
+table.styled-tbl td {
+  padding: 10px 16px;
+  border-top: 1px solid var(--line);
+  vertical-align: middle;
+}
+table.styled-tbl tr:nth-child(even) td { background: #F8FAFC; }
+
+/* Slide Bìa */
+.slide.cover {
+  background: radial-gradient(1100px 650px at 85% 12%, #E3F1EA 0%, transparent 60%), var(--giay);
+  padding: 48px 72px;
+}
+.cover-logos { display: flex; align-items: center; gap: 22px; margin-bottom: 26px; }
+.cover-logos img.hcmus { height: 76px; }
+.cover-logos .sep { width: 2px; height: 56px; background: var(--line); }
+.cover-logos .sen { width: 72px; height: 72px; background: #fff; border-radius: 20%; padding: 6px; box-shadow: 0 2px 10px rgba(16,33,43,.08); }
+.badge-pill {
+  background: var(--luc);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: 99px;
+  letter-spacing: .08em;
+}
+.cover-title { font: 700 64px/1.12 var(--serif); margin: 0 0 16px; letter-spacing: -.02em; color: var(--muc); }
+.cover-title em { font-style: normal; color: var(--luc); }
+.cover-sub { font-size: 23px; color: #475569; margin: 0 0 28px; line-height: 1.5; }
+.cover-person {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #fff;
+  border: 1.5px solid var(--line);
+  border-radius: 18px;
+  padding: 14px 24px;
+  width: fit-content;
+}
+.cover-av {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--lam);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 22px var(--serif);
+}
+.agenda-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: var(--giay);
+  border-radius: 10px;
+  border: 1px solid var(--line);
+}
+.t-tag {
+  background: #E8EEF5;
+  color: var(--lam);
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 15px;
+}
+
+/* Thanh điều khiển nổi */
+#ctrl {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  background: rgba(16,33,43,.94);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 7px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 50;
+  opacity: 0;
+  transition: opacity .25s;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+body.show-ctrl #ctrl, #ctrl:hover { opacity: 1; }
+#ctrl button, #ctrl a, #ctrl select {
+  background: transparent;
+  border: 0;
+  color: #fff;
+  font: inherit;
+  padding: 6px 11px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  transition: background .15s;
+}
+#ctrl select { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25); }
+#ctrl select option { background: #10212B; color: #fff; }
+#ctrl button:hover, #ctrl a:hover { background: rgba(255,255,255,.16); }
+#ctrl .pos { font-variant-numeric: tabular-nums; padding: 0 8px; font-weight: 800; color: #8FE0BD; }
+
+#progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: var(--luc);
+  z-index: 100;
+  transition: width .2s;
+}
+
+/* Modal Mục lục (O) */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(16,33,43,.65);
+  backdrop-filter: blur(4px);
+  z-index: 60;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+.modal.on { display: flex; }
+.panel {
+  background: #fff;
+  border-radius: 20px;
+  width: min(1240px, 96vw);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 28px 36px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.4);
+}
+.panel h2 { font: 700 30px var(--serif); margin: 0 0 8px; color: var(--muc); }
+.ov-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 12px; margin-top: 16px; }
+.ov-btn {
+  text-align: left;
+  border: 1.5px solid var(--line);
+  background: var(--giay);
+  border-radius: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 14.5px;
+  line-height: 1.38;
+  transition: all .15s;
+}
+.ov-btn:hover { border-color: var(--luc); background: #E3F1EA; }
+.ov-btn.cur { border-color: var(--luc); background: #E3F1EA; font-weight: 700; }
+.ov-btn small { display: block; color: var(--lam); font-weight: 700; font-size: 12px; margin-bottom: 3px; }
+
+/* Đồng hồ hẹn giờ 180 phút / từng phần (T) */
+#timer {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 45;
+  background: rgba(16,33,43,.94);
+  color: #fff;
+  border: 1.5px solid var(--luc-non);
+  border-radius: 14px;
+  padding: 8px 16px;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 6px 20px rgba(0,0,0,.3);
+}
+#timer.on { display: flex; }
+#timer button { background: rgba(255,255,255,.18); border: 0; color: #fff; border-radius: 8px; padding: 4px 9px; font-size: 13px; font-weight: 700; cursor: pointer; }
+#timer button:hover { background: var(--luc); }
+
+/* Bản in PDF (Ctrl+P): Ẩn logo sen theo đúng quy tắc tuan-thuong-hieu */
+@media print {
+  @page { size: 1600px 900px; margin: 0; }
+  html, body { overflow: visible !important; height: auto !important; background: #fff !important; }
+  #stage, #ctrl, #progress, #timer, .modal { display: none !important; }
+  #print { display: block !important; }
+  #print .slide { position: relative; width: 1600px; height: 900px; box-shadow: none; border-radius: 0; break-after: page; page-break-after: always; }
+  .sen, .sen-box { display: none !important; }
+}
+</style>
+
+<!-- MathJax 3 -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  options: { enableMenu: false }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body class="show-ctrl">
+
+<div id="progress"></div>
+<div id="stage"><div id="scaler"></div></div>
+<div id="print" aria-hidden="true" style="display:none;"></div>
+
+<div id="timer">
+  <span style="font-size:14px; color:#8FE0BD;">⏱ Thời gian:</span>
+  <span id="timerV">180:00</span>
+  <button type="button" onclick="timerStart(180)" title="Đặt 180 phút (3 tiếng)">3h</button>
+  <button type="button" onclick="timerStart(30)" title="Đặt 30 phút">30p</button>
+  <button id="timerP" type="button">Tạm dừng</button>
+  <button id="timerX" type="button">✕</button>
+</div>
+
+<nav id="ctrl">
+  <a href="giao-vien.html" title="Trở về trang Giáo Viên">🏠 Lớp học</a>
+  <select id="topicJump" onchange="jumpTopic(this.value)" title="Nhảy nhanh tới Chuyên đề">
+    <option value="0">📋 Bìa &amp; Ma trận (180p)</option>
+    <option value="2">CĐ1. Mệnh đề &amp; Tập hợp (25p)</option>
+    <option value="5">CĐ2. BPT &amp; Hệ BPT 2 ẩn (30p)</option>
+    <option value="7">CĐ3. Hàm số &amp; Parabol (35p)</option>
+    <option value="10">CĐ4. Hệ thức lượng (30p)</option>
+    <option value="12">CĐ5. Vectơ &amp; Tọa độ Oxy (40p)</option>
+    <option value="15">CĐ6. Thống kê mô tả (20p)</option>
+    <option value="17">🏆 Tổng kết 10 lưu ý vàng</option>
+  </select>
+  <button type="button" onclick="go(cur - 1)">◀ Trước</button>
+  <span class="pos" id="pos">1 / 18</span>
+  <button type="button" onclick="go(cur + 1)">Sau ▶</button>
+  <span style="opacity:0.3;">|</span>
+  <button type="button" onclick="openModal('mOverview')">📑 Mục lục (O)</button>
+  <button type="button" onclick="timerStart(180)">⏱ Đồng hồ 3h (T)</button>
+  <a href="2026-11-02_Toan10_LyThuyet-OnTap-CK1_A4.html" target="_blank" title="Mở Bản In Lý Thuyết A4">📄 Bản A4</a>
+  <button type="button" onclick="printAllSlides()" title="In toàn bộ Slide ra PDF">🖨 In PDF</button>
+  <button type="button" onclick="toggleFull()">⛶ Toàn màn hình (F)</button>
+</nav>
+
+<!-- Modal Tổng quan -->
+<div class="modal" id="mOverview">
+  <div class="panel">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <h2>Mục Lục 18 Slide Lý Thuyết Toán 10 (Kế Hoạch Giảng Dạy 3 Tiếng)</h2>
+      <button onclick="closeModals()" style="font-size:16px; font-weight:700; padding:6px 14px; border-radius:8px; border:1px solid #ccc; cursor:pointer;">✕ Đóng (Esc)</button>
+    </div>
+    <p style="color:#5A6A78; margin-top:4px; font-size:15px;">Bấm vào một slide bất kỳ để nhảy ngay tới nội dung đó. Phím tắt: <b>← / → / Space</b> chuyển trang · <b>O</b> Mục lục · <b>T</b> Đồng hồ 3h · <b>F</b> Toàn màn hình.</p>
+    <div class="ov-grid" id="ovList"></div>
+  </div>
+</div>
+
+<script>
+const LOGO_HCMUS = 'https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738';
+const LOGO_SEN = 'https://diemdanhsv.com/images/logo-sen.svg';
+
+const S = [
+  {
+    "title": "Bìa Bài Giảng Lý Thuyết Toán 10 (3 Tiếng)",
+    "kicker": "Mở đầu · Kế hoạch 180 phút",
+    "topic": "0",
+    "time_badge": "180 Phút Lý Thuyết",
+    "is_cover": true,
+    "html": "\n        <div style=\"display:grid; grid-template-columns: 1.25fr 0.75fr; gap: 44px; align-items: center; flex: 1;\">\n          <div>\n            <div class=\"cover-logos\">\n              <img class=\"hcmus\" src=\"https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738\" alt=\"HCMUS\">\n              <span class=\"sep\"></span>\n              <img class=\"sen\" src=\"https://diemdanhsv.com/images/logo-sen.svg\" alt=\"Logo hoa sen đọng sương\">\n              <span class=\"badge-pill\">GIÁO ÁN ĐIỆN TỬ · GDPT 2018</span>\n            </div>\n            <p class=\"s-kicker\" style=\"color:var(--luc); font-size:20px;\">CHUYÊN ĐỀ TỔNG ÔN CUỐI HỌC KỲ I · KẾT NỐI TRI THỨC &amp; CHÂN TRỜI SÁNG TẠO</p>\n            <h1 class=\"cover-title\">Hệ Thống Lý Thuyết<br/>&amp; Phương Pháp Giải <em>Toán 10</em></h1>\n            <p class=\"cover-sub\">Giảng dạy lý thuyết chuyên sâu trong <b>3 tiếng (180 phút)</b> — Bám sát 100% ma trận <b>Đề CK1 THPT Lương Thế Vinh (Mã 100)</b> &amp; <b>Đề Cương Ôn Tập CK1 (Bộ 2)</b> <i>(Thời gian làm bài tập tách riêng)</i>.</p>\n            <div class=\"cover-person\">\n              <div class=\"cover-av\">QT</div>\n              <div>\n                <b style=\"font-size:24px; font-family:var(--serif); display:block; color:var(--muc);\">ThS. Đinh Quốc Tuấn</b>\n                <span style=\"font-size:17px; color:#5A6A78;\">Trung Tâm Bồi Dưỡng Văn Hóa — Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM</span>\n              </div>\n            </div>\n          </div>\n          <div class=\"card\" style=\"background:#fff; border:2px solid var(--line); padding:26px 28px; border-radius:22px; box-shadow:0 16px 40px rgba(16,33,43,.08);\">\n            <h3 style=\"font:700 26px var(--serif); color:var(--lam); margin:0 0 14px; border-bottom:2px solid var(--line); padding-bottom:10px;\">⏱ Lộ Trình 3 Tiếng (180 Phút)</h3>\n            <div style=\"display:grid; gap:10px; font-size:19px;\">\n              <div class=\"agenda-row\"><span><b>CĐ 1.</b> Mệnh đề &amp; Tập hợp</span><b class=\"t-tag\">25 phút</b></div>\n              <div class=\"agenda-row\"><span><b>CĐ 2.</b> BPT &amp; Hệ BPT bậc nhất 2 ẩn</span><b class=\"t-tag\">30 phút</b></div>\n              <div class=\"agenda-row\"><span><b>CĐ 3.</b> Hàm số &amp; Parabol bậc hai</span><b class=\"t-tag\">35 phút</b></div>\n              <div class=\"agenda-row\"><span><b>CĐ 4.</b> Hệ thức lượng tam giác</span><b class=\"t-tag\">30 phút</b></div>\n              <div class=\"agenda-row\"><span><b>CĐ 5.</b> Vectơ – Tích vô hướng – $Oxy$</span><b class=\"t-tag\">40 phút</b></div>\n              <div class=\"agenda-row\"><span><b>CĐ 6.</b> Thống kê mẫu số liệu</span><b class=\"t-tag\">20 phút</b></div>\n            </div>\n            <div style=\"margin-top:14px; padding-top:10px; border-top:1px dashed var(--line); font-size:16px; color:#5A6A78; text-align:center;\">\n              Bấm phím <b>[→]</b> hoặc <b>[Space]</b> để chuyển slide · <b>[O]</b> mở Mục lục · <b>[T]</b> bật Đồng hồ\n            </div>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "Ma Trận Đối Chiếu Lý Thuyết Với 2 Bộ Đề",
+    "kicker": "Tổng quan · 0:00 – 0:05",
+    "topic": "0",
+    "time_badge": "5 phút định hướng",
+    "html": "\n        <div class=\"s-kicker\">🧭 BẢN ĐỒ TRI THỨC · ĐỐI CHIẾU HAI TÀI LIỆU BÀI TẬP</div>\n        <h2 class=\"s-title\">Cấu Trúc 6 Chuyên Đề Trọng Tâm Học Kỳ I Toán 10</h2>\n        <table class=\"styled-tbl\">\n          <thead>\n            <tr>\n              <th style=\"width:18%\">Chuyên đề</th>\n              <th style=\"width:12%\">Thời lượng</th>\n              <th style=\"width:40%\">Trọng tâm Lý thuyết &amp; Công thức cốt lõi</th>\n              <th style=\"width:30%\">Ánh xạ câu hỏi trong 2 File</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr>\n              <td><b>1. Mệnh đề – Tập hợp</b></td>\n              <td><b>25 phút</b><br/><small>(0:00–0:25)</small></td>\n              <td>Phủ định $\\forall, \\exists$; giao $A\\cap B$, hợp $A\\cup B$, hiệu $A\\setminus B$, phần bù $C_{\\mathbb{R}}A$; tham số $m$; biểu đồ Ven.</td>\n              <td>• <b>Đề LTV:</b> Phần I – Câu 1, 2<br/>• <b>Bộ 2:</b> TN C1, C2 · TL Bài 1, 2, 3</td>\n            </tr>\n            <tr>\n              <td><b>2. BPT &amp; Hệ BPT 2 ẩn</b></td>\n              <td><b>30 phút</b><br/><small>(0:25–0:55)</small></td>\n              <td>Nhận diện $ax+by \\le c$; vẽ bờ – thử điểm; đọc hệ BPT từ hình vẽ; quy hoạch tuyến tính $\\max/\\min F(x,y)$.</td>\n              <td>• <b>Đề LTV:</b> Phần I – Câu 3, 4<br/>• <b>Bộ 2:</b> TN C3 · TL Bài 4, 5</td>\n            </tr>\n            <tr>\n              <td><b>3. Hàm số bậc hai</b></td>\n              <td><b>35 phút</b><br/><small>(0:55–1:30)</small></td>\n              <td>TXĐ căn/mẫu; hàm nhiều công thức; đỉnh $S$, trục đối xứng, biến thiên, vẽ $(P)$; toán thực tế cổng Parabol.</td>\n              <td>• <b>Đề LTV:</b> P.I C5–7 · P.II C1,2 · P.III C1,2<br/>• <b>Bộ 2:</b> TN C4,5 · Đ/S C13 · TL Bài 6–9</td>\n            </tr>\n            <tr>\n              <td><b>4. Hệ thức lượng</b></td>\n              <td><b>30 phút</b><br/><small>(1:30–2:00)</small></td>\n              <td>Góc $0^\\circ\\to 180^\\circ$ (phụ, bù); định lý Côsin, định lý Sin ($2R$), 5 công thức diện tích $S$; đo khoảng cách.</td>\n              <td>• <b>Đề LTV:</b> Phần I – Câu 8, 9<br/>• <b>Bộ 2:</b> TN C6–8 · TL Bài 10, 11, 12, 13</td>\n            </tr>\n            <tr>\n              <td><b>5. Vectơ &amp; Tọa độ</b></td>\n              <td><b>40 phút</b><br/><small>(2:00–2:40)</small></td>\n              <td>Cùng hướng, quy tắc 3 điểm, HBH, trung điểm, trọng tâm; phân tích vectơ CM thẳng hàng; tích vô hướng &amp; $Oxy$.</td>\n              <td>• <b>Đề LTV:</b> P.I C10–15 · P.II C3 · P.III C3<br/>• <b>Bộ 2:</b> TN C9–11 · TL Bài 14, 15, 16</td>\n            </tr>\n            <tr>\n              <td><b>6. Thống kê mô tả</b></td>\n              <td><b>20 phút</b><br/><small>(2:40–3:00)</small></td>\n              <td>Số trung bình $\\bar{x}$, trung vị $M_e$, tứ phân vị $Q_1,Q_2,Q_3$, mốt $M_o$; $R, \\Delta_Q$, phương sai $s^2$, độ lệch chuẩn $s$, Outliers.</td>\n              <td>• <b>Bộ 2:</b> TN C12 · Đ/S C14 · TL Bài 17, 18</td>\n            </tr>\n          </tbody>\n        </table>\n        "
+  },
+  {
+    "title": "CĐ1.1 – Mệnh Đề Toán Học & Lượng Từ ∀, ∃",
+    "kicker": "Chuyên đề 1 · Mệnh đề & Tập hợp (0:05 – 0:12)",
+    "topic": "1",
+    "time_badge": "CĐ1 · Phút 05–12",
+    "html": "\n        <div class=\"s-kicker\">📘 CHUYÊN ĐỀ 1 · MỆNH ĐỀ &amp; TẬP HỢP (25 PHÚT)</div>\n        <h2 class=\"s-title\">1.1. Mệnh Đề Toán Học, Lượng Từ $\\forall, \\exists$ &amp; Mệnh Đề Phủ Định</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\" style=\"display:flex; flex-direction:column; justify-content:space-between;\">\n            <div>\n              <span class=\"tag\">Lý thuyết cốt lõi</span>\n              <h3>Định nghĩa &amp; Quy tắc Phủ định</h3>\n              <ul class=\"clean\">\n                <li><b>Mệnh đề lôgic:</b> Khẳng định có tính <b>Đúng</b> hoặc <b>Sai</b> xác định. Biểu thức chứa biến $P(x)$ chỉ trở thành mệnh đề khi gán giá trị cụ thể cho $x$ hoặc gắn lượng từ $\\forall, \\exists$.</li>\n                <li><b>Phủ định mệnh đề có lượng từ:</b> Đổi lượng từ ($\\forall \\leftrightarrow \\exists$) đồng thời phủ định tính chất ($P(x) \\leftrightarrow \\overline{P(x)}$):</li>\n              </ul>\n            </div>\n            <div class=\"eq-box\" style=\"margin-top:12px;\">\n              $$\\overline{\\forall x \\in X,\\ P(x)} \\iff \\exists x \\in X,\\ \\overline{P(x)}$$\n              $$\\overline{\\exists x \\in X,\\ P(x)} \\iff \\forall x \\in X,\\ \\overline{P(x)}$$\n            </div>\n            <div class=\"warn-banner\">\n              ⚠️ <b>Bẫy sai lầm:</b> Phủ định của \"$>$\" là \"$\\le$\" (phải có dấu bằng!). Tuyệt đối <b>không</b> đổi $\\in \\mathbb{R}$ thành $\\notin \\mathbb{R}$.\n            </div>\n          </div>\n          <div class=\"card\" style=\"display:flex; flex-direction:column; justify-content:space-between; background:#FCFBF8;\">\n            <div>\n              <span class=\"tag\" style=\"background:#FEF3C7; color:#B45309;\">Phân tích câu hỏi đề thi</span>\n              <h3 style=\"color:#B45309;\">Ví dụ mẫu từ 2 File Bài tập</h3>\n              <div class=\"ex-item\">\n                <b>📌 Câu 1 (Đề Lương Thế Vinh):</b> Tìm mệnh đề phủ định của $M$: <i>\"$\\forall x\\in\\mathbb{R},\\ x^2 > 2$\"</i>.<br/>\n                • Đổi $\\forall x\\in\\mathbb{R} \\longrightarrow \\exists x\\in\\mathbb{R}$.<br/>\n                • Phủ định $x^2 > 2 \\longrightarrow x^2 \\le 2$.<br/>\n                $\\implies \\overline{M}$: <b>\"$\\exists x\\in\\mathbb{R},\\ x^2 \\le 2$\"</b> (Chọn <b>A</b>).\n              </div>\n              <div class=\"ex-item\" style=\"margin-top:14px;\">\n                <b>📌 Câu 1 (Bộ 2 – KNTT):</b> Mệnh đề nào <b>đúng</b>?<br/>\n                • A. $\\forall x\\in\\mathbb{R}, x^2 > 0$ $\\rightarrow$ <b>Sai</b> tại phản ví dụ $x=0$.<br/>\n                • B. $\\exists x\\in\\mathbb{N}, x^2 = 3$ $\\rightarrow$ <b>Sai</b> vì $\\sqrt{3} \\notin \\mathbb{N}$.<br/>\n                • C. $\\forall n\\in\\mathbb{N}, n^2+n$ chia hết cho $2$ $\\rightarrow$ <b>ĐÚNG</b> vì $n^2+n = n(n+1)$ là tích 2 số tự nhiên liên tiếp.<br/>\n                • D. $\\exists x\\in\\mathbb{R}, x^2+1=0$ $\\rightarrow$ <b>Sai</b> vì $x^2+1 \\ge 1 > 0$.\n              </div>\n            </div>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "CĐ1.2 – Các Tập Con Của ℝ & Phép Toán Tập Hợp",
+    "kicker": "Chuyên đề 1 · Mệnh đề & Tập hợp (0:12 – 0:19)",
+    "topic": "1",
+    "time_badge": "CĐ1 · Phút 12–19",
+    "html": "\n        <div class=\"s-kicker\">📘 CHUYÊN ĐỀ 1 · MỆNH ĐỀ &amp; TẬP HỢP (25 PHÚT)</div>\n        <h2 class=\"s-title\">1.2. Các Tập Con Của $\\mathbb{R}$ &amp; Bốn Phép Toán Trên Trục Số</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\">\n            <span class=\"tag\">Bảng công thức &amp; Quy tắc biên</span>\n            <h3>Giao ($\\cap$) – Hợp ($\\cup$) – Hiệu ($\\setminus$) – Phần bù ($C_{\\mathbb{R}}$)</h3>\n            <ul class=\"clean\" style=\"font-size:21px;\">\n              <li><b>Giao $A \\cap B$:</b> Lấy phần chung thuộc cả $A$ và $B$.<br/>\n              <small><i>Mẹo:</i> Đầu trái lấy $\\max$, đầu phải lấy $\\min$.</small></li>\n              <li><b>Hợp $A \\cup B$:</b> Gom toàn bộ phần tử của $A$ hoặc $B$.</li>\n              <li><b>Hiệu $A \\setminus B$:</b> Giữ phần thuộc $A$, gạch bỏ phần thuộc $B$.</li>\n              <li><b>Quy tắc \"Đổi Ngoặc\" tại biên khi lấy Hiệu / Phần bù:</b>\n                <ul>\n                  <li>Biên có mặt trong $B$ (ngoặc <code>[</code>, <code>]</code>) $\\rightarrow$ bị trừ mất $\\rightarrow$ thành ngoặc tròn <code>(</code>, <code>)</code>.</li>\n                  <li>Biên không có trong $B$ (ngoặc <code>(</code>, <code>)</code>) $\\rightarrow$ còn nguyên $\\rightarrow$ thành ngoặc vuông <code>[</code>, <code>]</code>.</li>\n                </ul>\n              </li>\n            </ul>\n          </div>\n          <div class=\"card\" style=\"background:#F8FAFC;\">\n            <span class=\"tag\" style=\"background:#E0F2FE; color:#0369A1;\">Minh họa Trục số trực quan</span>\n            <h3 style=\"color:#0369A1;\">Giải mẫu Câu 2 (LTV) &amp; Bài 1 (Bộ 2)</h3>\n            <div class=\"ex-item\">\n              <b>1. Câu 2 (Đề LTV):</b> $P = [-2; 5)$ và $Q = (-1; +\\infty)$<br/>\n              $\\implies P \\cap Q = (-1; 5)$ (Tại $-1$ của $Q$ là ngoặc tròn).\n            </div>\n            <div class=\"ex-item\" style=\"margin-top:10px;\">\n              <b>2. Bài 1 (Bộ 2):</b> $A = [-1; 4)$ và $B = [2; +\\infty)$\n              <svg viewBox=\"0 0 520 95\" style=\"width:100%; height:auto; margin:6px 0; background:#fff; border-radius:8px; border:1px solid #CBD5E0;\">\n                <line x1=\"20\" y1=\"30\" x2=\"490\" y2=\"30\" stroke=\"#94A3B8\" stroke-width=\"1.5\"/>\n                <line x1=\"110\" y1=\"30\" x2=\"310\" y2=\"30\" stroke=\"#0F6B55\" stroke-width=\"4\"/>\n                <text x=\"106\" y=\"35\" font-size=\"18\" font-weight=\"bold\" fill=\"#0F6B55\">[</text>\n                <text x=\"306\" y=\"35\" font-size=\"18\" font-weight=\"bold\" fill=\"#0F6B55\">)</text>\n                <text x=\"105\" y=\"18\" font-size=\"14\" font-weight=\"bold\" fill=\"#0F6B55\">-1</text>\n                <text x=\"305\" y=\"18\" font-size=\"14\" font-weight=\"bold\" fill=\"#0F6B55\">4</text>\n                <text x=\"30\" y=\"25\" font-size=\"14\" font-weight=\"bold\" fill=\"#0F6B55\">Tập A</text>\n\n                <line x1=\"20\" y1=\"70\" x2=\"490\" y2=\"70\" stroke=\"#94A3B8\" stroke-width=\"1.5\"/>\n                <line x1=\"230\" y1=\"70\" x2=\"480\" y2=\"70\" stroke=\"#1D4ED8\" stroke-width=\"4\"/>\n                <text x=\"226\" y=\"75\" font-size=\"18\" font-weight=\"bold\" fill=\"#1D4ED8\">[</text>\n                <text x=\"225\" y=\"58\" font-size=\"14\" font-weight=\"bold\" fill=\"#1D4ED8\">2</text>\n                <text x=\"465\" y=\"58\" font-size=\"14\" font-weight=\"bold\" fill=\"#1D4ED8\">+∞</text>\n                <text x=\"30\" y=\"65\" font-size=\"14\" font-weight=\"bold\" fill=\"#1D4ED8\">Tập B</text>\n              </svg>\n              • $A \\cap B = [2; 4)$ &nbsp;|&nbsp; $A \\cup B = [-1; +\\infty)$<br/>\n              • $B \\setminus A = [4; +\\infty)$ <i>(vì $4 \\notin A$ nên $4$ vẫn còn trong $B\\setminus A$)</i><br/>\n              • $C_{\\mathbb{R}}A = \\mathbb{R}\\setminus A = (-\\infty; -1) \\cup [4; +\\infty)$.\n            </div>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "CĐ1.3 – Toán Tham Số Tập Hợp & Sơ Đồ Ven",
+    "kicker": "Chuyên đề 1 · Mệnh đề & Tập hợp (0:19 – 0:25)",
+    "topic": "1",
+    "time_badge": "CĐ1 · Phút 19–25",
+    "html": "\n        <div class=\"s-kicker\">📘 CHUYÊN ĐỀ 1 · MỆNH ĐỀ &amp; TẬP HỢP (25 PHÚT)</div>\n        <h2 class=\"s-title\">1.3. Hai Dạng Toán Vận Dụng: Điều Kiện $A \\subset B$ &amp; Biểu Đồ Ven</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\">\n            <span class=\"tag\">Dạng 1 · Bài 2 Tự luận (Bộ 2)</span>\n            <h3>Tìm tham số $m$ để $A \\subset B$</h3>\n            <p style=\"font-size:21px; margin:0 0 10px;\"><b>Quy tắc tổng quát:</b> Với đoạn $[a; b]$ ($a \\le b$):</p>\n            <div class=\"eq-box\" style=\"font-size:22px; padding:12px;\">\n              $$[a; b] \\subset (c; d) \\iff c < a \\le b < d$$\n              $$[a; b] \\subset [c; d] \\iff c \\le a \\le b \\le d$$\n            </div>\n            <div class=\"ex-item\">\n              <b>Giải mẫu Bài 2 (Bộ 2):</b> Tìm $m$ để $[m;\\ m+2] \\subset (-1; 5)$.<br/>\n              • Vì $m < m+2$ luôn thỏa với mọi $m \\in \\mathbb{R}$.<br/>\n              • Để đoạn $[m; m+2]$ nằm hẳn bên trong khoảng mở $(-1; 5)$:<br/>\n              $$\\begin{cases} m > -1 \\\\ m + 2 < 5 \\end{cases} \\iff \\begin{cases} m > -1 \\\\ m < 3 \\end{cases} \\iff \\mathbf{-1 < m < 3}.$$\n              <small style=\"color:#B91C1C;\">⚠️ <b>Kiểm tra biên:</b> Nếu $m = -1$ thì $[-1; 1] \\not\\subset (-1; 5)$ vì $-1 \\notin (-1;5)$ $\\rightarrow$ tuyệt đối không lấy dấu \"$=$\".</small>\n            </div>\n          </div>\n          <div class=\"card\">\n            <span class=\"tag\" style=\"background:#ECFDF5; color:#0F6B55;\">Dạng 2 · Bài 3 Tự luận (Bộ 2)</span>\n            <h3 style=\"color:#0F6B55;\">Công thức Bao hàm – Loại trừ (Sơ đồ Ven)</h3>\n            <div style=\"display:flex; align-items:center; gap:18px; margin-bottom:10px;\">\n              <svg viewBox=\"0 0 220 130\" style=\"width:210px; height:auto; flex:none; background:#fff; border:1px solid #CBD5E0; border-radius:10px;\">\n                <rect x=\"4\" y=\"4\" width=\"212\" height=\"122\" rx=\"6\" fill=\"#F8FAFC\" stroke=\"#64748B\"/>\n                <circle cx=\"85\" cy=\"68\" r=\"42\" fill=\"rgba(15,107,85,0.18)\" stroke=\"#0F6B55\" stroke-width=\"2\"/>\n                <circle cx=\"135\" cy=\"68\" r=\"42\" fill=\"rgba(31,78,121,0.18)\" stroke=\"#1F4E79\" stroke-width=\"2\"/>\n                <text x=\"62\" y=\"72\" font-size=\"15\" font-weight=\"bold\" fill=\"#0F6B55\">13</text>\n                <text x=\"106\" y=\"72\" font-size=\"15\" font-weight=\"bold\" fill=\"#B91C1C\">7</text>\n                <text x=\"150\" y=\"72\" font-size=\"15\" font-weight=\"bold\" fill=\"#1F6E79\">11</text>\n                <text x=\"48\" y=\"22\" font-size=\"12\" font-weight=\"bold\" fill=\"#334155\">U = 45 (Ngoài: 14)</text>\n              </svg>\n              <div style=\"font-size:20px;\">\n                $$n(A \\cup B) = n(A) + n(B) - n(A \\cap B)$$\n                $$n(\\text{Không môn nào}) = n(U) - n(A \\cup B)$$\n              </div>\n            </div>\n            <div class=\"ex-item\">\n              <b>Giải mẫu Bài 3 (Bộ 2):</b> Lớp 10B có $45$ HS; $20$ bóng đá ($A$), $18$ cầu lông ($B$), $7$ chơi cả hai môn ($A \\cap B$).<br/>\n              • Số HS chơi ít nhất 1 môn: $n(A \\cup B) = 20 + 18 - 7 = 31$.<br/>\n              • Số HS không chơi môn nào: $45 - 31 = \\mathbf{14}$ (học sinh).\n            </div>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "CĐ2.1 – Bất Phương Trình Bậc Nhất Hai Ẩn & Miền Nghiệm",
+    "kicker": "Chuyên đề 2 · BPT & Hệ BPT bậc nhất 2 ẩn (0:25 – 0:38)",
+    "topic": "2",
+    "time_badge": "CĐ2 · Phút 25–38",
+    "html": "\n        <div class=\"s-kicker\">📐 CHUYÊN ĐỀ 2 · BPT &amp; HỆ BPT BẬC NHẤT HAI ẨN (30 PHÚT)</div>\n        <h2 class=\"s-title\">2.1. Nhận Diện BPT Bậc Nhất Hai Ẩn &amp; Đọc Ngược Miền Nghiệm</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\">\n            <span class=\"tag\">Lý thuyết &amp; Quy tắc 3 bước</span>\n            <h3>1. Dạng chuẩn &amp; Cách xác định miền nghiệm</h3>\n            <ul class=\"clean\" style=\"font-size:20.5px;\">\n              <li><b>Dạng chuẩn:</b> $ax + by \\le c$ (hoặc $\\ge, <, >$) với $a^2+b^2 > 0$. Bậc của $x, y$ phải là <b>bậc 1</b> (Câu 3 LTV: chọn $x - 2y > 0$, loại các câu có $x^2, y^2$).</li>\n              <li><b>Quy tắc biểu diễn miền nghiệm:</b>\n                <ol style=\"margin:4px 0 0; padding-left:22px;\">\n                  <li><b>Vẽ đường bờ $d: ax + by = c$:</b> Có dấu \"$=$\" ($\\le, \\ge$) thì kể cả bờ; dấu строг ($<, >$) thì bỏ bờ.</li>\n                  <li><b>Chọn điểm thử $M_0(x_0; y_0) \\notin d$:</b> Nếu $c \\ne 0$ chọn $O(0;0)$; nếu $c = 0$ (bờ qua $O$) thì chọn $(0;1)$ hoặc $(1;0)$.</li>\n                  <li><b>Kết luận:</b> Thay $M_0$ vào BPT, thỏa mãn thì giữ nửa mặt phẳng chứa $M_0$, gạch bỏ nửa kia.</li>\n                </ol>\n              </li>\n            </ul>\n          </div>\n          <div class=\"card\" style=\"background:#FCFBF8;\">\n            <span class=\"tag\" style=\"background:#FEF3C7; color:#B45309;\">Kỹ năng đọc đồ thị (Câu 4 – Đề LTV)</span>\n            <h3 style=\"color:#B45309;\">2. Đọc ngược hệ BPT từ hình vẽ miền nghiệm</h3>\n            <div style=\"display:grid; grid-template-columns: 220px 1fr; gap:14px; align-items:center;\">\n              <svg width=\"215\" height=\"140\" viewBox=\"0 0 260 155\" style=\"background:#fff; border:1px solid #CBD5E0; border-radius:8px;\">\n                <defs><pattern id=\"hh2\" width=\"6\" height=\"6\" patternUnits=\"userSpaceOnUse\" patternTransform=\"rotate(45)\"><line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"6\" stroke=\"#b5603f\" stroke-width=\"1\"/></pattern></defs>\n                <rect x=\"0\" y=\"0\" width=\"260\" height=\"155\" fill=\"url(#hh2)\"/>\n                <polygon points=\"-1,58 101,92 257,14 257,-1 -1,-1\" fill=\"#fff\"/>\n                <g stroke=\"#222\" stroke-width=\"1\"><line x1=\"0\" y1=\"80\" x2=\"260\" y2=\"80\"/><line x1=\"125\" y1=\"0\" x2=\"125\" y2=\"155\"/></g>\n                <g stroke=\"#0F6B55\" stroke-width=\"1.8\"><line x1=\"-1\" y1=\"143\" x2=\"257\" y2=\"14\"/><line x1=\"-1\" y1=\"58\" x2=\"257\" y2=\"144\"/></g>\n                <circle cx=\"125\" cy=\"50\" r=\"4\" fill=\"#DC2626\"/>\n                <text x=\"95\" y=\"45\" font-size=\"12\" font-weight=\"bold\" fill=\"#DC2626\">M(0;1)</text>\n                <text x=\"155\" y=\"14\" font-size=\"11\" font-weight=\"bold\" fill=\"#0F6B55\">x−2y=0</text>\n                <text x=\"6\" y=\"34\" font-size=\"11\" font-weight=\"bold\" fill=\"#0F6B55\">x+3y+2=0</text>\n              </svg>\n              <div style=\"font-size:19px; line-height:1.45;\">\n                • Đề bài ghi <b>\"kể cả bờ\"</b> $\\rightarrow$ loại D (dấu $<, >$).<br/>\n                • Vì bờ $x - 2y = 0$ đi qua $O(0;0)$, ta chọn điểm <b>$M(0; 1)$</b> trên trục $Oy$ nằm trọn trong miền trắng:<br/>\n                1) Thay vào $x - 2y$: $0 - 2(1) = -2 \\le 0 \\Rightarrow \\mathbf{x - 2y \\le 0}$.<br/>\n                2) Thay vào $x + 3y$: $0 + 3(1) = 3 \\ge -2 \\Rightarrow \\mathbf{x + 3y \\ge -2}$.<br/>\n                $\\implies$ Chọn đáp án <b>C</b>!\n              </div>\n            </div>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "CĐ2.2 – Bài Toán Tối Ưu Quy Hoạch Tuyến Tính",
+    "kicker": "Chuyên đề 2 · BPT & Hệ BPT bậc nhất 2 ẩn (0:38 – 0:55)",
+    "topic": "2",
+    "time_badge": "CĐ2 · Phút 38–55",
+    "html": "\n        <div class=\"s-kicker\">📐 CHUYÊN ĐỀ 2 · BPT &amp; HỆ BPT BẬC NHẤT HAI ẨN (30 PHÚT)</div>\n        <h2 class=\"s-title\">2.2. Định Lý Cực Trị Đa Giác Lồi &amp; Toán Thực Tế Kinh Tế</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\">\n            <span class=\"tag\">Thuật toán 4 bước · Bài 4 Tự luận (Bộ 2)</span>\n            <h3>Tìm $\\max / \\min$ của $F(x,y) = mx + ny$</h3>\n            <p style=\"font-size:19.5px; margin:0 0 8px;\"><b>Định lý:</b> Biểu thức bậc nhất $F(x,y) = mx + ny$ trên miền đa giác nghiệm $\\Omega$ luôn đạt GTLN và GTNN tại một trong các <b>đỉnh của đa giác $\\Omega$</b>.</p>\n            <div class=\"ex-item\" style=\"font-size:19px;\">\n              <b>Minh họa Bài 4 (Bộ 2):</b> Tìm $\\max F = 3x + 2y$ với:<br/>\n              $$\\begin{cases} x \\ge 0,\\ y \\ge 0 \\\\ x + 2y \\le 8 \\quad (d_1) \\\\ 2x + y \\le 10 \\quad (d_2) \\end{cases}$$\n              • <b>Tọa độ 4 đỉnh miền tứ giác $OABC$:</b><br/>\n              $O(0;0)$;\\quad $A(5;0) = d_2\\cap Ox$;\\quad $C(0;4) = d_1\\cap Oy$;<br/>\n              Đỉnh $B = d_1 \\cap d_2$: giải hệ $\\begin{cases}x+2y=8\\\\2x+y=10\\end{cases} \\Rightarrow \\mathbf{B(4; 2)}$.<br/>\n              • <b>Tính $F$ tại 4 đỉnh:</b> $F(0;0)=0$;\\ $F(5;0)=15$;\\ $F(0;4)=8$;\\ $F(4;2) = 3(4)+2(2) = \\mathbf{16}$. Vậy $\\max F = 16$ tại $(4;2)$.\n            </div>\n          </div>\n          <div class=\"card\" style=\"background:#F0FDF4; border-color:#A7F3D0;\">\n            <span class=\"tag\" style=\"background:#0F6B55; color:#fff;\">Mô hình hóa thực tế · Bài 5 Tự luận (Bộ 2)</span>\n            <h3 style=\"color:#0F6B55;\">Bài toán tối ưu sản xuất Bàn &amp; Ghế</h3>\n            <div style=\"font-size:19.5px; line-height:1.48;\">\n              <p style=\"margin:0 0 8px;\"><b>Tóm tắt đề:</b> Bàn: $3$ giờ/cái, lãi $300$k. Ghế: $1$ giờ/cái, lãi $200$k. Tối đa $24$ giờ/ngày và tổng số không quá $12$ sản phẩm.</p>\n              <p style=\"margin:0 0 6px;\"><b>Bước 1 (Lập mô hình):</b> Gọi $x, y$ là số bàn, số ghế ($x,y \\ge 0$):</p>\n              <div class=\"eq-box\" style=\"font-size:20px; padding:8px; margin-bottom:8px;\">\n                $$\\begin{cases} 3x + y \\le 24 \\quad (\\text{giờ công}) \\\\ x + y \\le 12 \\quad (\\text{tổng SP}) \\\\ x \\ge 0,\\ y \\ge 0 \\end{cases} \\longrightarrow \\max F = 300x + 200y$$\n              </div>\n              <p style=\"margin:0 0 6px;\"><b>Bước 2 (Tìm 4 đỉnh của miền nghiệm):</b><br/>\n              • $O(0;0) \\Rightarrow F = 0$<br/>\n              • $A(8;0) \\Rightarrow F = 300(8) = 2400$ (nghìn đồng)<br/>\n              • $C(0;12) \\Rightarrow F = 200(12) = 2400$ (nghìn đồng)<br/>\n              • Giao điểm $B(6;6)$ của $\\begin{cases}3x+y=24\\\\x+y=12\\end{cases} \\Rightarrow F(6;6) = \\mathbf{3000}$.</p>\n              <div class=\"ans-pill\">✔ Kết luận: Làm <b>6 bàn và 6 ghế</b> mỗi ngày để lãi lớn nhất <b>3 triệu đồng</b>.</div>\n            </div>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "CĐ3.1 – Tập Xác Định & Hàm Số Cho Bởi Nhiều Công Thức",
+    "kicker": "Chuyên đề 3 · Hàm số & Parabol bậc hai (0:55 – 1:05)",
+    "topic": "3",
+    "time_badge": "CĐ3 · Phút 55–65",
+    "html": "\n        <div class=\"s-kicker\">📈 CHUYÊN ĐỀ 3 · HÀM SỐ &amp; ĐỒ THỊ HÀM SỐ BẬC HAI (35 PHÚT)</div>\n        <h2 class=\"s-title\">3.1. Tập Xác Định $D$ &amp; Bẫy Hàm Số Cho Bởi Nhiều Công Thức</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\">\n            <span class=\"tag\">Quy tắc tìm Tập xác định</span>\n            <h3>1. Ba điều kiện xác định cơ bản</h3>\n            <ul class=\"clean\" style=\"font-size:21px;\">\n              <li><b>Có mẫu số $\\dfrac{A}{B}$:</b> Điều kiện $B \\ne 0$.</li>\n              <li><b>Có căn bậc hai $\\sqrt{A}$:</b> Điều kiện $A \\ge 0$.</li>\n              <li><b>Căn bậc hai dưới mẫu $\\dfrac{1}{\\sqrt{A}}$:</b> Điều kiện $A > 0$.</li>\n            </ul>\n            <div class=\"ex-item\" style=\"margin-top:14px; font-size:19.5px;\">\n              <b>Giải nhanh các câu trong 2 File:</b><br/>\n              • <b>Câu 5 (Đề LTV):</b> $y = \\sqrt{2-x}$: ĐK $2-x \\ge 0 \\iff x \\le 2 \\Rightarrow D = (-\\infty; 2]$ (Chọn <b>C</b>).<br/>\n              • <b>Câu 4 (Bộ 2):</b> $y = \\dfrac{x+1}{x^2-4}$: ĐK $x^2-4 \\ne 0 \\Rightarrow D = \\mathbb{R}\\setminus\\{-2; 2\\}$.<br/>\n              • <b>Bài 6a (Bộ 2):</b> $y = \\sqrt{x+3} + \\dfrac{1}{x-1} \\Rightarrow D = [-3; +\\infty)\\setminus\\{1\\}$.\n            </div>\n          </div>\n          <div class=\"card\" style=\"background:#FFFBEB; border-color:#FDE68A;\">\n            <span class=\"tag\" style=\"background:#D97706; color:#fff;\">Phân tích Đúng/Sai · Phần II Câu 1 (Đề LTV)</span>\n            <h3 style=\"color:#B45309;\">2. Hàm số cho bởi nhiều công thức</h3>\n            <div class=\"eq-box\" style=\"font-size:22px; padding:10px; margin-bottom:10px;\">\n              $$f(x) = \\begin{cases} -2x + 1 & \\text{khi } x \\ge 2 \\quad \\text{(Nhánh 1)} \\\\ \\dfrac{1}{x - 2} & \\text{khi } x < 2 \\quad \\text{(Nhánh 2)} \\end{cases}$$\n            </div>\n            <ul class=\"clean\" style=\"font-size:19.5px; gap:8px;\">\n              <li><b>Ý a) TXĐ là $D = \\mathbb{R}$:</b> <b>ĐÚNG!</b> Vì khi $x < 2$ thì hiển nhiên $x - 2 \\ne 0$, nên Nhánh 2 xác định trên toàn bộ $(-\\infty; 2)$. Hợp với $[2; +\\infty)$ ta được $D = \\mathbb{R}$.</li>\n              <li><b>Ý b) $f(2) = -3$:</b> <b>ĐÚNG!</b> Vì $x=2 \\ge 2$ nên thay vào Nhánh 1: $f(2) = -2(2)+1 = -3$.</li>\n              <li><b>Ý c) $f(0) = 1$:</b> <b>SAI!</b> Vì $x=0 < 2$ nên phải thay vào Nhánh 2: $f(0) = \\dfrac{1}{0-2} = -\\dfrac{1}{2} \\ne 1$.</li>\n              <li><b>Ý d) Nghịch biến trên $(2; +\\infty)$:</b> <b>ĐÚNG!</b> Vì trên $(2;+\\infty)$, $f(x) = -2x+1$ là hàm bậc nhất có hệ số góc $a = -2 < 0$.</li>\n            </ul>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "CĐ3.2 – Hàm Số Bậc Hai & Đồ Thị Parabol (P)",
+    "kicker": "Chuyên đề 3 · Hàm số & Parabol bậc hai (1:05 – 1:18)",
+    "topic": "3",
+    "time_badge": "CĐ3 · Phút 65–78",
+    "html": "\n        <div class=\"s-kicker\">📈 CHUYÊN ĐỀ 3 · HÀM SỐ &amp; ĐỒ THỊ HÀM SỐ BẬC HAI (35 PHÚT)</div>\n        <h2 class=\"s-title\">3.2. Đỉnh, Trục Đối Xứng, Chiều Biến Thiên &amp; Cực Trị Parabol</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\">\n            <span class=\"tag\">Lý thuyết Parabol $y = ax^2 + bx + c\\ (a\\ne 0)$</span>\n            <h3>1. Bốn yếu tố giải tích cốt lõi</h3>\n            <div class=\"eq-box\" style=\"font-size:22px; padding:10px; margin-bottom:10px;\">\n              $$\\text{Đỉnh } S\\left(-\\dfrac{b}{2a};\\ -\\dfrac{\\Delta}{4a}\\right) \\quad \\Big|\\quad \\text{Trục ĐX: } x = -\\dfrac{b}{2a}$$\n            </div>\n            <table class=\"styled-tbl\" style=\"font-size:18.5px;\">\n              <thead>\n                <tr><th>Hệ số $a$</th><th>Chiều biến thiên</th><th>GTLN / GTNN</th></tr>\n              </thead>\n              <tbody>\n                <tr>\n                  <td><b>$a > 0$</b><br/>(Lõm lên $\\cup$)</td>\n                  <td>• NB $\\searrow$ trên $(-\\infty; x_S)$<br/>• ĐB $\\nearrow$ trên $(x_S; +\\infty)$</td>\n                  <td>$\\min_{\\mathbb{R}} y = y_S$<br/>tại $x = x_S$</td>\n                </tr>\n                <tr>\n                  <td><b>$a < 0$</b><br/>(Lõm xuống $\\cap$)</td>\n                  <td>• ĐB $\\nearrow$ trên $(-\\infty; x_S)$<br/>• NB $\\searrow$ trên $(x_S; +\\infty)$</td>\n                  <td>$\\max_{\\mathbb{R}} y = y_S$<br/>tại $x = x_S$</td>\n                </tr>\n              </tbody>\n            </table>\n          </div>\n          <div class=\"card\" style=\"background:#FCFBF8;\">\n            <span class=\"tag\" style=\"background:#FEF2F2; color:#B91C1C;\">Cẩn trọng các bẫy Đúng/Sai (Phần II C2 LTV &amp; C13 Bộ 2)</span>\n            <h3 style=\"color:#B91C1C;\">2. Phân tích Parabol $(P): y = -2x^2 + x - 1$</h3>\n            <ul class=\"clean\" style=\"font-size:19.5px; gap:10px;\">\n              <li><b>Hoành độ đỉnh:</b> $x_S = -\\dfrac{b}{2a} = -\\dfrac{1}{2\\cdot(-2)} = \\mathbf{\\dfrac{1}{4}}$.<br/>\n              Tung độ đỉnh: $y_S = -2\\left(\\dfrac{1}{4}\\right)^2 + \\dfrac{1}{4} - 1 = \\mathbf{-\\dfrac{7}{8}} \\Rightarrow$ <b>Ý a) ĐÚNG</b>.</li>\n              <li><b>Trục đối xứng:</b> Phải là $x = \\dfrac{1}{4}$ (Đề ghi $x = \\dfrac{1}{2}$ do quên nhân $2$ ở mẫu $\\rightarrow$ <b>Ý b) SAI</b>).</li>\n              <li><b>Cực trị:</b> Vì $a = -2 < 0$ nên hàm số đạt <b>GTLN</b> bằng $y_S = -\\dfrac{7}{8}$ $\\rightarrow$ <b>Ý c) ĐÚNG</b>.</li>\n              <li><b>Ý d) Parabol $(P')$ có đỉnh trùng với $S\\left(\\tfrac{1}{4}; -\\tfrac{7}{8}\\right)$:</b><br/>\n              Nếu $(P'): y = -2x^2 + x + 3$ thì $y_{\\text{đỉnh}} = -\\tfrac{1}{8} + \\tfrac{1}{4} + 3 = \\tfrac{25}{8} \\ne -\\tfrac{7}{8}$ (Tịnh tiến lên $4$ đơn vị làm đổi đỉnh!) $\\rightarrow$ <b>Ý d) SAI</b>.</li>\n            </ul>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "CĐ3.3 – Vẽ Parabol & Toán Thực Tế Cổng Vòm Parabol",
+    "kicker": "Chuyên đề 3 · Hàm số & Parabol bậc hai (1:18 – 1:30)",
+    "topic": "3",
+    "time_badge": "CĐ3 · Phút 78–90",
+    "html": "\n        <div class=\"s-kicker\">📈 CHUYÊN ĐỀ 3 · HÀM SỐ &amp; ĐỒ THỊ HÀM SỐ BẬC HAI (35 PHÚT)</div>\n        <h2 class=\"s-title\">3.3. Quy Trình Vẽ Parabol &amp; Mô Hình Hóa Cổng Vòm Parabol</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\">\n            <span class=\"tag\">Tự luận vẽ đồ thị · Câu 1 (LTV) &amp; Bài 7, 8 (Bộ 2)</span>\n            <h3>1. Bảng 5 điểm đối xứng chuẩn mực</h3>\n            <p style=\"font-size:19.5px; margin:0 0 8px;\"><b>Ví dụ Câu 1 Phần III (Đề LTV):</b> Vẽ $(P): y = x^2 + 2x - 3$.</p>\n            <ul class=\"clean\" style=\"font-size:19px; gap:6px;\">\n              <li><b>Đỉnh:</b> $S(-1; -4)$; <b>Trục đối xứng:</b> $x = -1$; bề lõm hướng lên ($a=1>0$).</li>\n              <li><b>Bảng 5 giá trị đối xứng qua $x = -1$:</b></li>\n            </ul>\n            <table class=\"styled-tbl\" style=\"font-size:18px; text-align:center; margin:8px 0;\">\n              <thead>\n                <tr><th>$x$</th><th>$-3$</th><th>$-2$</th><th><b>$-1$ (Đỉnh)</b></th><th>$0$</th><th>$1$</th></tr>\n              </thead>\n              <tbody>\n                <tr><td><b>$y$</b></td><td>$0$</td><td>$-3$</td><td><b>$-4$</b></td><td>$-3$</td><td>$0$</td></tr>\n              </tbody>\n            </table>\n            <div class=\"ex-item\" style=\"font-size:18.5px; margin-top:8px;\">\n              <b>Bài 8 (Bộ 2):</b> Tìm $(P): y = ax^2 + bx + 2$ qua $A(1;5)$ và $B(-1;3)$:<br/>\n              Giải hệ $\\begin{cases} a + b + 2 = 5 \\\\ a - b + 2 = 3 \\end{cases} \\iff \\begin{cases} a = 2 \\\\ b = 1 \\end{cases} \\implies y = 2x^2 + x + 2$.\n            </div>\n          </div>\n          <div class=\"card\" style=\"background:#F0FDF4; border-color:#A7F3D0;\">\n            <span class=\"tag\" style=\"background:#0F6B55; color:#fff;\">Toán thực tế 1,0 điểm · Câu 2 Phần III (Đề LTV)</span>\n            <h3 style=\"color:#0F6B55;\">2. Kỹ thuật gắn hệ trục $Oxy$ cho Cổng Parabol</h3>\n            <div style=\"display:grid; grid-template-columns: 205px 1fr; gap:12px; align-items:center;\">\n              <svg width=\"200\" height=\"150\" viewBox=\"0 0 300 190\" style=\"background:#fff; border:1px solid #CBD5E0; border-radius:8px;\">\n                <line x1=\"15\" y1=\"150\" x2=\"285\" y2=\"150\" stroke=\"#1E293B\" stroke-width=\"1.8\"/>\n                <line x1=\"150\" y1=\"10\" x2=\"150\" y2=\"175\" stroke=\"#1E293B\" stroke-width=\"1.8\"/>\n                <path d=\"M 46 150 Q 150 -90 254 150\" fill=\"none\" stroke=\"#B85042\" stroke-width=\"2.8\"/>\n                <rect x=\"90\" y=\"70\" width=\"120\" height=\"80\" fill=\"rgba(217,119,6,0.12)\" stroke=\"#D97706\" stroke-width=\"2\"/>\n                <circle cx=\"150\" cy=\"30\" r=\"4.5\" fill=\"#0F6B55\"/>\n                <circle cx=\"210\" cy=\"70\" r=\"4.5\" fill=\"#DC2626\"/>\n                <text x=\"156\" y=\"26\" font-size=\"13\" font-weight=\"bold\" fill=\"#0F6B55\">G(0;3)</text>\n                <text x=\"216\" y=\"68\" font-size=\"13\" font-weight=\"bold\" fill=\"#DC2626\">E(1,5; 2)</text>\n                <text x=\"34\" y=\"168\" font-size=\"14\" font-weight=\"bold\" fill=\"#1E293B\">A</text>\n                <text x=\"252\" y=\"168\" font-size=\"14\" font-weight=\"bold\" fill=\"#1E293B\">B</text>\n                <text x=\"136\" y=\"166\" font-size=\"13\" font-weight=\"bold\" fill=\"#1E293B\">O</text>\n              </svg>\n              <div style=\"font-size:18.5px; line-height:1.45;\">\n                • <b>Bước 1 (Chọn trục):</b> Gốc $O(0;0)$ tại trung điểm $AB$, $Oy$ qua đỉnh cổng $G(0;3)$. Phương trình cổng:<br/>\n                $$(P): y = ax^2 + 3$$\n                • <b>Bước 2 (Tìm $a$):</b> Cửa rộng $3\\text{m}$, cao $2\\text{m} \\Rightarrow$ mép trên cửa $E\\left(\\dfrac{3}{2}; 2\\right) \\in (P)$:<br/>\n                $$2 = a\\left(\\dfrac{3}{2}\\right)^2 + 3 \\Rightarrow a = -\\dfrac{4}{9}$$\n              </div>\n            </div>\n            <div class=\"ex-item\" style=\"margin-top:10px; font-size:19px;\">\n              • <b>Bước 3 (Tìm $AB$):</b> Chân cổng ứng với $y = 0 \\iff -\\dfrac{4}{9}x^2 + 3 = 0 \\iff x = \\pm\\dfrac{3\\sqrt{3}}{2}$.<br/>\n              $\\implies$ Độ dài $AB = 2 \\cdot \\dfrac{3\\sqrt{3}}{2} = 3\\sqrt{3} \\approx \\mathbf{5{,}2\\text{ m}}$. <i>(Bài 9 Bộ 2: $h(t)=-5t^2+20t+1$ đạt $\\max = 21\\text{m}$ tại $t=2\\text{s}$).</i>\n            </div>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "CĐ4.1 – Giá Trị Lượng Giác Của Góc Từ 0° Đến 180°",
+    "kicker": "Chuyên đề 4 · Hệ thức lượng trong tam giác (1:30 – 1:42)",
+    "topic": "4",
+    "time_badge": "CĐ4 · Phút 90–102",
+    "html": "\n        <div class=\"s-kicker\">📐 CHUYÊN ĐỀ 4 · HỆ THỨC LƯỢNG TRONG TAM GIÁC (30 PHÚT)</div>\n        <h2 class=\"s-title\">4.1. Giá Trị Lượng Giác Góc $0^\\circ \\to 180^\\circ$: Phụ Chéo – Sin Bù</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\">\n            <span class=\"tag\">Lý thuyết nửa đường tròn đơn vị</span>\n            <h3>1. Dấu lượng giác &amp; Quan hệ Phụ – Bù</h3>\n            <ul class=\"clean\" style=\"font-size:20px;\">\n              <li><b>Quy tắc dấu quan trọng nhất:</b>\n                <ul>\n                  <li>Với mọi $\\alpha \\in (0^\\circ; 180^\\circ)$: luôn có $\\mathbf{\\sin\\alpha > 0}$.</li>\n                  <li>Nếu $\\alpha$ là <b>góc tù ($90^\\circ < \\alpha < 180^\\circ$)</b>: $\\mathbf{\\cos\\alpha < 0,\\ \\tan\\alpha < 0,\\ \\cot\\alpha < 0}$.</li>\n                </ul>\n              </li>\n              <li><b>Hai góc phụ nhau ($\\alpha$ và $90^\\circ - \\alpha$):</b> <i>\"Phụ chéo\"</i>\n                $$\\sin(90^\\circ-\\alpha) = \\cos\\alpha;\\quad \\cos(90^\\circ-\\alpha) = \\sin\\alpha$$\n                <small>(<b>Câu 8 Đề LTV:</b> Chọn D: $\\cos(90^\\circ-\\alpha) = \\sin\\alpha$).</small>\n              </li>\n              <li><b>Hai góc bù nhau ($\\alpha$ và $180^\\circ - \\alpha$):</b> <i>\"Sin bù, còn lại đối\"</i>\n                $$\\sin(180^\\circ-\\alpha) = \\sin\\alpha;\\quad \\cos(180^\\circ-\\alpha) = -\\cos\\alpha$$\n                <small>(<b>Câu 6 Bộ 2:</b> $\\sin 150^\\circ = \\sin(180^\\circ-30^\\circ) = \\sin 30^\\circ = \\dfrac{1}{2}$).</small>\n              </li>\n            </ul>\n          </div>\n          <div class=\"card\" style=\"background:#FCFBF8;\">\n            <span class=\"tag\" style=\"background:#FEF3C7; color:#B45309;\">Phương pháp giải Bài 10 Tự luận (Bộ 2)</span>\n            <h3 style=\"color:#B45309;\">2. Hệ thức cơ bản &amp; Bẫy dấu góc tù</h3>\n            <div class=\"eq-box\" style=\"font-size:22px; padding:10px;\">\n              $$\\sin^2\\alpha + \\cos^2\\alpha = 1; \\qquad \\tan\\alpha = \\dfrac{\\sin\\alpha}{\\cos\\alpha}$$\n            </div>\n            <div class=\"ex-item\" style=\"font-size:19.5px;\">\n              <b>📌 Bài 10a (Bộ 2):</b> Tính $P = \\sin 30^\\circ\\cos 60^\\circ + \\sin 60^\\circ\\cos 30^\\circ + \\tan 45^\\circ$<br/>\n              $$P = \\dfrac{1}{2}\\cdot\\dfrac{1}{2} + \\dfrac{\\sqrt{3}}{2}\\cdot\\dfrac{\\sqrt{3}}{2} + 1 = \\dfrac{1}{4} + \\dfrac{3}{4} + 1 = \\mathbf{2}.$$\n            </div>\n            <div class=\"ex-item\" style=\"font-size:19.5px; margin-top:12px;\">\n              <b>📌 Bài 10b (Bộ 2):</b> Cho $\\sin\\alpha = \\dfrac{3}{5}$ với $90^\\circ < \\alpha < 180^\\circ$. Tính $\\cos\\alpha, \\tan\\alpha$.<br/>\n              • Vì $90^\\circ < \\alpha < 180^\\circ$ (góc tù) nên $\\mathbf{\\cos\\alpha < 0}$:<br/>\n              $$\\cos\\alpha = -\\sqrt{1 - \\sin^2\\alpha} = -\\sqrt{1 - \\dfrac{9}{25}} = \\mathbf{-\\dfrac{4}{5}} \\implies \\tan\\alpha = \\dfrac{\\sin\\alpha}{\\cos\\alpha} = \\mathbf{-\\dfrac{3}{4}}.$$\n            </div>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "CĐ4.2 – Định Lý Côsin, Định Lý Sin & 5 Công Thức Diện Tích",
+    "kicker": "Chuyên đề 4 · Hệ thức lượng trong tam giác (1:42 – 2:00)",
+    "topic": "4",
+    "time_badge": "CĐ4 · Phút 102–120",
+    "html": "\n        <div class=\"s-kicker\">📐 CHUYÊN ĐỀ 4 · HỆ THỨC LƯỢNG TRONG TAM GIÁC (30 PHÚT)</div>\n        <h2 class=\"s-title\">4.2. Định Lý Côsin, Định Lý Sin &amp; Bài Toán Đo Đạc Thực Tế</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\">\n            <span class=\"tag\">Hệ thống công thức giải tam giác</span>\n            <h3>1. Khi nào dùng Côsin? Khi nào dùng Sin?</h3>\n            <ul class=\"clean\" style=\"font-size:19.5px; gap:8px;\">\n              <li><b>Định lý Côsin</b> (Biết 2 cạnh + góc xen giữa, hoặc biết 3 cạnh):\n                $$a^2 = b^2 + c^2 - 2bc\\cos A \\implies \\cos A = \\dfrac{b^2+c^2-a^2}{2bc}$$</li>\n              <li><b>Định lý Sin</b> (Biết 1 cặp cạnh – góc đối diện, hoặc 1 cạnh + 2 góc):\n                $$\\dfrac{a}{\\sin A} = \\dfrac{b}{\\sin B} = \\dfrac{c}{\\sin C} = 2R \\implies R = \\dfrac{a}{2\\sin A}$$\n                <small>(<b>Câu 9 Đề LTV:</b> $BC=10, \\widehat{A}=30^\\circ \\Rightarrow R = \\dfrac{10}{2\\sin 30^\\circ} = 10$).</small>\n              </li>\n              <li><b>5 Công thức Diện tích $S$ &amp; Đường cao $h_a$:</b>\n                $$S = \\dfrac{1}{2}bc\\sin A = \\dfrac{1}{2}a h_a = \\dfrac{abc}{4R} = pr = \\sqrt{p(p-a)(p-b)(p-c)}$$\n                $$\\implies h_a = \\dfrac{2S}{a}$$</li>\n            </ul>\n          </div>\n          <div class=\"card\" style=\"background:#F0FDF4; border-color:#A7F3D0;\">\n            <span class=\"tag\" style=\"background:#0F6B55; color:#fff;\">Giải mẫu Bài 11, 12, 13 Tự luận (Bộ 2)</span>\n            <h3 style=\"color:#0F6B55;\">2. Ứng dụng giải tam giác &amp; Đo chiều rộng sông</h3>\n            <div class=\"ex-item\" style=\"font-size:19px;\">\n              <b>📌 Bài 11 (Bộ 2):</b> Cho $AB=c=3,\\ AC=b=8,\\ \\widehat{A}=60^\\circ$.<br/>\n              • Định lý Côsin: $BC^2 = 3^2 + 8^2 - 2\\cdot 3\\cdot 8\\cos 60^\\circ = 49 \\implies \\mathbf{BC = 7}$.<br/>\n              • Diện tích: $S = \\dfrac{1}{2}\\cdot 3\\cdot 8\\sin 60^\\circ = \\mathbf{6\\sqrt{3}}$.<br/>\n              • Đường cao: $h_a = \\dfrac{2S}{BC} = \\mathbf{\\dfrac{12\\sqrt{3}}{7}}$; \\quad Ngoại tiếp: $R = \\dfrac{7}{2\\sin 60^\\circ} = \\mathbf{\\dfrac{7\\sqrt{3}}{3}}$.\n            </div>\n            <div class=\"ex-item\" style=\"font-size:19px; margin-top:10px;\">\n              <b>📌 Bài 13 (Bộ 2 – Đo khoảng cách qua sông):</b> Biết $AB = 100\\text{ m}$, $\\widehat{CAB} = 60^\\circ$, $\\widehat{CBA} = 75^\\circ$. Tính $AC$.<br/>\n              • Tính góc đối diện cạnh $AB$: $\\widehat{C} = 180^\\circ - (60^\\circ + 75^\\circ) = 45^\\circ$.<br/>\n              • Định lý Sin: $\\dfrac{AC}{\\sin B} = \\dfrac{AB}{\\sin C} \\implies AC = \\dfrac{100\\cdot\\sin 75^\\circ}{\\sin 45^\\circ} = 50(\\sqrt{3}+1) \\approx \\mathbf{136{,}6\\text{ m}}$.\n            </div>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "CĐ5.1 – Vectơ: Cùng Hướng, Quy Tắc 3 Điểm, HBH, Trung Điểm, Trọng Tâm",
+    "kicker": "Chuyên đề 5 · Vectơ & Tọa độ (2:00 – 2:14)",
+    "topic": "5",
+    "time_badge": "CĐ5 · Phút 120–134",
+    "html": "\n        <div class=\"s-kicker\">🧭 CHUYÊN ĐỀ 5 · VECTƠ – TÍCH VÔ HƯỚNG – TỌA ĐỘ OXY (40 PHÚT)</div>\n        <h2 class=\"s-title\">5.1. Phương, Hướng Của Vectơ &amp; Năm Đẳng Thức Vectơ Nền Tảng</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\">\n            <span class=\"tag\">Lý thuyết &amp; Mẹo đọc lưới ô vuông</span>\n            <h3>1. Cùng phương, Cùng hướng &amp; Bằng nhau</h3>\n            <ul class=\"clean\" style=\"font-size:19.5px; gap:8px;\">\n              <li><b>Hai vectơ bằng nhau ($\\vec{a}=\\vec{b}$):</b> Phải <b>cùng hướng</b> và <b>cùng độ dài</b>.<br/>\n              <small>(<b>Câu 10 Đề LTV:</b> Hình vuông $ABCD$ có $\\overrightarrow{AB} = \\overrightarrow{DC}$).</small></li>\n              <li><b>Mẹo đếm cặp vectơ cùng hướng trên lưới ô vuông (Câu 11 Đề LTV):</b><br/>\n              Đếm độ dời $(\\Delta x; \\Delta y)$ từ điểm đầu đến điểm cuối của từng vectơ:\n                <ul>\n                  <li>$\\vec{c} = (3; 0)$ và $\\vec{d} = (2; 0) \\longrightarrow$ cùng hướng sang phải (Cặp 1).</li>\n                  <li>$\\vec{a} = (2; 2)$ và $\\vec{f} = (1; 1) \\longrightarrow$ cùng hướng chéo lên phải (Cặp 2).</li>\n                  <li>$\\vec{b} = (-1; 3)$ và $\\vec{e} = (1; -3) \\longrightarrow$ <b>ngược hướng</b>!</li>\n                </ul>\n                $\\implies$ Có đúng <b>2 cặp</b> vectơ cùng hướng (Chọn <b>B</b>).\n              </li>\n            </ul>\n          </div>\n          <div class=\"card\" style=\"background:#FCFBF8;\">\n            <span class=\"tag\" style=\"background:#E0F2FE; color:#0369A1;\">5 Quy tắc biến đổi (Câu 12, 13 LTV &amp; Bài 14 Bộ 2)</span>\n            <h3 style=\"color:#0369A1;\">2. Quy tắc cộng, trừ, Trung điểm &amp; Trọng tâm</h3>\n            <div style=\"font-size:19.5px; line-height:1.55;\">\n              <div class=\"eq-box\" style=\"font-size:20.5px; padding:10px; margin-bottom:10px; text-align:left;\">\n                1) <b>Quy tắc 3 điểm:</b> $\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{AC}$ (Nối đuôi)<br/>\n                2) <b>Quy tắc hiệu:</b> $\\overrightarrow{OA} - \\overrightarrow{OB} = \\overrightarrow{BA}$ (Chung gốc – Ngược thứ tự)<br/>\n                3) <b>Hình bình hành $ABCD$:</b> $\\overrightarrow{AB} + \\overrightarrow{AD} = \\overrightarrow{AC}$ (Câu 12 LTV)<br/>\n                4) <b>Trung điểm $I$ của $AB$:</b> $\\overrightarrow{IA}+\\overrightarrow{IB}=\\vec{0}$;\\quad $\\overrightarrow{MA}+\\overrightarrow{MB}=2\\overrightarrow{MI}$<br/>\n                5) <b>Trọng tâm $G$:</b> $\\overrightarrow{GA}+\\overrightarrow{GB}+\\overrightarrow{GC}=\\vec{0}$ (Câu 13 LTV)\n              </div>\n              <div class=\"ex-item\" style=\"font-size:18.5px;\">\n                <b>📌 Bài 14 (Bộ 2):</b> Chứng minh $\\overrightarrow{AB} + \\overrightarrow{CD} = \\overrightarrow{AD} + \\overrightarrow{CB}$.<br/>\n                <i>Cách 1 (Chèn điểm):</i> $VT = (\\overrightarrow{AD} + \\overrightarrow{DB}) + (\\overrightarrow{CB} + \\overrightarrow{BD}) = \\overrightarrow{AD} + \\overrightarrow{CB} + \\vec{0} = VP$.<br/>\n                <i>Cách 2 (Chuyển vế dùng hiệu):</i> $\\overrightarrow{AB} - \\overrightarrow{AD} = \\overrightarrow{CB} - \\overrightarrow{CD} \\iff \\overrightarrow{DB} = \\overrightarrow{DB}$ (luôn đúng).\n              </div>\n            </div>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "CĐ5.2 – Phân Tích Vectơ & Chứng Minh 3 Điểm Thẳng Hàng",
+    "kicker": "Chuyên đề 5 · Vectơ & Tọa độ (2:14 – 2:28)",
+    "topic": "5",
+    "time_badge": "CĐ5 · Phút 134–148",
+    "html": "\n        <div class=\"s-kicker\">🧭 CHUYÊN ĐỀ 5 · VECTƠ – TÍCH VÔ HƯỚNG – TỌA ĐỘ OXY (40 PHÚT)</div>\n        <h2 class=\"s-title\">5.2. Kỹ Thuật Phân Tích Vectơ Cơ Sở &amp; Chứng Minh Thẳng Hàng</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\" style=\"background:#FFFBEB; border-color:#FDE68A;\">\n            <span class=\"tag\" style=\"background:#D97706; color:#fff;\">Câu lấy điểm 9–10 · Câu 3 Phần III (Đề LTV – 2,0 điểm)</span>\n            <h3 style=\"color:#B45309;\">1. Giải chi tiết Câu 3 Tự luận Đề Lương Thế Vinh</h3>\n            <p style=\"font-size:18.5px; margin:0 0 6px;\"><b>Đề bài:</b> $\\triangle ABC$ đều cạnh $2a$, $K$ là trung điểm $AC$, $\\overrightarrow{BC}=5\\overrightarrow{BH}$, $\\overrightarrow{BK}=3\\overrightarrow{BI}$.</p>\n            <div class=\"ex-item\" style=\"font-size:18.5px;\">\n              <b>a) Tính $|\\vec{a}| = |\\overrightarrow{BA} + \\overrightarrow{AC}|$ (1,0 điểm):</b><br/>\n              Theo quy tắc 3 điểm: $\\vec{a} = \\overrightarrow{BA} + \\overrightarrow{AC} = \\overrightarrow{BC} \\implies |\\vec{a}| = BC = \\mathbf{2a}$.\n            </div>\n            <div class=\"ex-item\" style=\"font-size:18.5px; margin-top:8px;\">\n              <b>b) Chứng minh $A, I, H$ thẳng hàng (1,0 điểm):</b><br/>\n              Chọn 2 vectơ cơ sở $\\vec{u} = \\overrightarrow{AB}$ và $\\vec{v} = \\overrightarrow{AC}$ (suy ra $\\overrightarrow{BC} = \\vec{v} - \\vec{u}$):<br/>\n              • $\\overrightarrow{AH} = \\overrightarrow{AB} + \\overrightarrow{BH} = \\vec{u} + \\dfrac{1}{5}(\\vec{v} - \\vec{u}) = \\mathbf{\\dfrac{4}{5}\\vec{u} + \\dfrac{1}{5}\\vec{v}}$.<br/>\n              • $\\overrightarrow{AI} = \\overrightarrow{AB} + \\overrightarrow{BI} = \\vec{u} + \\dfrac{1}{3}\\overrightarrow{BK} = \\vec{u} + \\dfrac{1}{3}\\left(\\dfrac{1}{2}\\vec{v} - \\vec{u}\\right) = \\mathbf{\\dfrac{2}{3}\\vec{u} + \\dfrac{1}{6}\\vec{v}}$.<br/>\n              • Lập tỉ số: $\\dfrac{4/5}{2/3} = \\dfrac{6}{5}$ và $\\dfrac{1/5}{1/6} = \\dfrac{6}{5} \\implies \\mathbf{\\overrightarrow{AH} = \\dfrac{6}{5}\\overrightarrow{AI}} \\implies A,I,H$ thẳng hàng!\n            </div>\n          </div>\n          <div class=\"card\">\n            <span class=\"tag\">Tự luận vận dụng · Bài 15 (Bộ 2)</span>\n            <h3>2. Giải chi tiết Bài 15 (Bộ 2)</h3>\n            <p style=\"font-size:19px; margin:0 0 8px;\"><b>Đề bài:</b> Cho $\\triangle ABC$, $I$ là trung điểm $AB$ và điểm $M$ thỏa mãn $\\overrightarrow{MA} + \\overrightarrow{MB} + 2\\overrightarrow{MC} = \\vec{0}$.</p>\n            <div class=\"ex-item\" style=\"font-size:19px;\">\n              <b>a) Chứng minh $M$ là trung điểm của $IC$:</b><br/>\n              • Vì $I$ là trung điểm của đoạn $AB$ nên với điểm $M$ bất kỳ, ta luôn có:<br/>\n              $$\\overrightarrow{MA} + \\overrightarrow{MB} = 2\\overrightarrow{MI}$$\n              • Thay vào giả thiết:\n              $$2\\overrightarrow{MI} + 2\\overrightarrow{MC} = \\vec{0} \\iff \\overrightarrow{MI} + \\overrightarrow{MC} = \\vec{0}$$\n              $\\implies M$ chính là trung điểm của đoạn thẳng $IC$.\n            </div>\n            <div class=\"ex-item\" style=\"font-size:19px; margin-top:10px;\">\n              <b>b) Biểu diễn $\\overrightarrow{AM}$ theo $\\overrightarrow{AB}$ và $\\overrightarrow{AC}$:</b><br/>\n              • Vì $M$ là trung điểm $IC \\implies \\overrightarrow{AM} = \\dfrac{1}{2}\\left(\\overrightarrow{AI} + \\overrightarrow{AC}\\right)$.<br/>\n              • Mà $I$ là trung điểm $AB \\implies \\overrightarrow{AI} = \\dfrac{1}{2}\\overrightarrow{AB}$.<br/>\n              $$\\implies \\overrightarrow{AM} = \\dfrac{1}{2}\\left(\\dfrac{1}{2}\\overrightarrow{AB} + \\overrightarrow{AC}\\right) = \\mathbf{\\dfrac{1}{4}\\overrightarrow{AB} + \\dfrac{1}{2}\\overrightarrow{AC}}.$$\n            </div>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "CĐ5.3 – Tích Vô Hướng & Phương Pháp Tọa Độ Oxy",
+    "kicker": "Chuyên đề 5 · Vectơ & Tọa độ (2:28 – 2:40)",
+    "topic": "5",
+    "time_badge": "CĐ5 · Phút 148–160",
+    "html": "\n        <div class=\"s-kicker\">🧭 CHUYÊN ĐỀ 5 · VECTƠ – TÍCH VÔ HƯỚNG – TỌA ĐỘ OXY (40 PHÚT)</div>\n        <h2 class=\"s-title\">5.3. Tích Vô Hướng Của Hai Vectơ &amp; Hình Học Tọa Độ $Oxy$</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\">\n            <span class=\"tag\">Tích vô hướng hình học · Phần II Câu 3 (Đề LTV)</span>\n            <h3>1. Công thức Tích vô hướng &amp; Kiểm tra vuông góc</h3>\n            <div class=\"eq-box\" style=\"font-size:21px; padding:10px; margin-bottom:8px;\">\n              $$\\vec{a}\\cdot\\vec{b} = |\\vec{a}|\\cdot|\\vec{b}|\\cdot\\cos(\\vec{a},\\vec{b}); \\qquad \\vec{a}\\perp\\vec{b} \\iff \\vec{a}\\cdot\\vec{b} = 0$$\n            </div>\n            <div class=\"ex-item\" style=\"font-size:18.5px;\">\n              <b>📌 Câu 15 (Đề LTV):</b> $AB=10, AC=12, \\widehat{BAC}=120^\\circ \\Rightarrow \\overrightarrow{AB}\\cdot\\overrightarrow{AC} = 10\\cdot 12\\cdot\\cos 120^\\circ = \\mathbf{-60}$.\n            </div>\n            <div class=\"ex-item\" style=\"font-size:18.5px; margin-top:8px;\">\n              <b>📌 Câu 3 Phần II (Đề LTV):</b> $\\triangle ABC$ có $AB=4\\sqrt{2}, AC=6, \\widehat{A}=45^\\circ$; $D$ trung điểm $BC$, $AE=\\dfrac{5}{6}AC$.<br/>\n              • <b>Ý a:</b> $\\overrightarrow{AB}\\cdot\\overrightarrow{AC} = 4\\sqrt{2}\\cdot 6\\cdot\\cos 45^\\circ = 24 \\ne 20 \\Rightarrow$ <b>SAI</b>.<br/>\n              • <b>Ý b:</b> $\\overrightarrow{AD} = \\dfrac{1}{2}\\overrightarrow{AB} + \\dfrac{1}{2}\\overrightarrow{AC} \\Rightarrow$ <b>ĐÚNG</b>.<br/>\n              • <b>Ý c:</b> $\\overrightarrow{BE} = \\overrightarrow{AE} - \\overrightarrow{AB} = -\\overrightarrow{AB} + \\dfrac{5}{6}\\overrightarrow{AC}$ (đề thiếu dấu trừ) $\\Rightarrow$ <b>SAI</b>.<br/>\n              • <b>Ý d:</b> $\\overrightarrow{AD}\\cdot\\overrightarrow{BE} = \\dfrac{1}{2}(\\overrightarrow{AB}+\\overrightarrow{AC})\\cdot\\left(-\\overrightarrow{AB}+\\dfrac{5}{6}\\overrightarrow{AC}\\right) = \\dfrac{1}{2}(-32 - 4 + 30) = -3 \\ne 0 \\Rightarrow$ <b>SAI</b>.\n            </div>\n          </div>\n          <div class=\"card\" style=\"background:#F0FDF4; border-color:#A7F3D0;\">\n            <span class=\"tag\" style=\"background:#0F6B55; color:#fff;\">Hệ trục tọa độ Oxy · Bài 16 Tự luận (Bộ 2)</span>\n            <h3 style=\"color:#0F6B55;\">2. Công thức tọa độ &amp; Giải mẫu Bài 16</h3>\n            <ul class=\"clean\" style=\"font-size:18.5px; gap:6px; margin-bottom:8px;\">\n              <li>$\\overrightarrow{AB} = (x_B - x_A;\\ y_B - y_A)$; \\quad $|\\vec{a}| = \\sqrt{x_1^2 + y_1^2}$.</li>\n              <li>$\\vec{a}\\cdot\\vec{b} = x_1 x_2 + y_1 y_2$; \\quad $\\vec{a}\\perp\\vec{b} \\iff x_1 x_2 + y_1 y_2 = 0$. (Câu 11 Bộ 2: $2(3)+m(-6)=0 \\Rightarrow m=1$).</li>\n            </ul>\n            <div class=\"ex-item\" style=\"font-size:18.5px;\">\n              <b>📌 Giải Bài 16 (Bộ 2):</b> Cho $A(-1; 2),\\ B(3; 0),\\ C(4; 2)$.<br/>\n              • <b>a) Chứng minh vuông tại $B$ &amp; tính diện tích:</b><br/>\n              Ta có $\\overrightarrow{BA} = (-4; 2)$ và $\\overrightarrow{BC} = (1; 2) \\implies \\overrightarrow{BA}\\cdot\\overrightarrow{BC} = (-4)(1) + 2(2) = 0 \\implies \\triangle ABC$ vuông tại $B$.<br/>\n              $BA = \\sqrt{20} = 2\\sqrt{5},\\ BC = \\sqrt{5} \\implies S = \\dfrac{1}{2}BA\\cdot BC = \\mathbf{5}$.<br/>\n              • <b>b) Trọng tâm $G$:</b> $x_G = \\dfrac{-1+3+4}{3}=2,\\ y_G = \\dfrac{2+0+2}{3}=\\dfrac{4}{3} \\Rightarrow \\mathbf{G\\left(2; \\dfrac{4}{3}\\right)}$.<br/>\n              • <b>c) Tìm $D$ để $ABCD$ là hình chữ nhật:</b> Vì $\\widehat{B}=90^\\circ$ nên chỉ cần $ABCD$ là hình bình hành: $\\overrightarrow{AD} = \\overrightarrow{BC} \\iff (x_D+1; y_D-2) = (1; 2) \\implies \\mathbf{D(0; 4)}$.\n            </div>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "CĐ6.1 – Thống Kê: Số Trung Bình, Trung Vị, Tứ Phân Vị, Mốt",
+    "kicker": "Chuyên đề 6 · Các số đặc trưng mẫu số liệu (2:40 – 2:50)",
+    "topic": "6",
+    "time_badge": "CĐ6 · Phút 160–170",
+    "html": "\n        <div class=\"s-kicker\">📊 CHUYÊN ĐỀ 6 · CÁC SỐ ĐẶC TRƯNG CỦA MẪU SỐ LIỆU (20 PHÚT)</div>\n        <h2 class=\"s-title\">6.1. Các Số Đặc Trưng Đo Xu Thế Trung Tâm ($\\bar{x}, M_e, Q_1, Q_2, Q_3, M_o$)</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\">\n            <span class=\"tag\">Thuật toán tìm Tứ phân vị không bao giờ sai</span>\n            <h3>1. Quy trình 3 bước tìm $Q_1,\\ Q_2 (M_e),\\ Q_3$</h3>\n            <ul class=\"clean\" style=\"font-size:19.5px; gap:8px;\">\n              <li><b>Bước 1 (Sắp xếp):</b> Xếp mẫu tăng dần $x_1 \\le x_2 \\le \\dots \\le x_n$.</li>\n              <li><b>Bước 2 (Tìm trung vị $Q_2 = M_e$):</b>\n                <ul>\n                  <li>Nếu $n$ lẻ: $Q_2$ là số chính giữa. Nửa trái &amp; nửa phải <b>bỏ số $Q_2$ ra</b>.</li>\n                  <li>Nếu $n$ chẵn ($n=2k$): $Q_2 = \\dfrac{x_k + x_{k+1}}{2}$. Nửa trái gồm $k$ số đầu, nửa phải gồm $k$ số cuối.</li>\n                </ul>\n              </li>\n              <li><b>Bước 3 (Tìm $Q_1, Q_3$):</b> $Q_1$ là trung vị của nửa bên trái; $Q_3$ là trung vị của nửa bên phải.</li>\n              <li><b>Mốt ($M_o$):</b> Giá trị có tần số lớn nhất (Câu 12 Bộ 2: $M_o = 7$).</li>\n            </ul>\n          </div>\n          <div class=\"card\" style=\"background:#FFFBEB; border-color:#FDE68A;\">\n            <span class=\"tag\" style=\"background:#D97706; color:#fff;\">Phân tích Đúng/Sai · Câu 14 (Bộ 2)</span>\n            <h3 style=\"color:#B45309;\">2. Giải mẫu Câu 14 (Bộ 2): $n = 8$ số</h3>\n            <p style=\"font-size:19.5px; margin:0 0 8px;\">Mẫu đã sắp xếp ($n=8$ chẵn, chia đôi mỗi nửa $4$ số):</p>\n            <div class=\"eq-box\" style=\"font-size:22px; padding:10px; margin-bottom:10px;\">\n              $$\\underbrace{2;\\quad 3;\\quad 3;\\quad 5}_{\\text{Nửa trái (4 số)}} \\quad\\Big|\\quad \\underbrace{6;\\quad 7;\\quad 8;\\quad 10}_{\\text{Nửa phải (4 số)}}$$\n            </div>\n            <ul class=\"clean\" style=\"font-size:19px; gap:8px;\">\n              <li><b>a) Số trung bình:</b> $\\bar{x} = \\dfrac{2+3+3+5+6+7+8+10}{8} = \\dfrac{44}{8} = \\mathbf{5{,}5} \\rightarrow$ <b>ĐÚNG</b>.</li>\n              <li><b>b) Trung vị:</b> $M_e = Q_2 = \\dfrac{5 + 6}{2} = \\mathbf{5{,}5} \\rightarrow$ <b>ĐÚNG</b>.</li>\n              <li><b>c) Khoảng tứ phân vị $\\Delta_Q = 4$:</b><br/>\n              Ta có $Q_1 = \\dfrac{3+3}{2} = 3$;\\quad $Q_3 = \\dfrac{7+8}{2} = 7{,}5 \\implies \\Delta_Q = Q_3 - Q_1 = \\mathbf{4{,}5} \\ne 4 \\rightarrow$ <b>SAI</b>!</li>\n              <li><b>d) Khoảng biến thiên:</b> $R = x_{\\max} - x_{\\min} = 10 - 2 = \\mathbf{8} \\rightarrow$ <b>ĐÚNG</b>.</li>\n            </ul>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "CĐ6.2 – Độ Phân Tán, Phương Sai, Độ Lệch Chuẩn & Giá Trị Bất Thường",
+    "kicker": "Chuyên đề 6 · Các số đặc trưng mẫu số liệu (2:50 – 2:57)",
+    "topic": "6",
+    "time_badge": "CĐ6 · Phút 170–177",
+    "html": "\n        <div class=\"s-kicker\">📊 CHUYÊN ĐỀ 6 · CÁC SỐ ĐẶC TRƯNG CỦA MẪU SỐ LIỆU (20 PHÚT)</div>\n        <h2 class=\"s-title\">6.2. Phương Sai $s^2$, Độ Lệch Chuẩn $s$ &amp; Giá Trị Bất Thường (Outliers)</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\">\n            <span class=\"tag\">Công thức Độ phân tán &amp; Ngưỡng bất thường</span>\n            <h3>1. Hệ thống công thức đo độ phân tán</h3>\n            <div class=\"eq-box\" style=\"font-size:21px; padding:12px; margin-bottom:10px; text-align:left;\">\n              • <b>Khoảng biến thiên:</b> $R = x_{\\max} - x_{\\min}$<br/>\n              • <b>Khoảng tứ phân vị:</b> $\\Delta_Q = Q_3 - Q_1$<br/>\n              • <b>Phương sai:</b> $s^2 = \\dfrac{1}{n}\\sum_{i=1}^n (x_i - \\bar{x})^2$<br/>\n              • <b>Độ lệch chuẩn:</b> $s = \\sqrt{s^2}$\n            </div>\n            <div class=\"warn-banner\" style=\"font-size:19.5px;\">\n              🚨 <b>Quy tắc phát hiện Giá trị bất thường (Outlier):</b><br/>\n              Giá trị $x$ là bất thường nếu nằm ngoài đoạn $\\big[Q_1 - 1{,}5\\Delta_Q;\\ Q_3 + 1{,}5\\Delta_Q\\big]$, tức là:<br/>\n              $$\\mathbf{x < Q_1 - 1{,}5\\Delta_Q} \\quad\\text{hoặc}\\quad \\mathbf{x > Q_3 + 1{,}5\\Delta_Q}$$\n            </div>\n          </div>\n          <div class=\"card\" style=\"background:#F0FDF4; border-color:#A7F3D0;\">\n            <span class=\"tag\" style=\"background:#0F6B55; color:#fff;\">Giải mẫu Bài 17 &amp; Bài 18 Tự luận (Bộ 2)</span>\n            <h3 style=\"color:#0F6B55;\">2. Thực hành tính toán chuẩn xác</h3>\n            <div class=\"ex-item\" style=\"font-size:18.5px;\">\n              <b>📌 Bài 17 (Bộ 2):</b> Mẫu $n=12$ học sinh:<br/>\n              $\\underbrace{1;\\ 2;\\ 2;\\ 3;\\ 3;\\ 3}_{\\text{Nửa trái (6 số)}} \\ \\big|\\ \\underbrace{4;\\ 4;\\ 5;\\ 6;\\ 7;\\ 12}_{\\text{Nửa phải (6 số)}}$<br/>\n              • $\\bar{x} = \\dfrac{52}{12} \\approx 4{,}33$; \\quad $M_e = Q_2 = \\dfrac{3+4}{2} = 3{,}5$.<br/>\n              • $Q_1 = \\dfrac{2+3}{2} = 2{,}5$; \\quad $Q_3 = \\dfrac{5+6}{2} = 5{,}5 \\implies \\Delta_Q = 5{,}5 - 2{,}5 = \\mathbf{3}$.<br/>\n              • Ngưỡng chuẩn: $[2{,}5 - 1{,}5(3);\\ 5{,}5 + 1{,}5(3)] = \\mathbf{[-2;\\ 10]}$.<br/>\n              $\\implies$ Giá trị <b>$12 > 10$</b> nên <b>$12$ là giá trị bất thường</b>!\n            </div>\n            <div class=\"ex-item\" style=\"font-size:18.5px; margin-top:10px;\">\n              <b>📌 Bài 18 (Bộ 2):</b> Mẫu $3;\\ 5;\\ 6;\\ 8;\\ 8$ ($n=5$) có $\\bar{x} = \\dfrac{30}{5} = 6$:<br/>\n              $$s^2 = \\dfrac{(3-6)^2 + (5-6)^2 + (6-6)^2 + (8-6)^2 + (8-6)^2}{5} = \\dfrac{9+1+0+4+4}{5} = \\mathbf{3{,}6}$$\n              $$\\implies \\text{Độ lệch chuẩn: } s = \\sqrt{3{,}6} \\approx \\mathbf{1{,}90}.$$\n            </div>\n          </div>\n        </div>\n        "
+  },
+  {
+    "title": "Tổng Kết 3 Tiếng Lý Thuyết & 10 Cạm Bẫy Cần Tránh",
+    "kicker": "Tổng kết · 2:57 – 3:00",
+    "topic": "0",
+    "time_badge": "Hoàn tất 180 phút",
+    "html": "\n        <div class=\"s-kicker\">🏆 TỔNG KẾT 180 PHÚT LÝ THUYẾT · SẴN SÀNG BƯỚC VÀO PHẦN LÀM BÀI TẬP RIÊNG</div>\n        <h2 class=\"s-title\">10 Quy Tắc Vàng Chống Mất Điểm Oan Khi Giải 2 Đề Thi</h2>\n        <div class=\"g2\" style=\"flex:1; align-items:stretch;\">\n          <div class=\"card\">\n            <span class=\"tag\">Đại số &amp; Giải tích (Chuyên đề 1, 2, 3, 6)</span>\n            <ol style=\"font-size:19.5px; line-height:1.52; padding-left:24px; margin:0;\">\n              <li><b>Phủ định mệnh đề:</b> $\\overline{\\forall x, x^2 > 2}$ là $\\exists x, x^2 \\le 2$ (nhớ dấu bằng).</li>\n              <li><b>Hiệu hai tập hợp:</b> Với $A=[-1;4),\\ B=[2;+\\infty)$, điểm $4 \\notin A$ nên khi lấy $B\\setminus A$ thì $4$ vẫn còn lại $\\rightarrow [4;+\\infty)$.</li>\n              <li><b>Đọc hệ BPT từ hình vẽ:</b> Luôn kiểm tra bờ nét liền ($\\le,\\ge$) hay nét đứt ($<,>$) trước, rồi lấy 1 điểm không thuộc cả 2 bờ để thử dấu.</li>\n              <li><b>Hàm nhiều công thức:</b> Xác định rõ $x_0$ thuộc miền nào mới thay vào công thức nhánh đó.</li>\n              <li><b>Tứ phân vị &amp; Outliers:</b> Luôn sắp xếp mẫu tăng dần trước khi tìm $M_e, Q_1, Q_3$ và kiểm tra ngưỡng $[Q_1 - 1{,}5\\Delta_Q;\\ Q_3 + 1{,}5\\Delta_Q]$.</li>\n            </ol>\n          </div>\n          <div class=\"card\" style=\"background:#F0FDF4; border-color:#A7F3D0;\">\n            <span class=\"tag\" style=\"background:#0F6B55; color:#fff;\">Hình học &amp; Đo lường (Chuyên đề 3, 4, 5)</span>\n            <ol start=\"6\" style=\"font-size:19.5px; line-height:1.52; padding-left:24px; margin:0;\">\n              <li><b>Cổng Parabol:</b> Đặt gốc $O(0;0)$ tại trung điểm chân cổng $AB$, đỉnh $G(0;h)$ trên trục $Oy \\Rightarrow (P): y = ax^2 + h$ là nhanh nhất.</li>\n              <li><b>Góc tù ($90^\\circ < \\alpha < 180^\\circ$):</b> $\\sin\\alpha > 0$ nhưng $\\cos\\alpha < 0,\\ \\tan\\alpha < 0$.</li>\n              <li><b>Định lý Sin:</b> $\\dfrac{a}{\\sin A} = 2R \\implies R = \\dfrac{a}{2\\sin A}$ (không quên số $2$ ở mẫu).</li>\n              <li><b>Quy tắc hiệu Vectơ:</b> $\\overrightarrow{BE} = \\overrightarrow{AE} - \\overrightarrow{AB} = -\\overrightarrow{AB} + \\dfrac{5}{6}\\overrightarrow{AC}$.</li>\n              <li><b>Chứng minh 3 điểm $A, I, H$ thẳng hàng:</b> Biểu diễn $\\overrightarrow{AH}$ và $\\overrightarrow{AI}$ theo 2 vectơ gốc $\\vec{u}=\\overrightarrow{AB}, \\vec{v}=\\overrightarrow{AC}$ rồi lập tỉ số hệ số.</li>\n            </ol>\n          </div>\n        </div>\n        "
+  }
+];
+
+let cur = 0;
+const scaler = document.getElementById('scaler');
+
+function fit() {
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+  const k = Math.min(w / 1600, h / 900);
+  scaler.style.transform = `translate(-50%, -50%) scale(${k})`;
+}
+
+function slideHtml(s, i) {
+  if (s.is_cover) {
+    return `
+    <section class="slide cover">
+      <div class="s-body">${s.html}</div>
+    </section>`;
+  }
+  return `
+  <section class="slide">
+    <div class="s-body">
+      ${s.html}
+    </div>
+    <div class="s-foot">
+      <img class="hcmus" src="${LOGO_HCMUS}" alt="HCMUS">
+      <span style="font-weight:700; color:var(--lam);">Giáo Án Lý Thuyết Toán 10 (3 Tiếng) – ThS. Đinh Quốc Tuấn · HCMUS</span>
+      <span class="grow"></span>
+      <span class="time-pill">⏱ ${s.time_badge || '180 phút'}</span>
+      <span class="num">${i + 1} / ${S.length}</span>
+      <span class="sen-box"><img src="${LOGO_SEN}" alt="Logo hoa sen đọng sương"></span>
+    </div>
+  </section>`;
+}
+
+function go(i) {
+  if (i < 0) i = 0;
+  if (i >= S.length) i = S.length - 1;
+  cur = i;
+  scaler.innerHTML = slideHtml(S[i], i);
+  scaler.firstElementChild.classList.add('enter');
+  document.getElementById('pos').innerText = `${i + 1} / ${S.length}`;
+  document.getElementById('progress').style.width = `${((i + 1) / S.length) * 100}%`;
+
+  // Đồng bộ dropdown chuyên đề
+  const sel = document.getElementById('topicJump');
+  if (sel) {
+    const starts = [17, 15, 12, 10, 7, 5, 2, 0];
+    for (const st of starts) {
+      if (i >= st) { sel.value = String(st); break; }
+    }
+  }
+
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    window.MathJax.typesetPromise([scaler]);
+  }
+}
+
+function jumpTopic(val) {
+  const idx = parseInt(val, 10);
+  if (!isNaN(idx)) go(idx);
+}
+
+function toggleFull() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(err => {});
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+function openModal(id) {
+  document.getElementById(id).classList.add('on');
+  if (id === 'mOverview') buildOverview();
+}
+function closeModals() {
+  document.querySelectorAll('.modal.on').forEach(m => m.classList.remove('on'));
+}
+
+function buildOverview() {
+  document.getElementById('ovList').innerHTML = S.map((s, idx) => `
+    <button type="button" class="ov-btn ${idx === cur ? 'cur' : ''}" onclick="closeModals(); go(${idx});">
+      <small>Slide ${idx + 1} · ${s.time_badge || ''}</small>
+      <b>${s.title}</b>
+    </button>
+  `).join('');
+}
+
+async function printAllSlides() {
+  const pr = document.getElementById('print');
+  pr.innerHTML = S.map((s, idx) => slideHtml(s, idx)).join('');
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    await window.MathJax.typesetPromise([pr]);
+  }
+  window.print();
+}
+
+let tLeft = 180 * 60, tRun = false, tInt = null;
+function tShow() {
+  const m = Math.floor(tLeft / 60);
+  const s = tLeft % 60;
+  document.getElementById('timerV').innerText = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+}
+function timerStart(min) {
+  tLeft = min * 60;
+  tRun = true;
+  document.getElementById('timer').classList.add('on');
+  tShow();
+  clearInterval(tInt);
+  tInt = setInterval(() => {
+    if (!tRun) return;
+    tLeft--;
+    tShow();
+    if (tLeft <= 0) {
+      clearInterval(tInt);
+      tRun = false;
+      alert('Đã hết thời lượng giảng dạy lý thuyết!');
+    }
+  }, 1000);
+}
+document.getElementById('timerP').onclick = function() {
+  tRun = !tRun;
+  this.innerText = tRun ? 'Tạm dừng' : 'Tiếp tục';
+};
+document.getElementById('timerX').onclick = function() {
+  clearInterval(tInt);
+  document.getElementById('timer').classList.remove('on');
+};
+
+let hideTimer = null;
+function showControls() {
+  document.body.classList.add('show-ctrl');
+  clearTimeout(hideTimer);
+  hideTimer = setTimeout(() => document.body.classList.remove('show-ctrl'), 3200);
+}
+document.addEventListener('mousemove', showControls);
+document.addEventListener('touchstart', showControls, { passive: true });
+
+document.addEventListener('keydown', (e) => {
+  if (document.querySelector('.modal.on')) {
+    if (e.key === 'Escape' || e.key === 'o' || e.key === 'O') closeModals();
+    return;
+  }
+  const k = e.key;
+  if (k === 'ArrowRight' || k === ' ' || k === 'PageDown' || k === 'Enter') {
+    e.preventDefault();
+    go(cur + 1);
+  } else if (k === 'ArrowLeft' || k === 'PageUp' || k === 'Backspace') {
+    e.preventDefault();
+    go(cur - 1);
+  } else if (k === 'Home') {
+    go(0);
+  } else if (k === 'End') {
+    go(S.length - 1);
+  } else if (k === 'f' || k === 'F') {
+    toggleFull();
+  } else if (k === 'o' || k === 'O') {
+    openModal('mOverview');
+  } else if (k === 't' || k === 'T') {
+    timerStart(180);
+  }
+});
+
+window.addEventListener('resize', fit);
+window.addEventListener('DOMContentLoaded', () => {
+  fit();
+  go(0);
+});
+</script>
+</body>
+</html>

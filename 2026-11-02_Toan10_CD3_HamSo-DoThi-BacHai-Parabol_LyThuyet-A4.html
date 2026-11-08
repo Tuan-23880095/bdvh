@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Chuyên đề 3: Hàm Số & Đồ Thị Bậc Hai Parabol – Lý Thuyết & Phương Pháp Giải (Toán 10)</title>
+<style>
+:root {
+  --luc: #0F6B55;
+  --lam: #1F4E79;
+  --muc: #10212B;
+  --giay: #F6F7F3;
+  --son: #B85042;
+  --tho: #D6A130;
+  --brown: #5A3E2B;
+  --slate: #36454F;
+  --ink: #1d1d1d;
+}
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html { background: #7f8c8d; }
+body {
+  margin: 0;
+  font-family: "Times New Roman", Times, "DejaVu Serif", serif;
+  font-size: 12.5pt;
+  line-height: 1.48;
+  color: var(--ink);
+}
+#flow {
+  width: 210mm;
+  margin: 0 auto;
+  background: #fff;
+  padding: 22mm 16mm 20mm 24mm;
+}
+.page {
+  width: 210mm;
+  height: 297mm;
+  margin: 8mm auto;
+  background: #fff;
+  position: relative;
+  box-shadow: 0 3px 14px rgba(0,0,0,.35);
+  overflow: hidden;
+}
+.page::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4.5mm;
+  background: linear-gradient(180deg, #1F4E79 0%, #0F6B55 50%, #B85042 100%);
+}
+.page .content {
+  position: absolute;
+  top: 22mm;
+  left: 22mm;
+  right: 15mm;
+  bottom: 20mm;
+  overflow: hidden;
+}
+.page .hdr {
+  position: absolute;
+  top: 7mm;
+  left: 22mm;
+  right: 15mm;
+  height: 11mm;
+  font-size: 9.5pt;
+  color: #444;
+  border-bottom: .8pt solid #1F4E79;
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  padding-bottom: 1mm;
+}
+.page .hdr img { height: 8.5mm; width: auto; object-fit: contain; }
+.page .hdr .l { flex: 1; font-weight: bold; color: #1F4E79; }
+.page .hdr .run { text-align: right; color: #0F6B55; font-style: italic; font-weight: bold; }
+.page .ftr {
+  position: absolute;
+  bottom: 7mm;
+  left: 22mm;
+  right: 15mm;
+  border-top: .6pt solid #bbb;
+  padding-top: 1.5mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 9pt;
+  color: #444;
+}
+.page .ftr .pn {
+  display: inline-block;
+  min-width: 7.5mm;
+  height: 7.5mm;
+  line-height: 7.5mm;
+  border-radius: 4mm;
+  background: #1F4E79;
+  color: #fff;
+  text-align: center;
+  font-size: 10pt;
+  font-weight: bold;
+}
+.page.cover::before, .page.cover .hdr, .page.cover .ftr { display: none; }
+.page.cover .content { top: 0; left: 0; right: 0; bottom: 0; }
+
+/* Bìa A4 chuẩn */
+.coverpage { height: 297mm; position: relative; }
+.cv {
+  position: absolute;
+  inset: 12mm 12mm 12mm 12mm;
+  border: 2.5pt double #1F4E79;
+  border-radius: 4mm;
+  padding: 8mm 10mm;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(circle at 88% 10%, #E8F4EE 0%, #fff 50%), #fff;
+}
+.logos { display: flex; align-items: center; justify-content: space-between; gap: 4mm; border-bottom: 1pt solid #D5DCE1; padding-bottom: 4mm; }
+.logos img { height: 22mm; width: auto; object-fit: contain; }
+.orgt { flex: 1; font-size: 11pt; line-height: 1.4; color: #1F4E79; }
+.orgt .o1 { font-weight: bold; text-transform: uppercase; }
+.orgt .o2 { font-weight: bold; color: #0F6B55; font-size: 11.5pt; }
+.band {
+  margin: 5mm auto 0;
+  padding: 2mm 7mm;
+  border-radius: 10mm;
+  background: linear-gradient(90deg, #1F4E79, #0F6B55);
+  color: #fff;
+  font-weight: bold;
+  font-size: 10.5pt;
+  letter-spacing: .4pt;
+  text-transform: uppercase;
+}
+.ttl { font-size: 21.5pt; font-weight: bold; color: #10212B; margin-top: 5mm; line-height: 1.25; text-transform: uppercase; }
+.ttl span { font-size: 14pt; color: #B85042; display: block; margin-top: 2mm; }
+.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 2mm; margin-top: 3.5mm; }
+.chip { padding: 1.2mm 4mm; border-radius: 5mm; font-size: 10pt; font-weight: bold; background: #F0FDF4; color: #0F6B55; border: .8pt solid #0F6B55; }
+.chip.alt { background: #EFF6FF; color: #1F4E79; border-color: #1F4E79; }
+.motto {
+  margin: 4.5mm auto 0;
+  padding: 2.5mm 8mm;
+  border-left: 3.5pt solid #D6A130;
+  border-right: 3.5pt solid #D6A130;
+  background: #FEF9E7;
+  border-radius: 2mm;
+  width: 92%;
+}
+.motto .mt { font-size: 12.5pt; font-weight: bold; font-style: italic; color: #7E5109; }
+.motto .ms { font-size: 8.8pt; color: #9A7D0A; text-transform: uppercase; letter-spacing: .8pt; margin-top: 1mm; }
+.stu {
+  margin-top: auto;
+  text-align: left;
+  font-size: 11.5pt;
+  line-height: 1.85;
+  border: 1pt dashed #95A5A6;
+  border-radius: 2.5mm;
+  padding: 2.5mm 5mm;
+  background: #FAFAFA;
+}
+.dl { display: inline-block; border-bottom: 1pt dotted #555; width: 110mm; }
+.dl.s { width: 42mm; }
+.au { margin-top: 3.5mm; font-size: 12pt; font-weight: bold; color: #1F4E79; }
+.cp { font-size: 9.5pt; color: #555; margin-top: 1mm; font-style: italic; }
+
+/* Định dạng nội dung lý thuyết */
+p { margin: 0 0 5pt; text-align: justify; }
+ul, ol { margin: 0 0 5pt; padding-left: 6.5mm; }
+li { margin: 0 0 2.5pt; text-align: justify; }
+h1.sec-head {
+  font-size: 15pt;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(90deg, #1F4E79, #0F6B55);
+  padding: 2.5mm 4mm;
+  border-radius: 2mm;
+  margin: 0 0 7pt;
+  line-height: 1.25;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+h1.sec-head .t-badge {
+  font-size: 9.8pt;
+  background: #FEF3C7;
+  color: #92400E;
+  padding: .8mm 3mm;
+  border-radius: 3mm;
+  font-weight: bold;
+}
+h2.sub-head {
+  font-size: 13.5pt;
+  color: #B85042;
+  border-bottom: 1.2pt solid #B85042;
+  padding-bottom: 1mm;
+  margin: 8pt 0 5pt;
+}
+h3.mini-head {
+  font-size: 12.5pt;
+  color: #1F4E79;
+  margin: 6pt 0 3pt;
+}
+.box {
+  border: .8pt solid #CBD5E0;
+  border-left: 3.5pt solid #1F4E79;
+  border-radius: 2.5mm;
+  padding: 4.5pt 8pt 3.5pt;
+  margin: 5pt 0 7pt;
+  background: #F8FAFC;
+}
+.box .bt { font-weight: bold; color: #1F4E79; margin-bottom: 2.5pt; font-size: 12.3pt; }
+.box.formula { background: #F0FDF4; border-color: #A7F3D0; border-left-color: #0F6B55; }
+.box.formula .bt { color: #0F6B55; }
+.box.method { background: #FFFBEB; border-color: #FDE68A; border-left-color: #D97706; }
+.box.method .bt { color: #B45309; }
+.box.warn { background: #FEF2F2; border-color: #FECACA; border-left-color: #DC2626; }
+.box.warn .bt { color: #B91C1C; }
+.box.example { background: #FCFBF8; border-color: #E2E8F0; border-left-color: #5A3E2B; }
+.box.example .bt { color: #5A3E2B; }
+
+.sol-block {
+  border-top: .8pt dashed #CBD5E0;
+  margin-top: 4pt;
+  padding-top: 4pt;
+}
+body.hide-sol .sol-block {
+  display: none;
+}
+
+table.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 5pt 0 8pt;
+  font-size: 11.4pt;
+}
+table.tbl th, table.tbl td {
+  border: .6pt solid #94A3B8;
+  padding: 3.5pt 6pt;
+  vertical-align: middle;
+}
+table.tbl th {
+  background: #E2E8F0;
+  color: #1E293B;
+  font-weight: bold;
+  text-align: center;
+}
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4mm;
+  align-items: start;
+}
+.pb { break-before: page; }
+.keep { break-inside: avoid; page-break-inside: avoid; }
+.center { text-align: center; }
+.tool {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  background: #10212B;
+  color: #fff;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font: 12.5px Arial, sans-serif;
+  box-shadow: 0 3px 12px rgba(0,0,0,.35);
+  z-index: 99;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.tool button, .tool a {
+  background: #0F6B55;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 12px;
+}
+.tool a.slide-link { background: #D97706; }
+.tool button.toggle-btn { background: #1F4E79; }
+.page .content, #flow { overflow-wrap: anywhere; }
+mjx-container { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+mjx-container[display="true"] { margin: 3pt 0 !important; }
+
+@media print {
+  html, body { background: #fff; }
+  body.hide-sol .sol-block { display: block !important; }
+  .page { margin: 0; box-shadow: none; break-after: page; }
+  .tool { display: none !important; }
+}
+@page { size: A4; margin: 0; }
+</style>
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  },
+  startup: {
+    pageReady: () => {
+      return MathJax.startup.defaultPageReady().then(() => {
+        if(typeof window.runPagination === 'function') window.runPagination();
+      });
+    }
+  }
+};
+function toggleSolutions() {
+  document.body.classList.toggle('hide-sol');
+  const btn = document.getElementById('btn-sol');
+  if(document.body.classList.contains('hide-sol')) {
+    btn.textContent = '👁 Hiện lời giải Ví dụ';
+  } else {
+    btn.textContent = '🙈 Ẩn lời giải Ví dụ';
+  }
+}
+</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body data-left="Chuyên đề 3: Hàm số & Đồ thị bậc hai Parabol – Toán 10">
+<div class="tool">
+  <b class="np">Đang tải MathJax và dàn trang...</b>
+  <button id="btn-sol" class="toggle-btn" onclick="toggleSolutions()">🙈 Ẩn lời giải Ví dụ</button>
+  <a class="slide-link" href="slide-toan10-cd3-hamso-parabol.html" target="_blank">🖥 Mở Slide Trình Chiếu CĐ 3</a>
+  <button onclick="window.print()">🖨 In / Lưu PDF (Ctrl+P)</button>
+</div>
+<div id="book"></div>
+<div id="flow">
+
+<div class="coverpage pb" data-run="Bìa & Cấu trúc chuyên đề">
+  <div class="cv">
+    <div class="logos">
+      <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/ttbdvh.jpg?alt=media&token=f270aa9b-a2bc-48e8-8910-80742b542615" alt="TTBDVH"/>
+      <div class="orgt">
+        <div class="o1">ĐẠI HỌC QUỐC GIA TP. HỒ CHÍ MINH</div>
+        <div class="o1">TRƯỜNG ĐẠI HỌC KHOA HỌC TỰ NHIÊN</div>
+        <div class="o2">TRUNG TÂM BỒI DƯỠNG VĂN HÓA &amp; LUYỆN THI</div>
+      </div>
+      <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738" alt="HCMUS"/>
+    </div>
+
+    <div class="band">TÀI LIỆU LÝ THUYẾT &amp; PHƯƠNG PHÁP GIẢI CHUYÊN SÂU · TOÁN 10 (CHƯƠNG III – KNTT)</div>
+
+    <div class="ttl">
+      CHUYÊN ĐỀ 3: HÀM SỐ &amp; ĐỒ THỊ<br/>BẬC HAI PARABOL
+      <span>Trọn bộ Lý thuyết, Bảng biến thiên, Đọc đồ thị &amp; Toán thực tế Cổng vòm Parabol</span>
+    </div>
+
+    <div class="chips">
+      <span class="chip">1. Tập xác định &amp; Hàm nhiều công thức</span>
+      <span class="chip alt">2. Sự biến thiên (Đồng biến / Nghịch biến)</span>
+      <span class="chip">3. Khảo sát &amp; Vẽ Parabol 5 điểm</span>
+      <span class="chip alt">4. Lập phương trình $(P)$ &amp; Đọc dấu $a, b, c, \Delta$</span>
+      <span class="chip">5. GTLN – GTNN trên đoạn $[m;n]$</span>
+      <span class="chip alt">6. Toán thực tế Cổng vòm Parabol</span>
+    </div>
+
+    <div class="motto">
+      <div class="mt">“Hiểu bản chất đỉnh và trục đối xứng – Nhìn đồ thị đọc ngay hệ số – Vững vàng mô hình hóa thực tế”</div>
+      <div class="ms">Bám sát Đề CK1 THPT Lương Thế Vinh (TP.HCM) &amp; Đề Cương Ôn Tập CK1 Toán 10 (Bộ 2 – KNTT)</div>
+    </div>
+
+    <div style="margin-top:4mm; text-align:left;">
+      <div style="font-weight:bold; color:#1F4E79; font-size:11.5pt; margin-bottom:2mm; text-transform:uppercase; text-align:center;">
+        SƠ ĐỒ CẤU TRÚC LÝ THUYẾT &amp; MA TRẬN DẠNG BÀI TRONG CHUYÊN ĐỀ 3
+      </div>
+      <table class="tbl" style="font-size:10.3pt; margin:0;">
+        <thead>
+          <tr>
+            <th style="width:12%;">Phần</th>
+            <th style="width:32%;">Nội dung lý thuyết trọng tâm</th>
+            <th style="width:30%;">Kỹ năng &amp; Phương pháp giải</th>
+            <th style="width:26%;">Đối chiếu 2 File Đề gốc</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="center"><b>Phần I</b></td>
+            <td>Khái niệm hàm số, Tập xác định $D$, Tập giá trị, Hàm số cho bởi nhiều công thức.</td>
+            <td>3 quy tắc tìm TXĐ (mẫu $\ne 0$, căn $\ge 0$, căn ở mẫu $>0$); thay đúng nhánh $x$.</td>
+            <td><b>LTV:</b> Câu 3 (TN), Câu 1 Phần II (Đ/S hàm 2 nhánh).<br/><b>Bộ 2:</b> Câu 4 (TN), Bài 6 (TL).</td>
+          </tr>
+          <tr>
+            <td class="center"><b>Phần II</b></td>
+            <td>Sự biến thiên: Đồng biến, nghịch biến trên khoảng $(a;b)$ và Bảng biến thiên.</td>
+            <td>Xét dấu tỉ số $\dfrac{f(x_2)-f(x_1)}{x_2-x_1}$; đọc khoảng đơn điệu nhìn theo trục hoành $x$.</td>
+            <td><b>LTV:</b> Câu 2 (TN), Câu 1d Phần II.<br/><b>Bộ 2:</b> Câu 5 (TN).</td>
+          </tr>
+          <tr>
+            <td class="center"><b>Phần III</b></td>
+            <td>Hàm số bậc hai $y=ax^2+bx+c\ (a\ne 0)$ và đồ thị Parabol $(P)$.</td>
+            <td>Đỉnh $S\!\left(-\frac{b}{2a};-\frac{\Delta}{4a}\right)$, trục đối xứng $x=-\frac{b}{2a}$, lập BBT và vẽ Parabol bằng <b>5 điểm đối xứng</b>.</td>
+            <td><b>LTV:</b> Câu 1, Câu 8 (TN), Câu 1 Phần III (TL vẽ $P$).<br/><b>Bộ 2:</b> Bài 7a (TL vẽ $P$).</td>
+          </tr>
+          <tr>
+            <td class="center"><b>Phần IV</b></td>
+            <td>Xác định phương trình Parabol $(P)$, đọc dấu $(a,b,c,\Delta)$, tương giao &amp; Max/Min.</td>
+            <td>Lập hệ phương trình tìm $a,b,c$; quy tắc 4 bước xét dấu hệ số từ hình vẽ; tìm Max/Min trên $[m;n]$.</td>
+            <td><b>Bộ 2:</b> Bài 7b (Tìm $P$ biết đỉnh $I(1;4)$ và qua $M(0;3)$).</td>
+          </tr>
+          <tr>
+            <td class="center"><b>Phần V</b></td>
+            <td>Mô hình hóa thực tế: Bài toán Cổng vòm Parabol, cầu vòm, tối ưu lợi nhuận.</td>
+            <td>Cách gắn hệ trục tọa độ $Oxy$ tối ưu $y = ax^2 + h$ hoặc $y = ax^2 + bx + c$.</td>
+            <td><b>LTV:</b> Câu 2 Phần III (Cổng Parabol $AB=3\sqrt{3}$).<br/><b>Bộ 2:</b> Bài 8 (TL Cổng vòm).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="stu">
+      <div><b>Họ và tên học sinh:</b> <span class="dl"></span> <b>Lớp:</b> <span class="dl s"></span></div>
+      <div><b>Trường THPT:</b> <span class="dl"></span> <b>Ngày học:</b> <span class="dl s"></span></div>
+    </div>
+
+    <div class="au">Biên soạn &amp; Giảng dạy: ThS. Đinh Quốc Tuấn</div>
+    <div class="cp">© Bản quyền thuộc ThS. Đinh Quốc Tuấn – Mục đích phi lợi nhuận – Vì giáo dục.</div>
+  </div>
+</div>
+
+<div class="pb" data-run="Phần I & II: Đại cương Hàm số, Tập xác định & Sự biến thiên">
+  <h1 class="sec-head">
+    <span>PHẦN I. ĐẠI CƯƠNG VỀ HÀM SỐ &amp; TẬP XÁC ĐỊNH</span>
+    <span class="t-badge">Nền tảng bắt buộc · 10 phút</span>
+  </h1>
+
+  <div class="box formula keep">
+    <div class="bt">1. Định nghĩa Hàm số, Tập xác định, Tập giá trị &amp; Đồ thị</div>
+    <ul>
+      <li><b>Định nghĩa:</b> Cho tập hợp khác rỗng $D \subset \mathbb{R}$. Nếu với <b>mỗi</b> giá trị của $x \in D$ có <b>một và chỉ một</b> giá trị tương ứng của $y \in \mathbb{R}$ thì ta có một <b>hàm số</b>, ký hiệu $y = f(x)$. Trong đó $x$ gọi là <i>biến số</i> và $y$ gọi là <i>hàm số</i> của $x$.</li>
+      <li><b>Tập xác định ($D$):</b> Tập hợp tất cả các giá trị thực của $x$ sao cho biểu thức $f(x)$ có nghĩa:
+        $$D = \{x \in \mathbb{R} \mid f(x) \text{ có nghĩa}\}$$</li>
+      <li><b>Tập giá trị ($T$):</b> Tập hợp tất cả các giá trị $y = f(x)$ khi $x$ quét hết tập xác định $D$:
+        $$T = \{y \in \mathbb{R} \mid \exists x \in D,\ y = f(x)\}$$</li>
+      <li><b>Đồ thị của hàm số:</b> Tập hợp tất cả các điểm $M(x;\ f(x))$ trên mặt phẳng tọa độ $Oxy$ với mọi $x \in D$:
+        $$\text{Điểm } M(x_0; y_0) \in (C) \Longleftrightarrow \begin{cases} x_0 \in D \\ y_0 = f(x_0) \end{cases}$$</li>
+    </ul>
+  </div>
+
+  <div class="box method keep">
+    <div class="bt">2. Bốn quy tắc tìm Tập xác định $D$ của hàm số cho bởi công thức</div>
+    <table class="tbl" style="margin:3pt 0;">
+      <thead>
+        <tr>
+          <th style="width:26%;">Dạng biểu thức hàm số</th>
+          <th style="width:28%;">Điều kiện xác định (ĐKXĐ)</th>
+          <th style="width:46%;">Ví dụ minh họa trực tiếp từ Đề thi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>1. Đa thức:</b> $y = P(x)$</td>
+          <td class="center">Xác định với mọi $x \in \mathbb{R}$ ($D = \mathbb{R}$)</td>
+          <td>$y = x^2 - 4x + 3 \implies D = \mathbb{R}$.</td>
+        </tr>
+        <tr>
+          <td><b>2. Phân thức:</b> $y = \dfrac{A(x)}{B(x)}$</td>
+          <td class="center">$\mathbf{B(x) \neq 0}$</td>
+          <td>$y = \dfrac{2x+1}{x-3}$ <i>(Câu 4 Bộ 2)</i>: ĐKXĐ $x - 3 \neq 0 \iff x \neq 3 \implies \mathbf{D = \mathbb{R} \setminus \{3\}}$.</td>
+        </tr>
+        <tr>
+          <td><b>3. Căn bậc hai ở tử:</b> $y = \sqrt{A(x)}$</td>
+          <td class="center">$\mathbf{A(x) \ge 0}$</td>
+          <td>$y = \sqrt{2x-4}$: ĐKXĐ $2x - 4 \ge 0 \iff x \ge 2 \implies \mathbf{D = [2; +\infty)}$.</td>
+        </tr>
+        <tr>
+          <td><b>4. Căn bậc hai ở mẫu:</b> $y = \dfrac{A(x)}{\sqrt{B(x)}}$</td>
+          <td class="center">$\mathbf{B(x) > 0}$ <i>(không có dấu bằng!)</i></td>
+          <td>$y = \dfrac{\sqrt{x+2}}{x\sqrt{x^2-4x+4}} = \dfrac{\sqrt{x+2}}{x|x-2|}$ <i>(Câu 3 LTV)</i>:<br/>
+          ĐKXĐ: $\begin{cases} x+2 \ge 0 \\ x \neq 0 \\ x-2 \neq 0 \end{cases} \iff \begin{cases} x \ge -2 \\ x \neq 0,\ x \neq 2 \end{cases} \implies \mathbf{D = [-2; +\infty) \setminus \{0; 2\}}$.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:2pt;"><b>Mở rộng (Bài 6 Bộ 2):</b> Với hàm phối hợp $y = \sqrt{x-1} + \dfrac{1}{x-3}$, ta lấy <b>giao</b> các điều kiện:
+    $\begin{cases} x - 1 \ge 0 \\ x - 3 \neq 0 \end{cases} \iff \begin{cases} x \ge 1 \\ x \neq 3 \end{cases} \implies \mathbf{D = [1; +\infty) \setminus \{3\}}$.</p>
+  </div>
+
+  <div class="box warn keep">
+    <div class="bt">3. Hàm số cho bởi nhiều công thức &amp; Bẫy ĐKXĐ từng nhánh (Câu 1 Phần II Đề THPT Lương Thế Vinh)</div>
+    <p>Xét hàm số cho bởi 2 nhánh công thức:
+    $$y = f(x) = \begin{cases} \dfrac{2}{x-1} & \text{khi } x \in (-\infty;\ 0) \quad \text{(Nhánh 1)} \\[6pt] \sqrt{x+1} & \text{khi } x \in [0;\ 2] \quad\quad\ \ \text{(Nhánh 2)} \end{cases}$$</p>
+    <div class="sol-block">
+      <ul>
+        <li><b>Quy tắc tìm Tập xác định của hàm nhiều nhánh:</b> Trên mỗi miền con $D_i$, ta chỉ giữ lại những giá trị $x \in D_i$ làm cho biểu thức nhánh đó có nghĩa, rồi lấy <b>hợp</b> $D = D_1^* \cup D_2^*$:
+          <ul>
+            <li>Ở Nhánh 1 với $x \in (-\infty; 0)$: biểu thức $\dfrac{2}{x-1}$ cần $x - 1 \neq 0 \iff x \neq 1$. Vì $1 \notin (-\infty; 0)$ nên Nhánh 1 xác định với mọi $x \in (-\infty; 0)$.</li>
+            <li>Ở Nhánh 2 với $x \in [0; 2]$: biểu thức $\sqrt{x+1}$ cần $x + 1 \ge 0 \iff x \ge -1$ (luôn đúng với mọi $x \in [0; 2]$).</li>
+            <li>Vậy tập xác định là: $D = (-\infty; 0) \cup [0; 2] = \mathbf{(-\infty;\ 2]}$. <i>(Mệnh đề a trong đề LTV nói $D = (-\infty; 2]\setminus\{1\}$ là <b>SAI</b> vì tại $x=1$ ta dùng Nhánh 2 chứ không dùng Nhánh 1!).</i></li>
+          </ul>
+        </li>
+        <li><b>Quy tắc tính $f(x_0)$:</b> Phải kiểm tra xem $x_0$ thuộc miền nào trước khi thay số:
+          <ul>
+            <li>Tính $f(-1)$: vì $-1 \in (-\infty; 0)$ nên thay vào Nhánh 1: $f(-1) = \dfrac{2}{-1-1} = \mathbf{-1}$.</li>
+            <li>Tính $f(0)$: vì $0 \in [0; 2]$ nên thay vào Nhánh 2: $f(0) = \sqrt{0+1} = \mathbf{1}$.</li>
+            <li>Tính $f(3)$: vì $3 \notin D = (-\infty; 2]$ nên $f(3)$ <b>không xác định</b>!</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <h1 class="sec-head" style="margin-top:8pt;">
+    <span>PHẦN II. SỰ BIẾN THIÊN CỦA HÀM SỐ (ĐỒNG BIẾN – NGHỊCH BIẾN)</span>
+    <span class="t-badge">Đọc đồ thị &amp; BBT · 10 phút</span>
+  </h1>
+
+  <div class="grid2 keep">
+    <div class="box formula" style="margin:0;">
+      <div class="bt">1. Định nghĩa &amp; Tỉ số biến thiên trên khoảng $K$</div>
+      <p>Cho hàm số $y = f(x)$ xác định trên khoảng $K = (a; b)$:</p>
+      <ul>
+        <li><b>Hàm số đồng biến (tăng) trên $K$:</b><br/>
+        $\forall x_1, x_2 \in K:\ x_1 < x_2 \implies f(x_1) < f(x_2)$<br/>
+        $\Longleftrightarrow T = \dfrac{f(x_2) - f(x_1)}{x_2 - x_1} > 0\ (\forall x_1 \neq x_2 \in K)$.<br/>
+        <i>Đồ thị đi lên từ trái sang phải ($\nearrow$).</i></li>
+        <li><b>Hàm số nghịch biến (giảm) trên $K$:</b><br/>
+        $\forall x_1, x_2 \in K:\ x_1 < x_2 \implies f(x_1) > f(x_2)$<br/>
+        $\Longleftrightarrow T = \dfrac{f(x_2) - f(x_1)}{x_2 - x_1} < 0\ (\forall x_1 \neq x_2 \in K)$.<br/>
+        <i>Đồ thị đi xuống từ trái sang phải ($\searrow$).</i></li>
+      </ul>
+    </div>
+
+    <div class="box warn" style="margin:0;">
+      <div class="bt">2. Bẫy đọc khoảng Đồng biến / Nghịch biến từ Đồ thị</div>
+      <ul>
+        <li><b>Nguyên tắc vàng:</b> Khoảng đồng biến hay nghịch biến là <b>khoảng giá trị của $x$ (chiếu xuống trục hoành $Ox$)</b>, tuyệt đối không đọc theo giá trị tung độ $y$!</li>
+        <li><b>Minh họa Câu 2 Đề THPT Lương Thế Vinh:</b> Đồ thị hàm số trên $[-3; 3]$ đi lên trên đoạn từ $x = -3$ đến $x = -1$ (đạt đỉnh cao nhất $y=3$), sau đó đi xuống từ $x = -1$ đến $x = 1$ (đạt đáy $y=-1$), rồi đi lên từ $x = 1$ đến $x = 3$.<br/>
+        $\implies$ Hàm số đồng biến trên $\mathbf{(-3; -1)}$ và $\mathbf{(1; 3)}$; nghịch biến trên $\mathbf{(-1; 1)}$.</li>
+        <li><b>Lưu ý:</b> Giữa hai khoảng đồng biến rời nhau, ta viết từ <b>"và"</b> (ví dụ: đồng biến trên $(-3;-1)$ và $(1;3)$), <b>không dùng ký hiệu hợp $\cup$</b>!</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="pb" data-run="Phần III: Hàm số bậc hai & Đồ thị Parabol (P)">
+  <h1 class="sec-head">
+    <span>PHẦN III. HÀM SỐ BẬC HAI &amp; KHẢO SÁT VẼ ĐỒ THỊ PARABOL $(P)$</span>
+    <span class="t-badge">Trọng tâm CĐ 3 · 15 phút</span>
+  </h1>
+
+  <div class="box formula keep">
+    <div class="bt">1. Định nghĩa, Đỉnh, Trục đối xứng &amp; Bảng biến thiên tổng quát</div>
+    <p>Hàm số bậc hai có dạng tổng quát: $\mathbf{y = ax^2 + bx + c}$ (với $a, b, c \in \mathbb{R}$ và $\mathbf{a \neq 0}$). Tập xác định: $\mathbf{D = \mathbb{R}}$.</p>
+    <p>Đồ thị của hàm số bậc hai là một đường <b>Parabol $(P)$</b> có các yếu tố đặc trưng:</p>
+    <ul>
+      <li><b>Tọa độ đỉnh $S$ (hoặc $I$):</b>
+        $$\mathbf{x_S = -\frac{b}{2a}}, \qquad \mathbf{y_S = f(x_S) = -\frac{\Delta}{4a}} \quad (\text{với } \Delta = b^2 - 4ac)$$
+        <i>Mẹo tính nhanh:</i> Tính hoành độ đỉnh $x_S = -\dfrac{b}{2a}$ trước, sau đó <b>thay trực tiếp $x_S$ vào công thức hàm số $y = ax^2+bx+c$</b> để tìm $y_S$ (nhanh và ít nhầm dấu hơn công thức $-\dfrac{\Delta}{4a}$).</li>
+      <li><b>Trục đối xứng:</b> Là đường thẳng đứng đi qua đỉnh có phương trình $\mathbf{x = -\dfrac{b}{2a}}$ (chú ý phải viết đầy đủ chữ $\mathbf{x = \dots}$, không viết mỗi con số!).</li>
+      <li><b>Giao điểm với trục tung $Oy$:</b> Cho $x = 0 \implies y = c \implies$ Giao điểm $A(0; c)$. Điểm đối xứng với $A(0;c)$ qua trục đối xứng là $A'\!\left(-\dfrac{b}{a}; c\right)$.</li>
+      <li><b>Giao điểm với trục hoành $Ox$ (nếu có):</b> Giải phương trình $ax^2 + bx + c = 0$.</li>
+    </ul>
+
+    <table class="tbl" style="margin-top:4pt;">
+      <thead>
+        <tr>
+          <th style="width:18%;">Tiêu chí</th>
+          <th style="width:41%;">Trường hợp $\mathbf{a > 0}$ (Hệ số $a$ dương)</th>
+          <th style="width:41%;">Trường hợp $\mathbf{a < 0}$ (Hệ số $a$ âm)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center"><b>Hướng bề lõm</b></td>
+          <td>Bề lõm <b>quay lên trên</b> ($\cup$) – Đỉnh $S$ là điểm <b>thấp nhất</b>.</td>
+          <td>Bề lõm <b>quay xuống dưới</b> ($\cap$) – Đỉnh $S$ là điểm <b>cao nhất</b>.</td>
+        </tr>
+        <tr>
+          <td class="center"><b>Chiều biến thiên</b></td>
+          <td>
+            • <b>Nghịch biến</b> ($\searrow$) trên khoảng $\left(-\infty;\ -\dfrac{b}{2a}\right)$.<br/>
+            • <b>Đồng biến</b> ($\nearrow$) trên khoảng $\left(-\dfrac{b}{2a};\ +\infty\right)$.
+          </td>
+          <td>
+            • <b>Đồng biến</b> ($\nearrow$) trên khoảng $\left(-\infty;\ -\dfrac{b}{2a}\right)$.<br/>
+            • <b>Nghịch biến</b> ($\searrow$) trên khoảng $\left(-\dfrac{b}{2a};\ +\infty\right)$.
+          </td>
+        </tr>
+        <tr>
+          <td class="center"><b>Bảng biến thiên<br/>&amp; Minh họa</b></td>
+          <td class="center">
+            <svg viewBox="0 0 260 115" style="width:100%;max-width:240px;height:auto;">
+              <rect x="2" y="2" width="256" height="111" rx="4" fill="#fff" stroke="#94A3B8" stroke-width="1"/>
+              <line x1="2" y1="28" x2="258" y2="28" stroke="#94A3B8" stroke-width="1"/>
+              <line x1="38" y1="2" x2="38" y2="113" stroke="#94A3B8" stroke-width="1"/>
+              <text x="20" y="19" text-anchor="middle" font-size="12" font-weight="bold" font-style="italic">x</text>
+              <text x="58" y="19" text-anchor="middle" font-size="11">−∞</text>
+              <text x="148" y="19" text-anchor="middle" font-size="11" font-weight="bold" fill="#0F6B55">−b/(2a)</text>
+              <text x="238" y="19" text-anchor="middle" font-size="11">+∞</text>
+              <text x="20" y="74" text-anchor="middle" font-size="12" font-weight="bold" font-style="italic">y</text>
+              <text x="58" y="46" text-anchor="middle" font-size="11">+∞</text>
+              <text x="238" y="46" text-anchor="middle" font-size="11">+∞</text>
+              <text x="148" y="104" text-anchor="middle" font-size="11" font-weight="bold" fill="#B85042">−Δ/(4a)</text>
+              <line x1="72" y1="48" x2="128" y2="88" stroke="#1F4E79" stroke-width="1.8"/>
+              <polygon points="128,88 119,86 124,79" fill="#1F4E79"/>
+              <line x1="168" y1="88" x2="224" y2="48" stroke="#0F6B55" stroke-width="1.8"/>
+              <polygon points="224,48 215,50 220,57" fill="#0F6B55"/>
+            </svg>
+          </td>
+          <td class="center">
+            <svg viewBox="0 0 260 115" style="width:100%;max-width:240px;height:auto;">
+              <rect x="2" y="2" width="256" height="111" rx="4" fill="#fff" stroke="#94A3B8" stroke-width="1"/>
+              <line x1="2" y1="28" x2="258" y2="28" stroke="#94A3B8" stroke-width="1"/>
+              <line x1="38" y1="2" x2="38" y2="113" stroke="#94A3B8" stroke-width="1"/>
+              <text x="20" y="19" text-anchor="middle" font-size="12" font-weight="bold" font-style="italic">x</text>
+              <text x="58" y="19" text-anchor="middle" font-size="11">−∞</text>
+              <text x="148" y="19" text-anchor="middle" font-size="11" font-weight="bold" fill="#0F6B55">−b/(2a)</text>
+              <text x="238" y="19" text-anchor="middle" font-size="11">+∞</text>
+              <text x="20" y="74" text-anchor="middle" font-size="12" font-weight="bold" font-style="italic">y</text>
+              <text x="58" y="104" text-anchor="middle" font-size="11">−∞</text>
+              <text x="238" y="104" text-anchor="middle" font-size="11">−∞</text>
+              <text x="148" y="45" text-anchor="middle" font-size="11" font-weight="bold" fill="#B85042">−Δ/(4a)</text>
+              <line x1="72" y1="90" x2="128" y2="50" stroke="#0F6B55" stroke-width="1.8"/>
+              <polygon points="128,50 119,52 124,59" fill="#0F6B55"/>
+              <line x1="168" y1="50" x2="224" y2="90" stroke="#B85042" stroke-width="1.8"/>
+              <polygon points="224,90 215,88 220,81" fill="#B85042"/>
+            </svg>
+          </td>
+        </tr>
+        <tr>
+          <td class="center"><b>Cực trị &amp; Tập giá trị</b></td>
+          <td>
+            • Đạt <b>GTNN (Min)</b> $y_{\min} = -\dfrac{\Delta}{4a}$ tại $x = -\dfrac{b}{2a}$.<br/>
+            • Tập giá trị: $\mathbf{T = \left[-\dfrac{\Delta}{4a};\ +\infty\right)}$.
+          </td>
+          <td>
+            • Đạt <b>GTLN (Max)</b> $y_{\max} = -\dfrac{\Delta}{4a}$ tại $x = -\dfrac{b}{2a}$.<br/>
+            • Tập giá trị: $\mathbf{T = \left(-\infty;\ -\dfrac{\Delta}{4a}\right]}$.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box method keep">
+    <div class="bt">2. Quy trình 5 bước Chuẩn Mực để Lập Bảng biến thiên &amp; Vẽ Parabol (Ăn trọn điểm Tự luận)</div>
+    <ol>
+      <li><b>Bước 1 (Tập xác định):</b> Ghi rõ $D = \mathbb{R}$.</li>
+      <li><b>Bước 2 (Đỉnh &amp; Trục đối xứng):</b> Tính tọa độ đỉnh $S\!\left(-\dfrac{b}{2a}; y_S\right)$ và viết phương trình trục đối xứng $x = -\dfrac{b}{2a}$.</li>
+      <li><b>Bước 3 (Chiều biến thiên &amp; Bảng biến thiên):</b> Nêu rõ vì $a > 0$ (hoặc $a < 0$) nên bề lõm hướng lên (hoặc hướng xuống), kết luận khoảng đồng biến, nghịch biến và vẽ Bảng biến thiên.</li>
+      <li><b>Bước 4 (Bảng giá trị 5 điểm đối xứng):</b> Đặt đỉnh $S(x_S; y_S)$ ở cột chính giữa, lấy 2 giá trị $x$ bên trái và 2 giá trị $x$ đối xứng bên phải (sao cho tung độ $y$ bằng nhau từng cặp).</li>
+      <li><b>Bước 5 (Vẽ đồ thị):</b> Vẽ hệ trục $Oxy$, vẽ nét đứt trục đối xứng $x = x_S$, chấm 5 điểm và nối thành đường cong Parabol trơn, đối xứng qua trục.</li>
+    </ol>
+  </div>
+
+  <div class="grid2 keep">
+    <div class="box example" style="margin:0;">
+      <div class="bt">Ví dụ Mẫu 1 (Câu 1 Phần III Đề THPT Lương Thế Vinh)</div>
+      <p><b>Đề bài:</b> Vẽ đồ thị $(P)$ của hàm số $y = x^2 - 4x + 3$.</p>
+      <div class="sol-block">
+        <ul>
+          <li>TXĐ: $D = \mathbb{R}$. Hệ số $a = 1 > 0$ (bề lõm quay lên trên).</li>
+          <li>Đỉnh $S$: $x_S = -\dfrac{-4}{2\cdot 1} = 2 \implies y_S = 2^2 - 4(2) + 3 = -1 \implies \mathbf{S(2; -1)}$.</li>
+          <li>Trục đối xứng: đường thẳng $\mathbf{x = 2}$.</li>
+          <li>Bảng 5 điểm đặc biệt:
+            <table class="tbl center" style="margin:3pt 0;font-size:10.5pt;">
+              <tr><th>$x$</th><td>$0$</td><td>$1$</td><td>$\mathbf{2}$</td><td>$3$</td><td>$4$</td></tr>
+              <tr><th>$y$</th><td>$3$</td><td>$0$</td><td>$\mathbf{-1}$</td><td>$0$</td><td>$3$</td></tr>
+            </table>
+          </li>
+        </ul>
+        <div class="center">
+          <svg viewBox="0 0 230 165" style="width:100%;max-width:215px;height:auto;background:#fff;border:1px solid #cbd5e1;border-radius:4px;">
+            <line x1="15" y1="120" x2="215" y2="120" stroke="#334155" stroke-width="1.3"/>
+            <line x1="45" y1="155" x2="45" y2="10" stroke="#334155" stroke-width="1.3"/>
+            <text x="208" y="133" font-size="10" font-weight="bold">x</text>
+            <text x="33" y="18" font-size="10" font-weight="bold">y</text>
+            <text x="35" y="132" font-size="9.5">O</text>
+            <line x1="105" y1="12" x2="105" y2="152" stroke="#D97706" stroke-width="1.1" stroke-dasharray="4,3"/>
+            <text x="110" y="22" font-size="9.5" fill="#B45309" font-weight="bold">x = 2</text>
+            <!-- Parabol y = x^2 - 4x + 3: x=0->(45,45), x=1->(75,120), x=2->(105,145), x=3->(135,120), x=4->(165,45) -->
+            <path d="M 35 12 Q 105 278 175 12" fill="none" stroke="#0F6B55" stroke-width="2.2"/>
+            <circle cx="45" cy="45" r="3" fill="#1F4E79"/>
+            <circle cx="75" cy="120" r="3" fill="#1F4E79"/>
+            <circle cx="105" cy="145" r="3.5" fill="#DC2626"/>
+            <circle cx="135" cy="120" r="3" fill="#1F4E79"/>
+            <circle cx="165" cy="45" r="3" fill="#1F4E79"/>
+            <line x1="45" y1="145" x2="105" y2="145" stroke="#94A3B8" stroke-dasharray="2,2"/>
+            <text x="27" y="48" font-size="9.5">3</text>
+            <text x="22" y="148" font-size="9.5">-1</text>
+            <text x="72" y="133" font-size="9.5">1</text>
+            <text x="98" y="116" font-size="9.5">2</text>
+            <text x="132" y="133" font-size="9.5">3</text>
+            <text x="162" y="133" font-size="9.5">4</text>
+            <text x="112" y="152" font-size="9.5" font-weight="bold" fill="#DC2626">S(2;-1)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="box example" style="margin:0;">
+      <div class="bt">Ví dụ Mẫu 2 (Bài 7a Đề Ôn tập CK1 – Bộ 2 KNTT)</div>
+      <p><b>Đề bài:</b> Lập BBT và vẽ đồ thị hàm số $y = -x^2 + 2x + 3$.</p>
+      <div class="sol-block">
+        <ul>
+          <li>TXĐ: $D = \mathbb{R}$. Hệ số $a = -1 < 0$ (bề lõm quay xuống dưới).</li>
+          <li>Đỉnh $I$: $x_I = -\dfrac{2}{2(-1)} = 1 \implies y_I = -(1)^2 + 2(1) + 3 = 4 \implies \mathbf{I(1; 4)}$.</li>
+          <li>Trục đối xứng: $\mathbf{x = 1}$. Đồng biến trên $(-\infty; 1)$, nghịch biến trên $(1; +\infty)$.</li>
+          <li>Bảng 5 điểm đặc biệt:
+            <table class="tbl center" style="margin:3pt 0;font-size:10.5pt;">
+              <tr><th>$x$</th><td>$-1$</td><td>$0$</td><td>$\mathbf{1}$</td><td>$2$</td><td>$3$</td></tr>
+              <tr><th>$y$</th><td>$0$</td><td>$3$</td><td>$\mathbf{4}$</td><td>$3$</td><td>$0$</td></tr>
+            </table>
+          </li>
+        </ul>
+        <div class="center">
+          <svg viewBox="0 0 230 165" style="width:100%;max-width:215px;height:auto;background:#fff;border:1px solid #cbd5e1;border-radius:4px;">
+            <line x1="15" y1="125" x2="215" y2="125" stroke="#334155" stroke-width="1.3"/>
+            <line x1="75" y1="155" x2="75" y2="10" stroke="#334155" stroke-width="1.3"/>
+            <text x="208" y="138" font-size="10" font-weight="bold">x</text>
+            <text x="63" y="18" font-size="10" font-weight="bold">y</text>
+            <text x="64" y="137" font-size="9.5">O</text>
+            <line x1="105" y1="12" x2="105" y2="152" stroke="#D97706" stroke-width="1.1" stroke-dasharray="4,3"/>
+            <!-- Parabol y = -x^2 + 2x + 3: x=-1->(45,125), x=0->(75,53), x=1->(105,29), x=2->(135,53), x=3->(165,125) -->
+            <path d="M 38 152 Q 105 -94 172 152" fill="none" stroke="#B85042" stroke-width="2.2"/>
+            <circle cx="45" cy="125" r="3" fill="#1F4E79"/>
+            <circle cx="75" cy="53" r="3" fill="#1F4E79"/>
+            <circle cx="105" cy="29" r="3.5" fill="#DC2626"/>
+            <circle cx="135" cy="53" r="3" fill="#1F4E79"/>
+            <circle cx="165" cy="125" r="3" fill="#1F4E79"/>
+            <line x1="75" y1="29" x2="105" y2="29" stroke="#94A3B8" stroke-dasharray="2,2"/>
+            <text x="61" y="33" font-size="9.5">4</text>
+            <text x="61" y="56" font-size="9.5">3</text>
+            <text x="36" y="138" font-size="9.5">-1</text>
+            <text x="101" y="138" font-size="9.5">1</text>
+            <text x="132" y="138" font-size="9.5">2</text>
+            <text x="162" y="138" font-size="9.5">3</text>
+            <text x="112" y="27" font-size="9.5" font-weight="bold" fill="#DC2626">I(1;4)</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pb" data-run="Phần IV: Xác định Parabol, Xét dấu hệ số & Tìm GTLN - GTNN">
+  <h1 class="sec-head">
+    <span>PHẦN IV. XÁC ĐỊNH PARABOL $(P)$, ĐỌC DẤU $(a,b,c,\Delta)$ &amp; MAX/MIN</span>
+    <span class="t-badge">Kỹ năng Phân loại · 15 phút</span>
+  </h1>
+
+  <div class="box method keep">
+    <div class="bt">1. Bốn dạng toán Xác định phương trình Parabol $(P): y = ax^2 + bx + c\ (a \neq 0)$</div>
+    <table class="tbl" style="margin:3pt 0;">
+      <thead>
+        <tr>
+          <th style="width:28%;">Giả thiết đề bài cho</th>
+          <th style="width:42%;">Hệ phương trình / Công thức chuyển đổi</th>
+          <th style="width:30%;">Mẹo giải siêu tốc (Dạng chính tắc)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Dạng 1:</b> Đi qua 3 điểm $A(x_1; y_1),\ B(x_2; y_2),\ C(x_3; y_3)$</td>
+          <td>Lập hệ 3 ẩn $(a, b, c)$:<br/>
+          $\begin{cases} ax_1^2 + bx_1 + c = y_1 \\ ax_2^2 + bx_2 + c = y_2 \\ ax_3^2 + bx_3 + c = y_3 \end{cases}$</td>
+          <td>Nếu có điểm nằm trên trục tung $Oy$: $M(0; y_0) \implies$ biết ngay $\mathbf{c = y_0}$, chỉ còn giải hệ 2 ẩn $(a, b)$.</td>
+        </tr>
+        <tr>
+          <td><b>Dạng 2:</b> Biết đỉnh $I(x_I; y_I)$ và đi qua điểm $M(x_0; y_0)$</td>
+          <td>Hệ 3 phương trình:<br/>
+          $\begin{cases} -\dfrac{b}{2a} = x_I \iff 2x_I\cdot a + b = 0 \\ ax_I^2 + bx_I + c = y_I \\ ax_0^2 + bx_0 + c = y_0 \end{cases}$</td>
+          <td><b>Dùng dạng Đỉnh:</b><br/>
+          $$\mathbf{y = a(x - x_I)^2 + y_I}$$
+          Thay tọa độ $M(x_0; y_0)$ vào tìm ngay $a$ trong 1 dòng!</td>
+        </tr>
+        <tr>
+          <td><b>Dạng 3:</b> Biết trục đối xứng $x = x_0$ và qua 2 điểm $A, B$</td>
+          <td>Hệ phương trình:<br/>
+          $\begin{cases} -\dfrac{b}{2a} = x_0 \iff 2x_0\cdot a + b = 0 \\ ax_A^2 + bx_A + c = y_A \\ ax_B^2 + bx_B + c = y_B \end{cases}$</td>
+          <td>Từ $-\dfrac{b}{2a} = x_0 \implies \mathbf{b = -2ax_0}$, thế vào 2 phương trình điểm $A, B$.</td>
+        </tr>
+        <tr>
+          <td><b>Dạng 4:</b> Cắt trục $Ox$ tại 2 điểm có hoành độ $x_1, x_2$ và qua $M(x_0; y_0)$</td>
+          <td>Sử dụng dạng tích phân tích nhân tử:<br/>
+          $$\mathbf{y = a(x - x_1)(x - x_2)}$$</td>
+          <td>Thay tọa độ $M(x_0; y_0)$ vào tìm ngay $a$, rồi nhân bung ra $ax^2+bx+c$.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box example keep">
+    <div class="bt">Ví dụ Mẫu 3 (Bài 7b Đề Ôn tập CK1 – Bộ 2 KNTT): Giải theo 2 cách</div>
+    <p><b>Đề bài:</b> Tìm parabol $(P): y = ax^2 + bx + c$ biết $(P)$ có đỉnh $I(1; 4)$ và đi qua điểm $M(0; 3)$.</p>
+    <div class="sol-block">
+      <ul>
+        <li><b>Cách 1 (Trình bày tự luận chuẩn SGK bằng hệ phương trình):</b><br/>
+        Vì $(P)$ đi qua $M(0; 3) \implies a\cdot 0^2 + b\cdot 0 + c = 3 \implies \mathbf{c = 3}$.<br/>
+        Vì $(P)$ có đỉnh $I(1; 4)$ nên ta có hệ:
+        $$\begin{cases} -\dfrac{b}{2a} = 1 \\[4pt] a(1)^2 + b(1) + c = 4 \end{cases} \Longleftrightarrow \begin{cases} 2a + b = 0 \\ a + b = 4 - 3 = 1 \end{cases} \Longleftrightarrow \begin{cases} a = -1 \\ b = 2 \end{cases} \quad (\text{thỏa } a \neq 0)$$
+        Vậy phương trình Parabol là: $\mathbf{y = -x^2 + 2x + 3}$.</li>
+        <li><b>Cách 2 (Công thức dạng Đỉnh – Kiểm tra đáp số trắc nghiệm trong 5 giây):</b><br/>
+        Vì đỉnh là $I(1; 4)$ nên $(P)$ có dạng: $y = a(x - 1)^2 + 4$.<br/>
+        Thay $M(0; 3)$ vào: $3 = a(0 - 1)^2 + 4 \implies a = -1 \implies y = -(x-1)^2 + 4 = \mathbf{-x^2 + 2x + 3}$.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid2 keep">
+    <div class="box formula" style="margin:0;">
+      <div class="bt">2. Quy tắc "Nhìn Đồ Thị Đọc Dấu $a, b, c, \Delta$"</div>
+      <ol>
+        <li><b>Dấu của $a$ (Nhìn bề lõm):</b>
+          <ul>
+            <li>Bề lõm quay lên ($\cup$) $\implies \mathbf{a > 0}$.</li>
+            <li>Bề lõm quay xuống ($\cap$) $\implies \mathbf{a < 0}$.</li>
+          </ul>
+        </li>
+        <li><b>Dấu của $c$ (Nhìn giao điểm với trục tung $Oy$):</b>
+          <ul>
+            <li>Cắt $Oy$ phía trên gốc $O$ $\implies \mathbf{c > 0}$.</li>
+            <li>Đi qua gốc $O(0;0)$ $\implies \mathbf{c = 0}$.</li>
+            <li>Cắt $Oy$ phía dưới gốc $O$ $\implies \mathbf{c < 0}$.</li>
+          </ul>
+        </li>
+        <li><b>Dấu của $b$ (Nhìn hoành độ đỉnh $x_S = -\dfrac{b}{2a}$):</b>
+          <ul>
+            <li>Đỉnh nằm <b>bên phải</b> trục $Oy$ ($x_S > 0$) $\implies a$ và $b$ <b>trái dấu</b> ($ab < 0$).</li>
+            <li>Đỉnh nằm <b>trên</b> trục $Oy$ ($x_S = 0$) $\implies \mathbf{b = 0}$.</li>
+            <li>Đỉnh nằm <b>bên trái</b> trục $Oy$ ($x_S < 0$) $\implies a$ và $b$ <b>cùng dấu</b> ($ab > 0$).</li>
+          </ul>
+        </li>
+        <li><b>Dấu của $\Delta = b^2 - 4ac$ (Nhìn số giao điểm với trục $Ox$):</b>
+          <ul>
+            <li>Cắt $Ox$ tại 2 điểm phân biệt $\implies \mathbf{\Delta > 0}$.</li>
+            <li>Tiếp xúc với $Ox$ (đỉnh nằm trên $Ox$) $\implies \mathbf{\Delta = 0}$.</li>
+            <li>Không cắt $Ox$ $\implies \mathbf{\Delta < 0}$.</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+
+    <div class="box method" style="margin:0;">
+      <div class="bt">3. Tìm GTLN (Max) – GTNN (Min) trên đoạn $[m; n]$</div>
+      <p>Để tìm $\max_{[m;n]} f(x)$ và $\min_{[m;n]} f(x)$ của $f(x) = ax^2 + bx + c$:</p>
+      <ul>
+        <li><b>Bước 1:</b> Tính hoành độ đỉnh $x_S = -\dfrac{b}{2a}$ và kiểm tra xem $x_S$ có thuộc đoạn $[m; n]$ hay không.</li>
+        <li><b>Bước 2:</b>
+          <ul>
+            <li><b>Trường hợp 1 ($x_S \in [m; n]$):</b> Tính 3 giá trị $f(m),\ f(x_S),\ f(n)$. Giá trị lớn nhất trong 3 số là $\max$, nhỏ nhất là $\min$.</li>
+            <li><b>Trường hợp 2 ($x_S \notin [m; n]$):</b> Hàm số đơn điệu một chiều trên $[m; n]$, nên chỉ cần tính 2 đầu mút $f(m)$ và $f(n)$ rồi so sánh!</li>
+          </ul>
+        </li>
+      </ul>
+      <div class="bt" style="margin-top:5pt;border-top:.6pt dashed #F59E0B;padding-top:4pt;">4. Sự tương giao giữa $(P)$ và đường thẳng $d$</div>
+      <p>Cho $(P): y = ax^2 + bx + c$ và $d: y = mx + n$.<br/>
+      Phương trình hoành độ giao điểm của $(P)$ và $d$:
+      $$ax^2 + bx + c = mx + n \iff \mathbf{ax^2 + (b-m)x + (c-n) = 0} \quad (*)$$
+      • $\Delta_{(*)} > 0 \iff d$ cắt $(P)$ tại 2 điểm phân biệt.<br/>
+      • $\Delta_{(*)} = 0 \iff d$ tiếp xúc với $(P)$ (1 điểm chung).<br/>
+      • $\Delta_{(*)} < 0 \iff d$ và $(P)$ không giao nhau.</p>
+    </div>
+  </div>
+</div>
+
+<div class="pb" data-run="Phần V & VI: Mô hình hóa Thực tế Cổng Parabol & Bài tập Phân loại">
+  <h1 class="sec-head">
+    <span>PHẦN V. MÔ HÌNH HÓA THỰC TẾ: BÀI TOÁN CỔNG VÒM PARABOL</span>
+    <span class="t-badge">Câu chốt điểm 9–10 · 15 phút</span>
+  </h1>
+
+  <div class="box method keep">
+    <div class="bt">1. Hai cách gắn Hệ trục tọa độ $Oxy$ cho Bài toán Cổng vòm / Cầu vòm Parabol</div>
+    <p>Giả sử cổng vòm hình Parabol có <b>chiều cao tối đa là $H$</b> và <b>khoảng cách giữa hai chân cổng trên mặt đất là $L$</b>:</p>
+    <div class="grid2" style="margin-top:3pt;">
+      <div style="background:#fff;border:1px solid #cbd5e1;border-radius:4px;padding:4pt 6pt;">
+        <b style="color:#0F6B55;">Cách 1 (Khuyên dùng – Công thức ngắn nhất):</b><br/>
+        Chọn trục tung $Oy$ là <b>trục đối xứng</b> của cổng, trục hoành $Ox$ là mặt đất (gốc $O$ là trung điểm hai chân cổng).
+        <ul>
+          <li>Đỉnh cổng nằm trên $Oy$: $\mathbf{I(0; H)}$.</li>
+          <li>Hai chân cổng trên $Ox$: $\mathbf{C_1\!\left(-\frac{L}{2}; 0\right)}$ và $\mathbf{C_2\!\left(\frac{L}{2}; 0\right)}$.</li>
+          <li>Phương trình Parabol khuyết $b=0$:
+            $$\mathbf{y = ax^2 + H} \quad \text{với } a = -\frac{4H}{L^2}$$</li>
+        </ul>
+      </div>
+      <div style="background:#fff;border:1px solid #cbd5e1;border-radius:4px;padding:4pt 6pt;">
+        <b style="color:#1F4E79;">Cách 2 (Đỉnh trùng gốc tọa độ $O(0;0)$):</b><br/>
+        Chọn gốc tọa độ $O(0;0)$ ngay tại <b>đỉnh cao nhất</b> của cổng, trục $Oy$ hướng thẳng đứng.
+        <ul>
+          <li>Đỉnh cổng là $\mathbf{O(0; 0)}$.</li>
+          <li>Hai chân cổng có tọa độ $\left(-\frac{L}{2}; -H\right)$ và $\left(\frac{L}{2}; -H\right)$.</li>
+          <li>Phương trình Parabol đơn giản nhất:
+            $$\mathbf{y = ax^2} \quad \text{với } a = -\frac{4H}{L^2}$$</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="box example keep">
+    <div class="bt">2. Giải chi tiết Bài toán Cổng vòm Parabol (Câu 2 Phần III Đề THPT Lương Thế Vinh &amp; Bài 8 Bộ 2)</div>
+    <p><b>Bài toán 1 (Câu 2 Phần III Đề THPT Lương Thế Vinh):</b> Một chiếc cổng hình Parabol có chiều cao $OH = 4\text{ m}$ và khoảng cách giữa hai chân cổng trên mặt đất là $CD = 6\text{ m}$. Người ta muốn gắn một thanh sắt ngang $AB$ vào cổng ở độ cao $1\text{ m}$ so với mặt đất để treo biển trang trí (như hình vẽ). Tính độ dài thanh sắt $AB$ (làm tròn đến hàng phần chục).</p>
+    <div class="sol-block">
+      <div class="grid2" style="align-items:center;">
+        <div>
+          <ul>
+            <li><b>Bước 1 (Chọn hệ trục tọa độ $Oxy$):</b> Chọn gốc tọa độ $O(0;0)$ tại trung điểm của hai chân cổng $CD$ trên mặt đất, tia $Ox$ trùng với tia $OD$, tia $Oy$ trùng với tia $OH$ hướng thẳng đứng lên đỉnh cổng.</li>
+            <li><b>Bước 2 (Xác định tọa độ các điểm):</b>
+              <ul>
+                <li>Đỉnh cổng: $H(0; 4)$.</li>
+                <li>Hai chân cổng ($CD = 6\text{ m}$): $C(-3; 0)$ và $D(3; 0)$.</li>
+              </ul>
+            </li>
+            <li><b>Bước 3 (Lập phương trình Parabol):</b> Do trục đối xứng là $Oy$ và đỉnh là $H(0;4)$ nên phương trình $(P)$ có dạng: $y = ax^2 + 4$.<br/>
+            Vì $(P)$ đi qua chân cổng $D(3; 0)$ nên:
+            $$0 = a\cdot 3^2 + 4 \implies a = -\frac{4}{9} \implies \mathbf{(P): y = -\frac{4}{9}x^2 + 4}$$</li>
+            <li><b>Bước 4 (Tính độ dài thanh ngang $AB$ ở độ cao $y = 1\text{ m}$):</b><br/>
+            Thay $y = 1$ vào phương trình $(P)$:
+            $$-\frac{4}{9}x^2 + 4 = 1 \iff \frac{4}{9}x^2 = 3 \iff x^2 = \frac{27}{4} \iff x = \pm\frac{3\sqrt{3}}{2}$$
+            Vậy hai đầu thanh sắt là $A\!\left(-\dfrac{3\sqrt{3}}{2}; 1\right)$ và $B\!\left(\dfrac{3\sqrt{3}}{2}; 1\right)$, suy ra độ dài thanh sắt là:
+            $$\mathbf{AB = \frac{3\sqrt{3}}{2} - \left(-\frac{3\sqrt{3}}{2}\right) = 3\sqrt{3} \approx 5{,}2\text{ (m)}}$$</li>
+          </ul>
+        </div>
+        <div class="center">
+          <svg viewBox="0 0 260 190" style="width:100%;max-width:250px;height:auto;background:#fff;border:1px solid #cbd5e1;border-radius:6px;">
+            <!-- Mặt đất Ox và trục Oy -->
+            <line x1="15" y1="155" x2="245" y2="155" stroke="#334155" stroke-width="1.6"/>
+            <line x1="130" y1="175" x2="130" y2="12" stroke="#334155" stroke-width="1.5"/>
+            <text x="236" y="170" font-size="10.5" font-weight="bold">x</text>
+            <text x="136" y="20" font-size="10.5" font-weight="bold">y</text>
+            <text x="118" y="168" font-size="10" font-weight="bold">O(0;0)</text>
+            <!-- Parabol: C(40,155), H(130,35), D(220,155) => Q(130, -85) -->
+            <path d="M 40 155 Q 130 -85 220 155" fill="rgba(15,107,85,0.08)" stroke="#0F6B55" stroke-width="2.6"/>
+            <!-- Thanh ngang AB ở y=1 -> y_svg = 155 - 30 = 125; x = +- 3*sqrt(3)/2 * 30 = +- 77.94 -> xA=52, xB=208 -->
+            <line x1="52" y1="125" x2="208" y2="125" stroke="#DC2626" stroke-width="2.5"/>
+            <line x1="52" y1="125" x2="52" y2="155" stroke="#94A3B8" stroke-dasharray="3,3"/>
+            <line x1="208" y1="125" x2="208" y2="155" stroke="#94A3B8" stroke-dasharray="3,3"/>
+            <circle cx="130" cy="35" r="3.5" fill="#1F4E79"/>
+            <circle cx="40" cy="155" r="3.5" fill="#1F4E79"/>
+            <circle cx="220" cy="155" r="3.5" fill="#1F4E79"/>
+            <circle cx="52" cy="125" r="3.5" fill="#DC2626"/>
+            <circle cx="208" cy="125" r="3.5" fill="#DC2626"/>
+            <text x="136" y="36" font-size="10" font-weight="bold" fill="#1F4E79">H(0; 4)</text>
+            <text x="20" y="170" font-size="9.5" font-weight="bold" fill="#1F4E79">C(-3;0)</text>
+            <text x="202" y="170" font-size="9.5" font-weight="bold" fill="#1F4E79">D(3;0)</text>
+            <text x="34" y="120" font-size="10" font-weight="bold" fill="#DC2626">A</text>
+            <text x="213" y="120" font-size="10" font-weight="bold" fill="#DC2626">B</text>
+            <text x="135" y="120" font-size="9.5" fill="#DC2626" font-weight="bold">y = 1 m (AB ≈ 5,2 m)</text>
+          </svg>
+        </div>
+      </div>
+      <p style="margin-top:4pt;border-top:.6pt dashed #cbd5e1;padding-top:4pt;">
+        <b>Bài toán 2 (Bài 8 Đề Ôn tập CK1 – Bộ 2 KNTT):</b> Với cùng cổng Parabol cao $4\text{ m}$, rộng $6\text{ m}$ có phương trình $y = -\dfrac{4}{9}x^2 + 4$: Tính chiều cao của cổng tại vị trí cách tim cổng (trục đối xứng) một khoảng $1{,}5\text{ m}$.<br/>
+        $\implies$ Thay $x = 1{,}5 = \dfrac{3}{2}$ vào phương trình $(P)$:
+        $$h = y(1{,}5) = -\frac{4}{9}\cdot \left(\frac{3}{2}\right)^2 + 4 = -\frac{4}{9}\cdot \frac{9}{4} + 4 = -1 + 4 = \mathbf{3\text{ (m)}}$$
+        <i>(Nếu tính tại vị trí cách chân cổng $D(3;0)$ một đoạn $0{,}75\text{ m}$, tức $x = 3 - 0{,}75 = 2{,}25 = \dfrac{9}{4}\text{ m}$, thì chiều cao là $y = -\dfrac{4}{9}\cdot\dfrac{81}{16} + 4 = 4 - 2{,}25 = \mathbf{1{,}75\text{ m}}$).</i>
+      </p>
+    </div>
+  </div>
+
+  <h1 class="sec-head" style="margin-top:8pt;">
+    <span>PHẦN VI. TỔNG HỢP BÀI TẬP MẪU &amp; 8 CẠM BẪY THƯỜNG GẶP Ở CHUYÊN ĐỀ 3</span>
+    <span class="t-badge">Rà soát trước giờ thi</span>
+  </h1>
+
+  <div class="box example keep">
+    <div class="bt">Hệ thống Câu hỏi Trắc nghiệm Điển hình trong 2 Bộ Đề (Có giải thích chi tiết)</div>
+    <ol>
+      <li><b>(Câu 1 Đề LTV):</b> Cho hàm số $y = -2x^2 + x - 1$ có đồ thị $(P)$. Trục đối xứng của $(P)$ là đường thẳng nào?<br/>
+      <span class="sol-block"><b>Lời giải:</b> Ta có $a = -2,\ b = 1 \implies x = -\dfrac{b}{2a} = -\dfrac{1}{2(-2)} = \dfrac{1}{4}$. Vậy trục đối xứng là đường thẳng $\mathbf{x = \dfrac{1}{4}}$.</span></li>
+      <li><b>(Câu 8 Đề LTV):</b> Điểm nào sau đây thuộc đồ thị của hàm số $y = x^2 - 3x + 2$? &nbsp; A. $(1; 1)$ &nbsp; B. $(2; 0)$ &nbsp; C. $(0; -2)$ &nbsp; D. $(-1; 0)$<br/>
+      <span class="sol-block"><b>Lời giải:</b> Thay $x = 2$ vào hàm số: $y(2) = 2^2 - 3(2) + 2 = 0 \implies$ Điểm $\mathbf{(2; 0)}$ thuộc đồ thị (Chọn <b>B</b>).</span></li>
+      <li><b>(Câu 5 Bộ 2):</b> Hàm số $y = x^2 - 4x + 3$ đồng biến trên khoảng nào?<br/>
+      <span class="sol-block"><b>Lời giải:</b> Hoành độ đỉnh $x_S = -\dfrac{-4}{2\cdot 1} = 2$. Vì $a = 1 > 0$ (bề lõm quay lên) nên hàm số nghịch biến trên $(-\infty; 2)$ và <b>đồng biến trên khoảng $\mathbf{(2; +\infty)}$</b>.</span></li>
+    </ol>
+  </div>
+
+  <div class="box warn keep">
+    <div class="bt">⚠️ 8 Cạm bẫy "Mất điểm oan" ở Chuyên đề 3 Học sinh phải thuộc lòng</div>
+    <div class="grid2" style="font-size:11.2pt;">
+      <ol style="margin:0;">
+        <li><b>Quên chữ "$x =$" ở trục đối xứng:</b> Trục đối xứng là đường thẳng đứng nên bắt buộc phải viết $\mathbf{x = -\dfrac{b}{2a}}$, không viết mỗi con số hay viết nhầm thành $y = \dots$.</li>
+        <li><b>Sai công thức hoành độ đỉnh:</b> Hoành độ đỉnh là $-\dfrac{b}{\mathbf{2a}}$ (có số $2$ ở mẫu), không phải $-\dfrac{b}{a}$!</li>
+        <li><b>Đọc nhầm trục khi tìm khoảng đơn điệu:</b> Khoảng đồng biến/nghịch biến luôn nhìn theo hoành độ $x$, tuyệt đối không nhìn theo tung độ đỉnh $y_S$.</li>
+        <li><b>Dùng dấu $\cup$ giữa hai khoảng đồng biến:</b> Phải viết "đồng biến trên $(a;b)$ <b>và</b> $(c;d)$", không viết $(a;b)\cup(c;d)$.</li>
+      </ol>
+      <ol start="5" style="margin:0;">
+        <li><b>Bẫy ĐKXĐ hàm nhiều công thức:</b> Điều kiện mẫu khác $0$ của Nhánh 1 chỉ xét trên miền $x$ của Nhánh 1.</li>
+        <li><b>Căn bậc hai nằm ở mẫu số:</b> Với $\dfrac{1}{\sqrt{f(x)}}$ thì điều kiện là $\mathbf{f(x) > 0}$ (bỏ dấu bằng).</li>
+        <li><b>Vẽ Parabol thiếu nét cong ở đỉnh:</b> Tại đỉnh $S$, đồ thị Parabol phải uốn cong mượt mà, không vẽ nhọn như hình chữ $V$ của hàm trị tuyệt đối.</li>
+        <li><b>Nhầm chiều rộng $CD$ với hoành độ chân cổng:</b> Nếu cổng rộng $CD = 6\text{ m}$ và trục $Oy$ ở chính giữa thì chân cổng là $x = \pm 3$ (chia đôi!), không phải $x = 6$.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+window.runPagination = function(){
+ function run(){
+  const flow=document.getElementById('flow'); if(!flow) return;
+  const LEFT=document.body.dataset.left||'';
+  const blocks=[...flow.children]; flow.remove();
+  const book=document.getElementById('book');
+  let page,box,pn=0,running='';
+  function newPage(cover){
+   pn++;
+   page=document.createElement('div');
+   page.className='page'+(cover?' cover':'');
+   const h=document.createElement('div');
+   h.className='hdr';
+   h.innerHTML='<img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/ttbdvh.jpg?alt=media&token=f270aa9b-a2bc-48e8-8910-80742b542615" alt="TTBDVH"/><img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738" alt="HCMUS"/><span class="l">'+LEFT+'</span><span class="run"></span>';
+   box=document.createElement('div');
+   box.className='content';
+   const f=document.createElement('div');
+   f.className='ftr';
+   f.innerHTML='<span>© Bản quyền thuộc ThS. Đinh Quốc Tuấn – Mục đích phi lợi nhuận – Vì giáo dục.</span><span class="pn">'+pn+'</span>';
+   page.append(h,box,f);
+   book.append(page);
+   page.querySelector('.run').textContent=running;
+  }
+  const fits=()=>box.scrollHeight<=box.clientHeight+1;
+  const isHead=e=>/^H[1-4]$/.test(e.tagName);
+  function splitInto(el){
+   if(el.classList&&(el.classList.contains('keep')||el.classList.contains('coverpage')))return null;
+   let shell,src,dst;
+   if(el.tagName==='TABLE'){
+     shell=el.cloneNode(false);
+     const th=el.querySelector('thead');
+     if(th)shell.append(th.cloneNode(true));
+     const tb=document.createElement('tbody');
+     shell.append(tb);
+     src=el.querySelector('tbody');
+     dst=tb;
+   } else if(['DIV','UL','OL'].includes(el.tagName)){
+     shell=el.cloneNode(false);
+     src=el;
+     dst=shell;
+     const bt=el.querySelector(':scope>.bt');
+     if(bt)dst.append(bt.cloneNode(true));
+   } else return null;
+   box.append(shell);
+   let moved=0;
+   while(src.firstElementChild){
+     const c=src.firstElementChild;
+     if(c.classList&&c.classList.contains('bt')&&src===el){c.remove();continue;}
+     dst.append(c);
+     if(!fits()){
+       dst.removeChild(c);
+       src.prepend(c);
+       break;
+     }
+     moved++;
+   }
+   if(!moved){
+     box.removeChild(shell);
+     const b0=shell.querySelector(':scope>.bt');
+     if(b0&&el.tagName!=='TABLE'&&!el.querySelector(':scope>.bt'))el.prepend(b0);
+     return null;
+   }
+   if(!src.firstElementChild)return 'done';
+   const sb=shell.querySelector(':scope>.bt');
+   if(sb&&el.tagName==='DIV'){
+     const c=sb.cloneNode(true);
+     c.textContent+=' (tiếp theo)';
+     el.prepend(c);
+   }
+   return el;
+  }
+  function place(el,guard){
+   if(el.dataset&&el.dataset.run!==undefined)running=el.dataset.run;
+   const forced=el.classList&&el.classList.contains('pb');
+   if(!page||(forced&&box.children.length))newPage(el.classList&&el.classList.contains('coverpage'));
+   if(forced)page.querySelector('.run').textContent=running;
+   box.append(el);
+   if(fits())return;
+   box.removeChild(el);
+   const carry=[];
+   if(!guard){
+     while(box.lastElementChild&&isHead(box.lastElementChild)){
+       carry.unshift(box.lastElementChild);
+       box.lastElementChild.remove();
+     }
+   }
+   if(box.children.length&&!carry.length){
+     const r=splitInto(el);
+     if(r==='done')return;
+     if(r){newPage();place(r,true);return;}
+   }
+   newPage();
+   carry.forEach(c=>box.append(c));
+   box.append(el);
+   if(fits())return;
+   box.removeChild(el);
+   const r=splitInto(el);
+   if(r==='done')return;
+   if(r){newPage();place(r,true);return;}
+   newPage();
+   box.append(el);
+  }
+  blocks.forEach(b=>place(b,false));
+  const tl=document.querySelector('.tool .np');
+  if(tl)tl.textContent=pn+' trang A4 chuẩn in';
+  document.body.dataset.paged='1';
+ }
+ run();
+};
+setTimeout(function(){ if(!document.body.dataset.paged && typeof window.runPagination==='function') window.runPagination(); }, 7000);
+</script>
+</body>
+</html>

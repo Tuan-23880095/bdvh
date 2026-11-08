@@ -802,6 +802,12 @@ switch ($action) {
             $stmt->execute([$examCode]);
         }
         $exam = $stmt->fetch();
+        if (!$exam && $examCode !== '') {
+            seed_default_exams($pdo);
+            $stmt = $pdo->prepare("SELECT exam_id, exam_code, grade, subject, title, description, time_minutes, questions_json, status FROM bdvh_exams WHERE exam_code = ?");
+            $stmt->execute([$examCode]);
+            $exam = $stmt->fetch();
+        }
         if (!$exam) {
             json_out(['status' => 'error', 'message' => 'Không tìm thấy đề thi.'], 404);
         }
@@ -840,6 +846,7 @@ switch ($action) {
         $examCode = trim((string)($inputData['exam_code'] ?? ''));
         $userAnswers = $inputData['answers'] ?? []; // mảng đáp án
         $durationSeconds = (int)($inputData['duration_seconds'] ?? 0);
+        $questionTimes = $inputData['question_times'] ?? []; // thời gian từng câu
 
         // Lấy đề thi gốc để chấm điểm
         if ($examId > 0) {
@@ -902,7 +909,8 @@ switch ($action) {
                 'chosen' => $chosen,
                 'correct_ans' => $q['ans'],
                 'is_correct' => $isCorrect,
-                'explanation' => $q['exp'] ?? ''
+                'explanation' => $q['exp'] ?? '',
+                'time_spent_seconds' => isset($questionTimes[$idx]) ? (int)$questionTimes[$idx] : 0
             ];
         }
 
@@ -1011,7 +1019,8 @@ switch ($action) {
                     'diff_minutes' => round(abs($durationSeconds - $targetSeconds) / 60, 1),
                     'avg_seconds_per_question' => $avgSec,
                     'pace_category' => ($durationSeconds <= $targetSeconds) ? 'Đúng tiến độ' : 'Cần tăng tốc',
-                    'time_strategy_advice' => 'Em có thể xin mã lớp từ Thầy/Cô phụ trách để mở khóa hướng dẫn giải chi tiết cho toàn bộ câu hỏi nhé!'
+                    'time_strategy_advice' => 'Em có thể xin mã lớp từ Thầy/Cô phụ trách để mở khóa hướng dẫn giải chi tiết cho toàn bộ câu hỏi nhé!',
+                    'question_times' => $questionTimes
                 ],
                 'root_causes' => [
                     "Nhập mã lớp học do Thầy Đinh Quốc Tuấn hoặc Giáo viên cấp để mở khóa toàn bộ hướng dẫn giải chi tiết từng bước.",
