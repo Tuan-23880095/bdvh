@@ -55,7 +55,7 @@
       { ten: 'Quản lý', url: D + 'chd-tt/quanly.html', ai: 'GV' },
     ] },
     { ten: 'Luyện tập Toán — học sinh', muc: [
-      { ten: 'Trang chủ BDVH', url: B + 'index.html', ai: 'HS' },
+      { ten: 'Trang chủ luyện tập Toán', url: B + 'index.html', ai: 'HS' },
       { ten: 'Đề kiểm tra tính giờ', url: B + 'index.html#de-kiem-tra', ai: 'HS' },
       { ten: 'Phiếu kết quả', url: B + 'ket-qua.html', ai: 'HS' },
       { ten: 'Phòng thi trực tiếp', url: B + 'phong-thi.html', ai: 'HS', mo_ta: 'quét QR của GV' },
@@ -64,7 +64,7 @@
     { ten: 'Luyện tập Toán — giáo viên', muc: [
       { ten: 'Chiếu bài hôm nay', url: B + 'trinh-chieu.html?hom_nay=1', ai: 'GV' },
       { ten: 'Bài giảng trình chiếu', url: B + 'bai-giang.html', ai: 'GV', mo_ta: 'đề Drive + lời giải hệ thống' },
-      { ten: 'Quản trị BDVH (Thầy Tuấn)', url: B + 'thay-tuan.html', ai: 'GV' },
+      { ten: 'Quản trị luyện tập Toán (Thầy Tuấn)', url: B + 'thay-tuan.html', ai: 'GV' },
       { ten: 'Giám sát phòng thi', url: B + 'giam-sat.html', ai: 'GV' },
       { ten: 'Phòng chiếu Slido', url: B + 'giao-vien.html', ai: 'GV' },
       { ten: 'Slide Toán 6', url: B + 'slide-toan6.html', ai: 'GV' },

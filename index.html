@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Luyện tập Toán 6–12 &amp; ĐGNL · ThS. Đinh Quốc Tuấn</title>
-  <meta name="description" content="Chương trình học, phiếu bài tập và đề kiểm tra tính giờ môn Toán lớp 6–12 và luyện thi Đánh giá năng lực ĐHQG-HCM.">
+  <meta name="description" content="Chương trình học, phiếu bài tập và đề kiểm tra tính giờ môn Toán lớp 6–12 và luyện thi Đánh giá năng lực học tập và tư duy.">
   <meta name="theme-color" content="#0F6B55">
   <link rel="icon" type="image/svg+xml" href="assets/logo-sen.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,7 +84,7 @@
   <section class="hero">
     <div class="wrap">
       <div>
-        <p class="eyebrow">Toán THCS · THPT · Đánh giá năng lực ĐHQG-HCM</p>
+        <p class="eyebrow">Toán THCS · THPT · Đánh giá năng lực học tập và tư duy</p>
         <h1>Học theo tiến độ, luyện tập có phản hồi, kiểm tra có đo lường</h1>
         <p class="lead">Mục lục bài học theo tuần của chương trình GDPT 2018 cho lớp 6–12: tóm tắt lý thuyết, phiếu bài tập in A4 và đề trắc nghiệm tính giờ được chấm điểm ngay sau khi nộp.</p>
         <div class="hero-cta">
@@ -93,7 +93,7 @@
         </div>
         <div class="tac-gia">
           <span class="dqt-logo-o"><img src="assets/logo-sen.svg" alt=""></span>
-          <div><b>ThS. Đinh Quốc Tuấn</b><span>Kinh nghiệm giảng dạy (dạy kèm) Toán &amp; Khoa học tự nhiên · Hoạt động với tư cách cá nhân</span></div>
+          <div><b>ThS. Đinh Quốc Tuấn</b><span>Kinh nghiệm giảng dạy, hỗ trợ học sinh Toán &amp; Khoa học tự nhiên · Hoạt động với tư cách cá nhân</span></div>
         </div>
         <div class="hero-facts">
           <span><b>7 khối lớp</b> và chuyên đề ĐGNL</span>
@@ -367,7 +367,7 @@
       <div class="phieu-head">
         
         <div class="phieu-co-quan">
-          <b>Phiếu bài tập dạy kèm</b>
+          <b>Phiếu bài tập hỗ trợ học sinh</b>
           <span>ThS. Đinh Quốc Tuấn</span>
         </div>
         
@@ -576,7 +576,7 @@ function chonPhamViDe(v) {
   $('seg-tat-ca').setAttribute('aria-pressed', v === 'tat-ca');
   taiDe();
 }
-function tenKhoi(g) { return g === 'DGNL' ? 'ĐGNL ĐHQG-HCM' : 'Lớp ' + String(g).replace(/^L0?/, ''); }
+function tenKhoi(g) { return g === 'DGNL' ? 'Đánh giá năng lực học tập và tư duy' : 'Lớp ' + String(g).replace(/^L0?/, ''); }
 async function taiDe() {
   const tb = $('de-tbody');
   try {

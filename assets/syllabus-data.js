@@ -225,7 +225,7 @@ window.SYLLABUS_DATA = {
         ]
       },
       'DGNL': {
-        title: 'Chuyên Đề Luyện Thi ĐGNL ĐHQG-HCM 2026',
+        title: 'Chuyên Đề Luyện Thi Đánh giá năng lực học tập và tư duy 2026',
         currentWeek: 8,
         currentWeekFocus: 'Tuần 8: Tư duy Định lượng, Suy luận Logic & Xử lý số liệu bảng biểu',
         chapters: [
@@ -233,7 +233,7 @@ window.SYLLABUS_DATA = {
             chapterId: 'cdgnl_1',
             chapterTitle: 'Phần 1: Tư Duy Định Lượng (Toán Học & Suy Luận Số Liệu)',
             lessons: [
-              { id: 'dgnl-01', week: 8, title: 'Đề số 01: Tư duy Định lượng & Logic suy luận (Bộ đề chuẩn)', examCode: 'DGNL_2026_01', isExamFocus: true, isCurrent: true, theory: 'Cấu trúc đề ĐHQG-HCM: Đại số, Hình học, Xác suất thống kê, Đọc hiểu biểu đồ ma trận.', exercise: '30 câu trắc nghiệm 4 lựa chọn, phân tích tốc độ dưới 1.5 phút/câu.' },
+              { id: 'dgnl-01', week: 8, title: 'Đề số 01: Tư duy Định lượng & Logic suy luận (Bộ đề chuẩn)', examCode: 'DGNL_2026_01', isExamFocus: true, isCurrent: true, theory: 'Cấu trúc đề đánh giá năng lực: Đại số, Hình học, Xác suất thống kê, Đọc hiểu biểu đồ ma trận.', exercise: '30 câu trắc nghiệm 4 lựa chọn, phân tích tốc độ dưới 1.5 phút/câu.' },
               { id: 'dgnl-02', week: 8, title: 'Đề số 02: Xử lý bảng biểu dữ liệu thực tế & Logic sắp xếp', examCode: 'DGNL_2026_02', isExamFocus: true, isCurrent: true, theory: 'Quy tắc suy luận Modus Ponens, bài toán xếp chỗ, tính tỷ trọng doanh thu và xác suất Venn.', exercise: 'Thực hành phân tích ma trận dữ liệu thực tế đề thi 2026.' }
             ]
           }
