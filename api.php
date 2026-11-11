@@ -256,20 +256,20 @@ function seed_default_exams(PDO $db): void {
     $exams = json_decode($jsonText, true);
     if (!is_array($exams)) return;
 
-    $stmt = $db->prepare("
-        REPLACE INTO bdvh_exams (exam_code, grade, subject, title, description, time_minutes, questions_json)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-    ");
+    // Cập nhật theo exam_code, GIỮ NGUYÊN exam_id (không dùng REPLACE INTO vì sẽ đổi id,
+    // làm mồ côi bài nộp và phòng thi đang trỏ tới đề).
+    $find = $db->prepare("SELECT exam_id FROM bdvh_exams WHERE exam_code = ?");
+    $upd  = $db->prepare("UPDATE bdvh_exams SET grade = ?, subject = ?, title = ?, description = ?, time_minutes = ?, questions_json = ? WHERE exam_id = ?");
+    $ins  = $db->prepare("INSERT INTO bdvh_exams (grade, subject, title, description, time_minutes, questions_json, exam_code) VALUES (?, ?, ?, ?, ?, ?, ?)");
     foreach ($exams as $ex) {
-        $stmt->execute([
-            $ex['exam_code'],
-            $ex['grade'],
-            $ex['subject'],
-            $ex['title'],
-            $ex['description'],
-            $ex['time_minutes'],
+        $row = [
+            $ex['grade'], $ex['subject'], $ex['title'], $ex['description'], $ex['time_minutes'],
             json_encode($ex['questions'], JSON_UNESCAPED_UNICODE)
-        ]);
+        ];
+        $find->execute([$ex['exam_code']]);
+        $id = $find->fetchColumn();
+        if ($id) { $row[] = $id; $upd->execute($row); }
+        else     { $row[] = $ex['exam_code']; $ins->execute($row); }
     }
 }
 

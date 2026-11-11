@@ -198,7 +198,7 @@
     "exam_code": "DGNL_2026_01",
     "grade": "DGNL",
     "subject": "DGNL_TONGHOP",
-    "title": "Đánh giá năng lực học tập và tư duy: Tư duy Định lượng & Suy luận Logic (Đề số 01)",
+    "title": "Theo cấu trúc bài thi Đánh giá năng lực V-ACT: Tư duy Định lượng & Suy luận Logic (Đề số 01)",
     "description": "Cấu trúc đề đánh giá năng lực: Giải toán ứng dụng thực tế, toán chuyển động, tối ưu hóa phần trăm, logic suy luận và xác suất tổ hợp.",
     "time_minutes": 35,
     "questions": [
@@ -939,7 +939,7 @@
     "exam_code": "DGNL_2026_02",
     "grade": "DGNL",
     "subject": "DGNL",
-    "title": "Đánh giá năng lực học tập và tư duy: Phân tích bảng số liệu & Logic suy luận (Đề số 02)",
+    "title": "Theo cấu trúc bài thi Đánh giá năng lực V-ACT: Phân tích bảng số liệu & Logic suy luận (Đề số 02)",
     "description": "Bộ đề thi phân tích dữ liệu thực tế ma trận bảng biểu, logic hoán vị sắp xếp và bài toán điều kiện cần - đủ chuẩn kỳ thi Đánh Giá Năng Lực 2026.",
     "time_minutes": 25,
     "questions": [
