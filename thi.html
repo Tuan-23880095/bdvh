@@ -131,6 +131,9 @@
     let timeRemainingSeconds = 0;
     let durationSeconds = 0;
     const userAnswers = {};
+    // Đo thời gian từng câu (gửi kèm khi nộp bài: question_times)
+    let activeQIdx = null;
+    const questionTimes = {};
     let isExamStarted = false;
     let currentStudentName = sessionStorage.getItem('bdvh_student_name') || '';
     let currentClassCode = sessionStorage.getItem('bdvh_class_code') || '';
