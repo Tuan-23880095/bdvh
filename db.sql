@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS bdvh_users (
   last_login        DATETIME NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 2. Bảng ngân hàng đề thi & bài tập (Lớp 6 đến 12 & ĐGNL ĐHQG)
+-- 2. Bảng ngân hàng đề thi & bài tập (Lớp 6 đến 12 & Đánh giá năng lực học tập và tư duy)
 CREATE TABLE IF NOT EXISTS bdvh_exams (
   exam_id           INT AUTO_INCREMENT PRIMARY KEY,
   exam_code         VARCHAR(50) NOT NULL UNIQUE,   -- VD: TOAN06_01, DGNL_2026_01
@@ -125,8 +125,8 @@ VALUES
   'DGNL_2026_01', 
   'DGNL', 
   'DGNL_TONGHOP', 
-  'ĐGNL ĐHQG-HCM: Tư duy Định lượng & Suy luận Logic (Đề số 01)', 
-  'Đề luyện thi năng lực chuẩn cấu trúc Đại học Quốc gia TP.HCM: Giải toán ứng dụng, phân tích bảng số liệu, logic suy luận.', 
+  'Đánh giá năng lực học tập và tư duy: Tư duy Định lượng & Suy luận Logic (Đề số 01)', 
+  'Đề luyện thi năng lực theo cấu trúc đề đánh giá năng lực: Giải toán ứng dụng, phân tích bảng số liệu, logic suy luận.', 
   35,
   '[
     {"q":"Một cửa hàng giảm giá 20% cho một món hàng, sau đó lại giảm tiếp 10% trên giá đã giảm. Hỏi sau hai lần giảm, món hàng được giảm tất cả bao nhiêu phần trăm so với giá ban đầu?","opts":["28%","30%","72%","32%"],"ans":0,"exp":"Gọi giá ban đầu là 100%. Lần 1 giảm 20% còn 80%. Lần 2 giảm 10% của 80% tức là giảm $80% \\times 0,1 = 8%$. Giá còn lại là $80% - 8% = 72%$. Vậy mức giảm tổng cộng là $100% - 72% = 28%$."},

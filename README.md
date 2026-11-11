@@ -5,7 +5,7 @@
 ---
 
 ## 1. Giới thiệu hệ thống
-Hệ thống ôn luyện thi trắc nghiệm bấm giờ, quản lý lớp học và khảo thí đánh giá năng lực tư duy trực tuyến dành cho học sinh từ **Lớp 6 đến Lớp 12** và thí sinh chuẩn bị cho kỳ thi **Đánh Giá Năng Lực ĐHQG-HCM**.
+Hệ thống ôn luyện thi trắc nghiệm bấm giờ, quản lý lớp học và khảo thí đánh giá năng lực tư duy trực tuyến dành cho học sinh từ **Lớp 6 đến Lớp 12** và thí sinh chuẩn bị cho kỳ thi **Đánh giá năng lực học tập và tư duy**.
 
 ### Các tính năng cốt lõi:
 - **Cổng thông tin & Mục lục bài học (`index.html`):** Phân chia chương trình GDPT 2018 theo tuần học, hiển thị lý thuyết cốt lõi, bài tập rèn luyện và đề thi trắc nghiệm tương ứng.
