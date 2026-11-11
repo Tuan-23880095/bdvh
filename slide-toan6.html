@@ -1,16 +1,4 @@
-# -*- coding: utf-8 -*-
-import json
-import os
-import re
-
-# Load extracted questions
-with open(r"D:\2026-Daykem\toan7_extracted_questions.json", "r", encoding="utf-8") as f:
-    questions = json.load(f)
-
-print(f"Loaded {len(questions)} questions.")
-
-# HTML Template with workshop engine
-WORKSHOP_TEMPLATE = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="utf-8">
@@ -554,7 +542,7 @@ function go(i) {
   if (i >= S.length) i = S.length - 1;
   cur = i;
   scaler.innerHTML = slideHtml(S[i], i);
-  scaler.firstChild.classList.add('enter');
+  if (scaler.firstElementChild) scaler.firstElementChild.classList.add('enter');
   document.getElementById('pos').innerText = `${i + 1} / ${S.length}`;
   document.getElementById('progress').style.width = `${((i + 1) / S.length) * 100}%`;
   
@@ -672,17 +660,3 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-"""
-
-full_html = WORKSHOP_TEMPLATE + slides_js + ENGINE_JS
-
-out1 = r"D:\202610-Antigravity\PhatTrien-Repo-github\bdvh\slide-toan7.html"
-out2 = r"D:\2026-Daykem\slide-toan7.html"
-
-with open(out1, "w", encoding="utf-8") as f:
-    f.write(full_html)
-print(f"Generated {out1}, length: {len(full_html)} bytes, slides: {len(slides_data)}")
-
-with open(out2, "w", encoding="utf-8") as f:
-    f.write(full_html)
-print(f"Generated {out2}, length: {len(full_html)} bytes")
