@@ -96,6 +96,19 @@ body.tc { background: #0c1820; color: var(--muc); font-family: var(--sans); over
 .loi-hay-gap b { color: var(--son); }
 .chua-co { color: var(--muc-3); font-size: .7em; font-style: italic; margin-top: .5em; }
 
+/* Gợi ý công thức trên chính slide Đề — hiệu ứng xuất hiện kiểu PowerPoint "Appear/Fade".
+   Ô luôn chiếm chỗ sẵn trong khung (visibility, không display:none) để fit() tính cỡ chữ một lần,
+   nhờ vậy khi hiện gợi ý thì chữ của đề KHÔNG nhảy cỡ. */
+.goi-y { margin-top: .5em; padding: .4em .7em; background: var(--tho-nhat); border: .1em dashed var(--tho);
+  border-radius: .3em; font-size: .78em; visibility: hidden; opacity: 0; transform: translateY(.35em);
+  transition: opacity .32s ease, transform .32s ease; }
+.goi-y.hien { visibility: visible; opacity: 1; transform: none; }
+.goi-y .gy-nhan { font-weight: 700; color: var(--tho-chu); margin-bottom: .18em; }
+.goi-y ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .2em; }
+.goi-y li { color: var(--muc); position: relative; padding-left: .95em; }
+.goi-y li::before { content: "▸"; position: absolute; left: 0; color: var(--tho); }
+@media (prefers-reduced-motion: reduce) { .goi-y { transition: none; } }
+
 /* Slide bìa */
 .bia { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 140px; background: #fff; position: relative; }
 .bia::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 18px; background: var(--luc); }
