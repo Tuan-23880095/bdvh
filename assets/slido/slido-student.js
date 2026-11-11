@@ -1,6 +1,6 @@
 /**
  * slido-student.js — Trình điều khiển Phòng Tương Tác Học Sinh (Mobile & Desktop)
- * ThS. Đinh Quốc Tuấn — Bồi Dưỡng Văn Hóa HCMUS
+ * ThS. Đinh Quốc Tuấn
  */
 
 (function () {

@@ -1,7 +1,7 @@
 /**
  * BẢN DỰ PHÒNG — bản gốc ở repo diemdanhsv: js/ui/menu-he-thong.js (bdvh nạp bản gốc trước, lỗi mới dùng bản này).
  * menu-he-thong.js — MENU XỔ XUỐNG CHỨA TẤT CẢ CÁC TRANG của diemdanhsv.com và bdvh.diemdanhsv.com.
- * ThS. Đinh Quốc Tuấn · Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM
+ * ThS. Đinh Quốc Tuấn
  *
  * MỘT NGUỒN DUY NHẤT: thêm / bớt / đổi tên trang → chỉ sửa mảng NHOM bên dưới. Mọi trang có nhúng file này
  * (kể cả bdvh.diemdanhsv.com, nhúng qua https://diemdanhsv.com/js/ui/menu-he-thong.js) tự cập nhật theo.
@@ -54,16 +54,16 @@
       { ten: 'Giảng viên', url: D + 'chd-tt/gv.html', ai: 'GV' },
       { ten: 'Quản lý', url: D + 'chd-tt/quanly.html', ai: 'GV' },
     ] },
-    { ten: 'Bồi dưỡng văn hóa — học sinh', muc: [
+    { ten: 'Luyện tập Toán — học sinh', muc: [
       { ten: 'Trang chủ BDVH', url: B + 'index.html', ai: 'HS' },
       { ten: 'Đề kiểm tra tính giờ', url: B + 'index.html#de-kiem-tra', ai: 'HS' },
       { ten: 'Phiếu kết quả', url: B + 'ket-qua.html', ai: 'HS' },
       { ten: 'Phòng thi trực tiếp', url: B + 'phong-thi.html', ai: 'HS', mo_ta: 'quét QR của GV' },
       { ten: 'Bình chọn Toán 7', url: B + 'sv-toan7.html', ai: 'HS' },
     ] },
-    { ten: 'Bồi dưỡng văn hóa — giáo viên', muc: [
+    { ten: 'Luyện tập Toán — giáo viên', muc: [
       { ten: 'Chiếu bài hôm nay', url: B + 'trinh-chieu.html?hom_nay=1', ai: 'GV' },
-      { ten: 'Bài giảng trình chiếu', url: B + 'bai-giang.html', ai: 'GV', mo_ta: 'đề Drive + Gemini' },
+      { ten: 'Bài giảng trình chiếu', url: B + 'bai-giang.html', ai: 'GV', mo_ta: 'đề Drive + lời giải hệ thống' },
       { ten: 'Quản trị BDVH (Thầy Tuấn)', url: B + 'thay-tuan.html', ai: 'GV' },
       { ten: 'Giám sát phòng thi', url: B + 'giam-sat.html', ai: 'GV' },
       { ten: 'Phòng chiếu Slido', url: B + 'giao-vien.html', ai: 'GV' },
@@ -183,7 +183,7 @@
       <div class="mht-hop" id="mht-hop" role="dialog" aria-label="Tất cả các trang">
         <div class="mht-dau"><b>Tất cả trang</b><input class="mht-tim" type="search" placeholder="Tìm trang… (ví dụ: điểm, giám sát, slide)" aria-label="Tìm trang"><button class="mht-dong" type="button" aria-label="Đóng">×</button></div>
         <div class="mht-luoi"></div>
-        <div class="mht-chan"><span>${tong} trang · diemdanhsv.com và bdvh.diemdanhsv.com</span><span>ThS. Đinh Quốc Tuấn · ĐH Khoa học Tự nhiên, ĐHQG-HCM</span></div>
+        <div class="mht-chan"><span>${tong} trang · diemdanhsv.com và bdvh.diemdanhsv.com</span><span>ThS. Đinh Quốc Tuấn</span></div>
       </div>`;
     document.body.appendChild(vo);
     const hop = vo.querySelector('.mht-hop'), tim = vo.querySelector('.mht-tim'), luoi = vo.querySelector('.mht-luoi');

@@ -1,6 +1,6 @@
 /**
  * slido-teacher.js — Trình điều khiển Sân khấu Trình chiếu Slido Toán 7
- * ThS. Đinh Quốc Tuấn — Bồi Dưỡng Văn Hóa HCMUS
+ * ThS. Đinh Quốc Tuấn
  */
 
 (function () {
@@ -44,7 +44,7 @@
       render: () => `
         <div class="s-body" style="align-items:center; justify-content:center; text-align:center;">
           <div class="s-kicker sec-q" style="margin: 0 auto 16px auto;">
-            🏛️ BỒI DƯỠNG VĂN HÓA HCMUS · ĐẠI HỌC KHOA HỌC TỰ NHIÊN
+            📘 LỚP HỌC THS. ĐINH QUỐC TUẤN
           </div>
           <h1 class="s-title" style="font-size: 52px; margin-bottom: 12px; color: var(--lam-dam);">
             Toán 7 · Đề Kiểm Tra Cuối Học Kỳ I
@@ -58,7 +58,7 @@
               <div style="width: 52px; height: 52px; border-radius: 12px; background: var(--luc); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:22px;">QT</div>
               <div>
                 <b style="font-size: 20px; font-family: var(--serif); display:block; color: var(--muc);">ThS. Đinh Quốc Tuấn</b>
-                <span style="font-size: 14px; color: #64748B;">Giảng viên Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM</span>
+                <span style="font-size: 14px; color: #64748B;">Kinh nghiệm giảng dạy (dạy kèm) Toán & Khoa học tự nhiên</span>
               </div>
             </div>
 
@@ -352,7 +352,7 @@
         <div class="s-foot">
           <div class="s-foot-brand">
             <img src="https://diemdanhsv.com/images/logo-sen.svg" alt="Logo"/>
-            <span>Lớp Toán 7 – ThS. Đinh Quốc Tuấn · Bồi Dưỡng Văn Hóa HCMUS</span>
+            <span>Lớp Toán 7 – ThS. Đinh Quốc Tuấn</span>
           </div>
           <div style="font-variant-numeric: tabular-nums;">
             ${idx + 1} / ${slides.length}

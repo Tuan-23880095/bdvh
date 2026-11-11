@@ -2,8 +2,8 @@
 declare(strict_types=1);
 
 /**
- * bdvh/api.php — Backend REST API cho Nền tảng Bồi Dưỡng Văn Hóa & Khảo thí ĐGNL (bdvh.diemdanhsv.com)
- * ThS. Đinh Quốc Tuấn — Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM.
+ * bdvh/api.php — Backend REST API cho Nền tảng luyện tập Toán & ĐGNL (bdvh.diemdanhsv.com)
+ * ThS. Đinh Quốc Tuấn.
  *
  * Tính năng chính:
  * 1. Đăng ký & Đăng nhập tài khoản Khách (Guest Account) nhanh chóng.
@@ -330,7 +330,7 @@ function verify_class_code_check(PDO $pdo, string $code): array {
         if (get_rolling_class_code($off) === $cleanCode) {
             return [
                 'valid' => true,
-                'teacher' => 'ThS. Đinh Quốc Tuấn (HCMUS)',
+                'teacher' => 'ThS. Đinh Quốc Tuấn',
                 'teacher_id' => 1,
                 'label' => 'Lớp Toán Thầy Đinh Quốc Tuấn',
                 'is_tuan' => true
@@ -382,7 +382,7 @@ function verify_class_code_check(PDO $pdo, string $code): array {
 // PHÒNG THI TRỰC TIẾP CÓ GIÁM SÁT (action room_*) — xem phong-thi-api.php
 define('BDVH_API', true);
 require_once __DIR__ . '/phong-thi-api.php';
-// BÀI GIẢNG TRÌNH CHIẾU TỪ ĐỀ TRÊN DRIVE + LỜI GIẢI GEMINI (action bg_*) — xem bai-giang-api.php
+// BÀI GIẢNG TRÌNH CHIẾU TỪ ĐỀ TRÊN DRIVE + LỜI GIẢI HỆ THỐNG (action bg_*) — xem bai-giang-api.php
 require_once __DIR__ . '/bai-giang-api.php';
 // NGÂN HÀNG CÂU HỎI & TẠO ĐỀ NGẪU NHIÊN (action nh_*) — xem ngan-hang-api.php
 require_once __DIR__ . '/ngan-hang-api.php';
@@ -1300,7 +1300,7 @@ switch ($action) {
 // -------------------------------------------------------------
 
 function evaluate_with_gemini(string $studentName, string $examTitle, float $score, int $correct, int $total, int $seconds, int $targetSeconds, array $details): array {
-    // Phân tích sư phạm thông minh (Smart Pedagogical Fallback / Gemini Proxy)
+    // Phân tích sư phạm thông minh (Smart Pedagogical Fallback / proxy hệ thống)
     $wrongQuestions = [];
     foreach ($details as $d) {
         if (!$d['is_correct']) {
@@ -1348,7 +1348,7 @@ function evaluate_with_gemini(string $studentName, string $examTitle, float $sco
             ? 'Em giải đề rất xuất sắc và nhịp độ cực kỳ tự tin! Hãy duy trì phong độ này.' 
             : 'Tốc độ làm bài của em rất nhanh nhưng điểm số bị mất ở một số câu bẫy. Hãy dành 5-7 phút cuối để rà soát lại các phương án đã chọn trước khi nộp bài.';
     } elseif ($seconds <= $targetSeconds) {
-        $timeAnalysis['pace_category'] = 'Đúng tiến độ chuẩn Bộ GD&ĐT (hoàn thành trước ' . $diffMin . ' phút)';
+        $timeAnalysis['pace_category'] = 'Đúng tiến độ khuyến nghị (hoàn thành trước ' . $diffMin . ' phút)';
         $timeAnalysis['time_strategy_advice'] = 'Em phân bổ thời gian rất hợp lý và điềm tĩnh. Đây là chiến thuật thi cử tối ưu để đạt điểm cao trong phòng thi chính thức.';
     } else {
         $timeAnalysis['pace_category'] = 'Vượt quá thời gian khuyến nghị (' . $diffMin . ' phút)';
