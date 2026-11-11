@@ -1,6 +1,6 @@
 /**
  * toan7-data.js — Bộ 12 câu hỏi trắc nghiệm Toán 7 (Đề Cuối Học Kỳ I - THCS Tường Bình Hiệp)
- * ThS. Đinh Quốc Tuấn — Bồi Dưỡng Văn Hóa HCMUS
+ * ThS. Đinh Quốc Tuấn
  */
 
 window.TOAN7_QUESTIONS = [

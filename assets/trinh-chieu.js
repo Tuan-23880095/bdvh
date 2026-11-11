@@ -17,7 +17,7 @@
   let phong = '', khoa = false, hoiKq = null, lanBao = 0;
   let tuongTac = (() => { try { return localStorage.getItem('tc_tuong_tac') !== '0'; } catch (e) { return true; } })();
 
-  /* ---------- Vá công thức Gemini trả về bị hỏng dấu \ (\circ thành ký tự lạ, \overrightarrow mất \) ---------- */
+  /* ---------- Vá công thức hệ thống trả về bị hỏng dấu \ (\circ thành ký tự lạ, \overrightarrow mất \) ---------- */
   const LENH = ['overrightarrow', 'Leftrightarrow', 'rightarrow', 'Rightarrow', 'leftarrow', 'Leftarrow', 'overline', 'setminus', 'widehat',
     'mathbb', 'forall', 'exists', 'dfrac', 'infty', 'times', 'frac', 'sqrt', 'cdot', 'circ', 'perp', 'vec', 'cap', 'cup', 'leq', 'geq', 'neq',
     'sin', 'cos', 'tan', 'le', 'ge', 'ne', 'in', 'pi'];
@@ -33,7 +33,7 @@
       .replace(/\t(?=(?:imes|ext|an|heta|au|o|riangle|frac|op|ilde)(?![a-z]))/g, '\\t').replace(/\r(?=(?:ho|ight|angle|m|ceil|floor)(?![a-z]))/g, '\\r')
       .replace(/\t/g, ' ').replace(/\r/g, '')
       .replace(/\n(?=(?:eq|abla|otin|ot|eg|e|leq|geq)(?![a-z]))/g, '\\n');
-    // Lệnh bị mất dấu \ (Gemini trả "overrightarrow{AB}cdot…"): chỉ sửa dãy chữ ≥ 4 ký tự tách trọn được thành lệnh đã biết
+    // Lệnh bị mất dấu \ (hệ thống trả "overrightarrow{AB}cdot…"): chỉ sửa dãy chữ ≥ 4 ký tự tách trọn được thành lệnh đã biết
     t = t.replace(/(^|[^\\A-Za-z])([A-Za-z]{4,})(?=[^A-Za-z]|$)/g, (m, a, w) => { const p = tachLenh(w); return p ? a + p.map((x) => '\\' + x).join('') : m; });
     t = t.replace(/(^|[^\\A-Za-z])vec(?=\{)/g, '$1\\vec');
     // Ký hiệu độ viết sai (^\rho, ^\text{o}, ^o) → ^\circ
@@ -218,7 +218,7 @@
     const idx = bo.cau.indexOf(c) + 1;
     return `<div class="s-top">
       <span class="sen"><img src="${SEN}" alt=""></span>
-      <div class="ten"><b>${esc(bo.tieu_de)}</b><span>ThS. Đinh Quốc Tuấn · Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM</span></div>
+      <div class="ten"><b>${esc(bo.tieu_de)}</b><span>ThS. Đinh Quốc Tuấn</span></div>
       <span class="vi-tri">Câu ${idx}/${bo.cau.length}</span>
       <span class="nhan-slide ${loai}">${nhan}</span></div>`;
   }
@@ -268,7 +268,7 @@
       body = `<div class="so-cau">${esc(c.so)} <small>Đáp án từng ý</small></div>
         <div class="de" style="font-size:.62em">${c.de_html}</div>${luaChonHtml(c, true)}`;
     } else if (c.loai === 'abcd') {
-      // Thiếu đáp án trong file đề → tạm dùng chữ cái đầu đáp án Gemini (A. / B. …)
+      // Thiếu đáp án trong file đề → tạm dùng chữ cái đầu đáp án hệ thống (A. / B. …)
       if (!c.dap_an && /^\s*([A-D])[.)]/.test(g.dap_an_ngan || '')) c.dap_an = g.dap_an_ngan.trim().charAt(0);
       const o = c.lua_chon.find((x) => x.k === c.dap_an);
       body = `<div class="so-cau">${esc(c.so)} <small>Đáp án đúng</small></div>
@@ -306,7 +306,7 @@
       body = `<div class="gt-tieu-de">${esc(c.so)} · Giải thích</div>
         ${tom ? `<div class="can-nho"><b>Lời giải tóm tắt:</b> ${tom}</div>` : ''}
         <p class="chua-co">Chưa có lời giải từng bước cho câu này.</p>
-        ${laGV ? `<button class="btn-gemini" type="button" data-tao="${esc(c.id)}">${coGemini ? 'Tạo lời giải bằng Gemini' : 'Chưa có khoá Gemini (dán ở trang Bài giảng)'}</button>` : ''}`;
+        ${laGV ? `<button class="btn-gemini" type="button" data-tao="${esc(c.id)}">${coGemini ? 'Tạo lời giải bằng hệ thống' : 'Chưa có khoá API hệ thống (dán ở trang Bài giảng)'}</button>` : ''}`;
     }
     return `${top(c, 'giai')}<div class="s-body"><div class="fit"><div>${body}</div></div></div>`;
   }
@@ -316,7 +316,7 @@
       <span class="sen-lon"><img src="${SEN}" alt="Logo sen ThS. Đinh Quốc Tuấn"></span>
       <div class="eyebrow">${esc([bo.mon, bo.khoi ? 'Lớp ' + String(bo.khoi).replace(/^L0?/, '') : ''].filter(Boolean).join(' · '))} · ${bo.cau.length} câu</div>
       <h1>${esc(bo.tieu_de)}</h1>
-      <div class="tac-gia"><b>ThS. Đinh Quốc Tuấn</b>Trung tâm Bồi dưỡng Văn hóa · Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM</div>
+      <div class="tac-gia"><b>ThS. Đinh Quốc Tuấn</b>Kinh nghiệm giảng dạy (dạy kèm) Toán &amp; Khoa học tự nhiên</div>
       <div class="huong-dan">Mỗi câu 3 slide: Đề → Đáp án → Giải thích từng bước · Phím → để bắt đầu</div>
       ${tuongTac ? `<div class="bia-vao"><span class="qr" data-qr>${phong ? qrSvg(linkHs()) : ''}</span>
         <div><small>Học sinh quét mã hoặc vào</small><b>${esc(linkHsNgan())}</b><small>rồi nhập mã phòng</small><b class="ma" data-ma>${phong || '·····'}</b></div></div>` : ''}</div>`;
@@ -370,7 +370,7 @@
   /* ---------- Tạo lời giải ngay trên slide (chỉ giáo viên) ---------- */
   async function taoLoiGiai(cauId, btn) {
     if (!coGemini) return;
-    btn.disabled = true; btn.textContent = 'Gemini đang soạn lời giải…';
+    btn.disabled = true; btn.textContent = 'Hệ thống đang soạn lời giải…';
     try {
       const r = await fetch('api.php?action=bg_giai', { method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ bo_id: bo.bo_id, cau_id: cauId }) });

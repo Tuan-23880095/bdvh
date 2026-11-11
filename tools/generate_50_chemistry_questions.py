@@ -2,7 +2,7 @@
 """
 Bộ tạo 50 câu trắc nghiệm Hóa học 8 HK1 - Sách Kết nối tri thức với cuộc sống (KNTT)
 Tuân thủ chuẩn GDPT 2018: IUPAC, V = n * 24,79 L, thang pH, acid-base-oxide-muối-phân bón
-Tác giả: ThS. Đinh Quốc Tuấn - TT Bồi Dưỡng Văn Hóa HCMUS
+Tác giả: ThS. Đinh Quốc Tuấn
 """
 
 import json
@@ -817,11 +817,11 @@ window.MathJax = {
   <!-- Header nhận diện thương hiệu -->
   <div class="brand-hdr">
     <div class="logos">
-      <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/ttbdvh.jpg?alt=media&token=f270aa9b-a2bc-48e8-8910-80742b542615" alt="TTBDVH Logo"/>
-      <img src="https://firebasestorage.googleapis.com/v0/b/link-anh-web.firebasestorage.app/o/Logo-chinh-hcmus.png?alt=media&token=9cf3a1de-75f1-493b-8711-fd22c7b98738" alt="HCMUS Logo"/>
+      
+      
     </div>
     <div class="info">
-      <div class="org">TT Bồi Dưỡng Văn Hóa · ĐH KHTN ĐHQG-HCM</div>
+      <div class="org">Tài liệu dạy kèm · Khoa học tự nhiên 8</div>
       <div>Biên soạn: <span class="author">ThS. Đinh Quốc Tuấn</span></div>
       <div><i>Học hiểu bản chất – Tự tin bứt phá</i></div>
     </div>

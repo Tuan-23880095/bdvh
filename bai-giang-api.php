@@ -2,15 +2,15 @@
 declare(strict_types=1);
 
 /**
- * bdvh/bai-giang-api.php — BÀI GIẢNG TRÌNH CHIẾU TỪ ĐỀ TRÊN GOOGLE DRIVE + LỜI GIẢI GEMINI.
+ * bdvh/bai-giang-api.php — BÀI GIẢNG TRÌNH CHIẾU TỪ ĐỀ TRÊN GOOGLE DRIVE + LỜI GIẢI HỆ THỐNG.
  * Được api.php nạp (sau phong-thi-api.php, dùng chung các hàm rq/rok/rfail…); xử lý mọi action "bg_".
  *
  * Luồng: GV mở bai-giang.html → chọn file đề .html (tải từ Drive DAYKEM) → trình duyệt tách câu hỏi +
- *        đáp án → bg_save lưu bộ bài giảng → bấm "Tạo lời giải" → bg_giai gọi Gemini cho từng câu,
+ *        đáp án → bg_save lưu bộ bài giảng → bấm "Tạo lời giải" → bg_giai gọi hệ thống cho từng câu,
  *        lưu lại (chỉ gọi một lần, GV sửa được) → trinh-chieu.html?bo=… chiếu mỗi câu 3 slide:
  *        Đề · Đáp án · Giải thích từng bước cho học sinh yếu.
  *
- * Khoá Gemini: dùng CHUNG mục 'gemini' trong private/config.php của diemdanhsv (đã có cho KHTD):
+ * Khoá API hệ thống: dùng CHUNG mục 'gemini' trong private/config.php của diemdanhsv (đã có cho KHTD):
  *   'gemini' => ['api_key' => '...', 'model' => 'gemini-2.5-flash'],
  * Không có file cấu hình (chạy thử trên máy) → đọc biến môi trường GEMINI_API_KEY.
  */
@@ -124,7 +124,7 @@ function bg_norm_cau(array $c, int $i): array
     return $out;
 }
 
-/** Vá LaTeX Gemini trả về bị hỏng dấu \ (giống suaTex trong assets/trinh-chieu.js). */
+/** Vá LaTeX hệ thống trả về bị hỏng dấu \ (giống suaTex trong assets/trinh-chieu.js). */
 const BG_LENH = ['overrightarrow', 'Leftrightarrow', 'rightarrow', 'Rightarrow', 'leftarrow', 'Leftarrow', 'overline', 'setminus', 'widehat',
     'mathbb', 'forall', 'exists', 'dfrac', 'infty', 'times', 'frac', 'sqrt', 'cdot', 'circ', 'perp', 'vec', 'cap', 'cup', 'leq', 'geq', 'neq',
     'sin', 'cos', 'tan', 'le', 'ge', 'ne', 'in', 'pi'];
@@ -171,7 +171,7 @@ function bg_sua_json(string $text): string
     );
 }
 
-/** Ký hiệu độ Gemini hay viết sai: ^\rho, ^\text{o}, ^{o}, ^o → ^\circ */
+/** Ký hiệu độ hệ thống hay viết sai: ^\rho, ^\text{o}, ^{o}, ^o → ^\circ */
 function bg_sua_do(string $t): string
 {
     return preg_replace('/\^\s*(?:\{\s*)?(?:\\\\rho|\\\\text\{\s*o\s*\}|\\\\mathrm\{\s*o\s*\}|o(?![A-Za-z])|°)(?:\s*\})?/u', '^\\\\circ', $t);
@@ -233,10 +233,10 @@ function bg_public(array $row, bool $full): array
     return $o;
 }
 
-/* ============================ Gemini ============================ */
+/* ============================ hệ thống ============================ */
 
 /**
- * Tìm khoá Gemini theo thứ tự: (1) khoá thầy dán trên trang bai-giang.html (lưu trong CSDL, không bao giờ trả về trình duyệt);
+ * Tìm khoá API hệ thống theo thứ tự: (1) khoá thầy dán trên trang bai-giang.html (lưu trong CSDL, không bao giờ trả về trình duyệt);
  * (2) mục 'gemini' trong private/config.php của diemdanhsv (dùng chung với KHTD) — thử cả khi api.php chạy SQLite
  * vì thư mục subdomain nằm ngoài public_html; (3) biến môi trường GEMINI_API_KEY.
  */
@@ -267,14 +267,14 @@ function bg_gemini_cfg(): array
     return ['key' => $key, 'prefer' => array_values(array_unique(array_filter($prefer))), 'nguon' => $nguon, 'co_config' => (bool) $cfgs];
 }
 
-/** GV dán khoá Gemini (lấy ở aistudio.google.com/apikey). Máy chủ thử khoá với Google trước khi lưu; xoá khi gửi khoá rỗng. */
+/** GV dán khoá API hệ thống (lấy ở aistudio.google.com/apikey). Máy chủ thử khoá với Google trước khi lưu; xoá khi gửi khoá rỗng. */
 function action_bg_gemini_luu(array $in): void
 {
     r_teacher();
     $k = trim((string) ($in['api_key'] ?? ''));
     if ($k === '') { rq('DELETE FROM bdvh_bg_cau_hinh WHERE k = ?', ['gemini_key']); rok(['da_xoa' => true]); }
     // Hai dạng khoá Google AI Studio: kiểu cũ "AIza…" (39 ký tự) và kiểu mới "AQ.Ab…" (có dấu chấm, dài hơn).
-    if (!preg_match('/^[A-Za-z0-9_\-.]{30,200}$/', $k)) { rfail('Khoá không đúng dạng. Khoá Gemini bắt đầu bằng "AIza…" hoặc "AQ.…", chỉ gồm chữ, số và các dấu - _ . (kiểm tra xem có lỡ dán thừa dấu cách hay xuống dòng không).'); }
+    if (!preg_match('/^[A-Za-z0-9_\-.]{30,200}$/', $k)) { rfail('Khoá không đúng dạng. Khoá API hệ thống bắt đầu bằng "AIza…" hoặc "AQ.…", chỉ gồm chữ, số và các dấu - _ . (kiểm tra xem có lỡ dán thừa dấu cách hay xuống dòng không).'); }
     $r = bg_http('https://generativelanguage.googleapis.com/v1beta/models?pageSize=5', $k, null, 20);
     if ($r['http'] === 0) { rfail('Máy chủ không kết nối được tới Google để thử khoá: ' . $r['msg']); }
     if ($r['http'] !== 200) { rfail('Google từ chối khoá này (HTTP ' . $r['http'] . '): ' . $r['msg']); }
@@ -356,9 +356,9 @@ function bg_gemini_models(array $cfg): array
     return array_slice($list, 0, 6);
 }
 
-/** Gọi Gemini, trả [text, model]. Thử tắt "suy nghĩ" trước để không tốn token trước khi xuất JSON. */
-/** Cấu hình "suy nghĩ" ít nhất cho từng thế hệ model: Gemini 3.x dùng thinkingLevel, Gemini 2.5 dùng thinkingBudget.
- *  (Gửi thinkingBudget = 0 cho Gemini 3 bị từ chối → trước đây rơi về mức suy nghĩ mặc định "high", rất chậm, quá giờ máy chủ.) */
+/** Gọi hệ thống, trả [text, model]. Thử tắt "suy nghĩ" trước để không tốn token trước khi xuất JSON. */
+/** Cấu hình "suy nghĩ" ít nhất cho từng thế hệ model: hệ thống 3.x dùng thinkingLevel, hệ thống 2.5 dùng thinkingBudget.
+ *  (Gửi thinkingBudget = 0 cho hệ thống 3 bị từ chối → trước đây rơi về mức suy nghĩ mặc định "high", rất chậm, quá giờ máy chủ.) */
 function bg_thinking_it(string $model): ?array
 {
     if (preg_match('/gemini-([3-9])/i', $model)) { return ['thinkingLevel' => stripos($model, 'pro') !== false ? 'low' : 'minimal']; }
@@ -383,14 +383,14 @@ function bg_gemini_generate(array $cfg, array $body): array
                     if (empty($part['thought'])) { $t .= (string) ($part['text'] ?? ''); }
                 }
                 if (trim($t) !== '') { return [$t, $model]; }
-                $last = 'Gemini ' . $model . ' trả về rỗng (' . ($r['data']['candidates'][0]['finishReason'] ?? '?') . ').';
+                $last = 'Hệ thống trả về rỗng (' . ($r['data']['candidates'][0]['finishReason'] ?? '?') . ').';
                 break;
             }
-            $last = 'Gemini ' . $model . ' lỗi ' . ($r['http'] ?: 'kết nối') . ': ' . $r['msg'];
+            $last = 'Hệ thống lỗi ' . ($r['http'] ?: 'kết nối') . ': ' . $r['msg'];
             if ($r['http'] === 429) { $het++; }
             if ($r['http'] === 404 || preg_match('/no longer available|not found|is not supported for generateContent|deprecated/i', (string) $r['msg'])) {
                 bg_danh_dau_chet($cfg, $model);   // model đã ngừng → lần sau bỏ qua, sang model khác ngay
-                $last = 'Gemini ' . $model . ' đã ngừng hoạt động.';
+                $last = 'Hệ thống đã ngừng hoạt động.';
                 break;
             }
             if ($r['http'] === 400 && $cfgTh) { continue; }          // tham số suy nghĩ không hợp với model này → thử kiểu khác
@@ -399,15 +399,15 @@ function bg_gemini_generate(array $cfg, array $body): array
         }
     }
     if ($het > 0 && str_contains($last, '429')) {
-        throw new RoomError('Gemini báo hết hạn mức (429) — khoá miễn phí giới hạn số lần gọi mỗi phút/ngày. Chờ 1–2 phút rồi bấm lại, hoặc dùng khoá có trả phí. (' . $last . ')');
+        throw new RoomError('Hệ thống báo hết hạn mức (429) — khoá miễn phí giới hạn số lần gọi mỗi phút/ngày. Chờ 1–2 phút rồi bấm lại, hoặc dùng khoá có trả phí. (' . $last . ')');
     }
-    throw new RoomError($last ?: 'Gemini không phản hồi.');
+    throw new RoomError($last ?: 'Hệ thống không phản hồi.');
 }
 
-/** Chuyển HTML đề thành văn bản cho Gemini: giữ công thức LaTeX, bảng thành dòng, hình thành ghi chú. */
+/** Chuyển HTML đề thành văn bản cho hệ thống: giữ công thức LaTeX, bảng thành dòng, hình thành ghi chú. */
 function bg_html_text(string $html): string
 {
-    // Hình SVG: giữ các nhãn/số đo viết trên hình (6 cm, A, B…) để Gemini có đủ dữ kiện
+    // Hình SVG: giữ các nhãn/số đo viết trên hình (6 cm, A, B…) để hệ thống có đủ dữ kiện
     $html = preg_replace_callback('#<svg\b.*?</svg>#is', static function ($m) {
         preg_match_all('#<text\b[^>]*>(.*?)</text>#is', $m[0], $t);
         $nhan = array_filter(array_map(static fn ($x) => trim(html_entity_decode(strip_tags($x))), $t[1]));
@@ -602,13 +602,13 @@ function action_bg_delete(array $in): void
     rok(true);
 }
 
-/** Tạo lời giải cho MỘT câu bằng Gemini và lưu lại. ghi_de = true để tạo lại khi đã có. */
+/** Tạo lời giải cho MỘT câu bằng hệ thống và lưu lại. ghi_de = true để tạo lại khi đã có. */
 function action_bg_giai(array $in): void
 {
     bg_quyen($in);
-    @set_time_limit(180);   // gọi Gemini có thể mất 30–90 giây
+    @set_time_limit(180);   // gọi hệ thống có thể mất 30–90 giây
     $cfg = bg_gemini_cfg();
-    if ($cfg['key'] === '') { rfail('Chưa có khoá Gemini — dán khoá ở trang Bài giảng (khung "Khoá Gemini").'); }
+    if ($cfg['key'] === '') { rfail('Chưa có khoá API hệ thống — dán khoá ở trang Bài giảng (khung "Khoá API hệ thống").'); }
     $row = bg_load($in);
     $cid = (string) ($in['cau_id'] ?? '');
     $idx = null;
@@ -621,7 +621,7 @@ function action_bg_giai(array $in): void
     $text = trim(preg_replace('/^```(?:json)?|```$/m', '', $text));
     $g = json_decode(bg_sua_json($text), true);
     if (!is_array($g)) { $g = json_decode($text, true); }
-    if (!is_array($g) || empty($g['cac_buoc'])) { rfail('Gemini trả về không đúng định dạng, bấm tạo lại.'); }
+    if (!is_array($g) || empty($g['cac_buoc'])) { rfail('Hệ thống trả về không đúng định dạng, bấm tạo lại.'); }
     $g['nguon'] = $model;
     $g['luc'] = rnow();
     $g['da_duyet'] = false;
@@ -981,13 +981,13 @@ function action_bg_phong_buoi_moi(array $in): void
     rok(['buoi' => (int) rq_val('SELECT buoi FROM bdvh_bg_phong WHERE bo_id = ?', [$boId])]);
 }
 
-/** GV: chẩn đoán Gemini — thử một yêu cầu nhỏ với từng model trong danh sách, báo mã lỗi + thời gian. */
+/** GV: chẩn đoán hệ thống — thử một yêu cầu nhỏ với từng model trong danh sách, báo mã lỗi + thời gian. */
 function action_bg_gemini_thu(array $in): void
 {
     r_teacher();
     @set_time_limit(180);
     $cfg = bg_gemini_cfg();
-    if ($cfg['key'] === '') { rfail('Chưa có khoá Gemini.'); }
+    if ($cfg['key'] === '') { rfail('Chưa có khoá API hệ thống.'); }
     @array_map('unlink', glob(sys_get_temp_dir() . '/bdvh_gemini_models_*') ?: []);   // lấy lại danh sách model mới nhất
     @unlink(bg_model_chet_file($cfg));
     $out = [];

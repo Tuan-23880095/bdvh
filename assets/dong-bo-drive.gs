@@ -6,7 +6,7 @@
  *      (ví dụ 2026-10-31_Toan7_OnTap-CK1_T7.html) từ HÔM NAY trở đi, hoặc file đã sửa sau lần gửi trước.
  *   2. Gửi nguyên file lên máy chủ → máy chủ tự tách câu, ghép đáp án, lưu thành bộ bài giảng
  *      (mỗi câu 3 slide: Đề · Đáp án · Giải thích). Gửi lại cùng file chỉ cập nhật, không tạo bản trùng.
- *   3. Nhờ Gemini soạn lời giải từng bước cho các câu chưa có (của bài hôm nay và các ngày tới),
+ *   3. Nhờ hệ thống soạn lời giải từng bước cho các câu chưa có (của bài hôm nay và các ngày tới),
  *      để sáng ra mở là chiếu được. Hết thời gian chạy (6 phút) thì lần sau làm tiếp.
  *
  * CÀI ĐẶT (một lần):
@@ -62,7 +62,7 @@ function dongBo() {
   props.setProperty('daGui', JSON.stringify(daGui));
   Logger.log('Đã gửi ' + gui + ' file.');
 
-  // 3. Lời giải từng bước bằng Gemini cho bài hôm nay và các ngày tới
+  // 3. Lời giải từng bước bằng hệ thống cho bài hôm nay và các ngày tới
   if (!CAU_HINH.TAO_LOI_GIAI) return;
   const ds = goi_({ action: 'bg_list' }).filter(function (b) { return b.ngay && b.ngay >= tuNgay && b.so_da_giai < b.so_cau; });
   ds.sort(function (a, b) { return a.ngay < b.ngay ? -1 : 1; });            // bài sắp dạy trước
@@ -73,7 +73,7 @@ function dongBo() {
       if (c.giai && c.giai.cac_buoc && c.giai.cac_buoc.length) continue;
       if (Date.now() - batDau > 5 * 60 * 1000) { Logger.log('Hết giờ chạy — lần sau làm tiếp.'); return; }
       try { goi_({ action: 'bg_giai', bo_id: bo.bo_id, cau_id: c.id }); Logger.log('Lời giải: ' + bo.tieu_de + ' · ' + c.so); }
-      catch (e) { Logger.log('Lỗi Gemini ' + c.so + ': ' + e.message); if (/khoá|key|đăng nhập/i.test(e.message)) return; }
+      catch (e) { Logger.log('Lỗi hệ thống ' + c.so + ': ' + e.message); if (/khoá|key|đăng nhập/i.test(e.message)) return; }
     }
   }
 }

@@ -1,6 +1,6 @@
-# Nền Tảng Bồi Dưỡng Văn Hóa & Khảo Thí ĐGNL — HCMUS
+# Nền tảng luyện tập Toán & ĐGNL — ThS. Đinh Quốc Tuấn (cá nhân)
 **Tên miền chính thức:** [https://bdvh.diemdanhsv.com](https://bdvh.diemdanhsv.com)  
-**Chủ nhiệm & Giảng viên phụ trách:** ThS. Đinh Quốc Tuấn (Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM)
+**Chủ nhiệm & Giảng viên phụ trách:** ThS. Đinh Quốc Tuấn
 
 ---
 

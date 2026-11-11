@@ -1,6 +1,6 @@
 -- =====================================================================
---  bdvh/db.sql — CSDL Nền tảng Bồi Dưỡng Văn Hóa & Đánh Giá Năng Lực
---  Hệ thống khảo thí thông minh có trợ lý Gemini AI - ThS. Đinh Quốc Tuấn
+--  bdvh/db.sql — CSDL Nền tảng luyện tập Toán & ĐGNL
+--  Hệ thống khảo thí thông minh có trợ lý hệ thống - ThS. Đinh Quốc Tuấn
 --  Chạy trên MariaDB/MySQL Hostinger (bdvh.diemdanhsv.com)
 -- =====================================================================
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS bdvh_exams (
   created_at        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 3. Bảng lịch sử bài làm & Phân tích của Gemini AI
+-- 3. Bảng lịch sử bài làm & Phân tích của hệ thống
 CREATE TABLE IF NOT EXISTS bdvh_submissions (
   sub_id            INT AUTO_INCREMENT PRIMARY KEY,
   user_id           INT NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS bdvh_submissions (
   answers_given     LONGTEXT NOT NULL,             -- JSON kết quả chọn từng câu của học sinh
   correct_count     INT NOT NULL DEFAULT 0,
   total_questions   INT NOT NULL DEFAULT 0,
-  ai_evaluation     LONGTEXT NULL,                 -- Nhận xét phân tích tư duy từ Gemini AI
+  ai_evaluation     LONGTEXT NULL,                 -- Nhận xét phân tích tư duy từ hệ thống
   is_free_trial     TINYINT(1) NOT NULL DEFAULT 1,
   created_at        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES bdvh_users(user_id) ON DELETE CASCADE,

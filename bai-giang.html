@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bài giảng trình chiếu · Trung tâm Bồi dưỡng Văn hóa</title>
+  <title>Bài giảng trình chiếu · ThS. Đinh Quốc Tuấn</title>
   <meta name="theme-color" content="#0F6B55">
   <link rel="icon" type="image/svg+xml" href="assets/logo-sen.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -97,7 +97,7 @@
       <span class="dqt-logo-o brand-sen"><img src="assets/logo-sen.svg" alt="Logo sen ThS. Đinh Quốc Tuấn"></span>
       <span class="brand-text">
         <span class="brand-ten">Bài giảng trình chiếu</span>
-        <span class="brand-phu">Trung tâm Bồi dưỡng Văn hóa · ThS. Đinh Quốc Tuấn</span>
+        <span class="brand-phu">ThS. Đinh Quốc Tuấn</span>
       </span>
     </a>
     <div class="head-actions" style="margin-left:auto">
@@ -119,7 +119,7 @@
 
   <section class="the" id="the-nhap" hidden>
     <h2>Nhập đề từ Google Drive</h2>
-    <p>Mỗi câu của đề sẽ thành 3 slide: <b>Đề</b> (chữ to, tự co giãn lấp đầy khung) → <b>Đáp án</b> → <b>Giải thích từng bước</b> cho học sinh yếu (Gemini soạn, thầy duyệt).</p>
+    <p>Mỗi câu của đề sẽ thành 3 slide: <b>Đề</b> (chữ to, tự co giãn lấp đầy khung) → <b>Đáp án</b> → <b>Giải thích từng bước</b> cho học sinh yếu (hệ thống soạn, thầy duyệt).</p>
     <ol class="buoc-nhap">
       <li>Mở Google Drive → thư mục <b>DAYKEM</b> → Toan6 / Toan7 / Toan8 / KHTN…</li>
       <li>Chọn file đề <code>.html</code> → bấm <b>Tải xuống</b> (có thể chọn nhiều file một lần).</li>
@@ -182,7 +182,7 @@
   </section>
 
   <section class="the" id="the-gemini" hidden>
-    <h2>Khoá Gemini</h2>
+    <h2>Khoá API hệ thống</h2>
     <p id="gm-tt">Đang kiểm tra…</p>
     <ol class="buoc-nhap" id="gm-hd">
       <li>Mở <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>, đăng nhập tài khoản Google của thầy.</li>
@@ -192,7 +192,7 @@
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
       <input class="input" id="gm-key" type="password" autocomplete="off" spellcheck="false" placeholder="AIza… hoặc AQ.…" style="max-width:420px;height:40px">
       <button class="btn btn-chinh" type="button" id="gm-luu">Lưu khoá</button>
-      <button class="btn btn-vien" type="button" id="gm-thu">Kiểm tra Gemini</button>
+      <button class="btn btn-vien" type="button" id="gm-thu">Kiểm tra hệ thống</button>
     </div>
     <div id="gm-thu-kq" style="margin-top:12px;font-size:13.5px;overflow-x:auto"></div>
   </section>
@@ -200,7 +200,7 @@
   <section class="the" id="the-dong-bo" hidden>
     <h2>Đồng bộ tự động từ Google Drive</h2>
     <p>Mỗi giờ, một đoạn Google Apps Script trong tài khoản Google của thầy tự tìm file đề trong <b>DAYKEM</b> có ngày ở đầu tên từ <b>hôm nay</b> trở đi
-      (ví dụ <code>2026-10-31_Toan7_….html</code>), đưa lên đây thành bài giảng và nhờ Gemini soạn sẵn lời giải. Sáng ra chỉ việc bấm <b>Chiếu bài hôm nay</b>.</p>
+      (ví dụ <code>2026-10-31_Toan7_….html</code>), đưa lên đây thành bài giảng và nhờ hệ thống soạn sẵn lời giải. Sáng ra chỉ việc bấm <b>Chiếu bài hôm nay</b>.</p>
     <ol class="buoc-nhap">
       <li>Bấm <b>Tạo mã đồng bộ</b> rồi <b>Sao chép script</b> (mã đã được điền sẵn trong script).</li>
       <li>Mở <a href="https://script.google.com/home/projects/create" target="_blank" rel="noopener">script.google.com → Dự án mới</a>, xoá mã mẫu, dán script, bấm Lưu.</li>
@@ -309,7 +309,7 @@ async function taiDs() {
       <div class="bo-act">
         <a class="btn btn-chinh btn-sm" href="trinh-chieu.html?bo=${encodeURIComponent(b.ma)}">Trình chiếu</a>
         <a class="btn btn-vien btn-sm" href="ket-qua-lop.html?bo=${encodeURIComponent(b.ma)}">Kết quả lớp</a>
-        ${laGV ? `<button class="btn btn-vien btn-sm" type="button" data-tao="${b.bo_id}" ${coGemini ? '' : 'disabled title="Chưa cấu hình khoá Gemini"'}>${b.so_da_giai < b.so_cau ? 'Tạo lời giải (Gemini)' : 'Đã đủ lời giải'}</button>
+        ${laGV ? `<button class="btn btn-vien btn-sm" type="button" data-tao="${b.bo_id}" ${coGemini ? '' : 'disabled title="Chưa cấu hình khoá API hệ thống"'}>${b.so_da_giai < b.so_cau ? 'Tạo lời giải (hệ thống)' : 'Đã đủ lời giải'}</button>
         <button class="btn btn-vien btn-sm" type="button" data-duyet="${b.bo_id}">Duyệt lời giải</button>
         <button class="btn btn-chu btn-sm" type="button" data-xoa="${b.bo_id}">Xoá</button>` : ''}
       </div>
@@ -323,7 +323,7 @@ async function taoTatCa(boId, btn) {
   if (!can.length) { toast('Bộ này đã có đủ lời giải.', 'ok'); return; }
   btn.disabled = true;
   let xong = b.cau.length - can.length, loi = 0;
-  const capNhat = () => { btn.textContent = `Gemini đang soạn… ${xong}/${b.cau.length}`; $('dem-' + boId).textContent = `${xong}/${b.cau.length}`; $('thanh-' + boId).style.width = (xong / b.cau.length * 100) + '%'; };
+  const capNhat = () => { btn.textContent = `Hệ thống đang soạn… ${xong}/${b.cau.length}`; $('dem-' + boId).textContent = `${xong}/${b.cau.length}`; $('thanh-' + boId).style.width = (xong / b.cau.length * 100) + '%'; };
   capNhat();
   const hang = [...can], thuLai = {};
   let loiCuoi = '';
@@ -364,7 +364,7 @@ async function moDuyet(boId, ep) {
 function veDuyetCau(b, c) {
   const g = c.giai;
   const chip = !g || !g.cac_buoc?.length ? '<span class="chip">chưa có lời giải</span>'
-    : `<span class="chip ${g.kiem_tra_dap_an === 'khop' ? 'ok' : g.kiem_tra_dap_an === 'khong_khop' ? 'lech' : ''}">${g.kiem_tra_dap_an === 'khop' ? 'Gemini khớp đáp án' : g.kiem_tra_dap_an === 'khong_khop' ? 'Gemini ra kết quả KHÁC đáp án' : 'chưa kiểm được đáp án'}</span>${g.da_duyet ? '<span class="chip duyet-ok">đã duyệt</span>' : ''}`;
+    : `<span class="chip ${g.kiem_tra_dap_an === 'khop' ? 'ok' : g.kiem_tra_dap_an === 'khong_khop' ? 'lech' : ''}">${g.kiem_tra_dap_an === 'khop' ? 'Hệ thống khớp đáp án' : g.kiem_tra_dap_an === 'khong_khop' ? 'Hệ thống ra kết quả KHÁC đáp án' : 'chưa kiểm được đáp án'}</span>${g.da_duyet ? '<span class="chip duyet-ok">đã duyệt</span>' : ''}`;
   return `<div class="dc" id="dc-${b.bo_id}-${c.id}">
     <div class="dc-head"><b>${esc(c.so)}</b><span class="chip">${LOAI[c.loai]}${c.dap_an ? ' · ĐA ' + esc(c.dap_an) : ''}</span>${chip}<span class="de-tom">${esc(vanBan(c.de_html).slice(0, 140))}</span></div>
     ${g && g.cac_buoc?.length ? `<div class="dc-giai">
@@ -372,9 +372,9 @@ function veDuyetCau(b, c) {
       <ol>${g.cac_buoc.map((s) => `<li>${s.tieu_de ? '<b>' + esc(s.tieu_de) + ':</b> ' : ''}${esc(s.noi_dung)}</li>`).join('')}</ol>
       ${g.loi_thuong_gap ? `<div><b>Lỗi hay gặp:</b> ${esc(g.loi_thuong_gap)}</div>` : ''}
       ${g.ghi_chu_giao_vien ? `<div class="gv"><b>Ghi chú cho thầy:</b> ${esc(g.ghi_chu_giao_vien)}</div>` : ''}
-      <div class="xt-tom">Nguồn: ${esc(g.nguon || '')} · ${esc(g.luc || '')}</div></div>` : ''}
+      <div class="xt-tom">Nguồn: ${esc(/^gemini/i.test(g.nguon || '') ? 'hệ thống' : (g.nguon || ''))} · ${esc(g.luc || '')}</div></div>` : ''}
     <div class="dc-act">
-      <button class="btn btn-vien btn-sm" type="button" data-c-tao="${b.bo_id}|${c.id}" ${coGemini ? '' : 'disabled'}>${g && g.cac_buoc?.length ? 'Tạo lại' : 'Tạo bằng Gemini'}</button>
+      <button class="btn btn-vien btn-sm" type="button" data-c-tao="${b.bo_id}|${c.id}" ${coGemini ? '' : 'disabled'}>${g && g.cac_buoc?.length ? 'Tạo lại' : 'Tạo bằng hệ thống'}</button>
       ${g && g.cac_buoc?.length ? `<button class="btn btn-vien btn-sm" type="button" data-c-sua="${b.bo_id}|${c.id}">Sửa</button>
       ${g.da_duyet ? '' : `<button class="btn btn-chinh btn-sm" type="button" data-c-duyet="${b.bo_id}|${c.id}">Đánh dấu đã duyệt</button>`}` : ''}
       <a class="btn btn-chu btn-sm" href="trinh-chieu.html?bo=${encodeURIComponent(b.ma)}&s=${1 + b.cau.indexOf(c) * 3}" target="_blank" rel="noopener">Xem slide</a>
@@ -409,7 +409,7 @@ $('ds-bo').addEventListener('click', async (e) => {
     }
     const [boId, cauId] = (d.cTao || d.cSua || d.cDuyet || d.cLuu || '').split('|');
     if (d.cTao) {
-      t.disabled = true; t.textContent = 'Gemini đang soạn…';
+      t.disabled = true; t.textContent = 'Hệ thống đang soạn…';
       const r = await api('bg_giai', { bo_id: +boId, cau_id: cauId, ghi_de: true });
       capNhatCau(+boId, cauId, r.giai); taiDsNhe(+boId);
     } else if (d.cSua) moSua(+boId, cauId);
@@ -438,7 +438,7 @@ function veGemini(tt) {
   const nguon = { web: 'khoá thầy đã dán trên trang này', config: 'khoá trong private/config.php của diemdanhsv', env: 'biến môi trường của máy chủ' }[tt.gemini_nguon] || '';
   $('gm-tt').innerHTML = tt.gemini
     ? '<b style="color:var(--luc)">Đã có khoá</b> (…' + esc(tt.gemini_duoi || '') + ', ' + nguon + '). Muốn đổi khoá thì dán khoá mới bên dưới.'
-    : '<b style="color:var(--son)">Chưa có khoá Gemini.</b> Máy chủ bdvh không đọc được khoá nào, nên chưa tạo được lời giải. Làm 3 bước sau (miễn phí, khoảng 1 phút):';
+    : '<b style="color:var(--son)">Chưa có khoá API hệ thống.</b> Máy chủ bdvh không đọc được khoá nào, nên chưa tạo được lời giải. Làm 3 bước sau (miễn phí, khoảng 1 phút):';
   $('gm-hd').hidden = !!tt.gemini;
 }
 $('gm-thu').addEventListener('click', async (e) => {
@@ -450,7 +450,7 @@ $('gm-thu').addEventListener('click', async (e) => {
       <table style="border-collapse:collapse;width:100%"><tr style="text-align:left;background:var(--giay)"><th style="padding:6px">Model</th><th>Suy nghĩ</th><th>HTTP</th><th>Giây</th><th>Kết quả</th></tr>
       ${d.thu.map((t) => `<tr style="border-top:1px solid var(--vien)"><td style="padding:6px;white-space:nowrap">${esc(t.model)}</td><td>${esc(t.suy_nghi)}</td><td><b style="color:${t.http === 200 ? 'var(--luc)' : 'var(--son)'}">${t.http || '—'}</b></td><td>${t.giay}</td><td>${esc(t.ket_qua)}</td></tr>`).join('')}</table>`;
   } catch (err) { kq.innerHTML = `<p style="color:var(--son)">${esc(err.message)}</p>`; }
-  nut.disabled = false; nut.textContent = 'Kiểm tra Gemini';
+  nut.disabled = false; nut.textContent = 'Kiểm tra hệ thống';
 });
 $('gm-luu').addEventListener('click', async (e) => {
   const k = $('gm-key').value.trim();
@@ -461,8 +461,8 @@ $('gm-luu').addEventListener('click', async (e) => {
     $('gm-key').value = '';
     coGemini = true;
     veGemini({ gemini: true, gemini_nguon: 'web', gemini_duoi: r.duoi });
-    $('gemini-tt').innerHTML = 'Gemini đã sẵn sàng.';
-    toast('Khoá hợp lệ, đã lưu. Giờ bấm "Tạo lời giải (Gemini)" ở bộ bài giảng.', 'ok');
+    $('gemini-tt').innerHTML = 'Hệ thống đã sẵn sàng.';
+    toast('Khoá hợp lệ, đã lưu. Giờ bấm "Tạo lời giải (hệ thống)" ở bộ bài giảng.', 'ok');
     taiDs();
   } catch (err) { toast(err.message, 'loi'); }
   e.target.disabled = false; e.target.textContent = 'Lưu khoá';
@@ -672,7 +672,7 @@ $('chep-script').addEventListener('click', async () => {
   $('the-nhap').hidden = !laGV;
   $('the-nh').hidden = !laGV;
   if (laGV) nhTai();
-  if (laGV) $('gemini-tt').innerHTML = coGemini ? 'Gemini đã sẵn sàng.' : '<b style="color:var(--son)">Chưa có khoá Gemini</b> — dán khoá ở khung "Khoá Gemini" phía trên.';
+  if (laGV) $('gemini-tt').innerHTML = coGemini ? 'Hệ thống đã sẵn sàng.' : '<b style="color:var(--son)">Chưa có khoá API hệ thống</b> — dán khoá ở khung "Khoá API hệ thống" phía trên.';
   taiDs();
 })();
 </script>

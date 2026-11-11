@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 /**
  * slido-api.php — Realtime API cho Hệ thống Trình chiếu Tương tác Slido Toán 7 & BDVH
- * ThS. Đinh Quốc Tuấn — Trường ĐH Khoa học Tự nhiên, ĐHQG-HCM
+ * ThS. Đinh Quốc Tuấn
  * 
  * Hỗ trợ:
  * - Đồng bộ trạng thái Slide giáo viên đang chiếu (Câu hỏi, Chế độ Đề/Đáp án/Giải thích, Khóa bình chọn).
