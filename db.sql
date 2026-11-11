@@ -125,7 +125,7 @@ VALUES
   'DGNL_2026_01', 
   'DGNL', 
   'DGNL_TONGHOP', 
-  'Đánh giá năng lực học tập và tư duy: Tư duy Định lượng & Suy luận Logic (Đề số 01)', 
+  'Theo cấu trúc bài thi Đánh giá năng lực V-ACT: Tư duy Định lượng & Suy luận Logic (Đề số 01)', 
   'Đề luyện thi năng lực theo cấu trúc đề đánh giá năng lực: Giải toán ứng dụng, phân tích bảng số liệu, logic suy luận.', 
   35,
   '[
