@@ -58,7 +58,7 @@
               <div style="width: 52px; height: 52px; border-radius: 12px; background: var(--luc); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:22px;">QT</div>
               <div>
                 <b style="font-size: 20px; font-family: var(--serif); display:block; color: var(--muc);">ThS. Đinh Quốc Tuấn</b>
-                <span style="font-size: 14px; color: #64748B;">Kinh nghiệm giảng dạy (dạy kèm) Toán & Khoa học tự nhiên</span>
+                <span style="font-size: 14px; color: #64748B;">Kinh nghiệm giảng dạy, hỗ trợ học sinh Toán & Khoa học tự nhiên</span>
               </div>
             </div>
 

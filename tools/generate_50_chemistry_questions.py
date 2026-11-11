@@ -821,7 +821,7 @@ window.MathJax = {
       
     </div>
     <div class="info">
-      <div class="org">Tài liệu dạy kèm · Khoa học tự nhiên 8</div>
+      <div class="org">Tài liệu hỗ trợ học sinh · Khoa học tự nhiên 8</div>
       <div>Biên soạn: <span class="author">ThS. Đinh Quốc Tuấn</span></div>
       <div><i>Học hiểu bản chất – Tự tin bứt phá</i></div>
     </div>
@@ -896,7 +896,7 @@ window.MathJax = {
   </details>
 
   <div class="ftr-brand">
-    <div>Hệ thống dạy kèm &amp; khảo thí BDVH — bdvh.diemdanhsv.com</div>
+    <div>Hệ thống hỗ trợ học sinh luyện tập — bdvh.diemdanhsv.com</div>
     <div>© Bản quyền thuộc ThS. Đinh Quốc Tuấn – Mục đích phi lợi nhuận – Vì giáo dục</div>
   </div>
 

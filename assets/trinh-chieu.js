@@ -316,7 +316,7 @@
       <span class="sen-lon"><img src="${SEN}" alt="Logo sen ThS. Đinh Quốc Tuấn"></span>
       <div class="eyebrow">${esc([bo.mon, bo.khoi ? 'Lớp ' + String(bo.khoi).replace(/^L0?/, '') : ''].filter(Boolean).join(' · '))} · ${bo.cau.length} câu</div>
       <h1>${esc(bo.tieu_de)}</h1>
-      <div class="tac-gia"><b>ThS. Đinh Quốc Tuấn</b>Kinh nghiệm giảng dạy (dạy kèm) Toán &amp; Khoa học tự nhiên</div>
+      <div class="tac-gia"><b>ThS. Đinh Quốc Tuấn</b>Kinh nghiệm giảng dạy, hỗ trợ học sinh Toán &amp; Khoa học tự nhiên</div>
       <div class="huong-dan">Mỗi câu 3 slide: Đề → Đáp án → Giải thích từng bước · Phím → để bắt đầu</div>
       ${tuongTac ? `<div class="bia-vao"><span class="qr" data-qr>${phong ? qrSvg(linkHs()) : ''}</span>
         <div><small>Học sinh quét mã hoặc vào</small><b>${esc(linkHsNgan())}</b><small>rồi nhập mã phòng</small><b class="ma" data-ma>${phong || '·····'}</b></div></div>` : ''}</div>`;
