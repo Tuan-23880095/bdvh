@@ -371,7 +371,9 @@
   function nhanViTri() {
     const s = slides[cur];
     const ten = s.loai === 'de' ? (buoc > 0 ? 'Gợi ý công thức' : 'Đề') : { 'dap-an': 'Đáp án', giai: 'Giải thích' }[s.loai];
-    $('vt').textContent = s.loai === 'bia' ? 'Bìa' : `Câu ${bo.cau.indexOf(s.c) + 1}/${bo.cau.length} · ${ten}`;
+    // Báo cho giáo viên biết slide này còn một bước nữa (gợi ý công thức) trước khi sang đáp án
+    const con = buoc < soBuoc(s) ? ' · ▶ gợi ý' : '';
+    $('vt').textContent = s.loai === 'bia' ? 'Bìa' : `Câu ${bo.cau.indexOf(s.c) + 1}/${bo.cau.length} · ${ten}${con}`;
   }
 
   async function ve(i, b) {
