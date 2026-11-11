@@ -7,8 +7,8 @@ declare(strict_types=1);
  *
  * Luồng: GV mở bai-giang.html → chọn file đề .html (tải từ Drive DAYKEM) → trình duyệt tách câu hỏi +
  *        đáp án → bg_save lưu bộ bài giảng → bấm "Tạo lời giải" → bg_giai gọi hệ thống cho từng câu,
- *        lưu lại (chỉ gọi một lần, GV sửa được) → trinh-chieu.html?bo=… chiếu mỗi câu 3 slide:
- *        Đề · Đáp án · Giải thích từng bước cho học sinh yếu.
+ *        lưu lại (chỉ gọi một lần, GV sửa được) → trinh-chieu.html?bo=… chiếu mỗi câu theo 4 bước:
+ *        Đề → Gợi ý công thức (hiện thêm trên chính slide Đề) → Đáp án → Giải thích từng bước cho học sinh yếu.
  *
  * Khoá API hệ thống: dùng CHUNG mục 'gemini' trong private/config.php của diemdanhsv (đã có cho KHTD):
  *   'gemini' => ['api_key' => '...', 'model' => 'gemini-2.5-flash'],
@@ -188,10 +188,21 @@ function bg_norm_giai(array $g): array
         $buoc[] = ['tieu_de' => bg_sua_tex(bg_str($b['tieu_de'] ?? '', 120)), 'noi_dung' => $nd];
         if (count($buoc) >= 8) { break; }
     }
+    // Gợi ý công thức: tối đa 4 dòng ngắn, hiện thêm trên CHÍNH slide Đề (không đổi slide)
+    $ct = [];
+    $ctNguon = $g['cong_thuc'] ?? [];
+    if (is_string($ctNguon)) { $ctNguon = preg_split("/\r?\n/u", $ctNguon); }
+    foreach ((array) $ctNguon as $x) {
+        if (is_array($x)) { $x = $x['noi_dung'] ?? ($x['cong_thuc'] ?? ''); }
+        $x = bg_sua_tex(bg_str((string) $x, 240));
+        if ($x !== '') { $ct[] = $x; }
+        if (count($ct) >= 4) { break; }
+    }
     $kt = (string) ($g['kiem_tra_dap_an'] ?? '');
     return [
         'dap_an_ngan' => bg_sua_tex(bg_str($g['dap_an_ngan'] ?? '', 600)),
         'kien_thuc' => bg_sua_tex(bg_str($g['kien_thuc'] ?? '', 800)),
+        'cong_thuc' => $ct,
         'cac_buoc' => $buoc,
         'loi_thuong_gap' => bg_sua_tex(bg_str($g['loi_thuong_gap'] ?? '', 600)),
         'kiem_tra_dap_an' => in_array($kt, ['khop', 'khong_khop', 'khong_xac_dinh'], true) ? $kt : 'khong_xac_dinh',
@@ -446,6 +457,9 @@ function bg_gemini_body(string $prompt): array
         . "\"khong_khop\" và nêu lý do trong ghi_chu_giao_vien (vẫn trình bày lời giải theo đáp án của giáo viên nếu hợp lý).\n"
         . "2. cac_buoc: 2 đến 6 bước, mỗi bước MỘT thao tác, viết câu ngắn (tối đa 30 từ), ghi rõ phép tính trung gian, không nhảy bước.\n"
         . "3. kien_thuc: quy tắc/công thức cần nhớ để làm câu này, 1–2 câu.\n"
+        . "3b. cong_thuc: 1 đến 3 dòng GỢI Ý, mỗi dòng là MỘT công thức hoặc tính chất dùng để giải câu này, viết thật ngắn "
+        . "(ví dụ \"Diện tích tam giác: \$S=\\\\dfrac{1}{2}ah\$\"). Đây là gợi ý chiếu cho học sinh TRƯỚC khi xem đáp án, nên "
+        . "KHÔNG được chứa đáp án, không thay số của đề vào công thức, không nêu kết quả.\n"
         . "4. loi_thuong_gap: một lỗi học sinh hay mắc ở câu này và cách tránh.\n"
         . "5. dap_an_ngan: câu trả lời gọn (ví dụ: \"C. \$5^5\$\" hoặc \"Sai\" hoặc \"x = 3\").\n"
         . "6. Công thức viết LaTeX và LUÔN đặt trong \$...\$ (ví dụ \$\\dfrac{3}{4}\$, \$60^\\circ\$). Trong chuỗi JSON mỗi dấu \\ của LaTeX phải viết thành \\\\. Không dùng markdown (**, #). Tiếng Việt chuẩn, xưng \"em\" với học sinh.\n"
@@ -455,13 +469,14 @@ function bg_gemini_body(string $prompt): array
         'properties' => [
             'dap_an_ngan' => ['type' => 'STRING'],
             'kien_thuc' => ['type' => 'STRING'],
+            'cong_thuc' => ['type' => 'ARRAY', 'items' => ['type' => 'STRING']],
             'cac_buoc' => ['type' => 'ARRAY', 'items' => ['type' => 'OBJECT', 'properties' => [
                 'tieu_de' => ['type' => 'STRING'], 'noi_dung' => ['type' => 'STRING']], 'required' => ['tieu_de', 'noi_dung']]],
             'loi_thuong_gap' => ['type' => 'STRING'],
             'kiem_tra_dap_an' => ['type' => 'STRING', 'enum' => ['khop', 'khong_khop', 'khong_xac_dinh']],
             'ghi_chu_giao_vien' => ['type' => 'STRING'],
         ],
-        'required' => ['dap_an_ngan', 'kien_thuc', 'cac_buoc', 'loi_thuong_gap', 'kiem_tra_dap_an'],
+        'required' => ['dap_an_ngan', 'kien_thuc', 'cong_thuc', 'cac_buoc', 'loi_thuong_gap', 'kiem_tra_dap_an'],
     ];
     return [
         'systemInstruction' => ['parts' => [['text' => $system]]],

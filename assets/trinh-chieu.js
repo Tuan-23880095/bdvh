@@ -1,8 +1,9 @@
 /**
- * trinh-chieu.js — Trình chiếu bộ bài giảng: mỗi câu 3 slide (Đề · Đáp án · Giải thích từng bước).
+ * trinh-chieu.js — Trình chiếu bộ bài giảng: mỗi câu 4 bước — Đề → Gợi ý công thức (hiện thêm ngay trên
+ * slide Đề, không đổi slide, kiểu hiệu ứng "Appear" của PowerPoint) → Đáp án → Giải thích từng bước.
  * Chữ trên slide tự co giãn: ước lượng cỡ chữ theo số từ, rồi tìm cỡ LỚN NHẤT vẫn vừa khung (tìm nhị phân),
  * nên câu ngắn chữ rất to, câu dài tự nhỏ lại mà vẫn lấp đầy khung trình chiếu.
- * Phím: → / Space / PageDown: tiếp · ← / PageUp: lùi · 1 2 3: Đề / Đáp án / Giải thích · M: mục lục · F: toàn màn hình.
+ * Phím: → / Space / PageDown: tiếp · ← / PageUp: lùi · 1 2 3 4: Đề / Gợi ý công thức / Đáp án / Giải thích · M: mục lục · F: toàn màn hình.
  */
 (function () {
   'use strict';
@@ -13,6 +14,8 @@
   const SEN = 'assets/logo-sen.svg';
 
   let bo = null, slides = [], cur = 0, laGV = false, coGemini = false;
+  /* Bước hiện thêm trong CÙNG một slide (hiệu ứng xuất hiện kiểu PowerPoint): slide Đề có bước 1 = hiện gợi ý công thức */
+  let buoc = 0;
   /* Tương tác kiểu Slido: phòng (mã 5 ký tự), khoá bình chọn, bật/tắt tương tác */
   let phong = '', khoa = false, hoiKq = null, lanBao = 0;
   let tuongTac = (() => { try { return localStorage.getItem('tc_tuong_tac') !== '0'; } catch (e) { return true; } })();
@@ -153,7 +156,7 @@
     try { localStorage.setItem('tc_tuong_tac', tuongTac ? '1' : '0'); } catch (e) {}
     $('btn-tt').classList.toggle('chinh', tuongTac);
     thongBao(tuongTac ? 'Đã bật bình chọn trên điện thoại học sinh.' : 'Đã tắt bình chọn — chỉ trình chiếu.');
-    ve(cur);
+    ve(cur, buoc);
   }
 
   /* ---------- Sân khấu 16:9 co theo cửa sổ ---------- */
@@ -214,7 +217,7 @@
 
   /* ---------- Dựng slide ---------- */
   function top(c, loai) {
-    const nhan = { de: 'Đề', 'dap-an': 'Đáp án', giai: 'Giải thích' }[loai];
+    const nhan = loai === 'de' && buoc > 0 ? 'Gợi ý công thức' : { de: 'Đề', 'dap-an': 'Đáp án', giai: 'Giải thích' }[loai];
     const idx = bo.cau.indexOf(c) + 1;
     return `<div class="s-top">
       <span class="sen"><img src="${SEN}" alt=""></span>
@@ -256,9 +259,25 @@
     return '';
   }
 
+  /** Các dòng gợi ý công thức của câu (hệ thống soạn, thầy duyệt); chưa có cong_thuc thì dùng "Cần nhớ". */
+  function dsGoiY(c) {
+    const g = (c && c.giai) || {};
+    const ds = (g.cong_thuc || []).map((x) => String(x || '').trim()).filter(Boolean);
+    if (ds.length) return ds;
+    return g.kien_thuc ? [String(g.kien_thuc).trim()] : [];
+  }
+  const coGoiY = (c) => dsGoiY(c).length > 0;
+  /** Ô gợi ý công thức: luôn chiếm chỗ sẵn trong khung (để cỡ chữ không nhảy khi hiện), chỉ mờ đi khi chưa tới bước. */
+  function goiYHtml(c) {
+    const ds = dsGoiY(c);
+    if (!ds.length) return '';
+    return `<div class="goi-y" data-goi-y><div class="gy-nhan">💡 Công thức dùng cho câu này</div>
+      <ul>${ds.map((x) => `<li>${escTex(x)}</li>`).join('')}</ul></div>`;
+  }
+
   function slideDe(c) {
     const sl = coBinhChon(c);
-    return `${top(c, 'de')}<div class="s-body ${sl ? 'co-slido' : ''}"><div class="fit"><div>${deHtml(c)}${luaChonHtml(c, false)}</div></div>${sl ? khungSlido(c, 'de') : ''}</div>`;
+    return `${top(c, 'de')}<div class="s-body ${sl ? 'co-slido' : ''}"><div class="fit"><div>${deHtml(c)}${luaChonHtml(c, false)}${goiYHtml(c)}</div></div>${sl ? khungSlido(c, 'de') : ''}</div>`;
   }
 
   function slideDapAn(c) {
@@ -317,7 +336,7 @@
       <div class="eyebrow">${esc([bo.mon, bo.khoi ? 'Lớp ' + String(bo.khoi).replace(/^L0?/, '') : ''].filter(Boolean).join(' · '))} · ${bo.cau.length} câu</div>
       <h1>${esc(bo.tieu_de)}</h1>
       <div class="tac-gia"><b>ThS. Đinh Quốc Tuấn</b>Kinh nghiệm giảng dạy, hỗ trợ học sinh Toán &amp; Khoa học tự nhiên</div>
-      <div class="huong-dan">Mỗi câu 3 slide: Đề → Đáp án → Giải thích từng bước · Phím → để bắt đầu</div>
+      <div class="huong-dan">Mỗi câu 4 bước: Đề → Gợi ý công thức → Đáp án → Giải thích từng bước · Phím → để bắt đầu</div>
       ${tuongTac ? `<div class="bia-vao"><span class="qr" data-qr>${phong ? qrSvg(linkHs()) : ''}</span>
         <div><small>Học sinh quét mã hoặc vào</small><b>${esc(linkHsNgan())}</b><small>rồi nhập mã phòng</small><b class="ma" data-ma>${phong || '·····'}</b></div></div>` : ''}</div>`;
   }
@@ -327,8 +346,37 @@
     bo.cau.forEach((c) => { slides.push({ loai: 'de', c }, { loai: 'dap-an', c }, { loai: 'giai', c }); });
   }
 
-  async function ve(i) {
+  /** Số bước hiện thêm của một slide (0 = không có bước nào ngoài nội dung chính). */
+  function soBuoc(s) { return s && s.loai === 'de' && coGoiY(s.c) ? 1 : 0; }
+  /** Hiện/ẩn các khối theo bước — chỉ đổi lớp CSS nên có hiệu ứng xuất hiện, không vẽ lại slide. */
+  function apDungBuoc() {
+    const el = $('khung').firstElementChild;
+    if (!el) return;
+    el.querySelectorAll('[data-goi-y]').forEach((x) => x.classList.toggle('hien', buoc >= 1));
+    const s = slides[cur], n = el.querySelector('.nhan-slide');
+    if (n && s && s.loai === 'de') n.textContent = buoc > 0 ? 'Gợi ý công thức' : 'Đề';
+    nhanViTri();
+  }
+  /** Tiếp: còn bước trong slide thì hiện thêm khối, hết bước mới sang slide sau. */
+  function tiep() {
+    if (buoc < soBuoc(slides[cur])) { buoc++; apDungBuoc(); return; }
+    ve(cur + 1, 0);
+  }
+  /** Lùi: ẩn bớt khối vừa hiện; đầu slide thì về slide trước và giữ các khối của slide đó đã hiện sẵn. */
+  function lui() {
+    if (buoc > 0) { buoc--; apDungBuoc(); return; }
+    const t = Math.max(0, cur - 1);
+    ve(t, soBuoc(slides[t]));
+  }
+  function nhanViTri() {
+    const s = slides[cur];
+    const ten = s.loai === 'de' ? (buoc > 0 ? 'Gợi ý công thức' : 'Đề') : { 'dap-an': 'Đáp án', giai: 'Giải thích' }[s.loai];
+    $('vt').textContent = s.loai === 'bia' ? 'Bìa' : `Câu ${bo.cau.indexOf(s.c) + 1}/${bo.cau.length} · ${ten}`;
+  }
+
+  async function ve(i, b) {
     cur = Math.max(0, Math.min(slides.length - 1, i));
+    buoc = Math.max(0, Math.min(soBuoc(slides[cur]), b || 0));
     const s = slides[cur];
     const html = s.loai === 'bia' ? slideBia() : s.loai === 'de' ? slideDe(s.c) : s.loai === 'dap-an' ? slideDapAn(s.c) : slideGiai(s.c);
     const el = document.createElement('div');
@@ -345,7 +393,7 @@
       if (slides[cur] === s) fitAll(el);
     }
     baoPhong(s); theoDoiKq(s); nutKhoa();
-    $('vt').textContent = s.loai === 'bia' ? 'Bìa' : `Câu ${bo.cau.indexOf(s.c) + 1}/${bo.cau.length} · ${{ de: 'Đề', 'dap-an': 'Đáp án', giai: 'Giải thích' }[s.loai]}`;
+    apDungBuoc();
     const u = new URL(location.href); u.searchParams.set('s', cur); history.replaceState(null, '', u);
   }
 
@@ -378,7 +426,7 @@
       if (d.status !== 'success') throw new Error(d.message);
       const c = bo.cau.find((x) => x.id === cauId);
       c.giai = d.data.giai;
-      ve(cur);
+      ve(cur, buoc);
     } catch (e) {
       thongBao(e.message || 'Không tạo được lời giải.');
       btn.disabled = false; btn.textContent = 'Thử tạo lại';
@@ -412,15 +460,18 @@
   function phim(e) {
     if ($('muc-luc').classList.contains('mo')) { if (e.key === 'Escape' || e.key.toLowerCase() === 'm') moMucLuc(false); return; }
     const k = e.key;
-    if (['ArrowRight', 'PageDown', ' ', 'Enter', 'ArrowDown'].includes(k)) { e.preventDefault(); ve(cur + 1); }
-    else if (['ArrowLeft', 'PageUp', 'Backspace', 'ArrowUp'].includes(k)) { e.preventDefault(); ve(cur - 1); }
-    else if (k === 'Home') ve(0);
-    else if (k === 'End') ve(slides.length - 1);
+    if (['ArrowRight', 'PageDown', ' ', 'Enter', 'ArrowDown'].includes(k)) { e.preventDefault(); tiep(); }
+    else if (['ArrowLeft', 'PageUp', 'Backspace', 'ArrowUp'].includes(k)) { e.preventDefault(); lui(); }
+    else if (k === 'Home') ve(0, 0);
+    else if (k === 'End') ve(slides.length - 1, 0);
     else if (k.toLowerCase() === 'f') toanManHinh();
     else if (k.toLowerCase() === 'm') moMucLuc(true);
     else if (k.toLowerCase() === 'l') doiKhoa();
-    else if (['1', '2', '3'].includes(k) && slides[cur].c) {
-      const base = 1 + bo.cau.indexOf(slides[cur].c) * 3; ve(base + Number(k) - 1);
+    else if (['1', '2', '3', '4'].includes(k) && slides[cur].c) {
+      // 1 Đề · 2 Gợi ý công thức (cùng slide Đề) · 3 Đáp án · 4 Giải thích
+      const base = 1 + bo.cau.indexOf(slides[cur].c) * 3;
+      if (k === '1' || k === '2') ve(base, k === '2' ? 1 : 0);
+      else ve(base + Number(k) - 2, 0);
     }
   }
 
@@ -457,7 +508,7 @@
     document.title = bo.tieu_de + ' · Trình chiếu · ThS. Đinh Quốc Tuấn';
     dungDanhSach();
     veMucLuc();
-    await ve(parseInt(qs.get('s') || '0', 10) || 0);
+    await ve(parseInt(qs.get('s') || '0', 10) || 0, 0);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitAll($('khung')));
 
     document.addEventListener('keydown', phim);
@@ -465,10 +516,10 @@
     $('khung').addEventListener('click', (e) => {
       const b = e.target.closest('[data-tao]');
       if (b) { taoLoiGiai(b.dataset.tao, b); return; }
-      if (!e.target.closest('a,button')) ve(cur + (e.clientX > window.innerWidth / 3 ? 1 : -1));
+      if (!e.target.closest('a,button')) { if (e.clientX > window.innerWidth / 3) tiep(); else lui(); }
     });
-    $('btn-truoc').onclick = () => ve(cur - 1);
-    $('btn-sau').onclick = () => ve(cur + 1);
+    $('btn-truoc').onclick = lui;
+    $('btn-sau').onclick = tiep;
     $('btn-ml').onclick = () => moMucLuc(true);
     $('btn-fs').onclick = toanManHinh;
     $('btn-khoa').onclick = doiKhoa;
@@ -477,12 +528,12 @@
     $('btn-tt').classList.toggle('chinh', tuongTac);
     $('muc-luc').addEventListener('click', (e) => {
       const b = e.target.closest('[data-den]');
-      if (b) { moMucLuc(false); ve(Number(b.dataset.den)); } else if (e.target.id === 'muc-luc') moMucLuc(false);
+      if (b) { moMucLuc(false); ve(Number(b.dataset.den), 0); } else if (e.target.id === 'muc-luc') moMucLuc(false);
     });
     // Vuốt trên màn hình cảm ứng
     let x0 = null;
     document.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
-    document.addEventListener('touchend', (e) => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) ve(cur + (dx < 0 ? 1 : -1)); x0 = null; });
+    document.addEventListener('touchend', (e) => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) { if (dx < 0) tiep(); else lui(); } x0 = null; });
     hienDock();
   }
 

@@ -119,7 +119,7 @@
 
   <section class="the" id="the-nhap" hidden>
     <h2>Nhập đề từ Google Drive</h2>
-    <p>Mỗi câu của đề sẽ thành 3 slide: <b>Đề</b> (chữ to, tự co giãn lấp đầy khung) → <b>Đáp án</b> → <b>Giải thích từng bước</b> cho học sinh yếu (hệ thống soạn, thầy duyệt).</p>
+    <p>Mỗi câu của đề sẽ trình chiếu theo 4 bước, mỗi lần bấm hiện thêm một bước: <b>Đề</b> (chữ to, tự co giãn lấp đầy khung) → <b>Gợi ý công thức</b> (hiện thêm ngay trên slide đề, không đổi slide) → <b>Đáp án</b> → <b>Giải thích từng bước</b> cho học sinh yếu (hệ thống soạn, thầy duyệt).</p>
     <ol class="buoc-nhap">
       <li>Mở Google Drive → thư mục <b>DAYKEM</b> → Toan6 / Toan7 / Toan8 / KHTN…</li>
       <li>Chọn file đề <code>.html</code> → bấm <b>Tải xuống</b> (có thể chọn nhiều file một lần).</li>
@@ -369,6 +369,7 @@ function veDuyetCau(b, c) {
     <div class="dc-head"><b>${esc(c.so)}</b><span class="chip">${LOAI[c.loai]}${c.dap_an ? ' · ĐA ' + esc(c.dap_an) : ''}</span>${chip}<span class="de-tom">${esc(vanBan(c.de_html).slice(0, 140))}</span></div>
     ${g && g.cac_buoc?.length ? `<div class="dc-giai">
       ${g.kien_thuc ? `<div><b>Cần nhớ:</b> ${esc(g.kien_thuc)}</div>` : ''}
+      ${g.cong_thuc?.length ? `<div><b>Gợi ý công thức:</b> ${g.cong_thuc.map((x) => esc(x)).join(' · ')}</div>` : ''}
       <ol>${g.cac_buoc.map((s) => `<li>${s.tieu_de ? '<b>' + esc(s.tieu_de) + ':</b> ' : ''}${esc(s.noi_dung)}</li>`).join('')}</ol>
       ${g.loi_thuong_gap ? `<div><b>Lỗi hay gặp:</b> ${esc(g.loi_thuong_gap)}</div>` : ''}
       ${g.ghi_chu_giao_vien ? `<div class="gv"><b>Ghi chú cho thầy:</b> ${esc(g.ghi_chu_giao_vien)}</div>` : ''}
@@ -391,6 +392,7 @@ function moSua(boId, cauId) {
   const el = $(`dc-${boId}-${cauId}`);
   el.insertAdjacentHTML('beforeend', `<div class="sua">
     <label>Cần nhớ</label><textarea data-f="kien_thuc">${esc(g.kien_thuc || '')}</textarea>
+    <label>Gợi ý công thức — mỗi dòng một công thức, hiện trên slide đề trước khi xem đáp án (tối đa 4 dòng, không chứa đáp án)</label><textarea data-f="cong_thuc">${esc((g.cong_thuc || []).join('\n'))}</textarea>
     <label>Các bước (mỗi dòng một bước; dạng "Tiêu đề: nội dung")</label><textarea data-f="buoc" style="min-height:120px">${esc((g.cac_buoc || []).map((s) => (s.tieu_de ? s.tieu_de + ': ' : '') + s.noi_dung).join('\n'))}</textarea>
     <label>Lỗi hay gặp</label><textarea data-f="loi_thuong_gap">${esc(g.loi_thuong_gap || '')}</textarea>
     <div class="dc-act"><button class="btn btn-chinh btn-sm" type="button" data-c-luu="${boId}|${cauId}">Lưu và đánh dấu đã duyệt</button></div></div>`);
@@ -419,6 +421,7 @@ $('ds-bo').addEventListener('click', async (e) => {
       if (d.cLuu) {
         const box = t.closest('.sua'), f = (k) => box.querySelector(`[data-f="${k}"]`).value.trim();
         g.kien_thuc = f('kien_thuc'); g.loi_thuong_gap = f('loi_thuong_gap');
+        g.cong_thuc = f('cong_thuc').split('\n').map((x) => x.trim()).filter(Boolean).slice(0, 4);
         g.cac_buoc = f('buoc').split('\n').map((s) => s.trim()).filter(Boolean).map((s) => {
           const m = s.match(/^([^:]{1,60}):\s*(.+)$/); return m ? { tieu_de: m[1], noi_dung: m[2] } : { tieu_de: '', noi_dung: s };
         });
