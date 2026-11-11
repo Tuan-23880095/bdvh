@@ -162,6 +162,29 @@
           </div>
         </div>
       </div>
+
+      <!-- HỘP SINH ĐỀ ĐỘNG TỰ ĐỘNG TỪ NGÂN HÀNG 54.000+ CÂU HỎI -->
+      <div class="dyn-exam-card" style="margin-bottom: 1.5rem; background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%); border: 1px solid #a7f3d0; border-radius: 1rem; padding: 1.25rem 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+            <span style="background: #059669; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 0.375rem; text-transform: uppercase;">Mới · Ngân hàng 54k+ câu</span>
+            <h3 style="margin: 0; font-size: 1.1rem; color: #065f46; font-weight: 700;">Luyện thi ngẫu nhiên không giới hạn</h3>
+          </div>
+          <p style="margin: 0; font-size: 0.85rem; color: #047857;">Mỗi lần bấm là một đề thi mới tinh với tỷ lệ chuẩn GDPT 2018 (Nhận biết – Thông hiểu – Vận dụng) từ Ngân hàng đề thi ThS. Đinh Quốc Tuấn.</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+          <select id="dyn-num-select" style="padding: 0.5rem 0.75rem; font-size: 0.85rem; font-weight: 600; border-radius: 0.5rem; border: 1px solid #10b981; background: #fff; color: #065f46;">
+            <option value="10">10 câu (15 phút)</option>
+            <option value="12" selected>12 câu (25 phút - Chuẩn bài)</option>
+            <option value="20">20 câu (45 phút - Giữa kỳ)</option>
+            <option value="30">30 câu (60 phút - Cuối kỳ)</option>
+          </select>
+          <button type="button" class="btn btn-chinh" id="btn-dyn-generate" onclick="taoDeNgauNhien()" style="box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);">
+            <svg class="ico"><use href="#i-arrow"/></svg> <span>Sinh đề & Thi ngay</span>
+          </button>
+        </div>
+      </div>
+
       <table class="de-table">
         <thead><tr><th>Đề</th><th>Khối</th><th>Thời gian</th><th class="col-act"><span class="sr-only">Làm bài</span></th></tr></thead>
         <tbody id="de-tbody"><tr><td colspan="4" class="trong">Đang tải danh sách đề…</td></tr></tbody>
@@ -602,6 +625,42 @@ async function taiDe() {
 }
 async function demTongDe() {
   try { const d = await api('list_exams'); if (d.status === 'success') $('fact-so-de').textContent = d.exams.length; } catch (e) {}
+}
+
+/* ---------- Sinh đề ngẫu nhiên từ Ngân hàng 54k+ câu hỏi ---------- */
+async function taoDeNgauNhien() {
+  const btn = $('btn-dyn-generate');
+  const numSelect = $('dyn-num-select');
+  const num = numSelect ? numSelect.value : 12;
+  const grade = khoiDangChon || 'L10';
+  
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<svg class="ico"><use href="#i-clock"/></svg> <span>Đang bốc đề...</span>';
+  }
+  
+  try {
+    const res = await fetch(`api.php?action=generate_dynamic_exam&grade=${encodeURIComponent(grade)}&num_questions=${num}`);
+    const data = await res.json();
+    if (data.status === 'success' && data.exam && data.exam.exam_code) {
+      toast('Đã tạo đề thi thành công! Đang chuyển vào phòng thi...', 'ok');
+      setTimeout(() => {
+        window.location.href = `thi.html?exam_code=${encodeURIComponent(data.exam.exam_code)}`;
+      }, 600);
+    } else {
+      toast(data.message || 'Lỗi khi tạo đề ngẫu nhiên', 'loi');
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = '<svg class="ico"><use href="#i-arrow"/></svg> <span>Sinh đề & Thi ngay</span>';
+      }
+    }
+  } catch (err) {
+    toast('Lỗi kết nối máy chủ khi tạo đề', 'loi');
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = '<svg class="ico"><use href="#i-arrow"/></svg> <span>Sinh đề & Thi ngay</span>';
+    }
+  }
 }
 
 /* ---------- Tài khoản & mã lớp ---------- */

@@ -770,6 +770,195 @@ switch ($action) {
         json_out(['status' => 'success', 'exams' => $exams]);
         break;
 
+    // 4b. Sinh đề thi động ngẫu nhiên từ Ngân hàng 54.000+ câu hỏi (Database bdvh_exam_bank.sqlite)
+    case 'generate_dynamic_exam':
+        $reqGrade = trim((string)($_GET['grade'] ?? $inputData['grade'] ?? '10'));
+        $reqSubject = trim((string)($_GET['subject'] ?? $inputData['subject'] ?? 'Toán'));
+        $reqNum = (int)($_GET['num_questions'] ?? $inputData['num_questions'] ?? 12);
+        if ($reqNum < 5) $reqNum = 5;
+        if ($reqNum > 40) $reqNum = 40;
+
+        $customTitle = trim((string)($_GET['title'] ?? $inputData['title'] ?? ''));
+        $timeMinutes = (int)($_GET['time_minutes'] ?? $inputData['time_minutes'] ?? 0);
+        if ($timeMinutes <= 0) {
+            $timeMinutes = ($reqNum <= 10) ? 15 : (($reqNum <= 20) ? 30 : 45);
+        }
+
+        $bankDbFile = __DIR__ . '/database/bdvh_exam_bank.sqlite';
+        if (!file_exists($bankDbFile)) {
+            json_out(['status' => 'error', 'message' => 'Ngân hàng câu hỏi chưa được kích hoạt trên hệ thống.'], 500);
+        }
+
+        try {
+            $bankPdo = new PDO('sqlite:' . $bankDbFile);
+            $bankPdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $bankPdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+            // Xác định điều kiện khối lớp
+            $gradeCond = "";
+            $gradeNorm = strtoupper($reqGrade);
+            $gradeDisplay = 'Lớp 10';
+
+            if (strpos($gradeNorm, 'DGNL') !== false) {
+                $gradeCond = "grade LIKE 'DGNL%'";
+                $gradeDisplay = 'ĐGNL ĐHQG-HCM';
+            } elseif ($gradeNorm === '10' || $gradeNorm === 'L10') {
+                $gradeCond = "grade IN ('10', 'L10')";
+                $gradeDisplay = 'Lớp 10';
+            } elseif ($gradeNorm === '11' || $gradeNorm === 'L11') {
+                $gradeCond = "grade IN ('11', 'L11')";
+                $gradeDisplay = 'Lớp 11';
+            } elseif ($gradeNorm === '12' || $gradeNorm === 'L12') {
+                $gradeCond = "grade IN ('12', 'L12')";
+                $gradeDisplay = 'Lớp 12';
+            } elseif ($gradeNorm === '6' || $gradeNorm === 'L6') {
+                $gradeCond = "grade IN ('6', 'L6')";
+                $gradeDisplay = 'Lớp 6';
+            } elseif ($gradeNorm === '7' || $gradeNorm === 'L7') {
+                $gradeCond = "grade IN ('7', 'L7')";
+                $gradeDisplay = 'Lớp 7';
+            } elseif ($gradeNorm === '8' || $gradeNorm === 'L8') {
+                $gradeCond = "grade IN ('8', 'L8')";
+                $gradeDisplay = 'Lớp 8';
+            } elseif ($gradeNorm === '9' || $gradeNorm === 'L9') {
+                $gradeCond = "grade IN ('9', 'L9')";
+                $gradeDisplay = 'Lớp 9';
+            } else {
+                $gradeCond = "1=1";
+                $gradeDisplay = 'Toàn diện';
+            }
+
+            // Tỷ lệ phân bổ ma trận nhận thức: 40% NB, 40% TH, 20% VD
+            $nbTarget = (int)round($reqNum * 0.4);
+            $thTarget = (int)round($reqNum * 0.4);
+            $vdTarget = $reqNum - ($nbTarget + $thTarget);
+            if ($vdTarget < 1) $vdTarget = 1;
+
+            $selectedRows = [];
+            $selectedIds = [];
+
+            // Hàm bốc câu hỏi theo mức độ
+            $fetchByLevel = function(string $levelCond, int $limit) use ($bankPdo, $gradeCond, &$selectedIds) {
+                if ($limit <= 0) return [];
+                $excludeSql = !empty($selectedIds) ? " AND id NOT IN (" . implode(',', $selectedIds) . ")" : "";
+                $sql = "SELECT id, grade, cognitive_level, content_html, options_json, correct_answer, explanation_html 
+                        FROM questions 
+                        WHERE $gradeCond 
+                          AND question_format IN ('MCQ', 'MCQ_4', 'MCQ_SINGLE') 
+                          AND length(options_json) > 10 
+                          AND options_json LIKE '%\"B.%' 
+                          AND $levelCond 
+                          $excludeSql 
+                        ORDER BY RANDOM() LIMIT " . ($limit * 3);
+                $stmt = $bankPdo->query($sql);
+                $candidates = $stmt ? $stmt->fetchAll() : [];
+                $picked = [];
+                foreach ($candidates as $row) {
+                    $opts = json_decode($row['options_json'], true);
+                    if (is_array($opts) && count($opts) >= 4) {
+                        $picked[] = $row;
+                        $selectedIds[] = (int)$row['id'];
+                        if (count($picked) >= $limit) break;
+                    }
+                }
+                return $picked;
+            };
+
+            // Bốc 3 mức độ
+            $nbRows = $fetchByLevel("cognitive_level = 'NB'", $nbTarget);
+            $thRows = $fetchByLevel("cognitive_level = 'TH'", $thTarget);
+            $vdRows = $fetchByLevel("cognitive_level IN ('VD', 'VDC')", $vdTarget);
+
+            $selectedRows = array_merge($nbRows, $thRows, $vdRows);
+
+            // Bổ sung nếu chưa đủ câu
+            if (count($selectedRows) < $reqNum) {
+                $remain = $reqNum - count($selectedRows);
+                $moreRows = $fetchByLevel("1=1", $remain);
+                $selectedRows = array_merge($selectedRows, $moreRows);
+            }
+
+            if (empty($selectedRows)) {
+                json_out(['status' => 'error', 'message' => 'Không tìm thấy câu hỏi phù hợp trong ngân hàng dữ liệu.'], 404);
+            }
+
+            // Chuẩn hóa câu hỏi theo chuẩn thi bdvh
+            $questionsList = [];
+            $ansMap = ['A' => 0, 'B' => 1, 'C' => 2, 'D' => 3];
+            $counts = ['NB' => 0, 'TH' => 0, 'VD' => 0];
+
+            foreach ($selectedRows as $row) {
+                $opts = json_decode($row['options_json'], true);
+                if (!is_array($opts)) $opts = [];
+                $cleanOpts = [];
+                for ($oi = 0; $oi < 4; $oi++) {
+                    $optText = isset($opts[$oi]) ? (string)$opts[$oi] : '';
+                    $cleanOpts[] = trim(preg_replace('/^[A-D][\.:\)]\s*/u', '', $optText));
+                }
+
+                $rawAns = strtoupper(trim((string)$row['correct_answer']));
+                $ansIdx = $ansMap[$rawAns] ?? (is_numeric($rawAns) ? (int)$rawAns : 0);
+                if ($ansIdx < 0 || $ansIdx > 3) $ansIdx = 0;
+
+                $sec = 'Thông hiểu';
+                $cl = $row['cognitive_level'] ?? 'TH';
+                if ($cl === 'NB') {
+                    $sec = 'Nhận biết';
+                    $counts['NB']++;
+                } elseif (in_array($cl, ['VD', 'VDC'])) {
+                    $sec = 'Vận dụng';
+                    $counts['VD']++;
+                } else {
+                    $counts['TH']++;
+                }
+
+                $questionsList[] = [
+                    'q' => $row['content_html'],
+                    'type' => 'choice',
+                    'section' => $sec,
+                    'opts' => $cleanOpts,
+                    'ans' => $ansIdx,
+                    'exp' => $row['explanation_html'] ?? ''
+                ];
+            }
+
+            // Tiêu đề & mã đề
+            $title = $customTitle !== '' ? $customTitle : "Đề Luyện Tập $gradeDisplay: $reqSubject (" . count($questionsList) . " câu ngẫu nhiên)";
+            $examCode = 'DYN_' . preg_replace('/[^A-Za-z0-9]/', '', $gradeNorm) . '_' . date('Ymd_His') . '_' . substr(bin2hex(random_bytes(3)), 0, 4);
+
+            // Lưu đề mới vào bdvh_exams
+            $stmtInsert = $pdo->prepare("INSERT INTO bdvh_exams (exam_code, grade, subject, title, description, time_minutes, questions_json, competency_matrix, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'ACTIVE', $nowSql)");
+            $stmtInsert->execute([
+                $examCode,
+                $gradeDisplay,
+                $reqSubject,
+                $title,
+                "Đề luyện tập sinh ngẫu nhiên từ Ngân hàng 54.000+ câu hỏi chuẩn GDPT 2018 (ThS. Đinh Quốc Tuấn - TTBDVH HCMUS).",
+                $timeMinutes,
+                json_encode($questionsList, JSON_UNESCAPED_UNICODE),
+                json_encode($counts, JSON_UNESCAPED_UNICODE)
+            ]);
+            $examId = (int)$pdo->lastInsertId();
+
+            json_out([
+                'status' => 'success',
+                'message' => 'Đã sinh đề thi ngẫu nhiên thành công.',
+                'exam' => [
+                    'exam_id' => $examId,
+                    'exam_code' => $examCode,
+                    'title' => $title,
+                    'grade' => $gradeDisplay,
+                    'time_minutes' => $timeMinutes,
+                    'total_questions' => count($questionsList),
+                    'matrix' => $counts
+                ],
+                'redirect_url' => 'thi.html?exam_code=' . urlencode($examCode)
+            ]);
+        } catch (Throwable $e) {
+            json_out(['status' => 'error', 'message' => 'Lỗi tạo đề thi: ' . $e->getMessage()], 500);
+        }
+        break;
+
     // 5. Lấy đề thi vào phòng làm bài (MỌI HỌC SINH ĐỀU ĐƯỢC VÀO THI MIỄN PHÍ KHÔNG GIỚI HẠN)
     case 'get_exam':
         $examId = (int)($_GET['exam_id'] ?? $inputData['exam_id'] ?? 0);

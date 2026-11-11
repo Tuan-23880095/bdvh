@@ -5,6 +5,9 @@
 *.log
 error_log
 
+# Cho phép CSDL phát hành chuẩn cho Web BDVH
+!database/bdvh_exam_bank.sqlite
+
 # OS & Editor
 .DS_Store
 Thumbs.db
