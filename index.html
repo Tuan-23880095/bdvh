@@ -353,7 +353,7 @@
         <select class="input" id="tk-khoi">
           <option value="L06">Lớp 6</option><option value="L07" selected>Lớp 7</option><option value="L08">Lớp 8</option>
           <option value="L09">Lớp 9</option><option value="L10">Lớp 10</option><option value="L11">Lớp 11</option>
-          <option value="L12">Lớp 12</option><option value="DGNL">Luyện thi Đánh giá năng lực</option>
+          <option value="L12">Lớp 12</option><option value="DGNL">Luyện thi ĐGNL (ĐHQG-HCM)</option><option value="TSA">Đánh giá tư duy Bách Khoa (TSA)</option>
         </select>
       </div>
     </div>
@@ -426,7 +426,7 @@ const NAM_HOC = { ten: '2026 – 2027', batDau: '2026-09-07' };
 const KHOI = [
   { ma: 'L06', ten: 'Lớp 6' }, { ma: 'L07', ten: 'Lớp 7' }, { ma: 'L08', ten: 'Lớp 8' },
   { ma: 'L09', ten: 'Lớp 9' }, { ma: 'L10', ten: 'Lớp 10' }, { ma: 'L11', ten: 'Lớp 11' },
-  { ma: 'L12', ten: 'Lớp 12' }, { ma: 'DGNL', ten: 'Luyện thi ĐGNL' }
+  { ma: 'L12', ten: 'Lớp 12' }, { ma: 'DGNL', ten: 'Luyện thi ĐGNL' }, { ma: 'TSA', ten: 'ĐGTD Bách Khoa (TSA)' }
 ];
 const DATA = window.SYLLABUS_DATA || {};
 
@@ -599,7 +599,11 @@ function chonPhamViDe(v) {
   $('seg-tat-ca').setAttribute('aria-pressed', v === 'tat-ca');
   taiDe();
 }
-function tenKhoi(g) { return g === 'DGNL' ? 'Đánh giá năng lực học tập và tư duy' : 'Lớp ' + String(g).replace(/^L0?/, ''); }
+function tenKhoi(g) { 
+  if (g === 'DGNL') return 'Đánh giá năng lực học tập và tư duy (VNU-HCM)';
+  if (g === 'TSA') return 'Đánh giá tư duy Bách Khoa (TSA Hà Nội)';
+  return 'Lớp ' + String(g).replace(/^L0?/, ''); 
+}
 async function taiDe() {
   const tb = $('de-tbody');
   try {
