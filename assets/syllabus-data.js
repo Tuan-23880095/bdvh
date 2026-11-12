@@ -227,14 +227,28 @@ window.SYLLABUS_DATA = {
       'DGNL': {
         title: 'Chuyên Đề Luyện Thi Đánh giá năng lực học tập và tư duy 2026',
         currentWeek: 8,
-        currentWeekFocus: 'Tuần 8: Tư duy Định lượng, Suy luận Logic & Xử lý số liệu bảng biểu',
+        currentWeekFocus: 'Tuần 8: Khảo thí Tư duy 5 chiều (Ngôn ngữ, Định lượng, Logic, Số liệu, Khoa học)',
         chapters: [
           {
-            chapterId: 'cdgnl_1',
-            chapterTitle: 'Phần 1: Tư Duy Định Lượng (Toán Học & Suy Luận Số Liệu)',
+            chapterId: 'cdgnl_vip',
+            chapterTitle: 'Phần 1: Bộ 12 Đề Thi Thử Chuẩn Mẫu 120 Câu APT ĐHQG-HCM 2025',
             lessons: [
-              { id: 'dgnl-01', week: 8, title: 'Đề số 01: Tư duy Định lượng & Logic suy luận (Bộ đề chuẩn)', examCode: 'DGNL_2026_01', isExamFocus: true, isCurrent: true, theory: 'Cấu trúc đề đánh giá năng lực: Đại số, Hình học, Xác suất thống kê, Đọc hiểu biểu đồ ma trận.', exercise: '30 câu trắc nghiệm 4 lựa chọn, phân tích tốc độ dưới 1.5 phút/câu.' },
-              { id: 'dgnl-02', week: 8, title: 'Đề số 02: Xử lý bảng biểu dữ liệu thực tế & Logic sắp xếp', examCode: 'DGNL_2026_02', isExamFocus: true, isCurrent: true, theory: 'Quy tắc suy luận Modus Ponens, bài toán xếp chỗ, tính tỷ trọng doanh thu và xác suất Venn.', exercise: 'Thực hành phân tích ma trận dữ liệu thực tế đề thi 2026.' }
+              { id: 'dgnl-vip-01', week: 8, title: 'Đề VIP 01: Chuẩn Cấu Trúc APT 120 Câu (Ngôn ngữ, Toán, Khoa học)', examCode: 'VACT_VIP_01', isExamFocus: true, isCurrent: true, theory: '120 câu hỏi 4 lựa chọn (150 phút): Ngôn ngữ 60 câu, Toán học 30 câu, Tư duy khoa học 30 câu.', exercise: 'Luyện tập toàn diện tốc độ và độ chính xác tư duy.' },
+              { id: 'dgnl-vip-02', week: 8, title: 'Đề VIP 02: Chuẩn Cấu Trúc APT 120 Câu (Có giải chi tiết)', examCode: 'VACT_VIP_02', isExamFocus: true, theory: 'Rèn luyện khả năng phân bổ thời gian 150 phút, đánh giá ma trận 5 chiều năng lực tư duy.', exercise: 'Làm bài thi thử trực tuyến và nhận báo cáo khảo thí tư duy.' },
+              { id: 'dgnl-vip-03', week: 8, title: 'Đề VIP 03: Chuẩn Cấu Trúc APT 120 Câu (Có giải chi tiết)', examCode: 'VACT_VIP_03', isExamFocus: true, theory: 'Tập trung tư duy suy luận logic và giải quyết vấn đề khoa học đa ngành.', exercise: 'Đo lường năng lực và độ bền tư duy 150 phút.' },
+              { id: 'dgnl-vip-04', week: 8, title: 'Đề VIP 04: Chuẩn Cấu Trúc APT 120 Câu (Có giải chi tiết)', examCode: 'VACT_VIP_04', isExamFocus: true, theory: 'Rèn luyện kỹ năng đọc hiểu biểu đồ, phân tích ma trận số liệu thực tế.', exercise: 'Làm bài thi và kiểm tra đối chiếu lời giải chi tiết.' },
+              { id: 'dgnl-vip-05', week: 8, title: 'Đề VIP 05: Chuẩn Cấu Trúc APT 120 Câu (Có giải chi tiết)', examCode: 'VACT_VIP_05', isExamFocus: true, theory: 'Tập trung chuyên sâu câu hỏi chùm (Stimulus reading context).', exercise: 'Khảo sát và rèn luyện kỹ năng phân tích bối cảnh bài đọc.' }
+            ]
+          },
+          {
+            chapterId: 'cdgnl_mini',
+            chapterTitle: 'Phần 2: Mini-Tests Chuyên Sâu Rèn Luyện 5 Chiều Năng Lực (15–30 phút)',
+            lessons: [
+              { id: 'dgnl-mini-logic', week: 8, title: 'Mini-Test Logic: Tư Duy Suy Luận Logic Chuyên Sâu (15 câu)', examCode: 'MINI_LOGIC_01', isExamFocus: true, theory: 'Quy tắc suy luận Modus Ponens, bài toán hoán vị sắp xếp thứ tự, giả định mệnh đề và người nói dối.', exercise: '15 câu hỏi suy luận logic bấm giờ 25 phút.' },
+              { id: 'dgnl-mini-solieu', week: 8, title: 'Mini-Test Số Liệu: Phân Tích & Đọc Biểu Đồ Số Liệu (15 câu)', examCode: 'MINI_SO_LIEU_01', isExamFocus: true, theory: 'Kỹ thuật đọc biểu đồ cột, biểu đồ tròn, bảng số liệu kinh tế - xã hội, tính tỉ lệ tăng trưởng phần trăm.', exercise: '15 câu hỏi xử lý số liệu thực tế bấm giờ 25 phút.' },
+              { id: 'dgnl-mini-toan', week: 8, title: 'Mini-Test Định Lượng: Mô Hình Toán & Tối Ưu Hóa (20 câu)', examCode: 'MINI_TOAN_01', isExamFocus: true, theory: 'Ứng dụng đạo hàm, hình học không gian Oxyz, bài toán cực trị thực tế và xác suất thống kê.', exercise: '20 câu trắc nghiệm định lượng bấm giờ 30 phút.' },
+              { id: 'dgnl-mini-khoahoc', week: 8, title: 'Mini-Test Khoa Học: Tự Nhiên & Thực Nghiệm (20 câu)', examCode: 'MINI_KHOA_HOC_01', isExamFocus: true, theory: 'Vận dụng kiến thức liên môn Vật lý, Hóa học, Sinh học để giải thích các hiện tượng thực nghiệm.', exercise: '20 câu suy luận khoa học bấm giờ 30 phút.' },
+              { id: 'dgnl-mini-ngonngu', week: 8, title: 'Mini-Test Ngôn Ngữ: Đọc Hiểu & Ngữ Pháp Tiếng Anh (20 câu)', examCode: 'MINI_TIENG_ANH_01', isExamFocus: true, theory: 'Kỹ năng Skimming & Scanning, nhận diện lỗi sai ngữ pháp, từ vựng theo ngữ cảnh bài thi ĐGNL.', exercise: '20 câu trắc nghiệm tiếng Anh bấm giờ 25 phút.' }
             ]
           }
         ]
