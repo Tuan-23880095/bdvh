@@ -811,21 +811,35 @@ switch ($action) {
             } elseif ($gradeNorm === '12' || $gradeNorm === 'L12') {
                 $gradeCond = "grade IN ('12', 'L12')";
                 $gradeDisplay = 'Lớp 12';
-            } elseif ($gradeNorm === '6' || $gradeNorm === 'L6') {
-                $gradeCond = "grade IN ('6', 'L6')";
+            } elseif ($gradeNorm === '6' || $gradeNorm === 'L6' || $gradeNorm === 'L06') {
+                $gradeCond = "grade IN ('6', 'L6', 'L06')";
                 $gradeDisplay = 'Lớp 6';
-            } elseif ($gradeNorm === '7' || $gradeNorm === 'L7') {
-                $gradeCond = "grade IN ('7', 'L7')";
+            } elseif ($gradeNorm === '7' || $gradeNorm === 'L7' || $gradeNorm === 'L07') {
+                $gradeCond = "grade IN ('7', 'L7', 'L07')";
                 $gradeDisplay = 'Lớp 7';
-            } elseif ($gradeNorm === '8' || $gradeNorm === 'L8') {
-                $gradeCond = "grade IN ('8', 'L8')";
+            } elseif ($gradeNorm === '8' || $gradeNorm === 'L8' || $gradeNorm === 'L08') {
+                $gradeCond = "grade IN ('8', 'L8', 'L08')";
                 $gradeDisplay = 'Lớp 8';
-            } elseif ($gradeNorm === '9' || $gradeNorm === 'L9') {
-                $gradeCond = "grade IN ('9', 'L9')";
+            } elseif ($gradeNorm === '9' || $gradeNorm === 'L9' || $gradeNorm === 'L09') {
+                $gradeCond = "grade IN ('9', 'L9', 'L09')";
                 $gradeDisplay = 'Lớp 9';
             } else {
                 $gradeCond = "1=1";
                 $gradeDisplay = 'Toàn diện';
+            }
+
+            // Bộ lọc bắt buộc theo Môn học (tránh bốc nhầm môn Văn/Sử/Địa vào đề Toán)
+            $subjectCond = "subject IN ('Toán', 'Toan')";
+            if (stripos($reqSubject, 'văn') !== false || stripos($reqSubject, 'tiếng việt') !== false) {
+                $subjectCond = "subject IN ('TiengViet', 'Ngữ văn')";
+            } elseif (stripos($reqSubject, 'anh') !== false) {
+                $subjectCond = "subject IN ('TiengAnh', 'Tiếng Anh')";
+            } elseif (stripos($reqSubject, 'hóa') !== false) {
+                $subjectCond = "subject IN ('HoaHoc', 'Hóa học')";
+            } elseif (stripos($reqSubject, 'lý') !== false) {
+                $subjectCond = "subject IN ('VatLy', 'Vật lý')";
+            } elseif (stripos($reqSubject, 'sinh') !== false) {
+                $subjectCond = "subject IN ('SinhHoc', 'Sinh học')";
             }
 
             // Tỷ lệ phân bổ ma trận nhận thức: 40% NB, 40% TH, 20% VD
@@ -837,17 +851,24 @@ switch ($action) {
             $selectedRows = [];
             $selectedIds = [];
 
-            // Hàm bốc câu hỏi theo mức độ
-            $fetchByLevel = function(string $levelCond, int $limit) use ($bankPdo, $gradeCond, &$selectedIds) {
+            // Hàm bốc câu hỏi theo mức độ (đảm bảo sạch 100%, không rác MathType, đúng môn, đúng khối)
+            $fetchByLevel = function(string $levelCond, int $limit) use ($bankPdo, $gradeCond, $subjectCond, &$selectedIds) {
                 if ($limit <= 0) return [];
                 $excludeSql = !empty($selectedIds) ? " AND id NOT IN (" . implode(',', $selectedIds) . ")" : "";
                 $sql = "SELECT id, grade, cognitive_level, content_html, options_json, correct_answer, explanation_html 
                         FROM questions 
                         WHERE $gradeCond 
+                          AND $subjectCond
                           AND question_format IN ('MCQ', 'MCQ_4', 'MCQ_SINGLE') 
                           AND length(options_json) > 10 
                           AND content_html NOT LIKE '%hình vẽ%' 
                           AND content_html NOT LIKE '%đồ thị%' 
+                          AND content_html NOT LIKE '%MAI TRẦN NHẬT KHOA%'
+                          AND options_json NOT LIKE '%MAI TRẦN NHẬT KHOA%'
+                          AND id NOT IN (11839, 12454)
+                          AND $levelCond 
+                          $excludeSql 
+                        ORDER BY RANDOM() LIMIT " . ($limit * 3); 
                           AND $levelCond 
                           $excludeSql 
                         ORDER BY RANDOM() LIMIT " . ($limit * 3);
