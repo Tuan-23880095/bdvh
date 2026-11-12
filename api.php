@@ -846,6 +846,8 @@ switch ($action) {
                         WHERE $gradeCond 
                           AND question_format IN ('MCQ', 'MCQ_4', 'MCQ_SINGLE') 
                           AND length(options_json) > 10 
+                          AND content_html NOT LIKE '%hình vẽ%' 
+                          AND content_html NOT LIKE '%đồ thị%' 
                           AND $levelCond 
                           $excludeSql 
                         ORDER BY RANDOM() LIMIT " . ($limit * 3);
