@@ -846,7 +846,6 @@ switch ($action) {
                         WHERE $gradeCond 
                           AND question_format IN ('MCQ', 'MCQ_4', 'MCQ_SINGLE') 
                           AND length(options_json) > 10 
-                          AND options_json LIKE '%\"B.%' 
                           AND $levelCond 
                           $excludeSql 
                         ORDER BY RANDOM() LIMIT " . ($limit * 3);
@@ -912,8 +911,13 @@ switch ($action) {
                     $counts['TH']++;
                 }
 
+                $cleanContent = preg_replace('/<br\s*\/?>/i', "\n", $row['content_html']);
+                $cleanContent = preg_replace('/^<p>\s*/i', '', $cleanContent);
+                $cleanContent = preg_replace('/\s*<\/p>$/i', '', $cleanContent);
+                $cleanContent = trim($cleanContent);
+
                 $questionsList[] = [
-                    'q' => $row['content_html'],
+                    'q' => $cleanContent,
                     'type' => 'choice',
                     'section' => $sec,
                     'opts' => $cleanOpts,
