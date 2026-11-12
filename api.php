@@ -868,9 +868,6 @@ switch ($action) {
                           AND id NOT IN (11839, 12454)
                           AND $levelCond 
                           $excludeSql 
-                        ORDER BY RANDOM() LIMIT " . ($limit * 3); 
-                          AND $levelCond 
-                          $excludeSql 
                         ORDER BY RANDOM() LIMIT " . ($limit * 3);
                 $stmt = $bankPdo->query($sql);
                 $candidates = $stmt ? $stmt->fetchAll() : [];
