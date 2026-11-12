@@ -353,7 +353,7 @@
         <select class="input" id="tk-khoi">
           <option value="L06">Lớp 6</option><option value="L07" selected>Lớp 7</option><option value="L08">Lớp 8</option>
           <option value="L09">Lớp 9</option><option value="L10">Lớp 10</option><option value="L11">Lớp 11</option>
-          <option value="L12">Lớp 12</option><option value="DGNL">Luyện thi ĐGNL (ĐHQG-HCM)</option><option value="TSA">Đánh giá tư duy Bách Khoa (TSA)</option><option value="DGNL_CHUYEN_DE">Chuyên đề Logic & Số liệu (Mai Thành Luân)</option>
+          <option value="L12">Lớp 12</option><option value="DGNL">Luyện thi ĐGNL (ĐHQG-HCM)</option><option value="TSA">Đánh giá tư duy Bách Khoa (TSA)</option><option value="HSA">Đánh giá năng lực ĐHQG Hà Nội (HSA)</option><option value="HSCA">ĐGNL Chuyên biệt ĐH Sư Phạm (H-SCA)</option><option value="DGNL_CHUYEN_DE">Chuyên đề Logic & Số liệu (Mai Thành Luân)</option>
         </select>
       </div>
     </div>
@@ -426,7 +426,8 @@ const NAM_HOC = { ten: '2026 – 2027', batDau: '2026-09-07' };
 const KHOI = [
   { ma: 'L06', ten: 'Lớp 6' }, { ma: 'L07', ten: 'Lớp 7' }, { ma: 'L08', ten: 'Lớp 8' },
   { ma: 'L09', ten: 'Lớp 9' }, { ma: 'L10', ten: 'Lớp 10' }, { ma: 'L11', ten: 'Lớp 11' },
-  { ma: 'L12', ten: 'Lớp 12' }, { ma: 'DGNL', ten: 'Luyện thi ĐGNL' }, { ma: 'TSA', ten: 'ĐGTD Bách Khoa (TSA)' },
+  { ma: 'L12', ten: 'Lớp 12' }, { ma: 'DGNL', ten: 'Luyện thi ĐGNL (HCM)' }, { ma: 'TSA', ten: 'ĐGTD Bách Khoa (TSA)' },
+  { ma: 'HSA', ten: 'ĐGNL Hà Nội (HSA)' }, { ma: 'HSCA', ten: 'ĐGNL Sư Phạm (H-SCA)' },
   { ma: 'DGNL_CHUYEN_DE', ten: 'Chuyên đề Logic & Số liệu' }
 ];
 const DATA = window.SYLLABUS_DATA || {};
@@ -603,6 +604,8 @@ function chonPhamViDe(v) {
 function tenKhoi(g) { 
   if (g === 'DGNL') return 'Đánh giá năng lực học tập và tư duy (VNU-HCM)';
   if (g === 'TSA') return 'Đánh giá tư duy Bách Khoa (TSA Hà Nội)';
+  if (g === 'HSA') return 'Đánh giá năng lực ĐHQG Hà Nội (HSA)';
+  if (g === 'HSCA') return 'ĐGNL chuyên biệt ĐH Sư Phạm (H-SCA)';
   if (g === 'DGNL_CHUYEN_DE') return 'Chuyên đề Tư duy Logic & Số liệu (Mai Thành Luân)';
   return 'Lớp ' + String(g).replace(/^L0?/, ''); 
 }
