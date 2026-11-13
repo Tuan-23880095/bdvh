@@ -43549,5 +43549,327 @@
         "part": "Toán học Chuyên biệt (H-SCA)"
       }
     ]
+  },
+  {
+    "exam_code": "HOA11_T01_09",
+    "grade": "L11",
+    "subject": "Hóa học",
+    "title": "Khảo sát đầu vào Hóa học 11 (Tuần 1 - 9 KNTT): Cân bằng hóa học & Nitrogen",
+    "description": "24 câu trắc nghiệm chẩn đoán năng lực và lỗ hổng kiến thức 9 tuần đầu Hóa 11 Kết nối tri thức. Có tính giờ 40 phút và tính điểm phần trăm câu đúng.",
+    "time_minutes": 40,
+    "questions": [
+      {
+        "q": "Nhận định nào sau đây là <b>đúng</b> khi nói về trạng thái cân bằng của một phản ứng thuận nghịch?",
+        "type": "choice",
+        "section": "Cân bằng hóa học",
+        "opts": [
+          "Tốc độ của phản ứng thuận bằng tốc độ của phản ứng nghịch ($v_t = v_n \\neq 0$).",
+          "Phản ứng đã dừng lại hoàn toàn, các chất không tiếp tục phản ứng nữa.",
+          "Nồng độ của các chất phản ứng luôn luôn bằng nồng độ của các sản phẩm.",
+          "Phản ứng chỉ diễn ra theo một chiều từ chất phản ứng tạo thành sản phẩm."
+        ],
+        "ans": 0,
+        "explain": "Trạng thái cân bằng hóa học là cân bằng động: ở cấp vi mô, cả hai phản ứng thuận và nghịch vẫn tiếp tục diễn ra với tốc độ bằng nhau ($v_t = v_n \\neq 0$), nồng độ các chất trong hệ không đổi theo thời gian nhưng không nhất thiết phải bằng nhau."
+      },
+      {
+        "q": "Cho cân bằng hóa học: $N_2(g) + 3H_2(g) \\rightleftharpoons 2NH_3(g)$. Biểu thức hằng số cân bằng nồng độ $K_C$ của phản ứng là",
+        "type": "choice",
+        "section": "Cân bằng hóa học",
+        "opts": [
+          "$K_C = \\dfrac{[NH_3]^2}{[N_2] \\cdot [H_2]^3}$",
+          "$K_C = \\dfrac{[N_2] \\cdot [H_2]^3}{[NH_3]^2}$",
+          "$K_C = \\dfrac{2[NH_3]}{[N_2] \\cdot 3[H_2]}$",
+          "$K_C = \\dfrac{[NH_3]}{[N_2] \\cdot [H_2]}$"
+        ],
+        "ans": 0,
+        "explain": "Biểu thức hằng số cân bằng nồng độ $K_C$ bằng tích nồng độ sản phẩm với số mũ tương ứng chia cho tích nồng độ chất phản ứng với số mũ tương ứng: $K_C = \\dfrac{[NH_3]^2}{[N_2] \\cdot [H_2]^3}$."
+      },
+      {
+        "q": "Xét phản ứng thuận nghịch: $C(s) + H_2O(g) \\rightleftharpoons CO(g) + H_2(g)$. Biểu thức hằng số cân bằng $K_C$ của phản ứng là",
+        "type": "choice",
+        "section": "Cân bằng hóa học",
+        "opts": [
+          "$K_C = \\dfrac{[CO] \\cdot [H_2]}{[H_2O]}$",
+          "$K_C = \\dfrac{[CO] \\cdot [H_2]}{[C] \\cdot [H_2O]}$",
+          "$K_C = \\dfrac{[C] \\cdot [H_2O]}{[CO] \\cdot [H_2]}$",
+          "$K_C = \\dfrac{[H_2O]}{[CO] \\cdot [H_2]}$"
+        ],
+        "ans": 0,
+        "explain": "Quy ước cốt tử: Nồng độ của chất rắn nguyên chất (ở đây là than chì Carbon $C(s)$) được coi bằng 1 và không xuất hiện trong biểu thức $K_C$. Do đó: $K_C = \\dfrac{[CO] \\cdot [H_2]}{[H_2O]}$."
+      },
+      {
+        "q": "Cho cân bằng: $2SO_2(g) + O_2(g) \\rightleftharpoons 2SO_3(g) \\quad \\Delta_r H_{298}^\\circ = -198\\text{ kJ} < 0$. Để cân bằng chuyển dịch theo chiều thuận (tạo thêm $SO_3$), ta cần",
+        "type": "choice",
+        "section": "Cân bằng hóa học",
+        "opts": [
+          "Hạ nhiệt độ hoặc tăng nồng độ khí $O_2$.",
+          "Tăng nhiệt độ của hệ phản ứng.",
+          "Giảm áp suất chung của hệ phản ứng.",
+          "Dùng chất xúc tác thích hợp $V_2O_5$."
+        ],
+        "ans": 0,
+        "explain": "Phản ứng có $\\Delta_r H < 0$ là phản ứng tỏa nhiệt. Theo nguyên lý Le Chatelier: Muốn cân bằng dịch sang chiều thuận (chiều tỏa nhiệt), ta phải hạ nhiệt độ ('Giảm T đi chiều tỏa') hoặc tăng nồng độ chất phản ứng ($O_2, SO_2$). Tăng nhiệt độ sẽ làm dịch theo chiều nghịch."
+      },
+      {
+        "q": "Hệ phản ứng thuận nghịch nào sau đây <b>KHÔNG</b> bị chuyển dịch cân bằng khi thay đổi áp suất chung của hệ?",
+        "type": "choice",
+        "section": "Cân bằng hóa học",
+        "opts": [
+          "$H_2(g) + I_2(g) \\rightleftharpoons 2HI(g)$",
+          "$N_2(g) + 3H_2(g) \\rightleftharpoons 2NH_3(g)$",
+          "$2SO_2(g) + O_2(g) \\rightleftharpoons 2SO_3(g)$",
+          "$CaCO_3(s) \\rightleftharpoons CaO(s) + CO_2(g)$"
+        ],
+        "ans": 0,
+        "explain": "Áp suất chỉ ảnh hưởng đến cân bằng của hệ có chất khí và có sự biến đổi số mol khí ($\\Delta n_{(g)} \\neq 0$). Phản ứng $H_2(g) + I_2(g) \\rightleftharpoons 2HI(g)$ có tổng số mol khí hai vế bằng nhau ($1 + 1 = 2\\text{ mol}$ khí), nên khi thay đổi áp suất thì cân bằng không bị chuyển dịch."
+      },
+      {
+        "q": "Khi thêm chất xúc tác vào một phản ứng thuận nghịch đang ở trạng thái cân bằng thì",
+        "type": "choice",
+        "section": "Cân bằng hóa học",
+        "opts": [
+          "Tốc độ phản ứng thuận và nghịch tăng cùng số lần, cân bằng không chuyển dịch và $K_C$ không đổi.",
+          "Cân bằng sẽ chuyển dịch sang chiều thuận làm tăng hiệu suất tạo sản phẩm.",
+          "Giá trị hằng số cân bằng $K_C$ của phản ứng sẽ tăng lên.",
+          "Cân bằng sẽ chuyển dịch sang chiều nghịch làm giảm nồng độ chất phản ứng."
+        ],
+        "ans": 0,
+        "explain": "Chất xúc tác làm giảm năng lượng hoạt hóa, làm tăng tốc độ phản ứng thuận và nghịch với số lần bằng nhau. Do đó, xúc tác chỉ giúp hệ đạt tới trạng thái cân bằng nhanh hơn, hoàn toàn KHÔNG làm chuyển dịch cân bằng và KHÔNG làm thay đổi hằng số $K_C$."
+      },
+      {
+        "q": "Dung dịch chất nào sau đây <b>KHÔNG</b> dẫn điện được?",
+        "type": "choice",
+        "section": "Dung dịch nước",
+        "opts": [
+          "Dung dịch đường saccharose ($C_{12}H_{22}O_{11}$).",
+          "Dung dịch hydrochloric acid ($HCl$).",
+          "Dung dịch sodium hydroxide ($NaOH$).",
+          "Dung dịch potassium nitrate ($KNO_3$)."
+        ],
+        "ans": 0,
+        "explain": "Dung dịch dẫn điện được là nhờ các ion mang điện chuyển động tự do. Đường saccharose là chất không điện li, khi tan trong nước chỉ phân tán thành các phân tử trung hòa điện nên dung dịch không dẫn điện."
+      },
+      {
+        "q": "Theo thuyết acid – base của Brønsted – Lowry, chất hoặc ion nào sau đây đóng vai trò là <b>acid</b> trong phản ứng: $NH_4^+ + H_2O \\rightleftharpoons NH_3 + H_3O^+$?",
+        "type": "choice",
+        "section": "Dung dịch nước",
+        "opts": [
+          "$NH_4^+$",
+          "$NH_3$",
+          "$H_2O$",
+          "Cả $NH_4^+$ và $NH_3$"
+        ],
+        "ans": 0,
+        "explain": "Theo thuyết Brønsted – Lowry: Acid là chất/ion có khả năng cho proton ($H^+$). Trong phản ứng trên, ion $NH_4^+$ đã nhường $H^+$ cho nước để biến thành $NH_3$, do đó $NH_4^+$ đóng vai trò là acid."
+      },
+      {
+        "q": "Ion nào sau đây có tính chất <b>lưỡng tính</b> (vừa có thể cho proton $H^+$, vừa có thể nhận proton $H^+$)?",
+        "type": "choice",
+        "section": "Dung dịch nước",
+        "opts": [
+          "$HCO_3^-$",
+          "$HSO_4^-$",
+          "$CO_3^{2-}$",
+          "$NH_4^+$"
+        ],
+        "ans": 0,
+        "explain": "$HCO_3^-$ là ion lưỡng tính: $HCO_3^- + H_2O \\rightleftharpoons CO_3^{2-} + H_3O^+$ (cho $H^+$, tính acid) và $HCO_3^- + H_2O \\rightleftharpoons H_2CO_3 + OH^-$ (nhận $H^+$, tính base). Lưu ý bẫy: $HSO_4^-$ là acid mạnh nấc 2 phân li hoàn toàn thành $H^+ + SO_4^{2-}$, không phải lưỡng tính!"
+      },
+      {
+        "q": "Ở $25^\\circ\\text{C}$, hòa tan $0,004\\text{ gam } NaOH$ vào nước thu được $1000\\text{ mL}$ dung dịch. Biết $M_{NaOH} = 40\\text{ g/mol}$. Giá trị pH của dung dịch thu được là",
+        "type": "choice",
+        "section": "Dung dịch nước",
+        "opts": [
+          "$pH = 10$",
+          "$pH = 4$",
+          "$pH = 11$",
+          "$pH = 3$"
+        ],
+        "ans": 0,
+        "explain": "$n_{NaOH} = \\dfrac{0,004}{40} = 10^{-4}\\text{ mol} \\Rightarrow [OH^-] = \\dfrac{10^{-4}}{1} = 10^{-4}\\text{ M}$. Ta có $pOH = -\\log[OH^-] = 4 \\Rightarrow pH = 14 - pOH = 14 - 4 = 10$."
+      },
+      {
+        "q": "Khi pha loãng $10\\text{ mL}$ dung dịch $HCl$ có $pH = 2$ thành $1000\\text{ mL}$ bằng nước cất, giá trị pH của dung dịch mới thu được là",
+        "type": "choice",
+        "section": "Dung dịch nước",
+        "opts": [
+          "$pH = 4$",
+          "$pH = 5$",
+          "$pH = 1$",
+          "$pH = 7$"
+        ],
+        "ans": 0,
+        "explain": "Thể tích tăng từ $10\\text{ mL}$ lên $1000\\text{ mL}$ là tăng 100 lần ($10^2$ lần) $\\Rightarrow [H^+]$ giảm 100 lần $\\Rightarrow pH$ tăng thêm 2 đơn vị. Do đó $pH_{\\text{mới}} = 2 + 2 = 4$."
+      },
+      {
+        "q": "Trong phép chuẩn độ acid – base giữa dung dịch $HCl$ (trong bình tam giác) bằng dung dịch chuẩn $NaOH$ (trên buret) với chất chỉ thị phenolphthalein, điểm kết thúc chuẩn độ được xác định khi dung dịch trong bình tam giác",
+        "type": "choice",
+        "section": "Dung dịch nước",
+        "opts": [
+          "Từ không màu chuyển sang màu hồng nhạt bền vững trong khoảng 15 – 30 giây.",
+          "Từ màu hồng đậm chuyển hoàn toàn sang không màu.",
+          "Xuất hiện kết tủa trắng đục dưới đáy bình tam giác.",
+          "Bắt đầu sủi bọt khí không màu."
+        ],
+        "ans": 0,
+        "explain": "Ban đầu dung dịch trong bình tam giác có môi trường acid nên phenolphthalein không màu. Khi nhỏ $NaOH$ đến điểm tương đương, $1 - 2$ giọt $NaOH$ dư làm dung dịch chuyển sang môi trường kiềm nhẹ ($pH \\ge 8,3$) khiến chỉ thị hóa hồng nhạt bền vững."
+      },
+      {
+        "q": "Ở nhiệt độ thường, đơn chất nitrogen ($N_2$) rất trơ về mặt hóa học chủ yếu là do",
+        "type": "choice",
+        "section": "Nitrogen & Ammonia",
+        "opts": [
+          "Phân tử $N_2$ có liên kết ba $N \\equiv N$ rất bền với năng lượng liên kết cực lớn ($945\\text{ kJ/mol}$).",
+          "Nguyên tử nitrogen có bán kính rất lớn làm cản trở tương tác hóa học.",
+          "Độ âm điện của nitrogen rất nhỏ so với các phi kim cùng chu kì.",
+          "Phân tử nitrogen có cấu tạo phân cực mạnh khó bị phá vỡ."
+        ],
+        "ans": 0,
+        "explain": "Phân tử $N_2$ gồm hai nguyên tử liên kết với nhau bằng 1 liên kết $\\sigma$ và 2 liên kết $\\pi$ (liên kết ba $N \\equiv N$) có năng lượng liên kết cực lớn $E_b = 945\\text{ kJ/mol}$, cần nhiệt độ rất cao mới phá vỡ được nên ở điều kiện thường $N_2$ rất trơ."
+      },
+      {
+        "q": "Kim loại nào sau đây tác dụng được với khí nitrogen ($N_2$) ngay ở <b>nhiệt độ thường</b> tạo muối nitride?",
+        "type": "choice",
+        "section": "Nitrogen & Ammonia",
+        "opts": [
+          "Lithium ($Li$)",
+          "Magnesium ($Mg$)",
+          "Calcium ($Ca$)",
+          "Aluminium ($Al$)"
+        ],
+        "ans": 0,
+        "explain": "Chỉ duy nhất kim loại Lithium ($Li$) phản ứng với $N_2$ ngay ở nhiệt độ thường: $6Li + N_2 \\rightarrow 2Li_3N$. Các kim loại khác như $Mg, Ca, Al$ đều bắt buộc phải đun nóng mới phản ứng."
+      },
+      {
+        "q": "Phân tử ammonia ($NH_3$) có cấu tạo hình học dạng nào và đặc điểm liên kết nào giúp $NH_3$ tan cực kì nhiều trong nước?",
+        "type": "choice",
+        "section": "Nitrogen & Ammonia",
+        "opts": [
+          "Hình chóp tam giác; tạo được liên kết hydrogen liên phân tử mạnh với nước.",
+          "Hình tứ diện đều; tạo được liên kết cộng hóa trị không phân cực.",
+          "Dạng đường thẳng; có phân tử khối nhẹ hơn không khí.",
+          "Dạng góc gấp khúc; không tạo được liên kết hydrogen."
+        ],
+        "ans": 0,
+        "explain": "Nguyên tử $N$ trong $NH_3$ lai hóa $sp^3$ tạo hình chóp tam giác góc $\\widehat{HNH} \\approx 107^\\circ$, phân tử phân cực mạnh và tạo liên kết hydrogen liên phân tử bền với nước (1 lít nước hòa tan khoảng 700 lít khí $NH_3$ ở $20^\\circ\\text{C}$)."
+      },
+      {
+        "q": "Dung dịch ammonia ($NH_3$) thể hiện tính chất hóa học nào sau đây?",
+        "type": "choice",
+        "section": "Nitrogen & Ammonia",
+        "opts": [
+          "Tính base yếu và tính khử mạnh.",
+          "Tính base mạnh và tính oxi hóa mạnh.",
+          "Tính acid yếu và tính khử mạnh.",
+          "Tính acid mạnh và tính oxi hóa yếu."
+        ],
+        "ans": 0,
+        "explain": "Trong dung dịch nước, $NH_3$ nhận proton $H^+$ nên thể hiện tính base yếu ($NH_3 + H_2O \\rightleftharpoons NH_4^+ + OH^-$). Mặt khác, nguyên tử $N$ có số oxi hóa cực tiểu $-3$ nên $NH_3$ thể hiện tính khử mạnh (cháy trong $O_2$, khử oxide kim loại $CuO$)."
+      },
+      {
+        "q": "Để nhận biết ion ammonium ($NH_4^+$) trong dung dịch, người ta đun nhẹ mẫu thử với dung dịch kiềm ($NaOH$) và thử khí thoát ra bằng",
+        "type": "choice",
+        "section": "Nitrogen & Ammonia",
+        "opts": [
+          "Mẩu giấy quỳ tím ẩm, hiện tượng quỳ tím hóa xanh.",
+          "Mẩu than hồng, hiện tượng than bùng cháy.",
+          "Dung dịch nước vôi trong, hiện tượng nước vôi vẩn đục.",
+          "Dung dịch nước bromine, hiện tượng nước bromine mất màu."
+        ],
+        "ans": 0,
+        "explain": "Ion $NH_4^+$ tác dụng với $OH^-$ khi đun nóng giải phóng khí ammonia có mùi khai: $NH_4^+ + OH^- \\xrightarrow{t^\\circ} NH_3 \\uparrow + H_2O$. Khí $NH_3$ tan vào nước trên giấy quỳ ẩm tạo môi trường base làm quỳ tím ẩm hóa xanh."
+      },
+      {
+        "q": "Trong nông nghiệp, người ta tuyệt đối <b>KHÔNG</b> nên bón phân đạm ammonium (như $(NH_4)_2SO_4$) chung với vôi sống ($CaO$) vì",
+        "type": "choice",
+        "section": "Nitrogen & Ammonia",
+        "opts": [
+          "Xảy ra phản ứng sinh khí $NH_3$ bay đi làm thất thoát lượng đạm trong phân bón.",
+          "Làm tăng độ chua của đất nông nghiệp khiến cây trồng ngộ độc acid.",
+          "Tạo thành kết tủa không tan làm cứng đất và bít rễ cây.",
+          "Tỏa nhiệt quá lớn làm cháy và thối hỏng hệ rễ non của cây."
+        ],
+        "ans": 0,
+        "explain": "Vôi sống gặp nước tạo $Ca(OH)_2$ có môi trường kiềm mạnh: $2NH_4^+ + Ca(OH)_2 \\rightarrow Ca^{2+} + 2NH_3 \\uparrow + 2H_2O$. Khí $NH_3$ bay vào không khí gây thất thoát đạm, làm lãng phí phân bón."
+      },
+      {
+        "q": "Nước mưa được xác định là <b>mưa acid</b> khi có giá trị pH thỏa mãn điều kiện nào sau đây?",
+        "type": "choice",
+        "section": "Oxide của Nitrogen & Mưa acid",
+        "opts": [
+          "$pH < 5,6$",
+          "$pH < 7,0$",
+          "$pH < 3,5$",
+          "$pH > 7,0$"
+        ],
+        "ans": 0,
+        "explain": "Nước mưa bình thường đã có hòa tan $CO_2$ khí quyển tạo môi trường acid nhẹ với $pH \\approx 5,6$. Khi nước mưa hòa tan thêm các acid mạnh sinh ra từ khí ô nhiễm ($NO_x, SO_2$) làm cho $pH < 5,6$ thì mới được gọi là hiện tượng mưa acid."
+      },
+      {
+        "q": "Hiện tượng <b>phú dưỡng (eutrophication)</b> tại các ao, hồ xảy ra chủ yếu do nguồn nước bị dư thừa quá mức các ion nào sau đây?",
+        "type": "choice",
+        "section": "Oxide của Nitrogen & Mưa acid",
+        "opts": [
+          "Nitrate ($NO_3^-$) và Phosphate ($PO_4^{3-}$).",
+          "Chloride ($Cl^-$) và Sodium ($Na^+$).",
+          "Calcium ($Ca^{2+}$) và Magnesium ($Mg^{2+}$).",
+          "Sulfate ($SO_4^{2-}$) và Iron ($Fe^{3+}$)."
+        ],
+        "ans": 0,
+        "explain": "Hiện tượng phú dưỡng là sự dư thừa các nguyên tố dinh dưỡng Nitrogen ($NO_3^-, NH_4^+$) và Phosphorus ($PO_4^{3-}$) từ phân bón và nước thải, kích thích vi tảo nở hoa bùng phát, sau đó phân hủy làm cạn kiệt oxy hòa tan khiến thủy sinh chết hàng loạt."
+      },
+      {
+        "q": "Lọ đựng dung dịch nitric acid ($HNO_3$) đậm đặc để lâu ngày trong phòng thí nghiệm thường bị ngả sang màu vàng là do",
+        "type": "choice",
+        "section": "Nitric acid & Muối Nitrate",
+        "opts": [
+          "$HNO_3$ bị quang hóa phân hủy chậm giải phóng khí $NO_2$ màu nâu đỏ hòa tan ngược lại vào acid.",
+          "$HNO_3$ tác dụng với bụi bẩn lơ lửng trong không khí tạo muối sắt.",
+          "Acid $HNO_3$ hấp thụ khí oxygen trong không khí tạo thành chất có màu.",
+          "Nước trong dung dịch acid bị bay hơi làm tăng đột ngột nồng độ chất tan."
+        ],
+        "ans": 0,
+        "explain": "Dưới tác dụng của ánh sáng hoặc nhiệt độ, $HNO_3$ bị phân hủy chậm: $4HNO_3 \\xrightarrow{h\\nu, t^\\circ} 4NO_2 \\uparrow + O_2 \\uparrow + 2H_2O$. Khí $NO_2$ màu nâu đỏ tan lại vào dung dịch acid làm cho lọ acid ngả sang màu vàng."
+      },
+      {
+        "q": "Cho mẩu kim loại copper ($Cu$) vào ống nghiệm chứa dung dịch $HNO_3$ đặc, nóng. Hiện tượng quan sát được là",
+        "type": "choice",
+        "section": "Nitric acid & Muối Nitrate",
+        "opts": [
+          "Dung dịch chuyển sang màu xanh lam và có khí màu nâu đỏ thoát ra mãnh liệt.",
+          "Dung dịch không màu và có bọt khí không màu $H_2$ thoát ra.",
+          "Có kết tủa màu đỏ bám trên bề mặt thanh kim loại copper.",
+          "Không có hiện tượng gì xảy ra vì Cu đứng sau hydro trong dãy hoạt động."
+        ],
+        "ans": 0,
+        "explain": "$Cu$ tác dụng với $HNO_3$ đặc nóng: $Cu + 4HNO_3(\\text{đặc}) \\xrightarrow{t^\\circ} Cu(NO_3)_2 + 2NO_2 \\uparrow + 2H_2O$. Dung dịch tạo muối $Cu^{2+}$ có màu xanh lam và khí $NO_2$ thoát ra có màu nâu đỏ đặc trưng."
+      },
+      {
+        "q": "Kim loại nào sau đây bị <b>thụ động hóa</b> (không phản ứng do tạo màng oxide trơ bảo vệ) trong dung dịch $HNO_3$ đặc, nguội?",
+        "type": "choice",
+        "section": "Nitric acid & Muối Nitrate",
+        "opts": [
+          "$Fe, Al, Cr$",
+          "$Cu, Ag, Au$",
+          "$Mg, Zn, Fe$",
+          "$Na, K, Ba$"
+        ],
+        "ans": 0,
+        "explain": "Ba kim loại Iron ($Fe$), Aluminium ($Al$) và Chromium ($Cr$) bị thụ động hóa trong cả dung dịch $HNO_3$ đặc nguội và $H_2SO_4$ đặc nguội do trên bề mặt hình thành lớp màng oxide trơ cực mỏng và bền vững bảo vệ kim loại."
+      },
+      {
+        "q": "Nhiệt phân hoàn toàn muối copper(II) nitrate $Cu(NO_3)_2$ ở nhiệt độ cao thu được các chất nào sau đây?",
+        "type": "choice",
+        "section": "Nitric acid & Muối Nitrate",
+        "opts": [
+          "$CuO, NO_2, O_2$",
+          "$Cu, NO_2, O_2$",
+          "$Cu(NO_2)_2, O_2$",
+          "$CuO, N_2, O_2$"
+        ],
+        "ans": 0,
+        "explain": "Muối nitrate của các kim loại từ $Mg$ đến $Cu$ khi nhiệt phân tạo thành oxide kim loại tương ứng, khí $NO_2$ và $O_2$: $2Cu(NO_3)_2 \\xrightarrow{t^\\circ} 2CuO + 4NO_2 \\uparrow + O_2 \\uparrow$."
+      }
+    ]
   }
 ]

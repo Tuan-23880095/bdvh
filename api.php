@@ -745,9 +745,9 @@ switch ($action) {
 
         // Tự động đồng bộ ngân hàng đề thi chuẩn nếu cần
         try {
-            $cntSt = $pdo->query("SELECT COUNT(*) as c FROM bdvh_exams");
+            $cntSt = $pdo->query("SELECT COUNT(*) as c FROM bdvh_exams WHERE exam_code = 'HOA11_T01_09'");
             $cntRow = $cntSt ? $cntSt->fetch() : null;
-            if (!$cntRow || (int)$cntRow['c'] < 11) {
+            if (!$cntRow || (int)$cntRow['c'] === 0) {
                 seed_default_exams($pdo);
             }
         } catch (Throwable $e) {}

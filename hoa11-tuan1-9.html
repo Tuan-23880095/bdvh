@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Khảo sát đầu vào Hóa học 11 (Tuần 1 - 9 KNTT) · bdvh.diemdanhsv.com</title>
+<link rel="icon" type="image/svg+xml" href="assets/logo-sen.svg">
+
+<!-- Google Fonts: Source Serif 4 & Be Vietnam Pro -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- MathJax 3 -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+:root {
+  --luc: #0F6B55;         /* Lục Bồ Đề - Màu chủ đạo */
+  --luc-dam: #0a4d3c;
+  --luc-nhe: #E8F5F1;
+  --lam: #1F4E79;         /* Lam Hộ Vệ - Tiêu đề phụ, thanh viền */
+  --lam-nhe: #EDF4FA;
+  --son: #D2492A;         /* Son - Điểm nhấn quan trọng, cảnh báo */
+  --son-nhe: #FDF2E9;
+  --tho: #D6A130;         /* Hoàng Thổ - Mẹo thi, lưu ý */
+  --tho-nhe: #FEF9E7;
+  --muc: #10212B;         /* Mực Lam - Chữ chính */
+  --giay: #F6F7F3;        /* Giấy - Nền trang nhã */
+  --xam-line: #D5DCE1;    /* Bạc Sương - Kẻ phân cách */
+  --trang: #FFFFFF;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muc);
+  background-color: var(--giay);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header cố định */
+header.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--trang);
+  border-bottom: 1.5px solid var(--xam-line);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.bar-content {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand-group img.logo-sen {
+  height: 32px;
+  width: 32px;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid var(--xam-line);
+  padding: 2px;
+}
+.brand-group img.logo-hcmus {
+  height: 28px;
+}
+.brand-title {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--lam);
+  line-height: 1.2;
+}
+.brand-sub {
+  font-size: 11px;
+  color: #64748B;
+}
+
+/* Đồng hồ bấm giờ */
+.timer-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--lam-nhe);
+  border: 1px solid var(--lam);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+.timer-card i {
+  color: var(--lam);
+  font-size: 16px;
+}
+.timer-val {
+  font-family: "Courier New", monospace;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--lam);
+}
+
+/* Thanh tiến độ */
+.prog-strip {
+  background: #E2E8F0;
+  height: 4px;
+  width: 100%;
+}
+.prog-fill {
+  background: var(--luc);
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s;
+}
+
+/* Container chính */
+.main-wrap {
+  max-width: 860px;
+  margin: 20px auto 40px;
+  padding: 0 16px;
+}
+
+/* Banner giới thiệu đề thi */
+.intro-box {
+  background: var(--trang);
+  border: 1px solid var(--xam-line);
+  border-left: 4px solid var(--luc);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+.intro-box h1 {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 20px;
+  color: var(--lam);
+  margin: 0 0 6px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.intro-meta {
+  font-size: 12.5px;
+  color: #64748B;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.intro-meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Card câu hỏi */
+.q-card {
+  background: var(--trang);
+  border: 1px solid var(--xam-line);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.q-card:hover {
+  border-color: #B0BEC5;
+}
+.q-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.q-num {
+  background: var(--lam-nhe);
+  color: var(--lam);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 2px 9px;
+  border-radius: 14px;
+  border: 0.5px solid var(--lam);
+  flex-shrink: 0;
+}
+.q-tag {
+  font-size: 11px;
+  color: var(--luc);
+  font-weight: 600;
+  background: var(--luc-nhe);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.q-text {
+  font-size: 14.5px;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+/* Các phương án A, B, C, D */
+.opts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+.opt-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.opt-item:hover {
+  background: #F1F5F9;
+  border-color: var(--luc);
+}
+.opt-item.selected {
+  background: var(--luc-nhe);
+  border-color: var(--luc);
+  color: var(--muc);
+}
+.opt-key {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid #94A3B8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+  color: #64748B;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.opt-item.selected .opt-key {
+  background: var(--luc);
+  border-color: var(--luc);
+  color: #fff;
+}
+.opt-desc {
+  font-size: 13.5px;
+}
+
+/* Hộp giải thích sau khi nộp */
+.explain-box {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  display: none;
+}
+.explain-box.show {
+  display: block;
+}
+.explain-correct {
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  color: #065F46;
+}
+.explain-wrong {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #991B1B;
+}
+
+/* Vùng Nút nộp bài */
+.submit-area {
+  background: var(--trang);
+  border: 1px solid var(--xam-line);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-top: 24px;
+}
+.btn-submit {
+  background: var(--luc);
+  color: #fff;
+  border: none;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-submit:hover {
+  background: var(--luc-dam);
+  transform: translateY(-1px);
+}
+
+/* Modal Bảng điểm kết quả */
+.result-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.result-modal.show {
+  display: flex;
+}
+.result-card {
+  background: #fff;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  animation: zoomIn 0.3s ease;
+}
+@keyframes zoomIn {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.result-header {
+  background: linear-gradient(135deg, var(--lam), var(--luc));
+  color: #fff;
+  padding: 24px;
+  text-align: center;
+}
+.result-score {
+  font-size: 42px;
+  font-weight: 800;
+  font-family: "Source Serif 4", serif;
+  margin: 8px 0;
+}
+.result-percent {
+  font-size: 18px;
+  font-weight: 600;
+  background: rgba(255,255,255,0.2);
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+}
+.result-body {
+  padding: 20px 24px;
+}
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+.stat-cell {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  padding: 10px;
+  border-radius: 8px;
+}
+.stat-val {
+  font-size: 18px;
+  font-weight: 700;
+}
+.eval-box {
+  background: var(--giay);
+  border: 1px solid var(--xam-line);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+.result-actions {
+  display: flex;
+  gap: 10px;
+}
+.btn-action {
+  flex: 1;
+  padding: 11px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13.5px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.btn-review {
+  background: var(--lam);
+  color: #fff;
+}
+.btn-retry {
+  background: #E2E8F0;
+  color: #334155;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .bar-content {
+    padding: 6px 12px;
+  }
+  .brand-sub {
+    display: none;
+  }
+  .intro-box h1 {
+    font-size: 17px;
+  }
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+  .submit-area {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Header điều hướng & đồng hồ tính giờ -->
+<header class="top-bar">
+  <div class="bar-content">
+    <div class="brand-group">
+      <img src="assets/logo-sen.svg" alt="Logo Sen" class="logo-sen" onerror="this.src='https://diemdanhsv.com/images/logo-sen.svg'">
+      <div>
+        <div class="brand-title">bdvh.diemdanhsv.com</div>
+        <div class="brand-sub">Trung tâm Khảo thí & Luyện thi · ThS. Đinh Quốc Tuấn</div>
+      </div>
+    </div>
+    <div class="timer-card">
+      <i class="far fa-clock"></i>
+      <div class="timer-val" id="timer-display">40:00</div>
+    </div>
+  </div>
+  <div class="prog-strip">
+    <div class="prog-fill" id="prog-bar"></div>
+  </div>
+</header>
+
+<div class="main-wrap">
+  <!-- Hộp thông tin đề thi -->
+  <div class="intro-box">
+    <h1>Khảo sát Đầu vào Hóa học 11 · Tuần 1 đến 9 (KNTT)</h1>
+    <div class="intro-meta">
+      <span><i class="fas fa-layer-group"></i> <b>Số lượng:</b> 24 câu trắc nghiệm 4 lựa chọn</span>
+      <span><i class="fas fa-stopwatch"></i> <b>Thời gian:</b> 40 phút</span>
+      <span><i class="fas fa-award"></i> <b>Cách tính điểm:</b> Thang 10 &amp; Tỷ lệ phần trăm câu đúng (%)</span>
+      <span><i class="fas fa-book-open"></i> <b>Phạm vi:</b> Cân bằng hóa học, Dung dịch nước, Nitrogen, Ammonia, Muối ammonium, $NO_x$, Mưa acid &amp; $HNO_3$</span>
+    </div>
+  </div>
+
+  <!-- Danh sách 24 câu hỏi -->
+  <form id="quiz-form" onsubmit="submitQuiz(event)">
+    <div id="questions-container"></div>
+
+    <div class="submit-area">
+      <div style="font-size:13px; color:#64748B;">
+        <span id="answered-count">Đã làm: 0/24 câu</span> · <span id="time-note">Vui lòng kiểm tra kĩ trước khi nộp</span>
+      </div>
+      <button type="submit" class="btn-submit" id="btn-submit">
+        <i class="fas fa-paper-plane"></i> Nộp Bài &amp; Xem Kết Quả
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- Modal hiển thị kết quả và phần trăm điểm -->
+<div class="result-modal" id="result-modal">
+  <div class="result-card">
+    <div class="result-header">
+      <div style="font-size:14px; text-transform:uppercase; letter-spacing:0.5px; opacity:0.9;">KẾT QUẢ KHẢO SÁT ĐẦU VÀO HÓA 11</div>
+      <div class="result-score" id="res-score">0.0 / 10</div>
+      <div class="result-percent" id="res-percent">0% câu đúng</div>
+    </div>
+    <div class="result-body">
+      <div class="stat-grid">
+        <div class="stat-cell">
+          <div style="font-size:11px; color:#64748B;">SỐ CÂU ĐÚNG</div>
+          <div class="stat-val" style="color:var(--luc);" id="res-correct">0 / 24</div>
+        </div>
+        <div class="stat-cell">
+          <div style="font-size:11px; color:#64748B;">SỐ CÂU SAI</div>
+          <div class="stat-val" style="color:var(--son);" id="res-wrong">0 / 24</div>
+        </div>
+        <div class="stat-cell">
+          <div style="font-size:11px; color:#64748B;">THỜI GIAN LÀM</div>
+          <div class="stat-val" style="color:var(--lam);" id="res-time">00:00</div>
+        </div>
+      </div>
+
+      <div class="eval-box" id="res-eval">
+        <!-- Đánh giá năng lực tự động -->
+      </div>
+
+      <div class="result-actions">
+        <button class="btn-action btn-review" onclick="closeModalAndReview()">
+          <i class="fas fa-search"></i> Xem Lời Giải Từng Câu
+        </button>
+        <button class="btn-action btn-retry" onclick="resetQuiz()">
+          <i class="fas fa-redo"></i> Làm Lại Đề Này
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    "id": 1,
+    "section": "Cân bằng hóa học",
+    "q": "Nhận định nào sau đây là <b>đúng</b> khi nói về trạng thái cân bằng của một phản ứng thuận nghịch?",
+    "opts": [
+      "Tốc độ của phản ứng thuận bằng tốc độ của phản ứng nghịch ($v_t = v_n \\neq 0$).",
+      "Phản ứng đã dừng lại hoàn toàn, các chất không tiếp tục phản ứng nữa.",
+      "Nồng độ của các chất phản ứng luôn luôn bằng nồng độ của các sản phẩm.",
+      "Phản ứng chỉ diễn ra theo một chiều từ chất phản ứng tạo thành sản phẩm."
+    ],
+    "ans": 0,
+    "explain": "Trạng thái cân bằng hóa học là cân bằng động: ở cấp vi mô, cả hai phản ứng thuận và nghịch vẫn tiếp tục diễn ra với tốc độ bằng nhau ($v_t = v_n \\neq 0$), nồng độ các chất trong hệ không đổi theo thời gian nhưng không nhất thiết phải bằng nhau."
+  },
+  {
+    "id": 2,
+    "section": "Cân bằng hóa học",
+    "q": "Cho cân bằng hóa học: $N_2(g) + 3H_2(g) \\rightleftharpoons 2NH_3(g)$. Biểu thức hằng số cân bằng nồng độ $K_C$ của phản ứng là",
+    "opts": [
+      "$K_C = \\dfrac{[NH_3]^2}{[N_2] \\cdot [H_2]^3}$",
+      "$K_C = \\dfrac{[N_2] \\cdot [H_2]^3}{[NH_3]^2}$",
+      "$K_C = \\dfrac{2[NH_3]}{[N_2] \\cdot 3[H_2]}$",
+      "$K_C = \\dfrac{[NH_3]}{[N_2] \\cdot [H_2]}$"
+    ],
+    "ans": 0,
+    "explain": "Biểu thức hằng số cân bằng nồng độ $K_C$ bằng tích nồng độ sản phẩm với số mũ tương ứng chia cho tích nồng độ chất phản ứng với số mũ tương ứng: $K_C = \\dfrac{[NH_3]^2}{[N_2] \\cdot [H_2]^3}$."
+  },
+  {
+    "id": 3,
+    "section": "Cân bằng hóa học",
+    "q": "Xét phản ứng thuận nghịch: $C(s) + H_2O(g) \\rightleftharpoons CO(g) + H_2(g)$. Biểu thức hằng số cân bằng $K_C$ của phản ứng là",
+    "opts": [
+      "$K_C = \\dfrac{[CO] \\cdot [H_2]}{[H_2O]}$",
+      "$K_C = \\dfrac{[CO] \\cdot [H_2]}{[C] \\cdot [H_2O]}$",
+      "$K_C = \\dfrac{[C] \\cdot [H_2O]}{[CO] \\cdot [H_2]}$",
+      "$K_C = \\dfrac{[H_2O]}{[CO] \\cdot [H_2]}$"
+    ],
+    "ans": 0,
+    "explain": "Quy ước cốt tử: Nồng độ của chất rắn nguyên chất (ở đây là than chì Carbon $C(s)$) được coi bằng 1 và không xuất hiện trong biểu thức $K_C$. Do đó: $K_C = \\dfrac{[CO] \\cdot [H_2]}{[H_2O]}$."
+  },
+  {
+    "id": 4,
+    "section": "Cân bằng hóa học",
+    "q": "Cho cân bằng: $2SO_2(g) + O_2(g) \\rightleftharpoons 2SO_3(g) \\quad \\Delta_r H_{298}^\\circ = -198\\text{ kJ} < 0$. Để cân bằng chuyển dịch theo chiều thuận (tạo thêm $SO_3$), ta cần",
+    "opts": [
+      "Hạ nhiệt độ hoặc tăng nồng độ khí $O_2$.",
+      "Tăng nhiệt độ của hệ phản ứng.",
+      "Giảm áp suất chung của hệ phản ứng.",
+      "Dùng chất xúc tác thích hợp $V_2O_5$."
+    ],
+    "ans": 0,
+    "explain": "Phản ứng có $\\Delta_r H < 0$ là phản ứng tỏa nhiệt. Theo nguyên lý Le Chatelier: Muốn cân bằng dịch sang chiều thuận (chiều tỏa nhiệt), ta phải hạ nhiệt độ ('Giảm T đi chiều tỏa') hoặc tăng nồng độ chất phản ứng ($O_2, SO_2$). Tăng nhiệt độ sẽ làm dịch theo chiều nghịch."
+  },
+  {
+    "id": 5,
+    "section": "Cân bằng hóa học",
+    "q": "Hệ phản ứng thuận nghịch nào sau đây <b>KHÔNG</b> bị chuyển dịch cân bằng khi thay đổi áp suất chung của hệ?",
+    "opts": [
+      "$H_2(g) + I_2(g) \\rightleftharpoons 2HI(g)$",
+      "$N_2(g) + 3H_2(g) \\rightleftharpoons 2NH_3(g)$",
+      "$2SO_2(g) + O_2(g) \\rightleftharpoons 2SO_3(g)$",
+      "$CaCO_3(s) \\rightleftharpoons CaO(s) + CO_2(g)$"
+    ],
+    "ans": 0,
+    "explain": "Áp suất chỉ ảnh hưởng đến cân bằng của hệ có chất khí và có sự biến đổi số mol khí ($\\Delta n_{(g)} \\neq 0$). Phản ứng $H_2(g) + I_2(g) \\rightleftharpoons 2HI(g)$ có tổng số mol khí hai vế bằng nhau ($1 + 1 = 2\\text{ mol}$ khí), nên khi thay đổi áp suất thì cân bằng không bị chuyển dịch."
+  },
+  {
+    "id": 6,
+    "section": "Cân bằng hóa học",
+    "q": "Khi thêm chất xúc tác vào một phản ứng thuận nghịch đang ở trạng thái cân bằng thì",
+    "opts": [
+      "Tốc độ phản ứng thuận và nghịch tăng cùng số lần, cân bằng không chuyển dịch và $K_C$ không đổi.",
+      "Cân bằng sẽ chuyển dịch sang chiều thuận làm tăng hiệu suất tạo sản phẩm.",
+      "Giá trị hằng số cân bằng $K_C$ của phản ứng sẽ tăng lên.",
+      "Cân bằng sẽ chuyển dịch sang chiều nghịch làm giảm nồng độ chất phản ứng."
+    ],
+    "ans": 0,
+    "explain": "Chất xúc tác làm giảm năng lượng hoạt hóa, làm tăng tốc độ phản ứng thuận và nghịch với số lần bằng nhau. Do đó, xúc tác chỉ giúp hệ đạt tới trạng thái cân bằng nhanh hơn, hoàn toàn KHÔNG làm chuyển dịch cân bằng và KHÔNG làm thay đổi hằng số $K_C$."
+  },
+  {
+    "id": 7,
+    "section": "Dung dịch nước",
+    "q": "Dung dịch chất nào sau đây <b>KHÔNG</b> dẫn điện được?",
+    "opts": [
+      "Dung dịch đường saccharose ($C_{12}H_{22}O_{11}$).",
+      "Dung dịch hydrochloric acid ($HCl$).",
+      "Dung dịch sodium hydroxide ($NaOH$).",
+      "Dung dịch potassium nitrate ($KNO_3$)."
+    ],
+    "ans": 0,
+    "explain": "Dung dịch dẫn điện được là nhờ các ion mang điện chuyển động tự do. Đường saccharose là chất không điện li, khi tan trong nước chỉ phân tán thành các phân tử trung hòa điện nên dung dịch không dẫn điện."
+  },
+  {
+    "id": 8,
+    "section": "Dung dịch nước",
+    "q": "Theo thuyết acid – base của Brønsted – Lowry, chất hoặc ion nào sau đây đóng vai trò là <b>acid</b> trong phản ứng: $NH_4^+ + H_2O \\rightleftharpoons NH_3 + H_3O^+$?",
+    "opts": [
+      "$NH_4^+$",
+      "$NH_3$",
+      "$H_2O$",
+      "Cả $NH_4^+$ và $NH_3$"
+    ],
+    "ans": 0,
+    "explain": "Theo thuyết Brønsted – Lowry: Acid là chất/ion có khả năng cho proton ($H^+$). Trong phản ứng trên, ion $NH_4^+$ đã nhường $H^+$ cho nước để biến thành $NH_3$, do đó $NH_4^+$ đóng vai trò là acid."
+  },
+  {
+    "id": 9,
+    "section": "Dung dịch nước",
+    "q": "Ion nào sau đây có tính chất <b>lưỡng tính</b> (vừa có thể cho proton $H^+$, vừa có thể nhận proton $H^+$)?",
+    "opts": [
+      "$HCO_3^-$",
+      "$HSO_4^-$",
+      "$CO_3^{2-}$",
+      "$NH_4^+$"
+    ],
+    "ans": 0,
+    "explain": "$HCO_3^-$ là ion lưỡng tính: $HCO_3^- + H_2O \\rightleftharpoons CO_3^{2-} + H_3O^+$ (cho $H^+$, tính acid) và $HCO_3^- + H_2O \\rightleftharpoons H_2CO_3 + OH^-$ (nhận $H^+$, tính base). Lưu ý bẫy: $HSO_4^-$ là acid mạnh nấc 2 phân li hoàn toàn thành $H^+ + SO_4^{2-}$, không phải lưỡng tính!"
+  },
+  {
+    "id": 10,
+    "section": "Dung dịch nước",
+    "q": "Ở $25^\\circ\\text{C}$, hòa tan $0,004\\text{ gam } NaOH$ vào nước thu được $1000\\text{ mL}$ dung dịch. Biết $M_{NaOH} = 40\\text{ g/mol}$. Giá trị pH của dung dịch thu được là",
+    "opts": [
+      "$pH = 10$",
+      "$pH = 4$",
+      "$pH = 11$",
+      "$pH = 3$"
+    ],
+    "ans": 0,
+    "explain": "$n_{NaOH} = \\dfrac{0,004}{40} = 10^{-4}\\text{ mol} \\Rightarrow [OH^-] = \\dfrac{10^{-4}}{1} = 10^{-4}\\text{ M}$. Ta có $pOH = -\\log[OH^-] = 4 \\Rightarrow pH = 14 - pOH = 14 - 4 = 10$."
+  },
+  {
+    "id": 11,
+    "section": "Dung dịch nước",
+    "q": "Khi pha loãng $10\\text{ mL}$ dung dịch $HCl$ có $pH = 2$ thành $1000\\text{ mL}$ bằng nước cất, giá trị pH của dung dịch mới thu được là",
+    "opts": [
+      "$pH = 4$",
+      "$pH = 5$",
+      "$pH = 1$",
+      "$pH = 7$"
+    ],
+    "ans": 0,
+    "explain": "Thể tích tăng từ $10\\text{ mL}$ lên $1000\\text{ mL}$ là tăng 100 lần ($10^2$ lần) $\\Rightarrow [H^+]$ giảm 100 lần $\\Rightarrow pH$ tăng thêm 2 đơn vị. Do đó $pH_{\\text{mới}} = 2 + 2 = 4$."
+  },
+  {
+    "id": 12,
+    "section": "Dung dịch nước",
+    "q": "Trong phép chuẩn độ acid – base giữa dung dịch $HCl$ (trong bình tam giác) bằng dung dịch chuẩn $NaOH$ (trên buret) với chất chỉ thị phenolphthalein, điểm kết thúc chuẩn độ được xác định khi dung dịch trong bình tam giác",
+    "opts": [
+      "Từ không màu chuyển sang màu hồng nhạt bền vững trong khoảng 15 – 30 giây.",
+      "Từ màu hồng đậm chuyển hoàn toàn sang không màu.",
+      "Xuất hiện kết tủa trắng đục dưới đáy bình tam giác.",
+      "Bắt đầu sủi bọt khí không màu."
+    ],
+    "ans": 0,
+    "explain": "Ban đầu dung dịch trong bình tam giác có môi trường acid nên phenolphthalein không màu. Khi nhỏ $NaOH$ đến điểm tương đương, $1 - 2$ giọt $NaOH$ dư làm dung dịch chuyển sang môi trường kiềm nhẹ ($pH \\ge 8,3$) khiến chỉ thị hóa hồng nhạt bền vững."
+  },
+  {
+    "id": 13,
+    "section": "Nitrogen & Ammonia",
+    "q": "Ở nhiệt độ thường, đơn chất nitrogen ($N_2$) rất trơ về mặt hóa học chủ yếu là do",
+    "opts": [
+      "Phân tử $N_2$ có liên kết ba $N \\equiv N$ rất bền với năng lượng liên kết cực lớn ($945\\text{ kJ/mol}$).",
+      "Nguyên tử nitrogen có bán kính rất lớn làm cản trở tương tác hóa học.",
+      "Độ âm điện của nitrogen rất nhỏ so với các phi kim cùng chu kì.",
+      "Phân tử nitrogen có cấu tạo phân cực mạnh khó bị phá vỡ."
+    ],
+    "ans": 0,
+    "explain": "Phân tử $N_2$ gồm hai nguyên tử liên kết với nhau bằng 1 liên kết $\\sigma$ và 2 liên kết $\\pi$ (liên kết ba $N \\equiv N$) có năng lượng liên kết cực lớn $E_b = 945\\text{ kJ/mol}$, cần nhiệt độ rất cao mới phá vỡ được nên ở điều kiện thường $N_2$ rất trơ."
+  },
+  {
+    "id": 14,
+    "section": "Nitrogen & Ammonia",
+    "q": "Kim loại nào sau đây tác dụng được với khí nitrogen ($N_2$) ngay ở <b>nhiệt độ thường</b> tạo muối nitride?",
+    "opts": [
+      "Lithium ($Li$)",
+      "Magnesium ($Mg$)",
+      "Calcium ($Ca$)",
+      "Aluminium ($Al$)"
+    ],
+    "ans": 0,
+    "explain": "Chỉ duy nhất kim loại Lithium ($Li$) phản ứng với $N_2$ ngay ở nhiệt độ thường: $6Li + N_2 \\rightarrow 2Li_3N$. Các kim loại khác như $Mg, Ca, Al$ đều bắt buộc phải đun nóng mới phản ứng."
+  },
+  {
+    "id": 15,
+    "section": "Nitrogen & Ammonia",
+    "q": "Phân tử ammonia ($NH_3$) có cấu tạo hình học dạng nào và đặc điểm liên kết nào giúp $NH_3$ tan cực kì nhiều trong nước?",
+    "opts": [
+      "Hình chóp tam giác; tạo được liên kết hydrogen liên phân tử mạnh với nước.",
+      "Hình tứ diện đều; tạo được liên kết cộng hóa trị không phân cực.",
+      "Dạng đường thẳng; có phân tử khối nhẹ hơn không khí.",
+      "Dạng góc gấp khúc; không tạo được liên kết hydrogen."
+    ],
+    "ans": 0,
+    "explain": "Nguyên tử $N$ trong $NH_3$ lai hóa $sp^3$ tạo hình chóp tam giác góc $\\widehat{HNH} \\approx 107^\\circ$, phân tử phân cực mạnh và tạo liên kết hydrogen liên phân tử bền với nước (1 lít nước hòa tan khoảng 700 lít khí $NH_3$ ở $20^\\circ\\text{C}$)."
+  },
+  {
+    "id": 16,
+    "section": "Nitrogen & Ammonia",
+    "q": "Dung dịch ammonia ($NH_3$) thể hiện tính chất hóa học nào sau đây?",
+    "opts": [
+      "Tính base yếu và tính khử mạnh.",
+      "Tính base mạnh và tính oxi hóa mạnh.",
+      "Tính acid yếu và tính khử mạnh.",
+      "Tính acid mạnh và tính oxi hóa yếu."
+    ],
+    "ans": 0,
+    "explain": "Trong dung dịch nước, $NH_3$ nhận proton $H^+$ nên thể hiện tính base yếu ($NH_3 + H_2O \\rightleftharpoons NH_4^+ + OH^-$). Mặt khác, nguyên tử $N$ có số oxi hóa cực tiểu $-3$ nên $NH_3$ thể hiện tính khử mạnh (cháy trong $O_2$, khử oxide kim loại $CuO$)."
+  },
+  {
+    "id": 17,
+    "section": "Nitrogen & Ammonia",
+    "q": "Để nhận biết ion ammonium ($NH_4^+$) trong dung dịch, người ta đun nhẹ mẫu thử với dung dịch kiềm ($NaOH$) và thử khí thoát ra bằng",
+    "opts": [
+      "Mẩu giấy quỳ tím ẩm, hiện tượng quỳ tím hóa xanh.",
+      "Mẩu than hồng, hiện tượng than bùng cháy.",
+      "Dung dịch nước vôi trong, hiện tượng nước vôi vẩn đục.",
+      "Dung dịch nước bromine, hiện tượng nước bromine mất màu."
+    ],
+    "ans": 0,
+    "explain": "Ion $NH_4^+$ tác dụng với $OH^-$ khi đun nóng giải phóng khí ammonia có mùi khai: $NH_4^+ + OH^- \\xrightarrow{t^\\circ} NH_3 \\uparrow + H_2O$. Khí $NH_3$ tan vào nước trên giấy quỳ ẩm tạo môi trường base làm quỳ tím ẩm hóa xanh."
+  },
+  {
+    "id": 18,
+    "section": "Nitrogen & Ammonia",
+    "q": "Trong nông nghiệp, người ta tuyệt đối <b>KHÔNG</b> nên bón phân đạm ammonium (như $(NH_4)_2SO_4$) chung với vôi sống ($CaO$) vì",
+    "opts": [
+      "Xảy ra phản ứng sinh khí $NH_3$ bay đi làm thất thoát lượng đạm trong phân bón.",
+      "Làm tăng độ chua của đất nông nghiệp khiến cây trồng ngộ độc acid.",
+      "Tạo thành kết tủa không tan làm cứng đất và bít rễ cây.",
+      "Tỏa nhiệt quá lớn làm cháy và thối hỏng hệ rễ non của cây."
+    ],
+    "ans": 0,
+    "explain": "Vôi sống gặp nước tạo $Ca(OH)_2$ có môi trường kiềm mạnh: $2NH_4^+ + Ca(OH)_2 \\rightarrow Ca^{2+} + 2NH_3 \\uparrow + 2H_2O$. Khí $NH_3$ bay vào không khí gây thất thoát đạm, làm lãng phí phân bón."
+  },
+  {
+    "id": 19,
+    "section": "Oxide của Nitrogen & Mưa acid",
+    "q": "Nước mưa được xác định là <b>mưa acid</b> khi có giá trị pH thỏa mãn điều kiện nào sau đây?",
+    "opts": [
+      "$pH < 5,6$",
+      "$pH < 7,0$",
+      "$pH < 3,5$",
+      "$pH > 7,0$"
+    ],
+    "ans": 0,
+    "explain": "Nước mưa bình thường đã có hòa tan $CO_2$ khí quyển tạo môi trường acid nhẹ với $pH \\approx 5,6$. Khi nước mưa hòa tan thêm các acid mạnh sinh ra từ khí ô nhiễm ($NO_x, SO_2$) làm cho $pH < 5,6$ thì mới được gọi là hiện tượng mưa acid."
+  },
+  {
+    "id": 20,
+    "section": "Oxide của Nitrogen & Mưa acid",
+    "q": "Hiện tượng <b>phú dưỡng (eutrophication)</b> tại các ao, hồ xảy ra chủ yếu do nguồn nước bị dư thừa quá mức các ion nào sau đây?",
+    "opts": [
+      "Nitrate ($NO_3^-$) và Phosphate ($PO_4^{3-}$).",
+      "Chloride ($Cl^-$) và Sodium ($Na^+$).",
+      "Calcium ($Ca^{2+}$) và Magnesium ($Mg^{2+}$).",
+      "Sulfate ($SO_4^{2-}$) và Iron ($Fe^{3+}$)."
+    ],
+    "ans": 0,
+    "explain": "Hiện tượng phú dưỡng là sự dư thừa các nguyên tố dinh dưỡng Nitrogen ($NO_3^-, NH_4^+$) và Phosphorus ($PO_4^{3-}$) từ phân bón và nước thải, kích thích vi tảo nở hoa bùng phát, sau đó phân hủy làm cạn kiệt oxy hòa tan khiến thủy sinh chết hàng loạt."
+  },
+  {
+    "id": 21,
+    "section": "Nitric acid & Muối Nitrate",
+    "q": "Lọ đựng dung dịch nitric acid ($HNO_3$) đậm đặc để lâu ngày trong phòng thí nghiệm thường bị ngả sang màu vàng là do",
+    "opts": [
+      "$HNO_3$ bị quang hóa phân hủy chậm giải phóng khí $NO_2$ màu nâu đỏ hòa tan ngược lại vào acid.",
+      "$HNO_3$ tác dụng với bụi bẩn lơ lửng trong không khí tạo muối sắt.",
+      "Acid $HNO_3$ hấp thụ khí oxygen trong không khí tạo thành chất có màu.",
+      "Nước trong dung dịch acid bị bay hơi làm tăng đột ngột nồng độ chất tan."
+    ],
+    "ans": 0,
+    "explain": "Dưới tác dụng của ánh sáng hoặc nhiệt độ, $HNO_3$ bị phân hủy chậm: $4HNO_3 \\xrightarrow{h\\nu, t^\\circ} 4NO_2 \\uparrow + O_2 \\uparrow + 2H_2O$. Khí $NO_2$ màu nâu đỏ tan lại vào dung dịch acid làm cho lọ acid ngả sang màu vàng."
+  },
+  {
+    "id": 22,
+    "section": "Nitric acid & Muối Nitrate",
+    "q": "Cho mẩu kim loại copper ($Cu$) vào ống nghiệm chứa dung dịch $HNO_3$ đặc, nóng. Hiện tượng quan sát được là",
+    "opts": [
+      "Dung dịch chuyển sang màu xanh lam và có khí màu nâu đỏ thoát ra mãnh liệt.",
+      "Dung dịch không màu và có bọt khí không màu $H_2$ thoát ra.",
+      "Có kết tủa màu đỏ bám trên bề mặt thanh kim loại copper.",
+      "Không có hiện tượng gì xảy ra vì Cu đứng sau hydro trong dãy hoạt động."
+    ],
+    "ans": 0,
+    "explain": "$Cu$ tác dụng với $HNO_3$ đặc nóng: $Cu + 4HNO_3(\\text{đặc}) \\xrightarrow{t^\\circ} Cu(NO_3)_2 + 2NO_2 \\uparrow + 2H_2O$. Dung dịch tạo muối $Cu^{2+}$ có màu xanh lam và khí $NO_2$ thoát ra có màu nâu đỏ đặc trưng."
+  },
+  {
+    "id": 23,
+    "section": "Nitric acid & Muối Nitrate",
+    "q": "Kim loại nào sau đây bị <b>thụ động hóa</b> (không phản ứng do tạo màng oxide trơ bảo vệ) trong dung dịch $HNO_3$ đặc, nguội?",
+    "opts": [
+      "$Fe, Al, Cr$",
+      "$Cu, Ag, Au$",
+      "$Mg, Zn, Fe$",
+      "$Na, K, Ba$"
+    ],
+    "ans": 0,
+    "explain": "Ba kim loại Iron ($Fe$), Aluminium ($Al$) và Chromium ($Cr$) bị thụ động hóa trong cả dung dịch $HNO_3$ đặc nguội và $H_2SO_4$ đặc nguội do trên bề mặt hình thành lớp màng oxide trơ cực mỏng và bền vững bảo vệ kim loại."
+  },
+  {
+    "id": 24,
+    "section": "Nitric acid & Muối Nitrate",
+    "q": "Nhiệt phân hoàn toàn muối copper(II) nitrate $Cu(NO_3)_2$ ở nhiệt độ cao thu được các chất nào sau đây?",
+    "opts": [
+      "$CuO, NO_2, O_2$",
+      "$Cu, NO_2, O_2$",
+      "$Cu(NO_2)_2, O_2$",
+      "$CuO, N_2, O_2$"
+    ],
+    "ans": 0,
+    "explain": "Muối nitrate của các kim loại từ $Mg$ đến $Cu$ khi nhiệt phân tạo thành oxide kim loại tương ứng, khí $NO_2$ và $O_2$: $2Cu(NO_3)_2 \\xrightarrow{t^\\circ} 2CuO + 4NO_2 \\uparrow + O_2 \\uparrow$."
+  }
+];
+
+let userAnswers = new Array(QUESTIONS.length).fill(null);
+let totalSeconds = 40 * 60; // 40 phút
+let secondsLeft = totalSeconds;
+let timerId = null;
+let isSubmitted = false;
+
+function initQuiz() {
+  renderQuestions();
+  startTimer();
+}
+
+function renderQuestions() {
+  const container = document.getElementById('questions-container');
+  container.innerHTML = QUESTIONS.map((q, qIdx) => {
+    const optsHtml = q.opts.map((opt, oIdx) => {
+      const keyLetter = ['A', 'B', 'C', 'D'][oIdx];
+      return `
+        <div class="opt-item" id="opt-item-${qIdx}-${oIdx}" onclick="selectOption(${qIdx}, ${oIdx})">
+          <div class="opt-key">${keyLetter}</div>
+          <div class="opt-desc">${opt}</div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <div class="q-card" id="q-card-${qIdx}">
+        <div class="q-header">
+          <span class="q-num">Câu ${qIdx + 1}</span>
+          <span class="q-tag">${q.section}</span>
+        </div>
+        <div class="q-text">${q.q}</div>
+        <div class="opts-grid">
+          ${optsHtml}
+        </div>
+        <div class="explain-box" id="explain-${qIdx}">
+          <div style="font-weight:700; margin-bottom:4px;" id="explain-title-${qIdx}"></div>
+          <div>${q.explain}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    window.MathJax.typesetPromise();
+  }
+}
+
+function selectOption(qIdx, oIdx) {
+  if (isSubmitted) return;
+  userAnswers[qIdx] = oIdx;
+
+  for (let i = 0; i < 4; i++) {
+    const el = document.getElementById(`opt-item-${qIdx}-${i}`);
+    if (el) {
+      if (i === oIdx) el.classList.add('selected');
+      else el.classList.remove('selected');
+    }
+  }
+
+  updateProgress();
+}
+
+function updateProgress() {
+  const answered = userAnswers.filter(a => a !== null).length;
+  document.getElementById('answered-count').innerText = `Đã làm: ${answered}/${QUESTIONS.length} câu`;
+  const pct = (answered / QUESTIONS.length) * 100;
+  document.getElementById('prog-bar').style.width = pct + '%';
+}
+
+function startTimer() {
+  updateTimerDisplay();
+  timerId = setInterval(() => {
+    if (secondsLeft > 0) {
+      secondsLeft--;
+      updateTimerDisplay();
+    } else {
+      clearInterval(timerId);
+      alert('Đã hết 40 phút làm bài! Hệ thống tự động nộp bài và tính điểm.');
+      submitQuiz();
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(secondsLeft / 60).toString().padStart(2, '0');
+  const s = (secondsLeft % 60).toString().padStart(2, '0');
+  const display = document.getElementById('timer-display');
+  display.innerText = `${m}:${s}`;
+  if (secondsLeft <= 300) { // dưới 5 phút chuyển sang màu đỏ
+    display.style.color = 'var(--son)';
+  }
+}
+
+function submitQuiz(e) {
+  if (e) e.preventDefault();
+  if (isSubmitted) return;
+  isSubmitted = true;
+  clearInterval(timerId);
+
+  // Tính số câu đúng và phần trăm
+  let correctCount = 0;
+  QUESTIONS.forEach((q, qIdx) => {
+    const chosen = userAnswers[qIdx];
+    const isCorrect = (chosen === q.ans);
+    if (isCorrect) correctCount++;
+
+    const expBox = document.getElementById(`explain-${qIdx}`);
+    const expTitle = document.getElementById(`explain-title-${qIdx}`);
+    const qCard = document.getElementById(`q-card-${qIdx}`);
+
+    expBox.classList.add('show');
+    if (isCorrect) {
+      expBox.classList.add('explain-correct');
+      expTitle.innerHTML = `<i class="fas fa-check-circle"></i> Chính xác! Đáp án: ${'ABCD'[q.ans]}`;
+      qCard.style.borderColor = '#10B981';
+    } else {
+      expBox.classList.add('explain-wrong');
+      const userChoiceTxt = chosen !== null ? 'ABCD'[chosen] : 'Chưa chọn';
+      expTitle.innerHTML = `<i class="fas fa-times-circle"></i> Chưa chính xác! Bạn chọn: <b>${userChoiceTxt}</b> — Đáp án đúng: <b>${'ABCD'[q.ans]}</b>`;
+      qCard.style.borderColor = '#EF4444';
+    }
+  });
+
+  const percentScore = ((correctCount / QUESTIONS.length) * 100).toFixed(1);
+  const mark10 = ((correctCount / QUESTIONS.length) * 10).toFixed(2);
+  const timeUsedSeconds = totalSeconds - secondsLeft;
+  const timeUsedMin = Math.floor(timeUsedSeconds / 60);
+  const timeUsedSec = timeUsedSeconds % 60;
+
+  // Hiển thị kết quả vào modal
+  document.getElementById('res-score').innerText = `${mark10} / 10`;
+  document.getElementById('res-percent').innerText = `${percentScore}% câu đúng`;
+  document.getElementById('res-correct').innerText = `${correctCount} / ${QUESTIONS.length}`;
+  document.getElementById('res-wrong').innerText = `${QUESTIONS.length - correctCount} / ${QUESTIONS.length}`;
+  document.getElementById('res-time').innerText = `${timeUsedMin}p ${timeUsedSec}s`;
+
+  // Đánh giá năng lực theo tỷ lệ phần trăm câu đúng
+  let evalText = '';
+  if (percentScore >= 85) {
+    evalText = `<b style="color:var(--luc);">🌟 XUẤT SẮC (${percentScore}%):</b> Nắm rất chắc bản chất vi mô của cân bằng hóa học, dung dịch nước và các hợp chất nitrogen. Sẵn sàng bứt phá các bài toán điểm 9+ và chương Hóa học Hữu cơ!`;
+  } else if (percentScore >= 70) {
+    evalText = `<b style="color:var(--lam);">👍 KHÁ TỐT (${percentScore}%):</b> Nắm vững các khái niệm cơ bản. Cần lưu ý các bẫy Le Chatelier (vai trò chất xúc tác, chất rắn) và các phản ứng đặc trưng của $HNO_3$ để đạt điểm tối đa.`;
+  } else if (percentScore >= 50) {
+    evalText = `<b style="color:var(--tho);">⚠️ ĐẠT TRUNG BÌNH (${percentScore}%):</b> Đã có kiến thức nền nhưng còn hổng ở kỹ năng tính toán pH, bản chất chất lưỡng tính và tính oxi hóa của muối nitrate trong môi trường acid. Cần ôn luyện kỹ lại lý thuyết tuần 1-9.`;
+  } else {
+    evalText = `<b style="color:var(--son);">🚨 CẦN BỔ TÚC CẤP TỐC (${percentScore}%):</b> Hổng sâu cả phần Cân bằng hóa học lẫn Hóa vô cơ lớp 11. Đề xuất phụ đạo kèm 1-1 với Thầy Tuấn theo giáo án Sổ tay 12 trang để lấy lại gốc thần tốc.`;
+  }
+  document.getElementById('res-eval').innerHTML = evalText;
+
+  // Đổi nút submit
+  const btn = document.getElementById('btn-submit');
+  btn.innerHTML = `<i class="fas fa-check-double"></i> Đã Hoàn Thành (Xem Phân Tích)`;
+  btn.style.background = '#475569';
+  btn.onclick = () => document.getElementById('result-modal').classList.add('show');
+
+  // Mở modal
+  document.getElementById('result-modal').classList.add('show');
+
+  if (window.MathJax && window.MathJax.typesetPromise) {
+    window.MathJax.typesetPromise();
+  }
+}
+
+function closeModalAndReview() {
+  document.getElementById('result-modal').classList.remove('show');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetQuiz() {
+  if (!confirm('Bạn có chắc muốn làm lại bài từ đầu không?')) return;
+  userAnswers.fill(null);
+  isSubmitted = false;
+  secondsLeft = totalSeconds;
+  document.getElementById('result-modal').classList.remove('show');
+  
+  const btn = document.getElementById('btn-submit');
+  btn.innerHTML = `<i class="fas fa-paper-plane"></i> Nộp Bài &amp; Xem Kết Quả`;
+  btn.style.background = 'var(--luc)';
+  btn.onclick = null;
+
+  initQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.addEventListener('DOMContentLoaded', initQuiz);
+</script>
+
+</body>
+</html>
