@@ -43871,5 +43871,745 @@
         "explain": "Muối nitrate của các kim loại từ $Mg$ đến $Cu$ khi nhiệt phân tạo thành oxide kim loại tương ứng, khí $NO_2$ và $O_2$: $2Cu(NO_3)_2 \\xrightarrow{t^\\circ} 2CuO + 4NO_2 \\uparrow + O_2 \\uparrow$."
       }
     ]
+  },
+  {
+    "exam_code": "DGNL11_TA_B02",
+    "grade": "L11",
+    "subject": "Tiếng Anh",
+    "title": "Luyện Thi ĐGNL VNU Tiếng Anh Buổi 2 · Lớp 11 BSChool",
+    "description": "Bộ 30 câu luyện thi ĐGNL VNU Tiếng Anh Buổi 2 (Lớp 11 BSChool) chuẩn cấu trúc APT ĐHQG-HCM: Cấu trúc ngữ pháp chuyên sâu, Mệnh đề rút gọn, Đảo ngữ điều kiện, Từ vựng học thuật, Collocations, Biến đổi câu đồng nghĩa và Ghép câu phức. Kèm lời giải chi tiết và bản in A4.",
+    "time_minutes": 40,
+    "questions": [
+      {
+        "q": "The revolutionary solar panels ________ by the university research team last year have now been installed across the campus.",
+        "opts": [
+          "developing",
+          "developed",
+          "which developed",
+          "were developed"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (developed).</b> Giải thích: Rút gọn mệnh đề quan hệ dạng bị động (<i>which were developed → developed</i>). Động từ chính của câu là <i>have now been installed</i>.",
+        "section": "Ngữ Pháp Chuyên Sâu & Mệnh Đề Rút Gọn"
+      },
+      {
+        "q": "________ the severe weather alert earlier, the maritime expedition would have returned to the shore safely.",
+        "opts": [
+          "Should the captain receive",
+          "Had the captain received",
+          "Were the captain to receive",
+          "If the captain received"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (Had the captain received).</b> Giải thích: Đảo ngữ câu điều kiện loại 3 diễn tả giả thiết trái quá khứ: <i>Had + S + V3, S + would have + V3</i>.",
+        "section": "Ngữ Pháp Chuyên Sâu & Mệnh Đề Rút Gọn"
+      },
+      {
+        "q": "Dr. Henderson was the first Vietnamese scholar ________ an honorary doctorate by this prestigious institution.",
+        "opts": [
+          "conferring",
+          "to confer",
+          "to be conferred",
+          "who conferred"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án: C (to be conferred).</b> Giải thích: Sau <i>the first</i>, mệnh đề quan hệ rút gọn thành <i>To-V</i> (chủ động) hoặc <i>To be V3</i> (bị động). Ở đây học giả được trao bằng danh dự → chọn bị động.",
+        "section": "Ngữ Pháp Chuyên Sâu & Mệnh Đề Rút Gọn"
+      },
+      {
+        "q": "________ for his extensive financial investments, the new laboratory facilities could never have been constructed.",
+        "opts": [
+          "Had it not been",
+          "Were it not",
+          "If it were not",
+          "Without it had been"
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A (Had it not been).</b> Giải thích: Cấu trúc điều kiện ẩn định loại 3 đảo ngữ: <i>Had it not been for + N, S + could have V3</i> (Nếu không nhờ có...).",
+        "section": "Ngữ Pháp Chuyên Sâu & Mệnh Đề Rút Gọn"
+      },
+      {
+        "q": "It is imperative that each member of the research committee ________ the experimental data thoroughly before submitting the final draft.",
+        "opts": [
+          "verifies",
+          "verify",
+          "verified",
+          "will verify"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (verify).</b> Giải thích: Cấu trúc Giả định thức (Subjunctive Mood): <i>It is imperative that + S + (should) + V(bare)</i>. Động từ luôn ở dạng nguyên thể không chia.",
+        "section": "Ngữ Pháp Chuyên Sâu & Mệnh Đề Rút Gọn"
+      },
+      {
+        "q": "Renewable energy sources currently ________ approximately 28% of the country's total electricity production.",
+        "opts": [
+          "make off with",
+          "account for",
+          "take up with",
+          "bring about"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (account for).</b> Giải thích: <i>Account for + số phần trăm</i> mang nghĩa \"chiếm tỷ lệ bao nhiêu\" trong tổng số; còn có nghĩa giải thích nguyên nhân.",
+        "section": "Từ Vựng Học Thuật & Collocations"
+      },
+      {
+        "q": "The implementation of modern artificial intelligence tools has exerted a profound ________ on student learning behaviors.",
+        "opts": [
+          "impression",
+          "influence",
+          "affection",
+          "alteration"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (influence).</b> Giải thích: Collocation cố định: <i>exert a profound influence/impact on sth</i> (gây ra tác động/ảnh hưởng sâu sắc lên cái gì).",
+        "section": "Từ Vựng Học Thuật & Collocations"
+      },
+      {
+        "q": "Policy makers are striving to ________ a delicate balance between industrial expansion and ecological preservation.",
+        "opts": [
+          "strike",
+          "beat",
+          "hold",
+          "create"
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A (strike).</b> Giải thích: Collocation chuẩn học thuật: <i>strike a balance between A and B</i> (đạt được sự cân bằng hài hòa giữa hai yếu tố).",
+        "section": "Từ Vựng Học Thuật & Collocations"
+      },
+      {
+        "q": "Many prominent environmentalists ________ the recent surge in global sea levels to rapid polar ice melting.",
+        "opts": [
+          "contribute",
+          "distribute",
+          "attribute",
+          "dedicate"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án: C (attribute).</b> Giải thích: Cấu trúc: <i>attribute sth to sth</i> (quy nguyên nhân của cái gì cho cái gì). (Tránh nhầm với <i>contribute to</i>: đóng góp vào).",
+        "section": "Từ Vựng Học Thuật & Collocations"
+      },
+      {
+        "q": "The newly launched internship program was designed to ________ the gap between theoretical knowledge and practical workplace skills.",
+        "opts": [
+          "cross",
+          "bridge",
+          "connect",
+          "span"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (bridge).</b> Giải thích: Collocation học thuật quen thuộc trong ĐGNL VNU: <i>bridge the gap between A and B</i> (thu hẹp khoảng cách giữa A và B).",
+        "section": "Từ Vựng Học Thuật & Collocations"
+      },
+      {
+        "q": "Without the timely intervention of the local authorities, the historic monument would have collapsed.",
+        "opts": [
+          "But for the timely intervention of the local authorities, the historic monument would not collapse.",
+          "Had the local authorities not intervened in a timely manner, the historic monument would have collapsed.",
+          "The historic monument collapsed because the local authorities intervened too late.",
+          "If the local authorities had intervened in time, the historic monument would have collapsed."
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B.</b> Giải thích: <i>Without + N, S + would have V3</i> = <i>Had S not V3, S + would have V3</i> (Đảo ngữ điều kiện loại 3).",
+        "section": "Biến Đổi Câu Đồng Nghĩa (Closest in Meaning)"
+      },
+      {
+        "q": "The economic crisis was so severe that countless small businesses were forced into bankruptcy.",
+        "opts": [
+          "Such was the severity of the economic crisis that countless small businesses were forced into bankruptcy.",
+          "The economic crisis was not severe enough to force small businesses into bankruptcy.",
+          "Countless small businesses went bankrupt despite the moderate severity of the economic crisis.",
+          "So severe the economic crisis was that countless small businesses were forced into bankruptcy."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> Giải thích: Cấu trúc đảo ngữ: <i>So + Adj + be + S + that...</i> = <i>Such was + Noun + that...</i> (Quá nghiêm trọng đến mức...). Phương án D sai trật tự đảo ngữ.",
+        "section": "Biến Đổi Câu Đồng Nghĩa (Closest in Meaning)"
+      },
+      {
+        "q": "The candidate was poorly qualified. However, she managed to impress the interviewers with her enthusiasm.",
+        "opts": [
+          "However poorly qualified the candidate was, she managed to impress the interviewers with her enthusiasm.",
+          "Despite she was poorly qualified, she impressed the interviewers with her enthusiasm.",
+          "Poorly qualified though the candidate was not, she failed to impress the interviewers.",
+          "She impressed the interviewers because she was poorly qualified."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> Giải thích: Cấu trúc nhượng bộ: <i>However + Adj + S + V, clause</i> = Dù ứng viên ít bằng cấp đến mức nào đi nữa, cô ấy vẫn gây ấn tượng...",
+        "section": "Biến Đổi Câu Đồng Nghĩa (Closest in Meaning)"
+      },
+      {
+        "q": "The engineer finished the blueprint. He immediately submitted it to the project director for appraisal.",
+        "opts": [
+          "Hardly had the engineer finished the blueprint when he submitted it to the project director for appraisal.",
+          "No sooner had the engineer submitted the blueprint than he finished it.",
+          "Not until the director appraised the blueprint did the engineer finish it.",
+          "Finishing the blueprint, the project director appraised the engineer immediately."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> Giải thích: Cấu trúc hành động vừa mới... thì: <i>Hardly had + S + V3 + when + S + V2</i>. (Phương án B ngược trật tự; D bị lỗi chủ ngữ dangling modifier).",
+        "section": "Kết Hợp Câu Phức (Sentence Combination)"
+      },
+      {
+        "q": "The team conducted thorough laboratory trials. They discovered a novel chemical compound for cancer therapy.",
+        "opts": [
+          "Discovered a novel chemical compound, thorough laboratory trials were conducted.",
+          "Having conducted thorough laboratory trials, the team discovered a novel chemical compound for cancer therapy.",
+          "Conducting laboratory trials, a novel chemical compound was discovered by the team.",
+          "Because of discovering a compound, the team had conducted thorough trials."
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B.</b> Giải thích: Rút gọn hai mệnh đề cùng chủ ngữ có thứ tự thời gian: Hành động xảy ra và hoàn tất trước dùng <i>Having + V3</i> (Chủ động). A và C bị bẫy Dangling Modifier.",
+        "section": "Kết Hợp Câu Phức (Sentence Combination)"
+      },
+      {
+        "q": "The ancient manuscripts ________ in the cave date back to the early fourth century.",
+        "opts": [
+          "discovering",
+          "discovered",
+          "to discover",
+          "which discovered"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (discovered).</b> Rút gọn bị động: <i>manuscripts (which were) discovered</i>.",
+        "section": "Củng Cố · Ngữ Pháp & Đảo Ngữ"
+      },
+      {
+        "q": "________ they to offer him a higher salary, he might reconsider his decision to relocate abroad.",
+        "opts": [
+          "Should",
+          "Were",
+          "Had",
+          "Did"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (Were).</b> Đảo ngữ điều kiện loại 2: <i>Were + S + to-V, S + would/might + V</i>.",
+        "section": "Củng Cố · Ngữ Pháp & Đảo Ngữ"
+      },
+      {
+        "q": "Neil Armstrong was the first human ________ on the surface of the Moon in 1969.",
+        "opts": [
+          "walked",
+          "walking",
+          "to walk",
+          "walks"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án: C (to walk).</b> Rút gọn sau số thứ tự <i>the first</i> dùng <i>To-V</i> chủ động.",
+        "section": "Củng Cố · Ngữ Pháp & Đảo Ngữ"
+      },
+      {
+        "q": "Had the cybersecurity protocols been implemented properly, the data breach ________.",
+        "opts": [
+          "would be prevented",
+          "would have been prevented",
+          "will be prevented",
+          "had been prevented"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (would have been prevented).</b> Đảo ngữ loại 3 bị động: <i>Had + S + V3, S + would have been V3</i>.",
+        "section": "Củng Cố · Ngữ Pháp & Đảo Ngữ"
+      },
+      {
+        "q": "The dean recommended that the curriculum revision ________ by next September.",
+        "opts": [
+          "is completed",
+          "be completed",
+          "was completed",
+          "will be completed"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (be completed).</b> Giả định thức bị động: <i>recommended that + S + (should) be V3</i>.",
+        "section": "Củng Cố · Ngữ Pháp & Đảo Ngữ"
+      },
+      {
+        "q": "Urban traffic congestion accounts ________ nearly 40% of carbon emissions in metropolises.",
+        "opts": [
+          "of",
+          "for",
+          "with",
+          "to"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (for).</b> <i>Account for</i> = chiếm tỷ lệ.",
+        "section": "Củng Cố · Từ Vựng & Collocations"
+      },
+      {
+        "q": "Advances in biotechnology have brought ________ substantial improvements in medical treatment.",
+        "opts": [
+          "about",
+          "in",
+          "up",
+          "off"
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A (about).</b> <i>Bring about</i> = gây ra, mang lại sự thay đổi tích cực.",
+        "section": "Củng Cố · Từ Vựng & Collocations"
+      },
+      {
+        "q": "It is essential to draw a clear ________ between correlation and causation in scientific studies.",
+        "opts": [
+          "divide",
+          "distinction",
+          "difference",
+          "barrier"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (distinction).</b> Collocation: <i>draw a clear distinction between A and B</i> (vạch ra sự phân biệt rõ ràng).",
+        "section": "Củng Cố · Từ Vựng & Collocations"
+      },
+      {
+        "q": "Historians often attribute the rapid decline of the empire ________ prolonged political instability.",
+        "opts": [
+          "for",
+          "with",
+          "to",
+          "from"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án: C (to).</b> <i>Attribute sth to sth</i> (quy nguyên nhân cho...).",
+        "section": "Củng Cố · Từ Vựng & Collocations"
+      },
+      {
+        "q": "Online education has effectively helped to bridge the digital ________ in remote communities.",
+        "opts": [
+          "division",
+          "divide",
+          "gap",
+          "split"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án: C (gap).</b> Collocation: <i>bridge the digital gap / digital divide</i>. Tuy nhiên đi với <i>bridge the...</i> thông dụng nhất là <i>bridge the gap</i>.",
+        "section": "Củng Cố · Từ Vựng & Collocations"
+      },
+      {
+        "q": "But for the prompt arrival of the medical emergency team, the patient could not have survived.",
+        "opts": [
+          "Had the medical emergency team not arrived promptly, the patient could not have survived.",
+          "The patient survived although the medical emergency team arrived late.",
+          "If the medical emergency team arrived promptly, the patient would survive.",
+          "The patient would have survived without the emergency team."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> <i>But for + N</i> = <i>Had S not V3</i>.",
+        "section": "Củng Cố · Biến Đổi Câu Đồng Nghĩa"
+      },
+      {
+        "q": "The mountain path was so steep that none of the novice hikers could reach the summit.",
+        "opts": [
+          "Such was the steepness of the mountain path that none of the novice hikers could reach the summit.",
+          "The mountain path was too steep for any hiker to fail reaching the summit.",
+          "So steep was the path that all hikers reached the summit easily.",
+          "Despite the steep path, all novice hikers reached the summit."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> Đảo ngữ <i>Such was + Noun + that...</i>.",
+        "section": "Củng Cố · Biến Đổi Câu Đồng Nghĩa"
+      },
+      {
+        "q": "No matter how complicated the mathematical problem was, she solved it in ten minutes.",
+        "opts": [
+          "Complicated though the mathematical problem was, she solved it in ten minutes.",
+          "Because the problem was complicated, she took ten minutes to solve it.",
+          "She could not solve the problem despite its simplicity.",
+          "However the problem was complicated, she failed to solve it."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> <i>No matter how + Adj + S + V</i> = <i>Adj + though + S + be</i>.",
+        "section": "Củng Cố · Biến Đổi Câu Đồng Nghĩa"
+      },
+      {
+        "q": "The student completed her dissertation. She set off on a celebratory summer vacation.",
+        "opts": [
+          "Having completed her dissertation, the student set off on a celebratory summer vacation.",
+          "Completed her dissertation, a summer vacation was set off.",
+          "After she sets off on vacation, she had completed her dissertation.",
+          "Setting off on vacation, her dissertation was completed."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> Phân từ hoàn thành <i>Having + V3</i> diễn tả hành động hoàn tất trước.",
+        "section": "Củng Cố · Kết Hợp Câu Phức"
+      },
+      {
+        "q": "The manager entered the office. The staff immediately stopped arguing about the project.",
+        "opts": [
+          "No sooner had the manager entered the office than the staff stopped arguing about the project.",
+          "Hardly had the staff stopped arguing when the manager entered the office.",
+          "Scarcely did the manager enter the office than the staff stopped arguing.",
+          "Not until the staff stopped arguing did the manager enter the office."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> <i>No sooner had + S + V3 + than + clause</i>.",
+        "section": "Củng Cố · Kết Hợp Câu Phức"
+      }
+    ]
+  },
+  {
+    "exam_code": "DGNL_TA_B02",
+    "grade": "DGNL",
+    "subject": "Tiếng Anh",
+    "title": "Luyện Thi ĐGNL VNU Tiếng Anh Buổi 2 · Lớp 11 BSChool",
+    "description": "Bộ 30 câu luyện thi ĐGNL VNU Tiếng Anh Buổi 2 (Lớp 11 BSChool) chuẩn cấu trúc APT ĐHQG-HCM: Cấu trúc ngữ pháp chuyên sâu, Mệnh đề rút gọn, Đảo ngữ điều kiện, Từ vựng học thuật, Collocations, Biến đổi câu đồng nghĩa và Ghép câu phức. Kèm lời giải chi tiết và bản in A4.",
+    "time_minutes": 40,
+    "questions": [
+      {
+        "q": "The revolutionary solar panels ________ by the university research team last year have now been installed across the campus.",
+        "opts": [
+          "developing",
+          "developed",
+          "which developed",
+          "were developed"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (developed).</b> Giải thích: Rút gọn mệnh đề quan hệ dạng bị động (<i>which were developed → developed</i>). Động từ chính của câu là <i>have now been installed</i>.",
+        "section": "Ngữ Pháp Chuyên Sâu & Mệnh Đề Rút Gọn"
+      },
+      {
+        "q": "________ the severe weather alert earlier, the maritime expedition would have returned to the shore safely.",
+        "opts": [
+          "Should the captain receive",
+          "Had the captain received",
+          "Were the captain to receive",
+          "If the captain received"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (Had the captain received).</b> Giải thích: Đảo ngữ câu điều kiện loại 3 diễn tả giả thiết trái quá khứ: <i>Had + S + V3, S + would have + V3</i>.",
+        "section": "Ngữ Pháp Chuyên Sâu & Mệnh Đề Rút Gọn"
+      },
+      {
+        "q": "Dr. Henderson was the first Vietnamese scholar ________ an honorary doctorate by this prestigious institution.",
+        "opts": [
+          "conferring",
+          "to confer",
+          "to be conferred",
+          "who conferred"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án: C (to be conferred).</b> Giải thích: Sau <i>the first</i>, mệnh đề quan hệ rút gọn thành <i>To-V</i> (chủ động) hoặc <i>To be V3</i> (bị động). Ở đây học giả được trao bằng danh dự → chọn bị động.",
+        "section": "Ngữ Pháp Chuyên Sâu & Mệnh Đề Rút Gọn"
+      },
+      {
+        "q": "________ for his extensive financial investments, the new laboratory facilities could never have been constructed.",
+        "opts": [
+          "Had it not been",
+          "Were it not",
+          "If it were not",
+          "Without it had been"
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A (Had it not been).</b> Giải thích: Cấu trúc điều kiện ẩn định loại 3 đảo ngữ: <i>Had it not been for + N, S + could have V3</i> (Nếu không nhờ có...).",
+        "section": "Ngữ Pháp Chuyên Sâu & Mệnh Đề Rút Gọn"
+      },
+      {
+        "q": "It is imperative that each member of the research committee ________ the experimental data thoroughly before submitting the final draft.",
+        "opts": [
+          "verifies",
+          "verify",
+          "verified",
+          "will verify"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (verify).</b> Giải thích: Cấu trúc Giả định thức (Subjunctive Mood): <i>It is imperative that + S + (should) + V(bare)</i>. Động từ luôn ở dạng nguyên thể không chia.",
+        "section": "Ngữ Pháp Chuyên Sâu & Mệnh Đề Rút Gọn"
+      },
+      {
+        "q": "Renewable energy sources currently ________ approximately 28% of the country's total electricity production.",
+        "opts": [
+          "make off with",
+          "account for",
+          "take up with",
+          "bring about"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (account for).</b> Giải thích: <i>Account for + số phần trăm</i> mang nghĩa \"chiếm tỷ lệ bao nhiêu\" trong tổng số; còn có nghĩa giải thích nguyên nhân.",
+        "section": "Từ Vựng Học Thuật & Collocations"
+      },
+      {
+        "q": "The implementation of modern artificial intelligence tools has exerted a profound ________ on student learning behaviors.",
+        "opts": [
+          "impression",
+          "influence",
+          "affection",
+          "alteration"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (influence).</b> Giải thích: Collocation cố định: <i>exert a profound influence/impact on sth</i> (gây ra tác động/ảnh hưởng sâu sắc lên cái gì).",
+        "section": "Từ Vựng Học Thuật & Collocations"
+      },
+      {
+        "q": "Policy makers are striving to ________ a delicate balance between industrial expansion and ecological preservation.",
+        "opts": [
+          "strike",
+          "beat",
+          "hold",
+          "create"
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A (strike).</b> Giải thích: Collocation chuẩn học thuật: <i>strike a balance between A and B</i> (đạt được sự cân bằng hài hòa giữa hai yếu tố).",
+        "section": "Từ Vựng Học Thuật & Collocations"
+      },
+      {
+        "q": "Many prominent environmentalists ________ the recent surge in global sea levels to rapid polar ice melting.",
+        "opts": [
+          "contribute",
+          "distribute",
+          "attribute",
+          "dedicate"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án: C (attribute).</b> Giải thích: Cấu trúc: <i>attribute sth to sth</i> (quy nguyên nhân của cái gì cho cái gì). (Tránh nhầm với <i>contribute to</i>: đóng góp vào).",
+        "section": "Từ Vựng Học Thuật & Collocations"
+      },
+      {
+        "q": "The newly launched internship program was designed to ________ the gap between theoretical knowledge and practical workplace skills.",
+        "opts": [
+          "cross",
+          "bridge",
+          "connect",
+          "span"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (bridge).</b> Giải thích: Collocation học thuật quen thuộc trong ĐGNL VNU: <i>bridge the gap between A and B</i> (thu hẹp khoảng cách giữa A và B).",
+        "section": "Từ Vựng Học Thuật & Collocations"
+      },
+      {
+        "q": "Without the timely intervention of the local authorities, the historic monument would have collapsed.",
+        "opts": [
+          "But for the timely intervention of the local authorities, the historic monument would not collapse.",
+          "Had the local authorities not intervened in a timely manner, the historic monument would have collapsed.",
+          "The historic monument collapsed because the local authorities intervened too late.",
+          "If the local authorities had intervened in time, the historic monument would have collapsed."
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B.</b> Giải thích: <i>Without + N, S + would have V3</i> = <i>Had S not V3, S + would have V3</i> (Đảo ngữ điều kiện loại 3).",
+        "section": "Biến Đổi Câu Đồng Nghĩa (Closest in Meaning)"
+      },
+      {
+        "q": "The economic crisis was so severe that countless small businesses were forced into bankruptcy.",
+        "opts": [
+          "Such was the severity of the economic crisis that countless small businesses were forced into bankruptcy.",
+          "The economic crisis was not severe enough to force small businesses into bankruptcy.",
+          "Countless small businesses went bankrupt despite the moderate severity of the economic crisis.",
+          "So severe the economic crisis was that countless small businesses were forced into bankruptcy."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> Giải thích: Cấu trúc đảo ngữ: <i>So + Adj + be + S + that...</i> = <i>Such was + Noun + that...</i> (Quá nghiêm trọng đến mức...). Phương án D sai trật tự đảo ngữ.",
+        "section": "Biến Đổi Câu Đồng Nghĩa (Closest in Meaning)"
+      },
+      {
+        "q": "The candidate was poorly qualified. However, she managed to impress the interviewers with her enthusiasm.",
+        "opts": [
+          "However poorly qualified the candidate was, she managed to impress the interviewers with her enthusiasm.",
+          "Despite she was poorly qualified, she impressed the interviewers with her enthusiasm.",
+          "Poorly qualified though the candidate was not, she failed to impress the interviewers.",
+          "She impressed the interviewers because she was poorly qualified."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> Giải thích: Cấu trúc nhượng bộ: <i>However + Adj + S + V, clause</i> = Dù ứng viên ít bằng cấp đến mức nào đi nữa, cô ấy vẫn gây ấn tượng...",
+        "section": "Biến Đổi Câu Đồng Nghĩa (Closest in Meaning)"
+      },
+      {
+        "q": "The engineer finished the blueprint. He immediately submitted it to the project director for appraisal.",
+        "opts": [
+          "Hardly had the engineer finished the blueprint when he submitted it to the project director for appraisal.",
+          "No sooner had the engineer submitted the blueprint than he finished it.",
+          "Not until the director appraised the blueprint did the engineer finish it.",
+          "Finishing the blueprint, the project director appraised the engineer immediately."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> Giải thích: Cấu trúc hành động vừa mới... thì: <i>Hardly had + S + V3 + when + S + V2</i>. (Phương án B ngược trật tự; D bị lỗi chủ ngữ dangling modifier).",
+        "section": "Kết Hợp Câu Phức (Sentence Combination)"
+      },
+      {
+        "q": "The team conducted thorough laboratory trials. They discovered a novel chemical compound for cancer therapy.",
+        "opts": [
+          "Discovered a novel chemical compound, thorough laboratory trials were conducted.",
+          "Having conducted thorough laboratory trials, the team discovered a novel chemical compound for cancer therapy.",
+          "Conducting laboratory trials, a novel chemical compound was discovered by the team.",
+          "Because of discovering a compound, the team had conducted thorough trials."
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B.</b> Giải thích: Rút gọn hai mệnh đề cùng chủ ngữ có thứ tự thời gian: Hành động xảy ra và hoàn tất trước dùng <i>Having + V3</i> (Chủ động). A và C bị bẫy Dangling Modifier.",
+        "section": "Kết Hợp Câu Phức (Sentence Combination)"
+      },
+      {
+        "q": "The ancient manuscripts ________ in the cave date back to the early fourth century.",
+        "opts": [
+          "discovering",
+          "discovered",
+          "to discover",
+          "which discovered"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (discovered).</b> Rút gọn bị động: <i>manuscripts (which were) discovered</i>.",
+        "section": "Củng Cố · Ngữ Pháp & Đảo Ngữ"
+      },
+      {
+        "q": "________ they to offer him a higher salary, he might reconsider his decision to relocate abroad.",
+        "opts": [
+          "Should",
+          "Were",
+          "Had",
+          "Did"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (Were).</b> Đảo ngữ điều kiện loại 2: <i>Were + S + to-V, S + would/might + V</i>.",
+        "section": "Củng Cố · Ngữ Pháp & Đảo Ngữ"
+      },
+      {
+        "q": "Neil Armstrong was the first human ________ on the surface of the Moon in 1969.",
+        "opts": [
+          "walked",
+          "walking",
+          "to walk",
+          "walks"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án: C (to walk).</b> Rút gọn sau số thứ tự <i>the first</i> dùng <i>To-V</i> chủ động.",
+        "section": "Củng Cố · Ngữ Pháp & Đảo Ngữ"
+      },
+      {
+        "q": "Had the cybersecurity protocols been implemented properly, the data breach ________.",
+        "opts": [
+          "would be prevented",
+          "would have been prevented",
+          "will be prevented",
+          "had been prevented"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (would have been prevented).</b> Đảo ngữ loại 3 bị động: <i>Had + S + V3, S + would have been V3</i>.",
+        "section": "Củng Cố · Ngữ Pháp & Đảo Ngữ"
+      },
+      {
+        "q": "The dean recommended that the curriculum revision ________ by next September.",
+        "opts": [
+          "is completed",
+          "be completed",
+          "was completed",
+          "will be completed"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (be completed).</b> Giả định thức bị động: <i>recommended that + S + (should) be V3</i>.",
+        "section": "Củng Cố · Ngữ Pháp & Đảo Ngữ"
+      },
+      {
+        "q": "Urban traffic congestion accounts ________ nearly 40% of carbon emissions in metropolises.",
+        "opts": [
+          "of",
+          "for",
+          "with",
+          "to"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (for).</b> <i>Account for</i> = chiếm tỷ lệ.",
+        "section": "Củng Cố · Từ Vựng & Collocations"
+      },
+      {
+        "q": "Advances in biotechnology have brought ________ substantial improvements in medical treatment.",
+        "opts": [
+          "about",
+          "in",
+          "up",
+          "off"
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A (about).</b> <i>Bring about</i> = gây ra, mang lại sự thay đổi tích cực.",
+        "section": "Củng Cố · Từ Vựng & Collocations"
+      },
+      {
+        "q": "It is essential to draw a clear ________ between correlation and causation in scientific studies.",
+        "opts": [
+          "divide",
+          "distinction",
+          "difference",
+          "barrier"
+        ],
+        "ans": 1,
+        "exp": "<b>Đáp án: B (distinction).</b> Collocation: <i>draw a clear distinction between A and B</i> (vạch ra sự phân biệt rõ ràng).",
+        "section": "Củng Cố · Từ Vựng & Collocations"
+      },
+      {
+        "q": "Historians often attribute the rapid decline of the empire ________ prolonged political instability.",
+        "opts": [
+          "for",
+          "with",
+          "to",
+          "from"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án: C (to).</b> <i>Attribute sth to sth</i> (quy nguyên nhân cho...).",
+        "section": "Củng Cố · Từ Vựng & Collocations"
+      },
+      {
+        "q": "Online education has effectively helped to bridge the digital ________ in remote communities.",
+        "opts": [
+          "division",
+          "divide",
+          "gap",
+          "split"
+        ],
+        "ans": 2,
+        "exp": "<b>Đáp án: C (gap).</b> Collocation: <i>bridge the digital gap / digital divide</i>. Tuy nhiên đi với <i>bridge the...</i> thông dụng nhất là <i>bridge the gap</i>.",
+        "section": "Củng Cố · Từ Vựng & Collocations"
+      },
+      {
+        "q": "But for the prompt arrival of the medical emergency team, the patient could not have survived.",
+        "opts": [
+          "Had the medical emergency team not arrived promptly, the patient could not have survived.",
+          "The patient survived although the medical emergency team arrived late.",
+          "If the medical emergency team arrived promptly, the patient would survive.",
+          "The patient would have survived without the emergency team."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> <i>But for + N</i> = <i>Had S not V3</i>.",
+        "section": "Củng Cố · Biến Đổi Câu Đồng Nghĩa"
+      },
+      {
+        "q": "The mountain path was so steep that none of the novice hikers could reach the summit.",
+        "opts": [
+          "Such was the steepness of the mountain path that none of the novice hikers could reach the summit.",
+          "The mountain path was too steep for any hiker to fail reaching the summit.",
+          "So steep was the path that all hikers reached the summit easily.",
+          "Despite the steep path, all novice hikers reached the summit."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> Đảo ngữ <i>Such was + Noun + that...</i>.",
+        "section": "Củng Cố · Biến Đổi Câu Đồng Nghĩa"
+      },
+      {
+        "q": "No matter how complicated the mathematical problem was, she solved it in ten minutes.",
+        "opts": [
+          "Complicated though the mathematical problem was, she solved it in ten minutes.",
+          "Because the problem was complicated, she took ten minutes to solve it.",
+          "She could not solve the problem despite its simplicity.",
+          "However the problem was complicated, she failed to solve it."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> <i>No matter how + Adj + S + V</i> = <i>Adj + though + S + be</i>.",
+        "section": "Củng Cố · Biến Đổi Câu Đồng Nghĩa"
+      },
+      {
+        "q": "The student completed her dissertation. She set off on a celebratory summer vacation.",
+        "opts": [
+          "Having completed her dissertation, the student set off on a celebratory summer vacation.",
+          "Completed her dissertation, a summer vacation was set off.",
+          "After she sets off on vacation, she had completed her dissertation.",
+          "Setting off on vacation, her dissertation was completed."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> Phân từ hoàn thành <i>Having + V3</i> diễn tả hành động hoàn tất trước.",
+        "section": "Củng Cố · Kết Hợp Câu Phức"
+      },
+      {
+        "q": "The manager entered the office. The staff immediately stopped arguing about the project.",
+        "opts": [
+          "No sooner had the manager entered the office than the staff stopped arguing about the project.",
+          "Hardly had the staff stopped arguing when the manager entered the office.",
+          "Scarcely did the manager enter the office than the staff stopped arguing.",
+          "Not until the staff stopped arguing did the manager enter the office."
+        ],
+        "ans": 0,
+        "exp": "<b>Đáp án: A.</b> <i>No sooner had + S + V3 + than + clause</i>.",
+        "section": "Củng Cố · Kết Hợp Câu Phức"
+      }
+    ]
   }
 ]

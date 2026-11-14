@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Giáo Án & Đề Luyện Thi ĐGNL VNU Tiếng Anh Buổi 2 · Lớp 11 BSChool · ThS. Đinh Quốc Tuấn</title>
+
+<!-- Favicon thương hiệu hoa sen -->
+<link rel="icon" type="image/svg+xml" href="https://diemdanhsv.com/images/logo-sen.svg">
+
+<!-- Google Fonts: Source Serif 4 & Be Vietnam Pro -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --brand-luc: #0F6B55;      /* Lục Bồ Đề - Màu chủ đạo */
+  --brand-lam: #1F4E79;      /* Lam Hộ Vệ - Tiêu đề, thanh dẫn */
+  --brand-muc: #10212B;      /* Mực Lam - Chữ chính */
+  --brand-giay: #F6F7F3;     /* Nền sáng Giấy */
+  --brand-bac: #D5DCE1;      /* Bạc Sương - Đường kẻ viền */
+  --brand-son: #D2492A;      /* Son - Nhấn mạnh cảnh báo */
+  --brand-hoangtho: #D6A130; /* Hoàng Thổ - Ghi chú mẹo làm bài */
+}
+
+* { box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+html { background: #4A5568; margin: 0; padding: 0; }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 11.8pt;          /* Cỡ chữ 12pt chuẩn, siêu rõ nét */
+  line-height: 1.38;
+  color: var(--brand-muc);
+}
+
+/* Thanh công cụ Toolbar nổi trên Web (Tự ẩn khi in PDF) */
+.toolbar {
+  position: fixed;
+  top: 12px;
+  right: 18px;
+  z-index: 99999;
+  background: rgba(31, 78, 121, 0.95);
+  backdrop-filter: blur(6px);
+  padding: 8px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.toolbar button {
+  background: #ffffff;
+  color: var(--brand-lam);
+  border: 1px solid var(--brand-bac);
+  padding: 7px 15px;
+  border-radius: 5px;
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 11pt;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.toolbar button:hover {
+  background: var(--brand-luc);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+.toolbar .badge-status {
+  color: #FEEBC8;
+  font-size: 10.5pt;
+  font-weight: 600;
+}
+
+/* Khung dàn trang Khổ A4 (210 x 297 mm) */
+#book {
+  margin: 0 auto;
+  padding: 8mm 0;
+}
+.page {
+  width: 210mm;
+  height: 297mm;
+  min-height: 297mm;
+  max-height: 297mm;
+  margin: 8mm auto;
+  background: #ffffff;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+  padding: 11mm 16mm 10mm 18mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  page-break-after: always;
+  page-break-inside: avoid;
+  break-after: page;
+  break-inside: avoid;
+  overflow: hidden;
+}
+.page:last-child {
+  page-break-after: avoid !important;
+  break-after: avoid !important;
+}
+
+.page-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+/* Header & Footer chuẩn thương hiệu */
+.hdr {
+  font-size: 8.5pt;
+  color: #4A5568;
+  border-bottom: 1pt solid var(--brand-luc);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.2mm;
+  margin-bottom: 2mm;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.hdr .logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.hdr .logo-sen {
+  height: 18px;
+  width: 18px;
+  object-fit: contain;
+}
+.hdr .brand-title {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-weight: 700;
+  font-size: 8.6pt;
+  color: var(--brand-lam);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+.hdr .tag-sub {
+  font-size: 8.2pt;
+  font-weight: 600;
+  color: var(--brand-luc);
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.ftr {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9pt;
+  color: #718096;
+  border-top: 0.8pt solid var(--brand-bac);
+  padding-top: 1.5mm;
+  margin-top: 2mm;
+}
+.ftr .ftr-brand {
+  font-weight: 500;
+  color: var(--brand-muc);
+}
+
+/* Tiêu đề & Kiểu chữ */
+h1 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 14.5pt;
+  font-weight: 700;
+  color: var(--brand-lam);
+  text-align: center;
+  margin: 0 0 2pt;
+  text-transform: uppercase;
+  line-height: 1.22;
+}
+h2 {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 12pt;
+  font-weight: 700;
+  color: var(--brand-luc);
+  margin: 3.5pt 0 2pt;
+  border-left: 3.5pt solid var(--brand-luc);
+  padding-left: 6px;
+  line-height: 1.2;
+}
+h3 {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 11pt;
+  font-weight: 700;
+  color: var(--brand-lam);
+  margin: 2pt 0 1.5pt;
+}
+
+.sub-title {
+  text-align: center;
+  font-size: 9.8pt;
+  color: #4A5568;
+  margin-bottom: 2pt;
+  font-style: italic;
+}
+.author-badge {
+  text-align: center;
+  margin-bottom: 3.5pt;
+}
+.author-pill {
+  display: inline-block;
+  background: var(--brand-giay);
+  border: 1px solid var(--brand-bac);
+  color: var(--brand-lam);
+  font-size: 9.5pt;
+  font-weight: 600;
+  padding: 2pt 10pt;
+  border-radius: 14px;
+}
+
+/* Các loại Box nội dung */
+.box {
+  background: var(--brand-giay);
+  border: 1px solid var(--brand-bac);
+  border-radius: 4px;
+  padding: 4pt 6.5pt;
+  margin-bottom: 3pt;
+}
+.box-highlight {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  border-left: 3.5pt solid var(--brand-luc);
+}
+.box-alert {
+  background: #FFF5F5;
+  border: 1px solid #FED7D7;
+  border-left: 3.5pt solid var(--brand-son);
+}
+.box-tip {
+  background: #FFFAF0;
+  border: 1px solid #FEEBC8;
+  border-left: 3.5pt solid var(--brand-hoangtho);
+}
+
+/* Bảng biểu */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9.6pt;
+  margin-bottom: 2.5pt;
+}
+th, td {
+  border: 0.8pt solid var(--brand-bac);
+  padding: 3pt 5pt;
+  vertical-align: top;
+}
+th {
+  background: var(--brand-lam);
+  color: #ffffff;
+  font-weight: 600;
+  text-align: left;
+}
+tr:nth-child(even) td {
+  background: #FAFBF9;
+}
+
+/* Công thức ngữ pháp HTML sạch */
+.grammar-rule {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  color: var(--brand-muc);
+  background: #FFFFFF;
+  border: 1px solid var(--brand-bac);
+  border-radius: 4px;
+  padding: 3pt 6pt;
+  margin: 2pt 0;
+  font-size: 10pt;
+  line-height: 1.35;
+}
+.formula {
+  font-weight: 600;
+  color: var(--brand-lam);
+}
+.formula-kw {
+  font-weight: 700;
+  color: var(--brand-luc);
+  text-decoration: underline;
+}
+
+/* Câu lệnh chỉ dẫn làm bài (Task Instruction) - Đáp ứng chuẩn phản hồi */
+.task-instruction {
+  background: #EFF6FF;
+  border-left: 3.5pt solid #2563EB;
+  padding: 3pt 6pt;
+  margin-bottom: 4pt;
+  font-size: 10.5pt;
+  font-style: italic;
+  color: #1E3A8A;
+  font-weight: 600;
+}
+.task-instruction-vn {
+  display: block;
+  font-size: 9.5pt;
+  font-weight: normal;
+  color: #475569;
+  margin-top: 1pt;
+  font-style: normal;
+}
+
+/* Câu hỏi & Đáp án */
+.question-item {
+  margin-bottom: 4.5pt;
+  padding-bottom: 3pt;
+  border-bottom: 0.5pt dashed #CBD5E0;
+  page-break-inside: avoid;
+}
+.question-text {
+  font-weight: 600;
+  color: var(--brand-muc);
+  margin-bottom: 2pt;
+  font-size: 11.5pt;
+  line-height: 1.36;
+}
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2pt 10pt;
+  padding-left: 6pt;
+  font-size: 11pt;
+}
+.options-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 2pt;
+  padding-left: 6pt;
+  font-size: 11pt;
+}
+.options-inline {
+  display: flex;
+  gap: 14pt;
+  padding-left: 6pt;
+  font-size: 11pt;
+}
+.opt { color: #2D3748; }
+
+/* Hộp giải thích chi tiết & Ẩn hiện */
+.answer-box {
+  background: #F7FAFC;
+  border: 1px solid #CBD5E0;
+  border-left: 3pt solid var(--brand-luc);
+  padding: 3pt 6.5pt;
+  margin-top: 2.5pt;
+  font-size: 10pt;
+  border-radius: 3px;
+  line-height: 1.33;
+}
+.d-none { display: none !important; }
+
+/* Scaffolding Box (Gợi ý phân tầng từ vựng/ngữ pháp) */
+.scaffold-box {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 4px;
+  padding: 2.5pt 5.5pt;
+  margin-bottom: 3pt;
+  font-size: 9.4pt;
+  color: #334155;
+}
+.scaffold-tag {
+  display: inline-block;
+  background: #E0E7FF;
+  color: #3730A3;
+  font-weight: 600;
+  padding: 1pt 4pt;
+  border-radius: 3px;
+  font-size: 8.8pt;
+  margin-right: 4pt;
+}
+
+/* Responsive & Print */
+@media print {
+  @page {
+    size: 210mm 297mm;
+    margin: 0;
+  }
+  html, body {
+    background: none;
+    margin: 0;
+    padding: 0;
+  }
+  .toolbar {
+    display: none !important;
+  }
+  #book {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .page {
+    margin: 0;
+    box-shadow: none;
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-after: page;
+    break-inside: avoid;
+    width: 210mm;
+    height: 297mm;
+    min-height: 297mm;
+    max-height: 297mm;
+    padding: 11mm 16mm 10mm 18mm;
+    overflow: hidden;
+  }
+  .page:last-child {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- TOOLBAR ĐIỀU KHIỂN WEB (ẨN KHI IN) -->
+<div class="toolbar">
+  <span class="badge-status">Cỡ chữ 12pt Chuẩn · ĐGNL VNU Buổi 2 (15/11)</span>
+  <button onclick="toggleAllAnswers()">
+    <span id="btnIcon">👁️</span> <span id="btnText">Hiện / Ẩn Lời Giải</span>
+  </button>
+  <button onclick="window.print()">
+    🖨️ In A4 / Xuất PDF
+  </button>
+</div>
+
+<div id="book">
+
+  <!-- ==================== TRANG 1: TỔNG QUAN, KHUNG GIỜ & MA TRẬN ĐỐI CHIẾU ==================== -->
+  <div class="page" id="page-1">
+    <div class="hdr">
+      <div class="logo-wrap">
+        <img src="https://diemdanhsv.com/images/logo-sen.svg" alt="Logo Sen" class="logo-sen" onerror="this.style.display='none'"/>
+        <span class="brand-title">HỆ THỐNG DẠY KÈM & KHẢO THÍ ĐGNL · THS. ĐINH QUỐC TUẤN</span>
+      </div>
+      <span class="tag-sub">TÀI LIỆU LƯU HÀNH NỘI BỘ · BUỔI 2</span>
+    </div>
+
+    <div class="page-body">
+      <h1>HỌC LIỆU CHUYÊN SÂU LUYỆN THI ĐGNL VNU (APT)<br><span style="font-size: 13pt; color: var(--brand-luc);">MÔN TIẾNG ANH · BUỔI 2 (15/11/2026)</span></h1>
+      <div class="sub-title">Chương trình phối hợp bồi dưỡng học sinh Lớp 11 Trường BSChool (Nhóm Chuyên đề Nâng cao)</div>
+      <div class="author-badge">
+        <span class="author-pill">Chủ biên: ThS. Đinh Quốc Tuấn · Cố vấn Học thuật: Giáo viên Chuyên gia</span>
+      </div>
+
+      <h2>1. Kế Hoạch Phân Bổ Thời Khóa Biểu & Hướng Nghiệp (Buổi 2)</h2>
+      <div class="box box-highlight" style="margin-bottom: 2.5pt;">
+        <table style="margin-bottom: 0; font-size: 8.9pt;">
+          <tr>
+            <th style="width: 22%;">Khung Giờ</th>
+            <th style="width: 32%;">Nội Dung Trọng Tâm</th>
+            <th style="width: 46%;">Hình Thức Sư Phạm & Mục Tiêu Cần Đạt</th>
+          </tr>
+          <tr>
+            <td><b>08:30 – 09:00</b><br>(30 phút)</td>
+            <td><b>Ôn tập & Tư vấn Hướng nghiệp</b></td>
+            <td>Học sinh rà soát phiếu Scaffolding từ vựng học thuật; ThS. Đinh Quốc Tuấn tư vấn định hướng mục tiêu thi ĐGNL VNU và phương pháp học theo nhóm ban.</td>
+          </tr>
+          <tr>
+            <td><b>09:00 – 10:00</b><br><b>(60 phút)</b></td>
+            <td><b>Học Tiếng Anh với Chuyên gia</b><br><span style="color: var(--brand-luc); font-size: 8.4pt;"><b>Giáo viên Chuyên gia Tiếng Anh</b></span></td>
+            <td><b>Ca dạy 60 phút tập trung cao độ:</b> Chuyên gia chốt phương pháp xử lý Rút gọn mệnh đề, Đảo ngữ điều kiện và Biến đổi câu; trực tiếp giải mã <b>15 câu đề chính</b>.</td>
+          </tr>
+          <tr>
+            <td><b>10:00 – 11:00</b><br><b>(60 phút)</b></td>
+            <td><b>Học Ngữ văn với Chuyên gia Văn</b><br><span style="color: var(--brand-lam); font-size: 8.4pt;"><b>Giáo viên Chuyên gia Ngữ văn</b></span></td>
+            <td><b>Ca dạy 60 phút chuyên sâu:</b> Rèn luyện kỹ năng đọc hiểu văn bản nhật dụng & văn học, logic ngữ pháp tiếng Việt chuẩn cấu trúc đề thi ĐGNL VNU.</td>
+          </tr>
+          <tr>
+            <td><b>11:00 – 11:30</b><br>(30 phút)</td>
+            <td><b>Hướng nghiệp tiếp theo & Tổng kết</b></td>
+            <td>Tư vấn chọn ngành nghề, trường ĐH thành viên ĐHQG TP.HCM theo đặc thù 4 học sinh (2 Tự nhiên, 2 Xã hội); giao phiếu <b>15 câu củng cố tự lực</b>.</td>
+          </tr>
+        </table>
+      </div>
+      <div style="font-size: 9pt; color: #4A5568; margin-bottom: 3.5pt; font-style: italic;">
+        * <b>Thời khóa biểu toàn diện (8h30 – 11h30):</b> Kết hợp nhịp nhàng giữa ôn tập, 2 ca học chuyên gia (Anh – Văn) đúng 60 phút tối ưu sinh học, và 2 chặng tư vấn hướng nghiệp chuyên sâu.
+      </div>
+
+      <h2>2. Ma Trận Đối Chiếu: Chương Trình GDPT 2018 Lớp 11 vs. Đề Thi ĐGNL VNU (APT)</h2>
+      <table>
+        <tr>
+          <th style="width: 22%;">Nội Dung / Chuyên Đề</th>
+          <th style="width: 38%;">Chương Trình Lớp 11 & THPT Quốc Gia</th>
+          <th style="width: 40%;">Đặc Thù & Bẫy Đề Thi ĐGNL VNU TP.HCM</th>
+        </tr>
+        <tr>
+          <td><b>Rút gọn MĐ Quan hệ & Đảo ngữ điều kiện</b></td>
+          <td>Nhận diện đại từ quan hệ (who, which, that), câu điều kiện loại 1, 2, 3 và mệnh đề If thông thường ở mức nhận biết – thông hiểu.</td>
+          <td><b>Mức vận dụng cao:</b> Rút gọn bằng To-V (chỉ mục đích, sau the first/only), phân từ bị động ghép, và <b>Đảo ngữ câu điều kiện hỗn hợp</b> (Type 3 + 2).</td>
+        </tr>
+        <tr>
+          <td><b>Từ vựng & Cụm từ học thuật (Collocations)</b></td>
+          <td>Từ vựng theo chủ đề SGK (Global Warming, Education, Generation Gap, Healthy Lifestyle) ở mức độ giao tiếp cơ bản.</td>
+          <td><b>Văn phong học thuật (Academic Register):</b> Cụm từ cố định trong nghiên cứu (<i>exert an influence, strike a balance, bridge the gap, attribute to</i>).</td>
+        </tr>
+        <tr>
+          <td><b>Biến đổi câu & Ghép câu phức (Synthesis)</b></td>
+          <td>Chuyển đổi câu trực tiếp – gián tiếp, câu bị động cơ bản, so sánh hơn/nhất trong bài thi tốt nghiệp THPT.</td>
+          <td><b>Dạng bài tư duy logic ngôn ngữ:</b> Yêu cầu chọn câu đồng nghĩa hoàn toàn về sắc thái (Closest in meaning) và ghép 2 vế câu bằng liên từ phân từ.</td>
+        </tr>
+      </table>
+
+      <h2>3. Đặc Điểm Phân Hóa Nhóm Học Sinh BSChool (Buổi 2)</h2>
+      <div class="box box-tip" style="font-size: 9.8pt; line-height: 1.35; margin-bottom: 0;">
+        • <b>Nhóm Xã hội (1 Nam - Thiện, 1 Nữ):</b> Bạn Thiện có ưu thế phát âm và phản xạ nói (chuẩn bị thi IELTS); cần tập trung bồi đắp vốn từ vựng học thuật ĐGNL và cấu trúc ngữ pháp chốt; duy trì nhịp học 60 phút tập trung để đạt hiệu quả cao nhất.<br>
+        • <b>Nhóm Tự nhiên (2 Nữ):</b> Nắm tư duy cấu trúc logic nhanh, cần lưu ý các bẫy ngữ cảnh thực tế, giới từ đi kèm động từ và mở rộng trường từ vựng văn bản.
+      </div>
+    </div>
+
+    <div class="ftr">
+      <span class="ftr-brand">© Bản quyền thuộc ThS. Đinh Quốc Tuấn – Học liệu chuyên sâu ĐGNL VNU</span>
+      <span>Trang 1 / 8</span>
+    </div>
+  </div>
+
+  <!-- ==================== TRANG 2: HỆ THỐNG LÝ THUYẾT & CHIẾN LƯỢC BUỔI 2 ==================== -->
+  <div class="page" id="page-2">
+    <div class="hdr">
+      <div class="logo-wrap">
+        <img src="https://diemdanhsv.com/images/logo-sen.svg" alt="Logo Sen" class="logo-sen" onerror="this.style.display='none'"/>
+        <span class="brand-title">HỆ THỐNG DẠY KÈM & KHẢO THÍ ĐGNL · THS. ĐINH QUỐC TUẤN</span>
+      </div>
+      <span class="tag-sub">TÀI LIỆU LƯU HÀNH NỘI BỘ · BUỔI 2</span>
+    </div>
+
+    <div class="page-body">
+      <h2>Chuyên Đề 1: Rút Gọn Mệnh Đề Quan Hệ Phức Hợp & Đảo Ngữ Điều Kiện</h2>
+      
+      <div class="grammar-rule">
+        <b>1. Rút gọn Mệnh đề quan hệ (Reduced Relative Clauses):</b><br>
+        • <span class="formula">Chủ động:</span> Bỏ đại từ & to be → dùng <b>V-ing</b>. <i>VD: The scientist who conducts → The scientist <b>conducting</b> the research...</i><br>
+        • <span class="formula">Bị động:</span> Dùng <b>V-ed / V3</b>. <i>VD: The theory which was formulated by Newton → The theory <b>formulated</b> by Newton...</i><br>
+        • <span class="formula">Sau số thứ tự (first, second, last, only) hoặc so sánh nhất:</span> Dùng <b>To-V (chủ động)</b> hoặc <b>To be V3 (bị động)</b>.<br>
+        <span style="color: var(--brand-son); font-weight: 600;">⚠️ Cảnh báo bẫy:</span> Đề ĐGNL hay bẫy rút gọn danh từ đồng vị hoặc nhầm lẫn giữa dạng chủ động và bị động khi chủ ngữ là danh từ trừu tượng.
+      </div>
+
+      <div class="grammar-rule">
+        <b>2. Đảo ngữ Câu điều kiện (Inverted Conditionals - Cực hay thi APT):</b><br>
+        • <span class="formula">Loại 1:</span> <b>Should + S + V(bare)</b>, S + will/can + V. <i>(Thay cho If + S + V(s/es))</i><br>
+        • <span class="formula">Loại 2:</span> <b>Were + S + to-V</b> (hoặc <b>Were + S + Adj/Noun</b>), S + would + V.<br>
+        • <span class="formula">Loại 3:</span> <b>Had + S + V3/V-ed</b>, S + would have + V3. <i>VD: Had we known the risks, we wouldn't have...</i><br>
+        • <span class="formula">Điều kiện Hỗn hợp (Mixed):</span> Giả thiết trái quá khứ, kết quả hiện tại: <b>Had + S + V3</b>, S + <b>would + V(bare)</b> [now/today].
+      </div>
+
+      <h2>Chuyên Đề 2: Cụm Từ Cố Định Học Thuật (Academic Collocations) & Cụm Động Từ</h2>
+      <div class="box box-highlight" style="padding: 3.5pt 6pt;">
+        <table>
+          <tr>
+            <th style="width: 35%;">Cụm Từ Học Thuật (Collocations)</th>
+            <th style="width: 35%;">Cụm Động Từ (Phrasal Verbs)</th>
+            <th style="width: 30%;">Ngữ Cảnh Ứng Dụng ĐGNL</th>
+          </tr>
+          <tr>
+            <td>• <b>bridge the gap between:</b> thu hẹp khoảng cách<br>
+• <b>exert a profound influence on:</b> tác động sâu sắc<br>
+• <b>strike a delicate balance between:</b> cân bằng giữa</td>
+            <td>• <b>account for:</b> chiếm tỉ lệ / giải thích lý do<br>
+• <b>bring about:</b> dẫn đến, gây ra biến chuyển<br>
+• <b>attribute something to:</b> quy cho, gán cho</td>
+            <td>Thường xuất hiện trong các câu đọc hiểu vi mô và điền từ chủ đề khoa học, xã hội, môi trường.</td>
+          </tr>
+        </table>
+      </div>
+
+      <h2>Chuyên Đề 3: Phương Pháp Giải Biến Đổi Câu (Closest in Meaning) & Ghép Câu</h2>
+      <div class="grammar-rule">
+        • <b>Dạng câu điều kiện ẩn định (Without / But for):</b><br>
+        &nbsp;&nbsp;<span class="formula">But for / Without + Noun Phrase / V-ing</span> = <b>If it had not been for + N</b> = <b>Had it not been for + N</b>, S + would have + V3.<br>
+        • <b>Dạng Đảo ngữ mức độ (So / Such):</b><br>
+        &nbsp;&nbsp;<span class="formula">So + Adj + be + S + that...</span> = <span class="formula">Such + be + Noun + that...</span> <i>(Quá đến nỗi mà...).</i><br>
+        • <b>Dạng Nhượng bộ tuyệt đối:</b><br>
+        &nbsp;&nbsp;<span class="formula">However / No matter how + Adj + S + V, ...</span> = <i>Although / Even though + S + V + Adj, ...</i>
+      </div>
+
+      <div class="scaffold-box" style="margin-top: 3pt;">
+        <span class="scaffold-tag">HỖ TRỢ TỰ HỌC (SCAFFOLDING)</span> <b>Mẹo làm bài nhanh cho học sinh:</b><br>
+        1. Khi gặp câu biến đổi câu bắt đầu bằng <i>"Had it not been for..."</i>, lập tức nhìn vế sau xem có <i>"would have V3"</i> không để loại ngay 2 phương án sai thì.<br>
+        2. Với câu điền từ học thuật, hãy xác định giới từ đi liền sau chỗ trống (ví dụ: <i>influence <b>on</b>, balance <b>between</b>, attribute <b>to</b></i>) để khoanh vùng đáp án đúng trong 5 giây!
+      </div>
+    </div>
+
+    <div class="ftr">
+      <span class="ftr-brand">© Bản quyền thuộc ThS. Đinh Quốc Tuấn – Học liệu chuyên sâu ĐGNL VNU</span>
+      <span>Trang 2 / 8</span>
+    </div>
+  </div>
+
+  <!-- ==================== TRANG 3: ĐỀ CHIẾN LƯỢC 15 CÂU - PHẦN I ==================== -->
+  <div class="page" id="page-3">
+    <div class="hdr">
+      <div class="logo-wrap">
+        <img src="https://diemdanhsv.com/images/logo-sen.svg" alt="Logo Sen" class="logo-sen" onerror="this.style.display='none'"/>
+        <span class="brand-title">HỆ THỐNG DẠY KÈM & KHẢO THÍ ĐGNL · THS. ĐINH QUỐC TUẤN</span>
+      </div>
+      <span class="tag-sub">TÀI LIỆU LƯU HÀNH NỘI BỘ · BUỔI 2</span>
+    </div>
+
+    <div class="page-body">
+      <h2>PHẦN I: CẤU TRÚC NGỮ PHÁP CHUYÊN SÂU & MỆNH ĐỀ RÚT GỌN</h2>
+      <div class="task-instruction">
+        Directions: Mark the letter A, B, C, or D to indicate the correct answer to complete each of the following questions.
+        <span class="task-instruction-vn">(Hướng dẫn: Chọn chữ cái A, B, C hoặc D để hoàn thành chính xác các câu hỏi ngữ pháp chuyên sâu dưới đây.)</span>
+      </div>
+
+      <!-- Question 1 -->
+      <div class="question-item">
+        <div class="question-text">Question 1. The revolutionary solar panels ________ by the university research team last year have now been installed across the campus.</div>
+        <div class="options-grid">
+          <div class="opt">A. developing</div>
+          <div class="opt">B. developed</div>
+          <div class="opt">C. which developed</div>
+          <div class="opt">D. were developed</div>
+        </div>
+        <div class="answer-box d-none" data-explain="1">
+          <b>Đáp án: B (developed).</b> Giải thích: Rút gọn mệnh đề quan hệ dạng bị động (<i>which were developed → developed</i>). Động từ chính của câu là <i>have now been installed</i>.
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="question-item">
+        <div class="question-text">Question 2. ________ the severe weather alert earlier, the maritime expedition would have returned to the shore safely.</div>
+        <div class="options-grid">
+          <div class="opt">A. Should the captain receive</div>
+          <div class="opt">B. Had the captain received</div>
+          <div class="opt">C. Were the captain to receive</div>
+          <div class="opt">D. If the captain received</div>
+        </div>
+        <div class="answer-box d-none" data-explain="2">
+          <b>Đáp án: B (Had the captain received).</b> Giải thích: Đảo ngữ câu điều kiện loại 3 diễn tả giả thiết trái quá khứ: <i>Had + S + V3, S + would have + V3</i>.
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="question-item">
+        <div class="question-text">Question 3. Dr. Henderson was the first Vietnamese scholar ________ an honorary doctorate by this prestigious institution.</div>
+        <div class="options-grid">
+          <div class="opt">A. conferring</div>
+          <div class="opt">B. to confer</div>
+          <div class="opt">C. to be conferred</div>
+          <div class="opt">D. who conferred</div>
+        </div>
+        <div class="answer-box d-none" data-explain="3">
+          <b>Đáp án: C (to be conferred).</b> Giải thích: Sau <i>the first</i>, mệnh đề quan hệ rút gọn thành <i>To-V</i> (chủ động) hoặc <i>To be V3</i> (bị động). Ở đây học giả được trao bằng danh dự → chọn bị động.
+        </div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="question-item">
+        <div class="question-text">Question 4. ________ for his extensive financial investments, the new laboratory facilities could never have been constructed.</div>
+        <div class="options-grid">
+          <div class="opt">A. Had it not been</div>
+          <div class="opt">B. Were it not</div>
+          <div class="opt">C. If it were not</div>
+          <div class="opt">D. Without it had been</div>
+        </div>
+        <div class="answer-box d-none" data-explain="4">
+          <b>Đáp án: A (Had it not been).</b> Giải thích: Cấu trúc điều kiện ẩn định loại 3 đảo ngữ: <i>Had it not been for + N, S + could have V3</i> (Nếu không nhờ có...).
+        </div>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="question-item">
+        <div class="question-text">Question 5. It is imperative that each member of the research committee ________ the experimental data thoroughly before submitting the final draft.</div>
+        <div class="options-grid">
+          <div class="opt">A. verifies</div>
+          <div class="opt">B. verify</div>
+          <div class="opt">C. verified</div>
+          <div class="opt">D. will verify</div>
+        </div>
+        <div class="answer-box d-none" data-explain="5">
+          <b>Đáp án: B (verify).</b> Giải thích: Cấu trúc Giả định thức (Subjunctive Mood): <i>It is imperative that + S + (should) + V(bare)</i>. Động từ luôn ở dạng nguyên thể không chia.
+        </div>
+      </div>
+
+      <div class="box box-tip" style="margin-top: 4pt; font-size: 9.6pt;">
+        💡 <b>Trọng tâm Chuyên gia hướng dẫn (60 phút):</b> Nhận diện nhanh các dấu hiệu "the first/only", vế kết quả có "would have V3", hoặc tính từ mệnh lệnh (imperative, vital, essential) để không bị bẫy chia thì thông thường!
+      </div>
+    </div>
+
+    <div class="ftr">
+      <span class="ftr-brand">© Bản quyền thuộc ThS. Đinh Quốc Tuấn – Học liệu chuyên sâu ĐGNL VNU</span>
+      <span>Trang 3 / 8</span>
+    </div>
+  </div>
+
+  <!-- ==================== TRANG 4: ĐỀ CHIẾN LƯỢC 15 CÂU - PHẦN II ==================== -->
+  <div class="page" id="page-4">
+    <div class="hdr">
+      <div class="logo-wrap">
+        <img src="https://diemdanhsv.com/images/logo-sen.svg" alt="Logo Sen" class="logo-sen" onerror="this.style.display='none'"/>
+        <span class="brand-title">HỆ THỐNG DẠY KÈM & KHẢO THÍ ĐGNL · THS. ĐINH QUỐC TUẤN</span>
+      </div>
+      <span class="tag-sub">TÀI LIỆU LƯU HÀNH NỘI BỘ · BUỔI 2</span>
+    </div>
+
+    <div class="page-body">
+      <h2>PHẦN II: TỪ VỰNG HỌC THUẬT & CỤM TỪ NGỮ CẢNH (COLLOCATIONS)</h2>
+      <div class="task-instruction">
+        Directions: Mark the letter A, B, C, or D to indicate the correct word or phrase that best fits each of the following blanks.
+        <span class="task-instruction-vn">(Hướng dẫn: Chọn chữ cái A, B, C hoặc D để hoàn thành cụm từ học thuật hoặc cụm động từ phù hợp nhất với ngữ cảnh.)</span>
+      </div>
+
+      <!-- Question 6 -->
+      <div class="question-item">
+        <div class="question-text">Question 6. Renewable energy sources currently ________ approximately 28% of the country's total electricity production.</div>
+        <div class="options-grid">
+          <div class="opt">A. make off with</div>
+          <div class="opt">B. account for</div>
+          <div class="opt">C. take up with</div>
+          <div class="opt">D. bring about</div>
+        </div>
+        <div class="answer-box d-none" data-explain="6">
+          <b>Đáp án: B (account for).</b> Giải thích: <i>Account for + số phần trăm</i> mang nghĩa "chiếm tỷ lệ bao nhiêu" trong tổng số; còn có nghĩa giải thích nguyên nhân.
+        </div>
+      </div>
+
+      <!-- Question 7 -->
+      <div class="question-item">
+        <div class="question-text">Question 7. The implementation of modern artificial intelligence tools has exerted a profound ________ on student learning behaviors.</div>
+        <div class="options-grid">
+          <div class="opt">A. impression</div>
+          <div class="opt">B. influence</div>
+          <div class="opt">C. affection</div>
+          <div class="opt">D. alteration</div>
+        </div>
+        <div class="answer-box d-none" data-explain="7">
+          <b>Đáp án: B (influence).</b> Giải thích: Collocation cố định: <i>exert a profound influence/impact on sth</i> (gây ra tác động/ảnh hưởng sâu sắc lên cái gì).
+        </div>
+      </div>
+
+      <!-- Question 8 -->
+      <div class="question-item">
+        <div class="question-text">Question 8. Policy makers are striving to ________ a delicate balance between industrial expansion and ecological preservation.</div>
+        <div class="options-grid">
+          <div class="opt">A. strike</div>
+          <div class="opt">B. beat</div>
+          <div class="opt">C. hold</div>
+          <div class="opt">D. create</div>
+        </div>
+        <div class="answer-box d-none" data-explain="8">
+          <b>Đáp án: A (strike).</b> Giải thích: Collocation chuẩn học thuật: <i>strike a balance between A and B</i> (đạt được sự cân bằng hài hòa giữa hai yếu tố).
+        </div>
+      </div>
+
+      <!-- Question 9 -->
+      <div class="question-item">
+        <div class="question-text">Question 9. Many prominent environmentalists ________ the recent surge in global sea levels to rapid polar ice melting.</div>
+        <div class="options-grid">
+          <div class="opt">A. contribute</div>
+          <div class="opt">B. distribute</div>
+          <div class="opt">C. attribute</div>
+          <div class="opt">D. dedicate</div>
+        </div>
+        <div class="answer-box d-none" data-explain="9">
+          <b>Đáp án: C (attribute).</b> Giải thích: Cấu trúc: <i>attribute sth to sth</i> (quy nguyên nhân của cái gì cho cái gì). (Tránh nhầm với <i>contribute to</i>: đóng góp vào).
+        </div>
+      </div>
+
+      <!-- Question 10 -->
+      <div class="question-item">
+        <div class="question-text">Question 10. The newly launched internship program was designed to ________ the gap between theoretical knowledge and practical workplace skills.</div>
+        <div class="options-grid">
+          <div class="opt">A. cross</div>
+          <div class="opt">B. bridge</div>
+          <div class="opt">C. connect</div>
+          <div class="opt">D. span</div>
+        </div>
+        <div class="answer-box d-none" data-explain="10">
+          <b>Đáp án: B (bridge).</b> Giải thích: Collocation học thuật quen thuộc trong ĐGNL VNU: <i>bridge the gap between A and B</i> (thu hẹp khoảng cách giữa A và B).
+        </div>
+      </div>
+
+      <div class="scaffold-box" style="margin-top: 4pt;">
+        <span class="scaffold-tag">LƯU Ý DÀNH CHO THIỆN & CÁC BẠN</span> <b>Chiến lược tích lũy Collocation:</b><br>
+        Không học từ vựng đơn lẻ. Hãy học theo cụm 3 từ: [Động từ + Tính từ + Danh từ + Giới từ], ví dụ: <i>strike a balance between</i>, <i>exert an influence on</i>. Điều này vừa giúp nâng điểm Reading ĐGNL vừa hỗ trợ trực tiếp kỹ năng Speaking IELTS của Thiện!
+      </div>
+    </div>
+
+    <div class="ftr">
+      <span class="ftr-brand">© Bản quyền thuộc ThS. Đinh Quốc Tuấn – Học liệu chuyên sâu ĐGNL VNU</span>
+      <span>Trang 4 / 8</span>
+    </div>
+  </div>
+
+  <!-- ==================== TRANG 5: ĐỀ CHIẾN LƯỢC 15 CÂU - PHẦN III ==================== -->
+  <div class="page" id="page-5">
+    <div class="hdr">
+      <div class="logo-wrap">
+        <img src="https://diemdanhsv.com/images/logo-sen.svg" alt="Logo Sen" class="logo-sen" onerror="this.style.display='none'"/>
+        <span class="brand-title">HỆ THỐNG DẠY KÈM & KHẢO THÍ ĐGNL · THS. ĐINH QUỐC TUẤN</span>
+      </div>
+      <span class="tag-sub">TÀI LIỆU LƯU HÀNH NỘI BỘ · BUỔI 2</span>
+    </div>
+
+    <div class="page-body">
+      <h2>PHẦN III: BIẾN ĐỔI CÂU ĐỒNG NGHĨA & KẾT HỢP CÂU PHỨC</h2>
+      
+      <!-- Lệnh nhóm 11, 12, 13: Closest in meaning -->
+      <div class="task-instruction">
+        Directions (Questions 11–13): Mark the letter A, B, C, or D to indicate the sentence that is closest in meaning to each of the following questions.
+        <span class="task-instruction-vn">(Hướng dẫn: Chọn chữ cái A, B, C hoặc D biểu thị câu có nghĩa gần nhất với câu đã cho.)</span>
+      </div>
+
+      <!-- Question 11 -->
+      <div class="question-item">
+        <div class="question-text">Question 11. Without the timely intervention of the local authorities, the historic monument would have collapsed.</div>
+        <div class="options-vertical">
+          <div class="opt">A. But for the timely intervention of the local authorities, the historic monument would not collapse.</div>
+          <div class="opt">B. Had the local authorities not intervened in a timely manner, the historic monument would have collapsed.</div>
+          <div class="opt">C. The historic monument collapsed because the local authorities intervened too late.</div>
+          <div class="opt">D. If the local authorities had intervened in time, the historic monument would have collapsed.</div>
+        </div>
+        <div class="answer-box d-none" data-explain="11">
+          <b>Đáp án: B.</b> Giải thích: <i>Without + N, S + would have V3</i> = <i>Had S not V3, S + would have V3</i> (Đảo ngữ điều kiện loại 3).
+        </div>
+      </div>
+
+      <!-- Question 12 -->
+      <div class="question-item">
+        <div class="question-text">Question 12. The economic crisis was so severe that countless small businesses were forced into bankruptcy.</div>
+        <div class="options-vertical">
+          <div class="opt">A. Such was the severity of the economic crisis that countless small businesses were forced into bankruptcy.</div>
+          <div class="opt">B. The economic crisis was not severe enough to force small businesses into bankruptcy.</div>
+          <div class="opt">C. Countless small businesses went bankrupt despite the moderate severity of the economic crisis.</div>
+          <div class="opt">D. So severe the economic crisis was that countless small businesses were forced into bankruptcy.</div>
+        </div>
+        <div class="answer-box d-none" data-explain="12">
+          <b>Đáp án: A.</b> Giải thích: Cấu trúc đảo ngữ: <i>So + Adj + be + S + that...</i> = <i>Such was + Noun + that...</i> (Quá nghiêm trọng đến mức...). Phương án D sai trật tự đảo ngữ.
+        </div>
+      </div>
+
+      <!-- Lệnh nhóm 14, 15: Best combines -->
+      <div class="task-instruction" style="margin-top: 3pt;">
+        Directions (Questions 14–15): Mark the letter A, B, C, or D to indicate the sentence that best combines each pair of sentences.
+        <span class="task-instruction-vn">(Hướng dẫn: Chọn chữ cái A, B, C hoặc D để kết hợp hai câu đơn thành một câu phức logic và chính xác nhất.)</span>
+      </div>
+
+      <!-- Question 13 -->
+      <div class="question-item">
+        <div class="question-text">Question 13. The candidate was poorly qualified. However, she managed to impress the interviewers with her enthusiasm.</div>
+        <div class="options-vertical">
+          <div class="opt">A. However poorly qualified the candidate was, she managed to impress the interviewers with her enthusiasm.</div>
+          <div class="opt">B. Despite she was poorly qualified, she impressed the interviewers with her enthusiasm.</div>
+          <div class="opt">C. Poorly qualified though the candidate was not, she failed to impress the interviewers.</div>
+          <div class="opt">D. She impressed the interviewers because she was poorly qualified.</div>
+        </div>
+        <div class="answer-box d-none" data-explain="13">
+          <b>Đáp án: A.</b> Giải thích: Cấu trúc nhượng bộ: <i>However + Adj + S + V, clause</i> = Dù ứng viên ít bằng cấp đến mức nào đi nữa, cô ấy vẫn gây ấn tượng...
+        </div>
+      </div>
+
+      <!-- Question 14 -->
+      <div class="question-item">
+        <div class="question-text">Question 14. The engineer finished the blueprint. He immediately submitted it to the project director for appraisal.</div>
+        <div class="options-vertical">
+          <div class="opt">A. Hardly had the engineer finished the blueprint when he submitted it to the project director for appraisal.</div>
+          <div class="opt">B. No sooner had the engineer submitted the blueprint than he finished it.</div>
+          <div class="opt">C. Not until the director appraised the blueprint did the engineer finish it.</div>
+          <div class="opt">D. Finishing the blueprint, the project director appraised the engineer immediately.</div>
+        </div>
+        <div class="answer-box d-none" data-explain="14">
+          <b>Đáp án: A.</b> Giải thích: Cấu trúc hành động vừa mới... thì: <i>Hardly had + S + V3 + when + S + V2</i>. (Phương án B ngược trật tự; D bị lỗi chủ ngữ dangling modifier).
+        </div>
+      </div>
+
+      <!-- Question 15 -->
+      <div class="question-item">
+        <div class="question-text">Question 15. The team conducted thorough laboratory trials. They discovered a novel chemical compound for cancer therapy.</div>
+        <div class="options-vertical">
+          <div class="opt">A. Discovered a novel chemical compound, thorough laboratory trials were conducted.</div>
+          <div class="opt">B. Having conducted thorough laboratory trials, the team discovered a novel chemical compound for cancer therapy.</div>
+          <div class="opt">C. Conducting laboratory trials, a novel chemical compound was discovered by the team.</div>
+          <div class="opt">D. Because of discovering a compound, the team had conducted thorough trials.</div>
+        </div>
+        <div class="answer-box d-none" data-explain="15">
+          <b>Đáp án: B.</b> Giải thích: Rút gọn hai mệnh đề cùng chủ ngữ có thứ tự thời gian: Hành động xảy ra và hoàn tất trước dùng <i>Having + V3</i> (Chủ động). A và C bị bẫy Dangling Modifier.
+        </div>
+      </div>
+    </div>
+
+    <div class="ftr">
+      <span class="ftr-brand">© Bản quyền thuộc ThS. Đinh Quốc Tuấn – Học liệu chuyên sâu ĐGNL VNU</span>
+      <span>Trang 5 / 8</span>
+    </div>
+  </div>
+
+  <!-- ==================== TRANG 6: BÀI TẬP CỦNG CỐ - PHẦN 1 & 2 ==================== -->
+  <div class="page" id="page-6">
+    <div class="hdr">
+      <div class="logo-wrap">
+        <img src="https://diemdanhsv.com/images/logo-sen.svg" alt="Logo Sen" class="logo-sen" onerror="this.style.display='none'"/>
+        <span class="brand-title">HỆ THỐNG DẠY KÈM & KHẢO THÍ ĐGNL · THS. ĐINH QUỐC TUẤN</span>
+      </div>
+      <span class="tag-sub">TÀI LIỆU LƯU HÀNH NỘI BỘ · BUỔI 2</span>
+    </div>
+
+    <div class="page-body">
+      <h2>BÀI TẬP CỦNG CỐ TỰ LỰC (15 CÂU) · NHÓM 1: NGỮ PHÁP (CÂU 16 – 20)</h2>
+      <div class="task-instruction">
+        Directions: Mark the letter A, B, C, or D to indicate the correct answer to complete each sentence.
+      </div>
+
+      <!-- Question 16 -->
+      <div class="question-item">
+        <div class="question-text">Question 16. The ancient manuscripts ________ in the cave date back to the early fourth century.</div>
+        <div class="options-grid">
+          <div class="opt">A. discovering</div>
+          <div class="opt">B. discovered</div>
+          <div class="opt">C. to discover</div>
+          <div class="opt">D. which discovered</div>
+        </div>
+        <div class="answer-box d-none" data-explain="16">
+          <b>Đáp án: B (discovered).</b> Rút gọn bị động: <i>manuscripts (which were) discovered</i>.
+        </div>
+      </div>
+
+      <!-- Question 17 -->
+      <div class="question-item">
+        <div class="question-text">Question 17. ________ they to offer him a higher salary, he might reconsider his decision to relocate abroad.</div>
+        <div class="options-grid">
+          <div class="opt">A. Should</div>
+          <div class="opt">B. Were</div>
+          <div class="opt">C. Had</div>
+          <div class="opt">D. Did</div>
+        </div>
+        <div class="answer-box d-none" data-explain="17">
+          <b>Đáp án: B (Were).</b> Đảo ngữ điều kiện loại 2: <i>Were + S + to-V, S + would/might + V</i>.
+        </div>
+      </div>
+
+      <!-- Question 18 -->
+      <div class="question-item">
+        <div class="question-text">Question 18. Neil Armstrong was the first human ________ on the surface of the Moon in 1969.</div>
+        <div class="options-grid">
+          <div class="opt">A. walked</div>
+          <div class="opt">B. walking</div>
+          <div class="opt">C. to walk</div>
+          <div class="opt">D. walks</div>
+        </div>
+        <div class="answer-box d-none" data-explain="18">
+          <b>Đáp án: C (to walk).</b> Rút gọn sau số thứ tự <i>the first</i> dùng <i>To-V</i> chủ động.
+        </div>
+      </div>
+
+      <!-- Question 19 -->
+      <div class="question-item">
+        <div class="question-text">Question 19. Had the cybersecurity protocols been implemented properly, the data breach ________.</div>
+        <div class="options-grid">
+          <div class="opt">A. would be prevented</div>
+          <div class="opt">B. would have been prevented</div>
+          <div class="opt">C. will be prevented</div>
+          <div class="opt">D. had been prevented</div>
+        </div>
+        <div class="answer-box d-none" data-explain="19">
+          <b>Đáp án: B (would have been prevented).</b> Đảo ngữ loại 3 bị động: <i>Had + S + V3, S + would have been V3</i>.
+        </div>
+      </div>
+
+      <!-- Question 20 -->
+      <div class="question-item">
+        <div class="question-text">Question 20. The dean recommended that the curriculum revision ________ by next September.</div>
+        <div class="options-grid">
+          <div class="opt">A. is completed</div>
+          <div class="opt">B. be completed</div>
+          <div class="opt">C. was completed</div>
+          <div class="opt">D. will be completed</div>
+        </div>
+        <div class="answer-box d-none" data-explain="20">
+          <b>Đáp án: B (be completed).</b> Giả định thức bị động: <i>recommended that + S + (should) be V3</i>.
+        </div>
+      </div>
+
+      <h2>BÀI TẬP CỦNG CỐ · NHÓM 2: TỪ VỰNG & COLLOCATIONS (CÂU 21 – 23)</h2>
+      <div class="task-instruction">
+        Directions: Mark the letter A, B, C, or D to indicate the best option in context.
+      </div>
+
+      <!-- Question 21 -->
+      <div class="question-item">
+        <div class="question-text">Question 21. Urban traffic congestion accounts ________ nearly 40% of carbon emissions in metropolises.</div>
+        <div class="options-grid">
+          <div class="opt">A. of</div>
+          <div class="opt">B. for</div>
+          <div class="opt">C. with</div>
+          <div class="opt">D. to</div>
+        </div>
+        <div class="answer-box d-none" data-explain="21">
+          <b>Đáp án: B (for).</b> <i>Account for</i> = chiếm tỷ lệ.
+        </div>
+      </div>
+
+      <!-- Question 22 -->
+      <div class="question-item">
+        <div class="question-text">Question 22. Advances in biotechnology have brought ________ substantial improvements in medical treatment.</div>
+        <div class="options-grid">
+          <div class="opt">A. about</div>
+          <div class="opt">B. in</div>
+          <div class="opt">C. up</div>
+          <div class="opt">D. off</div>
+        </div>
+        <div class="answer-box d-none" data-explain="22">
+          <b>Đáp án: A (about).</b> <i>Bring about</i> = gây ra, mang lại sự thay đổi tích cực.
+        </div>
+      </div>
+
+      <!-- Question 23 -->
+      <div class="question-item">
+        <div class="question-text">Question 23. It is essential to draw a clear ________ between correlation and causation in scientific studies.</div>
+        <div class="options-grid">
+          <div class="opt">A. divide</div>
+          <div class="opt">B. distinction</div>
+          <div class="opt">C. difference</div>
+          <div class="opt">D. barrier</div>
+        </div>
+        <div class="answer-box d-none" data-explain="23">
+          <b>Đáp án: B (distinction).</b> Collocation: <i>draw a clear distinction between A and B</i> (vạch ra sự phân biệt rõ ràng).
+        </div>
+      </div>
+    </div>
+
+    <div class="ftr">
+      <span class="ftr-brand">© Bản quyền thuộc ThS. Đinh Quốc Tuấn – Học liệu chuyên sâu ĐGNL VNU</span>
+      <span>Trang 6 / 8</span>
+    </div>
+  </div>
+
+  <!-- ==================== TRANG 7: BÀI TẬP CỦNG CỐ - PHẦN 2 (TIẾP) & PHẦN 3 ==================== -->
+  <div class="page" id="page-7">
+    <div class="hdr">
+      <div class="logo-wrap">
+        <img src="https://diemdanhsv.com/images/logo-sen.svg" alt="Logo Sen" class="logo-sen" onerror="this.style.display='none'"/>
+        <span class="brand-title">HỆ THỐNG DẠY KÈM & KHẢO THÍ ĐGNL · THS. ĐINH QUỐC TUẤN</span>
+      </div>
+      <span class="tag-sub">TÀI LIỆU LƯU HÀNH NỘI BỘ · BUỔI 2</span>
+    </div>
+
+    <div class="page-body">
+      <h2>BÀI TẬP CỦNG CỐ · NHÓM 2: TỪ VỰNG HỌC THUẬT (CÂU 24 – 25)</h2>
+      <div class="task-instruction">
+        Directions: Mark the letter A, B, C, or D to indicate the correct word to complete the collocation.
+      </div>
+
+      <!-- Question 24 -->
+      <div class="question-item">
+        <div class="question-text">Question 24. Historians often attribute the rapid decline of the empire ________ prolonged political instability.</div>
+        <div class="options-grid">
+          <div class="opt">A. for</div>
+          <div class="opt">B. with</div>
+          <div class="opt">C. to</div>
+          <div class="opt">D. from</div>
+        </div>
+        <div class="answer-box d-none" data-explain="24">
+          <b>Đáp án: C (to).</b> <i>Attribute sth to sth</i> (quy nguyên nhân cho...).
+        </div>
+      </div>
+
+      <!-- Question 25 -->
+      <div class="question-item">
+        <div class="question-text">Question 25. Online education has effectively helped to bridge the digital ________ in remote communities.</div>
+        <div class="options-grid">
+          <div class="opt">A. division</div>
+          <div class="opt">B. divide</div>
+          <div class="opt">C. gap</div>
+          <div class="opt">D. split</div>
+        </div>
+        <div class="answer-box d-none" data-explain="25">
+          <b>Đáp án: C (gap).</b> Collocation: <i>bridge the digital gap / digital divide</i>. Tuy nhiên đi với <i>bridge the...</i> thông dụng nhất là <i>bridge the gap</i>.
+        </div>
+      </div>
+
+      <h2>BÀI TẬP CỦNG CỐ · NHÓM 3: BIẾN ĐỔI CÂU & GHÉP CÂU (CÂU 26 – 30)</h2>
+      <div class="task-instruction">
+        Directions (Questions 26–28): Mark the letter A, B, C, or D to indicate the sentence closest in meaning.
+      </div>
+
+      <!-- Question 26 -->
+      <div class="question-item">
+        <div class="question-text">Question 26. But for the prompt arrival of the medical emergency team, the patient could not have survived.</div>
+        <div class="options-vertical">
+          <div class="opt">A. Had the medical emergency team not arrived promptly, the patient could not have survived.</div>
+          <div class="opt">B. The patient survived although the medical emergency team arrived late.</div>
+          <div class="opt">C. If the medical emergency team arrived promptly, the patient would survive.</div>
+          <div class="opt">D. The patient would have survived without the emergency team.</div>
+        </div>
+        <div class="answer-box d-none" data-explain="26">
+          <b>Đáp án: A.</b> <i>But for + N</i> = <i>Had S not V3</i>.
+        </div>
+      </div>
+
+      <!-- Question 27 -->
+      <div class="question-item">
+        <div class="question-text">Question 27. The mountain path was so steep that none of the novice hikers could reach the summit.</div>
+        <div class="options-vertical">
+          <div class="opt">A. Such was the steepness of the mountain path that none of the novice hikers could reach the summit.</div>
+          <div class="opt">B. The mountain path was too steep for any hiker to fail reaching the summit.</div>
+          <div class="opt">C. So steep was the path that all hikers reached the summit easily.</div>
+          <div class="opt">D. Despite the steep path, all novice hikers reached the summit.</div>
+        </div>
+        <div class="answer-box d-none" data-explain="27">
+          <b>Đáp án: A.</b> Đảo ngữ <i>Such was + Noun + that...</i>.
+        </div>
+      </div>
+
+      <!-- Question 28 -->
+      <div class="question-item">
+        <div class="question-text">Question 28. No matter how complicated the mathematical problem was, she solved it in ten minutes.</div>
+        <div class="options-vertical">
+          <div class="opt">A. Complicated though the mathematical problem was, she solved it in ten minutes.</div>
+          <div class="opt">B. Because the problem was complicated, she took ten minutes to solve it.</div>
+          <div class="opt">C. She could not solve the problem despite its simplicity.</div>
+          <div class="opt">D. However the problem was complicated, she failed to solve it.</div>
+        </div>
+        <div class="answer-box d-none" data-explain="28">
+          <b>Đáp án: A.</b> <i>No matter how + Adj + S + V</i> = <i>Adj + though + S + be</i>.
+        </div>
+      </div>
+
+      <div class="task-instruction" style="margin-top: 3pt;">
+        Directions (Questions 29–30): Mark the letter A, B, C, or D to indicate the sentence that best combines each pair.
+      </div>
+
+      <!-- Question 29 -->
+      <div class="question-item">
+        <div class="question-text">Question 29. The student completed her dissertation. She set off on a celebratory summer vacation.</div>
+        <div class="options-vertical">
+          <div class="opt">A. Having completed her dissertation, the student set off on a celebratory summer vacation.</div>
+          <div class="opt">B. Completed her dissertation, a summer vacation was set off.</div>
+          <div class="opt">C. After she sets off on vacation, she had completed her dissertation.</div>
+          <div class="opt">D. Setting off on vacation, her dissertation was completed.</div>
+        </div>
+        <div class="answer-box d-none" data-explain="29">
+          <b>Đáp án: A.</b> Phân từ hoàn thành <i>Having + V3</i> diễn tả hành động hoàn tất trước.
+        </div>
+      </div>
+
+      <!-- Question 30 -->
+      <div class="question-item">
+        <div class="question-text">Question 30. The manager entered the office. The staff immediately stopped arguing about the project.</div>
+        <div class="options-vertical">
+          <div class="opt">A. No sooner had the manager entered the office than the staff stopped arguing about the project.</div>
+          <div class="opt">B. Hardly had the staff stopped arguing when the manager entered the office.</div>
+          <div class="opt">C. Scarcely did the manager enter the office than the staff stopped arguing.</div>
+          <div class="opt">D. Not until the staff stopped arguing did the manager enter the office.</div>
+        </div>
+        <div class="answer-box d-none" data-explain="30">
+          <b>Đáp án: A.</b> <i>No sooner had + S + V3 + than + clause</i>.
+        </div>
+      </div>
+    </div>
+
+    <div class="ftr">
+      <span class="ftr-brand">© Bản quyền thuộc ThS. Đinh Quốc Tuấn – Học liệu chuyên sâu ĐGNL VNU</span>
+      <span>Trang 7 / 8</span>
+    </div>
+  </div>
+
+  <!-- ==================== TRANG 8: ĐÁP ÁN NHANH, HỒ SƠ 4 HỌC SINH & LỜI NHẮN CHUYÊN GIA ==================== -->
+  <div class="page" id="page-8">
+    <div class="hdr">
+      <div class="logo-wrap">
+        <img src="https://diemdanhsv.com/images/logo-sen.svg" alt="Logo Sen" class="logo-sen" onerror="this.style.display='none'"/>
+        <span class="brand-title">HỆ THỐNG DẠY KÈM & KHẢO THÍ ĐGNL · THS. ĐINH QUỐC TUẤN</span>
+      </div>
+      <span class="tag-sub">TÀI LIỆU LƯU HÀNH NỘI BỘ · BUỔI 2</span>
+    </div>
+
+    <div class="page-body">
+      <h2>BẢNG ĐÁP ÁN NHANH 30 CÂU & CHÌA KHÓA CỐT LÕI (BUỔI 2)</h2>
+      <table style="font-size: 8.8pt; margin-bottom: 3.5pt;">
+        <tr>
+          <th style="width: 14%;">Câu & Đ.Án</th>
+          <th style="width: 36%;">Chìa Khóa Ngữ Pháp / Collocation</th>
+          <th style="width: 14%;">Câu & Đ.Án</th>
+          <th style="width: 36%;">Chìa Khóa Ngữ Pháp / Collocation</th>
+        </tr>
+        <tr>
+          <td><b>1. B</b></td>
+          <td>Rút gọn bị động (which were developed → developed)</td>
+          <td><b>16. B</b></td>
+          <td>Rút gọn bị động (manuscripts discovered in cave)</td>
+        </tr>
+        <tr>
+          <td><b>2. B</b></td>
+          <td>Đảo ngữ ĐK loại 3: Had the captain received...</td>
+          <td><b>17. B</b></td>
+          <td>Đảo ngữ ĐK loại 2: Were they to offer...</td>
+        </tr>
+        <tr>
+          <td><b>3. C</b></td>
+          <td>Sau "the first" bị động: to be conferred</td>
+          <td><b>18. C</b></td>
+          <td>Sau "the first" chủ động: to walk on the Moon</td>
+        </tr>
+        <tr>
+          <td><b>4. A</b></td>
+          <td>ĐK ẩn định: Had it not been for his investment</td>
+          <td><b>19. B</b></td>
+          <td>Đảo ngữ loại 3: would have been prevented</td>
+        </tr>
+        <tr>
+          <td><b>5. B</b></td>
+          <td>Giả định thức: imperative that + S + (should) verify</td>
+          <td><b>20. B</b></td>
+          <td>Giả định thức bị động: recommended that S be V3</td>
+        </tr>
+        <tr>
+          <td><b>6. B</b></td>
+          <td>Collocation: account for 28% (chiếm tỷ lệ)</td>
+          <td><b>21. B</b></td>
+          <td>Collocation: account for nearly 40%</td>
+        </tr>
+        <tr>
+          <td><b>7. B</b></td>
+          <td>Collocation: exert a profound influence on</td>
+          <td><b>22. A</b></td>
+          <td>Phrasal verb: bring about (dẫn đến sự thay đổi)</td>
+        </tr>
+        <tr>
+          <td><b>8. A</b></td>
+          <td>Collocation: strike a delicate balance between</td>
+          <td><b>23. B</b></td>
+          <td>Collocation: draw a clear distinction between</td>
+        </tr>
+        <tr>
+          <td><b>9. C</b></td>
+          <td>Cấu trúc: attribute the surge to ice melting</td>
+          <td><b>24. C</b></td>
+          <td>Cấu trúc: attribute the decline to instability</td>
+        </tr>
+        <tr>
+          <td><b>10. B</b></td>
+          <td>Collocation: bridge the gap between theory & practice</td>
+          <td><b>25. C</b></td>
+          <td>Collocation: bridge the digital gap</td>
+        </tr>
+        <tr>
+          <td><b>11. B</b></td>
+          <td>Closest in meaning: Without N = Had S not V3</td>
+          <td><b>26. A</b></td>
+          <td>Closest in meaning: But for N = Had S not V3</td>
+        </tr>
+        <tr>
+          <td><b>12. A</b></td>
+          <td>Closest in meaning: So adj be S = Such was N that</td>
+          <td><b>27. A</b></td>
+          <td>Closest in meaning: So steep be = Such was steepness</td>
+        </tr>
+        <tr>
+          <td><b>13. A</b></td>
+          <td>Nhượng bộ: However poorly qualified S was</td>
+          <td><b>28. A</b></td>
+          <td>Nhượng bộ: No matter how adj = Adj though S be</td>
+        </tr>
+        <tr>
+          <td><b>14. A</b></td>
+          <td>Ghép câu: Hardly had S V3 when S V2</td>
+          <td><b>29. A</b></td>
+          <td>Ghép câu phân từ hoàn thành: Having completed</td>
+        </tr>
+        <tr>
+          <td><b>15. B</b></td>
+          <td>Ghép câu: Having conducted trials, team discovered</td>
+          <td><b>30. A</b></td>
+          <td>Ghép câu: No sooner had S V3 than S V2</td>
+        </tr>
+      </table>
+
+      <h2>HỒ SƠ THEO DÕI SƯ PHẠM CÁ NHÂN HÓA LỚP 11 BSCHOOL</h2>
+      <div class="box box-highlight" style="padding: 3.5pt 6pt; margin-bottom: 3.5pt;">
+        <table style="margin-bottom: 0; font-size: 8.9pt;">
+          <tr>
+            <th style="width: 24%;">Học Sinh & Nhóm Ban</th>
+            <th style="width: 38%;">Đánh Giá Năng Lực & Tình Hình Buổi 1</th>
+            <th style="width: 38%;">Định Hướng Sư Phạm Trọng Tâm Buổi 2</th>
+          </tr>
+          <tr>
+            <td><b>Thiện</b><br><i>(Ban Xã hội - Nam)</i></td>
+            <td>Phát âm và phản xạ Nói rất tốt (thế mạnh IELTS); thái độ hợp tác và nỗ lực cao. Tuy nhiên vốn từ vựng học thuật ĐGNL và cấu trúc ngữ pháp chốt còn nặng; khả năng tập trung cao độ tối ưu trong <b>60 phút</b>.</td>
+            <td>Khung 60 phút Giáo viên Chuyên gia kèm sát phương pháp phân tích câu; cung cấp sẵn Scaffolding từ vựng/gốc từ để tránh quá tải; rèn kỹ năng bắt từ khóa (Collocation Clues) để giải nhanh câu trắc nghiệm.</td>
+          </tr>
+          <tr>
+            <td><b>Học sinh Nữ</b><br><i>(Ban Xã hội)</i></td>
+            <td>Cảm thụ ngôn ngữ tốt, vốn từ mức khá; đôi khi còn phân vân giữa các câu biến đổi đồng nghĩa có cấu trúc đảo ngữ phức tạp.</td>
+            <td>Tập trung giải mã quy tắc đảo ngữ <i>Such was / No sooner... than</i>; thực hành đối chiếu sắc thái câu gốc và các phương án nhiễu.</td>
+          </tr>
+          <tr>
+            <td><b>2 Học sinh Nữ</b><br><i>(Ban Tự nhiên)</i></td>
+            <td>Tư duy logic cấu trúc chặt chẽ, tiếp thu nhanh các công thức ngữ pháp; vốn từ vựng học thuật ngữ cảnh xã hội cần bồi đắp thêm.</td>
+            <td>Phát huy tư duy công thức vào các dạng rút gọn phân từ và đảo ngữ điều kiện; mở rộng trường từ vựng khoa học và môi trường qua 15 câu củng cố.</td>
+          </tr>
+        </table>
+      </div>
+
+      <h2>PHIẾU TỰ ĐÁNH GIÁ & LỜI NHẮN SƯ PHẠM CỦA GIÁO VIÊN CHUYÊN GIA</h2>
+      <div class="box box-tip" style="font-size: 9.3pt; line-height: 1.35; margin-bottom: 0;">
+        • <b>Điểm số mục tiêu Buổi 2:</b> Đạt tối thiểu <b>12/15 câu</b> phần đề chính & <b>12/15 câu</b> phần củng cố.<br>
+        • <b>Lời nhắn Chuyên gia:</b> <i>"Đề thi ĐGNL VNU không kiểm tra trí nhớ máy móc mà kiểm tra tư duy liên kết ngữ cảnh và năng lực xử lý ngôn ngữ học thuật. Hãy nắm vững bản chất của Đảo ngữ điều kiện và bộ Collocations then chốt. Sự kiên trì và tập trung cao độ trong 60 phút sẽ tạo nên bước nhảy vọt về điểm số!"</i>
+      </div>
+    </div>
+
+    <div class="ftr">
+      <span class="ftr-brand">© Bản quyền thuộc ThS. Đinh Quốc Tuấn – Học liệu chuyên sâu ĐGNL VNU</span>
+      <span>Trang 8 / 8</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- SCRIPT ẨN / HIỆN LỜI GIẢI CHI TIẾT -->
+<script>
+let answersVisible = false;
+function toggleAllAnswers() {
+  answersVisible = !answersVisible;
+  const boxes = document.querySelectorAll('.answer-box');
+  boxes.forEach(box => {
+    if (answersVisible) {
+      box.classList.remove('d-none');
+    } else {
+      box.classList.add('d-none');
+    }
+  });
+  document.getElementById('btnText').innerText = answersVisible ? 'Ẩn Lời Giải' : 'Hiện / Ẩn Lời Giải';
+  document.getElementById('btnIcon').innerText = answersVisible ? '🙈' : '👁️';
+}
+</script>
+</body>
+</html>
